@@ -1,0 +1,85 @@
+!SESSION 2017-10-26 22:25:41.664 -----------------------------------------------
+eclipse.buildId=4.7.0.I20170612-0950
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.ui 2 0 2017-10-26 23:08:29.754
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.build', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.rebuild', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.clean', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.publish', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addactorservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addstatelessservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestcontainerservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestbinaryservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.uninstall', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.deploy', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:29.755
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.editmanifests', categoryId='servicefabric.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.build', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.rebuild', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.clean', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.publish', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addactorservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addstatelessservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestcontainerservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestbinaryservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.uninstall', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.deploy', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:32.776
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.editmanifests', categoryId='servicefabric.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2017-10-26 23:08:33.035
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-26 23:08:33.035
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'
+
+!ENTRY com.microsoft.azuretools.core 1 0 2017-10-26 23:08:38.320
+!MESSAGE Plugin folder path:C:\Users\Nate\eclipse\java-oxygen\eclipse\..\..\..\.p2\pool\plugins
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2017-10-26 23:08:48.960
+!MESSAGE Darkest Dark theme is being activated on this workspace; preparing colors and configuration
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2017-10-26 23:09:26.252
+!MESSAGE Darkest Dark has archived current color configurations to alternate preferences - will be restored when switching out of Darkest Dark theme
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2017-10-26 23:09:44.359
+!MESSAGE Project facet jst.ejb has not been defined. It is used in plugin org.eclipse.jst.j2ee.
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-10-26 23:09:45.905
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nate'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
