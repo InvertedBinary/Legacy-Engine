@@ -149,7 +149,7 @@ public class FluxWisp extends Mob {
 		this.yOffset =  -15;
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			}
 	}

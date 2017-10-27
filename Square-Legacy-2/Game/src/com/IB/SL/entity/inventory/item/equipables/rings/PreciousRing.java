@@ -41,7 +41,7 @@ import com.IB.SL.level.Level;
 			this.slot = slot;
 			this.slot_Default = slot_HEAD;
 			this.desc = "So\nVery\nPRECIOUS";
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 		}
 		
 		protected void move(double x, double y) {
@@ -60,25 +60,25 @@ import com.IB.SL.level.Level;
 	
 		public void equipEvent() {
 			equipped = true;
-				Game.getGame().getPlayer().setInvisible = true;
-				Game.getGame().getPlayer().stat_item_VIT += 500;
-				Game.getGame().getPlayer().stat_item_WIS += 500;
-				Game.getGame().getPlayer().stat_item_EDR += 500;
-				Game.getGame().getPlayer().stat_item_ATC += 500;
-				Game.getGame().getPlayer().stat_item_AGI += 500;
-				Game.getGame().getPlayer().calcStat(true);
+				Game.get().getPlayer().setInvisible = true;
+				Game.get().getPlayer().stat_item_VIT += 500;
+				Game.get().getPlayer().stat_item_WIS += 500;
+				Game.get().getPlayer().stat_item_EDR += 500;
+				Game.get().getPlayer().stat_item_ATC += 500;
+				Game.get().getPlayer().stat_item_AGI += 500;
+				Game.get().getPlayer().calcStat(true);
 
 		}
 		
 		public void dequipEvent() {
 			equipped = false;
-			Game.getGame().getPlayer().setInvisible = false;
-			Game.getGame().getPlayer().stat_item_VIT -= 500;
-			Game.getGame().getPlayer().stat_item_WIS -= 500;
-			Game.getGame().getPlayer().stat_item_EDR -= 500;
-			Game.getGame().getPlayer().stat_item_ATC -= 500;
-			Game.getGame().getPlayer().stat_item_AGI -= 500;
-			Game.getGame().getPlayer().calcStat(true);
+			Game.get().getPlayer().setInvisible = false;
+			Game.get().getPlayer().stat_item_VIT -= 500;
+			Game.get().getPlayer().stat_item_WIS -= 500;
+			Game.get().getPlayer().stat_item_EDR -= 500;
+			Game.get().getPlayer().stat_item_ATC -= 500;
+			Game.get().getPlayer().stat_item_AGI -= 500;
+			Game.get().getPlayer().calcStat(true);
 		}
 		
 		public boolean clickEvent() {
@@ -139,7 +139,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

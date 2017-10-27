@@ -36,7 +36,7 @@ public abstract class Ability extends Projectile{
 	
 	public boolean use(Projectile p, Ability ability, Mob origin) {
 		if (p != null) {			
-		Game.getGame().getLevel().add(p);
+		Game.get().getLevel().add(p);
 		}
 		return true;
 	}

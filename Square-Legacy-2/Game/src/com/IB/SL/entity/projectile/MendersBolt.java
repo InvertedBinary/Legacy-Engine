@@ -49,7 +49,7 @@ public class MendersBolt extends Projectile {
 		item = new Item();
 		this.id = 4;
 		Sound.Play(Sound.Spell2,  false);
-		Player p = Game.getGame().getPlayer();
+		Player p = Game.get().getPlayer();
 		p.effects.addEffect(new Regen(p, 40, 20));
 	}
 	
@@ -98,7 +98,7 @@ public class MendersBolt extends Projectile {
 		xOffset = -8;
 		yOffset = -14;
 		screen.renderProjectile((int)x + xOffset,(int)y + yOffset, this);
-		if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

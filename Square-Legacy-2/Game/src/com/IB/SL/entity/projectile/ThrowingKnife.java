@@ -24,9 +24,9 @@ public class ThrowingKnife extends Projectile{
 		super(x, y, dir);
 		range = random.nextInt(55) + 60;
 		speed = 1.5;
-		if (mob != Game.getGame().getPlayer())		
+		if (mob != Game.get().getPlayer())		
 			speed = 2;
-		damage = 3 + Game.getGame().getPlayer().Lvl;
+		damage = 3 + Game.get().getPlayer().Lvl;
 		this.mob = mob;
 		sprite = Sprite.knifeThrow;
 		this.breakParticle = 1;
@@ -48,7 +48,7 @@ public class ThrowingKnife extends Projectile{
 		rot_time = 0;
 		}
 
-		if (mob == Game.getGame().getPlayer()) {			
+		if (mob == Game.get().getPlayer()) {			
 			Collision(this, entities); 
 		} else {
 			speed = 2;

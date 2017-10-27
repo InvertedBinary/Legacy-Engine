@@ -48,14 +48,14 @@ import com.IB.SL.entity.inventory.effects.Regen;
 			this.desc = "+" + (int)MDF + "FAI";
 			this.item_TYPE = this.type_STAFF;
 			this.FIRE_RATE = 5;
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 			this.recipe.add("Stick");
 			this.recipe.add("Stick");
 		}
 
 		@Override
 		public void secondary(Projectile p, Weapon w, Mob origin) {
-			Game.getGame().getPlayer().effects.addEffect(new Regen(Game.getGame().getPlayer(), 40, 20) );
+			Game.get().getPlayer().effects.addEffect(new Regen(Game.get().getPlayer(), 40, 20) );
 			p = new ProjPass(0, 0, 0, origin);;
 			super.secondary(p, this, origin);		
 
@@ -149,7 +149,7 @@ import com.IB.SL.entity.inventory.effects.Regen;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

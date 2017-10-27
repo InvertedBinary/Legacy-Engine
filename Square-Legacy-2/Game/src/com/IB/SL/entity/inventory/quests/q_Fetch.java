@@ -26,7 +26,7 @@ public class q_Fetch extends Quest {
 	}
 	
 	public void complete() {
-		Player p = Game.getGame().getLevel().getClientPlayer();
+		Player p = Game.get().getLevel().getClientPlayer();
 		p.ExpC += 250;
 		p.getInventory().add(new mace_Bronze(EquipableItem.slot_WEAPON));
 		p.quests.removeItem(this);
@@ -38,11 +38,11 @@ public class q_Fetch extends Quest {
 	}
 	
 	public void update() {
-		if (Game.getGame()!= null && Game.getGame().getLevel() != null) {
+		if (Game.get()!= null && Game.get().getLevel() != null) {
 			Entity e = null;
 			this.destination = new TileCoord(-1000, -1000);				
-			for (int i = 0; i < Game.getGame().getLevel().entities.size(); i++) {	
-				e = Game.getGame().getLevel().entities.get(i);
+			for (int i = 0; i < Game.get().getLevel().entities.size(); i++) {	
+				e = Game.get().getLevel().entities.get(i);
 			}
 			if (stage == 0) {
 				this.displayname = "Occulos";
@@ -64,7 +64,7 @@ public class q_Fetch extends Quest {
 				this.complete();
 			}
 			
-			if (Game.getGame().getLevel() instanceof SpawnHaven) {
+			if (Game.get().getLevel() instanceof SpawnHaven) {
 				if (stage == 0) {
 					if (e instanceof Shop) {
 						if (((Shop)e).type == 0) {
@@ -74,7 +74,7 @@ public class q_Fetch extends Quest {
 				}
 				
 				if (stage == 1) {
-					Player p = Game.getGame().getPlayer();
+					Player p = Game.get().getPlayer();
 					if (p.getX() == destination.x() << 4 && p.getY() == destination.y() << 4) {
 						this.completeStage(1);
 					}

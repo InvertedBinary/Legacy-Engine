@@ -164,19 +164,19 @@ public class PoisonZombie extends Mob{
 		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
 		this.xOffset = -8;
 		this.yOffset = -15;
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			//gui.renderHealth(screen, this, (int) x - 16, (int)y - 24, true);
 			}
 		//gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true, true);
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			try {
 			if (players.size() > 0 || entities.size() > 0) {
 				if (tracking != null) {
 					
-				Game.getGame().getScreen().drawVectors(Game.getGame().getLevel().BresenhamLine((int) x, (int)y, (int)tracking.x, (int)tracking.y), 0xffFF3AFB, true);				
+				Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int) x, (int)y, (int)tracking.x, (int)tracking.y), 0xffFF3AFB, true);				
 				}
 			}
 				} catch (Exception e) {

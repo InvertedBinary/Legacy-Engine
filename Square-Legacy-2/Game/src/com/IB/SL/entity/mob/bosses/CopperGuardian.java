@@ -168,7 +168,7 @@ public class CopperGuardian extends Mob {
 		font.render((int) (x - 65), (int) (y - 110), -5, 0, this.name, screen, true, false);
 		//circle();
 		List<Player> players2 = level.getPlayers(this, 300);
-		if (Game.getGame().gameState == Game.getGame().gameState.INGAME_A) {
+		if (Game.get().gameState == Game.get().gameState.INGAME_A) {
 		//System.out.println("WIDTH: " + sprite.getWidth());
 			Debug.drawRect(screen, (int)x + xOffset, (int)y + yOffset, (int)(sprite.getWidth()), (int)(sprite.getHeight()), true);
 			//Debug.drawRect(screen, (int)x + xOffset, (int)y + yOffset, 128, 128, 0xff00ff, true);
@@ -249,7 +249,7 @@ public class CopperGuardian extends Mob {
 	}
 	
 	private void circle() {
-		Game.getGame().getScreen().renderLight((int)(x + xx - 21), (int) (y + yy - 147), 50 , 20, 20, 40, true);
+		Game.get().getScreen().renderLight((int)(x + xx - 21), (int) (y + yy - 147), 50 , 20, 20, 40, true);
 		List<PlayerMP> players = level.getPlayersFixed((int)(x + xx - 8), (int)(y + yy - 140), 50);
 			
 		if (players.size() > 0) {

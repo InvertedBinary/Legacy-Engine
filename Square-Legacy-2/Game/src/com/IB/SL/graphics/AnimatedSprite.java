@@ -1,5 +1,6 @@
 package com.IB.SL.graphics;
 
+import org.w3c.dom.Element;
 
 public class AnimatedSprite extends Sprite{
 
@@ -8,6 +9,7 @@ public class AnimatedSprite extends Sprite{
 	private int rate = 12;
 	private int time = 0;
 	private int length = -1;
+	
 	
 	public AnimatedSprite(SpriteSheet sheet, int width, int height, int length) {
 		super(sheet, width, height);

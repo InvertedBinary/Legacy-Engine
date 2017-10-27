@@ -142,7 +142,7 @@ public static Entity[] loadEntities() {
 				Entity[] loadedObject = null;
 			try {
 				
-				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Game.getGame().getPlayer().currentLevelId);
+				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Game.get().getPlayer().currentLevelId);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				loadedObject = (Entity[]) ois.readObject();
 				ois.close();
@@ -214,7 +214,7 @@ public static Entity[] loadEntities(int levelID) {
 				try {
 					fis = new FileInputStream(createSaveFolder() + equipFileName);					
 				} catch (FileNotFoundException e) {
-					Game.getGame().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
+					Game.get().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
 				//	Game.getGame().getPlayer().equipment.Equip(new CottonRobe(EquipableItem.slot_CHEST, Game.getGame().getPlayer()));
 				}
 				ObjectInputStream ois = new ObjectInputStream(fis);
@@ -381,14 +381,14 @@ public static LoadProperties loadPrefs() {
 	
 	public static boolean deleteCharacter(String userName) {
 		
-			if (!Game.getGame().gui.save1.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save1;
-			} else if (!Game.getGame().gui.save2.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save2;
-			} else if (!Game.getGame().gui.save3.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save3;
-			} else if (!Game.getGame().gui.save4.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save4;
+			if (!Game.get().gui.save1.equals("(Open)")) {
+				Game.get().gui.saveSelected = Game.get().gui.save1;
+			} else if (!Game.get().gui.save2.equals("(Open)")) {
+				Game.get().gui.saveSelected = Game.get().gui.save2;
+			} else if (!Game.get().gui.save3.equals("(Open)")) {
+				Game.get().gui.saveSelected = Game.get().gui.save3;
+			} else if (!Game.get().gui.save4.equals("(Open)")) {
+				Game.get().gui.saveSelected = Game.get().gui.save4;
 			
 		}
 		

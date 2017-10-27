@@ -39,7 +39,7 @@ public class HealthPot extends Item{
 		this.desc = "Heals\nUp to\n5 HP\n";
 		this.item_TYPE = type_STAFF;
 		//this.stackSize = 5;
-		level = Game.getGame().getLevel();
+		level = Game.get().getLevel();
 	}
 	
 	protected void move(double x, double y) {
@@ -156,7 +156,7 @@ public class HealthPot extends Item{
 	
 		public void render(Screen screen) {
 			screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
-			if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+			if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 		
 		}
 

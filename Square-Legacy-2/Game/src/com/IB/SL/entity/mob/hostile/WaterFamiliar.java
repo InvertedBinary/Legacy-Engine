@@ -68,8 +68,8 @@ public class WaterFamiliar extends Mob {
 					if (p.size() > 0) {
 					}
 					for (int i = 0; i < ent.size(); i++) {
-						Game.getGame().getLevel().damage((int) x, (int) y, (Mob) ent.get(0), 0,
-								1 + (Game.getGame().getPlayer().stat_base_MDF * 0.15), name, 0);
+						Game.get().getLevel().damage((int) x, (int) y, (Mob) ent.get(0), 0,
+								1 + (Game.get().getPlayer().stat_base_MDF * 0.15), name, 0);
 					}
 				}
 			}
@@ -180,7 +180,7 @@ public class WaterFamiliar extends Mob {
 		this.yOffset = -15;
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 		}

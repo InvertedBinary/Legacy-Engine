@@ -88,7 +88,7 @@ public abstract class Projectile extends EquipableItem{
 						if (p.breakParticle == 1) {
 							level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 						}
-						Game.getGame().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
+						Game.get().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
 						return e;
 							}
 						} catch (Exception err) {
@@ -105,7 +105,7 @@ public abstract class Projectile extends EquipableItem{
 	public boolean Collision(Projectile p, List<Entity> entities) {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Game.getGame().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Game.get().PersonNameGetter, p.ExpV);
 			doEffect(ee);
 			p.remove();
 			return true;
@@ -119,7 +119,7 @@ public abstract class Projectile extends EquipableItem{
 		if (ee != null) {
 			if (ee != p.prevHit) {				
 			p.prevHit = ee;
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Game.getGame().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Game.get().PersonNameGetter, p.ExpV);
 			doEffect(ee);
 			return true;
 			}
@@ -183,7 +183,7 @@ public abstract class Projectile extends EquipableItem{
 				}
 				if (entities.get(i).mobhealth <= 0){
 					entities.get(i).remove();
-					Game.getGame().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
+					Game.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
 
 					}
 				}
@@ -202,7 +202,7 @@ public abstract class Projectile extends EquipableItem{
 					) {
 				if (!players.get(i).invulnerable) {
 				remove();
-    			if (Game.getGame().gameState != gameState.INGAME_A) {
+    			if (Game.get().gameState != gameState.INGAME_A) {
 					level.damagePlayer((int)proj.getX(), (int)proj.getY(), players.get(i), 0, proj.damage, "projectile", 0);
 					proj.addEffect(players.get(i));
 				}
@@ -216,7 +216,7 @@ public abstract class Projectile extends EquipableItem{
 				}
 				if (players.get(i).mobhealth <= 0){
 					players.get(i).onPlayerDeath();
-					Game.switchState(Game.getGame().gameState.DEATH);
+					Game.switchState(Game.get().gameState.DEATH);
 					level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");
 					Game.Dead = true;	

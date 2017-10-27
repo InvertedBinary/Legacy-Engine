@@ -251,11 +251,11 @@ public class Cultist extends Mob {
 		this.xOffset = -8;
 		this.yOffset = -15;
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			try {
 				if (players.size() > 0) {					
-				Game.getGame().getScreen().drawVectors(Game.getGame().getLevel().BresenhamLine((int)x, (int)y, raycastFlee.rayVector.x, raycastFlee.rayVector.y), 0xffFF3AFB, true);				
+				Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int)x, (int)y, raycastFlee.rayVector.x, raycastFlee.rayVector.y), 0xffFF3AFB, true);				
 				}
 				} catch (NullPointerException e) {
 					

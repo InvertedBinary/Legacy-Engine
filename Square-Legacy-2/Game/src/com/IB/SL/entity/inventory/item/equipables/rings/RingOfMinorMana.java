@@ -40,7 +40,7 @@ import com.IB.SL.level.Level;
 			this.slot = slot;
 			this.slot_Default = slot_UTILITY1;
 			this.item_TYPE = type_ARMOR;
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 		}
 		
 		protected void move(double x, double y) {
@@ -63,14 +63,14 @@ import com.IB.SL.level.Level;
 				use = ind;
 			}*/
 			
-			Game.getGame().getPlayer().maxmana += 10;
+			Game.get().getPlayer().maxmana += 10;
 			
 		}
 		
 		public void dequipEvent() {
-			Game.getGame().getPlayer().maxmana -= 10;
-			if (Game.getGame().getPlayer().mana > Game.getGame().getPlayer().maxmana) {
-				Game.getGame().getPlayer().mana = Game.getGame().getPlayer().maxmana;
+			Game.get().getPlayer().maxmana -= 10;
+			if (Game.get().getPlayer().mana > Game.get().getPlayer().maxmana) {
+				Game.get().getPlayer().mana = Game.get().getPlayer().maxmana;
 			}
 		}
 		
@@ -133,7 +133,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

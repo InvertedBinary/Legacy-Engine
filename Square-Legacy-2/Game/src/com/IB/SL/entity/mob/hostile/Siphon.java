@@ -141,7 +141,7 @@ public class Siphon extends Mob {
 		this.yOffset = -15;
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 		}
@@ -187,7 +187,7 @@ public class Siphon extends Mob {
 					Sound.Play(Sound.Siphon1, false);
 					pullTime += 1;
 				}
-				Game.getGame().getPlayer().pull(this, var);
+				Game.get().getPlayer().pull(this, var);
 				level.add(new VoidParticleSpawner((int) (x - 4), (int) (y - 10), 10, 1, level));
 
 			}

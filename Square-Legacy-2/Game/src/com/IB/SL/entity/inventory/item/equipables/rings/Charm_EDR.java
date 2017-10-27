@@ -42,7 +42,7 @@ import com.IB.SL.level.Level;
 			this.slot_Default = slot_UTILITY1;
 			this.item_TYPE = type_ARMOR;
 			this.desc = "+15%\nEDR";
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 		}
 		
 		protected void move(double x, double y) {
@@ -68,7 +68,7 @@ import com.IB.SL.level.Level;
 		}
 		
 		public void RNGGen() {
-			this.EDR = Game.getGame().getPlayer().stat_EDR * 0.15;
+			this.EDR = Game.get().getPlayer().stat_EDR * 0.15;
 		}
 		
 		public boolean clickEvent() {
@@ -129,7 +129,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

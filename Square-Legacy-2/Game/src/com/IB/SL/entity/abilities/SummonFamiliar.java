@@ -45,9 +45,9 @@ public class SummonFamiliar extends Ability{
 	
 	public boolean use(Projectile p, Ability ability, Mob origin) {
 		super.use(p, ability, origin);
-		if(Game.getGame().getLevel().returnTileXY(Screen.xo, Screen.yo).solid() == false || Game.getGame().devModeOn) {			
-		Game.getGame().getLevel().add(new WaterFamiliar((int) Screen.xo, (int) Screen.yo + 1, 1000));
-		Game.getGame().getLevel().add(new WallParticleSpawner((int) (x + nx), (int) (y + ny), 30, 50, Game.getGame().getLevel()));
+		if(Game.get().getLevel().returnTileXY(Screen.xo, Screen.yo).solid() == false || Game.get().devModeOn) {			
+		Game.get().getLevel().add(new WaterFamiliar((int) Screen.xo, (int) Screen.yo + 1, 1000));
+		Game.get().getLevel().add(new WallParticleSpawner((int) (x + nx), (int) (y + ny), 30, 50, Game.get().getLevel()));
 		return true;
 		} else {
 			return false;

@@ -81,7 +81,7 @@ public class Teleporter extends Interactable {
 			}
 		}
 		*/
-		Player player = Game.getGame().getLevel().getClientPlayer();
+		Player player = Game.get().getLevel().getClientPlayer();
 
 		if (PlayerTele(x,y, level, player)) {
 			
@@ -153,7 +153,7 @@ public class Teleporter extends Interactable {
 	}*/
 	
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
 		}
 		int radius = level.radius / 2 + 5;

@@ -101,7 +101,7 @@ public class TrappersOrb extends Projectile {
 		xOffset = -8;
 		yOffset = -14;
 		screen.renderProjectile((int)x + xOffset,(int)y + yOffset, this);
-		if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

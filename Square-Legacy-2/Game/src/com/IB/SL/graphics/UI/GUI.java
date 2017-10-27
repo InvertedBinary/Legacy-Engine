@@ -60,23 +60,23 @@ public class GUI extends CheckBounds {
 
 	public void update() {
 		if (name == null) {
-			name = new TextBox(90, 38, 204, 20, Game.getGame().key, 12, false);
+			name = new TextBox(90, 38, 204, 20, Game.get().key, 12, false);
 		}
-		if (Game.getGame().gameState == Game.getGame().gameState.MENU && newCharMenu) {
+		if (Game.get().gameState == Game.get().gameState.MENU && newCharMenu) {
 			name.update(); // LAG with using numpad
 		} else {
 			name.reset(false);
 		}
 
 		if (cmd == null) {
-			cmd = new TextBox(5, 5, 266, 19, Game.getGame().key, -1, false);
+			cmd = new TextBox(5, 5, 266, 19, Game.get().key, -1, false);
 			cmd.desc = "Command:";
 			cmd.useCmds = true;
 			cmd.acceptable.add("!");
 			cmd.acceptable.add(",");
 			cmd.acceptable.add(".");
 		}
-		if (Game.getGame().gameState == Game.getGame().gameState.PAUSE) {
+		if (Game.get().gameState == Game.get().gameState.PAUSE) {
 			cmd.update();
 		} else {
 			cmd.reset(false);
@@ -208,7 +208,7 @@ public class GUI extends CheckBounds {
 			if (overChars == true) {
 				screen.renderSprite(0, 0, Sprite.title_overChars, false);
 			}
-			if (Game.loading && Game.getGame().gameState == gameState.MENU) {
+			if (Game.loading && Game.get().gameState == gameState.MENU) {
 				// screen.renderSheet(0, 0, SpriteSheet.loading, false);
 				if (fadeTime2 % 3 == 0) {
 					fadeTime--;
@@ -218,22 +218,22 @@ public class GUI extends CheckBounds {
 			}
 		} else if (charMenu && newCharMenu == false) {
 			screen.renderSprite(0, 0, Sprite.title_Chars, false);
-			Game.getGame().font.render(30, 9, save1, screen, false, false);
-			Game.getGame().font.render(30, 41, save2, screen, false, false);
-			Game.getGame().font.render(30, 73, save3, screen, false, false);
-			Game.getGame().font.render(30, 105, save4, screen, false, false);
+			Game.get().font.render(30, 9, save1, screen, false, false);
+			Game.get().font.render(30, 41, save2, screen, false, false);
+			Game.get().font.render(30, 73, save3, screen, false, false);
+			Game.get().font.render(30, 105, save4, screen, false, false);
 
 			if (saveSelected.equals(save1)) {
-				Game.getGame().font.render(-6, 9, "X", Game.getGame().getScreen(), false, false);
+				Game.get().font.render(-6, 9, "X", Game.get().getScreen(), false, false);
 			}
 			if (saveSelected.equals(save2)) {
-				Game.getGame().font.render(-6, 41, "X", Game.getGame().getScreen(), false, false);
+				Game.get().font.render(-6, 41, "X", Game.get().getScreen(), false, false);
 			}
 			if (saveSelected.equals(save3)) {
-				Game.getGame().font.render(-6, 73, "X", Game.getGame().getScreen(), false, false);
+				Game.get().font.render(-6, 73, "X", Game.get().getScreen(), false, false);
 			}
 			if (saveSelected.equals(save4)) {
-				Game.getGame().font.render(-6, 105, "X", Game.getGame().getScreen(), false, false);
+				Game.get().font.render(-6, 105, "X", Game.get().getScreen(), false, false);
 			}
 
 			if (overTrash == 1) {
@@ -291,8 +291,8 @@ public class GUI extends CheckBounds {
 
 		} else if (newCharMenu) {
 			screen.renderSprite(0, 0, Sprite.title_NewChar, false);
-			if (Game.getGame().runTut) {
-				Game.getGame().font.render(116, 70, "X", Game.getGame().getScreen(), false, false);
+			if (Game.get().runTut) {
+				Game.get().font.render(116, 70, "X", Game.get().getScreen(), false, false);
 			}
 
 			if (overTutorial) {
@@ -305,9 +305,9 @@ public class GUI extends CheckBounds {
 			// G = 0;
 			// B = 0;
 
-			Game.getGame().font8x8.render(160, 119, "" + R, Game.getGame().getScreen(), false, false);
-			Game.getGame().font8x8.render(160, 135, "" + G, Game.getGame().getScreen(), false, false);
-			Game.getGame().font8x8.render(160, 151, "" + B, Game.getGame().getScreen(), false, false);
+			Game.get().font8x8.render(160, 119, "" + R, Game.get().getScreen(), false, false);
+			Game.get().font8x8.render(160, 135, "" + G, Game.get().getScreen(), false, false);
+			Game.get().font8x8.render(160, 151, "" + B, Game.get().getScreen(), false, false);
 
 			System.out.println("B: " + B);
 			Sprite sprite = Sprite.resize(playersprite, 4);
@@ -376,14 +376,14 @@ public class GUI extends CheckBounds {
 
 			screen.renderSprite(0, 0, Sprite.pauseOptions, false);
 
-			Game.getGame().font8x8.render(5, 126, -2, desc, Game.getGame().getScreen(), false, false);
+			Game.get().font8x8.render(5, 126, -2, desc, Game.get().getScreen(), false, false);
 
-			if (Game.getGame().autoSave) {
-				Game.getGame().font.render(-6, 37, "X", Game.getGame().getScreen(), false, false);
+			if (Game.get().autoSave) {
+				Game.get().font.render(-6, 37, "X", Game.get().getScreen(), false, false);
 			}
 
 			if (overDelFiles) {
-				Game.getGame().font.render(-6, 67, "X", Game.getGame().getScreen(), false, false);
+				Game.get().font.render(-6, 67, "X", Game.get().getScreen(), false, false);
 			}
 
 		}
@@ -1092,8 +1092,8 @@ public class GUI extends CheckBounds {
 				points = 2;
 			}
 		}
-		if (Game.getGame().gameState == Game.getGame().gameState.INGAME_A) {
-			Game.getGame().getPlayer().skillPoints += points;
+		if (Game.get().gameState == Game.get().gameState.INGAME_A) {
+			Game.get().getPlayer().skillPoints += points;
 		}
 
 		return points;

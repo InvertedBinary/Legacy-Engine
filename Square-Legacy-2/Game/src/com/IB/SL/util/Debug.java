@@ -19,7 +19,7 @@ public class Debug {
 	   }
 	
 	   public static void drawLine(Screen screen, int x0, int y0, int x1, int y1, int colour, boolean fixed){
-		   screen.drawVectors(Game.getGame().getLevel().BresenhamLine(x0, y0, x1, y1), colour, fixed);
+		   screen.drawVectors(Game.get().getLevel().BresenhamLine(x0, y0, x1, y1), colour, fixed);
 		}
 	   
 	   public static void drawTriangle(Screen screen, font8x8 font8x8, double x, double y, double x2, double y2) {

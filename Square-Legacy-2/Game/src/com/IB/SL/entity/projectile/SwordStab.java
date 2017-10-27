@@ -32,7 +32,7 @@ public class SwordStab extends Projectile {
 	
 	public SwordStab(double x, double y, double dir, Mob mob) {
 		super(x, y, dir);
-		damage = 5 + Game.getGame().getPlayer().Lvl;
+		damage = 5 + Game.get().getPlayer().Lvl;
 
 		basicInit();
 	}
@@ -75,7 +75,7 @@ public class SwordStab extends Projectile {
 
 	public void render(Screen screen) {
 		screen.renderProjectile((int)x - 8,(int)y - 14, this);
-		if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

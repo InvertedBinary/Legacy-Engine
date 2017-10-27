@@ -1,10 +1,10 @@
 package com.IB.SL.entity.inventory;
 
 import com.IB.SL.Game;
+import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.inventory.item.Item;
 import com.IB.SL.entity.inventory.item.equipables.staves.wand_ArcaneTwig;
 import com.IB.SL.entity.inventory.item.material.Stick;
-import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.bosses.CopperGuardian;
 import com.IB.SL.entity.mob.bosses.FrozenKing;
@@ -27,8 +27,8 @@ public class ActiveQuests {
 	}
 	
 	public boolean add(Quest quest) {
-		if (Game.getGame() != null)
-		Game.getGame().save(false);
+		if (Game.get() != null)
+		Game.get().save(false);
 		if (firstFree == quests.length) {
 			System.out.println("Could Not Add Quest: " + quest.getName() + " You Have Too Many Active Quests!");
 			return false;
@@ -50,21 +50,21 @@ public class ActiveQuests {
 	}
 	
 	public void completeCraftingObjective(Item i) {
-		Player p = Game.getGame().getPlayer();
+		Player p = Game.get().getPlayer();
 		if (i instanceof wand_ArcaneTwig) {
 			p.quests.completeStage("Fetch", 1);
 		}
 	}
 	
 	public void completePurchaseObjective(Item i) {
-		Player p = Game.getGame().getPlayer();
+		Player p = Game.get().getPlayer();
 		if (i instanceof Stick) {
 			p.quests.completeStage("Fetch", 0);
 		}
 	}
 	
-	public void completeKillObjective(Mob m) {
-		Player p = Game.getGame().getPlayer();
+	public void completeKillObjective(Entity m) {
+		Player p = Game.get().getPlayer();
 		if (m instanceof Occulus) {
 			p.quests.completeStage("Main", 0);
 		}

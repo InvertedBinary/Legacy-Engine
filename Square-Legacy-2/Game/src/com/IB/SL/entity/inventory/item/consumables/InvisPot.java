@@ -41,7 +41,7 @@ public class InvisPot extends Item{
 		this.desc = "Invis\nFor 5s";
 		this.stackSize = 5;
 		this.item_TYPE = type_STAFF;
-		level = Game.getGame().getLevel();
+		level = Game.get().getLevel();
 	}
 	
 	protected void move(double x, double y) {
@@ -142,7 +142,7 @@ public class InvisPot extends Item{
 		public void render(Screen screen) {
 			screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 			
-			if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+			if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 		}
 
 }

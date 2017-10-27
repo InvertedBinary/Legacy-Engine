@@ -257,7 +257,7 @@ public class Shop extends Interactable {
 	}
 	
 	public void decideGeneration() {
-		if (Game.getGame().getLevel() != null) {
+		if (Game.get().getLevel() != null) {
 			if (added == false) {
 				
 				switch(type) {
@@ -554,7 +554,7 @@ public class Shop extends Interactable {
 	}
 	
 	public void update() {
-		if (Game.getGame().key.generalActivator && Game.getGame().getPlayer().nearShop == this) {
+		if (Game.get().key.generalActivator && Game.get().getPlayer().nearShop == this) {
 			detectPage();
 		}
 
@@ -726,8 +726,8 @@ public class Shop extends Interactable {
 			if (players.get(i).input.generalActivator && !players.get(i).inventoryEnabled) {  
 				screen.renderSprite(116, 70, Sprite.ArrowRight, false);
 				screen.renderSprite(7, 70, Sprite.ArrowLeft, false);
-				gui.renderInventory(screen, Game.getGame().getPlayer(), 140, 30);
-				Game.getGame().getPlayer().inventory.abViewExpanded = false;
+				gui.renderInventory(screen, Game.get().getPlayer(), 140, 30);
+				Game.get().getPlayer().inventory.abViewExpanded = false;
 				gui.renderInventory(screen, this, players.get(i));
 				//Game.getGame().getPlayer().inventory.tab = TAB.ITEMS;
 				players.get(i).inChest = true;
@@ -746,7 +746,7 @@ public class Shop extends Interactable {
 	} 
 	
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 16, 16, 0xFF00FF, true);
 		}
 		//int radius = level.radius / 2 + 5;

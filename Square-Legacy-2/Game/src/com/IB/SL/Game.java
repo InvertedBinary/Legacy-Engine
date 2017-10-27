@@ -543,7 +543,7 @@ public int deathTimeSec = 0;
 		} catch (Exception e) {
 			autoSave = true;
 		}
-		Game.switchState(Game.getGame().gameState.INGAME);
+		Game.switchState(Game.get().gameState.INGAME);
 		
 		if (Game.runTut) {
 			getPlayer().setPosition(73, 38, Maps.tutWorldId, true);
@@ -713,7 +713,7 @@ public int deathTimeSec = 0;
 		}
 
 		if (!loadGame) {
-			if (gameState != Game.getGame().gameState.MENU && key.gs1) {
+			if (gameState != Game.get().gameState.MENU && key.gs1) {
 				// playHope = false;
 
 				// playMenuMusic = true;
@@ -866,7 +866,7 @@ public int deathTimeSec = 0;
 			getGui().renderPause(screen);
 		} else if (gameState == gameState.DEATH) {
 			getGui().renderDeath(screen);
-			font8x8.render(-4, 159, -3, 0xffFFFFFF, "Auto Respawn In.." + (10 - Game.getGame().deathTimeSec), screen, false, false);
+			font8x8.render(-4, 159, -3, 0xffFFFFFF, "Auto Respawn In.." + (10 - Game.get().deathTimeSec), screen, false, false);
 		} else if (gameState == gameState.SPLASH) {
 			getGui().renderSplash(screen);
 		}
@@ -1114,7 +1114,7 @@ public int deathTimeSec = 0;
 		setMouseIcon("/Textures/cursor.png");
 
 		game.start();
-		 centreMouse();
+		 centerMouse();
 
 		
 		blankBoolean = true;
@@ -1122,26 +1122,28 @@ public int deathTimeSec = 0;
 	}
     
     
-	public static Game getGame() {
+	public static Game get() {
 		return game1;
+	}
+	
+	public static void centerMouse() {
+		int centreFrameX = frame.getX() + (frame.getWidth() / 2);
+		int centreFrameY = frame.getY() + (frame.getHeight() / 2);
+		moveMouse(new Point(centreFrameX, centreFrameY));
 	}
 	
 	public static void moveMouse(Point p) {
 	    GraphicsEnvironment ge = 
 	        GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    GraphicsDevice[] gs = ge.getScreenDevices();
-
-	    // Search the devices for the one that draws the specified point.
 	    for (GraphicsDevice device: gs) { 
 	        GraphicsConfiguration[] configurations =
 	            device.getConfigurations();
 	        for (GraphicsConfiguration config: configurations) {
 	            Rectangle bounds = config.getBounds();
 	            if(bounds.contains(p)) {
-	                // Set point to screen coordinates.
 	                Point b = bounds.getLocation(); 
 	                Point s = new Point(p.x - b.x, p.y - b.y);
-
 	                try {
 	                    Robot r = new Robot(device);
 	                    r.mouseMove(s.x, s.y);
@@ -1153,7 +1155,6 @@ public int deathTimeSec = 0;
 	            }
 	        }
 	    }
-	    // Couldn't move to the point, it may be off screen.
 	    return;
 	}
 	
@@ -1161,9 +1162,9 @@ public int deathTimeSec = 0;
 	
 	public static void switchState(gameState state) {
 		Mouse.setMouseB(-1);
-		gameState current = Game.getGame().gameState;
-		Game.getGame().gui.newCharMenu = false;
-		Game.getGame().gui.charMenu = false;
+		gameState current = Game.get().gameState;
+		Game.get().gui.newCharMenu = false;
+		Game.get().gui.charMenu = false;
 
 		try {
 		if (current != current.SPLASH) {
@@ -1186,7 +1187,7 @@ public int deathTimeSec = 0;
 		} else if (state == state.INGAME) {
 			if (current != current.INGAME_A) {
 				if (current == current.PAUSE) {
-					Game.getGame().save(false);
+					Game.get().save(false);
 					try {						
 					Sound.resumeOgg();
 					} catch (Exception e) {
@@ -1216,7 +1217,7 @@ public int deathTimeSec = 0;
 		 * if (gamestate == 4) { Sound.StopMusic(); }
 		 */
 
-		Game.getGame().gameState = state;
+		Game.get().gameState = state;
 
 	}
 
@@ -1248,8 +1249,6 @@ public int deathTimeSec = 0;
 		this.gui = gui;
 	}
 	
-	
-	
 	public static void log(String text, boolean err) {
 		if (!err) {			
 			System.out.println(" >> " + text);
@@ -1267,13 +1266,6 @@ public int deathTimeSec = 0;
 		}
 	}
 	
-	public static void centreMouse() {
-		int centreFrameX = frame.getX() + (frame.getWidth() / 2);
-		int centreFrameY = frame.getY() + (frame.getHeight() / 2);
-		moveMouse(new Point(centreFrameX, centreFrameY));
-		
-	}
-	
 	public void setMousePos(int framex, int framey) {
 		moveMouse(new Point(framex, framey));
 	}
@@ -1285,9 +1277,7 @@ public int deathTimeSec = 0;
 		} else {
 			System.out.println("Closing Application");
 		}
-				
 		System.exit(0);
-		
 	}
 	
 	

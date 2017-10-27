@@ -294,7 +294,7 @@ public class ChestInventory implements Serializable{
 	}
 	
 	public boolean checkRecipe(ArrayList<String> recipe) {
-		Player p = Game.getGame().getPlayer();
+		Player p = Game.get().getPlayer();
 		if (p.inventory.contains(recipe)) {
 		return true;
 		} else {
@@ -408,7 +408,7 @@ public class ChestInventory implements Serializable{
 			if (gui.checkBounds(138, 58, 48, 48, true, true)) {
 				if (Mouse.getButton() == 1) {
 					Mouse.setMouseB(-1);
-					if (Game.getGame().getPlayer().addItem(crafted)) {
+					if (Game.get().getPlayer().addItem(crafted)) {
 						player.quests.completeCraftingObjective(crafted);
 						crafted = null;
 					}

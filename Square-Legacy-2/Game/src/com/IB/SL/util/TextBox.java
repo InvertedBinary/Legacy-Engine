@@ -229,7 +229,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 	public void runCmd(String text) {
 		if (useCmds) {
 			if (text.startsWith("!")) {
-			Game.getGame().getPlayer().cmd.updateCommandMode(finalText.substring(1, finalText.length()), Game.getGame().getPlayer());
+			Game.get().getPlayer().cmd.updateCommandMode(finalText.substring(1, finalText.length()), Game.get().getPlayer());
 			reset(true);
 			}
 		}

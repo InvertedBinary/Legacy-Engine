@@ -246,11 +246,11 @@ public class FrozenKing extends Mob {
 
 	public void death() {
 		if (!removed) {
-			Game.getGame().getLevel().add(new mace_Frostbitten((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
-			Game.getGame().getLevel().add(new ShardOfTrueIce((int) x, (int) y, 2000, 1, EquipableItem.slot_UTILITY1));
-  			Game.getGame().getLevel().add(new BerserkersHelm((int) x, (int) y, 2000, 1, EquipableItem.slot_HEAD));
-  			Game.getGame().getLevel().add(new MagicMirror((int) x, (int) y, 2000, 1, EquipableItem.slot_SHEILD));
- 			Game.getGame().getLevel().add(new FrostCandle((int) x, (int) y, 2000, 1, EquipableItem.slot_SHEILD));
+			Game.get().getLevel().add(new mace_Frostbitten((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new ShardOfTrueIce((int) x, (int) y, 2000, 1, EquipableItem.slot_UTILITY1));
+  			Game.get().getLevel().add(new BerserkersHelm((int) x, (int) y, 2000, 1, EquipableItem.slot_HEAD));
+  			Game.get().getLevel().add(new MagicMirror((int) x, (int) y, 2000, 1, EquipableItem.slot_SHEILD));
+ 			Game.get().getLevel().add(new FrostCandle((int) x, (int) y, 2000, 1, EquipableItem.slot_SHEILD));
 			
 		}
 	}
@@ -271,13 +271,13 @@ public class FrozenKing extends Mob {
 
 		if (level.getPlayers(this, 300).size() > 0) {
 			screen.renderSprite((Game.width / 2) - 54, 2, Sprite.resize(gui.renderBar(60, gui.healthbar, maxhealth, mobhealth), 1.5), false); // 130
-			Game.getGame().getLevel().SpawnTime_MOD = -1;
+			Game.get().getLevel().SpawnTime_MOD = -1;
 			if (!switchedMusic) {
 			Sound.switchMusic(Sound.CallOfTheVoid, 1f);
 			switchedMusic = true;
 			}
 		} else {
-			Game.getGame().getLevel().SpawnTime_MOD = Dungeon03.SpawnTime_Default;
+			Game.get().getLevel().SpawnTime_MOD = Dungeon03.SpawnTime_Default;
 			if (switchedMusic) {
 			Sound.switchMusic(Sound.TheMightyWillCrumble, 1f);
 			switchedMusic = false;

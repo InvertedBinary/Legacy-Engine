@@ -163,7 +163,7 @@ public class Villager01 extends Mob{
 	
 	public void renderGUI(Screen screen) {
 		if (this.mobhealth < this.maxhealth) 
-			screen.renderSprite((int) x - 16, (int)y - 25, Game.getGame().gui.renderMobHealthExperiment(this, 20), true);
+			screen.renderSprite((int) x - 16, (int)y - 25, Game.get().gui.renderMobHealthExperiment(this, 20), true);
 
 	}
 

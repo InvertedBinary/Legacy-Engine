@@ -49,7 +49,7 @@ public class StunBall extends Projectile{
 	}
 	
 	public void addEffect(PlayerMP player) {
-		int r = Game.getGame().getLevel().myRandom(0, 100);
+		int r = Game.get().getLevel().myRandom(0, 100);
 		if (r > 40)
 		player.effects.addEffect(new Stun(player, 20));
 	}

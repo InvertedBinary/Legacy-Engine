@@ -239,9 +239,9 @@ public class SwarmBoss extends Mob {
 
 	public void death() {
 		if (!removed) {
-			Game.getGame().getLevel().add(new wand_MendersStaff((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
-			Game.getGame().getLevel().add(new wand_Swarm((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
-			Game.getGame().getLevel().add(new SandblastedTurban((int) x, (int) y, 2000, 1, EquipableItem.slot_HEAD));
+			Game.get().getLevel().add(new wand_MendersStaff((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new wand_Swarm((int) x, (int) y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new SandblastedTurban((int) x, (int) y, 2000, 1, EquipableItem.slot_HEAD));
 		}
 	}
 

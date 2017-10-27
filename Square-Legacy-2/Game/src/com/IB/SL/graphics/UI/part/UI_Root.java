@@ -29,7 +29,7 @@ public class UI_Root {
 	}
 	
 	public boolean checkBounds(int x, int y, int width, int height) {
-		int scale = Game.getGame().scale; 
+		int scale = Game.get().scale; 
 		x *= scale;
 		y *= scale;
 		width *= scale;

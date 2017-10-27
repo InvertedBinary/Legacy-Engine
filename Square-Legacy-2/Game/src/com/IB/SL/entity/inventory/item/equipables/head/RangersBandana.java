@@ -43,7 +43,7 @@ import com.IB.SL.level.Level;
 			this.slot_Default = slot_HEAD;
 			this.item_TYPE = type_ARMOR;
 			this.desc = "A\nlength\nof\nfabric\n+7 RES\n+22 AGI\n+16 STR";
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 		}
 		
 		protected void move(double x, double y) {
@@ -137,7 +137,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

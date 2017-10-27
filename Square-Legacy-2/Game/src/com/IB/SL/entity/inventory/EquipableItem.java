@@ -57,8 +57,8 @@ public abstract class EquipableItem extends Item implements Serializable{
 	}
 	
 	public void equipEvent() {
-		Player p = Game.getGame().getPlayer();
-		Game.getGame().getPlayer().calcStat(true);
+		Player p = Game.get().getPlayer();
+		Game.get().getPlayer().calcStat(true);
 		p.stat_item_Health += stat_Health;
 		p.stat_item_Mana += stat_Mana;
 		p.stat_item_Stam += stat_Stam;
@@ -71,12 +71,12 @@ public abstract class EquipableItem extends Item implements Serializable{
 		p.stat_item_MDF += MDF;
 		p.stat_item_AGI += AGI;
 		
-		Game.getGame().getPlayer().calcStat(true);
+		Game.get().getPlayer().calcStat(true);
 	}
 	
 	public void dequipEvent() {
-		Player p = Game.getGame().getPlayer();
-		Game.getGame().getPlayer().calcStat(true);
+		Player p = Game.get().getPlayer();
+		Game.get().getPlayer().calcStat(true);
 		p.stat_item_Health -= stat_Health;
 		p.stat_item_Mana -= stat_Mana;
 		p.stat_item_Stam -= stat_Stam;
@@ -89,7 +89,7 @@ public abstract class EquipableItem extends Item implements Serializable{
 		p.stat_item_MDF -= MDF;
 		p.stat_item_AGI -= AGI;
 		
-		Game.getGame().getPlayer().calcStat(true);
+		Game.get().getPlayer().calcStat(true);
 	}
 	
 	public void renderAoE(Screen screen) {

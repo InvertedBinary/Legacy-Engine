@@ -53,6 +53,10 @@ public class Entity implements Serializable {
 	public Integer id = -1;
 	public transient String UID = "";
 	transient public Rectangle r;
+	public transient String name;
+	public int rarity = -1;
+	transient public boolean incombat;
+
 	
 	public enum HOSTILITY {
 		AGR, PASS, NEU, BOSS, PLAYER
@@ -181,7 +185,7 @@ public class Entity implements Serializable {
 	   }
 	   
 	   public void displayQuest(Screen screen) {
-		   Player p = Game.getGame().getPlayer();
+		   Player p = Game.get().getPlayer();
 		   if (this.toGive != null && givenQuest == false) {
 			   p.gui.font8x8.render(110, 15, -2, 0xff000000, "Quest - 'F'", screen, false, true);
 			   p.gui.font8x8.render(109, 15, -2, 0xffFFFFFF, "Quest - 'F'", screen, false, false);
@@ -287,6 +291,10 @@ public class Entity implements Serializable {
 		return this.ChestInventory;
 	}
 
+	
+	public void death() {
+		
+	}
 	
 	
 	public int getID() {

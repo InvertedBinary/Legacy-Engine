@@ -184,7 +184,7 @@ public class Commands {
 				switch (Command.toLowerCase()) {
 			/*	case "help": JOptionPane.showMessageDialog(Game.frame, HelpText, "Help", JOptionPane.INFORMATION_MESSAGE);
 		break;	*/
-				case "tpp": Game.getGame().getLevel().MPTeleport(Modifier);
+				case "tpp": Game.get().getLevel().MPTeleport(Modifier);
 		break;
 				case "nospawns":
 					if (Game.cmdln_args.containsKey("-nospawns")) {
@@ -196,25 +196,25 @@ public class Commands {
 		break;
 				case "tp": 
 					if (Modifier.equals("$")) {
-						Modifier = ""+(int)Game.getGame().getPlayer().x/16;
+						Modifier = ""+(int)Game.get().getPlayer().x/16;
 					}
 					if (Modifier2.equals("$")) {
-						Modifier2 = ""+(int)Game.getGame().getPlayer().y/16;
+						Modifier2 = ""+(int)Game.get().getPlayer().y/16;
 					}
-				Game.getGame().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
+				Game.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
 		break;
 				case "cq":
 				Quest q = player.quests.constructQuest(Modifier);	
 					if (q != null) {
-						Game.getGame().getPlayer().addQuest(q);
+						Game.get().getPlayer().addQuest(q);
 					} else {
 						System.out.println("Invalid path or something");
 					}
 				break;
 				case "load":
 					int id = Integer.parseInt(Modifier);	
-							Game.getGame().getPlayer().setPosition(0, 0, id, false);
+							Game.get().getPlayer().setPosition(0, 0, id, false);
 					break;
 				case "speed": 
 				{
@@ -231,9 +231,9 @@ public class Commands {
 		
 				case "weather": 
 					if (Modifier.equalsIgnoreCase("rain")) {
-						Game.getGame().getLevel().isRaining = !Game.getGame().getLevel().isRaining;
+						Game.get().getLevel().isRaining = !Game.get().getLevel().isRaining;
 					} else if (Modifier.equalsIgnoreCase("clear")) {
-						Game.getGame().getLevel().isRaining = false;
+						Game.get().getLevel().isRaining = false;
 					}
 		break;
 		
@@ -242,11 +242,11 @@ public class Commands {
 				break;
 				
 				case "stage":
-					Game.getGame().getPlayer().quests.setStage(Modifier, Integer.parseInt(Modifier2));
+					Game.get().getPlayer().quests.setStage(Modifier, Integer.parseInt(Modifier2));
 					break;
 		
 				case "gs3":
-					Game.getGame().switchState(Game.getGame().gameState.INGAME_A);
+					Game.get().switchState(Game.get().gameState.INGAME_A);
 					break;
 				
 				case "dir":
@@ -261,10 +261,10 @@ public class Commands {
 				
 				case "dbg":
 				
-					if (!Game.getGame().gameState.equals(Game.getGame().gameState.INGAME_A)) {
-						Game.switchState(Game.getGame().gameState.INGAME_A);						
+					if (!Game.get().gameState.equals(Game.get().gameState.INGAME_A)) {
+						Game.switchState(Game.get().gameState.INGAME_A);						
 					} else {
-						Game.switchState(Game.getGame().gameState.INGAME);
+						Game.switchState(Game.get().gameState.INGAME);
 					}
 					
 				break;
@@ -333,7 +333,7 @@ public class Commands {
 			}
 		break;
 				case "cl":
-					Game.getGame().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
+					Game.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

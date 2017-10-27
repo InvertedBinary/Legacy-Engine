@@ -50,7 +50,7 @@ public class HealingSpell extends Ability{
 			}
 			origin.mobhealth += amountToHeal;
 			Sound.Play(Sound.Spell2, false);
-			Game.getGame().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 6, Game.getGame().getLevel()));
+			Game.get().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 6, Game.get().getLevel()));
 			return true;
 		}
 	}

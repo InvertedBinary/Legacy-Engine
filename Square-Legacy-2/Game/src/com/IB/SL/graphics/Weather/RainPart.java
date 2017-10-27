@@ -39,14 +39,14 @@ public class RainPart {
 			time = 0;
 		}
 		
-		if (this.y != Game.getGame().getHeight()) {
+		if (this.y != Game.get().getHeight()) {
 			if (time % 10 == 0) {
 				x++;
 				y++;
 			}
 		} 
 		
-		if (this.y >= Game.getGame().height){
+		if (this.y >= Game.get().height){
 			x = ix;
 			y = -2 - sy;
 		}
@@ -60,17 +60,17 @@ public class RainPart {
 			}
 		}
 		
-		if (this.y != Game.getGame().getHeight()) {
+		if (this.y != Game.get().getHeight()) {
 			System.out.println("Is update");
 			if (time % 10 == 0 || in_render == false) {
-				if (Game.getGame().getPlayer().walking) {
-					switch(Game.getGame().getPlayer().getDir()) {
+				if (Game.get().getPlayer().walking) {
+					switch(Game.get().getPlayer().getDir()) {
 					case UP:
 						x+= 1;
-						y+= 2 * Game.getGame().getPlayer().speed;
+						y+= 2 * Game.get().getPlayer().speed;
 						break;
 					case LEFT:		
-						x+= 2 * Game.getGame().getPlayer().speed;
+						x+= 2 * Game.get().getPlayer().speed;
 						y+= 1;
 						break;
 					case RIGHT: 
@@ -94,7 +94,7 @@ public class RainPart {
 			}
 		} 
 		
-		if (this.y >= Game.getGame().height){
+		if (this.y >= Game.get().height){
 			x = ix;
 			y = -2 - sy;
 		}

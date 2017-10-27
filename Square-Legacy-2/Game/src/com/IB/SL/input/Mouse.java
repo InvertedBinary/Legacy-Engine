@@ -137,23 +137,23 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	     //  System.out.println(notch);
 	     System.out.println(notch);
 	       try {
-	    	   if (Game.getGame().gameState == Game.getGame().gameState.INGAME_A || Game.getGame().gameState == Game.getGame().gameState.INGAME) {
-	    		 if (!Game.getGame().getPlayer().buildMode) {
-	    			 if (notch > Game.getGame().getPlayer().abilities.lastAbilitySlot()) {
+	    	   if (Game.get().gameState == Game.get().gameState.INGAME_A || Game.get().gameState == Game.get().gameState.INGAME) {
+	    		 if (!Game.get().getPlayer().buildMode) {
+	    			 if (notch > Game.get().getPlayer().abilities.lastAbilitySlot()) {
 	    				 notch = 0;
 	    			 }
 	    			 if (notch < 0) {
-	    				 notch = Game.getGame().getPlayer().abilities.lastAbilitySlot();
+	    				 notch = Game.get().getPlayer().abilities.lastAbilitySlot();
 	    			 }
-	    		    Game.getGame().getPlayer().abilities.checkAbility(Game.getGame().getScreen(), notch, true);
+	    		    Game.get().getPlayer().abilities.checkAbility(Game.get().getScreen(), notch, true);
 	    		 } else {
-	    			   if (notch > Game.getGame().getPlayer().history.size() - 1) {
+	    			   if (notch > Game.get().getPlayer().history.size() - 1) {
 	    				   notch = 0;
 	    			   }
 	    			   if (notch < 0) {
-	    				   notch = Game.getGame().getPlayer().history.size() - 1;
+	    				   notch = Game.get().getPlayer().history.size() - 1;
 	    			   }
-	    			 Game.getGame().getPlayer().swapBlock(notch);
+	    			 Game.get().getPlayer().swapBlock(notch);
 	    		 }
 	    		 
 	    	   

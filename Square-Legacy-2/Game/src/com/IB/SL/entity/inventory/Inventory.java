@@ -61,12 +61,12 @@ public class Inventory {
 		
 		
 		System.out.println("BEING CALLED WITH AN ID OF " + id);
-		Game.getGame().getLevel().addInvById(inv, id);
+		Game.get().getLevel().addInvById(inv, id);
 	}
 	
 	
 	public boolean add(Item item) {
-		Game.getGame().save(false);
+		Game.get().save(false);
 		Game.log("ITEM INDEXED " + getItemSlot(item), "InvClass", true);
 
 		if (false) {
@@ -422,7 +422,7 @@ public class Inventory {
 	
 	private void dropItem(Item item) {
 		int xp = 0, yp = 0;
-		List<PlayerMP> players = Game.getGame().getLevel().players;
+		List<PlayerMP> players = Game.get().getLevel().players;
 		for (int i = 0; i < players.size(); i++) {
 			xp = (int) players.get(i).getX();
 			yp = (int) players.get(i).getY();
@@ -430,56 +430,56 @@ public class Inventory {
 		
 		if (item instanceof Ticket) {
 		Ticket t = (Ticket)item;
-		Game.getGame().getLevel().add(new Ticket((xp), (yp + 6), 7400, 1, t.type));
+		Game.get().getLevel().add(new Ticket((xp), (yp + 6), 7400, 1, t.type));
 		}
 		
 		if (item instanceof RoomKey) {
 		RoomKey t = (RoomKey)item;
-		Game.getGame().getLevel().add(new RoomKey((xp), (yp + 6), 7400, 1, t.rm));
+		Game.get().getLevel().add(new RoomKey((xp), (yp + 6), 7400, 1, t.rm));
 		}
 
 		if (sendItemToLevel(item, xp, yp) != null) {				
 			sendItemToLevel(item, xp, yp);
 			}
 			
-		Game.getGame().save(false);
+		Game.get().save(false);
 	}
 	
 	private void dropItem(int index) {
 		CoinBag c = null;
 		int xp = 0, yp = 0;
-			xp = (int) Game.getGame().getLevel().getClientPlayer().getX();
-			yp = (int) Game.getGame().getLevel().getClientPlayer().getY();
+			xp = (int) Game.get().getLevel().getClientPlayer().getX();
+			yp = (int) Game.get().getLevel().getClientPlayer().getY();
 		Item item = get(index);
 		
 		
 		if (item instanceof Ticket) {
 			Ticket t = (Ticket)item;
-			Game.getGame().getLevel().add(new Ticket((xp), (yp + 6), 7400, 1, t.type));
+			Game.get().getLevel().add(new Ticket((xp), (yp + 6), 7400, 1, t.type));
 			removeByIndex(index);
 		}
 		
 		if (item instanceof RoomKey) {
 			RoomKey t = (RoomKey)item;
-			Game.getGame().getLevel().add(new RoomKey((xp), (yp + 6), 7400, 1, t.rm));
+			Game.get().getLevel().add(new RoomKey((xp), (yp + 6), 7400, 1, t.rm));
 			removeByIndex(index);
 		}
 		
 		if (item instanceof AbstractMatter) {
 			AbstractMatter um = (AbstractMatter)item;
-			Game.getGame().getLevel().add(new AbstractMatter((xp), (yp + 6), 7400, 1, um.tier));
+			Game.get().getLevel().add(new AbstractMatter((xp), (yp + 6), 7400, 1, um.tier));
 			removeByIndex(index);
 		}
 		
 		if (sendItemToLevel(item, xp, yp) != null) {				
 		if (removeByIndex(index)) {			
 			//TODO: Implement check for null return -- keep item | DONE
-			Game.getGame().getLevel().add(sendItemToLevel(item, xp, yp));
+			Game.get().getLevel().add(sendItemToLevel(item, xp, yp));
 			}
 			
 		}
 		
-			Game.getGame().save(false);		
+			Game.get().save(false);		
 			currentItemName = "";
 			currentDesc = "";
 	}
@@ -666,10 +666,10 @@ public class Inventory {
 	}
 	
 	public void renderTabEQUIPMENT(Screen screen, EquipableItem[] equips) {
-		if (Game.getGame().getPlayer().inventoryEnabled) {
+		if (Game.get().getPlayer().inventoryEnabled) {
 		EquipableItem slotCheck = null;
 		screen.renderSheet(x, y, SpriteSheet.inventoryEquip, false);
-		font8x8.render(x + 44, y + 24, -2, 0xFFFFFF, " Level: " + Game.getGame().getPlayer().Lvl + "\n Exp: " + Game.getGame().getLevel().getClientPlayer().ExpC + "\n Kills: " + Game.getGame().getLevel().getClientPlayer().kills + "\n Money: " + Game.getGame().getPlayer().money, screen, false, false);
+		font8x8.render(x + 44, y + 24, -2, 0xFFFFFF, " Level: " + Game.get().getPlayer().Lvl + "\n Exp: " + Game.get().getLevel().getClientPlayer().ExpC + "\n Kills: " + Game.get().getLevel().getClientPlayer().kills + "\n Money: " + Game.get().getPlayer().money, screen, false, false);
 		//for (int i = 0; i < equipment.length; i++) {
 			
 			if (equips[EquipableItem.slot_HEAD] != null) {
@@ -738,7 +738,7 @@ public class Inventory {
 					if (slotCheck != null) {
 						font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT, Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -3, 0xFFFFFF, slotCheck.getName().toUpperCase(), screen, false, true);
 						if (Mouse.getButton() == 1) {
-							Game.getGame().getPlayer().equipment.Dequip(slotCheck.slot);
+							Game.get().getPlayer().equipment.Dequip(slotCheck.slot);
 						}
 					}
 			}
@@ -811,7 +811,7 @@ public class Inventory {
 		
 		for (int i = 0; i < quests.length; i++) {
 			if (quests[i] != null) {
-				if (quests[i].equals(Game.getGame().getPlayer().quests.active)) {
+				if (quests[i].equals(Game.get().getPlayer().quests.active)) {
 					//screen.drawFillRect(87, 51 + i * 12, 38, 8, 0, false);
 					font8x8.render(81, 51 + i * 12, -3, 0xFFFFFF, quests[i].getName(), screen, false, false);
 				} else {
@@ -829,7 +829,7 @@ public class Inventory {
 			try {
 				Quest q = detectQuestButton(quests);
 				if (Mouse.getButton() == 1) {
-					Game.getGame().getPlayer().quests.active = q;
+					Game.get().getPlayer().quests.active = q;
 					Sound.Play(Sound.Click, false);
 					Mouse.setMouseB(-1);
 				}
@@ -852,7 +852,7 @@ public class Inventory {
 		for (int i = 0; i < quests.length; i++) {
 
 			
-			if (Game.getGame().getPlayer().gui.checkBounds(87, 51 + i * 12, 38, 8, true, true)) {
+			if (Game.get().getPlayer().gui.checkBounds(87, 51 + i * 12, 38, 8, true, true)) {
 				if (quests[i] != null) {
 					return quests[i];
 				} else {
@@ -885,14 +885,14 @@ public class Inventory {
 			this.currentItemName = items[slot].getName().toUpperCase();
 			this.currentDesc = items[slot].getDesc().toUpperCase();
 			
-		if (Mouse.getButton() == 3 && Game.getGame().key.Sprint) {
-				if (!sellItem(Game.getGame().getPlayer(), slot)) {
+		if (Mouse.getButton() == 3 && Game.get().key.Sprint) {
+				if (!sellItem(Game.get().getPlayer(), slot)) {
 					dropItem(slot);
 			}
 			Mouse.setMouseB(-1);
 		}
 		
-	if (Mouse.getButton() == 3 && !Game.getGame().key.Sprint) {
+	if (Mouse.getButton() == 3 && !Game.get().key.Sprint) {
 		if (moving == null) {
 			moving = items[slot];
 			removeByIndex(slot);
@@ -901,8 +901,8 @@ public class Inventory {
 	}
 
 	if (Mouse.getButton() == 1) {
-		if (Game.getGame().getPlayer().nearShop != null && Game.getGame().getPlayer().input.generalActivator) {
-			sellItem(Game.getGame().getPlayer(), slot);
+		if (Game.get().getPlayer().nearShop != null && Game.get().getPlayer().input.generalActivator) {
+			sellItem(Game.get().getPlayer(), slot);
 		} else {
 		if (moving != null) {
 		} else if (items[slot].clickEvent()) {
@@ -929,7 +929,7 @@ public class Inventory {
 		}
 		
 		if (overMoveLock || moveLock) {
-		Game.getGame().getScreen().drawFillRect(x - 5, y - 5, 5, 5, 0xff000000, false);
+		Game.get().getScreen().drawFillRect(x - 5, y - 5, 5, 5, 0xff000000, false);
 		}
 		
 		if (tab == TAB.ITEMS) {
@@ -958,7 +958,7 @@ public class Inventory {
 	}
 
 	public void move(int x, int y) {
-		if (x <= Game.getGame().getScreen().width - 4 && y <= Game.getGame().getScreen().height - 4) {
+		if (x <= Game.get().getScreen().width - 4 && y <= Game.get().getScreen().height - 4) {
 			if (x >= 4 && y >= 4) {
 				
 		this.x = x;
@@ -984,11 +984,11 @@ public class Inventory {
 	public boolean abDragLock = false;
 	public boolean overMoveLock = false;
 	private void manageClickEvents() {
-		if (Game.getGame().getPlayer().inventoryEnabled || Game.getGame().getPlayer().nearShop != null && Game.getGame().getPlayer().input.generalActivator) {
+		if (Game.get().getPlayer().inventoryEnabled || Game.get().getPlayer().nearShop != null && Game.get().getPlayer().input.generalActivator) {
 		//TODO: Double Click To Activate Click Events
 			
 	if (!moveLock) {
-		if (Game.getGame().getPlayer().nearShop == null) {
+		if (Game.get().getPlayer().nearShop == null) {
 		if (gui.checkBounds(x - 5, y - 5, 5, 5, true, true)) {
 			overMoveLock = true;
 			if (Mouse.getButton() == 1) {
@@ -1058,7 +1058,7 @@ public class Inventory {
 
 			if (moving != null) {
 				if (Mouse.getButton() == 3) {
-					if (!Game.getGame().gui.checkBounds(85, 49, 132, 86, true, true)) {
+					if (!Game.get().gui.checkBounds(85, 49, 132, 86, true, true)) {
 						//TODO: FIX
 						//System.out.println("broken --");
 						//dropItem(moving );
@@ -1162,7 +1162,7 @@ public class Inventory {
 		manageClickEvents();
 		
 		if (moving != null) {
-		if (!Game.getGame().getPlayer().inventoryEnabled) {
+		if (!Game.get().getPlayer().inventoryEnabled) {
 			if (this.add(moving)) {
 				moving = null;
 			}
