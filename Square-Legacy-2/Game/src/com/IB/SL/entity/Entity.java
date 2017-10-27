@@ -33,7 +33,8 @@ public class Entity implements Serializable {
 	public double maxmana;
 	public double maxstamina;
 	transient public boolean hurt = false;
-	
+	transient public boolean walking = false;
+
 	public transient Quest toGive;
 	private boolean givenQuest = false;
 

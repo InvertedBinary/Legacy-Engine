@@ -78,7 +78,6 @@ public abstract  class Mob extends Entity implements Serializable {
 	
 	
 	transient protected boolean moving = false;
-	transient public boolean walking = false;
 	transient private boolean solid;
 	transient private List<Node> pathPull = null;
 	transient double PathtimePull = 0;

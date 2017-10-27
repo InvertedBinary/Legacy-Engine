@@ -542,7 +542,7 @@ public class GUI extends CheckBounds {
 		return HealthSprite;
 	}
 
-	public Sprite renderMobHealthExperiment(Mob mob, int size) {
+	public Sprite renderMobHealthExperiment(Entity mob, int size) {
 		double CurrentHealth = mob.mobhealth;
 		double MaxHealth = mob.maxhealth;
 		double Special = MaxHealth - 1;
