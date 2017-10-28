@@ -6,7 +6,6 @@ import java.util.Random;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.ThrowableRock;
@@ -50,7 +49,6 @@ public class Zombie extends Mob{
 		this.rarity = 4;
 		this.hostility = HOSTILITY.AGR;
 		sprite = Sprite.playerback;
-		this.effects = new ActiveEffects(7, this);
 		
 		Random rand = new Random();
 		int r = 2;

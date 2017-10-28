@@ -3,7 +3,6 @@ package com.IB.SL.entity.mob.peaceful;
 import java.util.List;
 
 import com.IB.SL.Game;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -49,7 +48,6 @@ public class Villager01 extends Mob{
 		this.font8x8 = new font8x8();
 		sprite = Sprite.playerback;
 		this.hostility = hostility.PASS;
-		this.effects = new ActiveEffects(7, this);
 	}
 	
 	

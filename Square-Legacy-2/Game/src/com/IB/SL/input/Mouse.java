@@ -136,7 +136,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	       // System.out.println(message + e);
 	     //  System.out.println(notch);
 	     System.out.println(notch);
-	       try {
+	      /* try {
 	    	   if (Game.get().gameState == Game.get().gameState.INGAME_A || Game.get().gameState == Game.get().gameState.INGAME) {
 	    		 if (!Game.get().getPlayer().buildMode) {
 	    			 if (notch > Game.get().getPlayer().abilities.lastAbilitySlot()) {
@@ -160,7 +160,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	       }
 	       } catch (NullPointerException e1) {
 	    	   System.err.println("Ability at slot " + notch + " is null (Nonexistant)");
-	       }
+	       }*/
 	     }
 
 	

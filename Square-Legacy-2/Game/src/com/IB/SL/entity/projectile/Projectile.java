@@ -8,7 +8,6 @@ import javax.sound.sampled.Clip;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.EquipableItem;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.entity.spawner.BleedSpawner;
@@ -18,7 +17,7 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 
-public abstract class Projectile extends EquipableItem{
+public abstract class Projectile extends Entity {
 
 	protected final double xOrigin, yOrigin;
 	public double angle;
@@ -32,6 +31,7 @@ public abstract class Projectile extends EquipableItem{
 	protected int ExpV;
 	public Entity prevHit;
 	public int id = -1;
+	public int time = 0;
 	
 	/**
 	 * 1 = Rock
@@ -215,7 +215,7 @@ public abstract class Projectile extends EquipableItem{
 					level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 				}
 				if (players.get(i).mobhealth <= 0){
-					players.get(i).onPlayerDeath();
+					//players.get(i).onPlayerDeath();
 					Game.switchState(Game.get().gameState.DEATH);
 					level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");

@@ -1,0 +1,215 @@
+package com.IB.SL.entity;
+
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.IB.SL.entity.mob.Mob;
+import com.IB.SL.entity.mob.Player;
+import com.IB.SL.entity.mob.Mob.DIRECTION;
+import com.IB.SL.graphics.AnimatedSprite;
+import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.SpriteSheet;
+import com.IB.SL.graphics.UI.GUI;
+
+public class XMLEntity extends Mob {
+	
+	transient private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down, 16, 16, 3);
+	transient private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16, 16, 3);
+	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left, 16, 16, 2);
+	transient private AnimatedSprite right = new AnimatedSprite(SpriteSheet.zombie_right, 16, 16, 2);
+
+	transient private AnimatedSprite animSprite = down;
+	
+	transient private int time = 0;
+	transient double xa = 0;
+	transient double ya = 0;
+	
+	GUI gui = new GUI();
+
+	public XMLEntity(String XML) {
+		XML = "/XML/Entities/Test_Zombie.xml";
+		readXML(XML);
+	}
+	
+	public XMLEntity(int x, int y, String XML) {
+		XML = "/XML/Entities/Test_Zombie.xml";
+		readXML(XML);
+		this.x = x * 16;
+		this.y = y * 16;
+	}
+	
+	public void readXML(String path) {
+		try {
+		InputStream fXmlFile = getClass().getResourceAsStream(path);
+		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		
+		doc.getDocumentElement().normalize();
+		
+		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		
+		initMob(doc);
+		initSprite(doc);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void initMob(Document doc) {
+		NodeList nList = doc.getElementsByTagName("mob");
+		System.out.println("----------------------------");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			System.out.println("\nCurrent Element :" + nNode.getNodeName());
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+
+			this.id = Integer.parseInt(eElement.getAttribute("id"));
+			this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
+			this.speed = Double.parseDouble(eElement.getElementsByTagName("speed").item(0).getTextContent());
+			this.maxhealth = Double.parseDouble(eElement.getElementsByTagName("maxhealth").item(0).getTextContent());
+			this.mobhealth = maxhealth;
+			this.rarity = Integer.parseInt(eElement.getElementsByTagName("rarity").item(0).getTextContent());
+			this.Exp = Integer.parseInt(eElement.getElementsByTagName("exp").item(0).getTextContent());
+			}
+		}
+	}
+	
+	public void initSprite(Document doc) {
+		NodeList nList = doc.getElementsByTagName("sprite");
+		for (int i = 0; i < nList.getLength(); i++) {
+			Node nNode = nList.item(i);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				
+				this.xOffset = Integer.parseInt(eElement.getAttribute("xOffset"));
+				this.yOffset = Integer.parseInt(eElement.getAttribute("yOffset"));
+
+				Element xml_down = (Element) eElement.getElementsByTagName("down").item(0);
+				Element xml_up = (Element) eElement.getElementsByTagName("up").item(0);
+				Element xml_left = (Element) eElement.getElementsByTagName("left").item(0);
+				Element xml_right = (Element) eElement.getElementsByTagName("right").item(0);
+				
+				this.down = buildAnimSprite(xml_down);
+				this.up = buildAnimSprite(xml_up);
+				this.left = buildAnimSprite(xml_left);
+				this.right = buildAnimSprite(xml_right);
+
+			}
+		}
+	}
+	
+	public AnimatedSprite buildAnimSprite(Element XML) {
+		AnimatedSprite xanim;
+		try {
+			Field field = SpriteSheet.class.getField(XML.getTextContent());
+			Object sprite = field.get(field.getType());
+			xanim = new AnimatedSprite((SpriteSheet) sprite, 
+					Integer.parseInt(XML.getAttribute("width")),
+					Integer.parseInt(XML.getAttribute("height")),
+					Integer.parseInt(XML.getAttribute("length")));
+			return xanim;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void update() {
+		if (time % 8 == 0) {
+			this.hurt = false;
+		}
+		time = (time % 60 == 0) ? 0 : time++;
+		
+		
+		move();
+		if (walking) animSprite.update();
+		else animSprite.setFrame(0);
+		if (ya < 0) {
+			animSprite = up;
+			dir = DIRECTION.UP;
+		} else if (ya > 0) {
+			animSprite = down;
+			dir = DIRECTION.DOWN;
+		} 
+		
+		if (xa < 0) {
+			animSprite = left;
+			dir = DIRECTION.LEFT;
+		} else if (xa > 0) {
+			animSprite = right;
+			dir = DIRECTION.RIGHT;
+		}
+	}
+	
+	
+	private void move() {
+		xa = 0;
+		ya = 0;
+		players = level.getPlayers(this, 125 - visability);
+		List<Player> players2 = level.getPlayers(this, 215 - visability);
+
+		entities = level.getEntities(this, 150 - visability, hostility.NEU, hostility.PASS);
+		
+				//if (entities.get(0).hostility == hostility.NEU || entities.get(0).hostility == hostility.PASS) {
+		if (entities.size() > 0) {
+			if (players2.size() > 0) {
+			Entity e = entities.get(0);
+			tracking = e;
+				if ((int)x < (int)e.getX() + 20) xa+= this.speed;
+				if ((int)x > (int)e.getX() - 20) xa-= this.speed;
+				if ((int)y < (int)e.getY() + 20) ya+= this.speed;
+				if ((int)y > (int)e.getY() - 20) ya-= this.speed;
+				updateMobShooting(e);
+					}
+				} else if (players.size() > 0) {
+					p = players.get(0);
+					tracking = p;
+				//	Debug.drawLine(Game.getGame().getScreen(), (int)x / 16, (int)y / 16, (int)player.x / 16, (int)player.y / 16, 0xff000000, true);
+					if ((int)x < (int)p.getX() + 20) xa+= this.speed;
+					if ((int)x > (int)p.getX() - 20) xa-= this.speed;
+					if ((int)y < (int)p.getY() + 20) ya+= this.speed;
+					if ((int)y > (int)p.getY() - 20) ya-= this.speed;
+					updateShooting();
+					
+		} else {
+			 if (time % (random.nextInt(50) + 30) == 0) {
+		            xa = random.nextInt(3) - 1;
+		            ya = random.nextInt(3) - 1;
+		            if (random.nextInt(2) == 0) {
+		               xa = 0;
+		               ya = 0;
+		              
+		            }
+		         }
+		}
+		
+		if (xa != 0 || ya != 0) {
+		move(xa, ya);
+		walking = true;
+	} else {
+		walking = false;
+	}
+}
+	
+	public void render(Screen screen) {
+		sprite = animSprite.getSprite();
+		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
+		//gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true, true);
+		sprite = animSprite.getSprite();
+		screen.renderMobSpriteUniversal((int) (x + xOffset), (int) (y + yOffset), sprite);
+	
+	}
+}

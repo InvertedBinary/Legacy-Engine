@@ -5,7 +5,6 @@ import java.util.List;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.spawner.WallParticleSpawner;
@@ -52,7 +51,6 @@ public class WaterFamiliar extends Mob {
 		this.speed = 0.8;
 		this.hostility = HOSTILITY.NEU;
 		sprite = Sprite.playerback;
-		this.effects = new ActiveEffects(7, this);
 
 		this.maxlife = maxlife;
 
@@ -68,8 +66,8 @@ public class WaterFamiliar extends Mob {
 					if (p.size() > 0) {
 					}
 					for (int i = 0; i < ent.size(); i++) {
-						Game.get().getLevel().damage((int) x, (int) y, (Mob) ent.get(0), 0,
-								1 + (Game.get().getPlayer().stat_base_MDF * 0.15), name, 0);
+						//Game.get().getLevel().damage((int) x, (int) y, (Mob) ent.get(0), 0,
+								//1 + (Game.get().getPlayer().stat_base_MDF * 0.15), name, 0);
 					}
 				}
 			}

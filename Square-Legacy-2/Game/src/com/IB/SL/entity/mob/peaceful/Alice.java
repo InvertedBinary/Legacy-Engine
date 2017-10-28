@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
@@ -39,7 +38,6 @@ public class Alice extends Mob{
 		this.speed = 0.5;
 		this.hostility = HOSTILITY.NEU;
 		sprite = Sprite.playerback;
-		this.effects = new ActiveEffects(7, this);
 		new font8x8();
 	}
 	

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.WizardProjectile2;
@@ -62,7 +61,6 @@ public class UndeadCaster extends Mob {
 		this.rarity = 4;
 		this.name = "Undead Caster";
 		sprite = Sprite.playerback;
-		this.effects = new ActiveEffects(7, this);
 	}
 
 	private void move() {

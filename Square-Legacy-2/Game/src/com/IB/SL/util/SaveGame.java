@@ -11,10 +11,6 @@ import java.io.Serializable;
 
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.EquipableItem;
-import com.IB.SL.entity.inventory.Quest;
-import com.IB.SL.entity.inventory.item.Item;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_ArcaneTwig;
 import com.IB.SL.entity.mob.PlayerMP;
 
 public class SaveGame {
@@ -112,7 +108,7 @@ public static PlayerMP load(String name) {
 	}
 	
 	
-	public static Item[] loadItems() {
+	/*public static Item[] loadItems() {
 		
 		if(checkSaveExists(itemFileName)) {
 			FileInputStream fis = null;
@@ -133,7 +129,7 @@ public static PlayerMP load(String name) {
 			
 		}
 		return null;
-	}
+	}*/
 	
 public static Entity[] loadEntities() {
 		
@@ -182,7 +178,7 @@ public static Entity[] loadEntities(int levelID) {
 }
 
 	
-	public static Quest[] loadQuests() {
+	/*public static Quest[] loadQuests() {
 		
 		if(checkSaveExists(questsFileName)) {
 			FileInputStream fis = null;
@@ -203,9 +199,9 @@ public static Entity[] loadEntities(int levelID) {
 			
 		}
 		return null;
-	}
+	}*/
 	
-	public static EquipableItem[] loadEquips() {
+	/*public static EquipableItem[] loadEquips() {
 		
 		if(checkSaveExists(equipFileName)) {
 			FileInputStream fis = null;
@@ -230,7 +226,7 @@ public static Entity[] loadEntities(int levelID) {
 			
 		}
 		return null;
-	}
+	}*/
 	
 public static LoadProperties loadPrefs() {
 		

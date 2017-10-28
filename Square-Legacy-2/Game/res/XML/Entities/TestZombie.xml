@@ -2,7 +2,6 @@
 <entity>
 	<mob id="3001">
 		<name>Zombie</name>
-		<maxhealth>10</maxhealth>
 		<speed>0.5</speed>
 		<rarity>4</rarity>
 		<hostility>HOSTILITY.AGR</hostility>
@@ -14,4 +13,10 @@
 		<left width="16" height="16" length="3">zombie01_left</left>
 		<right width="16" height="16" length="3">zombie01_right</right>
 	</sprite>
+	<attack type="projectile">
+	</attack>
 </entity>
+
+
+
+

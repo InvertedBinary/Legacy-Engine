@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.IB.SL.Game;
-import com.IB.SL.entity.XMLEntity;
-import com.IB.SL.entity.inventory.Quest;
 import com.IB.SL.entity.mob.Player;
+import com.IB.SL.entity.mob.XMLMob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 
@@ -111,14 +110,6 @@ public class Commands {
 				Game.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
 		break;
-				case "cq":
-				Quest q = player.quests.constructQuest(Modifier);	
-					if (q != null) {
-						Game.get().getPlayer().addQuest(q);
-					} else {
-						System.out.println("Invalid path or something");
-					}
-				break;
 				case "load":
 					int id = Integer.parseInt(Modifier);	
 							Game.get().getPlayer().setPosition(0, 0, id, false);
@@ -147,11 +138,6 @@ public class Commands {
 				case "tcl":
 					player.noclip = !player.noclip;
 				break;
-				
-				case "stage":
-					Game.get().getPlayer().quests.setStage(Modifier, Integer.parseInt(Modifier2));
-					break;
-		
 				case "gs3":
 					Game.get().switchState(Game.get().gameState.INGAME_A);
 					break;
@@ -207,14 +193,6 @@ public class Commands {
 						}
 					}
 		break;
-				case "exp":
-					try {
-							player.ExpC += Double.parseDouble(Modifier);
-							System.out.println("Added: " + Modifier + "To Current EXP");
-						} catch (Exception e) {
-							e.printStackTrace();
-					}
-		break;
 				case "money":
 					try {
 							player.money += Double.parseDouble(Modifier);
@@ -243,7 +221,7 @@ public class Commands {
 					Game.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 		break;
 				case "spawn":
-					Game.get().getLevel().add(new XMLEntity(Game.get().getPlayer().x / 16, Game.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
+					Game.get().getLevel().add(new XMLMob(Game.get().getPlayer().x / 16, Game.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

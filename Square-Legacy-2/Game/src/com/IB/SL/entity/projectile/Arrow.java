@@ -6,7 +6,6 @@ import java.util.Random;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.item.Item;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -19,7 +18,6 @@ public class Arrow extends Projectile {
 	int ExpV = (random.nextInt(1) + 3);
 	Random dropChance = new Random();
 	int drop;
-	Item item;
 
 	protected static Random Random = new Random();
 	
@@ -31,7 +29,7 @@ public class Arrow extends Projectile {
 	
 	public Arrow(double x, double y, double dir, Mob mob) {
 		super(x, y, dir);
-		damage = 1 + (mob.stat_ATC / 5);
+		damage = 1;
 		basicInitialization();
 	}
 	
@@ -44,7 +42,6 @@ public class Arrow extends Projectile {
 		manaCost = 0;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
-		item = new Item();
 		this.id = 4;
 		Sound.Play(Sound.Spell2,  false);
 	}
@@ -81,24 +78,15 @@ public class Arrow extends Projectile {
 			remove();
 		}
 		
-		za -= 0.9;
-		
-		if (zz < 0) {
-			zz = 0;
-			za *= -0;
-			xa *= 0;
-			ya *= 0;
-		}
-		
 		//move(xx + xa, (yy + ya) + (zz + za));
 	}
 	
 	protected void move() {
 		double deltaX = x - (x+nx);
-		double deltaY = (y - (y+ny)) - (zz + za) / 900;
+		double deltaY = (y - (y+ny)) - (0) / 900;
 		this.angle = Math.atan2(deltaY, deltaX);
 		x += nx;
-		y += ny -= (zz + za) / 900;
+		y += ny -= (0) / 900;
 		sprite = Sprite.rotate(Sprite.Arrow, angle);	
 		if (distance() > range) remove();
 	}

@@ -11,9 +11,6 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Node;
-import com.IB.SL.level.TileCoord;
-import com.IB.SL.util.Sound;
-import com.IB.SL.util.Vector2i;
 
 public class Horse extends Mob {
 
@@ -56,7 +53,7 @@ public class Horse extends Mob {
 	}
 
 	private void move() {
-	      List<Player> players = level.getPlayers(this, 20);
+	      /*List<Player> players = level.getPlayers(this, 20);
 	      List<Player> players2 = level.getPlayers(this, 90);
 
 	      if (players.size() > 0) {
@@ -91,7 +88,7 @@ public class Horse extends Mob {
 					this.breatheTime = 519;
 				}
 				}
-	      } 
+	      } */
 
 	  /*   if (Game.getGame().getPlayer().horse_following != null) {
 	     if (lp != null && p == null && (this.f_id == Game.getGame().getPlayer().horse_following.f_id)) {
@@ -144,9 +141,9 @@ public class Horse extends Mob {
 		time++;
 		move();
 		
-		if (Game.get().getPlayer().ridingOn != this) {
+		/*if (Game.get().getPlayer().ridingOn != this) {
 			walking = false;
-		}
+		}*/
 		
 		if (walking || walking2) 
 			animSprite.update();

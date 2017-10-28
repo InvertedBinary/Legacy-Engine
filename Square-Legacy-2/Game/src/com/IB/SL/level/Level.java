@@ -14,25 +14,11 @@ import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
-import com.IB.SL.entity.inventory.Effect;
-import com.IB.SL.entity.inventory.EquipableItem;
-import com.IB.SL.entity.inventory.Equipment;
-import com.IB.SL.entity.inventory.Inventory;
-import com.IB.SL.entity.inventory.item.Item;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_ContradictionWand;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_FlareScepter;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_Pulsefire;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_StygianScepter;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_VoidCrook;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Mob.DIRECTION;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.mob.hostile.Slime;
-import com.IB.SL.entity.mob.hostile.UndeadCaster;
-import com.IB.SL.entity.mob.hostile.Zombie;
-import com.IB.SL.entity.mob.hostile.minions.Slimey;
-import com.IB.SL.entity.mob.peaceful.Alice;
+import com.IB.SL.entity.mob.XMLMob;
 import com.IB.SL.entity.particle.DamageIndicator;
 import com.IB.SL.entity.particle.Particle;
 import com.IB.SL.entity.projectile.Projectile;
@@ -43,6 +29,8 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
+
+import javafx.scene.effect.Effect;
 
 public class Level implements Serializable {
 	/**
@@ -61,7 +49,6 @@ public class Level implements Serializable {
 	public List<Particle> particles = new ArrayList<Particle>();
 	public List<PlayerMP> players = new ArrayList<PlayerMP>();
 
-	public List<Item> items = new ArrayList<Item>();
 	public List<Entity> entitiesList = new ArrayList<Entity>();
 	public List<Spawner> Spawner = new ArrayList<Spawner>();
 	public List<Effect> StatusFx = new ArrayList<Effect>();
@@ -305,7 +292,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					Entity e = temp[i];
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
+					if (e instanceof XMLMob) {
+						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XMLMob)temp[i]).XML_String));
+					} else {						
 					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
+					}
 					e.onLoad(temp[i]);
 					e.mobhealth = temp[i].mobhealth;
 				Game.get().getLevel().add(e);
@@ -682,9 +673,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 				}
 		}
 		
-		for (int i = 0; i < StatusFx.size(); i++) {
-			StatusFx.get(i).update();
-		}
 		for (int i = 0; i < Projectiles.size(); i++) {
 			Projectiles.get(i).update();
 		}
@@ -697,19 +685,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		
 		
 	
-		/*for (int i = 0; i < HealthPot.size(); i++) {
-			HealthPot.get(i).update();
-		}
-		for (int i = 0; i < ManaPot.size(); i++) {
-			ManaPot.get(i).update();
-		}*/
-		for (int i = 0; i < items.size(); i++) {
-			items.get(i).update();
-		} 
-		
-	/*	for (int i = 0; i < tiles_anim.size(); i++) {
-			tiles_anim.get(i).update();
-		}*/
 		
 		Water.update();
 		
@@ -835,9 +810,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			         entitiesList.get(i).render(screen);
 			   //   }
 				}
-				for(int i = 0; i < StatusFx.size(); i++) {
-					StatusFx.get(i).render(screen);
-				}
 				
 				for(int i = 0; i < entitiesList.size(); i++){
 					entitiesList.get(i).renderGUI(screen);
@@ -887,10 +859,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			if (entities.get(i).isRemoved())
 				entities.remove(i);
 		}
-		for (int i = 0; i < StatusFx.size(); i++) {
-			if (StatusFx.get(i).isRemoved())
-				StatusFx.remove(i);
-		}
 		for (int i = 0; i < Projectiles.size(); i++) {
 			if (Projectiles.get(i).isRemoved())
 				Projectiles.remove(i);
@@ -907,25 +875,10 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			if (Spawner.get(i).isRemoved())
 			Spawner.remove(i);
 		}
-		/*for (int i = 0; i < HealthPot.size(); i++) {
-			if (HealthPot.get(i).isRemoved())
-				HealthPot.remove(i);
-		}
-		for (int i = 0; i < ManaPot.size(); i++) {
-			if (ManaPot.get(i).isRemoved())
-				ManaPot.remove(i);
-		}*/
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).isRemoved())
-				items.remove(i);
-		}
 	}
 
 	public void add(Entity e) {
 		e.init(this);
-		if (e instanceof Effect) {
-			StatusFx.add((Effect) e);
-		} else {
 		entitiesList.add(e);
 		if (e instanceof Particle) {
 			particles.add((Particle) e);
@@ -936,9 +889,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			players.add((PlayerMP) e);
 		} else if (e instanceof Spawner) {
 			Spawner.add((Spawner) e);
-		} else if (e instanceof Item) {
-			items.add((Item) e);
-			System.out.println("ADDING: " + ((Item)e).name);
 		} else {
 		//	if (!Game.cmdln_args.get("-nospawns")) {				
 			entities.add(e);
@@ -953,10 +903,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			}
 		}
 	}
-		
 		//TODO: SEND PACKET TO ADD TO ALL CLIENTS
 		
-	}
 
 	public List<PlayerMP> getPlayers() {
 		return players;
@@ -1202,40 +1150,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		return result;
 	}
 	
-	public List<Item> getItems(Entity e, int radius) {
-		List<Item> result = new ArrayList<Item>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
-		for (int i = 0; i < items.size(); i++) {
-			Item items = this.items.get(i);
-			int x = (int) items.getX();
-			int y = (int) items.getY();
-			int dx = Math.abs(x - ex);
-			int dy = Math.abs(y - ey);
-			double distance = Math.sqrt((dx * dx) + (dy * dy));
-			if (distance <= radius)
-				result.add(items);
-		}
-		return result;
-	}
-	
-	public List<Item> getItemsFixed(int xx, int yy, int radius) {
-		List<Item> result = new ArrayList<Item>();
-		int ex = xx;
-		int ey = yy;
-		for (int i = 0; i < items.size(); i++) {
-			Item items = this.items.get(i);
-			int x = (int) items.getX();
-			int y = (int) items.getY();
-			int dx = Math.abs(x - ex);
-			int dy = Math.abs(y - ey);
-			double distance = Math.sqrt((dx * dx) + (dy * dy));
-			if (distance <= radius)
-				result.add(items);
-		}
-		return result;
-	}
-	
 	public List<Entity> getEntitiesFixed(int xx, int yy, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = xx;
@@ -1297,7 +1211,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
-			if (distance <= radius && player.setInvisible == false)
+			if (distance <= radius)
 				result.add(player);
 		}
 		return result;
@@ -1314,7 +1228,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
-			if (distance <= radius && player.setInvisible == false)
+			if (distance <= radius)
 				result.add(player);
 		}
 		return result;
@@ -1655,78 +1569,66 @@ public void resetLevelPostDeath(Player player) {
 	public void damage(int x, int y, Entity mob, long Exp, double damage, String name, int ExpV) {
 		int color;
 		String dmgInd = "" + damage;
-		
-        if (!mob.invulnerable) {
-        		mob.mobhealth -= (damage);        		
-        		mob.hurt = true;
-		try {
-			add(new DamageIndicator((int)(mob.getX() - mob.getSprite().getWidth() / 2), (int)((y - (mob.getSprite().getHeight() * 1.5))), 15, 1, dmgInd, 0xffDD0011));
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		if (!mob.invulnerable) {
+			mob.mobhealth -= (damage);
+			mob.hurt = true;
+			try {
+				add(new DamageIndicator((int) (mob.getX() - mob.getSprite().getWidth() / 2), (int) ((y - (mob.getSprite().getHeight() * 1.5))), 15, 1, dmgInd, 0xffDD0011));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mob.incombat = true;
+			if (mob.mobhealth <= 0) {
+
+				mob.death();
+				if (mob.remove()) {
+					if (!Game.Dead && Game.get().gameState != gameState.INGAME_A) {
+						Game.get().getLevel().getClientPlayer().kills += 1;
+						// if (mob.inventory != null) mob.inventory.dropAll();
+					}
+					if (mob.hostility != mob.hostility.PASS) {
+						Game.get().getPlayer().money += (mob.maxhealth / 2);
+					}
+				}
+			}
 		}
-      //  mob.getSprite().pixels[mob.getSprite().getWidth() * mob.getSprite().getHeight()] = MyColor.changeBrightness(0, 60, false);
-        mob.incombat = true;
-        if (mob.mobhealth <= 0){
-      
-        	mob.death();
-        	if (mob.remove()) {
-        		Game.get().getPlayer().quests.completeKillObjective(mob);
-    					if (!Game.Dead  && Game.get().gameState != gameState.INGAME_A) {
-    						Game.get().getLevel().getClientPlayer().kills += 1;
-	        				Game.get().getLevel().getClientPlayer().ExpC += (Exp + ExpV) * this.getClientPlayer().expModif;
-	        				//if (mob.inventory != null) mob.inventory.dropAll();
-	        				}
-    						if (mob.hostility != mob.hostility.PASS) {
-    					Game.get().getPlayer().money += (mob.maxhealth / 2);
-	    				}
-        			}
-        		}
-        	}
-		}
-	
+	}
+
 	public void damagePlayer(int x, int y, PlayerMP player, long Exp, double damage, String name, int ExpV) {
 		if (Game.get().gameState.equals(Game.get().gameState.INGAME)) {
-			
-		int color;
-		int chance  = (random.nextInt((101 - 1) + 1) + 1);
-		String dmgInd = "0";
-		damage -= (player.stat_DEF * 1/4);
-		
-		if (damage < 1) {
-			damage = 1;
-		}
-		
-		if (player.inPointMenu) {
-			player.inPointMenu = false;
-		}
-		
-		System.out.println(player.maxhealth + " / " + player.mobhealth);
-		
-		if(chance <= (getClientPlayer().stat_AGI / 5)) {
-			damage = 0;
-			dmgInd = "*Dodged*";
-		} else {
+
+			int color;
+			int chance = (random.nextInt((101 - 1) + 1) + 1);
+			String dmgInd = "0";
+
+			if (damage < 1) {
+				damage = 1;
+			}
+
+			System.out.println(player.maxhealth + " / " + player.mobhealth);
+
 			dmgInd = "" + Math.round(damage);
-		}
-		
-        if (!player.invulnerable) {
-        	if (Game.get().gameState != gameState.INGAME_A) {        		
-    			damage *= (7 / ( 1 + Math.pow(Math.E, -0.05 * (Game.get().getPlayer().Lvl - 40)))) + 1;
-        	player.mobhealth -= (damage);
-        	}
-        	System.out.println("Damage: " + damage);
-		try {
-			//add(new DamageIndicator((int)(player.getX()), (int)((y - 20)), 15, 1, dmgInd, 0xffDD0011));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-      //  mob.getSprite().pixels[mob.getSprite().getWidth() * mob.getSprite().getHeight()] = MyColor.changeBrightness(0, 60, false);
-		player.incombat = true;
-        if (player.mobhealth <= 0){
-        	//player.remove();
-        	player.dead = true;
-        }
-        }
+
+			if (!player.invulnerable) {
+				if (Game.get().gameState != gameState.INGAME_A) {
+					damage *= (7 / (1 + Math.pow(Math.E, -0.05 * (Game.get().getPlayer().Lvl - 40)))) + 1;
+					player.mobhealth -= (damage);
+				}
+				System.out.println("Damage: " + damage);
+				try {
+					// add(new DamageIndicator((int)(player.getX()), (int)((y - 20)), 15, 1, dmgInd,
+					// 0xffDD0011));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// mob.getSprite().pixels[mob.getSprite().getWidth() *
+				// mob.getSprite().getHeight()] = MyColor.changeBrightness(0, 60, false);
+				player.incombat = true;
+				if (player.mobhealth <= 0) {
+					// player.remove();
+				}
+			}
 		}
 	}
 	
@@ -1801,86 +1703,6 @@ public void resetLevelPostDeath(Player player) {
 		}
 
 
-	public String getEntityByID(int id) {
-		String entityName = "";
-		
-		switch(id) {
-		
-		case 0: entityName = "ALICE";
-		break;
-		
-		case 5: entityName = "SLIME";
-		break;
-		
-		case 6: entityName = "SLIMEY";
-		break;
-		
-		case 7: entityName = "UNDCAST";
-		break;
-		
-		case 10: entityName = "ZOMB";
-		break;
-		
-		}
-		return entityName;
-	}
-	
-	public String getProjByID(int id) { 
-		String proj = "-1";
-		
-		switch(id) {
-		case -1: proj = "WISBOLT";
-		break;
-		case 0: proj = "ALICE";
-		break;
-		case 1: proj = "ALICE";
-		break;
-		case 2: proj = "ALICE";
-		break;
-		case 3: proj = "ALICE";
-		break;
-		case 4: proj = "WISBOLT";
-		break;
-		case 5: proj = "SLIME";
-		break;
-		case 6: proj = "SLIMEY";
-		break;
-		case 7: proj = "UNDCAST";
-		break;
-		case 8: proj = "GLDORB";
-		break;
-		case 9: proj = "ALICE";
-		break;
-		case 10: proj = "RDBLAST";
-		break;
-		case 11: proj = "SRBOLT";
-		break;
-		
-		}
-		return proj;
-	}
-	
-	public void moveProjectile(String UUID, double angle, int id) {
-		int index = getPlayerMPIndexUUID(UUID);
-		PlayerMP player = (PlayerMP) this.players.get(index);
-		
-		if(getProjByID(id).equals("WISBOLT"))  {
-			player.shoot(player.x, player.y, angle);
-		}
-		
-		if(getProjByID(id).equals("GLDORB"))  {
-			player.GoldenOrb(player.x, player.y, angle);
-		}
-		
-		if(getProjByID(id).equals("RDBLAST"))  {
-			player.RadialBlast(player.x, player.y, angle);
-		}
-		
-		if(getProjByID(id).equals("SRBOLT"))  {
-			player.PierceSpell(player.x, player.y, angle);
-		}
-	}
-
 	public void MPTeleport(String tp) {
 		try {
 		int index = getPlayerMPIndex(tp);
@@ -1893,76 +1715,6 @@ public void resetLevelPostDeath(Player player) {
 		}
 	}
 
-public void addMultiplayerEntity(int id, int x, int y, int index, String UUID) {
-		if (getEntityByID(id).equals("-1")) {
-			System.out.println("Skipping Unknown Entity");
-		}
-		if (getEntityByID(id).equals("ALICE")) {
-			entities.get(index).remove();
-			this.entities.add(index, new Alice(x, y));
-			entities.get(index).setUUID(UUID);
-		}
-		if (getEntityByID(id).equals("UNDCAST")) {
-			entities.get(index).remove();
-			this.entities.add(index, new UndeadCaster(x, y));
-			entities.get(index).setUUID(UUID);
-		}
-		if (getEntityByID(id).equals("ZOMB")) {
-			entities.get(index).remove();
-			this.entities.add(index, new Zombie(x, y));
-			entities.get(index).setUUID(UUID);
-		}
-		if (getEntityByID(id).equals("SLIME")) {
-			entities.get(index).remove();
-			this.entities.add(index, new Slime(x, y));
-			entities.get(index).setUUID(UUID);
-		}
-		if (getEntityByID(id).equals("SLIMEY")) {
-			entities.get(index).remove();
-			this.entities.add(index, new Slimey(x, y));
-			entities.get(index).setUUID(UUID);
-		}
-		System.out.println("ENTITIES NEW: " + entities.size());
-	}
-
-
-	public void addInvById(Inventory inv, int id) {
-		if (id == -1) {
-			System.out.println("No (Valid) Weapon is Equipped!");
-		}else if (id == 12) {
-			inv.add(new wand_Pulsefire(EquipableItem.slot_WEAPON));
-		}else if (id == 13) {
-			inv.add(new wand_VoidCrook(EquipableItem.slot_WEAPON));
-		}else if (id == 14) {
-			inv.add(new wand_FlareScepter(EquipableItem.slot_WEAPON));
-		} else if (id == 15) {
-			inv.add(new wand_StygianScepter(EquipableItem.slot_WEAPON));
-		} else if (id == 16) {
-			inv.add(new wand_ContradictionWand(EquipableItem.slot_WEAPON));
-
-		}
-	}
-	
-	public void addEquipsById(Equipment equip, int id) {
-		if (id == -1) {
-			System.out.println("No (Valid) Weapon is Equipped!");
-		}else if (id == 12) {
-			equip.Equip(new wand_Pulsefire(EquipableItem.slot_WEAPON));
-		}else if (id == 13) {
-			equip.Equip(new wand_VoidCrook(EquipableItem.slot_WEAPON));
-		}else if (id == 14) {
-			equip.Equip(new wand_FlareScepter(EquipableItem.slot_WEAPON));
-		} else if (id == 15) {
-			equip.Equip(new wand_StygianScepter(EquipableItem.slot_WEAPON));
-		} else if (id == 16) {
-			equip.Equip(new wand_ContradictionWand(EquipableItem.slot_WEAPON));
-
-		}
-	}
-
-	public void addLevelById(int id) {
-	
-	}
 	
 	public void addDoorTile(int x, int y) {
 		try {			
