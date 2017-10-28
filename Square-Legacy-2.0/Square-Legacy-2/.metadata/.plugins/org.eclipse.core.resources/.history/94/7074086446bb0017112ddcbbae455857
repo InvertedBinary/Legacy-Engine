@@ -1,0 +1,34 @@
+package com.IB.SL.entity;
+
+import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+
+public class XMLEntity extends Entity {
+	
+	public XMLEntity(String XML) {
+		XML = "/XML/Entities/Test_Zombie.xml";
+		readXML(XML);
+	}
+	
+	public void readXML(String path) {
+		try {
+		InputStream fXmlFile = getClass().getResourceAsStream(path);
+		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		
+		doc.getDocumentElement().normalize();
+		
+		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}

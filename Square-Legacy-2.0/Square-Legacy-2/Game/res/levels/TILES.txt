@@ -1,0 +1,12 @@
+	// TILES:
+	// Grass = FF00 = green
+	// cobblestone = FFFF00 = yellow (light)
+	// gmcs = 7F7F00 (Brown-ish kinda)
+	// flower = FFC300 (Darkerish yellowish)
+	// gmscDown = 7F8F00
+	// gmcsLeft = 7F9F00
+	// gmscUp = 9F9F00
+	// water = 0094FF
+	// stoneBrick = 898282
+	// flower2 = FF0008
+	// HellStone = FF0010

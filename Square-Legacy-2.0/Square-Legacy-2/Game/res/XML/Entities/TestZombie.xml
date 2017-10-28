@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity>
+	<mob id="3001">
+		<name>Zombie</name>
+		<speed>0.5</speed>
+		<rarity>4</rarity>
+		<hostility>HOSTILITY.AGR</hostility>
+		<exp>5</exp>
+	</mob>
+	<sprite xOffset="-8" yOffset="-15">
+		<down width="16" height="16" length="3">zombie02_down</down>
+		<up width="16" height="16" length="3">zombie02_up</up>
+		<left width="16" height="16" length="3">zombie02_left</left>
+		<right width="16" height="16" length="3">zombie02_right</right>
+	</sprite>
+	<attack type="projectile">
+	</attack>
+</entity>
+
+
+
+
