@@ -18,7 +18,7 @@ import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Mob.DIRECTION;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.mob.XMLMob;
+import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.entity.particle.DamageIndicator;
 import com.IB.SL.entity.particle.Particle;
 import com.IB.SL.entity.projectile.Projectile;
@@ -292,8 +292,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					Entity e = temp[i];
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
-					if (e instanceof XMLMob) {
-						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XMLMob)temp[i]).XML_String));
+					if (e instanceof XML_Mob) {
+						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XML_Mob)temp[i]).XML_String));
 					} else {						
 					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
 					}

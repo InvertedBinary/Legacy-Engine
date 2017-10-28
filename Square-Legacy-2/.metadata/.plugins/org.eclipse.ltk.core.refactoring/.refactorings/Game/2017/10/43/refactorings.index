@@ -45,3 +45,7 @@
 1509160757718	Delete elements
 1509169114399	Rename field 'cmdln_args'
 1509169190372	Move member 'get'
+1509211311790	Rename type 'XMLMob'
+1509211715361	Delete element
+1509221304015	Copy compilation unit
+1509221378219	Move compilation unit

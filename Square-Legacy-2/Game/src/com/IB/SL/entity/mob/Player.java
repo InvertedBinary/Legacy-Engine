@@ -29,7 +29,7 @@ import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.MainLevel;
 import com.IB.SL.level.worlds.Maps;
-import com.IB.SL.level.worlds.SpawnHaven;
+import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
 import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
@@ -524,7 +524,7 @@ public class Player extends Mob implements Serializable{
 		
 		switch (LvlId) {
 		case 0:
-			Boot.get().setLevel(new SpawnHaven(Maps.SpawnHaven));
+			Boot.get().setLevel(new SpawnHaven_Deprecated(Maps.SpawnHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 1:

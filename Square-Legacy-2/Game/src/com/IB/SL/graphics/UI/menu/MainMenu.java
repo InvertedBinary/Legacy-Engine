@@ -13,14 +13,24 @@ public class MainMenu extends UI_Menu {
 		//ui.addUI(btn_gears);
 	}
 	
+	public void load(UI_Menu menu) {
+		super.load(menu);
+		suspend = this.SUS_ALL;
+	}
+	
+	public void unload(UI_Menu menu) {
+		super.unload(menu);
+		suspend = this.SUS_NON;
+	}
+	
 	public void update() {
-			//if (btn_gears.clicked) {
-				//Game.getGame().Menus.load(Game.getGame().Menus.settingsMenu);
+		//if (btn_gears.clicked) {
+		//Game.getGame().Menus.load(Game.getGame().Menus.settingsMenu);
 		//}
 	}
 	
 	public void render(Screen screen) {
-		//screen.renderAlphaSprite(bg, x, y);
+		screen.renderAlphaSprite(bg, x, y);
 	}
 	
 

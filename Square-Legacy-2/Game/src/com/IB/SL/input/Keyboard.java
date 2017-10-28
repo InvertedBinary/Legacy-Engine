@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
 	
+	public boolean suspended = false;
+	
 	private final int numOfKeys = 520;
 	
 	private boolean[] keys = new boolean[numOfKeys]; //65536
@@ -14,21 +16,35 @@ public class Keyboard implements KeyListener {
 	public boolean up, down, left, right, toggleDevModeInfo, DevMode, 
 	Sprint, Pause, commandMode, jump, a1, a2, a3, a4, a5, a6, a7, a8,
 	a9, a0, ab, inventory, gs1, gs2, gs3, gs4, space, map, capture,
-	dropItem, toggleChatWindow, abTab, generalActivator, save, load, inventory_Equipment, hk_manapot, hk_healthpot, hk_staminapot, buildMode;
+	dropItem, toggleChatWindow, abTab, generalActivator, save, load, 
+	inventory_Equipment, hk_manapot, hk_healthpot, hk_staminapot, buildMode,
+	console;
 	
 	public boolean a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, enter, backspace, delete, tab, ctrl, arrow_Left, arrow_Right, exclamation; 
 	
+	public void suspendInput() {
+		this.suspended = true;
+		for (int i = 0; i < keys.length; i++) {
+			keys[i] = false;
+		}
+		for (int i = 0; i < toggles.length; i++) {
+			toggles[i] = false;
+		}
+	}
+	
+	public void resumeInput() {
+		this.suspended = false;
+	}
+	
 	public void update() {
 		
+		if (!suspended) {
 		up = toggles[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
-		toggleDevModeInfo = keys[KeyEvent.VK_C];
-		DevMode = keys[KeyEvent.VK_CONTROL];
+
 		Sprint = keys[KeyEvent.VK_SHIFT];
-		Pause = keys[KeyEvent.VK_ESCAPE];
-		commandMode = keys[KeyEvent.VK_ALT];
 		save = keys[KeyEvent.VK_K];
 		load = keys[KeyEvent.VK_N];
 
@@ -47,6 +63,15 @@ public class Keyboard implements KeyListener {
 		
 		buildMode = (true) ? toggles[KeyEvent.VK_B] : false;
 		toggles[KeyEvent.VK_B] = (true) ? toggles[KeyEvent.VK_B] : false;
+		
+		}
+		
+		toggleDevModeInfo = keys[KeyEvent.VK_C];
+		commandMode = keys[KeyEvent.VK_ALT];
+		DevMode = keys[KeyEvent.VK_CONTROL];
+		Pause = keys[KeyEvent.VK_ESCAPE];
+	
+		console = keys[KeyEvent.VK_BACK_QUOTE];
 		
 		/**
 		 * gameState Keys:
@@ -105,16 +130,18 @@ public class Keyboard implements KeyListener {
 		a9 = keys[KeyEvent.VK_9];
 		a0 = keys[KeyEvent.VK_0];
 		
+		
+		
 		exclamation = keys[KeyEvent.VK_EXCLAMATION_MARK];
 		enter = keys[KeyEvent.VK_ENTER];
 		space = keys[KeyEvent.VK_SPACE];
 		backspace = keys[KeyEvent.VK_BACK_SPACE];
 		delete = keys[KeyEvent.VK_DELETE];
-		tab = keys[KeyEvent.VK_DELETE];
-		ctrl = keys[KeyEvent.VK_DELETE];
+		tab = keys[KeyEvent.VK_TAB];
+		ctrl = keys[KeyEvent.VK_CONTROL];
 		arrow_Left = keys[KeyEvent.VK_LEFT];
 		arrow_Right = keys[KeyEvent.VK_RIGHT];
-			}
+	}
 
 	
 	public void keyPressed(KeyEvent e) {

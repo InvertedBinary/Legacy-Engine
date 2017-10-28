@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.UI.part.TextBox;
 import com.IB.SL.input.Mouse;
-import com.IB.SL.util.TextBox;
 
 @SuppressWarnings("static-access")
 public class CheckBounds extends UI implements Serializable{

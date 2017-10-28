@@ -1,0 +1,37 @@
+package com.IB.SL.graphics.UI.menu;
+
+import com.IB.SL.Boot;
+import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.Sprite;
+import com.IB.SL.graphics.UI.part.TextBox;
+
+public class ConsoleMenu extends UI_Menu {
+
+	transient public TextBox cmd;
+
+	public ConsoleMenu(int x, int y, Sprite bg) {
+		this.bg = bg;
+		init(x, y);
+	}
+	
+	public void onLoad() {
+		Boot.get().getPlayer().input.suspendInput();
+	}
+	
+	public void onUnload() {
+		Boot.get().getPlayer().input.resumeInput();
+	}
+	
+	
+	public void update() {
+		if (enabled) {
+		cmd.update();
+		}
+	}
+	
+	public void render(Screen screen) {
+		if (cmd != null) {
+		cmd.render(screen);
+		}
+	}
+}
