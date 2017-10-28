@@ -12,6 +12,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
@@ -86,9 +87,9 @@ public class Player extends Mob implements Serializable{
 	public transient LoadProperties loadProp;
 	private  int tileX;
 	private  int tileY;
-	private  int healthRegenRate;
-	private  int manaRegenRate;
-	private  int staminaRegenRate;
+	private  int healthRegenRate = 1;
+	private  int manaRegenRate = 1;
+	private  int staminaRegenRate = 1;
 	double xa = 0;
 	double ya = 0;
 	public boolean noclip = false;
@@ -103,7 +104,7 @@ public class Player extends Mob implements Serializable{
 	
 	
 	public Player(Keyboard input) {
-		this.name = Game.get().PersonNameGetter;
+		this.name = Boot.get().PersonNameGetter;
 		this.input = input;
 		sprite = Sprite.playerback;
 	}
@@ -174,7 +175,7 @@ public class Player extends Mob implements Serializable{
 	
 	public void invokeLoad(Player p) {
 		try {
-		loadProp.loadPrefs(Game.get());;
+		loadProp.loadPrefs(Boot.get());;
 		Player temp = SaveGame.load();
 
 		System.out.println("-----------------------STEP1---------------------------");
@@ -241,7 +242,7 @@ public class Player extends Mob implements Serializable{
 			input.save = false;
 		} else if (input.load){
 			if (input.Sprint) {
-				Game.get().getLevel().loadMobs(Game.currentLevelId);
+				Boot.get().getLevel().loadMobs(Game.currentLevelId);
 			} else {
 				invokeLoad(this);
 			}
@@ -274,11 +275,11 @@ public class Player extends Mob implements Serializable{
 				
 			}
 		if (this.mobhealth <= 0) {
-			Game.switchState(Game.get().gameState.DEATH);
+			Game.switchState(Boot.get().gameState.DEATH);
 		}
 		
 		
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 		this.mana = maxmana;
 		this.mobhealth = maxhealth;
 		this.stamina = maxstamina;
@@ -528,19 +529,19 @@ public class Player extends Mob implements Serializable{
 		
 		switch (LvlId) {
 		case 0:
-			Game.get().setLevel(new SpawnHaven(Maps.SpawnHaven));
+			Boot.get().setLevel(new SpawnHaven(Maps.SpawnHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 1:
-			Game.get().setLevel(new MainLevel(Maps.main));
+			Boot.get().setLevel(new MainLevel(Maps.main));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.main, 1024);
 			break;
 		}
-		Game.get().getLevel().add(this);
+		Boot.get().getLevel().add(this);
 		this.x = (x);
 		this.y = (y);
-		Game.get().getLevel().loadMobs(LvlId);
+		Boot.get().getLevel().loadMobs(LvlId);
 	}
 	
 	public String getUsername() {
@@ -553,10 +554,10 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	
 			screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff),  sprite);			
 
-			if (Game.get().gameState == gameState.INGAME_A) {
+			if (Boot.get().gameState == gameState.INGAME_A) {
 	screen.drawRect((int)x - 8, (int)y - 15, 16, 16, 0x0093FF, true);
 	try {		
-		Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
+		Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
 	} catch (NullPointerException e) {
 	}
 	//USE FOR FRIENDLY MOBS LATER ON: 0xff00FF21
@@ -614,23 +615,23 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	private void switchBlocks_key() {
 	try {
 	if (switchTimer == 0) {
-	  if (Game.get().getPlayer().input.a2) {
+	  if (Boot.get().getPlayer().input.a2) {
 		swapBlock(1);
-	} if (Game.get().getPlayer().input.a3) {
+	} if (Boot.get().getPlayer().input.a3) {
 		swapBlock(2);
-	} if (Game.get().getPlayer().input.a4) {		  
+	} if (Boot.get().getPlayer().input.a4) {		  
 		swapBlock(3);
-	} if (Game.get().getPlayer().input.a5) {		  
+	} if (Boot.get().getPlayer().input.a5) {		  
 		swapBlock(4);
-	} if (Game.get().getPlayer().input.a6) {		  
+	} if (Boot.get().getPlayer().input.a6) {		  
 		swapBlock(5);
-	} if (Game.get().getPlayer().input.a7) {		 
+	} if (Boot.get().getPlayer().input.a7) {		 
 		swapBlock(6);
-	} if (Game.get().getPlayer().input.a8) {		  
+	} if (Boot.get().getPlayer().input.a8) {		  
 		swapBlock(7);
-	} if (Game.get().getPlayer().input.a9) {		  
+	} if (Boot.get().getPlayer().input.a9) {		  
 		swapBlock(8);
-	} if (Game.get().getPlayer().input.a0) {
+	} if (Boot.get().getPlayer().input.a0) {
 		swapBlock(9);
 	}
 	}
@@ -715,29 +716,29 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	
 	
 	
-	if (Game.get().gameState == gameState.INGAME || Game.get().gameState == gameState.INGAME_A) {
+	if (Boot.get().gameState == gameState.INGAME || Boot.get().gameState == gameState.INGAME_A) {
 		if (buildMode) {
 		gui.renderBuild(screen, this);
 		}
 	}
 	
-		String text = (int)Game.get().getPlayer().getX() / 16 + "," + (int)Game.get().getPlayer().getY() / 16;
+		String text = (int)Boot.get().getPlayer().getX() / 16 + "," + (int)Boot.get().getPlayer().getY() / 16;
 		//screen.renderSprite(1064/ Game.scale, 530 / Game.scale, gui.renderHealthExperiment(screen, this, 20), false);
 		
 		if (!level.minimap_enabled) {
-			Game.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);
-			Game.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);
+			Boot.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else if (!level.map_hidden){
 			//screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12, 0xff262626), false);
-			Game.get().font8x8.render((int)270 - text.length() * 8, 3, -3, text, screen, false, false);
-			Game.get().font8x8.render((int)270 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font8x8.render((int)270 - text.length() * 8, 3, -3, text, screen, false, false);
+			Boot.get().font8x8.render((int)270 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else {
-			Game.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);	
-			Game.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);	
+			Boot.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		}
 
 		
-		if (Game.get().gameState == gameState.INGAME) {
+		if (Boot.get().gameState == gameState.INGAME) {
 		if (!gui.displayM && !gui.displayS) {
 			gui.yOffH = 156;
 		} else if (!gui.displayS && gui.displayM) {

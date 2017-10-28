@@ -2,7 +2,7 @@ package com.IB.SL.entity.mob.peaceful;
 
 import java.util.List;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -161,7 +161,7 @@ public class Villager01 extends Mob{
 	
 	public void renderGUI(Screen screen) {
 		if (this.mobhealth < this.maxhealth) 
-			screen.renderSprite((int) x - 16, (int)y - 25, Game.get().gui.renderMobHealthExperiment(this, 20), true);
+			screen.renderSprite((int) x - 16, (int)y - 25, Boot.get().gui.renderMobHealthExperiment(this, 20), true);
 
 	}
 

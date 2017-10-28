@@ -3,7 +3,7 @@ package com.IB.SL.entity.projectile;
 import java.util.List;
 import java.util.Random;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
@@ -101,7 +101,7 @@ public class Arrow extends Projectile {
 		xOffset = -8;
 		yOffset = -14;
 		screen.renderProjectile((int)x + xOffset,(int)y + yOffset, this);
-		if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		if (Boot.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

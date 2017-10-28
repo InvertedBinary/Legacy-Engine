@@ -9,6 +9,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XMLMob;
@@ -90,29 +91,29 @@ public class Commands {
 				switch (Command.toLowerCase()) {
 			/*	case "help": JOptionPane.showMessageDialog(Game.frame, HelpText, "Help", JOptionPane.INFORMATION_MESSAGE);
 		break;	*/
-				case "tpp": Game.get().getLevel().MPTeleport(Modifier);
+				case "tpp": Boot.get().getLevel().MPTeleport(Modifier);
 		break;
 				case "nospawns":
-					if (Game.cmdln_args.containsKey("-nospawns")) {
-						boolean g = Game.cmdln_args.get("-nospawns");						
-						Game.cmdln_args.put("-nospawns", !Game.cmdln_args.get("-nospawns"));
+					if (Boot.launch_args.containsKey("-nospawns")) {
+						boolean g = Boot.launch_args.get("-nospawns");						
+						Boot.launch_args.put("-nospawns", !Boot.launch_args.get("-nospawns"));
 					} else {
-						Game.cmdln_args.put("-nospawns", false);
+						Boot.launch_args.put("-nospawns", false);
 					}
 		break;
 				case "tp": 
 					if (Modifier.equals("$")) {
-						Modifier = ""+(int)Game.get().getPlayer().x/16;
+						Modifier = ""+(int)Boot.get().getPlayer().x/16;
 					}
 					if (Modifier2.equals("$")) {
-						Modifier2 = ""+(int)Game.get().getPlayer().y/16;
+						Modifier2 = ""+(int)Boot.get().getPlayer().y/16;
 					}
-				Game.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
+				Boot.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
 		break;
 				case "load":
 					int id = Integer.parseInt(Modifier);	
-							Game.get().getPlayer().setPosition(0, 0, id, false);
+							Boot.get().getPlayer().setPosition(0, 0, id, false);
 					break;
 				case "speed": 
 				{
@@ -129,9 +130,9 @@ public class Commands {
 		
 				case "weather": 
 					if (Modifier.equalsIgnoreCase("rain")) {
-						Game.get().getLevel().isRaining = !Game.get().getLevel().isRaining;
+						Boot.get().getLevel().isRaining = !Boot.get().getLevel().isRaining;
 					} else if (Modifier.equalsIgnoreCase("clear")) {
-						Game.get().getLevel().isRaining = false;
+						Boot.get().getLevel().isRaining = false;
 					}
 		break;
 		
@@ -139,7 +140,7 @@ public class Commands {
 					player.noclip = !player.noclip;
 				break;
 				case "gs3":
-					Game.get().switchState(Game.get().gameState.INGAME_A);
+					Boot.get().switchState(Boot.get().gameState.INGAME_A);
 					break;
 				
 				case "dir":
@@ -154,10 +155,10 @@ public class Commands {
 				
 				case "dbg":
 				
-					if (!Game.get().gameState.equals(Game.get().gameState.INGAME_A)) {
-						Game.switchState(Game.get().gameState.INGAME_A);						
+					if (!Boot.get().gameState.equals(Boot.get().gameState.INGAME_A)) {
+						Game.switchState(Boot.get().gameState.INGAME_A);						
 					} else {
-						Game.switchState(Game.get().gameState.INGAME);
+						Game.switchState(Boot.get().gameState.INGAME);
 					}
 					
 				break;
@@ -218,10 +219,10 @@ public class Commands {
 			}
 		break;
 				case "cl":
-					Game.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
+					Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 		break;
 				case "spawn":
-					Game.get().getLevel().add(new XMLMob(Game.get().getPlayer().x / 16, Game.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
+					Boot.get().getLevel().add(new XMLMob(Boot.get().getPlayer().x / 16, Boot.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

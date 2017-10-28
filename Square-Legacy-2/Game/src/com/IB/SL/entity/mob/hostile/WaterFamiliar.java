@@ -2,6 +2,7 @@ package com.IB.SL.entity.mob.hostile;
 
 import java.util.List;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
@@ -178,7 +179,7 @@ public class WaterFamiliar extends Mob {
 		this.yOffset = -15;
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 		}

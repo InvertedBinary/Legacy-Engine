@@ -3,6 +3,7 @@ package com.IB.SL.level.interactables;
 import java.util.List;
 import java.util.Random;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
@@ -81,7 +82,7 @@ public class Teleporter extends Interactable {
 			}
 		}
 		*/
-		Player player = Game.get().getLevel().getClientPlayer();
+		Player player = Boot.get().getLevel().getClientPlayer();
 
 		if (PlayerTele(x,y, level, player)) {
 			
@@ -153,7 +154,7 @@ public class Teleporter extends Interactable {
 	}*/
 	
 	public void render(Screen screen) {
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
 		}
 		int radius = level.radius / 2 + 5;

@@ -3,7 +3,7 @@ package com.IB.SL.entity.mob.hostile;
 import java.util.List;
 import java.util.Random;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
@@ -190,19 +190,19 @@ public class Zombie extends Mob{
 		xOffset = -8;
 		yOffset = -15;
 		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 			//gui.renderHealth(screen, this, (int) x - 16, (int)y - 24, true);
 			}
 		//gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true, true);
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			try {
 			if (players.size() > 0 || entities.size() > 0) {
 				if (tracking != null) {
 					
-				Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int) x, (int)y, (int)tracking.x, (int)tracking.y), 0xffFF3AFB, true);				
+				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int)y, (int)tracking.x, (int)tracking.y), 0xffFF3AFB, true);				
 				}
 			}
 				} catch (Exception e) {

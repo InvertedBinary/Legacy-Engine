@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -138,7 +139,7 @@ public static Entity[] loadEntities() {
 				Entity[] loadedObject = null;
 			try {
 				
-				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Game.get().getPlayer().currentLevelId);
+				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Boot.get().getPlayer().currentLevelId);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				loadedObject = (Entity[]) ois.readObject();
 				ois.close();
@@ -377,14 +378,14 @@ public static LoadProperties loadPrefs() {
 	
 	public static boolean deleteCharacter(String userName) {
 		
-			if (!Game.get().gui.save1.equals("(Open)")) {
-				Game.get().gui.saveSelected = Game.get().gui.save1;
-			} else if (!Game.get().gui.save2.equals("(Open)")) {
-				Game.get().gui.saveSelected = Game.get().gui.save2;
-			} else if (!Game.get().gui.save3.equals("(Open)")) {
-				Game.get().gui.saveSelected = Game.get().gui.save3;
-			} else if (!Game.get().gui.save4.equals("(Open)")) {
-				Game.get().gui.saveSelected = Game.get().gui.save4;
+			if (!Boot.get().gui.save1.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save1;
+			} else if (!Boot.get().gui.save2.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save2;
+			} else if (!Boot.get().gui.save3.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save3;
+			} else if (!Boot.get().gui.save4.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save4;
 			
 		}
 		
