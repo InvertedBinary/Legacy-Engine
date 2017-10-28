@@ -330,7 +330,6 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 
 
 
-	Level level = Game.level2;
 	   public void renderTile(int xp, int yp, Tile tile) {
 	      int tilesx = xp;
 	      int tilesy = yp;
@@ -477,8 +476,10 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 				   return 0;
 	   }
 	   
+		//Level level = Boot.get().getLevel();
+
 	   private void deterLightLevel(int tilesx, int tilesy) {
-		   boolean bool = false;
+		   /*boolean bool = false;
 	//IF TILE IS AN OVERLAY TILE, REPLACE Level.getTile WITH Level.getOverlayTile down below.
 	//ALSO CHECK IF IT IS NULL WITH if (Level.getOverlayTile(.......) != null)
 	//OR YOU CAN MAKE IT A try { .... } catch (NullPointerException e) { return 0; }
@@ -526,7 +527,7 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 			          if (level.getOverlayTile((tilesx) - 1, (tilesy) + 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
 			          if (level.getOverlayTile((tilesx) - 1, (tilesy) - 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
 			          if (level.getOverlayTile((tilesx) + 1, (tilesy) - 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			}
+			}*/
 	   }
 
 public void renderMob(double x2, double y2, Mob mob) {

@@ -1,0 +1,16 @@
+package com.IB.SL;
+
+public class Boot {
+
+	public static String title = "Square Legacy 2 [Build 1]";
+	private static Game g = new Game(title);
+
+	public static Game get() {
+		return g;
+	}
+	
+	public static void main(String[] args) {
+		g.STRAP(g);
+	}
+
+}

@@ -25,6 +25,8 @@ public class Sprite {
 	public static Sprite title_NewChar = new Sprite(300, 0, 0, SpriteSheet.title_NewChar);
 	public static Sprite title_overChars = new Sprite(300, 0, 0, SpriteSheet.title_OverChars);
 	public static Sprite title_overTrash = new Sprite(22, 20, 91, 198, SpriteSheet.title_Char);
+	
+	public static Sprite bgFade = new Sprite(300, 168, 0, 0, SpriteSheet.bgFade);
 
 	public static Sprite pauseMenu = new Sprite(300, 0, 0, SpriteSheet.pauseMenu);
 	public static Sprite pauseMenuResume = new Sprite(300, 0, 0, SpriteSheet.pauseMenuResume);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Game/lib"/>
+	<classpathentry kind="src" path="Game/res"/>
+	<classpathentry kind="src" path="Game/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="Game/lib/easyogg.jar"/>
+	<classpathentry kind="lib" path="Game/lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="Game/lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="Game/lib/startup2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

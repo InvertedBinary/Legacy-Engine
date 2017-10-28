@@ -12,18 +12,15 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
-import com.IB.SL.util.TextBox;
+import com.IB.SL.graphics.UI.menu.UI_Menu;
+import com.IB.SL.graphics.UI.part.TextBox;
 
 public class GUI extends CheckBounds {
 	private static final long serialVersionUID = 1L;
 
 	transient public font font;
 	transient public font8x8 font8x8;
-	boolean options = false;
-	public boolean charMenu = false;
 
-	transient int colortime = 0;
-	transient int colorMod = 0;
 	// TODO: Red outline on screen -- lowhealth
 	public transient int displayTime = 0;
 	transient public int displayTimeM = 0;
@@ -34,10 +31,6 @@ public class GUI extends CheckBounds {
 	private transient Sprite HealthSprite = Sprite.HealthBar20;
 	private transient Sprite ManaSprite = Sprite.manabar20;
 	private transient Sprite StaminaSprite = Sprite.manabar20;
-	public transient int fadeTime;
-	public transient int fadeTime2;
-	public transient int fadeTimeS;
-	public transient int fadeTimeS2;
 
 	Player tempLoadInfo = null;
 
@@ -48,6 +41,8 @@ public class GUI extends CheckBounds {
 
 	public boolean displayH = true, displayM = true, displayS = true;
 	public int yOffM = 130, yOffH = 143, yOffS = 156;
+	
+	public UI_Menu menu = new UI_Menu();
 
 	public GUI() {
 		font = new font();
@@ -69,10 +64,11 @@ public class GUI extends CheckBounds {
 		}
 			cmd.update();
 		// expBar.update();
+			menu.update();
 	}
 
 	public void render(Screen screen) {
-
+		menu.render(screen);
 	}
 
 

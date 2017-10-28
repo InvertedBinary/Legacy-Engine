@@ -18,7 +18,7 @@ import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Mob.DIRECTION;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.mob.XMLMob;
+import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.entity.particle.DamageIndicator;
 import com.IB.SL.entity.particle.Particle;
 import com.IB.SL.entity.projectile.Projectile;
@@ -30,7 +30,6 @@ import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
 
-import javafx.scene.effect.Effect;
 
 public class Level implements Serializable {
 	/**
@@ -51,7 +50,6 @@ public class Level implements Serializable {
 
 	public List<Entity> entitiesList = new ArrayList<Entity>();
 	public List<Spawner> Spawner = new ArrayList<Spawner>();
-	public List<Effect> StatusFx = new ArrayList<Effect>();
 
 	//public List<AnimatedTile> tiles_anim = new ArrayList<AnimatedTile>();
 	double addX, addY;
@@ -292,8 +290,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					Entity e = temp[i];
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
-					if (e instanceof XMLMob) {
-						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XMLMob)temp[i]).XML_String));
+					if (e instanceof XML_Mob) {
+						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XML_Mob)temp[i]).XML_String));
 					} else {						
 					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
 					}

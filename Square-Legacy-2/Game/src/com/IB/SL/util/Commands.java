@@ -12,7 +12,7 @@ import java.util.Date;
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.mob.Player;
-import com.IB.SL.entity.mob.XMLMob;
+import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 
@@ -222,7 +222,7 @@ public class Commands {
 					Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 		break;
 				case "spawn":
-					Boot.get().getLevel().add(new XMLMob(Boot.get().getPlayer().x / 16, Boot.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
+					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x / 16, Boot.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

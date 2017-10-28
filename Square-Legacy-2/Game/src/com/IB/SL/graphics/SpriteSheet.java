@@ -67,6 +67,8 @@ public class SpriteSheet {
 	public static SpriteSheet overDeathExit = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Death/DEATH3.png", 300, 168);
 	public static SpriteSheet robobob = new SpriteSheet("/Textures/sheets/00_MobSheets/robobob.png", 20);
 
+	public static SpriteSheet bgFade = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/fade.png", 300, 168);
+
 	/**
 	 * Pause MENUS
 	 */

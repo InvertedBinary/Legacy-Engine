@@ -2,6 +2,7 @@
 <entity>
 	<mob id="3001">
 		<name>Zombie</name>
+		<maxhealth>10</maxhealth>
 		<speed>0.5</speed>
 		<rarity>4</rarity>
 		<hostility>HOSTILITY.AGR</hostility>
