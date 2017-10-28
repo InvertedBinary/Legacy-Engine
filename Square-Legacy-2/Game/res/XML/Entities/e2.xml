@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <entity>
 	<mob id="3001">
-		<name>Robbie</name>
+		<name>Zombie</name>
 		<maxhealth>10</maxhealth>
 		<speed>0.5</speed>
 		<rarity>4</rarity>
@@ -10,8 +10,8 @@
 	</mob>
 	<sprite xOffset="-8" yOffset="-15">
 		<down width="16" height="16" length="3">zombie01_down</down>
-		<up width="16" height="16" length="3">zombie01_up</up>
+		<up width="16" height="16" length="3">zombie02_up</up>
 		<left width="16" height="16" length="3">zombie01_left</left>
-		<right width="16" height="16" length="3">zombie01_right</right>
+		<right width="16" height="16" length="3">zombie02_right</right>
 	</sprite>
 </entity>
