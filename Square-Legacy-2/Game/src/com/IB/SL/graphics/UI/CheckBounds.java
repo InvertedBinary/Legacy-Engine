@@ -545,7 +545,7 @@ public class CheckBounds extends UI implements Serializable{
 							Player p = Game.get().getPlayer();
 						
 							SaveGame.deleteCharacter(p.name);
-							p.reset(p);
+							//p.reset(p);
 							p.invokeLoad(p);
 							Mouse.setMouseB(-1);
 						}

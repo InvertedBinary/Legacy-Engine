@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.ActiveEffects;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -76,7 +75,6 @@ public class Guard extends Mob{
 		this.speed = 0.5;
 		new font8x8();
 		sprite = Sprite.playerback;
-		this.effects = new ActiveEffects(7, this);
 	}
 	
 	

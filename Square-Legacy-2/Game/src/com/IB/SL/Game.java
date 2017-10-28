@@ -529,7 +529,7 @@ public int deathTimeSec = 0;
 		}
 		this.PersonNameGetter = name;
 		getPlayer().name = name;
-		getPlayer().reset(getPlayer());
+		//getPlayer().reset(getPlayer());
 		getPlayer().invokeLoad(getPlayer());
 		System.out.println("Switched To: " + getPlayer().name);
 		
@@ -567,7 +567,7 @@ public int deathTimeSec = 0;
 		//System.out.println("Respawning In.." + (10 - deathTimeSec));
 		
 			Player p = level.getClientPlayer();
-			if (p.dead) {
+			/*if (p.dead) {
 			p.setX(playerRespawn.x());
 			p.setY(playerRespawn.y());
 			//Game.getGame().getLevel().resetLevelPostDeath(p);
@@ -576,10 +576,8 @@ public int deathTimeSec = 0;
 			p.stamina = p.maxstamina;
 			p.money = p.money * 5/6;
 		//	p.ExpC -= p.ExpC * 1/30;
-			p.effects.removeAll();
 			p.speed = 1;
 			p.riding = false;
-			p.ridingOn = null;
 			if ((playerRespawn.x() == playerSpawn.x()) && (playerRespawn.y() == playerSpawn.y())) {
 				p.setPosition(playerSpawn.x(), playerSpawn.y(), Maps.spawnHavenId, false);
 				p.setX(playerSpawn.x());
@@ -591,7 +589,7 @@ public int deathTimeSec = 0;
 			}
 //			Game.getGame().getLevel().add(p);
 				p.dead = false;
-		}
+		}*/
 	}
 
 	public void onLaunch() {
@@ -735,12 +733,7 @@ public int deathTimeSec = 0;
 		}
 
 			if (gameState != gameState.PAUSE && gameState != gameState.MENU && key.gs4)
-				if (player.inventoryEnabled) {
-					player.inventoryEnabled = false;
-					key.gs4 = false;
-				} else {
 					switchState(gameState.PAUSE);
-				}
 		}
 	}
 
@@ -876,13 +869,6 @@ public int deathTimeSec = 0;
 //		}
 //		}
 		//font8x8.render(18, 2, -3, 0xffFF0000, "DEV>CLASS.." + mat, screen, false, false);
-
-		if (Player.unlockTime > 1 && Player.unlockTime < 300) {
-			font.render(-Game.width + (Player.unlockTime), 22, -7, 0x990000 + (0x110000 * (Player.unlockTime / 2)),
-					"Progress Further To Unlock This", screen, false, true);
-		}
-		
-	
 		
 		if (showAVG) { 
 		if (fpsAVG < 200) {			

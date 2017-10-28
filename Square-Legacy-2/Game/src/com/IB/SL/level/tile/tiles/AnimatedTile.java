@@ -2,7 +2,6 @@ package com.IB.SL.level.tile.tiles;
 
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
-import com.IB.SL.level.Level;
 import com.IB.SL.level.tile.Tile;
 
 public class AnimatedTile extends Tile {

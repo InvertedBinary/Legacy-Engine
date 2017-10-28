@@ -1,7 +1,5 @@
 package com.IB.SL.graphics;
 
-import org.w3c.dom.Element;
-
 public class AnimatedSprite extends Sprite{
 
 	private int frame = 0;

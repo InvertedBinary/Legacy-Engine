@@ -8,18 +8,13 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import com.IB.SL.Game;
-import com.IB.SL.entity.XMLEntity;
 import com.IB.SL.entity.mob.Player;
-import com.IB.SL.entity.mob.npc.TestQG;
+import com.IB.SL.entity.mob.XMLMob;
 import com.IB.SL.entity.mob.peaceful.Alice;
 import com.IB.SL.entity.mob.peaceful.Guard;
 import com.IB.SL.entity.mob.peaceful.Villager01;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.level.interactables.ArcaneBench;
-import com.IB.SL.level.interactables.Chest;
-import com.IB.SL.level.interactables.EnchArray;
-import com.IB.SL.level.interactables.Shop;
 
 public class SpawnHaven extends Level implements Serializable{
 	
@@ -96,9 +91,7 @@ public class SpawnHaven extends Level implements Serializable{
 			add(new Villager01(50, 41));
 		
 
-		add(new TestQG(55, 73));
-			
-		add(new Shop(46, 64, 0));
+		/*add(new Shop(46, 64, 0));
 		add(new Shop(46, 73, 1));
 		add(new Shop(58, 73, 2));
 		add(new Shop(58, 64, 3));
@@ -106,34 +99,14 @@ public class SpawnHaven extends Level implements Serializable{
 		add(new EnchArray(56, 65));
 
 		add(new Chest(50, 38, Chest.Type.RANDOM));
-		add(new Chest(53, 38, Chest.Type.EMPTY));
+		add(new Chest(53, 38, Chest.Type.EMPTY));*/
 
-		//add(new Guard(54, 72, new TileCoord(43, 75), new TileCoord(60, 75)));
 		add(new Guard(45, 71, new TileCoord(45, 71), new TileCoord(51, 71)));
 		add(new Guard(53, 71, new TileCoord(53, 71), new TileCoord(58, 71)));
 
 		add(new Alice(52, 73));
 		
-		add(new XMLEntity(52, 70, "/XML/Entities/TestZombie.xml"));
-
-		//add(new VoidBoss(15, 25));
-		//add(new OpticBond(25 * 16, 13 * 16, 2000, 1, EquipableItem.slot_UTILITY1));
-
-		/*add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));
-		add(new VoidCharger(13, 21));*/
-		//add(new Siphon(25, 22));
-		
-		//add(new Teleporter(25, 22)); // create some teleport into teleport trap
-
-		//generateRandomLevel();
+		add(new XMLMob(52, 70, "/XML/Entities/TestZombie.xml"));
 	}
 	
 	protected void generateRandomLevel() {

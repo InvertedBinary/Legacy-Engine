@@ -6,7 +6,6 @@ import java.util.Random;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.item.Item;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.spawner.WallParticleSpawner;
 import com.IB.SL.graphics.Screen;
@@ -20,7 +19,6 @@ public class WizardProjectile extends Projectile {
 	int ExpV = (random.nextInt(1) + 3);
 	Random dropChance = new Random();
 	int drop;
-	Item item;
 
 	protected static Random Random = new Random();
 	
@@ -32,7 +30,7 @@ public class WizardProjectile extends Projectile {
 	
 	public WizardProjectile(double x, double y, double dir, Mob mob) {
 		super(x, y, dir);
-		damage = 1 + (mob.stat_ATC / 5);
+		damage = 1;
 		basicInitialization();
 	}
 	
@@ -44,7 +42,6 @@ public class WizardProjectile extends Projectile {
 		manaCost = 0;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
-		item = new Item();
 		this.id = 4;
 		Sound.Play(Sound.Spell2,  false);
 	}
