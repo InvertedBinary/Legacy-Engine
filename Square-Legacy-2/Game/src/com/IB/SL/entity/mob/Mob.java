@@ -7,6 +7,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.hostile.Zombie;
@@ -60,7 +61,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		
 		try {
 			
-			if (!Level.Overworld && level.getPlayersFixedBool((int)Game.get().getPlayer().getX() - 8, (int)Game.get().getPlayer().getY() - 15, 20)) {
+			if (!Level.Overworld && level.getPlayersFixedBool((int)Boot.get().getPlayer().getX() - 8, (int)Boot.get().getPlayer().getY() - 15, 20)) {
 	//	List<PlayerMP> players = level.getPlayersFixed((int)this.x + 8, (int) this.y + 8, 20);
 			while (xa != 0) {
 				if (Math.abs(xa) > 1) {

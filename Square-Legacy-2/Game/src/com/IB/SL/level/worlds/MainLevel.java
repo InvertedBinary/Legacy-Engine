@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.peaceful.Guard;
@@ -201,7 +202,7 @@ public class MainLevel extends Level{
 		if (x == 729 && y == 362) {//296, 464 Spawn Haven
 			Sound.switchMusic(Sound.Boss, 0.8f);
 			//Game.get().setLevel(new Dungeon01(Maps.dungeon01));
-			level = Game.get().getLevel();
+			level = Boot.get().getLevel();
 			level.add(player);
 			Level.Overworld = false;
 			Level.minimap_enabled = true;
@@ -213,7 +214,7 @@ public class MainLevel extends Level{
 		if (x == 654 && y == 78 || x == 655 && y == 78) {//296, 464 Spawn Haven
 			Sound.switchMusic(Sound.TheIcicleFalls, 0.7f);
 			//Game.get().setLevel(new Dungeon03(Maps.dungeon03));
-			level = Game.get().getLevel();
+			level = Boot.get().getLevel();
 			level.add(player);
 			Level.Overworld = false;
 			Level.minimap_enabled = true;
@@ -256,7 +257,7 @@ public class MainLevel extends Level{
 		if (x == 401 && y == 735) {//296, 464 Spawn Haven
 			Sound.switchMusic(Sound.VoidDungeon, 0.8f);
 			//Game.get().setLevel(new Dungeon02(Maps.dungeon02));
-			level = Game.get().getLevel();
+			level = Boot.get().getLevel();
 			level.add(player);
 			Level.Overworld = false;
 			Level.minimap_enabled = true;

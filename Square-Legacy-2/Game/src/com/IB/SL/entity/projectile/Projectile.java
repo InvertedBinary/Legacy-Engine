@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.sound.sampled.Clip;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
@@ -88,7 +89,7 @@ public abstract class Projectile extends Entity {
 						if (p.breakParticle == 1) {
 							level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 						}
-						Game.get().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
+						Boot.get().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
 						return e;
 							}
 						} catch (Exception err) {
@@ -105,7 +106,7 @@ public abstract class Projectile extends Entity {
 	public boolean Collision(Projectile p, List<Entity> entities) {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Game.get().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().PersonNameGetter, p.ExpV);
 			doEffect(ee);
 			p.remove();
 			return true;
@@ -119,7 +120,7 @@ public abstract class Projectile extends Entity {
 		if (ee != null) {
 			if (ee != p.prevHit) {				
 			p.prevHit = ee;
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Game.get().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Boot.get().PersonNameGetter, p.ExpV);
 			doEffect(ee);
 			return true;
 			}
@@ -183,7 +184,7 @@ public abstract class Projectile extends Entity {
 				}
 				if (entities.get(i).mobhealth <= 0){
 					entities.get(i).remove();
-					Game.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
+					Boot.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
 
 					}
 				}
@@ -202,7 +203,7 @@ public abstract class Projectile extends Entity {
 					) {
 				if (!players.get(i).invulnerable) {
 				remove();
-    			if (Game.get().gameState != gameState.INGAME_A) {
+    			if (Boot.get().gameState != gameState.INGAME_A) {
 					level.damagePlayer((int)proj.getX(), (int)proj.getY(), players.get(i), 0, proj.damage, "projectile", 0);
 					proj.addEffect(players.get(i));
 				}
@@ -216,7 +217,7 @@ public abstract class Projectile extends Entity {
 				}
 				if (players.get(i).mobhealth <= 0){
 					//players.get(i).onPlayerDeath();
-					Game.switchState(Game.get().gameState.DEATH);
+					Game.switchState(Boot.get().gameState.DEATH);
 					level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");
 					Game.Dead = true;	

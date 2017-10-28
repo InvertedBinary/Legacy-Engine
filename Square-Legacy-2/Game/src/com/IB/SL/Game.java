@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable {
 	public Tile tile;
 	public GUI gui;
 	private Thread thread;
-	public static JFrame frame; 
+	public JFrame frame; 
 	public Keyboard key;
 	public transient font font;
 	
@@ -66,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 	public static int scale = 4;
 	public static final int TILE_BIT_SHIFT = 4;
 
-	public static String title = "Square Legacy 1.0.3";
+	public static String title = "";
 	public double xScroll, yScroll;
 	
 	public static Level level;
@@ -209,24 +209,6 @@ public class Game extends Canvas implements Runnable {
 	}*/
 	
 	
-	public void addDevelopers() {
-		devs.add("Nate");
-		devs.add("coinreturn1");
-		
-		devs.add("Pascal");
-		devs.add("Nickavia");
-		
-		devs.add("Robbie");
-		devs.add("GeekSquad2");
-		
-		devs.add("*[A]7381");
-		devs.add("AggressiveChairlift");
-
-		devs.add("Varspasian");
-
-	}
-
-	
     private static final char PKG_SEPARATOR = '.';
 
     private static final char DIR_SEPARATOR = '/';
@@ -269,9 +251,9 @@ public class Game extends Canvas implements Runnable {
     }
 	
     ArrayList<String> materials = new ArrayList<String>();
-	public Game() {
+	public Game(String title) {
+		this.title = title;
 		//load();
-		addDevelopers();
 		/*List<Class<?>> classes = find("com.IB.SL.entity.inventory.item.material");
 		for(int i = 0; i < classes.size(); i++) {
 			String path = classes.get(i).getName();
@@ -543,7 +525,7 @@ public int deathTimeSec = 0;
 		} catch (Exception e) {
 			autoSave = true;
 		}
-		Game.switchState(Game.get().gameState.INGAME);
+		Game.switchState(Boot.get().gameState.INGAME);
 		
 		if (Game.runTut) {
 			getPlayer().setPosition(73, 38, Maps.tutWorldId, true);
@@ -711,7 +693,7 @@ public int deathTimeSec = 0;
 		}
 
 		if (!loadGame) {
-			if (gameState != Game.get().gameState.MENU && key.gs1) {
+			if (gameState != Boot.get().gameState.MENU && key.gs1) {
 				// playHope = false;
 
 				// playMenuMusic = true;
@@ -859,7 +841,7 @@ public int deathTimeSec = 0;
 			getGui().renderPause(screen);
 		} else if (gameState == gameState.DEATH) {
 			getGui().renderDeath(screen);
-			font8x8.render(-4, 159, -3, 0xffFFFFFF, "Auto Respawn In.." + (10 - Game.get().deathTimeSec), screen, false, false);
+			font8x8.render(-4, 159, -3, 0xffFFFFFF, "Auto Respawn In.." + (10 - Boot.get().deathTimeSec), screen, false, false);
 		} else if (gameState == gameState.SPLASH) {
 			getGui().renderSplash(screen);
 		}
@@ -1048,15 +1030,14 @@ public int deathTimeSec = 0;
 		bs.show();
 
 	}
-    static Game game1;
     
-    public static void setWindowIcon(String path) {
+    public void setWindowIcon(String path) {
     	frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				Game.class.getResource(path)));
     	
     }
     
-    public static Cursor setMouseIcon(String path) {
+    public Cursor setMouseIcon(String path) {
     	Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = null;
 		image = Toolkit.getDefaultToolkit().getImage(
@@ -1068,27 +1049,16 @@ public int deathTimeSec = 0;
 		return cursor;
     }
 
-    public static  HashMap<String, Boolean>  cmdln_args;
-    public static void main(String[] args) {
-    	cmdln_args = new HashMap<String, Boolean>();
-    	
-    	System.out.println("CALLED");
-    	
-    	for (String s : args) {
-    		cmdln_args.put(s, true);
-    	}
-    	
-		Game game = new Game();
-		game1 = game;
-
+    
+    public void Launch(Game game) {
 		setWindowIcon("/Textures/sheets/wizard.png");
 		game.frame.setResizable(false);			
-		if (cmdln_args.containsKey("-resizeable")) {
+		if (Boot.launch_args.containsKey("-resizeable")) {
 		game.frame.setResizable(true);			
 		}
 		game.frame.setTitle(Game.title);
 		game.frame.add(game);
-		if (cmdln_args.containsKey("-fullscreen")) {
+		if (Boot.launch_args.containsKey("-fullscreen")) {
 			game.frame.setUndecorated(true);
 			game.frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 			
 		}
@@ -1107,12 +1077,7 @@ public int deathTimeSec = 0;
 		
 	}
     
-    
-	public static Game get() {
-		return game1;
-	}
-	
-	public static void centerMouse() {
+	public void centerMouse() {
 		int centreFrameX = frame.getX() + (frame.getWidth() / 2);
 		int centreFrameY = frame.getY() + (frame.getHeight() / 2);
 		moveMouse(new Point(centreFrameX, centreFrameY));
@@ -1148,9 +1113,9 @@ public int deathTimeSec = 0;
 	
 	public static void switchState(gameState state) {
 		Mouse.setMouseB(-1);
-		gameState current = Game.get().gameState;
-		Game.get().gui.newCharMenu = false;
-		Game.get().gui.charMenu = false;
+		gameState current = Boot.get().gameState;
+		Boot.get().gui.newCharMenu = false;
+		Boot.get().gui.charMenu = false;
 
 		try {
 		if (current != current.SPLASH) {
@@ -1173,7 +1138,7 @@ public int deathTimeSec = 0;
 		} else if (state == state.INGAME) {
 			if (current != current.INGAME_A) {
 				if (current == current.PAUSE) {
-					Game.get().save(false);
+					Boot.get().save(false);
 					try {						
 					Sound.resumeOgg();
 					} catch (Exception e) {
@@ -1203,7 +1168,7 @@ public int deathTimeSec = 0;
 		 * if (gamestate == 4) { Sound.StopMusic(); }
 		 */
 
-		Game.get().gameState = state;
+		Boot.get().gameState = state;
 
 	}
 

@@ -2,7 +2,7 @@ package com.IB.SL.graphics.Weather;
 
 import java.util.Random;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 
@@ -39,14 +39,14 @@ public class RainPart {
 			time = 0;
 		}
 		
-		if (this.y != Game.get().getHeight()) {
+		if (this.y != Boot.get().getHeight()) {
 			if (time % 10 == 0) {
 				x++;
 				y++;
 			}
 		} 
 		
-		if (this.y >= Game.get().height){
+		if (this.y >= Boot.get().height){
 			x = ix;
 			y = -2 - sy;
 		}
@@ -60,17 +60,17 @@ public class RainPart {
 			}
 		}
 		
-		if (this.y != Game.get().getHeight()) {
+		if (this.y != Boot.get().getHeight()) {
 			System.out.println("Is update");
 			if (time % 10 == 0 || in_render == false) {
-				if (Game.get().getPlayer().walking) {
-					switch(Game.get().getPlayer().getDir()) {
+				if (Boot.get().getPlayer().walking) {
+					switch(Boot.get().getPlayer().getDir()) {
 					case UP:
 						x+= 1;
-						y+= 2 * Game.get().getPlayer().speed;
+						y+= 2 * Boot.get().getPlayer().speed;
 						break;
 					case LEFT:		
-						x+= 2 * Game.get().getPlayer().speed;
+						x+= 2 * Boot.get().getPlayer().speed;
 						y+= 1;
 						break;
 					case RIGHT: 
@@ -94,7 +94,7 @@ public class RainPart {
 			}
 		} 
 		
-		if (this.y >= Game.get().height){
+		if (this.y >= Boot.get().height){
 			x = ix;
 			y = -2 - sy;
 		}

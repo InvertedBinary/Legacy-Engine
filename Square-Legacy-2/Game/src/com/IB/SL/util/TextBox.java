@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
@@ -229,7 +229,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 	public void runCmd(String text) {
 		if (useCmds) {
 			if (text.startsWith("!")) {
-			Game.get().getPlayer().cmd.updateCommandMode(finalText.substring(1, finalText.length()), Game.get().getPlayer());
+			Boot.get().getPlayer().cmd.updateCommandMode(finalText.substring(1, finalText.length()), Boot.get().getPlayer());
 			reset(true);
 			}
 		}

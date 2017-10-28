@@ -2,6 +2,7 @@ package com.IB.SL.entity.mob.hostile;
 
 import java.util.List;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.mob.Mob;
@@ -262,7 +263,7 @@ public class UndeadCaster extends Mob {
 			screen.renderSprite((int) x - 16, (int) y - 24, gui.renderMobHealthExperiment(this, 20), true);
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 			screen.drawRect((int) x - 8, (int) y - 15, sprite.getWidth(), sprite.getHeight(), 0xFF00FF, true);
@@ -270,7 +271,7 @@ public class UndeadCaster extends Mob {
 
 			try {
 				if (players.size() > 0) {
-					Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int) x, (int) y,
+					Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int) y,
 							raycastFlee.rayVector.x, raycastFlee.rayVector.y), 0xffFF3AFB, true);
 				}
 			} catch (NullPointerException e) {
