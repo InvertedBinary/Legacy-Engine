@@ -9,12 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.inventory.EquipableItem;
-import com.IB.SL.entity.inventory.Quest;
-import com.IB.SL.entity.inventory.item.Item;
-import com.IB.SL.entity.inventory.item.equipables.staves.wand_ArcaneTwig;
 import com.IB.SL.entity.mob.PlayerMP;
 
 public class SaveGame {
@@ -112,7 +109,7 @@ public static PlayerMP load(String name) {
 	}
 	
 	
-	public static Item[] loadItems() {
+	/*public static Item[] loadItems() {
 		
 		if(checkSaveExists(itemFileName)) {
 			FileInputStream fis = null;
@@ -133,7 +130,7 @@ public static PlayerMP load(String name) {
 			
 		}
 		return null;
-	}
+	}*/
 	
 public static Entity[] loadEntities() {
 		
@@ -142,7 +139,7 @@ public static Entity[] loadEntities() {
 				Entity[] loadedObject = null;
 			try {
 				
-				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Game.getGame().getPlayer().currentLevelId);
+				fis = new FileInputStream(createSaveFolder() + SaveGame.mobsFileName + Boot.get().getPlayer().currentLevelId);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				loadedObject = (Entity[]) ois.readObject();
 				ois.close();
@@ -182,7 +179,7 @@ public static Entity[] loadEntities(int levelID) {
 }
 
 	
-	public static Quest[] loadQuests() {
+	/*public static Quest[] loadQuests() {
 		
 		if(checkSaveExists(questsFileName)) {
 			FileInputStream fis = null;
@@ -203,9 +200,9 @@ public static Entity[] loadEntities(int levelID) {
 			
 		}
 		return null;
-	}
+	}*/
 	
-	public static EquipableItem[] loadEquips() {
+	/*public static EquipableItem[] loadEquips() {
 		
 		if(checkSaveExists(equipFileName)) {
 			FileInputStream fis = null;
@@ -214,7 +211,7 @@ public static Entity[] loadEntities(int levelID) {
 				try {
 					fis = new FileInputStream(createSaveFolder() + equipFileName);					
 				} catch (FileNotFoundException e) {
-					Game.getGame().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
+					Game.get().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
 				//	Game.getGame().getPlayer().equipment.Equip(new CottonRobe(EquipableItem.slot_CHEST, Game.getGame().getPlayer()));
 				}
 				ObjectInputStream ois = new ObjectInputStream(fis);
@@ -230,7 +227,7 @@ public static Entity[] loadEntities(int levelID) {
 			
 		}
 		return null;
-	}
+	}*/
 	
 public static LoadProperties loadPrefs() {
 		
@@ -314,7 +311,7 @@ public static LoadProperties loadPrefs() {
 		
 		
 		File saveDir = new File(home);
-		saveDir = new File(saveDir, root + "/Saves/" + Game.PersonNameGetter);
+		saveDir = new File(saveDir, root + "/Saves/" + Game.PlayerName);
 		
 		if (!saveDir.exists()) {
 			saveDir.mkdir();
@@ -379,16 +376,16 @@ public static LoadProperties loadPrefs() {
 		index.delete();
 	}
 	
-	public static boolean deleteCharacter(String userName) {
+	/*public static boolean deleteCharacter(String userName) {
 		
-			if (!Game.getGame().gui.save1.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save1;
-			} else if (!Game.getGame().gui.save2.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save2;
-			} else if (!Game.getGame().gui.save3.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save3;
-			} else if (!Game.getGame().gui.save4.equals("(Open)")) {
-				Game.getGame().gui.saveSelected = Game.getGame().gui.save4;
+			if (!Boot.get().gui.save1.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save1;
+			} else if (!Boot.get().gui.save2.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save2;
+			} else if (!Boot.get().gui.save3.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save3;
+			} else if (!Boot.get().gui.save4.equals("(Open)")) {
+				Boot.get().gui.saveSelected = Boot.get().gui.save4;
 			
 		}
 		
@@ -408,7 +405,7 @@ public static LoadProperties loadPrefs() {
 		
 		
 		return true;
-	}
+	}*/
 	
 	public static boolean deleteSaveFile(String fileName) {
 		if(!checkFileExists(fileName)) {

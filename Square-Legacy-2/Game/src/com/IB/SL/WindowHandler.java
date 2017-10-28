@@ -21,9 +21,7 @@ public class WindowHandler implements WindowListener, FocusListener{
 
 	@Override
 	public void windowClosed(WindowEvent event) {
-		if (game.gameState == game.gameState.INGAME || game.gameState == game.gameState.INGAME_A) {
-			Game.getGame().quit();
-		}
+			Boot.get().quit();
 	}
 
 	@Override
@@ -47,8 +45,6 @@ public class WindowHandler implements WindowListener, FocusListener{
 
 	@Override
 	public void windowIconified(WindowEvent event) {
-		if (game.gameState == game.gameState.INGAME || game.gameState == game.gameState.INGAME_A)
-		game.switchState(game.gameState.PAUSE);
 	}
 
 	@Override

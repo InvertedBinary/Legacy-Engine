@@ -1,0 +1,15 @@
+package com.IB.SL.entity;
+
+import java.io.File;
+
+public class XMLEntity extends Entity {
+	
+	public XMLEntity(String XML) {
+		
+	}
+	
+	public void readXML() {
+		File fXmlFile = new File("");
+	}
+	
+}
