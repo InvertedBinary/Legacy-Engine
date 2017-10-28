@@ -71,7 +71,6 @@ private class MyDispatcher implements KeyEventDispatcher {
 		finalText = "";
 		text = "";
 		caretPos = 0;
-		
 	}
 	
 	public void addHistory() {

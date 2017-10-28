@@ -30,7 +30,6 @@ import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
 
-import javafx.scene.effect.Effect;
 
 public class Level implements Serializable {
 	/**
@@ -51,7 +50,6 @@ public class Level implements Serializable {
 
 	public List<Entity> entitiesList = new ArrayList<Entity>();
 	public List<Spawner> Spawner = new ArrayList<Spawner>();
-	public List<Effect> StatusFx = new ArrayList<Effect>();
 
 	//public List<AnimatedTile> tiles_anim = new ArrayList<AnimatedTile>();
 	double addX, addY;
