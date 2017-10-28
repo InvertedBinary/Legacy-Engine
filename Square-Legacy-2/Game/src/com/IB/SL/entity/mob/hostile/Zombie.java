@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
@@ -190,13 +189,10 @@ public class Zombie extends Mob{
 		xOffset = -8;
 		yOffset = -15;
 		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
-		if (Boot.get().gameState == gameState.INGAME_A) {
-			//gui.renderHealth(screen, this, (int) x - 16, (int)y - 24, true);
-			}
-		//gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true, true);
+
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Boot.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().devModeOn) {
 			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			try {
 			if (players.size() > 0 || entities.size() > 0) {

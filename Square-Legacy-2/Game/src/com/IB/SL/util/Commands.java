@@ -140,7 +140,7 @@ public class Commands {
 					player.noclip = !player.noclip;
 				break;
 				case "gs3":
-					Boot.get().switchState(Boot.get().gameState.INGAME_A);
+					//Boot.get().switchState(Boot.get().gameState.INGAME_A);
 					break;
 				
 				case "dir":
@@ -155,12 +155,12 @@ public class Commands {
 				
 				case "dbg":
 				
-					if (!Boot.get().gameState.equals(Boot.get().gameState.INGAME_A)) {
+				/*	if (!Boot.get().gameState.equals(Boot.get().gameState.INGAME_A)) {
 						Game.switchState(Boot.get().gameState.INGAME_A);						
 					} else {
 						Game.switchState(Boot.get().gameState.INGAME);
 					}
-					
+					*/
 				break;
 		
 				case "avg": 

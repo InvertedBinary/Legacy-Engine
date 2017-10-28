@@ -5,7 +5,6 @@ import java.util.Random;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.spawner.WallParticleSpawner;
@@ -87,7 +86,7 @@ public class DebugProjectile extends Projectile {
 
 	public void render(Screen screen) {
 		screen.renderProjectile((int)x - 8,(int)y - 14, this);
-		if (Boot.get().gameState == gameState.INGAME_A) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		if (Boot.get().devModeOn) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

@@ -6,8 +6,6 @@ import java.util.Random;
 import javax.sound.sampled.Clip;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -106,7 +104,7 @@ public abstract class Projectile extends Entity {
 	public boolean Collision(Projectile p, List<Entity> entities) {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().PlayerName, p.ExpV);
 			doEffect(ee);
 			p.remove();
 			return true;
@@ -120,7 +118,7 @@ public abstract class Projectile extends Entity {
 		if (ee != null) {
 			if (ee != p.prevHit) {				
 			p.prevHit = ee;
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Boot.get().PersonNameGetter, p.ExpV);
+			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Boot.get().PlayerName, p.ExpV);
 			doEffect(ee);
 			return true;
 			}
@@ -203,7 +201,7 @@ public abstract class Projectile extends Entity {
 					) {
 				if (!players.get(i).invulnerable) {
 				remove();
-    			if (Boot.get().gameState != gameState.INGAME_A) {
+				if (!Boot.get().devModeOn) {
 					level.damagePlayer((int)proj.getX(), (int)proj.getY(), players.get(i), 0, proj.damage, "projectile", 0);
 					proj.addEffect(players.get(i));
 				}
@@ -217,10 +215,10 @@ public abstract class Projectile extends Entity {
 				}
 				if (players.get(i).mobhealth <= 0){
 					//players.get(i).onPlayerDeath();
-					Game.switchState(Boot.get().gameState.DEATH);
+					//Game.switchState(Boot.get().gameState.DEATH);
 					level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");
-					Game.Dead = true;	
+					//Game.Dead = true;	
 					}
 				}
 			}

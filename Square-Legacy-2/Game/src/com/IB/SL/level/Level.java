@@ -12,7 +12,6 @@ import java.util.Random;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
 import com.IB.SL.entity.mob.Mob;
@@ -711,7 +710,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 	
 	private void renderMiniMap(Screen screen) {
-		if (minimap_enabled == true && Boot.get().gameState != Boot.get().gameState.PAUSE) {
+		if (minimap_enabled == true) {
 			int size = 45;
 			int x = 254;
 			int y = 1;
@@ -1584,10 +1583,7 @@ public void resetLevelPostDeath(Player player) {
 
 				mob.death();
 				if (mob.remove()) {
-					if (!Game.Dead && Boot.get().gameState != gameState.INGAME_A) {
 						Boot.get().getLevel().getClientPlayer().kills += 1;
-						// if (mob.inventory != null) mob.inventory.dropAll();
-					}
 					if (mob.hostility != mob.hostility.PASS) {
 						Boot.get().getPlayer().money += (mob.maxhealth / 2);
 					}
@@ -1597,8 +1593,6 @@ public void resetLevelPostDeath(Player player) {
 	}
 
 	public void damagePlayer(int x, int y, PlayerMP player, long Exp, double damage, String name, int ExpV) {
-		if (Boot.get().gameState.equals(Boot.get().gameState.INGAME)) {
-
 			int color;
 			int chance = (random.nextInt((101 - 1) + 1) + 1);
 			String dmgInd = "0";
@@ -1612,10 +1606,8 @@ public void resetLevelPostDeath(Player player) {
 			dmgInd = "" + Math.round(damage);
 
 			if (!player.invulnerable) {
-				if (Boot.get().gameState != gameState.INGAME_A) {
 					damage *= (7 / (1 + Math.pow(Math.E, -0.05 * (Boot.get().getPlayer().Lvl - 40)))) + 1;
 					player.mobhealth -= (damage);
-				}
 				System.out.println("Damage: " + damage);
 				try {
 					// add(new DamageIndicator((int)(player.getX()), (int)((y - 20)), 15, 1, dmgInd,
@@ -1631,8 +1623,7 @@ public void resetLevelPostDeath(Player player) {
 				}
 			}
 		}
-	}
-	
+
 	protected void refresh() {
 		if (Boot.get().autoSave) {
 		Entity[] es = Boot.get().getLevel().entities.toArray(new Entity[Boot.get().getLevel().entities.size()]);
