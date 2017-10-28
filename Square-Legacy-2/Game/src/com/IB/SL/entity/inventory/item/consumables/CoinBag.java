@@ -48,7 +48,7 @@ public class CoinBag extends Item{
 		this.dropchance = 5;
 		this.rarity = 3;
 		this.price = "0";
-		level = Game.getGame().getLevel();
+		level = Game.get().getLevel();
 		this.invulnerable = true;
 		this.type = type;
 		this.stackSize = 100;
@@ -59,25 +59,25 @@ public class CoinBag extends Item{
 	if (randGen == 4 || this.type.equals(Type.LARGE)) {
 		this.type = Type.LARGE;
 		this.name = "Large Coin Bag";
-		contents = Game.getGame().getPlayer().Lvl * 100 + (int)(Math.random() * 500);
+		contents = Game.get().getPlayer().Lvl * 100 + (int)(Math.random() * 500);
 		this.price = String.valueOf(contents);
 
 	} else if (randGen == 3 || this.type.equals(Type.MEDIUM)) {
 		this.type = Type.MEDIUM;
 		this.name = "Moderate Coin Bag";
-		contents =Game.getGame().getPlayer().Lvl * 10 + (int)(Math.random() * 250);
+		contents =Game.get().getPlayer().Lvl * 10 + (int)(Math.random() * 250);
 		this.price = String.valueOf(contents);
 		
 	} else if (randGen == 2 || this.type.equals(Type.SMALL)) {
 		this.type = Type.SMALL;
 		this.name = "Small Coin Bag";
-		contents = Game.getGame().getPlayer().Lvl * 5 + (int)(Math.random() * 100);
+		contents = Game.get().getPlayer().Lvl * 5 + (int)(Math.random() * 100);
 		this.price = String.valueOf(contents);
 		
 	} else if (randGen == 1 || this.type.equals(Type.POCKETCHANGE)) {
 		this.type = Type.POCKETCHANGE;
 		this.name = "Pocket Change";
-		contents = Game.getGame().getPlayer().Lvl + (int)(Math.random() * 10);
+		contents = Game.get().getPlayer().Lvl + (int)(Math.random() * 10);
 		this.price = String.valueOf(contents);
 	}
 		//}
@@ -115,7 +115,7 @@ public class CoinBag extends Item{
 	
 	
 	public void decideGeneration() {
-		if (Game.getGame().getLevel() != null) {
+		if (Game.get().getLevel() != null) {
 			if (type == type.POCKETCHANGE) {
 				generateEasyItems();
 			} else if (type == type.SMALL) {
@@ -207,7 +207,7 @@ public class CoinBag extends Item{
 		public void render(Screen screen) {
 			screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 			
-			if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+			if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 		
 		}
 

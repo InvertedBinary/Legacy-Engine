@@ -56,7 +56,7 @@ public class Equilibrium extends Ability{
 			origin.mana += amountMana;
 			origin.mobhealth -= origin.maxhealth * 0.2;
 			Sound.Play(Sound.Spell2, false);
-			Game.getGame().getLevel().add(new BleedSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.getGame().getLevel()));
+			Game.get().getLevel().add(new BleedSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.get().getLevel()));
 			return true;
 		}
 	}

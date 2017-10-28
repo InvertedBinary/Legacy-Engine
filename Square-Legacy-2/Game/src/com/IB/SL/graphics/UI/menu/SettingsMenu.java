@@ -36,7 +36,7 @@ public class SettingsMenu extends UI_Menu {
 		
 			if (btn_back.clicked) {
 				navUp();
-				Game.getGame().loadProp.savePrefs(Game.getGame());
+				Game.get().loadProp.savePrefs(Game.get());
 			}
 	}
 	

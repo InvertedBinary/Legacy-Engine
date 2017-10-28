@@ -3,6 +3,8 @@ package com.IB.SL.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.IB.SL.Game;
+
 public class Keyboard implements KeyListener {
 	
 	private final int numOfKeys = 520;
@@ -45,8 +47,8 @@ public class Keyboard implements KeyListener {
 		toggleChatWindow = keys[KeyEvent.VK_T];
 		generalActivator = keys[KeyEvent.VK_F];
 		
-		buildMode = toggles[KeyEvent.VK_B];
-
+		buildMode = (Game.get().gameState == (Game.get().gameState.INGAME)) ? toggles[KeyEvent.VK_B] : false;
+		toggles[KeyEvent.VK_B] = (Game.get().gameState == (Game.get().gameState.INGAME)) ? toggles[KeyEvent.VK_B] : false;
 		
 		/**
 		 * gameState Keys:

@@ -53,8 +53,8 @@ public class CheckBounds extends UI implements Serializable{
 	
 	
 	public void checkMenu() {
-		if(!Game.getGame().gui.charMenu) {
-		if (Game.getGame().gameState == Game.getGame().gameState.MENU) {
+		if(!Game.get().gui.charMenu) {
+		if (Game.get().gameState == Game.get().gameState.MENU) {
 				if (checkBounds(29, 96, 243, 24, true, true)) {
 				overContinue = true;
 				if (Mouse.getButton() == 1 && !Game.loading) {
@@ -69,7 +69,7 @@ public class CheckBounds extends UI implements Serializable{
 				if (checkBounds(29, 132, 243, 24, true, true)) {
 					overChars = true;
 					if (Mouse.getButton() == 1) {
-						Game.getGame().gui.charMenu = true;
+						Game.get().gui.charMenu = true;
 						Sound.Play(Sound.Click, false);
 						Mouse.setMouseB(-1);
 					}
@@ -78,11 +78,11 @@ public class CheckBounds extends UI implements Serializable{
 				}
 		
 					}
-		} else if (Game.getGame().gui.charMenu && newCharMenu == false) {
+		} else if (Game.get().gui.charMenu && newCharMenu == false) {
 			
 			if (checkBounds(229, 140, 16, 16, true, true)) {
 				if (Mouse.getButton() == 1) {
-				Game.getGame().gui.charMenu = false;
+				Game.get().gui.charMenu = false;
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
 				}
@@ -90,13 +90,13 @@ public class CheckBounds extends UI implements Serializable{
 			
 			if (checkBounds(252, 140, 37, 16, true, true)) {
 				if (Mouse.getButton() == 1) {
-					Game.getGame().switchCharacter(saveSelected);
+					Game.get().switchCharacter(saveSelected);
 					/*if (Game.getGame().runTut) {
 					Game.getGame().getPlayer().setPosition(71, 12, Maps.tutWorldId, true);
 					}*/
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
-				Game.getGame().gui.charMenu = false;
+				Game.get().gui.charMenu = false;
 				}
 			}
 			
@@ -177,7 +177,7 @@ public class CheckBounds extends UI implements Serializable{
 					save2 = save3;
 					save4 = "(Open)";
 				if (Game.PersonNameGetter == save1) {
-					Game.getGame().switchCharacter(saveSelected);
+					Game.get().switchCharacter(saveSelected);
 				}
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
@@ -198,7 +198,7 @@ public class CheckBounds extends UI implements Serializable{
 					save3 = save4;
 					save4 = "(Open)";
 					if (Game.PersonNameGetter == save2) {
-						Game.getGame().switchCharacter(saveSelected);
+						Game.get().switchCharacter(saveSelected);
 					}
 	
 				Sound.Play(Sound.Click, false);
@@ -219,7 +219,7 @@ public class CheckBounds extends UI implements Serializable{
 					save3 = save4;
 					save4 = "(Open)";
 					if (Game.PersonNameGetter == save3) {
-						Game.getGame().switchCharacter(saveSelected);
+						Game.get().switchCharacter(saveSelected);
 					}
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
@@ -238,7 +238,7 @@ public class CheckBounds extends UI implements Serializable{
 					SaveGame.deleteCharacter(save4);
 					save4 = "(Open)";
 					if (Game.PersonNameGetter == save4) {
-						Game.getGame().switchCharacter(saveSelected);
+						Game.get().switchCharacter(saveSelected);
 					}
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
@@ -252,23 +252,23 @@ public class CheckBounds extends UI implements Serializable{
 			
 			try {
 				
-			if (Game.getGame().getCharDirs().get(0) != null) {
-				save1 = Game.getGame().getCharDirs().get(0);
+			if (Game.get().getCharDirs().get(0) != null) {
+				save1 = Game.get().getCharDirs().get(0);
 			} else {
 				save1 = "(Open)";
 			}
-			if (Game.getGame().getCharDirs().get(1) != null) {
-				save2 = Game.getGame().getCharDirs().get(1);
+			if (Game.get().getCharDirs().get(1) != null) {
+				save2 = Game.get().getCharDirs().get(1);
 			} else {
 				save2 = "(Open)";
 			}
-			if (Game.getGame().getCharDirs().get(2) != null) {
-				save3 = Game.getGame().getCharDirs().get(2);
+			if (Game.get().getCharDirs().get(2) != null) {
+				save3 = Game.get().getCharDirs().get(2);
 			} else {
 				save3 = "(Open)";
 			}
-			if (Game.getGame().getCharDirs().get(3) != null) {
-				save4 = Game.getGame().getCharDirs().get(3);
+			if (Game.get().getCharDirs().get(3) != null) {
+				save4 = Game.get().getCharDirs().get(3);
 			} else {
 				save4 = "(Open)";
 			}
@@ -287,7 +287,7 @@ public class CheckBounds extends UI implements Serializable{
 			
 			if (checkBounds(132, 71, 16, 16, true, true)) {
 				if (Mouse.getButton() == 1) {
-					Game.getGame().runTut = !Game.getGame().runTut;
+					Game.get().runTut = !Game.get().runTut;
 					name.focused = false;
 					}
 				}
@@ -415,12 +415,12 @@ public class CheckBounds extends UI implements Serializable{
 			
 			if (checkBounds(277, 145, 16, 16, true, true)) {
 				if (Mouse.getButton() == 1) {
-			Game.getGame().switchCharacter(name.getText(true));
+			Game.get().switchCharacter(name.getText(true));
 			saveSelected = (name.getText(true));
 			newCharMenu = false;
 			name.reset(false);
 			
-			Game.getGame().save(true);
+			Game.get().save(true);
 				Sound.Play(Sound.Click, false);
 				Mouse.setMouseB(-1);
 					}
@@ -431,10 +431,10 @@ public class CheckBounds extends UI implements Serializable{
 	
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale, boolean temp) {
 		if (toScale) {
-		x *= Game.getGame().scale;
-		y *= Game.getGame().scale;
-		width *= Game.getGame().scale;
-		height *= Game.getGame().scale;
+		x *= Game.get().scale;
+		y *= Game.get().scale;
+		width *= Game.get().scale;
+		height *= Game.get().scale;
 		}
 		
 		if (Mouse.getX() < x + width && Mouse.getX() > x && Mouse.getY() < y + height && Mouse.getY() > y ) {
@@ -446,10 +446,10 @@ public class CheckBounds extends UI implements Serializable{
 
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale) {
 		if (toScale) {
-		x *= Game.getGame().scale;
-		y *= Game.getGame().scale;
-		width *= Game.getGame().scale;
-		height *= Game.getGame().scale;
+		x *= Game.get().scale;
+		y *= Game.get().scale;
+		width *= Game.get().scale;
+		height *= Game.get().scale;
 		}
 		
 		System.out.println("X: " + Screen.xo + "," + x);
@@ -461,16 +461,16 @@ public class CheckBounds extends UI implements Serializable{
 	}	
 	
 		public void checkDeath() {
-		if (Game.getGame().gameState == Game.getGame().gameState.DEATH) {
+		if (Game.get().gameState == Game.get().gameState.DEATH) {
 				/*if (Mouse.getX() < 85 + 300 && Mouse.getX() > 85 - 5
 						&& Mouse.getY() < 270 + 105 && Mouse.getY() > 270 - 10) {*/
 					if (checkBounds(19, 65, 76, 28, true, true)) {
 					overMenu = true;
 					if (Mouse.getButton() == 1) {
 						Sound.Play(Sound.Click, false);
-						Game.switchState(Game.getGame().gameState.MENU);
-						Game.getGame().deathTimeTicks = 0;
-						Game.getGame().deathTimeSec = 0;
+						Game.switchState(Game.get().gameState.MENU);
+						Game.get().deathTimeTicks = 0;
+						Game.get().deathTimeSec = 0;
 
 					}
 					} else {
@@ -484,7 +484,7 @@ public class CheckBounds extends UI implements Serializable{
 						overQuit = true;
 						if (Mouse.getButton() == 1) {
 							Sound.Play(Sound.Click, false);
-							Game.getGame().quit();
+							Game.get().quit();
 						}
 					} else {
 						overQuit = false;
@@ -495,8 +495,8 @@ public class CheckBounds extends UI implements Serializable{
 
 	public void checkPause() {
 		
-		if (Game.getGame().gameState == Game.getGame().gameState.PAUSE) {
-			if (Game.getGame().getPlayer().input.exclamation) {
+		if (Game.get().gameState == Game.get().gameState.PAUSE) {
+			if (Game.get().getPlayer().input.exclamation) {
 				System.out.println("true");
 				this.cmd.focused = true;
 			}	
@@ -504,12 +504,12 @@ public class CheckBounds extends UI implements Serializable{
 				desc = "Returns To Previous Menu";
 				if (Mouse.getButton() == 1) {
 					Sound.Play(Sound.Click, false);
-					Game.getGame().gui.options = !Game.getGame().gui.options;
+					Game.get().gui.options = !Game.get().gui.options;
 					Mouse.setMouseB(-1);
 				}
 			}
 			
-			if (Game.getGame().gui.options == true) {
+			if (Game.get().gui.options == true) {
 				if (checkBounds(249, 5, 20, 20, true, true)) {
 					desc = "Opens The Help PDF\n(Must have a PDF reader installed!)";
 					if (Mouse.getButton() == 1) {
@@ -529,9 +529,9 @@ public class CheckBounds extends UI implements Serializable{
 				if (checkBounds(8, 36, 20, 20, true, true)) {
 						desc = "Toggle Autosave";
 					if (Mouse.getButton() == 1) {
-						Game.getGame().loadProp.savePrefs(Game.getGame());
+						Game.get().loadProp.savePrefs(Game.get());
 						Sound.Play(Sound.Click, false);
-						Game.getGame().autoSave = !Game.getGame().autoSave;
+						Game.get().autoSave = !Game.get().autoSave;
 						Mouse.setMouseB(-1);
 					}
 				} else {
@@ -542,7 +542,7 @@ public class CheckBounds extends UI implements Serializable{
 						overDelFiles = true;
 						if (Mouse.getButton() == 1) {
 							Sound.Play(Sound.Click, false);
-							Player p = Game.getGame().getPlayer();
+							Player p = Game.get().getPlayer();
 						
 							SaveGame.deleteCharacter(p.name);
 							p.reset(p);
@@ -556,7 +556,7 @@ public class CheckBounds extends UI implements Serializable{
 						if (checkBounds(8, 96, 20, 20, true, true)) {
 							desc = "Toggle Multiplayer (Beta) Features\nFor Developers Only!";
 							if (Mouse.getButton() == 1) {
-								Game.getGame().loadProp.savePrefs(Game.getGame());
+								Game.get().loadProp.savePrefs(Game.get());
 								//Game.getGame().multiplayerEnabled = !Game.getGame().multiplayerEnabled;
 								Sound.Play(Sound.Click, false);
 								Mouse.setMouseB(-1);
@@ -573,7 +573,7 @@ public class CheckBounds extends UI implements Serializable{
 				overResume = true;
 				if (Mouse.getButton() == 1) {
 					Sound.Play(Sound.Click, false);
-					Game.switchState(Game.getGame().gameState.INGAME);
+					Game.switchState(Game.get().gameState.INGAME);
 				}
 			} else {
 				overResume = false;
@@ -582,7 +582,7 @@ public class CheckBounds extends UI implements Serializable{
 				overMenuPause = true;
 				if (Mouse.getButton() == 1) {
 					Sound.Play(Sound.Click, false);
-					Game.switchState(Game.getGame().gameState.MENU);
+					Game.switchState(Game.get().gameState.MENU);
 				}
 			} else {
 				overMenuPause = false;
@@ -591,7 +591,7 @@ public class CheckBounds extends UI implements Serializable{
 				overQuitPause = true;
 				if (Mouse.getButton() == 1) {
 						Sound.Play(Sound.Click, false);
-						Game.getGame().quit();
+						Game.get().quit();
 					}
 			} else {
 				overQuitPause = false;

@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import com.IB.SL.Game;
+import com.IB.SL.entity.XMLEntity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.npc.TestQG;
 import com.IB.SL.entity.mob.peaceful.Alice;
@@ -112,6 +113,8 @@ public class SpawnHaven extends Level implements Serializable{
 		add(new Guard(53, 71, new TileCoord(53, 71), new TileCoord(58, 71)));
 
 		add(new Alice(52, 73));
+		
+		add(new XMLEntity(52, 70, "/XML/Entities/TestZombie.xml"));
 
 		//add(new VoidBoss(15, 25));
 		//add(new OpticBond(25 * 16, 13 * 16, 2000, 1, EquipableItem.slot_UTILITY1));

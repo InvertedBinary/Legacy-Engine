@@ -212,13 +212,13 @@ public class VoidBoss extends Mob {
 	public void death() {
 		if (!removed) {
 			
-			Game.getGame().getLevel().add(new wand_VoidCrook((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
-			Game.getGame().getLevel().add(new wand_StygianScepter((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
-			Game.getGame().getLevel().add(new VoidweaversHood((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new wand_VoidCrook((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new wand_StygianScepter((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
+			Game.get().getLevel().add(new VoidweaversHood((int)x, (int)y, 2000, 1, EquipableItem.slot_WEAPON));
 			
 			Sound.Play(Sound.erie, false);
 			
-			Game.getGame().getLevel().addDoorTile((int)x / 16, (int)y / 16);
+			Game.get().getLevel().addDoorTile((int)x / 16, (int)y / 16);
 			}
 		
 	}
@@ -249,7 +249,7 @@ private void updatePull() {
    			Sound.Play(Sound.Siphon1, false);
    			pullTime += 1;
    		}
-    	  Game.getGame().getPlayer().pull(this, var);
+    	  Game.get().getPlayer().pull(this, var);
 			//level.add(new VoidParticleSpawner((int) (x - 4), (int) (y - 10), 10, 1, level));
 
    	} 

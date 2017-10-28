@@ -25,7 +25,7 @@ public class qExplore extends Quest {
 	}
 	
 	public void complete() {
-		Player p = Game.getGame().getLevel().getClientPlayer();
+		Player p = Game.get().getLevel().getClientPlayer();
 		p.ExpC += 8;
 		p.getInventory().add(new TravellersCap(EquipableItem.slot_HEAD));
 		p.quests.removeItem(this);
@@ -33,11 +33,11 @@ public class qExplore extends Quest {
 	}
 	
 	public void update() {
-		if (Game.getGame()!= null && Game.getGame().getLevel() != null) {
+		if (Game.get()!= null && Game.get().getLevel() != null) {
 			Entity e = null;
 			this.destination = new TileCoord(-1000, -1000);				
-			for (int i = 0; i < Game.getGame().getLevel().entities.size(); i++) {	
-				e = Game.getGame().getLevel().entities.get(i);
+			for (int i = 0; i < Game.get().getLevel().entities.size(); i++) {	
+				e = Game.get().getLevel().entities.get(i);
 			}
 			if (stage == 0) {
 				this.displayname = "Ghelln";
@@ -50,13 +50,13 @@ public class qExplore extends Quest {
 			}
 		
 			if (stage > MAX_STAGE) {
-				Game.getGame().getPlayer().quests.get(this).complete();
+				Game.get().getPlayer().quests.get(this).complete();
 			}
 			
-			if (Game.getGame().getLevel() instanceof MainLevel) {
+			if (Game.get().getLevel() instanceof MainLevel) {
 				if (stage == 0)  {
 							this.destination = new TileCoord(838, 158);{
-								Player p = Game.getGame().getPlayer();
+								Player p = Game.get().getPlayer();
 								if ((int)(p.getX() / 16) == destination.x() >> 4 && (int)(p.getY() / 16) == destination.y() >> 4){
 									System.out.println("TRUE");
 									p.quests.completeStage(this.name, 0);

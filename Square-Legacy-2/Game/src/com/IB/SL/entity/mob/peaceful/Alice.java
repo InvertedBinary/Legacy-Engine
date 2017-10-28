@@ -50,7 +50,7 @@ public class Alice extends Mob{
 			if (ent.get(0).hostility == hostility.AGR) {
 			if (time % 30 == 0) {
 			for (int i = 0; i < ent.size(); i++) {
-				Game.getGame().getLevel().damage((int)x, (int)y, (Mob)ent.get(0), 0, 1, name, 0);
+				Game.get().getLevel().damage((int)x, (int)y, (Mob)ent.get(0), 0, 1, name, 0);
 					}
 				}
 			}
@@ -133,7 +133,7 @@ public class Alice extends Mob{
 	public void render(Screen screen) {
 		this.xOffset = -8;
 		this.yOffset = -16;
-		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, Game.getGame().gui.renderMobHealthExperiment(this, 20), true);
+		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, Game.get().gui.renderMobHealthExperiment(this, 20), true);
 
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);

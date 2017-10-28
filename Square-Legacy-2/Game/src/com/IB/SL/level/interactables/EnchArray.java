@@ -129,7 +129,7 @@ public class EnchArray extends Interactable {
 	} 
 	
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 16, 16, 0xFF00FF, true);
 		}
 		sprite = animSprite.getSprite();

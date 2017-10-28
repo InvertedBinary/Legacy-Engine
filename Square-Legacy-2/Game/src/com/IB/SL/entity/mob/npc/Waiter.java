@@ -169,7 +169,7 @@ public class Waiter extends Shop {
 		}
 	}
 	} else {
-		int dir = oppositeDir(Game.getGame().getPlayer().direction);
+		int dir = oppositeDir(Game.get().getPlayer().direction);
 		if (dir == 0)
 			animSprite = down;
 		if (dir == 1)

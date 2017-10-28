@@ -23,14 +23,14 @@ public class testQuest extends Quest	{
 	}
 	
 	public void complete() {
-		Player p = Game.getGame().getLevel().getClientPlayer();
+		Player p = Game.get().getLevel().getClientPlayer();
 		p.ExpC += 250;
 		p.getInventory().add(new mace_Bronze(EquipableItem.slot_WEAPON));
 		p.quests.removeItem(this);
 	}
 	
 	public void update() {
-		if (Game.getGame()!= null && Game.getGame().getLevel() != null) {
+		if (Game.get()!= null && Game.get().getLevel() != null) {
 			
 			if (stage == 0) {
 				this.displayname = "Stage One";

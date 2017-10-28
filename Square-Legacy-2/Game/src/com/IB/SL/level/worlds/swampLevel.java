@@ -85,16 +85,16 @@ public class swampLevel extends Level implements Serializable{
 		}		
 	
 	public void resetLevel(Player player) {
-		Game.getGame().setLevel(new SpawnHaven(Maps.SpawnHaven));
-		Game.getGame().getLevel().add(player);
+		Game.get().setLevel(new SpawnHaven(Maps.SpawnHaven));
+		Game.get().getLevel().add(player);
 		player.setPosition(new TileCoord(277, 477));
 	}
 	
 	
 	public void checkExits(Player player, Level level, int x, int y) {
 		refresh();
-		Game.getGame().setLevel(new MainLevel(Maps.main));
-		level = Game.getGame().getLevel();
+		Game.get().setLevel(new MainLevel(Maps.main));
+		level = Game.get().getLevel();
 		level.add(player);
 		
 		if (x == 296 && y == 464) {//296, 464 Spawn Haven

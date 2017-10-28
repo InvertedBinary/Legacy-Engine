@@ -64,7 +64,7 @@ public class Horse extends Mob {
 		      if (p != null && lp == null) {
 		    	  lp = p;
 		      }
-		      Game.getGame().getPlayer().horse_following = this;
+		      Game.get().getPlayer().horse_following = this;
 	    	  
 	    	  if (p.ridingOn == null || p.ridingOn == this) {
 	    			  
@@ -72,7 +72,7 @@ public class Horse extends Mob {
 	    	  if (breatheTime % 520 == 0) {
 	    		  Sound.Play(Sound.horse_Whinny, false);
 	    	  }
-				if (!Game.getGame().key.Sprint) {					
+				if (!Game.get().key.Sprint) {					
 				p.animSprite.setFrame(0);
 				
 				p.speed = 3;
@@ -144,7 +144,7 @@ public class Horse extends Mob {
 		time++;
 		move();
 		
-		if (Game.getGame().getPlayer().ridingOn != this) {
+		if (Game.get().getPlayer().ridingOn != this) {
 			walking = false;
 		}
 		

@@ -17,7 +17,7 @@ public class Equipment {
 	}
 	
 	public boolean Equip(EquipableItem item) {
-		Game.getGame().save(false);
+		Game.get().save(false);
 		int index = item.getSlot();
 		
 		if (item.slot == 5) {
@@ -147,7 +147,7 @@ public class Equipment {
 	
 	
 	public void render(Screen screen) {
-	if (Game.getGame().getPlayer().inventoryEnabled) {
+	if (Game.get().getPlayer().inventoryEnabled) {
 		if (inv.tab == inv.tab.EQUIPMENT) {
 			inv.renderTabEQUIPMENT(screen, items);
 			}
@@ -156,7 +156,7 @@ public class Equipment {
 
 	public void addByID(Equipment equips, int id) {
 			System.out.println("BEING CALLED!!");
-			Game.getGame().getLevel().addInvById(inv, id);
+			Game.get().getLevel().addInvById(inv, id);
 	}
 	
 }

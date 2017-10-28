@@ -27,7 +27,7 @@ public class SlowTrap extends Projectile{
 	
 	public void update() {
 		List<PlayerMP> players = level.players;
-		if (Game.getGame().getLevel().getClientPlayer().ridingOn == null) {
+		if (Game.get().getLevel().getClientPlayer().ridingOn == null) {
 		PlayerCollision(players, this); 
 		}
 	     

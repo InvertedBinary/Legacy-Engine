@@ -46,7 +46,7 @@ public class DamageIndicator extends Particle{
 
 		public void render(Screen screen) {
             try {
-            	Game.getGame().font8x8.render((int)x, (int)y, -4, this.color, this.text, screen, true, false);
+            	Game.get().font8x8.render((int)x, (int)y, -4, this.color, this.text, screen, true, false);
             	//screen.renderText((int)x - 8, (int)y - 14, text, 0xff);
             } catch (NullPointerException e) {
             	e.printStackTrace();

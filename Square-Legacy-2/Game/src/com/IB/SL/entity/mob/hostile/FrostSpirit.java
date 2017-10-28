@@ -52,7 +52,7 @@ public class FrostSpirit extends Mob {
 			List<Player> p = level.getPlayers(this, 20);
 			if (time % 240 == 0) {
 				for (int i = 0; i < p.size(); i++) {
-					Game.getGame().getLevel().damagePlayer((int) x, (int) y, (PlayerMP) p.get(0), 0, 3, name, 0);
+					Game.get().getLevel().damagePlayer((int) x, (int) y, (PlayerMP) p.get(0), 0, 3, name, 0);
 					p.get(i).effects.addEffect(new freeze(p.get(i), 100));
 				}
 				time = 0;
@@ -136,14 +136,14 @@ public class FrostSpirit extends Mob {
 			screen.renderSprite((int) x - 16, (int) y - 24, gui.renderMobHealthExperiment(this, 20), true);
 		this.xOffset = -8;
 		this.yOffset = -15;
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			// gui.renderHealth(screen, this, (int) x - 16, (int)y - 24, true);
 		}
 		// gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true,
 		// true);
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 		}

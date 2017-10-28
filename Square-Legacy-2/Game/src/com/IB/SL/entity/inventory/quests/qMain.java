@@ -35,7 +35,7 @@ public class qMain extends Quest {
 	}
 	
 	public void complete() {
-		Player p = Game.getGame().getLevel().getClientPlayer();
+		Player p = Game.get().getLevel().getClientPlayer();
 		p.ExpC += 250;
 		p.getInventory().add(new mace_Bronze(EquipableItem.slot_WEAPON));
 		p.quests.removeItem(this);
@@ -44,7 +44,7 @@ public class qMain extends Quest {
 	
 	int total = 0;
 	public void update() {
-		if (Game.getGame()!= null && Game.getGame().getLevel() != null) {
+		if (Game.get()!= null && Game.get().getLevel() != null) {
 			Entity e = null;
 			this.destination = new TileCoord(-1000, -1000);				
 			if (stage == 0) {
@@ -72,9 +72,9 @@ public class qMain extends Quest {
 				this.complete();
 			}
 			
-			for (int i = 0; i < Game.getGame().getLevel().entities.size(); i++) {	
-				e = Game.getGame().getLevel().entities.get(i);
-			if (Game.getGame().getLevel() instanceof MainLevel) {
+			for (int i = 0; i < Game.get().getLevel().entities.size(); i++) {	
+				e = Game.get().getLevel().entities.get(i);
+			if (Game.get().getLevel() instanceof MainLevel) {
 				if (stage == 0 || stage == 1)  {
 				this.destination = this.FirstDungeon;
 				}
@@ -87,7 +87,7 @@ public class qMain extends Quest {
 				if (stage == 4) {
 					this.destination = this.IceDungeon;
 				}
-			} else if (Game.getGame().getLevel() instanceof Dungeon01) {
+			} else if (Game.get().getLevel() instanceof Dungeon01) {
 				if (e != null) {
 					if (stage == 0) {
 						if (e instanceof Occulus) {
@@ -100,17 +100,17 @@ public class qMain extends Quest {
 					}
 				}
 
-			} else if (Game.getGame().getLevel() instanceof Dungeon02) {
+			} else if (Game.get().getLevel() instanceof Dungeon02) {
 				if (stage == 3) {
 					this.destination = new TileCoord(133, 46);
 				}
-			} else if (Game.getGame().getLevel() instanceof VoidBossRoom) {
+			} else if (Game.get().getLevel() instanceof VoidBossRoom) {
 				if (stage == 3) {
 					if (e instanceof VoidBoss) {
 						this.destination = new TileCoord((int) e.getX() >> 4, (int) e.getY() >> 4);
 					}
 				}
-			} else if (Game.getGame().getLevel() instanceof Dungeon03) {
+			} else if (Game.get().getLevel() instanceof Dungeon03) {
 				if (stage == 4) {
 					if (e instanceof FrozenKing) {
 						this.destination = new TileCoord((int) e.getX() >> 4, (int) e.getY() >> 4);
@@ -133,7 +133,7 @@ public class qMain extends Quest {
 				} else {
 				//	this.displayname = "Stage: " + this.stage;
 				}
-			} else if (Game.getGame().getLevel() instanceof Dungeon04) {
+			} else if (Game.get().getLevel() instanceof Dungeon04) {
 				if (stage == 2) {
 					if (e instanceof SwarmBoss) {
 						this.destination = new TileCoord((int) e.getX() >> 4, (int) e.getY() >> 4);

@@ -127,7 +127,7 @@ public class Screen {
 				for (int x = 0; x < 32; x++) {
 					int xa = x + xp;
 					if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-					pixels[xa + ya * width] = map.pixels[(int) Game.getGame().getPlayer().getX() / TileCoord.TILE_SIZE + (int) Game.getGame().getPlayer().getY() / TileCoord.TILE_SIZE  * 32];
+					pixels[xa + ya * width] = map.pixels[(int) Game.get().getPlayer().getX() / TileCoord.TILE_SIZE + (int) Game.get().getPlayer().getY() / TileCoord.TILE_SIZE  * 32];
 				}
 			}
 	   }
@@ -833,12 +833,12 @@ public void render32Mob(double x2, double y2, Mob mob) {
 	                 continue;
 	              int d = (int) Math.sqrt((y - radius) * (y - radius) + (x - radius) * (x - radius));
 	              if (d < radius) {
-		double px1 = Game.getGame().getPlayer().getX();
-        double py1 = Game.getGame().getPlayer().getY();
-        double px2 = Game.getGame().getPlayer().getX() + 16;
-        double py2 = Game.getGame().getPlayer().getY() + 32;
-        double px3 = Game.getGame().getPlayer().getX() + 8;
-        double py3 = Game.getGame().getPlayer().getY() + 16;
+		double px1 = Game.get().getPlayer().getX();
+        double py1 = Game.get().getPlayer().getY();
+        double px2 = Game.get().getPlayer().getX() + 16;
+        double py2 = Game.get().getPlayer().getY() + 32;
+        double px3 = Game.get().getPlayer().getX() + 8;
+        double py3 = Game.get().getPlayer().getY() + 16;
         
         double ang1R = Math.atan((py1 - (yp + radius)) /(px1 - (xp + radius)));
         double ang1P = ang1R + Math.PI;
@@ -1074,7 +1074,7 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 				xp -= xOffset;
 				yp -= yOffset;
 				int col = 0;
-			entities = Game.getGame().getLevel().getEntities(player, 20);
+			entities = Game.get().getLevel().getEntities(player, 20);
 			for (int i = 0; i < entities.size(); i++) {
 				System.out.println("drawing: " + entities.get(i));
 				System.out.println("E: " + entities.get(i).getX() + " P: " + player.getX());
@@ -1093,18 +1093,18 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 			}
 
 			public boolean shakeScreen() {
-				double xoff = Game.getGame().xScroll;
-				double yoff = Game.getGame().yScroll;
+				double xoff = Game.get().xScroll;
+				double yoff = Game.get().yScroll;
 				boolean shaking = true;
 				for (int i = 0; i < 10; i++) {
-					Game.getGame().xScroll += i;
-					Game.getGame().yScroll += i;
-					System.out.println(Game.getGame().xScroll);
+					Game.get().xScroll += i;
+					Game.get().yScroll += i;
+					System.out.println(Game.get().xScroll);
 					if (i >= 10) {
 						i = 0;
 						shaking = false;
-						Game.getGame().xScroll = xoff;
-						Game.getGame().yScroll = yoff;
+						Game.get().xScroll = xoff;
+						Game.get().yScroll = yoff;
 					}
 				}
 				return shaking;
@@ -1122,13 +1122,13 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 					Sprite map;
 					//Sprite playerPos = new Sprite(1, 1, 0xff191970);
 					//Sprite border = new Sprite(minimapSize + 2, minimapSize + 2, 0xff262626);
-					int renderXt = (((int)Game.getGame().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
-					int renderYt = (((int)Game.getGame().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
+					int renderXt = (((int)Game.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
+					int renderYt = (((int)Game.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
 					
-					int px = (((int)Game.getGame().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - renderXt);
-					int py = (((int)Game.getGame().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - renderYt);
+					int px = (((int)Game.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - renderXt);
+					int py = (((int)Game.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - renderYt);
 					int ex = 0, ey = 0;
-					List<Entity> e = Game.getGame().getLevel().entities;
+					List<Entity> e = Game.get().getLevel().entities;
 
 					
 					while (renderXt > 0) {
@@ -1153,11 +1153,11 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 					
 					
 					
-					if (renderX >= Game.getGame().level.width - minimapSize) {
-						renderX = Game.getGame().level.width - minimapSize;
+					if (renderX >= Game.get().level.width - minimapSize) {
+						renderX = Game.get().level.width - minimapSize;
 					}
-					if (renderY >= Game.getGame().level.height - minimapSize) {
-						renderY = Game.getGame().level.height - minimapSize;
+					if (renderY >= Game.get().level.height - minimapSize) {
+						renderY = Game.get().level.height - minimapSize;
 					}
 					
 						map = new Sprite(minimapSize, renderX, renderY, SpriteSheet.minimapDYN, 7);

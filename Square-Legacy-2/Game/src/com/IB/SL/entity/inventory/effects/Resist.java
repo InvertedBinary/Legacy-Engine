@@ -27,7 +27,7 @@ public class Resist extends Effect{
 	public void effectEquip() {
 		System.out.println("Resistance attempted: ");
 		if (!fortified) {
-			Game.getGame().getPlayer().stat_item_DEF += magnitude;
+			Game.get().getPlayer().stat_item_DEF += magnitude;
 			fortified = true;
 			System.out.println(e + " is now resistant!");
 		}
@@ -38,7 +38,7 @@ public class Resist extends Effect{
 	public void effectDequip() {
 		System.out.println("Resistance removal attempted: ");
 		if (fortified) {
-			Game.getGame().getPlayer().stat_item_DEF -= magnitude;
+			Game.get().getPlayer().stat_item_DEF -= magnitude;
 			fortified = false;
 			System.out.println(e + " is no longer reisitant!");
 		}

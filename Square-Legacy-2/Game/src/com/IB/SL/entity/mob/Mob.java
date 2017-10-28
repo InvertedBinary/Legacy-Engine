@@ -78,10 +78,7 @@ public abstract  class Mob extends Entity implements Serializable {
 	
 	
 	transient protected boolean moving = false;
-	transient public boolean walking = false;
-	transient public boolean incombat;
 	transient private boolean solid;
-	public String name;
 	transient private List<Node> pathPull = null;
 	transient double PathtimePull = 0;
 	
@@ -99,9 +96,7 @@ public abstract  class Mob extends Entity implements Serializable {
 	public double stat_MAT;
 	public double stat_MDF;
 	public double stat_AGI;
-	
-	public int rarity = -1;
-	
+		
 	public double stat_Health;
 	public double stat_Mana;
 	public double stat_Stam;
@@ -157,7 +152,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		
 		try {
 			
-			if (!Level.Overworld && level.getPlayersFixedBool((int)Game.getGame().getPlayer().getX() - 8, (int)Game.getGame().getPlayer().getY() - 15, 20)) {
+			if (!Level.Overworld && level.getPlayersFixedBool((int)Game.get().getPlayer().getX() - 8, (int)Game.get().getPlayer().getY() - 15, 20)) {
 	//	List<PlayerMP> players = level.getPlayersFixed((int)this.x + 8, (int) this.y + 8, 20);
 			while (xa != 0) {
 				if (Math.abs(xa) > 1) {
@@ -717,9 +712,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		return dir;
 	}
 
-	public void death() {
-		
-	}
+
 
 
 

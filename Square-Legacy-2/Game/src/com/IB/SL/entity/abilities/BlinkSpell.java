@@ -39,11 +39,11 @@ public class BlinkSpell extends Ability{
 	public boolean use(Projectile p, Ability ability, Mob origin) {
 		super.use(p, ability, origin);
 		if (((Player)origin).ridingOn == null) {
-		if(Game.getGame().getLevel().returnTileXY(Screen.xo, Screen.yo).solid() == false || Game.getGame().devModeOn) {
-			Game.getGame().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.getGame().getLevel()));
-			Game.getGame().getPlayer().x = (Screen.xo << Game.TILE_BIT_SHIFT) + 8;
-			Game.getGame().getPlayer().y = (Screen.yo << Game.TILE_BIT_SHIFT) + 8;
-			Game.getGame().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.getGame().getLevel()));
+		if(Game.get().getLevel().returnTileXY(Screen.xo, Screen.yo).solid() == false || Game.get().devModeOn) {
+			Game.get().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.get().getLevel()));
+			Game.get().getPlayer().x = (Screen.xo << Game.TILE_BIT_SHIFT) + 8;
+			Game.get().getPlayer().y = (Screen.yo << Game.TILE_BIT_SHIFT) + 8;
+			Game.get().getLevel().add(new WallParticleSpawner((int) origin.getX(), (int) origin.getY(), 20, 200, Game.get().getLevel()));
 			Sound.Play(Sound.Spell2,  false);
 			return true;
 		} else {

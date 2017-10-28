@@ -104,7 +104,7 @@ public class GoldenOrb extends Ability{
 							time++;
 							if ((time % 55) == 0) {
 				 	try {
-						level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, (int)this.damage / 3, Game.getGame().PersonNameGetter, ExpV);
+						level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, (int)this.damage / 3, Game.get().PersonNameGetter, ExpV);
 						time = 0;
 
 				 	} catch (Exception e) {

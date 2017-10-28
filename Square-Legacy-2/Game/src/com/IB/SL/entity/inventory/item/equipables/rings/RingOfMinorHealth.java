@@ -40,7 +40,7 @@ import com.IB.SL.level.Level;
 			this.slot_Default = slot_UTILITY1;
 			this.item_TYPE = type_ARMOR;
 			this.desc = "+5\nTo Max\nHP";
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 		}
 		
 		protected void move(double x, double y) {
@@ -63,17 +63,17 @@ import com.IB.SL.level.Level;
 				use = ind;
 			}*/
 			
-			Game.getGame().getPlayer().maxhealth += 5;
-			System.out.println("Health: " + Game.getGame().getPlayer().maxhealth);
+			Game.get().getPlayer().maxhealth += 5;
+			System.out.println("Health: " + Game.get().getPlayer().maxhealth);
 		}
 		
 		public void dequipEvent() {
 		
-			Game.getGame().getPlayer().maxhealth -= 5;
-			if (Game.getGame().getPlayer().mobhealth > Game.getGame().getPlayer().maxhealth) {
-				Game.getGame().getPlayer().mobhealth = Game.getGame().getPlayer().maxhealth;
+			Game.get().getPlayer().maxhealth -= 5;
+			if (Game.get().getPlayer().mobhealth > Game.get().getPlayer().maxhealth) {
+				Game.get().getPlayer().mobhealth = Game.get().getPlayer().maxhealth;
 			}
-			System.out.println("Health: " + Game.getGame().getPlayer().maxhealth);
+			System.out.println("Health: " + Game.get().getPlayer().maxhealth);
 			
 		}
 		
@@ -135,7 +135,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

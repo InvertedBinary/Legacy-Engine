@@ -50,7 +50,7 @@ public class AbstractMatter extends Item{
 		this.dropchance = 5;
 		this.rarity = 3;
 		this.price = "0";
-		level = Game.getGame().getLevel();
+		level = Game.get().getLevel();
 		this.invulnerable = true;
 		this.tier = tier;
 		this.stackSize = 100;
@@ -112,7 +112,7 @@ public class AbstractMatter extends Item{
 	
 	
 	public void decideGeneration() {
-		if (Game.getGame().getLevel() != null) {
+		if (Game.get().getLevel() != null) {
 			if (tier == tier.SHARD) {
 				generateEasyItems();
 			} else if (tier == tier.SMALL) {
@@ -182,7 +182,7 @@ public class AbstractMatter extends Item{
 		public void render(Screen screen) {
 			screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 			
-			if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+			if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 		
 		}
 

@@ -308,7 +308,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
 					e.onLoad(temp[i]);
 					e.mobhealth = temp[i].mobhealth;
-				Game.getGame().getLevel().add(e);
+				Game.get().getLevel().add(e);
 				e.mobhealth = temp[i].mobhealth;
 
 				} else {
@@ -362,7 +362,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					}*/
 					e.onLoad(temp[i]);
 					e.mobhealth = temp[i].mobhealth;
-				Game.getGame().getLevel().add(e);
+				Game.get().getLevel().add(e);
 				e.mobhealth = temp[i].mobhealth;
 				//e.setX(temp[i].getX());
 				//e.setY(temp[i].getY());
@@ -540,11 +540,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						int sx, sy, lx, rx, ty, by;
 						do {
 							
-						lx = (int)(Game.getGame().getPlayer().x / 16) - (int)(((Game.getGame().getScreen().width / 16) / 2) + 8);
-						rx = (int)(Game.getGame().getPlayer().x / 16) + (int)(((Game.getGame().getScreen().width / 16) / 2) + 8);
+						lx = (int)(Game.get().getPlayer().x / 16) - (int)(((Game.get().getScreen().width / 16) / 2) + 8);
+						rx = (int)(Game.get().getPlayer().x / 16) + (int)(((Game.get().getScreen().width / 16) / 2) + 8);
 						
-						ty = (int)(Game.getGame().getPlayer().y / 16) - (int)(((Game.getGame().getScreen().height / 16) / 2) + 5);
-						by = (int)(Game.getGame().getPlayer().y / 16) + (int)(((Game.getGame().getScreen().height / 16) / 2) + 5);
+						ty = (int)(Game.get().getPlayer().y / 16) - (int)(((Game.get().getScreen().height / 16) / 2) + 5);
+						by = (int)(Game.get().getPlayer().y / 16) + (int)(((Game.get().getScreen().height / 16) / 2) + 5);
 						sx = myRandom(lx - 4, rx + 4);
 						sy = myRandom(ty - 4, by + 4);
 						
@@ -584,7 +584,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}*/
 		
 		
-		if (Game.getGame().getLevel().isRaining) {
+		if (Game.get().getLevel().isRaining) {
 			rain.update(false);
 		}
 		//TODO: Add mob spawning just outside of player view
@@ -735,14 +735,14 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 	
 	private void renderMiniMap(Screen screen) {
-		if (minimap_enabled == true && Game.getGame().gameState != Game.getGame().gameState.PAUSE) {
+		if (minimap_enabled == true && Game.get().gameState != Game.get().gameState.PAUSE) {
 			int size = 45;
 			int x = 254;
 			int y = 1;
 			//x = 10;
 			//y = 110;
 			
-			if (Game.getGame().getPlayer().input.map) {
+			if (Game.get().getPlayer().input.map) {
 				size = 200;
 				 x = 50;
 				 y = 0;
@@ -847,7 +847,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					players.get(i).renderGUI(screen);
 				}
 				
-				 if (Game.getGame().getLevel().isRaining) {
+				 if (Game.get().getLevel().isRaining) {
 					 rain.render(screen);
 				 }
 		//screen.renderSprite(644 * 16, 206 * 16, Sprite.robobob, true);
@@ -945,7 +945,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		//	}
 			if (e instanceof Mob) {
 				try {
-				e.maxhealth *= (10 / ( 1 + Math.pow(Math.E, -0.1 * (Game.getGame().getPlayer().Lvl - 40)))) + 1;
+				e.maxhealth *= (10 / ( 1 + Math.pow(Math.E, -0.1 * (Game.get().getPlayer().Lvl - 40)))) + 1;
 				e.mobhealth = e.maxhealth;
 				} catch (NullPointerException err) {
 					
@@ -1652,19 +1652,9 @@ public void resetLevelPostDeath(Player player) {
 	protected static java.util.Random Random = new Random();
 	public static java.util.Random random = Random;
 	
-	public void damage(int x, int y, Mob mob, long Exp, double damage, String name, int ExpV) {
-		int chance  = (random.nextInt((101 - 1) + 1) + 1);
-		
-		double critMult = 2;
+	public void damage(int x, int y, Entity mob, long Exp, double damage, String name, int ExpV) {
 		int color;
-		String dmgInd = "0";
-		
-		if(chance <= (getClientPlayer().stat_AGI / 3)) {
-			damage *= critMult;
-			dmgInd = "" + Math.round(damage) + "!";
-		} else {
-			dmgInd = "" + Math.round(damage);
-		}
+		String dmgInd = "" + damage;
 		
         if (!mob.invulnerable) {
         		mob.mobhealth -= (damage);        		
@@ -1677,20 +1667,17 @@ public void resetLevelPostDeath(Player player) {
       //  mob.getSprite().pixels[mob.getSprite().getWidth() * mob.getSprite().getHeight()] = MyColor.changeBrightness(0, 60, false);
         mob.incombat = true;
         if (mob.mobhealth <= 0){
-        	for(int i = 0; i < mob.effects.effects.length; i++) {
-        		mob.effects.removeEffect(mob.effects.effects[i]);
-        	}
-        	
+      
         	mob.death();
         	if (mob.remove()) {
-        		Game.getGame().getPlayer().quests.completeKillObjective(mob);
-    					if (!Game.Dead  && Game.getGame().gameState != gameState.INGAME_A) {
-    						Game.getGame().getLevel().getClientPlayer().kills += 1;
-	        				Game.getGame().getLevel().getClientPlayer().ExpC += (Exp + ExpV) * this.getClientPlayer().expModif;
-	        				if (mob.inventory != null) mob.inventory.dropAll();
+        		Game.get().getPlayer().quests.completeKillObjective(mob);
+    					if (!Game.Dead  && Game.get().gameState != gameState.INGAME_A) {
+    						Game.get().getLevel().getClientPlayer().kills += 1;
+	        				Game.get().getLevel().getClientPlayer().ExpC += (Exp + ExpV) * this.getClientPlayer().expModif;
+	        				//if (mob.inventory != null) mob.inventory.dropAll();
 	        				}
     						if (mob.hostility != mob.hostility.PASS) {
-    					Game.getGame().getPlayer().money += (mob.maxhealth / 2);
+    					Game.get().getPlayer().money += (mob.maxhealth / 2);
 	    				}
         			}
         		}
@@ -1698,7 +1685,7 @@ public void resetLevelPostDeath(Player player) {
 		}
 	
 	public void damagePlayer(int x, int y, PlayerMP player, long Exp, double damage, String name, int ExpV) {
-		if (Game.getGame().gameState.equals(Game.getGame().gameState.INGAME)) {
+		if (Game.get().gameState.equals(Game.get().gameState.INGAME)) {
 			
 		int color;
 		int chance  = (random.nextInt((101 - 1) + 1) + 1);
@@ -1723,8 +1710,8 @@ public void resetLevelPostDeath(Player player) {
 		}
 		
         if (!player.invulnerable) {
-        	if (Game.getGame().gameState != gameState.INGAME_A) {        		
-    			damage *= (7 / ( 1 + Math.pow(Math.E, -0.05 * (Game.getGame().getPlayer().Lvl - 40)))) + 1;
+        	if (Game.get().gameState != gameState.INGAME_A) {        		
+    			damage *= (7 / ( 1 + Math.pow(Math.E, -0.05 * (Game.get().getPlayer().Lvl - 40)))) + 1;
         	player.mobhealth -= (damage);
         	}
         	System.out.println("Damage: " + damage);
@@ -1744,9 +1731,9 @@ public void resetLevelPostDeath(Player player) {
 	}
 	
 	protected void refresh() {
-		if (Game.getGame().autoSave) {
-		Entity[] es = Game.getGame().getLevel().entities.toArray(new Entity[Game.getGame().getLevel().entities.size()]);
-		Game.getGame().getLevel().saveMobs(es);
+		if (Game.get().autoSave) {
+		Entity[] es = Game.get().getLevel().entities.toArray(new Entity[Game.get().getLevel().entities.size()]);
+		Game.get().getLevel().saveMobs(es);
 		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.remove(i);

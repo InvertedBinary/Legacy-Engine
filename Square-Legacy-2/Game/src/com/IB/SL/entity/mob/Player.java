@@ -18,6 +18,7 @@ import javax.sound.sampled.Clip;
 import com.IB.SL.Game;
 import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.XMLEntity;
 import com.IB.SL.entity.abilities.Ability;
 import com.IB.SL.entity.abilities.BlinkSpell;
 import com.IB.SL.entity.abilities.Equilibrium;
@@ -72,7 +73,6 @@ import com.IB.SL.level.worlds.SpawnHaven;
 import com.IB.SL.level.worlds.TutorialWorld;
 import com.IB.SL.level.worlds.VoidBossRoom;
 import com.IB.SL.util.Commands;
-import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
@@ -184,7 +184,7 @@ public class Player extends Mob implements Serializable{
 	
 	
 	public Player(Keyboard input) {
-		this.name = Game.getGame().PersonNameGetter;
+		this.name = Game.get().PersonNameGetter;
 		this.input = input;
 		sprite = Sprite.playerback;
 	}
@@ -377,7 +377,7 @@ public class Player extends Mob implements Serializable{
 		Lvl++;
 		/*this.maxhealth = this.Lvl * 2;
 		this.mobhealth = maxhealth;*/
-		if (Game.getGame().ExpStor != exp) {
+		if (Game.get().ExpStor != exp) {
 				Sound.Play(Sound.lavel_up, false);
 				skillPoints += 3 + 10/(1 +Math.pow(Math.E,-0.05 * ((this.stat_MAT / 10) + 4)));
 			}
@@ -405,7 +405,7 @@ public class Player extends Mob implements Serializable{
 	
 	public void invokeLoad(Player p) {
 		try {
-		loadProp.loadPrefs(Game.getGame());;
+		loadProp.loadPrefs(Game.get());;
 		Player temp = SaveGame.load();
 
 		System.out.println("-----------------------STEP1---------------------------");
@@ -507,7 +507,7 @@ public class Player extends Mob implements Serializable{
 		p.money = 15;
 		setPosition(52, 78, Maps.spawnHavenId, true);
 		calcStat(false);
-		Game.getGame().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
+		Game.get().getPlayer().equipment.Equip(new wand_ArcaneTwig(EquipableItem.slot_WEAPON));
 	}
 	
 	boolean addedAbility = false;
@@ -518,7 +518,7 @@ public class Player extends Mob implements Serializable{
 		}
 	}
 	
-	public void update() {
+	public void update() {		
 		this.buildMode = input.buildMode;
 		
 		if (quests.active != null) {
@@ -528,17 +528,17 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		if (!addedAbility) {
-			Game.getGame().getPlayer().abilities.clear();
-			Game.getGame().getPlayer().abilities.add(new HealingSpell(0, 0, 0, this));
-			Game.getGame().getPlayer().abilities.add(new BlinkSpell(0, 0, 0));
-			Game.getGame().getPlayer().abilities.add(new Equilibrium(0, 0, 0, this));
-			Game.getGame().getPlayer().abilities.add(new GoldenOrb(0, 0, 0, this));
-			Game.getGame().getPlayer().abilities.add(new RadialBlast(0, 0, 0, this));
-			Game.getGame().getPlayer().abilities.add(new SearingBolt(0, 0, 0, this));
-			Game.getGame().getPlayer().abilities.add(new SummonFamiliar(0, 0, 0));
-			Game.getGame().getPlayer().abilities.add(new HeatSeekingBolt(0, 0, 0));
-			Game.getGame().getPlayer().abilities.add(new Geartrap(0, 0, 0));
-			Game.getGame().getPlayer().abilities.add(new Kunai(0, 0, 0));
+			Game.get().getPlayer().abilities.clear();
+			Game.get().getPlayer().abilities.add(new HealingSpell(0, 0, 0, this));
+			Game.get().getPlayer().abilities.add(new BlinkSpell(0, 0, 0));
+			Game.get().getPlayer().abilities.add(new Equilibrium(0, 0, 0, this));
+			Game.get().getPlayer().abilities.add(new GoldenOrb(0, 0, 0, this));
+			Game.get().getPlayer().abilities.add(new RadialBlast(0, 0, 0, this));
+			Game.get().getPlayer().abilities.add(new SearingBolt(0, 0, 0, this));
+			Game.get().getPlayer().abilities.add(new SummonFamiliar(0, 0, 0));
+			Game.get().getPlayer().abilities.add(new HeatSeekingBolt(0, 0, 0));
+			Game.get().getPlayer().abilities.add(new Geartrap(0, 0, 0));
+			Game.get().getPlayer().abilities.add(new Kunai(0, 0, 0));
 
 			addedAbility = true;
 		}
@@ -550,7 +550,7 @@ public class Player extends Mob implements Serializable{
 			input.save = false;
 		} else if (input.load){
 			if (input.Sprint) {
-				Game.getGame().getLevel().loadMobs(Game.currentLevelId);
+				Game.get().getLevel().loadMobs(Game.currentLevelId);
 			} else {
 				invokeLoad(this);
 			}
@@ -588,11 +588,11 @@ public class Player extends Mob implements Serializable{
 				
 			}
 		if (this.mobhealth <= 0) {
-			Game.switchState(Game.getGame().gameState.DEATH);
+			Game.switchState(Game.get().gameState.DEATH);
 		}
 		
 		
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 		this.mana = maxmana;
 		this.mobhealth = maxhealth;
 		this.stamina = maxstamina;
@@ -612,7 +612,7 @@ public class Player extends Mob implements Serializable{
 //		System.out.println(ExpC);
 		if (ExpC >= (expNeeded)) {
 			if (this == level.getClientPlayer()) {
-			if (ExpC == Game.getGame().ExpStor) skillPoints = Lvl + 1;
+			if (ExpC == Game.get().ExpStor) skillPoints = Lvl + 1;
 			levelUp(ExpC);
 			}
 		}
@@ -981,11 +981,11 @@ public class Player extends Mob implements Serializable{
 				w.attack(w.getProjectile(), w, this);
 				updateSecondary();
 				fireRate = equipment.getItem(EquipableItem.slot_WEAPON).FIRE_RATE;
-				if (Game.getGame().gameState == gameState.INGAME_A) {
+				if (Game.get().gameState == gameState.INGAME_A) {
 					fireRate = 4;
 				}
 			} else {
-				if (Game.getGame().gameState.equals(Game.getGame().gameState.INGAME_A)) {
+				if (Game.get().gameState.equals(Game.get().gameState.INGAME_A)) {
 					if (input.ctrl) {
 					this.shoot(x, y, Weapon.angle(), this, 7777777);
 					} else if (input.Sprint) {
@@ -1060,7 +1060,7 @@ public class Player extends Mob implements Serializable{
 						shooting = true;
 						standingint = 0;
 						incombat = false;
-						if (Game.getGame().gameState == gameState.INGAME_A) {
+						if (Game.get().gameState == gameState.INGAME_A) {
 							abilities.Cooldowns.replace(ab, ab.FIRE_RATE - 3);
 						}
 					}
@@ -1174,68 +1174,68 @@ public class Player extends Mob implements Serializable{
 		
 		switch (LvlId) {
 		case 0:
-			Game.getGame().setLevel(new SpawnHaven(Maps.SpawnHaven));
+			Game.get().setLevel(new SpawnHaven(Maps.SpawnHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 1:
-			Game.getGame().setLevel(new MainLevel(Maps.main));
+			Game.get().setLevel(new MainLevel(Maps.main));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.main, 1024);
 			break;
 		case 2:
-			Game.getGame().setLevel(new TutorialWorld(Maps.Tutorial_World));
+			Game.get().setLevel(new TutorialWorld(Maps.Tutorial_World));
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.Tutorial_World, 104);
 			break;
 		case 3:
-			Game.getGame().setLevel(new Dungeon01(Maps.dungeon01));
+			Game.get().setLevel(new Dungeon01(Maps.dungeon01));
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon01, 256);
 			Sound.switchMusic(Sound.Boss, 0.8f);
 			break;
 		case 4:
-			Game.getGame().setLevel(new Dungeon02(Maps.dungeon02));
+			Game.get().setLevel(new Dungeon02(Maps.dungeon02));
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon02, 256);
 			Sound.switchMusic(Sound.VoidDungeon, 0.8f);
 			break;
 		case 5:
-			Game.getGame().setLevel(new VoidBossRoom(Maps.VoidBossRoom));
+			Game.get().setLevel(new VoidBossRoom(Maps.VoidBossRoom));
 			Sound.switchMusic(Sound.Boss, 0.8f);
 			break;
 		case 6:
-			Game.getGame().setLevel(new Dungeon03(Maps.dungeon03));
+			Game.get().setLevel(new Dungeon03(Maps.dungeon03));
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon03, 356);
 			Sound.switchMusic(Sound.TheMightyWillCrumble, 0.7f);
 			break;
 		case 7:
-			Game.getGame().setLevel(new Dungeon04(Maps.dungeon04));
+			Game.get().setLevel(new Dungeon04(Maps.dungeon04));
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon04, 356);
 			Sound.switchMusic(Sound.OasisSands, 0.7f);
 			break;
 		case 8:
-			Game.getGame().setLevel(new CaveHaven(Maps.CaveHaven));
+			Game.get().setLevel(new CaveHaven(Maps.CaveHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 9:
-			Game.getGame().setLevel(new IceHaven(Maps.IceHaven));
+			Game.get().setLevel(new IceHaven(Maps.IceHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 10:
-			Game.getGame().setLevel(new RedTownHaven(Maps.RedTownHaven));
+			Game.get().setLevel(new RedTownHaven(Maps.RedTownHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 11:
-			Game.getGame().setLevel(new SandHaven(Maps.SandHaven));
+			Game.get().setLevel(new SandHaven(Maps.SandHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 12:
-			Game.getGame().setLevel(new SouthTownHaven(Maps.SouthTownHaven));
+			Game.get().setLevel(new SouthTownHaven(Maps.SouthTownHaven));
 			Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 			
 		}
-		Game.getGame().getLevel().add(this);
+		Game.get().getLevel().add(this);
 		this.x = (x);
 		this.y = (y);
-		Game.getGame().getLevel().loadMobs(LvlId);
+		Game.get().getLevel().loadMobs(LvlId);
 	}
 	
 	/*public void setAbility(Ability setAbility, Sprite displaySprite) {
@@ -1285,7 +1285,7 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	}
 	
 	if (this.equipment.getItem(EquipableItem.slot_WEAPON) != null) {
-		if ((canShoot && !inventoryEnabled && !inChest && !inPointMenu && (Game.getGame().gameState == Game.getGame().gameState.INGAME || Game.getGame().gameState == Game.getGame().gameState.INGAME_A))) {
+		if ((canShoot && !inventoryEnabled && !inChest && !inPointMenu && (Game.get().gameState == Game.get().gameState.INGAME || Game.get().gameState == Game.get().gameState.INGAME_A))) {
 	this.equipment.getItem(EquipableItem.slot_WEAPON).renderAoE(screen);
 	this.equipment.getItem(EquipableItem.slot_WEAPON).playAnim(screen, this.fireRate);
 		}
@@ -1303,10 +1303,10 @@ private transient Sprite arrow = Sprite.QuestArrow;
 			screen.renderLight((int) x - 208, (int) y - 215, 200, 0, 5, 0);
 	}
 	//screen.renderLight((int) x - 20, (int) y - 20, 20, this, 20, 20, 20);
-	if (Game.getGame().gameState == gameState.INGAME_A) {
+	if (Game.get().gameState == gameState.INGAME_A) {
 	screen.drawRect((int)x - 8, (int)y - 15, 16, 16, 0x0093FF, true);
 	try {		
-		Game.getGame().getScreen().drawVectors(Game.getGame().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
+		Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
 	} catch (NullPointerException e) {
 	}
 	//USE FOR FRIENDLY MOBS LATER ON: 0xff00FF21
@@ -1364,23 +1364,23 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	private void switchBlocks_key() {
 	try {
 	if (switchTimer == 0) {
-	  if (Game.getGame().getPlayer().input.a2) {
+	  if (Game.get().getPlayer().input.a2) {
 		swapBlock(1);
-	} if (Game.getGame().getPlayer().input.a3) {
+	} if (Game.get().getPlayer().input.a3) {
 		swapBlock(2);
-	} if (Game.getGame().getPlayer().input.a4) {		  
+	} if (Game.get().getPlayer().input.a4) {		  
 		swapBlock(3);
-	} if (Game.getGame().getPlayer().input.a5) {		  
+	} if (Game.get().getPlayer().input.a5) {		  
 		swapBlock(4);
-	} if (Game.getGame().getPlayer().input.a6) {		  
+	} if (Game.get().getPlayer().input.a6) {		  
 		swapBlock(5);
-	} if (Game.getGame().getPlayer().input.a7) {		 
+	} if (Game.get().getPlayer().input.a7) {		 
 		swapBlock(6);
-	} if (Game.getGame().getPlayer().input.a8) {		  
+	} if (Game.get().getPlayer().input.a8) {		  
 		swapBlock(7);
-	} if (Game.getGame().getPlayer().input.a9) {		  
+	} if (Game.get().getPlayer().input.a9) {		  
 		swapBlock(8);
-	} if (Game.getGame().getPlayer().input.a0) {
+	} if (Game.get().getPlayer().input.a0) {
 		swapBlock(9);
 	}
 	}
@@ -1582,12 +1582,12 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	
 	
 	
-	if (Game.getGame().gameState != gameState.PAUSE) {
+	if (Game.get().gameState != gameState.PAUSE) {
 		if (!buildMode)
 		abilities.render(screen);
 	}
 	
-	if (Game.getGame().gameState == gameState.INGAME || Game.getGame().gameState == gameState.INGAME_A) {
+	if (Game.get().gameState == gameState.INGAME || Game.get().gameState == gameState.INGAME_A) {
 		if (inventoryEnabled) {
 			gui.renderInventory(screen, this);
 		}
@@ -1599,28 +1599,28 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		}
 	}
 	
-		String text = (int)Game.getGame().getPlayer().getX() / 16 + "," + (int)Game.getGame().getPlayer().getY() / 16;
+		String text = (int)Game.get().getPlayer().getX() / 16 + "," + (int)Game.get().getPlayer().getY() / 16;
 		//screen.renderSprite(1064/ Game.scale, 530 / Game.scale, gui.renderHealthExperiment(screen, this, 20), false);
 		
 		if (!level.minimap_enabled) {
-			Game.getGame().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);
-			Game.getGame().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Game.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);
+			Game.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else if (!level.map_hidden){
 			//screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12, 0xff262626), false);
-			Game.getGame().font8x8.render((int)270 - text.length() * 8, 3, -3, text, screen, false, false);
-			Game.getGame().font8x8.render((int)270 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Game.get().font8x8.render((int)270 - text.length() * 8, 3, -3, text, screen, false, false);
+			Game.get().font8x8.render((int)270 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else {
 			if (!this.inventoryEnabled) {
-			Game.getGame().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);	
-			Game.getGame().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Game.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);	
+			Game.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 			} else {
-				Game.getGame().font8x8.render((int)308 - text.length() * 8, 11, -3, text, screen, false, false);
-				Game.getGame().font8x8.render((int)308 - text.length() * 8 + 1, 11, -3, 0xffFFFFFF, text, screen, false, false);
+				Game.get().font8x8.render((int)308 - text.length() * 8, 11, -3, text, screen, false, false);
+				Game.get().font8x8.render((int)308 - text.length() * 8 + 1, 11, -3, 0xffFFFFFF, text, screen, false, false);
 			}
 		}
 
 		
-		if (Game.getGame().gameState == gameState.INGAME) {
+		if (Game.get().gameState == gameState.INGAME) {
 		if (!gui.displayM && !gui.displayS) {
 			gui.yOffH = 156;
 		} else if (!gui.displayS && gui.displayM) {
@@ -1676,7 +1676,7 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	//	screen.renderSprite(0, 143, gui.expBar.getSprite(), false);
 	}
 	
-	if(inPointMenu && (Game.getGame().gameState == Game.getGame().gameState.INGAME || Game.getGame().gameState == Game.getGame().gameState.INGAME_A)) {
+	if(inPointMenu && (Game.get().gameState == Game.get().gameState.INGAME || Game.get().gameState == Game.get().gameState.INGAME_A)) {
 		gui.renderPointMenu(screen, this);
 		inventoryEnabled = false;
 	}

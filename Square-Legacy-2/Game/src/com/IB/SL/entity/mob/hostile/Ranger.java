@@ -268,7 +268,7 @@ public class Ranger extends Mob {
 			screen.renderSprite((int) x - 16, (int) y - 24, gui.renderMobHealthExperiment(this, 20), true);
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 			screen.drawRect((int) x - 8, (int) y - 15, sprite.getWidth(), sprite.getHeight(), 0xFF00FF, true);
@@ -276,7 +276,7 @@ public class Ranger extends Mob {
 
 			try {
 				if (players.size() > 0) {
-					Game.getGame().getScreen().drawVectors(Game.getGame().getLevel().BresenhamLine((int) x, (int) y,
+					Game.get().getScreen().drawVectors(Game.get().getLevel().BresenhamLine((int) x, (int) y,
 							raycastFlee.rayVector.x, raycastFlee.rayVector.y), 0xffFF3AFB, true);
 				}
 			} catch (NullPointerException e) {

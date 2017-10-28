@@ -444,7 +444,7 @@ public class Chest extends Interactable {
 		if (type == type.RANDOM) {
 			type = type.EASY;
 		}
-		if (Game.getGame().getLevel() != null) {
+		if (Game.get().getLevel() != null) {
 			if (type == type.EASY) {
 				generateEasyItems();
 			} else if (type == type.NORMAL) {
@@ -505,7 +505,7 @@ public class Chest extends Interactable {
 			
 			
 			
-			if (Game.getGame().gameState == Game.getGame().gameState.INGAME_A) {
+			if (Game.get().gameState == Game.get().gameState.INGAME_A) {
 				testItem();
 			}
 		}
@@ -603,7 +603,7 @@ public class Chest extends Interactable {
 	}*/
 	
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 16, 16, 0xFF00FF, true);
 		}
 		//int radius = level.radius / 2 + 5;

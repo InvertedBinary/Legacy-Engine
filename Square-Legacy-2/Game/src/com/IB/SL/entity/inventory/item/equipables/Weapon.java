@@ -13,12 +13,12 @@ public abstract class Weapon extends EquipableItem {
 	
 	public void attack(Projectile p, Weapon weapon, Mob origin) {
 		System.out.println(p);
-		Game.getGame().getLevel().add(p);
+		Game.get().getLevel().add(p);
 	}
 	
 	public void secondary(Projectile p, Weapon weapon, Mob origin) {
 		 	System.out.println(p);
-			Game.getGame().getLevel().add(p);
+			Game.get().getLevel().add(p);
 	}
 	
 	public void renderAoE(Screen screen) {

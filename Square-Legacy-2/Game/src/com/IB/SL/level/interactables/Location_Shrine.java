@@ -54,16 +54,16 @@ public class Location_Shrine extends Interactable {
 			for (int i = 0; i < players.size(); i++) {
 				Player p = players.get(i);
 				if (p.input.generalActivator) {
-					Game.getGame().playerRespawn = new TileCoord(52, 72);
-					Game.getGame().playerRespawn = p_spawn;
-					System.out.println("Set player spawn location to: " + Game.getGame().playerRespawn.x() + ", " + Game.getGame().playerRespawn.y());
+					Game.get().playerRespawn = new TileCoord(52, 72);
+					Game.get().playerRespawn = p_spawn;
+					System.out.println("Set player spawn location to: " + Game.get().playerRespawn.x() + ", " + Game.get().playerRespawn.y());
 				}
 			}
 		}
 	}
 
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Game.get().gameState == gameState.INGAME_A) {
 			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
 		}
 		sprite = Sprite.loc_shrine;

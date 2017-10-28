@@ -19,13 +19,13 @@ public class Stun extends Effect{
 	
 	public void effectEquip() {
 		e.speed = 0;
-		Game.getGame().getPlayer().isStunned = true;
+		Game.get().getPlayer().isStunned = true;
 		System.out.println(e + " is now stunned!");
 	}
 	
 	public void effectDequip() {
 		e.speed = 1;
-		Game.getGame().getPlayer().isStunned = false;
+		Game.get().getPlayer().isStunned = false;
 		System.out.println(e + " is no longer stunned!");
 	}
 	

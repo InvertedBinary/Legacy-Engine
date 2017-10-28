@@ -49,18 +49,18 @@ import com.IB.SL.level.Level;
 			this.desc = "+" + (int)WIS + "WIS\n+" + (int)MDF + "FAI";
 			this.item_TYPE = this.type_STAFF;
 			this.FIRE_RATE = 5;
-			level = Game.getGame().level2;
+			level = Game.get().level2;
 			this.recipe.add("Stick");
 			this.recipe.add("Stick");
 		}
 
 		@Override
 		public void secondary(Projectile p, Weapon w, Mob origin) {
-			Player pl = Game.getGame().getPlayer();
+			Player pl = Game.get().getPlayer();
 			double xaa = (Math.random() * 80 - 40);
 			double yaa = (Math.random() * 80 - 40);
 			
-			if (!Game.getGame().getLevel().returnTileXY((int)xaa, (int)yaa).solid()) {
+			if (!Game.get().getLevel().returnTileXY((int)xaa, (int)yaa).solid()) {
 			pl.setX(pl.x + xaa);
 			pl.setY(pl.y + yaa);
 			}
@@ -159,7 +159,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

@@ -45,7 +45,7 @@ import com.IB.SL.level.Level;
 			this.desc = "+" + (int)ATC + "\nATC\n-----\n+" + (int)MAT + "\nMAT";
 			this.FIRE_RATE = Stygian.FIRE_RATE;
 			this.item_TYPE = type_STAFF;
-			level = Game.getGame().getLevel();
+			level = Game.get().getLevel();
 		}
 		
 		@Override
@@ -145,7 +145,7 @@ import com.IB.SL.level.Level;
 			public void render(Screen screen) {
 				screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
 				
-				if (Game.getGame().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
+				if (Game.get().gameState == gameState.INGAME_A) screen.drawRect((int)xx + 3, ((int)yy - (int)zz) + 5, sprite.getWidth() / 2 + 1, sprite.getHeight() / 2 + 1, 0xFF00FF,true);
 			
 			}
 

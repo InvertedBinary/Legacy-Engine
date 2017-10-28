@@ -127,7 +127,7 @@ public class EquippedAbilities implements Serializable{
 					}
 				}
 				
-				if (Game.getGame().getPlayer().Lvl < abilities[i].unlock) {
+				if (Game.get().getPlayer().Lvl < abilities[i].unlock) {
 					screen.renderAlphaSprite(Sprite.AB_LOCK, 31 + (i * 23), 2);
 					//screen.drawRect(31 + (i * 23), 2, 19, 19, 0xffCC0000, false);						
 				}
@@ -174,7 +174,7 @@ public class EquippedAbilities implements Serializable{
 		} else {
 		screen.renderSprite(0, 0, Sprite.AbilityBarClosed, false);
 		
-		if (Game.getGame().getPlayer().inventoryEnabled) {
+		if (Game.get().getPlayer().inventoryEnabled) {
 		screen.drawFillRect(119, 5, 62, 9, 0xff302B23, false);
 		font8x8.render(113, 5, -2, 0xffFFFFFF, "BETA BUILD", screen, false, false);
 		}
@@ -182,7 +182,7 @@ public class EquippedAbilities implements Serializable{
 		
 		
 		if (selected != null) {
-			screen.renderSprite(2, 2, Game.getGame().gui.renderBar(16, animated_box, selected.FIRE_RATE, selected.FIRE_RATE - this.Cooldowns.get(selected)), false);
+			screen.renderSprite(2, 2, Game.get().gui.renderBar(16, animated_box, selected.FIRE_RATE, selected.FIRE_RATE - this.Cooldowns.get(selected)), false);
 			if (selected.displaySprite != null) {
 			screen.renderSprite(4, 4, selected.displaySprite, false);
 			}
@@ -196,7 +196,7 @@ public class EquippedAbilities implements Serializable{
 	
 	public boolean checkAbility(Screen screen, int slot, boolean scroll) {
 		System.out.println("unlock: " + abilities[slot].unlock + " NAME: " + abilities[slot].name);
-		if (Game.getGame().getPlayer().Lvl < abilities[slot].unlock && Game.getGame().gameState != gameState.INGAME_A) {
+		if (Game.get().getPlayer().Lvl < abilities[slot].unlock && Game.get().gameState != gameState.INGAME_A) {
 			if (!scroll) {
 				Player.unlockWarning = true;
 			}
@@ -207,7 +207,7 @@ public class EquippedAbilities implements Serializable{
 				} else {
 					if (abilities[slot] != selected) {						
 						selected = abilities[slot];
-						Game.getGame().getPlayer().abilitySwitched(selected);
+						Game.get().getPlayer().abilitySwitched(selected);
 						Sound.Play(Sound.Click, false);
 					}
 				//	Game.getGame().getPlayer().setAbility(abilities[slot], abilities[slot].displaySprite);
@@ -222,25 +222,25 @@ public class EquippedAbilities implements Serializable{
 	private void keyEvents(Screen screen) {
 		//Slot 1
 		try {
-	if (Game.getGame().getPlayer().input.a1) {
+	if (Game.get().getPlayer().input.a1) {
 		checkAbility(screen,0, false);
-	} if (Game.getGame().getPlayer().input.a2) {
+	} if (Game.get().getPlayer().input.a2) {
 		checkAbility(screen,1, false);
-	} if (Game.getGame().getPlayer().input.a3) {
+	} if (Game.get().getPlayer().input.a3) {
 		checkAbility(screen,2, false);
-	} if (Game.getGame().getPlayer().input.a4) {
+	} if (Game.get().getPlayer().input.a4) {
 		checkAbility(screen,3, false);
-	} if (Game.getGame().getPlayer().input.a5) {
+	} if (Game.get().getPlayer().input.a5) {
 		checkAbility(screen,4, false);
-	} if (Game.getGame().getPlayer().input.a6) {
+	} if (Game.get().getPlayer().input.a6) {
 		checkAbility(screen,5, false);
-	} if (Game.getGame().getPlayer().input.a7) {
+	} if (Game.get().getPlayer().input.a7) {
 		checkAbility(screen,6, false);
-	} if (Game.getGame().getPlayer().input.a8) {
+	} if (Game.get().getPlayer().input.a8) {
 		checkAbility(screen,7, false);
-	} if (Game.getGame().getPlayer().input.a9) {
+	} if (Game.get().getPlayer().input.a9) {
 		checkAbility(screen,8, false);
-	} if (Game.getGame().getPlayer().input.a0) {
+	} if (Game.get().getPlayer().input.a0) {
 		checkAbility(screen,9, false);
 
 	}
