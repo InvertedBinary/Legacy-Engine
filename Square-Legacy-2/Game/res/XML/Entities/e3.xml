@@ -9,9 +9,9 @@
 		<exp>5</exp>
 	</mob>
 	<sprite xOffset="-8" yOffset="-15">
-		<down width="16" height="16" length="3">zombie01_down</down>
-		<up width="16" height="16" length="3">zombie01_up</up>
-		<left width="16" height="16" length="3">zombie01_left</left>
-		<right width="16" height="16" length="3">zombie01_right</right>
+		<down width="16" height="16" length="3">zombie_down</down>
+		<up width="16" height="16" length="3">zombie_up</up>
+		<left width="16" height="16" length="3">zombie_left</left>
+		<right width="16" height="16" length="3">zombie_right</right>
 	</sprite>
 </entity>
