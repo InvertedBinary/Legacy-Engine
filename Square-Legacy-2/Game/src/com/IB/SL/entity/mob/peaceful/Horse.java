@@ -3,7 +3,6 @@ package com.IB.SL.entity.mob.peaceful;
 import java.util.List;
 import java.util.Random;
 
-import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;

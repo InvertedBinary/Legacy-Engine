@@ -18,10 +18,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -74,49 +71,34 @@ public class Game extends Canvas implements Runnable {
 	private Player player;
 	public int frames = 0;
 	public static int mouseMotionTime = 0;
-	private boolean invokedLoad = false;
+	//private boolean invokedLoad = false;
 
 	public boolean autoSave = true;
 
-	public static boolean switchedTo3;
 	private boolean running = false;
-	public static boolean loading = false; 
 	public transient font8x8 font8x8;
 	public static int currentLevelId;
-	private static boolean blankBoolean = false;
-	public static String PersonNameGetter = "Player";
-	public static boolean Dead = false;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 	
 	public int ClickTime = 0;
 	public int time2 = 0;
-	boolean playingHope = false;
 	public boolean atMenu = true;
-	static String version = "";
 	public static boolean devModeOn = false;
 	private boolean devModeReleased = true;
 	public LoadProperties loadProp;
 	public static boolean devModeInfoOn = false;
-	public static boolean loadGame = true;
-	int loadGameTime = 0;
-	public String titleTampered = title + " | [Modded] ";
-	public int loadTime = 0;
 	public TileCoord playerSpawn;
 	public TileCoord playerRespawn = new TileCoord(52, 72);
-   private ArrayList<String> devs = new ArrayList<String>();
+	public static String PlayerName = "Player";
 	File screenshots = null;
 	public static boolean runTut = false;
 
 	int saveTime = 0;
-	private int warningTime = 0;
 	/**
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol:
 	 * (in-game); 4 = pause; 5 = modded/tampered; 6 = dead; 7 = Splash;
 	 */
-	public enum gameState {
-		STOP, MENU, INGAME, INGAME_A, PAUSE, MODDED, DEATH, SPLASH;
-	}
 	
 	public HashMap<String, Boolean> properties = new HashMap<String, Boolean>();
 
@@ -129,11 +111,6 @@ public class Game extends Canvas implements Runnable {
 
 	@SuppressWarnings("unused")
 	private int time = 0;
-
-	public gameState gameState;
-	public int ExpStor;
-	public boolean developerPlaying;
-	private int developerTime;
 
 	private void folderCreation() {
 		File SavesFolder = new File(LoadProperties.basePath + "/Saves");
@@ -263,7 +240,6 @@ public class Game extends Canvas implements Runnable {
 		loadProp = new LoadProperties();
 		loadProp.createDataFolder();
 		screenshots = new File(LoadProperties.basePath + "/screenshots");
-		gameState = gameState.SPLASH;
 		Sound.loadOggs();
 		//readVersion();
 		/*
@@ -281,7 +257,6 @@ public class Game extends Canvas implements Runnable {
 		
 	
 		setGui(new GUI());
-		getLauncherName();
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		screen = new Screen(width, height);
@@ -295,7 +270,7 @@ public class Game extends Canvas implements Runnable {
 			level2 = level;
 		
 		// TileCoord playerSpawn = new TileCoord(296, 381);
-		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, PersonNameGetter, Entity.genUUID(), null, -1));
+		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
 		level.add(getPlayer());
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
@@ -304,21 +279,6 @@ public class Game extends Canvas implements Runnable {
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 		addMouseWheelListener(mouse);
-	    
-		if(devs.size() > 0) {
-			for(int i = 0; i < devs.size(); i++) {
-				if (devs.get(i) != null) {
-						
-				if (devs.get(i).toString().equalsIgnoreCase(getPlayer().getUsername())) {
-					System.out.println("Welcome Developer, " + devs.get(i).toString());
-					System.out.println("Enabling Square Legacy MultiPlayer features...");
-					this.developerPlaying = true;
-				}
-
-
-				}}
-		}
-		//load();
 	}
 
 	public void setLevel(Level level) {
@@ -327,21 +287,6 @@ public class Game extends Canvas implements Runnable {
 	
 	static Level currentLevel() {
 		return level2;
-	}
-	private void getLauncherName() {
-	File launcherName = new File(LoadProperties.basePath + "/LoginData.dat");
-	try {
-		@SuppressWarnings("resource")
-		DataInputStream MyInStream = new DataInputStream(
-				new FileInputStream(launcherName));
-		PersonNameGetter = MyInStream.readLine();
-		gui.saveSelected = PersonNameGetter;
-		//load(); 
-	} catch (FileNotFoundException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
 	}
 	
 	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException {
@@ -410,35 +355,16 @@ public class Game extends Canvas implements Runnable {
 			while (delta >= 1) {
 
 				// speedModif++;
-				if (gameState == gameState.MODDED) {
-					title = titleTampered;
-				}
 
-				if (gameState == gameState.INGAME || gameState == gameState.INGAME_A || gameState == gameState.MODDED) {
 					 //if (speedModif % 1 == 0) {
 					update();
 					 //speedModif = 0;
 					//}
-				}
 				
 				
-				if (gameState == gameState.MENU) {
-					getGui().checkMenu();
-					updateMenu();
-				}
-				if (gameState == gameState.PAUSE) {
-					updatePause();
-					getGui().checkPause();
-				}
-				if (gameState == gameState.DEATH) {
-					updateDeath();
-					update();
-					getGui().checkDeath();
-				}
 				key.update();
 				gui.update();
 				updateMode();
-				loadGame();
 				updates++;
 				delta--;
 			}
@@ -450,21 +376,7 @@ public class Game extends Canvas implements Runnable {
 				timer += 1000;
 				// System.out.println(updates + " ups, " + frames + " fps");
 				
-				if (gameState == gameState.INGAME || gameState == gameState.INGAME_A || gameState == gameState.MODDED
-						&& frames < 5000) {
-					frame.setTitle(title + " | " + updates + " ups, " + frames
-							+ " fps");
-				}
-				if (gameState == gameState.PAUSE) {
-					frame.setTitle(title + " | PAUSED");
-				}
-				if (gameState == gameState.INGAME_A) {
-					frame.setTitle("[A] " + title + " | " + updates + " ups, "
-							+ frames + " fps");
-				}
-				if (gameState == gameState.MENU) {
-					frame.setTitle(title + " | Main Menu");
-				}
+				frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
 				
 				if (this.recAVG_FPS) {				
 				fpsTotal += frames;
@@ -509,7 +421,7 @@ public int deathTimeSec = 0;
 			autoSave = false;
 			disabledSave = true;
 		}
-		this.PersonNameGetter = name;
+		this.PlayerName = name;
 		getPlayer().name = name;
 		//getPlayer().reset(getPlayer());
 		getPlayer().invokeLoad(getPlayer());
@@ -525,7 +437,6 @@ public int deathTimeSec = 0;
 		} catch (Exception e) {
 			autoSave = true;
 		}
-		Game.switchState(Boot.get().gameState.INGAME);
 		
 		if (Game.runTut) {
 			getPlayer().setPosition(73, 38, Maps.tutWorldId, true);
@@ -542,7 +453,7 @@ public int deathTimeSec = 0;
 			} else {
 				deathTimeSec = 0;
 				deathTimeTicks = 0;
-				Game.switchState(gameState.INGAME);
+				//Game.switchState(gameState.INGAME);
 			}
 		}
 		
@@ -574,19 +485,6 @@ public int deathTimeSec = 0;
 		}*/
 	}
 
-	public void onLaunch() {
-			Dead = false;
-		/*
-		 * if (gameState == 2 || gameState == 3) { Sound.Play(Hope, -10, true);
-		 * }
-		 */
-		/*
-		 * List<Entity> entities = level.entities; for (int i = 0; i <
-		 * entities.size(); i++) { entities.remove(i); }
-		 */
-
-	}
-
 	public void updatePause() {
 		//System.out.println("[Game: ~773] GAMESTATE: PAUSE");
 		
@@ -595,18 +493,8 @@ public int deathTimeSec = 0;
 
 	}
 
-	public void updateMenu() {
-		loadTime++;
-		atMenu = true;
-		// System.out.println("[Game: ~293] GAMESTATE: 1");
-		onLaunch();
-		loadGameState2();
-
-		// Sound.Play(Sound.Rock, 10, true);
-	}
-	
 	public void save(boolean autoOverride) {
-		if (gameState != gameState.MENU) {
+		//if (gameState != gameState.MENU) {
 		loadProp.savePrefs(this);
 		if (autoSave || autoOverride) {
 		List<PlayerMP> players = level.players;
@@ -614,7 +502,7 @@ public int deathTimeSec = 0;
 			getLevel().getClientPlayer().invokeSave(getLevel().getClientPlayer());
 				}
 			}
-		}
+		//}
 	}
 
 	public void autoSave() {
@@ -630,13 +518,8 @@ public int deathTimeSec = 0;
 	public void updateMode() {
 		// adminCmds();
 
-		if (gameState == gameState.INGAME || gameState == gameState.INGAME_A
-				|| gameState == gameState.PAUSE) {
 			autoSave();
-		}
-		if (gameState != gameState.SPLASH && gameState != gameState.MENU
-				&& gameState != gameState.DEATH && key.DevMode && !devModeOn
-				&& devModeReleased && Mouse.getButton() == 2) {
+		if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
 			devModeOn = true;
 			devModeReleased = false;
 		}
@@ -663,25 +546,6 @@ public int deathTimeSec = 0;
 			releasedDevInfo = false;
 		}
 
-		if (blankBoolean) {
-
-			width = frame.getWidth() / scale;
-			height = frame.getHeight() / scale;
-			/*
-			 * System.out.println("HEIGHT: " + height + " || " +
-			 * frame.getHeight()); System.out.println("WIDTH: " + width + " || "
-			 * + frame.getWidth());
-			 */
-
-		}
-
-		loadGameTime++;
-
-		/*
-		 * boolean playValiant = true; if (playValiant) {
-		 * Sound.PlayMusic(Sound.menuMusic, true); playValiant = false; }
-		 */
-
 		if (key.capture) {
 			if (screenshots.exists()) {
 				try {
@@ -691,73 +555,7 @@ public int deathTimeSec = 0;
 				}
 			}
 		}
-
-		if (!loadGame) {
-			if (gameState != Boot.get().gameState.MENU && key.gs1) {
-				// playHope = false;
-
-				// playMenuMusic = true;
-				switchState(gameState.MENU);
-			}
-			if (gameState != gameState.INGAME && key.gs2) {
-					if (!invokedLoad) {
-						player.invokeLoad(player);
-						invokedLoad = true;
-					}
-					switchState(gameState.INGAME);					
-				}
-			if (gameState != gameState.INGAME_A && key.gs3) {
-				if (!invokedLoad) {
-					player.invokeLoad(player);
-					invokedLoad = true;
-				}
-				switchState(gameState.INGAME_A);					
-		}
-
-			if (gameState != gameState.PAUSE && gameState != gameState.MENU && key.gs4)
-					switchState(gameState.PAUSE);
-		}
 	}
-
-	public void loadGameState2() {
-		if (loading) {
-			if ((loadTime % 70) == 0) {
-				loadTime = 0;
-				for (int i = 0; i < 3000; i++) {
-					if (i > 2000) {
-
-						switchState(gameState.INGAME);
-						getGui().fadeTime = 0;
-						loading = false;
-						if (!invokedLoad) {
-							player.invokeLoad(player);
-							invokedLoad = true;
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	public void fadeScreen() {
-		
-	}
-
-	public void loadGame() {
-		if (loadGame) {
-			if ((loadGameTime % 100) == 0) {
-				loadGameTime = 0;
-				// for (int i = 0; i < 3000;  i++) {
-				// if (i > 2000) {
-				switchState(gameState.MENU);
-				getGui().fadeTimeS = 0;
-				loadGame = false;
-			}
-		}
-	}
-
-	// }
-	// }
 
 	public void update() {
 		if (mouseMotionTime > 0) {
@@ -766,19 +564,6 @@ public int deathTimeSec = 0;
 		
 		
 		
-		if (switchedTo3) {
-			warningTime++;
-		}
-
-		if (warningTime > 200) {
-			switchedTo3 = false;
-			warningTime = 0;
-		}
-		
-		if (developerPlaying && developerTime < 250) {
-			developerTime++;
-		}
-
 		time2++;
 		ClickTime++;
 
@@ -796,10 +581,6 @@ public int deathTimeSec = 0;
 		 * player.removed = true; player.isRemoved(); player.update();
 		 * player.render(screen); screen.renderMob(296, 381, player); }
 		 */
-
-		if (PersonNameGetter == null) {
-			PersonNameGetter = "Player";
-		}
 	}
 	String mat = "";
 
@@ -823,34 +604,9 @@ public int deathTimeSec = 0;
 		//}
 
 		
-		if (gameState == gameState.INGAME || gameState == gameState.INGAME_A || gameState == gameState.PAUSE) {
 			level.render((int) (xScroll), (int) (yScroll), screen);
 			gui.render(screen);
-			if (!(warningTime > 1)){
-				player.renderGUI(screen);
-			}
-		}
-		if (getLevel() instanceof SpawnHaven) {
-			font.render(48 << 4, 36 << 4, -2, 0xffFFFFFF, " Haven", screen, true, false);
-		}
-		if (gameState == gameState.MENU) {
-			getGui().renderMainMenu(screen);
-			//screen.renderSprite(24, 92, Sprite.button_Default, false);
-			//font.render(18, 98, -4, "Survival", screen, false, false);
-		} else if (gameState == gameState.PAUSE) {
-			getGui().renderPause(screen);
-		} else if (gameState == gameState.DEATH) {
-			getGui().renderDeath(screen);
-			font8x8.render(-4, 159, -3, 0xffFFFFFF, "Auto Respawn In.." + (10 - Boot.get().deathTimeSec), screen, false, false);
-		} else if (gameState == gameState.SPLASH) {
-			getGui().renderSplash(screen);
-		}
-//		if (time2 % 10 == 0) {
-//		for (String m : materials) {
-//		mat = m;
-//		}
-//		}
-		//font8x8.render(18, 2, -3, 0xffFF0000, "DEV>CLASS.." + mat, screen, false, false);
+			//player.renderGUI(screen);
 		
 		if (showAVG) { 
 		if (fpsAVG < 200) {			
@@ -862,75 +618,11 @@ public int deathTimeSec = 0;
 		}
 		}
 
-		if (warningTime > 1) {
-			font.render(-5, this.height - 23, -6, 0xDB0000 - (0x110000 * (warningTime / 2)),
-					"Warning: Not Collecting Stats", screen, false, true);
-		}
-
-		/*
-		 * if (!Dead && gameState == 4) { //0xff302B29 //screen.renderSprite(36,
-		 * 13, Sprite.staticGrey, false); if (Player.Lvl < 10 && Player.ExpC <
-		 * 1000) { screen.drawFillRect(36, 13, 16 * 6 + 4, 59, 0xff302B23,
-		 * false); Debug.drawRect(screen, 36, 13, 16 * 6 + 4, 59, 0xff000000,
-		 * false); } else { screen.drawFillRect(36, 13, 16 * 7 + 4, 59,
-		 * 0xff302B23, false); Debug.drawRect(screen, 36, 13, 16 * 7 + 4, 59,
-		 * 0xff000000, false); } font.render(12, 15, -4, 0xFFFFFF, " Level: " +
-		 * Player.Lvl + "\n Exp: " + Player.ExpC + "\n Kills: " + kills, screen,
-		 * false, false); }
-		 */
-		
-		
-		/*time++;
-		for(int j = 0; j < screen.height; j++) {
-			for (int i = 0; i < screen.width; i++) {
-				screen.pixels[i + j * screen.width] = 0;												
-				if (i % 2 == 0) {
-						if (time % 2  == 0) {
-							screen.pixels[i + j * screen.width] = 0xffFF00FF;												
-						} else {
-							if (j % 2 == 0) {
-							screen.pixels[i + j * screen.width] = 0xff00FF00;												
-						}
-					}
-				}
-			}
-		}*/
-		
-	/*	for (int y = 0; y < screen.height; y++) {
-			for (int x = 0; x < screen.width; x++) {
-				if (x < 0 || x >= width || y < 0 || y >= height) continue;
-				     screen.pixels[(int) (x + y * width)] += (int) (0x110000 * ((x - y + Math.round(Math.random() * 10)) / 2));
-			}
-		}*/	
 		
 		for (int i = 0; i < pixels.length; i++) {
-		//	if ((int)(Math.random() * 100) % 2 == 0) {
-		   // screen.pixels[(int) i] += (int) (((Math.round(Math.random() * 100000))));
-			//}
-		//	if (getPlayer().mobhealth <= 5) {
-			/*if ((int)(Math.random() * 50) % 60 == 0) {
-			for (int i1 = 0; i1 < 6; i1++) {
-				for (int j = screen.pixels.length - 1; j > 0; j--) {
-					if ((int)(i * 2) % 100 == 0) {
-						
-					int temp = screen.pixels[j];
-					double r = Math.random();
-						screen.pixels[j] = screen.pixels[j - 1];
-					screen.pixels[j - 1] = temp;
-					}
-				}
-			}
-			}*/
-	//		}
-		//	}
-		//	if (Game.getGame().getPlayer().mobhealth < 5) {
-		//	if (((int)(Math.random() * 1.2005) % 61418 == 0)) {// || this.getPlayer().ridingOn == null) {
 			pixels[i] = screen.pixels[i];
-			//	}
-		//	} else {
-		//		pixels[i] = screen.pixels[i];
-			}
-		//}
+		}
+
 		Graphics g = bs.getDrawGraphics();
 		Color Opaque = new Color(5, 0, 0, 120);
 
@@ -938,49 +630,7 @@ public int deathTimeSec = 0;
 
 		g.setColor(Opaque);
 
-		/*
-		 * if (Player.inventoryOn) { if (Mouse.getButton() == 1) { if
-		 * (Mouse.getX() < 820 + 25 && Mouse.getX() > 820 - 5 && Mouse.getY() <
-		 * 164 + 42 && Mouse.getY() > 164 - 5 ) { Player.inventoryOn = false; if
-		 * (ClickTime > 20) { Sound.Play(Sound.Click, false); ClickTime = 0; } }
-		 * } if (useHealthPotion) { time++; } if (Mouse.getButton() == 1 &&
-		 * healthPotionsRemaining > 0) { if (Mouse.getX() < 522 + 40 &&
-		 * Mouse.getX() > 522 - 5 && Mouse.getY() < 245 + 42 && Mouse.getY() >
-		 * 245 - 5 ) { useHealthPotion = true; grabbedHealthPotion = true; /* if
-		 * (time > 20) { time = 0; healthPotionsRemaining -=1; useHealthPotion =
-		 * false; } } } }
-		 */
-
-
-		
-		
-		
-		/*
-		  if (Player.inventoryOn == false && gameState == 2 || gameState == 3)
-		  { g.fill3DRect(30 * 16 + 40, 20 * 16 - 80, 150, 30, true);
-		  g.setColor(Color.WHITE); g.setFont(new Font("Verdana",0, 18));
-		  //g.drawString(PersonNameGetter, 30 * 16 + 46, 20 * 16 - 59);
-		  
-		  }*/
-		 
-		/*
-		 * if (Player.inventoryOn) { g.fill3DRect(0, 0, 1500, 160, true);
-		 * g.fill3DRect(0, 160, 340, 1000, true); g.fill3DRect(850, 160, 350,
-		 * 520, true); g.fill3DRect(340, 540, 510, 130, true); }
-		 */
-
-		/*
-		 * if (level.players.size() > 0) { double
-		 * mx=(level.getPlayerAt(0).getX()-width/2)+(Mouse.getX()/(Game.scale));
-		 * mx=(mx/16); double
-		 * my=(level.getPlayerAt(0).getY()-height/2)+(Mouse.getY
-		 * ()/(Game.scale)-10); my=(my/16); // System.out.println("MX: " +
-		 * (int)mx + "MY: " + (int)my); if ((int)mx == 245 && (int)my == 400) {
-		 * Player.inventoryOn = true; } }
-		 */
-
-		if (gameState != gameState.SPLASH && gameState != gameState.MENU && gameState != gameState.DEATH
-				&& devModeOn == true || Mouse.getButton() == 2) {
+		if (devModeOn == true || Mouse.getButton() == 2) {
 			g.setColor(Opaque);
 			// g.fillRect(10, 80, 100, 1);
 			g.fill3DRect(0, 0, 545, 95, false);
@@ -1008,7 +658,7 @@ public int deathTimeSec = 0;
 			 * g.drawString("Map", 1372, 25); }
 			 */
 
-			if (devModeOn == true && devModeInfoOn && gameState != gameState.MENU) {
+			if (devModeOn == true && devModeInfoOn) {
 				g.setFont(new Font("Verdana", 0, 16));
 				g.drawString(
 						"Developer Mode: Mouse Grid, Coordinate, Player [UUID], Scrolls",
@@ -1071,10 +721,6 @@ public int deathTimeSec = 0;
 
 		game.start();
 		 centerMouse();
-
-		
-		blankBoolean = true;
-		
 	}
     
 	public void centerMouse() {
@@ -1110,76 +756,10 @@ public int deathTimeSec = 0;
 	}
 	
 	
-	
-	public static void switchState(gameState state) {
-		Mouse.setMouseB(-1);
-		gameState current = Boot.get().gameState;
-		Boot.get().gui.newCharMenu = false;
-		Boot.get().gui.charMenu = false;
-
-		try {
-		if (current != current.SPLASH) {
-			if (current == current.MENU && state == state.INGAME) {
-				Sound.StopMusic();
-			} else if (current != current.INGAME && state == state.INGAME_A) {
-				Sound.StopMusic();
-				Sound.PlayOgg(Sound.Windwalker, true, 1);
-			} else if (state == state.MENU || state == state.DEATH) {
-				Sound.StopMusic();
-			}
-		}
-		
-		} catch (Exception e) {
-			System.out.println("Stopped Playing an invalid (null) Ogg");
-		}
-		
-		if (state == state.MENU) {
-			 Sound.PlayOgg(Sound.menuMusOgg, true, 0.8);
-		} else if (state == state.INGAME) {
-			if (current != current.INGAME_A) {
-				if (current == current.PAUSE) {
-					Boot.get().save(false);
-					try {						
-					Sound.resumeOgg();
-					} catch (Exception e) {
-						System.err.println(e);
-					}
-				} else if (current == current.MENU){
-					Sound.PlayOgg(Sound.Windwalker, true, 1);
-				}
-			}
-		} else if (state == state.INGAME_A) {
-			switchedTo3 = true;
-		} else if (state == state.PAUSE) {
-			//centreMouse();
-			 Sound.pauseOgg();
-		} else if (state == state.DEATH) {
-			//centreMouse();
-		}
-
-		/*
-		 * if (gamestate == 1) { if (Sound.clipM.isOpen()) Sound.clipM.stop();
-		 * Sound.PlayMusic(Sound.menuMusic, true); }
-		 * 
-		 * if (gamestate == 2) { if (Sound.clipM.isOpen()) Sound.clipM.close();
-		 * 
-		 * //Sound.PlayMusic(Sound.Hope, true); }
-		 * 
-		 * if (gamestate == 4) { Sound.StopMusic(); }
-		 */
-
-		Boot.get().gameState = state;
-
-	}
-
 	public Screen getScreen() {
 		return screen;
 	}
 	
-/*	public Level level() {
-		return level2;
-	}*/
-
 	public Player getPlayer() {
 		return player;
 	}
@@ -1222,16 +802,8 @@ public int deathTimeSec = 0;
 	}
 
 	public void quit() {
-		if (gameState == gameState.INGAME || gameState == gameState.INGAME_A) {
-			System.out.println("Saving & Closing Application");
+		System.out.println("Saving & Closing Application");
 			save(false);			
-		} else {
-			System.out.println("Closing Application");
-		}
 		System.exit(0);
 	}
-	
-	
-	
-	
 }

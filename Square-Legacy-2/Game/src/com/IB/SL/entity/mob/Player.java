@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -104,7 +103,7 @@ public class Player extends Mob implements Serializable{
 	
 	
 	public Player(Keyboard input) {
-		this.name = Boot.get().PersonNameGetter;
+		this.name = Boot.get().PlayerName;
 		this.input = input;
 		sprite = Sprite.playerback;
 	}
@@ -274,12 +273,8 @@ public class Player extends Mob implements Serializable{
 			} catch (Exception e) {
 				
 			}
-		if (this.mobhealth <= 0) {
-			Game.switchState(Boot.get().gameState.DEATH);
-		}
 		
-		
-		if (Boot.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().devModeOn) {
 		this.mana = maxmana;
 		this.mobhealth = maxhealth;
 		this.stamina = maxstamina;
@@ -554,7 +549,7 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	
 			screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff),  sprite);			
 
-			if (Boot.get().gameState == gameState.INGAME_A) {
+			if (Boot.get().devModeOn) {
 	screen.drawRect((int)x - 8, (int)y - 15, 16, 16, 0x0093FF, true);
 	try {		
 		Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
@@ -714,13 +709,10 @@ private transient Sprite arrow = Sprite.QuestArrow;
 	}
 	
 	
-	
-	
-	if (Boot.get().gameState == gameState.INGAME || Boot.get().gameState == gameState.INGAME_A) {
 		if (buildMode) {
 		gui.renderBuild(screen, this);
 		}
-	}
+	
 	
 		String text = (int)Boot.get().getPlayer().getX() / 16 + "," + (int)Boot.get().getPlayer().getY() / 16;
 		//screen.renderSprite(1064/ Game.scale, 530 / Game.scale, gui.renderHealthExperiment(screen, this, 20), false);
@@ -738,7 +730,6 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		}
 
 		
-		if (Boot.get().gameState == gameState.INGAME) {
 		if (!gui.displayM && !gui.displayS) {
 			gui.yOffH = 156;
 		} else if (!gui.displayS && gui.displayM) {
@@ -792,7 +783,6 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		screen.renderSprite(223, gui.yOffH, gui.renderBar(60, gui.healthbar, maxhealth, mobhealth), false); // 130
 		}
 	//	screen.renderSprite(0, 143, gui.expBar.getSprite(), false);
-	}
 	
 }
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -64,7 +63,7 @@ public class Location_Shrine extends Interactable {
 	}
 
 	public void render(Screen screen) {
-		if (Boot.get().gameState == gameState.INGAME_A) {
+		if (Boot.get().devModeOn) {
 			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
 		}
 		sprite = Sprite.loc_shrine;

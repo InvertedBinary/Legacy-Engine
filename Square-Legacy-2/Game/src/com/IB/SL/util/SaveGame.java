@@ -311,7 +311,7 @@ public static LoadProperties loadPrefs() {
 		
 		
 		File saveDir = new File(home);
-		saveDir = new File(saveDir, root + "/Saves/" + Game.PersonNameGetter);
+		saveDir = new File(saveDir, root + "/Saves/" + Game.PlayerName);
 		
 		if (!saveDir.exists()) {
 			saveDir.mkdir();
@@ -376,7 +376,7 @@ public static LoadProperties loadPrefs() {
 		index.delete();
 	}
 	
-	public static boolean deleteCharacter(String userName) {
+	/*public static boolean deleteCharacter(String userName) {
 		
 			if (!Boot.get().gui.save1.equals("(Open)")) {
 				Boot.get().gui.saveSelected = Boot.get().gui.save1;
@@ -405,7 +405,7 @@ public static LoadProperties loadPrefs() {
 		
 		
 		return true;
-	}
+	}*/
 	
 	public static boolean deleteSaveFile(String fileName) {
 		if(!checkFileExists(fileName)) {

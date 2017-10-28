@@ -3,8 +3,6 @@ package com.IB.SL.graphics.UI;
 import java.util.ArrayList;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
@@ -14,9 +12,6 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
-import com.IB.SL.input.Mouse;
-import com.IB.SL.util.SaveGame;
-import com.IB.SL.util.Sound;
 import com.IB.SL.util.TextBox;
 
 public class GUI extends CheckBounds {
@@ -63,11 +58,6 @@ public class GUI extends CheckBounds {
 		if (name == null) {
 			name = new TextBox(90, 38, 204, 20, Boot.get().key, 12, false);
 		}
-		if (Boot.get().gameState == Boot.get().gameState.MENU && newCharMenu) {
-			name.update(); // LAG with using numpad
-		} else {
-			name.reset(false);
-		}
 
 		if (cmd == null) {
 			cmd = new TextBox(5, 5, 266, 19, Boot.get().key, -1, false);
@@ -77,11 +67,7 @@ public class GUI extends CheckBounds {
 			cmd.acceptable.add(",");
 			cmd.acceptable.add(".");
 		}
-		if (Boot.get().gameState == Boot.get().gameState.PAUSE) {
 			cmd.update();
-		} else {
-			cmd.reset(false);
-		}
 		// expBar.update();
 	}
 
@@ -105,202 +91,6 @@ public class GUI extends CheckBounds {
 	
 
 	// 263, 42, 55[mana]
-
-	public void renderMainMenu(Screen screen) {
-		if (!charMenu) {
-
-			fadeTime2++;
-			screen.clear();
-			if (overContinue == false && overChars == false) {
-				screen.renderSprite(0, 0, Sprite.Title, false);
-			}
-			if (overContinue == true) {
-				screen.renderSprite(0, 0, Sprite.title_overContinue, false);
-			}
-
-			if (overChars == true) {
-				screen.renderSprite(0, 0, Sprite.title_overChars, false);
-			}
-			if (Game.loading && Boot.get().gameState == gameState.MENU) {
-				// screen.renderSheet(0, 0, SpriteSheet.loading, false);
-				if (fadeTime2 % 3 == 0) {
-					fadeTime--;
-					fadeTime2 = 0;
-				}
-				screen.fade(fadeTime, fadeTime, fadeTime);
-			}
-		} else if (charMenu && newCharMenu == false) {
-			screen.renderSprite(0, 0, Sprite.title_Chars, false);
-			Boot.get().font.render(30, 9, save1, screen, false, false);
-			Boot.get().font.render(30, 41, save2, screen, false, false);
-			Boot.get().font.render(30, 73, save3, screen, false, false);
-			Boot.get().font.render(30, 105, save4, screen, false, false);
-
-			if (saveSelected.equals(save1)) {
-				Boot.get().font.render(-6, 9, "X", Boot.get().getScreen(), false, false);
-			}
-			if (saveSelected.equals(save2)) {
-				Boot.get().font.render(-6, 41, "X", Boot.get().getScreen(), false, false);
-			}
-			if (saveSelected.equals(save3)) {
-				Boot.get().font.render(-6, 73, "X", Boot.get().getScreen(), false, false);
-			}
-			if (saveSelected.equals(save4)) {
-				Boot.get().font.render(-6, 105, "X", Boot.get().getScreen(), false, false);
-			}
-
-			if (overTrash == 1) {
-				screen.renderSprite(272, 8, Sprite.title_overTrash, false);
-			}
-			if (overTrash == 2) {
-				screen.renderSprite(272, 40, Sprite.title_overTrash, false);
-			}
-			if (overTrash == 3) {
-				screen.renderSprite(272, 72, Sprite.title_overTrash, false);
-			}
-			if (overTrash == 4) {
-				screen.renderSprite(272, 104, Sprite.title_overTrash, false);
-			}
-
-			try {
-
-				if (overSave == 1) {
-					if (tempLoadInfo == null) {
-						tempLoadInfo = SaveGame.load(save1);
-					}
-					font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-							Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff,
-							"Level: " + tempLoadInfo.Lvl, screen, false, true, 7);
-				} else if (overSave == 2) {
-					if (tempLoadInfo == null) {
-						tempLoadInfo = SaveGame.load(save2);
-
-					}
-					font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-							Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff,
-							"Level: " + tempLoadInfo.Lvl, screen, false, true, 7);
-				} else if (overSave == 3) {
-					if (tempLoadInfo == null) {
-						tempLoadInfo = SaveGame.load(save3);
-
-					}
-					font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-							Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff,
-							"Level: " + tempLoadInfo.Lvl, screen, false, true, 7);
-				} else if (overSave == 4) {
-					if (tempLoadInfo == null) {
-						tempLoadInfo = SaveGame.load(save4);
-
-					}
-					font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-							Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff,
-							"Level: " + tempLoadInfo.Lvl, screen, false, true, 7);
-				} else {
-					tempLoadInfo = null;
-				}
-			} catch (Exception e) {
-
-			}
-
-		} else if (newCharMenu) {
-			screen.renderSprite(0, 0, Sprite.title_NewChar, false);
-			if (Boot.get().runTut) {
-				Boot.get().font.render(116, 70, "X", Boot.get().getScreen(), false, false);
-			}
-
-			if (overTutorial) {
-				font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-						Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff, "Run The Tutorial", screen,
-						false, true, 7);
-			}
-
-			// R = 0;
-			// G = 0;
-			// B = 0;
-
-			Boot.get().font8x8.render(160, 119, "" + R, Boot.get().getScreen(), false, false);
-			Boot.get().font8x8.render(160, 135, "" + G, Boot.get().getScreen(), false, false);
-			Boot.get().font8x8.render(160, 151, "" + B, Boot.get().getScreen(), false, false);
-
-			System.out.println("B: " + B);
-			Sprite sprite = Sprite.resize(playersprite, 4);
-			screen.renderMobSpriteUniversal(30, 80, sprite, R, G, B);
-			// screen.renderMobSpriteUniversal(30, 80, sprite);
-			// if (Game.getGame().perma) {
-			// Game.getGame().font.render(-6, 139, "X",
-			// Game.getGame().getScreen(), false, false);
-			// }
-			//
-			// if (overPerma) {
-			// font8x8.render(Mouse.getX() * Game.scale >> Game.TILE_BIT_SHIFT,
-			// Mouse.getY() * Game.scale >> Game.TILE_BIT_SHIFT, -2, 0xffffffff,
-			// "On Death You Lose Everything", screen, false, true, 7);
-			// }
-
-			name.render(screen);
-		}
-	}
-
-	public void renderSplash(Screen screen) {
-		fadeTimeS2++;
-		if (fadeTimeS2 % 3 == 0) {
-			fadeTimeS++;
-			fadeTimeS2 = 0;
-		}
-		if (Game.loadGame) {
-			screen.renderSheet(0, 0, SpriteSheet.ibLOGO, false);
-		}
-		screen.fade(fadeTimeS, fadeTimeS, fadeTimeS);
-	}
-
-	public void renderDeath(Screen screen) {
-		screen.clear();
-		if (overMenu == false && overQuit == false) {
-			screen.renderAlphaSprite(0, 0, Sprite.Death, false);
-		}
-		if (overMenu) {
-			screen.renderAlphaSprite(0, 0, Sprite.Death_Menu, false);
-		}
-		if (overQuit) {
-			screen.renderAlphaSprite(0, 0, Sprite.Death_Quit, false);
-		}
-
-	}
-
-	public void renderPause(Screen screen) {
-
-		if (!options) {
-			if (overResume == false && overMenuPause == false) {
-				screen.renderSprite(0, 0, Sprite.pauseMenu, false);
-			}
-			if (overResume) {
-				screen.renderSprite(0, 0, Sprite.pauseMenuResume, false);
-			}
-			if (overMenuPause) {
-				screen.renderSprite(0, 0, Sprite.pauseMenuMenu, false);
-			}
-			if (overQuitPause) {
-				screen.renderSprite(0, 0, Sprite.pauseMenuQuit, false);
-			}
-
-			cmd.render(screen);
-
-		} else if (options) {
-
-			screen.renderSprite(0, 0, Sprite.pauseOptions, false);
-
-			Boot.get().font8x8.render(5, 126, -2, desc, Boot.get().getScreen(), false, false);
-
-			if (Boot.get().autoSave) {
-				Boot.get().font.render(-6, 37, "X", Boot.get().getScreen(), false, false);
-			}
-
-			if (overDelFiles) {
-				Boot.get().font.render(-6, 67, "X", Boot.get().getScreen(), false, false);
-			}
-
-		}
-	}
 
 	public Sprite renderBar(int size, AnimatedSprite sprite, double max, double current) {
 		double currentHealth = current;
