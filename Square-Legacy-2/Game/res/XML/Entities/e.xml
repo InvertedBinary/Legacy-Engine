@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <entity>
 	<mob id="3001">
+<<<<<<< HEAD
 		<name>Robbie</name>
+=======
+		<name>Z</name>
+>>>>>>> 064011efbd5bfb9e039701a21d1bf3fd2e627cbb
 		<maxhealth>10</maxhealth>
 		<speed>0.5</speed>
 		<rarity>4</rarity>
