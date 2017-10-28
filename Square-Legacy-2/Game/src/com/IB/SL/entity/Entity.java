@@ -5,11 +5,6 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.UUID;
 
-import com.IB.SL.Game;
-import com.IB.SL.entity.inventory.ActiveEffects;
-import com.IB.SL.entity.inventory.ChestInventory;
-import com.IB.SL.entity.inventory.Quest;
-import com.IB.SL.entity.mob.MobFactory;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.Screen;
@@ -23,7 +18,6 @@ public class Entity implements Serializable {
 	protected transient Sprite sprite;
 	public transient boolean removed = false;
 	public transient Level level;
-	public transient ActiveEffects effects;
 
 	transient public final Random random = new Random();
 	public double mobhealth;
@@ -33,12 +27,7 @@ public class Entity implements Serializable {
 	public double maxmana;
 	public double maxstamina;
 	transient public boolean hurt = false;
-	
-	public transient Quest toGive;
-	private boolean givenQuest = false;
-
-	public transient MobFactory factory = new MobFactory();
-	transient public ChestInventory ChestInventory;
+	transient public boolean walking = false;
 
 	protected transient int xBound = 0;
 	protected transient int yBound = 0;
@@ -53,6 +42,10 @@ public class Entity implements Serializable {
 	public Integer id = -1;
 	public transient String UID = "";
 	transient public Rectangle r;
+	public transient String name;
+	public int rarity = -1;
+	transient public boolean incombat;
+
 	
 	public enum HOSTILITY {
 		AGR, PASS, NEU, BOSS, PLAYER
@@ -180,35 +173,6 @@ public class Entity implements Serializable {
 	      return value < 0 ? -1 : 1;
 	   }
 	   
-	   public void displayQuest(Screen screen) {
-		   Player p = Game.getGame().getPlayer();
-		   if (this.toGive != null && givenQuest == false) {
-			   p.gui.font8x8.render(110, 15, -2, 0xff000000, "Quest - 'F'", screen, false, true);
-			   p.gui.font8x8.render(109, 15, -2, 0xffFFFFFF, "Quest - 'F'", screen, false, false);
-			   if (p.input.generalActivator) {
-				   if (p.addQuest(toGive)) {
-				   this.givenQuest = true;
-				   }
-			   }
-		} else if (givenQuest == true && toGive != null) {
-			if (p.quests.get(toGive) != null) {
-				
-			if (p.quests.get(toGive).getStage() > p.quests.get(toGive).MAX_STAGE) {
-			   p.gui.font8x8.render(110, 15, -2, 0xff000000, "Complete - 'F'", screen, false, true);
-			   p.gui.font8x8.render(109, 15, -2, 0xffFFFFFF, "Complete - 'F'", screen, false, false);
-			   if (p.input.generalActivator) {				   
-			   p.quests.completeQuest(toGive.name, false);
-			   toGive = null;
-			   }
-			} else {
-				   p.gui.font8x8.render(110, 15, -2, 0xff000000, "Quest Given!", screen, false, true);
-				   p.gui.font8x8.render(109, 15, -2, 0xffFFFFFF, "Quest Given!", screen, false, false);
-			}
-			   }
-		   }
-	   }
-	   
-	   
 	   public boolean eCol(double xa, double ya){
 	      boolean col = false;
 	      for(int e2 = 0; e2 < level.entities.size(); e2++){
@@ -283,10 +247,9 @@ public class Entity implements Serializable {
 		}
 	}	*/
 	
-	public com.IB.SL.entity.inventory.ChestInventory getChestInventory() {
-		return this.ChestInventory;
+	public void death() {
+		
 	}
-
 	
 	
 	public int getID() {

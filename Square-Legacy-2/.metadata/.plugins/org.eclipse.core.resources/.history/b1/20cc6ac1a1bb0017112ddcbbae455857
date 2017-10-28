@@ -1,0 +1,11 @@
+package com.IB.SL;
+
+public class Boot {
+
+	private Game g;
+	
+    public static void main(String[] args) {
+    	
+    }
+	
+}

@@ -3,7 +3,6 @@ package com.IB.SL.entity.mob.peaceful;
 import java.util.List;
 import java.util.Random;
 
-import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
@@ -11,9 +10,6 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Node;
-import com.IB.SL.level.TileCoord;
-import com.IB.SL.util.Sound;
-import com.IB.SL.util.Vector2i;
 
 public class Horse extends Mob {
 
@@ -56,7 +52,7 @@ public class Horse extends Mob {
 	}
 
 	private void move() {
-	      List<Player> players = level.getPlayers(this, 20);
+	      /*List<Player> players = level.getPlayers(this, 20);
 	      List<Player> players2 = level.getPlayers(this, 90);
 
 	      if (players.size() > 0) {
@@ -64,7 +60,7 @@ public class Horse extends Mob {
 		      if (p != null && lp == null) {
 		    	  lp = p;
 		      }
-		      Game.getGame().getPlayer().horse_following = this;
+		      Game.get().getPlayer().horse_following = this;
 	    	  
 	    	  if (p.ridingOn == null || p.ridingOn == this) {
 	    			  
@@ -72,7 +68,7 @@ public class Horse extends Mob {
 	    	  if (breatheTime % 520 == 0) {
 	    		  Sound.Play(Sound.horse_Whinny, false);
 	    	  }
-				if (!Game.getGame().key.Sprint) {					
+				if (!Game.get().key.Sprint) {					
 				p.animSprite.setFrame(0);
 				
 				p.speed = 3;
@@ -91,7 +87,7 @@ public class Horse extends Mob {
 					this.breatheTime = 519;
 				}
 				}
-	      } 
+	      } */
 
 	  /*   if (Game.getGame().getPlayer().horse_following != null) {
 	     if (lp != null && p == null && (this.f_id == Game.getGame().getPlayer().horse_following.f_id)) {
@@ -144,9 +140,9 @@ public class Horse extends Mob {
 		time++;
 		move();
 		
-		if (Game.getGame().getPlayer().ridingOn != this) {
+		/*if (Game.get().getPlayer().ridingOn != this) {
 			walking = false;
-		}
+		}*/
 		
 		if (walking || walking2) 
 			animSprite.update();

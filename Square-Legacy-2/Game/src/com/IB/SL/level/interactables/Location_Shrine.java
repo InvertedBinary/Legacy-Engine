@@ -2,8 +2,8 @@ package com.IB.SL.level.interactables;
 
 import java.util.List;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.Game.gameState;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -54,16 +54,16 @@ public class Location_Shrine extends Interactable {
 			for (int i = 0; i < players.size(); i++) {
 				Player p = players.get(i);
 				if (p.input.generalActivator) {
-					Game.getGame().playerRespawn = new TileCoord(52, 72);
-					Game.getGame().playerRespawn = p_spawn;
-					System.out.println("Set player spawn location to: " + Game.getGame().playerRespawn.x() + ", " + Game.getGame().playerRespawn.y());
+					Boot.get().playerRespawn = new TileCoord(52, 72);
+					Boot.get().playerRespawn = p_spawn;
+					System.out.println("Set player spawn location to: " + Boot.get().playerRespawn.x() + ", " + Boot.get().playerRespawn.y());
 				}
 			}
 		}
 	}
 
 	public void render(Screen screen) {
-		if (Game.getGame().gameState == gameState.INGAME_A) {
+		if (Boot.get().devModeOn) {
 			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
 		}
 		sprite = Sprite.loc_shrine;

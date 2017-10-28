@@ -69,7 +69,6 @@ public class Shooting extends Mob{
 		double dx = p.getX() - x;
 		double dy = p.getY() - y;
 		double dir = Math.atan2(dy, dx);
-		shootingtrackerSpam(x, y, dir);
 	}
 
 	@Override

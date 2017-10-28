@@ -1,6 +1,6 @@
 package com.IB.SL.graphics.UI.menu;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.UI.part.UI_Button;
@@ -36,7 +36,7 @@ public class SettingsMenu extends UI_Menu {
 		
 			if (btn_back.clicked) {
 				navUp();
-				Game.getGame().loadProp.savePrefs(Game.getGame());
+				Boot.get().loadProp.savePrefs(Boot.get());
 			}
 	}
 	

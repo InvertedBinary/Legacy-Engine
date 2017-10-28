@@ -45,8 +45,8 @@ public class Keyboard implements KeyListener {
 		toggleChatWindow = keys[KeyEvent.VK_T];
 		generalActivator = keys[KeyEvent.VK_F];
 		
-		buildMode = toggles[KeyEvent.VK_B];
-
+		buildMode = (true) ? toggles[KeyEvent.VK_B] : false;
+		toggles[KeyEvent.VK_B] = (true) ? toggles[KeyEvent.VK_B] : false;
 		
 		/**
 		 * gameState Keys:

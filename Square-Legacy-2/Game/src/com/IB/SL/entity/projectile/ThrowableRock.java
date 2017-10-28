@@ -2,7 +2,7 @@ package com.IB.SL.entity.projectile;
 
 import java.util.List;
 
-import com.IB.SL.Game;
+import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -24,7 +24,7 @@ public class ThrowableRock extends Projectile{
 		super(x, y, dir);
 		range = random.nextInt(55) + 60;
 		speed = 1.5;
-		if (mob != Game.getGame().getPlayer())		
+		if (mob != Boot.get().getPlayer())		
 			speed = 2;
 		damage = 3;
 		this.mob = mob;
@@ -49,7 +49,7 @@ public class ThrowableRock extends Projectile{
 		rot_time = 0;
 		}
 
-		if (mob == Game.getGame().getPlayer()) {			
+		if (mob == Boot.get().getPlayer()) {			
 			Collision(this, entities); 
 		} else {
 			speed = 2;
@@ -68,15 +68,6 @@ public class ThrowableRock extends Projectile{
 			remove();
 		}
 		
-		za -= 0.9;
-		
-		if (zz < 0) {
-			zz = 0;
-			za *= -0;
-			xa *= 0;
-			ya *= 0;
-		}
-		
 		move();
 		
 	}
@@ -84,7 +75,7 @@ public class ThrowableRock extends Projectile{
 	int mod = 1000;
 	protected void move() {
 		x += nx;
-		y += ny -= (zz + za) / mod;
+		y += ny -= mod;
 		if (distance() > range) {
 			level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
 			remove();
