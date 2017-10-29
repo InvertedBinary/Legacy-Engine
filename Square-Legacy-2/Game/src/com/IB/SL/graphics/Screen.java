@@ -29,7 +29,7 @@ public class Screen {
 	private static int ss = 15;
 	public static int xo, yo;
 	private int[][] lightlevels;
-	final static  int ALPHA_COL = 0xffFF3AFB;
+	public final static  int ALPHA_COL = 0xffFF00FF;
 	
 	public Screen(int width, int height) {
 		this.width = width;

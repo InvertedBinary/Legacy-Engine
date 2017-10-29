@@ -12,7 +12,7 @@ public class DoorTile extends Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
-		screen.renderTile(x << Game.TILE_BIT_SHIFT, y << Game.TILE_BIT_SHIFT, new Sprite(16, 0xffFF3AFB));
+		screen.renderTile(x << Game.TILE_BIT_SHIFT, y << Game.TILE_BIT_SHIFT, new Sprite(16, screen.ALPHA_COL));
 		//screen.blendTiles(x << Game.TILE_BIT_SHIFT, y << Game.TILE_BIT_SHIFT, DoorTile, swirly);
 	}
 	

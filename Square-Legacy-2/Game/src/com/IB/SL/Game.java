@@ -200,7 +200,7 @@ public class Game extends Canvas implements Runnable {
 		
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
-		level.add(getPlayer());
+		//level.add(getPlayer());
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
 		font = new font();
@@ -210,7 +210,7 @@ public class Game extends Canvas implements Runnable {
 		addMouseWheelListener(mouse);
 		
 		getMenu().addMenus();
-		getMenu().load(getMenu().MainMenu);
+		getMenu().load(getMenu().MainMenu, true);
 		
 	}
 	
@@ -381,9 +381,10 @@ public class Game extends Canvas implements Runnable {
 		//if (gameState != gameState.MENU) {
 		loadProp.savePrefs(this);
 		if (autoSave || autoOverride) {
-		List<PlayerMP> players = level.players;
-		if (players != null) {
+			if (getLevel().players.size() > 0) {
+		if (getLevel().getClientPlayer() != null) {
 			getLevel().getClientPlayer().invokeSave(getLevel().getClientPlayer());
+				}
 				}
 			}
 		//}
@@ -399,18 +400,25 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	
+	short menu_time;
 	public void updateMode() {
 		// adminCmds();
 		
 		if (getMenu().ConsoleMenu.enabled == false) {	
 			if (key.console) {
-				getMenu().load(getMenu().ConsoleMenu);
+				getMenu().load(getMenu().ConsoleMenu, true);
+				menu_time = 25;
+			}
+			if (key.Pause && menu_time == 0) {
+				Boot.get().getMenu().load(gui.menu.MainMenu, false);
 			}
 		} else if (key.Pause) {
 			getMenu().unload(getMenu().ConsoleMenu);
 		}
 		
+		if (menu_time > 0) {
+			menu_time--;
+		}
 
 			autoSave();
 		if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
@@ -484,12 +492,12 @@ public class Game extends Canvas implements Runnable {
 		
 	//if (!screen.shakeScreen()) {
 			
-		
-		
+		if (level.players.size() > 0) {
 		xScroll = getPlayer().getX() - screen.width / 2;
 		yScroll = getPlayer().getY() - screen.height / 2;
+		}
 		
-		
+
 		//}
 
 		

@@ -888,9 +888,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		} else if (e instanceof Spawner) {
 			Spawner.add((Spawner) e);
 		} else {
-		//	if (!Game.cmdln_args.get("-nospawns")) {				
 			entities.add(e);
-		//	}
 			if (e instanceof Mob) {
 				try {
 				e.maxhealth *= (10 / ( 1 + Math.pow(Math.E, -0.1 * (Boot.get().getPlayer().Lvl - 40)))) + 1;

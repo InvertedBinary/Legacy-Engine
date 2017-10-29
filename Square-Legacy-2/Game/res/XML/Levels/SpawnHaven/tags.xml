@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entity>
+	<level id="0">
+		<name>Spawn Haven</name>
+		<tile-map>/XML/levels/SpawnHaven/level.png</tile-map>
+		<overlay-map>/XML/levels/SpawnHaven/overlay.png</overlay-map>
+		<rarity>4</rarity>
+		<hostility>HOSTILITY.AGR</hostility>
+		<exp>5</exp>
+	</level>
+	<sprite xOffset="-8" yOffset="-15">
+		<down width="16" height="16" length="3">zombie01_down</down>
+		<up width="16" height="16" length="3">zombie01_up</up>
+		<left width="16" height="16" length="3">zombie01_left</left>
+		<right width="16" height="16" length="3">zombie01_right</right>
+	</sprite>
+</entity>
