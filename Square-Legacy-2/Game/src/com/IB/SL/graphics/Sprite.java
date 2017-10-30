@@ -33,7 +33,7 @@ public class Sprite {
 
 
 	public static Sprite robobob = new Sprite(20, 0, 0, SpriteSheet.robobob);
-	
+	  
 	public static Sprite water = new Sprite(16, 0, 0, SpriteSheet.Water_Main);
 	public static Sprite water2 = new Sprite(16, 0, 1, SpriteSheet.Water_Main);
 	//public static Sprite ibLOGO = new Sprite(300, 0, 0, SpriteSheet.ibLOGO);

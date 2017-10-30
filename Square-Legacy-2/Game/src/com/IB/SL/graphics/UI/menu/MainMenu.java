@@ -148,8 +148,10 @@ public class MainMenu extends UI_Menu {
 	
 	public void continueGame() {
 		Boot.get().getMenu().unload(Boot.get().getMenu().current);
+		if (Boot.get().level.players.size() == 0) {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
+		}
 	}
 	
 	public void render(Screen screen) {

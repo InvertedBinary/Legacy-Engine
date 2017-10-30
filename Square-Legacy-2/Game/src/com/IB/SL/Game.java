@@ -492,11 +492,6 @@ public class Game extends Canvas implements Runnable {
 		
 	//if (!screen.shakeScreen()) {
 			
-		if (level.players.size() > 0) {
-		xScroll = getPlayer().getX() - screen.width / 2;
-		yScroll = getPlayer().getY() - screen.height / 2;
-		}
-		
 
 		//}
 
@@ -577,28 +572,10 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 
 	}
-    
-    public void setWindowIcon(String path) {
-    	frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				Game.class.getResource(path)));
-    	
-    }
-    
-    public Cursor setMouseIcon(String path) {
-    	Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = null;
-		image = Toolkit.getDefaultToolkit().getImage(
-				Game.class.getResource(path));
-
-		Point hotspot = new Point(0, 0);
-		Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
-		frame.setCursor(cursor);
-		return cursor;
-    }
 
     
     public void Launch(Game game) {
-		setWindowIcon("/Textures/sheets/wizard.png");
+		Boot.setWindowIcon("/Textures/sheets/wizard.png");
 		game.frame.setResizable(false);			
 		if (Boot.launch_args.containsKey("-resizeable")) {
 		game.frame.setResizable(true);			
@@ -614,43 +591,13 @@ public class Game extends Canvas implements Runnable {
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		setMouseIcon("/Textures/cursor.png");
+		Boot.setMouseIcon("/Textures/cursor.png");
 
 		game.start();
-		 centerMouse();
+		Boot.centerMouse();
 	}
     
-	public void centerMouse() {
-		int centreFrameX = frame.getX() + (frame.getWidth() / 2);
-		int centreFrameY = frame.getY() + (frame.getHeight() / 2);
-		moveMouse(new Point(centreFrameX, centreFrameY));
-	}
-	
-	public static void moveMouse(Point p) {
-	    GraphicsEnvironment ge = 
-	        GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    GraphicsDevice[] gs = ge.getScreenDevices();
-	    for (GraphicsDevice device: gs) { 
-	        GraphicsConfiguration[] configurations =
-	            device.getConfigurations();
-	        for (GraphicsConfiguration config: configurations) {
-	            Rectangle bounds = config.getBounds();
-	            if(bounds.contains(p)) {
-	                Point b = bounds.getLocation(); 
-	                Point s = new Point(p.x - b.x, p.y - b.y);
-	                try {
-	                    Robot r = new Robot(device);
-	                    r.mouseMove(s.x, s.y);
-	                } catch (AWTException e) {
-	                    e.printStackTrace();
-	                }
 
-	                return;
-	            }
-	        }
-	    }
-	    return;
-	}
 	
 	
 	public Screen getScreen() {
@@ -677,27 +624,6 @@ public class Game extends Canvas implements Runnable {
 		this.gui = gui;
 	}
 	
-	public static void log(String text, boolean err) {
-		if (!err) {			
-			System.out.println(" >> " + text);
-		} else {
-			System.err.println(" >> ALERT: " + text);			
-		}
-	}
-	
-	public static void log(String text, String outboundClass, boolean err) {
-		if (!err) {			
-			System.out.println(" >> " + text);
-		} else {
-			System.err.print(outboundClass + " >> ALERT: ");
-				System.out.println(text);
-		}
-	}
-	
-	public void setMousePos(int framex, int framey) {
-		moveMouse(new Point(framex, framey));
-	}
-
 	public void quit() {
 		System.out.println("Saving & Closing Application");
 			save(false);			

@@ -18,6 +18,7 @@ public class SpriteSheet {
 	private int width, height;
 	public int[] pixels;
 	
+	
 	public static SpriteSheet Teleporter = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/Teleporter.png", 32, 512);
 	public static SpriteSheet maps_Spawn = new SpriteSheet(Maps.main, 1024, 1024);
 
@@ -58,7 +59,7 @@ public class SpriteSheet {
 	public static SpriteSheet title = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/Menu.png", 300);
 	public static SpriteSheet ibLOGO = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/ibLOGO.png", 300);
 	public static SpriteSheet robobob = new SpriteSheet("/Textures/sheets/00_MobSheets/robobob.png", 20);
-
+	public static SpriteSheet robotbob = new SpriteSheet(robobob, 0, 0, 1, 1, 20);
 	public static SpriteSheet bgFade = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/fade.png", 300, 168);
 
 	/**

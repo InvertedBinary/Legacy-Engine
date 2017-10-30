@@ -202,18 +202,6 @@ public class Player extends Mob implements Serializable{
 		System.out.println("-----------------------STEP5----------------------------");
 		temp = null;
 		
-		if (getUsername().equalsIgnoreCase("Nate")) {
-			//	inventory.add(new testItem_EQ001(EquipableItem.slot_WEAPON));
-				/*inventory.add(new wand_Pulsefire(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_VoidCrook(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_FlareScepter(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_StygianScepter(EquipableItem.slot_WEAPON)); // fires 5 in a cone
-				inventory.add(new wand_ContradictionWand(EquipableItem.slot_WEAPON)); // fires 10 in a circle*/
-				this.money = 5000;
-			}
-		
-		
-		
 		if (Game.runTut) {
 			setPosition(73, 38, Maps.tutWorldId, true);
 		}
@@ -545,6 +533,9 @@ public class Player extends Mob implements Serializable{
 	
 private transient Sprite arrow = Sprite.QuestArrow;
 	public void render(Screen screen) {
+		Boot.get().xScroll = this.getX() - screen.width / 2;
+		Boot.get().yScroll = this.getY() - screen.height / 2;
+		
 	sprite = animSprite.getSprite();
 	
 			screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff),  sprite);			
@@ -693,7 +684,6 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		if (Mouse.getButton() == 1) {
 			this.level.tiles[x + y *  level.width] = toPlace.getHex();
 			SpriteSheet.minimapDYN.pixels[x + y * SpriteSheet.minimapDYN.getWidth()] = toPlace.getHex();
-			
 		}
 		
 	}
