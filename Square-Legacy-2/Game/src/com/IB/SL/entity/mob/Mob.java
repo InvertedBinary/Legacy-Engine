@@ -61,7 +61,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		
 		try {
 			
-			if (!Level.Overworld && level.getPlayersFixedBool((int)Boot.get().getPlayer().getX() - 8, (int)Boot.get().getPlayer().getY() - 15, 20)) {
+			if (level.getPlayersFixedBool((int)Boot.get().getPlayer().getX() - 8, (int)Boot.get().getPlayer().getY() - 15, 20)) {
 	//	List<PlayerMP> players = level.getPlayersFixed((int)this.x + 8, (int) this.y + 8, 20);
 			while (xa != 0) {
 				if (Math.abs(xa) > 1) {

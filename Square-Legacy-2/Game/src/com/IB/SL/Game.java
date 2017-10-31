@@ -89,7 +89,6 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	public static String PlayerName = "Player";
 	File screenshots = null;
-	public static boolean runTut = false;
 
 	int saveTime = 0;
 	/**
@@ -368,9 +367,6 @@ public class Game extends Canvas implements Runnable {
 			autoSave = true;
 		}
 		
-		if (Game.runTut) {
-			getPlayer().setPosition(73, 38, Maps.tutWorldId, true);
-		}
 	}
 	
 	public void updatePause() {
@@ -400,24 +396,20 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	short menu_time;
 	public void updateMode() {
 		// adminCmds();
 		
 		if (getMenu().ConsoleMenu.enabled == false) {	
 			if (key.console) {
 				getMenu().load(getMenu().ConsoleMenu, true);
-				menu_time = 25;
 			}
-			if (key.Pause && menu_time == 0) {
-				Boot.get().getMenu().load(gui.menu.MainMenu, false);
-			}
-		} else if (key.Pause) {
+
+		} else if (key.console) {
 			getMenu().unload(getMenu().ConsoleMenu);
 		}
 		
-		if (menu_time > 0) {
-			menu_time--;
+		if (key.Pause) {
+			Boot.get().getMenu().load(gui.menu.MainMenu, false);
 		}
 
 			autoSave();
@@ -491,7 +483,6 @@ public class Game extends Canvas implements Runnable {
 		
 		
 	//if (!screen.shakeScreen()) {
-			
 
 		//}
 

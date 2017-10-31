@@ -1,0 +1,9 @@
+package com.IB.SL.level.worlds;
+
+import com.IB.SL.graphics.Sprite;
+
+public class LevelExit {
+
+	public LevelExit() {
+	}
+}

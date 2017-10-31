@@ -1,0 +1,16 @@
+package com.IB.SL.level.worlds;
+
+import org.w3c.dom.Element;
+
+public class LevelExit {
+	
+	public String xml;
+	public int tx, ty;
+	public int x, y, w, h;
+	
+	public LevelExit(Element eElement) {
+		this.xml = eElement;
+		
+		
+	}
+}

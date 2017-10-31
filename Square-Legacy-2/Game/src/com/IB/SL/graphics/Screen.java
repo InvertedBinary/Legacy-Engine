@@ -1223,7 +1223,7 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 
 							}
 					}	catch (Exception e) {
-						System.out.println("mini map exception");
+						//System.out.println("mini map exception");
 					}
 				}
 
