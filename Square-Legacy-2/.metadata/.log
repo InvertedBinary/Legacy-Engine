@@ -371,3 +371,1131 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
 	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
 	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.epp.mpc.ui 1 0 2017-10-30 22:09:05.293
+!MESSAGE Performing Marketplace install request from http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=856887
+
+!ENTRY org.eclipse.e4.ui.css.swt.theme 4 0 2017-10-30 22:09:07.008
+!MESSAGE 
+!STACK 0
+java.lang.NullPointerException
+	at com.codeaffine.eclipse.swt.widget.scrollbar.FlatScrollBar.setBackground(FlatScrollBar.java:237)
+	at org.eclipse.e4.ui.css.swt.helpers.CSSSWTColorHelper.setBackground(CSSSWTColorHelper.java:355)
+	at org.eclipse.e4.ui.css.swt.properties.css2.CSSPropertyBackgroundSWTHandler.applyCSSPropertyBackgroundColor(CSSPropertyBackgroundSWTHandler.java:77)
+	at org.eclipse.e4.ui.css.core.dom.properties.css2.AbstractCSSPropertyBackgroundHandler.applyCSSProperty(AbstractCSSPropertyBackgroundHandler.java:35)
+	at org.eclipse.e4.ui.css.swt.properties.css2.CSSPropertyBackgroundSWTHandler.applyCSSProperty(CSSPropertyBackgroundSWTHandler.java:43)
+	at org.eclipse.e4.ui.css.core.impl.engine.AbstractCSSEngine.applyCSSProperty(AbstractCSSEngine.java:766)
+	at org.eclipse.e4.ui.css.core.impl.engine.AbstractCSSEngine.applyStyleDeclaration(AbstractCSSEngine.java:552)
+	at org.eclipse.e4.ui.css.core.impl.engine.AbstractCSSEngine.applyStyles(AbstractCSSEngine.java:426)
+	at org.eclipse.e4.ui.css.core.impl.engine.AbstractCSSEngine.applyStyles(AbstractCSSEngine.java:367)
+	at org.eclipse.e4.ui.css.swt.engine.CSSSWTEngineImpl.applyStyles(CSSSWTEngineImpl.java:29)
+	at org.eclipse.e4.ui.css.swt.engine.CSSSWTApplyStylesListener$1.handleEvent(CSSSWTApplyStylesListener.java:32)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4428)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4420)
+	at org.eclipse.swt.widgets.Display.runSkin(Display.java:4321)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1361)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1774)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4918)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5178)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2555)
+	at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:88)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5743)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4931)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5178)
+	at org.eclipse.swt.internal.win32.OS.SetWindowPos(Native Method)
+	at org.eclipse.swt.widgets.Widget.SetWindowPos(Widget.java:1482)
+	at org.eclipse.swt.widgets.Control.setBoundsInPixels(Control.java:3304)
+	at org.eclipse.swt.widgets.Composite.setBoundsInPixels(Composite.java:1079)
+	at org.eclipse.swt.widgets.Control.setBoundsInPixels(Control.java:3265)
+	at org.eclipse.swt.widgets.Control.setSizeInPixels(Control.java:3829)
+	at org.eclipse.swt.widgets.Control.setSize(Control.java:3824)
+	at com.codeaffine.eclipse.swt.widget.scrollbar.Direction$2.setDefaultSize(Direction.java:116)
+	at com.codeaffine.eclipse.swt.widget.scrollbar.FlatScrollBar.<init>(FlatScrollBar.java:71)
+	at com.codeaffine.eclipse.swt.widget.scrollbar.FlatScrollBar.<init>(FlatScrollBar.java:57)
+	at com.codeaffine.eclipse.swt.widget.scrollbar.FlatScrollBarsProvider.createScrollBars(FlatScrollBarsProvider.java:23)
+	at org.eclipse.swt.custom.ScrolledComposite.createScrollBar(ScrolledComposite.java:842)
+	at org.eclipse.swt.custom.ScrolledComposite.<init>(ScrolledComposite.java:163)
+	at org.eclipse.equinox.internal.p2.ui.discovery.util.ControlListViewer.<init>(ControlListViewer.java:50)
+	at org.eclipse.equinox.internal.p2.ui.discovery.wizards.CatalogViewer$3.<init>(CatalogViewer.java:329)
+	at org.eclipse.equinox.internal.p2.ui.discovery.wizards.CatalogViewer.doCreateViewer(CatalogViewer.java:329)
+	at org.eclipse.epp.internal.mpc.ui.wizards.MarketplaceViewer.doCreateViewer(MarketplaceViewer.java:917)
+	at org.eclipse.equinox.internal.p2.ui.discovery.util.FilteredViewer.createControl(FilteredViewer.java:80)
+	at org.eclipse.epp.internal.mpc.ui.wizards.MarketplacePage.doCreateViewer(MarketplacePage.java:725)
+	at org.eclipse.equinox.internal.p2.ui.discovery.wizards.CatalogPage.createControl(CatalogPage.java:52)
+	at org.eclipse.epp.internal.mpc.ui.wizards.MarketplacePage.createControl(MarketplacePage.java:184)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:176)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:688)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:580)
+	at org.eclipse.jface.window.Window.create(Window.java:426)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1096)
+	at org.eclipse.jface.window.Window.open(Window.java:783)
+	at org.eclipse.epp.internal.mpc.ui.commands.AbstractMarketplaceWizardCommand.openWizardDialog(AbstractMarketplaceWizardCommand.java:136)
+	at org.eclipse.epp.internal.mpc.ui.commands.AbstractMarketplaceWizardCommand.execute(AbstractMarketplaceWizardCommand.java:63)
+	at org.eclipse.epp.mpc.ui.MarketplaceUrlHandler.triggerInstall(MarketplaceUrlHandler.java:222)
+	at org.eclipse.epp.internal.mpc.ui.wizards.MarketplaceDropAdapter.proceedInstallation(MarketplaceDropAdapter.java:168)
+	at org.eclipse.epp.internal.mpc.ui.wizards.MarketplaceDropAdapter$MarketplaceDropTargetListener$1.run(MarketplaceDropAdapter.java:295)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4213)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3820)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+!SESSION 2017-10-30 22:10:50.132 -----------------------------------------------
+eclipse.buildId=4.7.0.I20170612-0950
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.ui 2 0 2017-10-30 22:11:35.603
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.603
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.build', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.603
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.rebuild', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.603
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.clean', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.603
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.publish', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addactorservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addstatelessservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestcontainerservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestbinaryservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.uninstall', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.deploy', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:35.604
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.editmanifests', categoryId='servicefabric.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.build', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.rebuild', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.clean', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.publish', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addactorservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addstatelessservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestcontainerservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.addguestbinaryservice', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.uninstall', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.deploy', categoryId='servicefabric.commands.category'
+!SUBENTRY 1 org.eclipse.ui 2 0 2017-10-30 22:11:36.614
+!MESSAGE Commands should really have a category: plug-in='Servicefabric.plugin', id='servicefabric.commands.editmanifests', categoryId='servicefabric.commands.category'
+
+!ENTRY com.microsoft.azuretools.core 1 0 2017-10-30 22:11:39.899
+!MESSAGE Plugin folder path:C:\Users\Nate\eclipse\java-oxygen\eclipse\..\..\..\.p2\pool\plugins
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2017-10-30 22:11:48.175
+!MESSAGE Darkest Dark detected colors from an earlier Eclipse Color Theme install that are being cleaned up to avoid workspace pollution
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2017-10-30 22:12:01.414
+!MESSAGE Project facet jst.ejb has not been defined. It is used in plugin org.eclipse.jst.j2ee.
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-10-30 22:12:08.182
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nate'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.osgi 2 0 2017-10-30 22:12:16.807
+!MESSAGE While loading class "com.microsoft.tfs.client.eclipse.ui.productplugin.EclipseProductPluginProvider", thread "Thread[main,6,main]" timed out waiting (5002ms) for thread "Thread[Worker-6,5,main]" to finish starting bundle "com.microsoft.tfs.client.eclipse.ui_14.120.0.201706271645 [667]". To avoid deadlock, thread "Thread[main,6,main]" is proceeding but "com.microsoft.tfs.client.eclipse.ui.productplugin.EclipseProductPluginProvider" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: Unable to acquire the state change lock for the module: osgi.identity; type="osgi.bundle"; version:Version="14.120.0.201706271645"; osgi.identity="com.microsoft.tfs.client.eclipse.ui"; singleton:="true" [id=667] STARTED [STARTED]
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:337)
+	at org.eclipse.osgi.container.Module.start(Module.java:401)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:468)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:103)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:529)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:328)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:368)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:446)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:150)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.loadClass(EquinoxBundle.java:564)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:174)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:905)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:55)
+	at com.microsoft.tfs.client.common.util.ExtensionLoader.loadSingleExtensionClass(ExtensionLoader.java:74)
+	at com.microsoft.tfs.client.common.util.ExtensionLoader.loadSingleExtensionClass(ExtensionLoader.java:30)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.getProductPlugin(TFSCommonUIClientPlugin.java:221)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.createConsole(TFSCommonUIClientPlugin.java:172)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.access$000(TFSCommonUIClientPlugin.java:39)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin$1$1.run(TFSCommonUIClientPlugin.java:129)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4213)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3820)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+Caused by: java.util.concurrent.TimeoutException: Timeout after waiting 5 seconds to acquire the lock.
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:334)
+	... 47 more
+Root exception:
+java.util.concurrent.TimeoutException: Timeout after waiting 5 seconds to acquire the lock.
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:334)
+	at org.eclipse.osgi.container.Module.start(Module.java:401)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:468)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:103)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:529)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:328)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:368)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:446)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:150)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.loadClass(EquinoxBundle.java:564)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:174)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:905)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:55)
+	at com.microsoft.tfs.client.common.util.ExtensionLoader.loadSingleExtensionClass(ExtensionLoader.java:74)
+	at com.microsoft.tfs.client.common.util.ExtensionLoader.loadSingleExtensionClass(ExtensionLoader.java:30)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.getProductPlugin(TFSCommonUIClientPlugin.java:221)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.createConsole(TFSCommonUIClientPlugin.java:172)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.access$000(TFSCommonUIClientPlugin.java:39)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin$1$1.run(TFSCommonUIClientPlugin.java:129)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4213)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3820)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY org.eclipse.ui 4 0 2017-10-30 22:12:16.838
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException: productPlugin must not be null
+	at com.microsoft.tfs.util.Check.throwForNull(Check.java:116)
+	at com.microsoft.tfs.util.Check.notNull(Check.java:22)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.getProductPlugin(TFSCommonUIClientPlugin.java:227)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.createConsole(TFSCommonUIClientPlugin.java:172)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin.access$000(TFSCommonUIClientPlugin.java:39)
+	at com.microsoft.tfs.client.common.ui.TFSCommonUIClientPlugin$1$1.run(TFSCommonUIClientPlugin.java:129)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4213)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3820)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY org.eclipse.osgi 2 0 2017-10-30 22:12:18.760
+!MESSAGE While loading class "com.microsoft.tfs.client.eclipse.util.TeamUtils", thread "Thread[Worker-4,5,main]" timed out waiting (5001ms) for thread "Thread[Worker-6,5,main]" to finish starting bundle "com.microsoft.tfs.client.eclipse_14.120.0.201706271645 [663]". To avoid deadlock, thread "Thread[Worker-4,5,main]" is proceeding but "com.microsoft.tfs.client.eclipse.util.TeamUtils" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: Unable to acquire the state change lock for the module: osgi.identity; type="osgi.bundle"; version:Version="14.120.0.201706271645"; osgi.identity="com.microsoft.tfs.client.eclipse"; singleton:="true" [id=663] STARTED [STARTED]
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:337)
+	at org.eclipse.osgi.container.Module.start(Module.java:401)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:468)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:103)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:529)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:328)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:368)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:446)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:150)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at com.microsoft.tfs.client.eclipse.project.ProjectRepositoryManager.shouldConnect(ProjectRepositoryManager.java:529)
+	at com.microsoft.tfs.client.eclipse.project.ProjectRepositoryManager.start(ProjectRepositoryManager.java:179)
+	at com.microsoft.tfs.client.eclipse.TFSEclipseClientPlugin$1.run(TFSEclipseClientPlugin.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: java.util.concurrent.TimeoutException: Timeout after waiting 5 seconds to acquire the lock.
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:334)
+	... 15 more
+Root exception:
+java.util.concurrent.TimeoutException: Timeout after waiting 5 seconds to acquire the lock.
+	at org.eclipse.osgi.container.Module.lockStateChange(Module.java:334)
+	at org.eclipse.osgi.container.Module.start(Module.java:401)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:468)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:103)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:529)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:328)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:368)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:446)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:150)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at com.microsoft.tfs.client.eclipse.project.ProjectRepositoryManager.shouldConnect(ProjectRepositoryManager.java:529)
+	at com.microsoft.tfs.client.eclipse.project.ProjectRepositoryManager.start(ProjectRepositoryManager.java:179)
+	at com.microsoft.tfs.client.eclipse.TFSEclipseClientPlugin$1.run(TFSEclipseClientPlugin.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.ui 4 4 2017-10-30 22:17:52.937
+!MESSAGE Referenced part does not exist yet: org.eclipse.jdt.ui.PackageExplorer.
+
+!ENTRY org.eclipse.ui 4 4 2017-10-30 22:17:52.951
+!MESSAGE Referenced part does not exist yet: org.eclipse.ui.views.TaskList.
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:19:24.326
+!MESSAGE received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0 (StunServiceImpl.java:420)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:19:34.927
+!MESSAGE  new connection state == ERROR (XMPPConnectionService.java:400)
+!STACK 0
+gmail.com:5222 Exception: XMPPError connecting to gmail.com:5222.; : remote-server-error(502)
+  -- caused by: XMPPError connecting to gmail.com:5222.: remote-server-error(502) XMPPError connecting to gmail.com:5222.
+  -- caused by: java.net.ConnectException: Connection timed out: connect
+	at org.jivesoftware.smack.XMPPConnection.connectUsingConfiguration(XMPPConnection.java:592)
+	at org.jivesoftware.smack.XMPPConnection.connect(XMPPConnection.java:1010)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:268)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$6.run(ChangeXMPPAccountAction.java:201)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+Nested Exception: 
+XMPPError connecting to gmail.com:5222.: remote-server-error(502) XMPPError connecting to gmail.com:5222.
+  -- caused by: java.net.ConnectException: Connection timed out: connect
+	at org.jivesoftware.smack.XMPPConnection.connectUsingConfiguration(XMPPConnection.java:565)
+	at org.jivesoftware.smack.XMPPConnection.connect(XMPPConnection.java:1010)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:268)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$6.run(ChangeXMPPAccountAction.java:201)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+Nested Exception: 
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at org.jivesoftware.smack.proxy.DirectSocketFactory.createSocket(DirectSocketFactory.java:45)
+	at org.jivesoftware.smack.XMPPConnection.connectUsingConfiguration(XMPPConnection.java:557)
+	at org.jivesoftware.smack.XMPPConnection.connect(XMPPConnection.java:1010)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:268)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$6.run(ChangeXMPPAccountAction.java:201)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:20:34.726
+!MESSAGE  new connection state == ERROR (XMPPConnectionService.java:400)
+!STACK 0
+SASL authentication PLAIN failed: not-authorized: 
+	at org.jivesoftware.smack.SASLAuthentication.authenticate(SASLAuthentication.java:342)
+	at org.jivesoftware.smack.XMPPConnection.login(XMPPConnection.java:243)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:276)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$6.run(ChangeXMPPAccountAction.java:201)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:20:44.712
+!MESSAGE received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0 (StunServiceImpl.java:420)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:20:49.996
+!MESSAGE  new connection state == ERROR (XMPPConnectionService.java:400)
+!STACK 0
+SASL authentication PLAIN failed: not-authorized: 
+	at org.jivesoftware.smack.SASLAuthentication.authenticate(SASLAuthentication.java:342)
+	at org.jivesoftware.smack.XMPPConnection.login(XMPPConnection.java:243)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:276)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.ConnectingFailureHandler$3.run(ConnectingFailureHandler.java:96)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:21:00.167
+!MESSAGE received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0 (StunServiceImpl.java:420)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:23:06.065
+!MESSAGE  new connection state == ERROR (XMPPConnectionService.java:400)
+!STACK 0
+SASL authentication PLAIN failed: not-authorized: 
+	at org.jivesoftware.smack.SASLAuthentication.authenticate(SASLAuthentication.java:342)
+	at org.jivesoftware.smack.XMPPConnection.login(XMPPConnection.java:243)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:276)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$6.run(ChangeXMPPAccountAction.java:201)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:23:16.136
+!MESSAGE received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0 (StunServiceImpl.java:420)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:23:24.768
+!MESSAGE received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0 (StunServiceImpl.java:420)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:23:45.065
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:24:15.267
+!MESSAGE Service Discovery failed on recipient 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/MessagingA22E623E035 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:24:45.275
+!MESSAGE Service Discovery failed on recipient 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:25:15.287
+!MESSAGE Service Discovery failed on recipient trahmlow@gmail.com/MessagingA6349c002 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:29:57.801
+!MESSAGE Internal Error: (ThreadUtils.java:40)
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4533)
+	at org.eclipse.swt.SWT.error(SWT.java:4448)
+	at org.eclipse.swt.SWT.error(SWT.java:4419)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:482)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:354)
+	at org.eclipse.swt.widgets.Widget.getData(Widget.java:539)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.selectExistentTab(ChatRoomsComposite.java:596)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.openChat(ChatRoomsComposite.java:510)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatControl$5$1.run(ChatControl.java:238)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4213)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3820)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:29:57.810
+!MESSAGE Original caller: (ThreadUtils.java:41)
+!STACK 0
+StackTrace:
+	at de.fu_berlin.inf.dpp.util.ThreadUtils.wrapSafe(ThreadUtils.java:32)
+	at de.fu_berlin.inf.dpp.ui.util.SWTUtils.runSafeSWTAsync(SWTUtils.java:139)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatControl$5.messageReceived(ChatControl.java:232)
+	at de.fu_berlin.inf.dpp.communication.chat.AbstractChat.notifyJIDMessageReceived(AbstractChat.java:81)
+	at de.fu_berlin.inf.dpp.communication.chat.single.SingleUserChat$1.processMessage(SingleUserChat.java:41)
+	at de.fu_berlin.inf.dpp.communication.chat.single.SingleUserChat.sendMessage(SingleUserChat.java:156)
+	at de.fu_berlin.inf.dpp.communication.chat.single.SingleUserChat.sendMessage(SingleUserChat.java:172)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatControl.sendMessage(ChatControl.java:722)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatControl.access$2(ChatControl.java:718)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatControl$2.keyPressed(ChatControl.java:157)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:168)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4428)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1103)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1088)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1130)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1126)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1547)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4962)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:364)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4843)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:359)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5178)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2560)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3815)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1044)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:10.792
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:30:25.478
+!MESSAGE discovery for service 'gmail.com' failed (XMPPUtils.java:345)
+!STACK 0
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:25.488
+!MESSAGE MUC service is not available, aborting connection request (MultiUserChatService.java:103)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:40.801
+!MESSAGE Service Discovery failed on recipient trahmlow@gmail.com/MessagingA6349c002 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:49.793
+!MESSAGE Viewport Range Problem in org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor$AdaptedSourceViewer@1fbef3f4: Bottom == 3 < Top == 13 (EditorAPI.java:381)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:50.434
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:50.445
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:50.458
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:30:50.480
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:00.629
+!MESSAGE OSN [remote side: 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/Saros4BE31CEE] : could not obtain remote Saros version (OutgoingSessionNegotiation.java:262)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:00.639
+!MESSAGE cancelled process OSN [remote side: 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/Saros4BE31CEE], error: Could not obtain the version of the Saros plugin from Robbie S. Please try again. (CancelableProcess.java:398)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:00.864
+!MESSAGE Invitation was cancelled locally because of an error: Could not obtain the version of the Saros plugin from Robbie S. Please try again.
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:10.085
+!MESSAGE discovery for service 'gmail.com' failed (XMPPUtils.java:345)
+!STACK 0
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:31:10.095
+!MESSAGE MUC service is not available, aborting connection request (MultiUserChatService.java:103)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:31:10.262
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:31:10.822
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:20.320
+!MESSAGE OSN [remote side: 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/Saros4BE31CEE] : could not obtain remote Saros version (OutgoingSessionNegotiation.java:262)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:20.328
+!MESSAGE cancelled process OSN [remote side: 3gjl8gs9gw3zw1b2bswxadsdc0@public.talk.google.com/Saros4BE31CEE], error: Could not obtain the version of the Saros plugin from Robbie S. Please try again. (CancelableProcess.java:398)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:31:20.566
+!MESSAGE Invitation was cancelled locally because of an error: Could not obtain the version of the Saros plugin from Robbie S. Please try again.
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:31:40.829
+!MESSAGE Service Discovery failed on recipient trahmlow@gmail.com/MessagingA6349c002 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:32:10.838
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:32:40.845
+!MESSAGE Service Discovery failed on recipient trahmlow@gmail.com/MessagingA6349c002 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:33:10.982
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:33:21.790
+!MESSAGE discovery for service 'gmail.com' failed (XMPPUtils.java:345)
+!STACK 0
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:33:21.800
+!MESSAGE MUC service is not available, aborting connection request (MultiUserChatService.java:103)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:33:21.818
+!MESSAGE could not get resource reference from editor part: org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart@6b1b9944 (EditorAPI.java:298)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:33:24.860
+!MESSAGE discovery for service 'gmail.com' failed (XMPPUtils.java:345)
+!STACK 0
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:33:38.949
+!MESSAGE [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host (Socks5Transport.java:411)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:33:38.957
+!MESSAGE An error occurred while establishing a response connection  (Socks5Transport.java:440)
+!STACK 0
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:33:38.965
+!MESSAGE could not establish bytestream connection to 3robbie7@gmail.com/Saros4BE31CEE (ByteStreamTransport.java:105)
+!STACK 0
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:33:40.990
+!MESSAGE Service Discovery failed on recipient trahmlow@gmail.com/MessagingA6349c002 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:34:10.998
+!MESSAGE Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:34:21.956
+!MESSAGE [SOCKS5Transport] could not establish a connection to 3robbie7@gmail.com/Saros4BE31CEE, remote side could not connect to any offered stream hosts: item-not-found(404) Could not establish socket with any provided host (Socks5Transport.java:544)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:34:25.645
+!MESSAGE could not establish bytestream connection to 3robbie7@gmail.com/Saros4BE31CEE (ByteStreamTransport.java:105)
+!STACK 0
+Could not establish socket with any provided host: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.cancelRequest(Socks5BytestreamRequest.java:277)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:247)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:34)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.handleResponse(Socks5Transport.java:315)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:471)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:34:41.023
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:34:51.965
+!MESSAGE failed to connect to 3robbie7@gmail.com/Saros4BE31CEE using transport: XMPP-Socks5-Transport (DataTransferManager.java:415)
+!STACK 0
+java.io.IOException: [SOCKS5Transport] waiting for a response session timed out (30000ms) and could not establish a connection from this side, too:
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:592)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:512)
+	... 13 more
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:35:11.033
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:35:41.042
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:36:11.051
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:36:26.842
+!MESSAGE OPN [remote side: 3robbie7@gmail.com/Saros4BE31CEE] I/O error occurred (CancelableProcess.java:299)
+!STACK 0
+java.io.IOException: unknown SMACK Filetransfer API error
+	at de.fu_berlin.inf.dpp.negotiation.ProjectNegotiation.monitorFileTransfer(ProjectNegotiation.java:187)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.sendArchive(OutgoingProjectNegotiation.java:400)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.run(OutgoingProjectNegotiation.java:144)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingProjectJob.run(NegotiationHandler.java:164)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: error writing to output stream: 
+  -- caused by: java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.filetransfer.FileTransfer.writeToStream(FileTransfer.java:219)
+	at org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer$2.run(OutgoingFileTransfer.java:233)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:36:26.852
+!MESSAGE cancelled process OPN [remote side: 3robbie7@gmail.com/Saros4BE31CEE], error: I/O failure: unknown SMACK Filetransfer API error (CancelableProcess.java:398)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:36:27.396
+!MESSAGE received leave message from user who is not part of the current session: 3robbie7@gmail.com/Saros4BE31CEE (LeaveAndKickHandler.java:113)
+
+!ENTRY de.fu_berlin.inf.dpp 4 0 2017-10-30 22:36:27.586
+!MESSAGE Invitation was cancelled locally because of an error: I/O failure: unknown SMACK Filetransfer API error
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:36:31.495
+!MESSAGE cannot leave a non-running session (CollaborationUtils.java:130)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:36:41.060
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:37:11.068
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:37:41.078
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:11.086
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.095
+!MESSAGE Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com (DiscoveryManager.java:451)
+!STACK 0
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.103
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.137
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.150
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.156
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.162
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY de.fu_berlin.inf.dpp 2 0 2017-10-30 22:38:41.169
+!MESSAGE cannot not perform a service discovery because not connected to a XMPP server (DiscoveryManager.java:440)
+
+!ENTRY org.eclipse.recommenders.models.rcp 1 11 2017-10-31 17:32:41.469
+!MESSAGE The model index service was accessed either before it started or after it finished running.
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:126)
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelIndex.suggest(EclipseModelIndex.java:211)
+	at org.eclipse.recommenders.models.SimpleModelProvider.acquireModel(SimpleModelProvider.java:70)
+	at org.eclipse.recommenders.models.PoolingModelProvider.access$0(PoolingModelProvider.java:1)
+	at org.eclipse.recommenders.models.PoolingModelProvider$ModelPoolFactoryMediator.makeObject(PoolingModelProvider.java:96)
+	at org.eclipse.recommenders.models.PoolingModelProvider$ModelPoolFactoryMediator.makeObject(PoolingModelProvider.java:1)
+	at org.apache.commons.pool.impl.GenericKeyedObjectPool.borrowObject(GenericKeyedObjectPool.java:1220)
+	at org.eclipse.recommenders.models.PoolingModelProvider.acquireModel(PoolingModelProvider.java:67)
+	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:65)
+	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:1)
+	at org.eclipse.recommenders.internal.models.rcp.PrefetchModelArchiveJob.run(PrefetchModelArchiveJob.java:43)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)

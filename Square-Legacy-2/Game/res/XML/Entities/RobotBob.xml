@@ -8,7 +8,7 @@
 		<hostility>HOSTILITY.PASS</hostility>
 		<exp>5</exp>
 	</mob>
-	<sprite xOffset="0" yOffset="0">
+	<sprite size ="16" xOffset="-8" yOffset="-15">
 		<down width="16" height="20" length="1">robotbob</down>
 		<up width="16" height="20" length="1">robotbob</up>
 		<left width="16" height="20" length="1">robotbob</left>

@@ -7,17 +7,17 @@
 		<spawnlist tags=".xml" />
 		<playlist tags=".xml" />
 		<time-cycle enabled="false" />
+		<null_tile_sprite sprite="Water" />
 	</props>
 	<exits>
-		<exit to="/XML/Levels/SpawnHaven" x="40" y="40" xo="28" yo="79" w="24" h="13" />
-		<exit to="/XML/Levels/SpawnHaven" x="52" y="70" xo="52" yo="79" w="24" h="13" />
+		<exit to="/XML/Levels/SpawnHaven" x="40" y="40" xo="28" yo="79" w="48" h="13" />
 	</exits>
 	<custom_mobs>
-		<entity x="40" y="40" tags="RobotBob.xml" id="0">
+		<entity x="40" y="40" tags="RobotBob.xml" uid="0">
 			<speed>1</speed>
 		</entity>
 	</custom_mobs>
 	<mobs>
-		<entity x="40" y="40" tags="TestZombie.xml" id="4" />
+		<entity x="40" y="40" tags="TestZombie.xml" uid="4" />
 	</mobs>
 </level>

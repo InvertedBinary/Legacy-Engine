@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import com.IB.SL.Boot;
 import com.IB.SL.entity.mob.Player;
+import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.interactables.Location_Shrine;
@@ -54,6 +55,7 @@ public class XML_Level extends Level{
 		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
 		initLevel(doc);
 		initExits(doc);
+		initMobs(doc);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,12 +87,39 @@ public class XML_Level extends Level{
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
 			System.out.println("\nCurrent Element :" + nNode.getNodeName());
-			System.err.println("PRE CHECK");
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				for (int i = 0; i < (((Element)nNode).getElementsByTagName("exit").getLength()); i++) {
-				Element eElement = (Element) ((Element)nNode).getElementsByTagName("exit").item(i);
-					System.out.println(Integer.parseInt(eElement.getAttribute("x")));
-					this.exits.add(new LevelExit(eElement));
+				for (int i = 0; i < (((Element) nNode).getElementsByTagName("exit").getLength()); i++) {
+					try {
+						Element eElement = (Element) ((Element) nNode).getElementsByTagName("exit").item(i);
+						System.out.println(Integer.parseInt(eElement.getAttribute("x")));
+						this.exits.add(new LevelExit(eElement));
+					} catch (Exception e) {
+					}
+				}
+			}
+		}
+	}
+
+	public void initMobs(Document doc) {
+		exits = new ArrayList<LevelExit>();
+		NodeList nList = doc.getElementsByTagName("mobs");
+		System.out.println("--------------Mobs--------------");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			System.out.println("\nCurrent Element :" + nNode.getNodeName());
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				for (int i = 0; i < (((Element)nNode).getElementsByTagName("entity").getLength()); i++) {
+				try {
+				Element eElement = (Element) ((Element)nNode).getElementsByTagName("entity").item(i);
+				double x = Integer.parseInt(eElement.getAttribute("x"));
+				double y = Integer.parseInt(eElement.getAttribute("y"));
+				double id = Integer.parseInt(eElement.getAttribute("uid"));
+				String tags = "/XML/Entities/" + (eElement.getAttribute("tags"));
+				XML_Mob m = new XML_Mob(x, y, tags);
+				add(m);
+					} catch (Exception e) {
+						
+					}
 				}
 			}
 		}

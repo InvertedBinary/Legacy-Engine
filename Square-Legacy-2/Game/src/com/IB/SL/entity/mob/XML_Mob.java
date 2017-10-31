@@ -31,7 +31,7 @@ public class XML_Mob extends Mob {
 	
 	transient private int time = 0;
 	transient double xa = 0;
-	transient double ya = 0;
+	transient double ya = 0; 
 	
 	transient List<Player> players;
 	transient Player p;
@@ -105,30 +105,29 @@ public class XML_Mob extends Mob {
 				try {
 				this.xOffset = Integer.parseInt(eElement.getAttribute("xOffset"));
 				this.yOffset = Integer.parseInt(eElement.getAttribute("yOffset"));
+				int size = Integer.parseInt(eElement.getAttribute("size"));
 
 				Element xml_down = (Element) eElement.getElementsByTagName("down").item(0);
 				Element xml_up = (Element) eElement.getElementsByTagName("up").item(0);
 				Element xml_left = (Element) eElement.getElementsByTagName("left").item(0);
 				Element xml_right = (Element) eElement.getElementsByTagName("right").item(0);
 				
-				this.down = buildAnimSprite(xml_down);
-				this.up = buildAnimSprite(xml_up);
-				this.left = buildAnimSprite(xml_left);
-				this.right = buildAnimSprite(xml_right);
+				this.down = buildAnimSprite(size, xml_down);
+				this.up = buildAnimSprite(size, xml_up);
+				this.left = buildAnimSprite(size, xml_left);
+				this.right = buildAnimSprite(size, xml_right);
 				} catch (Exception e) {
 				}
 			}
 		}
 	}
 	
-	public AnimatedSprite buildAnimSprite(Element XML) {
+	public AnimatedSprite buildAnimSprite(int size, Element XML) {
 		AnimatedSprite xanim;
 		try {
 			Field field = SpriteSheet.class.getField(XML.getTextContent());
 			Object sprite = field.get(field.getType());
-			xanim = new AnimatedSprite((SpriteSheet) sprite, 
-					Integer.parseInt(XML.getAttribute("width")),
-					Integer.parseInt(XML.getAttribute("height")),
+			xanim = new AnimatedSprite((SpriteSheet) sprite, size, size,
 					Integer.parseInt(XML.getAttribute("length")));
 			return xanim;
 		} catch (Exception e) {
