@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class Boot {
 
-	public static String title = "Square Legacy 2 [Build 0 : 10/29/17]";
+	public static String title = "Square Legacy 2 [Build 1 : 10/31/17]";
 	private static Game g = new Game(title);
 
 	public static Game get() {
