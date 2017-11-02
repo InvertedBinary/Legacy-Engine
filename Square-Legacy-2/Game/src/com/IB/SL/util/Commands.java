@@ -15,6 +15,8 @@ import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
+import com.IB.SL.level.worlds.Maps;
+import com.IB.SL.level.worlds.XML_Level;
 
 public class Commands {
 
@@ -84,6 +86,7 @@ public class Commands {
 		cmds.add("cq");
 		cmds.add("load");
 		cmds.add("spawn");
+		cmds.add("xmload");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -223,6 +226,9 @@ public class Commands {
 		break;
 				case "spawn":
 					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x / 16, Boot.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
+		break;
+				case "xmload":
+					player.setPositionXML(0, 0, "/XML/Levels/" + Modifier, true);
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

@@ -64,7 +64,9 @@ public class UI_Menu {
 		if (current != null) {
 			if (current.enabled) {
 				current.update();
+				if (current != null) {
 				current.ui.update();
+				}
 			}
 		}
 	}
@@ -100,8 +102,9 @@ public class UI_Menu {
 		}
 	}
 	
-	public void load(UI_Menu menu) {
+	public void load(UI_Menu menu, boolean override) {
 		System.out.println("Attempting to load: " + menu);
+		if (current == null || override == true) {
 		if (menu != null) {
 		if (current != null) {
 			unload(current);
@@ -109,6 +112,7 @@ public class UI_Menu {
 		current = menu; 
 		current.enabled = true;
 		current.onLoad();
+		}
 		}
 	}
 	

@@ -19,13 +19,7 @@ public class Sprite {
 	//MiniMap(s)
 	public static Sprite MiniMap = new Sprite(32 , 0, 0, SpriteSheet.minimap);
 	//GUIS
-	public static Sprite Title = new Sprite(300, 0, 0, SpriteSheet.title);
-	public static Sprite title_overContinue = new Sprite(300, 0, 0, SpriteSheet.title_OverContinue);
-	public static Sprite title_Chars = new Sprite(300, 0, 0, SpriteSheet.title_Char);
-	public static Sprite title_NewChar = new Sprite(300, 0, 0, SpriteSheet.title_NewChar);
-	public static Sprite title_overChars = new Sprite(300, 0, 0, SpriteSheet.title_OverChars);
-	public static Sprite title_overTrash = new Sprite(22, 20, 91, 198, SpriteSheet.title_Char);
-	
+	public static Sprite Title = new Sprite(300, 168, 0, 0, SpriteSheet.title);
 	public static Sprite bgFade = new Sprite(300, 168, 0, 0, SpriteSheet.bgFade);
 
 	public static Sprite pauseMenu = new Sprite(300, 0, 0, SpriteSheet.pauseMenu);
@@ -35,16 +29,11 @@ public class Sprite {
 	public static Sprite AB_LOCK = new Sprite(20, 0, 0, (new SpriteSheet("/Textures/sheets/01_GUI/AB_LOCK.png", 20, 20)));
 	public static Sprite pauseOptions = new Sprite(300, 0, 0, SpriteSheet.options);
 
-	public static Sprite Death = new Sprite(300, 168, 0, 0, SpriteSheet.Death);
-	public static Sprite Death_Menu = new Sprite(300, 168, 0, 0, SpriteSheet.overDeathMenu);
-	public static Sprite Death_Quit = new Sprite(300, 168, 0, 0, SpriteSheet.overDeathExit);
-
-	
 	public static Sprite invAbilityGreen = new Sprite(160, 0, 0, SpriteSheet.invAbilityGreen);
 
 
 	public static Sprite robobob = new Sprite(20, 0, 0, SpriteSheet.robobob);
-	
+	  
 	public static Sprite water = new Sprite(16, 0, 0, SpriteSheet.Water_Main);
 	public static Sprite water2 = new Sprite(16, 0, 1, SpriteSheet.Water_Main);
 	//public static Sprite ibLOGO = new Sprite(300, 0, 0, SpriteSheet.ibLOGO);
@@ -748,7 +737,7 @@ public class Sprite {
 				int yy = (int) y1;
 				
 				int col = 0;
-				if (xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffFF3AFB /*0xff00CFCB*/;
+				if (xx < 0 || xx >= width || yy < 0 || yy >= height) col = Screen.ALPHA_COL /*0xff00CFCB*/;
 				else col = pixels[xx + yy * width];
 				result[x + y * width] = col;
 				

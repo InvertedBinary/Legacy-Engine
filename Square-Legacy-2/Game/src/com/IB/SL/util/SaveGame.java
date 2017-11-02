@@ -53,7 +53,7 @@ public class SaveGame {
 			oos.writeObject(objectToSerialze);
 			oos.flush();
 			oos.close();
-			System.out.println("Saving: " + objectToSerialze);
+			//System.out.println("Saving: " + objectToSerialze);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Failed To Save: " + objectToSerialze);

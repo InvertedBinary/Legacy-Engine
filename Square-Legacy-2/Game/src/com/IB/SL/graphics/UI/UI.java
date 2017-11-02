@@ -19,7 +19,9 @@ public class UI extends UI_Root{
 	public void update() {
 		for (int i = 0; i < ui_Global.size(); i++) {
 			if (ui_Global.get(i).enabled) {
+				if (ui_Global.get(i) != null) {					
 			ui_Global.get(i).update();
+				}
 			}
 		}
 	}

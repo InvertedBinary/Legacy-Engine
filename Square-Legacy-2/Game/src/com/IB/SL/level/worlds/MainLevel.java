@@ -71,7 +71,6 @@ public class MainLevel extends Level{
 	
 	protected void loadLevel(String path) {
 		minimap_enabled  = true;
-		Overworld  = true;
 		SpawnList.clear();
 		
 		SpawnTime_MOD = 150;
@@ -192,138 +191,11 @@ public class MainLevel extends Level{
 			}
 		}
 	
-	public void checkExits(Player player, Level level, int x, int y) {
-		refresh();
-		
-		//if (x == 641 && y == 219) {
-	//	}
-		
-		
-		if (x == 729 && y == 362) {//296, 464 Spawn Haven
-			Sound.switchMusic(Sound.Boss, 0.8f);
-			//Game.get().setLevel(new Dungeon01(Maps.dungeon01));
-			level = Boot.get().getLevel();
-			level.add(player);
-			Level.Overworld = false;
-			Level.minimap_enabled = true;
-			player.setPosition(new TileCoord(49, 55)); 
-			SpriteSheet.minimapDYN = new SpriteSheet("/levels/Dungeons/Labarynth.png", 256);
-			return;
-		}
-		
-		if (x == 654 && y == 78 || x == 655 && y == 78) {//296, 464 Spawn Haven
-			Sound.switchMusic(Sound.TheIcicleFalls, 0.7f);
-			//Game.get().setLevel(new Dungeon03(Maps.dungeon03));
-			level = Boot.get().getLevel();
-			level.add(player);
-			Level.Overworld = false;
-			Level.minimap_enabled = true;
-			player.setPosition(new TileCoord(177, 66)); 
-			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon03, 356);
-			return;
-		}
-		
-		if (x == 517 && y == 399) {
-			player.setPosition(158, 66, Maps.dungeon4Id, true);
-			return;
-		}
-		
-		if ((y == 130 || y == 129) && (x == 837 || x == 838)) {
-			player.setPosition(52, 78, Maps.IceHavenId, true);
-			return;
-		}
-		
-		if ((y == 389 || y == 390) && (x == 783 || x == 784)) {
-			player.setPosition(35, 79, Maps.CaveHavenId, true);
-			return;
-		}
-		
-		if ((y == 439 || y == 440) && (x == 619 || x == 620 || x == 621)) {
-			player.setPosition(52, 81, Maps.SandHavenId, true);
-			return;
-		}
-		
-		if ((y == 681 || y == 682) && (x == 606 || x == 607)) {
-			player.setPosition(38, 74, Maps.RedTownHavenId, true);
-			player.x += 8;
-			return;
-		}
-		
-		if ((y == 831 || y == 832) && (x == 237 || x == 238)) {
-			player.setPosition(41, 75, Maps.SouthTownHavenId, true);
-			return;
-		}
-
-		if (x == 401 && y == 735) {//296, 464 Spawn Haven
-			Sound.switchMusic(Sound.VoidDungeon, 0.8f);
-			//Game.get().setLevel(new Dungeon02(Maps.dungeon02));
-			level = Boot.get().getLevel();
-			level.add(player);
-			Level.Overworld = false;
-			Level.minimap_enabled = true;
-			player.setPosition(new TileCoord(146, 155)); 
-			SpriteSheet.minimapDYN = new SpriteSheet(Maps.dungeon02, 256);
-			return;
-		}
-		
-			player.setPosition(52, 78, Maps.spawnHavenId, true); 
-
-		}
-	
 	public void checkExits(Player player, Level level, int x, int y, boolean e) {
 		refresh();
-		if (x == 729 && y == 362) {//296, 464 Spawn Haven
-			player.setPosition(49, 55, Maps.dungeon1Id, true); 
-			return;
-		}
-		
-		if (x == 654 && y == 78 || x == 655 && y == 78) {//296, 464 Spawn Haven
-			player.setPosition(177, 66, Maps.dungeon3Id, true); 
-			return;
-		}
-		
-		
-		if (x == 401 && y == 735) {//296, 464 Spawn Haven
-			player.setPosition(146, 155, Maps.dungeon2Id, true); 
-			return;
-		}
-		
-		if (x == 517 && y == 399) {
-			player.setPosition(157, 65, Maps.dungeon4Id, true);
-			return;
-		}
-		
-		if ((y == 130 || y == 129) && (x == 837 || x == 838)) {
-			player.setPosition(52, 78, Maps.IceHavenId, true);
-			return;
-		}
-		
-		if ((y == 389 || y == 390) && (x == 783 || x == 784)) {
-			player.setPosition(35, 79, Maps.CaveHavenId, true);
-			return;
-		}
-		
-		if ((y == 439 || y == 440) && (x == 619 || x == 620 || x == 621)) {
-			player.setPosition(52, 81, Maps.SandHavenId, true);
-			return;
-		}
-		
-		if ((y == 681 || y == 682) && (x == 606 || x == 607)) {
-			player.setPosition(38, 74, Maps.RedTownHavenId, true);
-			player.x += 8;
-			return;
-		}
-		
-		if ((y == 831 || y == 832) && (x == 237 || x == 238)) {
-			player.setPosition(41, 75, Maps.SouthTownHavenId, true);
-			return;
-		}
-		
-	player.setPosition(52, 78, Maps.spawnHavenId, true); 
-		
-		}
-
+		player.setPosition(52, 78, Maps.spawnHavenId, true);
 	}
-	
+
+}
 
 

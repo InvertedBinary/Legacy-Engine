@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<level>
+	<props id="0">
+		<name>Spawn Haven</name>
+		<minimap enabled="false" w="20" h="20" />
+		<tile_sheet bitm="" />
+		<spawnlist tags=".xml" />
+		<playlist tags=".xml" />
+		<time-cycle enabled="false" />
+		<null_tile_sprite sprite="Water" />
+	</props>
+	<exits>
+		<exit to="/XML/Levels/SpawnHaven" x="40" y="40" xo="28" yo="79" w="48" h="13" />
+	</exits>
+	<custom_mobs>
+		<entity x="40" y="40" tags="RobotBob.xml" uid="0">
+			<speed>1</speed>
+		</entity>
+	</custom_mobs>
+	<mobs>
+		<entity x="52" y="70" tags="TestZombie.xml" uid="4" />
+	</mobs>
+</level>

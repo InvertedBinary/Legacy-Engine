@@ -18,6 +18,7 @@ public class SpriteSheet {
 	private int width, height;
 	public int[] pixels;
 	
+	
 	public static SpriteSheet Teleporter = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/Teleporter.png", 32, 512);
 	public static SpriteSheet maps_Spawn = new SpriteSheet(Maps.main, 1024, 1024);
 
@@ -56,17 +57,9 @@ public class SpriteSheet {
 	
 	
 	public static SpriteSheet title = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/Menu.png", 300);
-	public static SpriteSheet title_OverContinue = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/menuSurvival.png", 300);
-	public static SpriteSheet title_OverChars = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/menuCharacters.png", 300);
-	public static SpriteSheet title_Char = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/CharComponent.png", 300);
-	public static SpriteSheet title_NewChar = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/NewCharComponent.png", 300);
 	public static SpriteSheet ibLOGO = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/ibLOGO.png", 300);
-	public static SpriteSheet loading = new SpriteSheet("/Textures/sheets/01_GUI/Load.png", 300, 168);
-	public static SpriteSheet Death = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Death/Death.png", 300, 168);
-	public static SpriteSheet overDeathMenu = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Death/DEATH2.png", 300, 168);
-	public static SpriteSheet overDeathExit = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Death/DEATH3.png", 300, 168);
 	public static SpriteSheet robobob = new SpriteSheet("/Textures/sheets/00_MobSheets/robobob.png", 20);
-
+	public static SpriteSheet robotbob = new SpriteSheet(robobob, 0, 0, 1, 1, 20);
 	public static SpriteSheet bgFade = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/fade.png", 300, 168);
 
 	/**
@@ -123,7 +116,7 @@ public class SpriteSheet {
 	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 3, 16);
 	public static SpriteSheet player_left = new SpriteSheet(player, 2, 0, 1, 3, 16);
 	public static SpriteSheet player_right = new SpriteSheet(player, 3, 0, 1, 3, 16);
-	
+
 	
 	
 	public static SpriteSheet Mace_SwooshBase = new SpriteSheet("/Textures/sheets/04_Attacks/MaceSwish.png", 32, 512);

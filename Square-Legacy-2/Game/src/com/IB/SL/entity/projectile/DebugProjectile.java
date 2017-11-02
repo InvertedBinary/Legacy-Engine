@@ -60,12 +60,12 @@ public class DebugProjectile extends Projectile {
 	public boolean DebugCollision(Projectile p, List<Entity> entities) {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
-			Game.log("===============================================", false);
-			Game.log("ID: " + ee.id, true);
-			Game.log("HOSTILITY: " + ee.hostility, true);
-			Game.log("X: " + ee.getX() / 16, true);
-			Game.log("Y: " + ee.getY() / 16, true);
-			Game.log("===============================================", false);
+			Boot.log("===============================================", false);
+			Boot.log("ID: " + ee.id, true);
+			Boot.log("HOSTILITY: " + ee.hostility, true);
+			Boot.log("X: " + ee.getX() / 16, true);
+			Boot.log("Y: " + ee.getY() / 16, true);
+			Boot.log("===============================================", false);
 			remove();
 			return true;
 		}

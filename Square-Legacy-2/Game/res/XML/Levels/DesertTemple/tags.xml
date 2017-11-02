@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<level>
+    <props id="0">
+   	 <name>Desert Temple</name>
+   	 <minimap enabled="false" w="20" h="20" />
+   	 <tile_sheet bitm="" />
+   	 <spawnlist tags=".xml" />
+   	 <playlist tags=".xml" />
+   	 <time-cycle enabled="false" />
+   	 <null_tile_sprite sprite="Sand" />
+    </props>
+    <exits>
+   	 <exit to="/XML/Levels/SpawnHaven" x="52" y="70" xo="0" yo="37" w="50" h="13" />
+    </exits>
+    <!--<custom_mobs>
+   	 <entity x="24" y="19" tags="DesertPreist.xml" uid="0">
+   		 <speed>1</speed>
+   	 </entity>
+    </custom_mobs>
+    <mobs>
+   	 <entity x="27" y="19" tags="DesertPreist.xml" uid="69" />
+    </mobs>-->
+</level>

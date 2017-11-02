@@ -39,7 +39,6 @@ public class SpawnHaven_Deprecated extends Level implements Serializable{
 	
 	protected void loadLevel(String path) {
 		minimap_enabled = false;
-		Level.Overworld = false;
 		
 		SpawnList.clear();
 		SpawnTime_MOD = -1;
@@ -118,7 +117,6 @@ public class SpawnHaven_Deprecated extends Level implements Serializable{
 	}
 	
 	protected void generategetLevel() {
-
 		for (int y = 0; y < 64; y++) {
 			for (int x = 0; x < 64; x++) {
 				getTile(x, y);
@@ -133,20 +131,7 @@ public class SpawnHaven_Deprecated extends Level implements Serializable{
 	
 	public void checkExits(Player player, Level level, int x, int y) { 
 		refresh();
-		//if (Game.getGame().developerPlaying) {
-		if (x == 80 || x == 81 && y == 38 || y == 39 || y == 40) {
-			player.setPosition(73, 38, Maps.tutWorldId, true); 
-			return;
+		player.setPosition(52, 75, 120, true); 
 		}
-		
-		
-		player.setPosition(643, 220, Maps.mainId, true); 
-		}
-
-//}
-
-
-
-
-}
+	}
 	

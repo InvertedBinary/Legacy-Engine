@@ -30,6 +30,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.MainLevel;
 import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
+import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
@@ -201,22 +202,6 @@ public class Player extends Mob implements Serializable{
 		//this.quests.loadQuests(this);
 		System.out.println("-----------------------STEP5----------------------------");
 		temp = null;
-		
-		if (getUsername().equalsIgnoreCase("Nate")) {
-			//	inventory.add(new testItem_EQ001(EquipableItem.slot_WEAPON));
-				/*inventory.add(new wand_Pulsefire(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_VoidCrook(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_FlareScepter(EquipableItem.slot_WEAPON));
-				inventory.add(new wand_StygianScepter(EquipableItem.slot_WEAPON)); // fires 5 in a cone
-				inventory.add(new wand_ContradictionWand(EquipableItem.slot_WEAPON)); // fires 10 in a circle*/
-				this.money = 5000;
-			}
-		
-		
-		
-		if (Game.runTut) {
-			setPosition(73, 38, Maps.tutWorldId, true);
-		}
 		
 		} catch (Exception e) {
 			
@@ -510,6 +495,25 @@ public class Player extends Mob implements Serializable{
 		this.setY(tileCoord.y());
 	}
 	
+	public void setPositionXML(double x, double y, String XML, boolean tileMult) {
+		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
+		//level.saveMobs(es);
+		if (tileMult) {
+			x *= TileCoord.TILE_SIZE;
+			y *= TileCoord.TILE_SIZE;
+		}
+
+		this.currentLevelId = -1;
+		
+		Boot.get().setLevel(new XML_Level(XML));
+		//Sound.switchMusic(Sound.Windwalker, 1f);
+
+		this.removed = false;
+		Boot.get().getLevel().add(this);
+		this.x = (x);
+		this.y = (y);
+		//Boot.get().getLevel().loadMobs(LvlId);
+	}	
 	public void setPosition(double x, double y, int LvlId, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);
@@ -523,9 +527,13 @@ public class Player extends Mob implements Serializable{
 		System.out.println("Loaded ID: " + LvlId + ", ID: " + currentLevelId);
 		
 		switch (LvlId) {
+		case 120:
+			Boot.get().setLevel(new XML_Level(Maps.XML_Haven));
+			//Sound.switchMusic(Sound.Windwalker, 1f);
+			break;
 		case 0:
 			Boot.get().setLevel(new SpawnHaven_Deprecated(Maps.SpawnHaven));
-			Sound.switchMusic(Sound.Windwalker, 1f);
+			//Sound.switchMusic(Sound.Windwalker, 1f);
 			break;
 		case 1:
 			Boot.get().setLevel(new MainLevel(Maps.main));
@@ -533,10 +541,11 @@ public class Player extends Mob implements Serializable{
 			SpriteSheet.minimapDYN = new SpriteSheet(Maps.main, 1024);
 			break;
 		}
+		this.removed = false;
 		Boot.get().getLevel().add(this);
 		this.x = (x);
 		this.y = (y);
-		Boot.get().getLevel().loadMobs(LvlId);
+		//Boot.get().getLevel().loadMobs(LvlId);
 	}
 	
 	public String getUsername() {
@@ -545,6 +554,9 @@ public class Player extends Mob implements Serializable{
 	
 private transient Sprite arrow = Sprite.QuestArrow;
 	public void render(Screen screen) {
+		Boot.get().xScroll = this.getX() - screen.width / 2;
+		Boot.get().yScroll = this.getY() - screen.height / 2;
+		
 	sprite = animSprite.getSprite();
 	
 			screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff),  sprite);			
@@ -693,7 +705,6 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		if (Mouse.getButton() == 1) {
 			this.level.tiles[x + y *  level.width] = toPlace.getHex();
 			SpriteSheet.minimapDYN.pixels[x + y * SpriteSheet.minimapDYN.getWidth()] = toPlace.getHex();
-			
 		}
 		
 	}
@@ -704,7 +715,7 @@ private transient Sprite arrow = Sprite.QuestArrow;
 			renderBuildGUI(screen);
 		}
 	
-	if (level.map_hidden) {
+	if (level.minimap_collapsed) {
 	screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
 	}
 	
@@ -720,7 +731,7 @@ private transient Sprite arrow = Sprite.QuestArrow;
 		if (!level.minimap_enabled) {
 			Boot.get().font8x8.render((int)305 - text.length() * 8, 3, -3, text, screen, false, false);
 			Boot.get().font8x8.render((int)305 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
-		} else if (!level.map_hidden){
+		} else if (!level.minimap_collapsed){
 			//screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12, 0xff262626), false);
 			Boot.get().font8x8.render((int)270 - text.length() * 8, 3, -3, text, screen, false, false);
 			Boot.get().font8x8.render((int)270 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);

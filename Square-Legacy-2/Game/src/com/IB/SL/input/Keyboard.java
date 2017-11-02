@@ -10,8 +10,9 @@ public class Keyboard implements KeyListener {
 	private final int numOfKeys = 520;
 	
 	private boolean[] keys = new boolean[numOfKeys]; //65536
+
 	private boolean[] toggles = new boolean[numOfKeys];
-	private int[] toggle_helper = new int[numOfKeys];
+	public int[] toggle_helper = new int[numOfKeys];
 	
 	public boolean up, down, left, right, toggleDevModeInfo, DevMode, 
 	Sprint, Pause, commandMode, jump, a1, a2, a3, a4, a5, a6, a7, a8,
@@ -61,8 +62,8 @@ public class Keyboard implements KeyListener {
 		toggleChatWindow = keys[KeyEvent.VK_T];
 		generalActivator = keys[KeyEvent.VK_F];
 		
-		buildMode = (true) ? toggles[KeyEvent.VK_B] : false;
-		toggles[KeyEvent.VK_B] = (true) ? toggles[KeyEvent.VK_B] : false;
+		buildMode = toggles[KeyEvent.VK_B];
+		toggles[KeyEvent.VK_B] = toggles[KeyEvent.VK_B];
 		
 		}
 		
@@ -145,6 +146,7 @@ public class Keyboard implements KeyListener {
 
 	
 	public void keyPressed(KeyEvent e) {
+		
 		keys[e.getKeyCode()] = true;
 		
 		if (keys[e.getKeyCode()] && toggles[e.getKeyCode()] == false) {

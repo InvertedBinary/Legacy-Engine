@@ -1,0 +1,14 @@
+package com.IB.SL.level.worlds;
+
+public class LevelExit {
+	
+	public String xml;
+	public int tx, ty;
+	public int x, y, w, h;
+	
+	public LevelExit(String xml) {
+		this.xml = xml;
+		
+		
+	}
+}

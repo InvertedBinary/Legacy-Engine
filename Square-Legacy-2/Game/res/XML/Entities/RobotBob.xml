@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entity>
+	<mob id="3737">
+		<name>RobotBob</name>
+		<maxhealth>999</maxhealth>
+		<speed>1</speed>
+		<rarity>4</rarity>
+		<hostility>HOSTILITY.PASS</hostility>
+		<exp>5</exp>
+	</mob>
+	<sprite size ="16" xOffset="-8" yOffset="-15">
+		<down width="16" height="20" length="1">robotbob</down>
+		<up width="16" height="20" length="1">robotbob</up>
+		<left width="16" height="20" length="1">robotbob</left>
+		<right width="16" height="20" length="1">robotbob</right>
+	</sprite>
+</entity>
