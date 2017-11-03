@@ -105,6 +105,8 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
+	public static final float Ag = 16f/9.8f;
+	
 	@SuppressWarnings("unused")
 	private int time = 0;
 

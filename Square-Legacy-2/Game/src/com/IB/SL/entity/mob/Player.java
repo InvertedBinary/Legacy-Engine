@@ -16,6 +16,7 @@ import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.projectile.Projectile;
+import com.IB.SL.entity.projectile.XML_Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -429,10 +430,17 @@ public class Player extends Mob implements Serializable{
 		
 			}
 				
-		
+		updateShooting();
 			}
 		
 		
+	public void updateShooting() {
+		if (Mouse.getButton() == 1) {
+			XML_Projectile Test_Arrow = new XML_Projectile(x, y, Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
+			level.add(Test_Arrow);
+		}
+	}
+	
 	private void clear() {
 		for (int i = 0; i < level.getProjectiles().size(); i++) {
 			Projectile p = level.getProjectiles().get(i);

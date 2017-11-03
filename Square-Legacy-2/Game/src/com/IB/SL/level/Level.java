@@ -886,7 +886,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		if (e instanceof Particle) {
 			particles.add((Particle) e);
 		} else if (e instanceof Projectile) {
-			e.r = new Rectangle((int)e.x, (int)e.y, e.getSprite().getWidth(), e.getSprite().getHeight());
 			Projectiles.add((Projectile) e);
 		} else if (e instanceof Player) {
 			players.add((PlayerMP) e);

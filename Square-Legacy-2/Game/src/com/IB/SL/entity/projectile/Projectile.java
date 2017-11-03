@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.sound.sampled.Clip;
 
 import com.IB.SL.Boot;
+import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -13,15 +14,17 @@ import com.IB.SL.entity.spawner.BleedSpawner;
 import com.IB.SL.entity.spawner.ParticleSpawner;
 import com.IB.SL.entity.spawner.RockShatterSpawner;
 import com.IB.SL.graphics.Sprite;
+import com.IB.SL.input.Mouse;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 
 public abstract class Projectile extends Entity {
 
-	protected final double xOrigin, yOrigin;
+	protected double xOrigin, yOrigin;
 	public double angle;
 	public double x, y;
 	protected double nx, ny;
+	protected float zz, za;
 	protected double distance;
 	protected double range;
 	public double damage;
@@ -31,6 +34,12 @@ public abstract class Projectile extends Entity {
 	public Entity prevHit;
 	public int id = -1;
 	public int time = 0;
+	protected Sprite master_sprite;
+	
+	public Entity origin;
+	
+	String MovementStyle = "simple";
+	boolean initial_rotation = false;
 	
 	/**
 	 * 1 = Rock
@@ -40,6 +49,9 @@ public abstract class Projectile extends Entity {
 	protected final Random random = new Random();
 	protected final static Random randomFIRERATE = new Random();
 
+	public Projectile() {
+		
+	}
 	
 	public Projectile (double x, double y, double dir) {
 		xOrigin = x;
@@ -225,8 +237,63 @@ public abstract class Projectile extends Entity {
 		}
 	}
 	
+	public static double angle() {
+		double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+		double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+		double dir = Math.atan2(dy + 28, dx + 16);
+		return dir;
+	}
+	
+	public double distance() {
+		double dist = 0;
+		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin -y) * (yOrigin - y)));
+		return dist;
+	}
+	
 	public void addEffect(PlayerMP playerMP) {}
 	protected void move() {}
+	
+	protected void moveSimple() {
+		this.x += this.nx;
+		this.y += this.ny;
+		if (distance() > range) {
+			remove();
+		}
+	}
+	
+	protected void moveDropArc() {
+		x += nx;
+		y += ny -= 1000;
+		if (distance() > range) {
+			//level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
+			remove();
+		}
+	}
+	
+	protected void moveArc() {
+		//if (y + ny < yOrigin) {
+		za -= (Game.Ag);
+		if (zz < 0f) {
+			zz = 0f;
+			za *= -0f;
+		}
+		
+		if (master_sprite == null) master_sprite = sprite;
+		double deltaX = this.x - (this.x + this.nx);
+		double deltaY = (this.y - (this.y + this.ny)) - (zz + za) / 900;
+		this.angle = Math.atan2(deltaY, deltaX);
+		this.x += this.nx;
+		this.y += this.ny -= (zz + za) / 900;
+		this.sprite = Sprite.rotate(this.master_sprite, this.angle);	
+		if (distance() > range) remove();
+		//if (this.yOrigin < this.y) remove();
+		if (time > 300) {
+			remove();
+		}
+		//} else {
+		//	moveSimple();
+		//}
+	}
 	
 
 	/*protected void PlayerCollision(List<PlayerMP> players, List<Projectile> projectiles, int width, int height) {

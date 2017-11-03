@@ -73,27 +73,11 @@ public class Arrow extends Projectile {
 			time++;
 		}
 		
-		if (time > 300) {
-			remove();
-		}
-		
 		//move(xx + xa, (yy + ya) + (zz + za));
 	}
 	
-	protected void move() {
-		double deltaX = x - (x+nx);
-		double deltaY = (y - (y+ny)) - (0) / 900;
-		this.angle = Math.atan2(deltaY, deltaX);
-		x += nx;
-		y += ny -= (0) / 900;
-		sprite = Sprite.rotate(Sprite.Arrow, angle);	
-		if (distance() > range) remove();
-	}
-
-	public double distance() {
-		double dist = 0;
-		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin -y) * (yOrigin - y)));
-		return dist;
+	public void move() {
+		moveArc();
 	}
 
 	public void render(Screen screen) {

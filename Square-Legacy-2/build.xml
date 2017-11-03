@@ -1,23 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project Game">
-    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
-    <!--define folder properties-->
-    <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="${dir.buildfile}"/>
-    <property name="dir.jarfile" value=""/>
-    <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/SL2.jar" filesetmanifest="mergewithoutmain">
-            <manifest>
-                <attribute name="Main-Class" value="com.IB.SL.Boot"/>
-                <attribute name="Class-Path" value="."/>
-            </manifest>
-            <fileset dir="${dir.workspace}/Game/bin"/>
+<project name="SL2" default="deploy" basedir=".">
+   <target name="create_run_jar">
+      <property name="sourceDir" value="src"/ >
+      <property name="outputDir" value="classes" />
+      <mkdir dir="${outputDir}" />
+	        <fileset dir="${dir.workspace}/Game/bin"/>
             <fileset dir="${dir.workspace}/Game/res"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/easyogg.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/jogg-0.0.7.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/jorbis-0.0.15.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/startup2.jar"/>
-        </jar>
-    </target>
+     <javac srcdir="${sourceDir}" destdir="${outputDir}" />
+   </target>
 </project>

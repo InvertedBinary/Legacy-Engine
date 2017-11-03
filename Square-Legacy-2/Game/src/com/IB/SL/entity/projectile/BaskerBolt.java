@@ -54,11 +54,9 @@ public class BaskerBolt extends Projectile{
 		}	
 
 	protected void move() {
-		
 		x += nx;
 		y += ny;
 		if (distance() > range) {
-			//level.add(new slimeParticleSpawner((int) (x + nx), (int) (y + ny), 40, 1, level));
 			remove();
 		}
 	}
