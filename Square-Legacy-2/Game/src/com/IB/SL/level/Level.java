@@ -226,7 +226,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
-		// add(new ParticleSpawner(29 * 16, 31*16, 13, 35, this));
+		// add(new ParticleSpawner(29 * TileCoord.TILE_SIZE, 31*TileCoord.TILE_SIZE, 13, 35, this));
 
 	}
 	
@@ -296,9 +296,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
 					if (e instanceof XML_Mob) {
-						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16), (((XML_Mob)temp[i]).XML_String));
+						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE), (((XML_Mob)temp[i]).XML_String));
 					} else {						
-					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
+					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE));
 					}
 					e.onLoad(temp[i]);
 					e.mobhealth = temp[i].mobhealth;
@@ -338,7 +338,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					Entity e = temp[i];
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
-					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / 16), (int)(temp[i].getY() / 16));
+					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE));
 				//Entity e = temp[i].getClass().newInstance();
 				/*	Field[] fields = temp[i].getClass().getDeclaredFields();
 					Field[] fields2 = e.getClass().getDeclaredFields();
@@ -534,11 +534,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						int sx, sy, lx, rx, ty, by;
 						do {
 							
-						lx = (int)(Boot.get().getPlayer().x / 16) - (int)(((Boot.get().getScreen().width / 16) / 2) + 8);
-						rx = (int)(Boot.get().getPlayer().x / 16) + (int)(((Boot.get().getScreen().width / 16) / 2) + 8);
+						lx = (int)(Boot.get().getPlayer().x / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
+						rx = (int)(Boot.get().getPlayer().x / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
 						
-						ty = (int)(Boot.get().getPlayer().y / 16) - (int)(((Boot.get().getScreen().height / 16) / 2) + 5);
-						by = (int)(Boot.get().getPlayer().y / 16) + (int)(((Boot.get().getScreen().height / 16) / 2) + 5);
+						ty = (int)(Boot.get().getPlayer().y / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
+						by = (int)(Boot.get().getPlayer().y / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
 						sx = myRandom(lx - 4, rx + 4);
 						sy = myRandom(ty - 4, by + 4);
 						
@@ -573,7 +573,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			System.out.println("X: " + sx + " Y: " + sy);
 
 			if (!returnTileXY(tile, sx, sy).solid()) {
-				add(new WallParticleSpawner((int) (sx * 16), (int) (sy * 16), 20000, 1, this));
+				add(new WallParticleSpawner((int) (sx * TileCoord.TILE_SIZE), (int) (sy * TileCoord.TILE_SIZE), 20000, 1, this));
 			}
 		}*/
 		
@@ -583,13 +583,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		//TODO: Add mob spawning just outside of player view
 	/*	for (int i = 0; i < players.size(); i++) {
-			 addX = players.get(i).x / 16;
+			 addX = players.get(i).x / TileCoord.TILE_SIZE;
 					 addY = 54;
 					 
-			 tx = (players.get(i).x / 16)- 12;
-					 ty = (players.get(i).y / 16) - 8;
+			 tx = (players.get(i).x / TileCoord.TILE_SIZE)- 12;
+					 ty = (players.get(i).y / TileCoord.TILE_SIZE) - 8;
 			 otx = players.get(i).x + 12;
-					 oty = (players.get(i).y / 16) + 8;
+					 oty = (players.get(i).y / TileCoord.TILE_SIZE) + 8;
 		}
 		
 		
@@ -799,8 +799,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		for (int i = 0; i < ManaPot.size(); i++) {
 			ManaPot.get(i).render(screen);
 				}*/	
-			/*screen.blendTiles(283 * 16, 477 * 16, tile.CobbleStone, tile.Swamp);
-			screen.blendTiles(282 * 16, 477 * 16, tile.CobbleStone, tile.Swamp);*/
+			/*screen.blendTiles(283 * TileCoord.TILE_SIZE, 477 * TileCoord.TILE_SIZE, tile.CobbleStone, tile.Swamp);
+			screen.blendTiles(282 * TileCoord.TILE_SIZE, 477 * TileCoord.TILE_SIZE, tile.CobbleStone, tile.Swamp);*/
 
 				for(int i = 0; i < entities.size(); i++){
 					if (!entities.get(i).ySort)
@@ -825,10 +825,10 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 				 if (Boot.get().getLevel().isRaining) {
 					 rain.render(screen);
 				 }
-		//screen.renderSprite(644 * 16, 206 * 16, Sprite.robobob, true);
+		//screen.renderSprite(644 * TileCoord.TILE_SIZE, 206 * TileCoord.TILE_SIZE, Sprite.robobob, true);
 		 renderMiniMap(screen);
 
-		//screen.renderLight(277 * 16, 477 * 16, 40, 20, 20, 20, "test");
+		//screen.renderLight(277 * TileCoord.TILE_SIZE, 477 * TileCoord.TILE_SIZE, 40, 20, 20, 20, "test");
 
 			/*	screen.renderSprite(4, 4, Sprite.abilitybox, false);
 				screen.renderSprite(24, 4, Sprite.abilitybox, false);
@@ -848,8 +848,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		
 		//renderMiniMap(screen, 32, 32, 5, 5);
 
-		//screen.renderLight(280 * 16 - radius, 490 * 16 - radius, radius);
-		//screen.renderLight(277 * 16 - radius, 477 * 16 - radius, radius, 20, 20, 20);
+		//screen.renderLight(280 * TileCoord.TILE_SIZE - radius, 490 * TileCoord.TILE_SIZE - radius, radius);
+		//screen.renderLight(277 * TileCoord.TILE_SIZE - radius, 477 * TileCoord.TILE_SIZE - radius, radius, 20, 20, 20);
 
 	
 		remove();

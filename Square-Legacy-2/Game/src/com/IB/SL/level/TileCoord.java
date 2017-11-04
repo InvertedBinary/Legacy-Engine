@@ -3,7 +3,7 @@ package com.IB.SL.level;
 public class TileCoord {
 
 	private int x, y;
-	public final static int TILE_SIZE = 16;
+	public final static int TILE_SIZE = 32;
 	
 	public TileCoord(int x, int y) {
 		this.x = x * getTILE_SIZE();

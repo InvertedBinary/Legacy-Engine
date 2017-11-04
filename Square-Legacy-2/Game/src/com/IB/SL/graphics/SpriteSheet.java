@@ -41,7 +41,9 @@ public class SpriteSheet {
 	public static SpriteSheet loc_shrine = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/loc_shrine.png", 32, 32);
 	public static SpriteSheet shrine = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/loc_shrine.png", 32, 256);
 
-	public static SpriteSheet blocks = new SpriteSheet("/Textures/sheets/03_WorldGen/blocks.png", 512);
+	public static SpriteSheet blocks = new SpriteSheet("/Textures/sheets/03_WorldGen/blocks32.png", 1024);
+
+	public static SpriteSheet blocks16x = new SpriteSheet("/Textures/sheets/03_WorldGen/blocks.png", 512);
 	public static SpriteSheet Items = new SpriteSheet("/Textures/sheets/02_Items/Items.png", 256);
 
 	public static SpriteSheet spells = new SpriteSheet("/Textures/sheets/04_Attacks/Projectiles.png", 256);
@@ -78,13 +80,11 @@ public class SpriteSheet {
 	public static SpriteSheet Water1 = new SpriteSheet(anim_Water, 0, 0, 1, 2, 16);
 	//public static SpriteSheet Water2 = new SpriteSheet(anim_Water, 1, 0, 1, 3, 16);
 
-	public static SpriteSheet minimap_OLD = new SpriteSheet("/levels/minmap.png", 32);
 	public static SpriteSheet minimap = new SpriteSheet("/levels/minimap_worldmap.png", 32);
 	public static SpriteSheet minimapDYN = new SpriteSheet("/overlays/levels/WorldMap.png", 1024);
 	public static SpriteSheet minimap_hidden = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/MapClose.png", 45, 10);
 
-	public static SpriteSheet player = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/BlueWizard.png", 128, 96);
-	public static SpriteSheet playerGS = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/Mage_Grayscale.png", 128, 96);
+	public static SpriteSheet player = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/PlayerSprite.png", 512, 512);
 
 	public static SpriteSheet mobHealth = new SpriteSheet("/Textures/sheets/01_GUI/HUD/MobHealth.png", 128, 704);
 	
@@ -112,10 +112,10 @@ public class SpriteSheet {
 	public static SpriteSheet AbilityBarClosed = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Abilities/AbilityBarClose.png", 32, 32);
 
 
-	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 3, 16);
-	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 3, 16);
-	public static SpriteSheet player_left = new SpriteSheet(player, 2, 0, 1, 3, 16);
-	public static SpriteSheet player_right = new SpriteSheet(player, 3, 0, 1, 3, 16);
+	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 7, 64);
+	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 7, 64);
+	public static SpriteSheet player_left = new SpriteSheet(player, 3, 0, 1, 7, 64);
+	public static SpriteSheet player_right = new SpriteSheet(player, 2, 0, 1, 7, 64);
 
 	
 	

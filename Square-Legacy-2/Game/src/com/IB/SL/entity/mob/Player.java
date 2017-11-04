@@ -48,7 +48,6 @@ public class Player extends Mob implements Serializable{
 	public transient  Keyboard input;
 	public transient  Sprite sprite;
 	public transient  Tile tile;
-	public transient int direction = 0;
 	transient double xOff = 0;
 	transient double yOff = 0;
 	public boolean buildMode = false;
@@ -56,19 +55,17 @@ public class Player extends Mob implements Serializable{
 	//private transient transient Inventory inventory;
 	//public transient Level level;
 	transient int walkingPacketTime = 0;
-	public transient  AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 16, 16, 3);
-	public transient  AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 16, 16, 3);
-	public transient  AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 16, 16, 3);
-	public transient  AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16, 16, 3);
+	public transient  AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
+	public transient  AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
+	public transient  AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
+	public transient  AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 64, 64, 7);
 	
-	private transient  AnimatedSprite player_upstill = new AnimatedSprite(SpriteSheet.player_upstill, 16, 16, 1);
-	private transient  AnimatedSprite player_downstill = new AnimatedSprite(SpriteSheet.player_downstill, 16, 16, 1);
-	private transient  AnimatedSprite player_leftstill = new AnimatedSprite(SpriteSheet.player_leftstill, 16, 16, 1);
-	private transient  AnimatedSprite player_rightstill = new AnimatedSprite(SpriteSheet.player_rightstill, 16, 16, 1);
+//	private transient  AnimatedSprite player_upstill = new AnimatedSprite(SpriteSheet.player_upstill, 16, 16, 1);
+//	private transient  AnimatedSprite player_downstill = new AnimatedSprite(SpriteSheet.player_downstill, 16, 16, 1);
+//	private transient  AnimatedSprite player_leftstill = new AnimatedSprite(SpriteSheet.player_leftstill, 16, 16, 1);
+//	private transient  AnimatedSprite player_rightstill = new AnimatedSprite(SpriteSheet.player_rightstill, 16, 16, 1);
 	
 	public transient  AnimatedSprite animSprite = down;
-	
-
 	
 	public transient static java.util.Random random1 = new Random();
 	public transient static int random = random1.nextInt(8 + 4);
@@ -119,9 +116,8 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	public void init() {
-		
 		this.speed = 1;
-		 this.Lvl = 1;
+		this.Lvl = 1;
 		this.xBound = 8;
 		this.yBound = 8;
 		this.xOffset = 0;
@@ -186,7 +182,6 @@ public class Player extends Mob implements Serializable{
 		p.currentLevelId = Game.currentLevelId;
 
 		p.Lvl = temp.Lvl;
-		p.direction = temp.direction;
 		p.kills = temp.kills;
 		p.money = temp.money;
 		setPosition(temp.x, temp.y, temp.currentLevelId, false);
@@ -289,7 +284,7 @@ public class Player extends Mob implements Serializable{
 
 		}
 		
-			if (walking && !riding && !raycastDIR.hasCollided()) {
+			if (walking) {
 					animSprite.update();					
 			} else animSprite.setFrame(0);
 		
@@ -347,7 +342,6 @@ public class Player extends Mob implements Serializable{
 					yOff = 3;
 				} else {
 			animSprite = up;
-			direction = 1;
 			dirInt = 5;
 			yOff = 0;
 				}
@@ -357,7 +351,6 @@ public class Player extends Mob implements Serializable{
 					yOff = -3;
 				} else {
 			animSprite = down;
-			direction = 0;
 			yOff = 0;
 			dirInt = 8;
 				}
@@ -367,7 +360,6 @@ public class Player extends Mob implements Serializable{
 				animSprite = left;				
 				xOff = 0;
 			xa-= speed;
-			direction = 2;
 			if (!input.up && !input.down) {
 				dirInt = 3;				
 			} else {
@@ -377,7 +369,6 @@ public class Player extends Mob implements Serializable{
 				animSprite = right;				
 				xOff = 0;
 			xa+= speed;
-			direction = 3;
 			if (!input.up && !input.down) {
 				dirInt = 0;
 			} else {
@@ -410,7 +401,7 @@ public class Player extends Mob implements Serializable{
 			regenHealth();
 						
 			if (this == level.getClientPlayer()) {
-					updateBuild();
+			updateBuild();
 			}
 						
 		//command mode TOGGLE
@@ -564,24 +555,25 @@ public class Player extends Mob implements Serializable{
 		return this.name;
 	}
 	
-private transient Sprite arrow = Sprite.QuestArrow;
+	private transient Sprite arrow = Sprite.QuestArrow;
+
 	public void render(Screen screen) {
 		Boot.get().xScroll = this.getX() - screen.width / 2;
 		Boot.get().yScroll = this.getY() - screen.height / 2;
-		
-	sprite = animSprite.getSprite();
-	
-			screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff),  sprite);			
+		this.animSprite.setFrameRate(4);
+		sprite = animSprite.getSprite();
+		screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff), sprite);
 
-			if (Boot.get().devModeOn) {
-	screen.drawRect((int)x - 8, (int)y - 15, 16, 16, 0x0093FF, true);
-	try {		
-		Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int)x, (int)y, raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);				
-	} catch (NullPointerException e) {
-	}
-	//USE FOR FRIENDLY MOBS LATER ON: 0xff00FF21
-	}
-	
+		if (Boot.get().devModeOn) {
+			screen.drawRect((int) x - 8, (int) y - 15, 64, 64, 0x0093FF, true);
+			try {
+				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int) y,
+					raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);
+				} catch (NullPointerException e) {
+			}
+			// Friendly Mobs Minimap Color: 0xff00FF21
+		}
+
 	}
 	
 	public int roundTo(int number, int multiple) {
