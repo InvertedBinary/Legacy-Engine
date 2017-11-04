@@ -15,7 +15,7 @@ public class Entity implements Serializable {
 
 	public double x;
 	public double y;
-	protected transient Sprite sprite;
+	public transient Sprite sprite;
 	public transient boolean removed = false;
 	public transient Level level;
 

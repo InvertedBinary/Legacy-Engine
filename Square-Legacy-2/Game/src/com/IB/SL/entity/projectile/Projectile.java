@@ -271,8 +271,10 @@ public abstract class Projectile extends Entity {
 	}
 	
 	protected void moveArc() {
+		Game.Ag = 16f/9.8f;
+		this.range = 1000;
 		//if (y + ny < yOrigin) {
-		za -= (Game.Ag);
+		za += (Game.Ag);
 		if (zz < 0f) {
 			zz = 0f;
 			za *= -0f;
@@ -283,7 +285,7 @@ public abstract class Projectile extends Entity {
 		double deltaY = (this.y - (this.y + this.ny)) - (zz + za) / 900;
 		this.angle = Math.atan2(deltaY, deltaX);
 		this.x += this.nx;
-		this.y += this.ny -= (zz + za) / 900;
+		this.y += this.ny += (zz + za);
 		this.sprite = Sprite.rotate(this.master_sprite, this.angle);	
 		if (distance() > range) remove();
 		//if (this.yOrigin < this.y) remove();

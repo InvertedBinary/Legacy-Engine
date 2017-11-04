@@ -437,7 +437,11 @@ public class Player extends Mob implements Serializable{
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
 			XML_Projectile Test_Arrow = new XML_Projectile(x, y, Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
+			XML_Projectile Test_Arrow2 = new XML_Projectile(x, y, Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
+			Test_Arrow2.sprite = Sprite.WizardProjectile2;
 			level.add(Test_Arrow);
+			
+			level.add(Test_Arrow2);
 		}
 	}
 	
