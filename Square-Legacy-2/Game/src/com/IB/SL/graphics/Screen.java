@@ -294,17 +294,13 @@ public class Screen {
 				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
 				int col = sprite.pixels[x + y * 16];
 				 if (col != ALPHA_COL) {
-						col = colSwitch(col, tilesx, tilesy);
-
-	                  pixels[(int) (xa + ya * width)] = col;
-	            }
+					col = colSwitch(col, tilesx, tilesy);
+	                pixels[(int) (xa + ya * width)] = col;
+				 	}
 				}
 			}
 		}		
 	
-
-
-
 public void renderTile(int xp, int yp, Sprite sprite) {
 	xp -= xOffset;
 	yp -= yOffset;
@@ -343,11 +339,9 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 	            if (xa < 0) xa = 0;
 	         //New way for Day / Night Cycles   
 	            int col = tile.sprite.pixels[x + y * tile.sprite.SIZE];
-	           /* if (col == 0xff1F1F1F) {
-	            	col += 0xff00FF00;
-	            }*/
+	            //	col -= 0xffFFFFFF;
 	            if (col != ALPHA_COL) {
-					col = colSwitch(col, tilesx, tilesy);
+					//col = colSwitch(col, tilesx, tilesy);
 	                  pixels[xa + ya * width] = col;
 	            }
 	         //--------------------------
@@ -355,30 +349,6 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 	         }
 	      }
 	   }   
-//		public void renderTile(int xp, int yp, Tile tile) {
-//		 try {
-//		      Sprite sp = tile.sprite;
-//		      int WIDTH = 640;
-//		      int rWidth = sp.SIZE;
-//		      int rHeight = sp.SIZE;
-//		      
-//			if (sp.SIZE <= 0) {
-//		        return;
-//		    }
-//			
-//		    int pos = (xp) + (yp) * WIDTH;
-//		    for (int i = pos, i2 = pos + rWidth; i != i2; i++) {
-//		        pixels[i] = 0xFFFFFF;
-//		    }
-//		    int pos2 = pos;
-//		    for (int y = 1; y != rHeight; y++) {
-//		        pos2 += WIDTH;
-//		        System.arraycopy(pixels, pos, pixels, pos2, rWidth);
-//		    }
-//		 } catch (Exception e) {
-//			 e.printStackTrace();
-//		 }
-//		}
 	
 		public static int Randomhex() {
 			Random rand = new Random();

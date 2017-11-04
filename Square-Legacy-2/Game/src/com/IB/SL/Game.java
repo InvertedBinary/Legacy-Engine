@@ -11,7 +11,6 @@ import java.awt.Robot;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -83,6 +82,7 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	public static String PlayerName = "Player";
 	File screenshots = null;
+	public static float Ag = 32f/9.8f;
 
 	int saveTime = 0;
 	/**
@@ -101,9 +101,6 @@ public class Game extends Canvas implements Runnable {
 
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	public static float Ag = 32f/9.8f;
-	
-	@SuppressWarnings("unused")
 	private int time = 0;
 
 	private void folderCreation() {
@@ -496,7 +493,7 @@ public class Game extends Canvas implements Runnable {
 				"Average FPS: " + fpsAVG, screen, false, true);
 		} else {
 			font8x8.render(-5, this.height - 17, -3, 0x00ff00,
-					"Average FPS: " + fpsAVG, screen, false, true);
+				"Average FPS: " + fpsAVG, screen, false, true);
 		}
 		}
 
@@ -522,8 +519,7 @@ public class Game extends Canvas implements Runnable {
 			g.setFont(new Font("Verdana", 0, 16));
 			g.setColor(Color.WHITE);
 			g.drawString("Player[UUID]: " + level.getPlayers(), 10, 40);
-			// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10,
-			// 60);
+			// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
 			g.drawString("Tile: " + level.returnTile() + " || Overlay: " + level.returnOverlayTile(), 10, 60);
 			g.drawString("X: " + (int) getPlayer().getX() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().getY() / TileCoord.TILE_SIZE, 10, 20);
 			g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale, Mouse.getX() - 103, Mouse.getY() + 70);
@@ -550,17 +546,13 @@ public class Game extends Canvas implements Runnable {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("Verdana", 0, 18));
 				g.drawString("Map", 1372, 25);
-
 				// g.drawString("Button: " + Mouse.getButton(), 415, 80);
 			}
 
 		}
-		
 		//fontLayer.render(g);
-
 		g.dispose();
 		bs.show();
-
 	}
 
     
