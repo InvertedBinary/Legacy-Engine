@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="timer"/>
 			<item value="size"/>
 			<item value="updateMode"/>
 			<item value="spawn"/>
@@ -22,7 +23,6 @@
 			<item value="minimap_enabled"/>
 			<item value="cont_pressed ="/>
 			<item value="0xFF"/>
-			<item value="xScroll"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Boot.launch_args"/>

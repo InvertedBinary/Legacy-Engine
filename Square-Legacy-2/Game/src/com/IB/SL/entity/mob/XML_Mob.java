@@ -47,8 +47,8 @@ public class XML_Mob extends Mob {
 	
 	public XML_Mob(double x, double y, String XML) {
 		readXML(XML);
-		this.x = x * 16;
-		this.y = y * 16;
+		this.x = x * 32;
+		this.y = y * 32;
 	}
 	
 	public void readXML(String path) {

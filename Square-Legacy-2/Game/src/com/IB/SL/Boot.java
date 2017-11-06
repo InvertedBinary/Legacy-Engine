@@ -12,10 +12,13 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.util.HashMap;
 
+import com.IB.SL.AlphaLWJGL.LWJGL;
+
 public class Boot {
 
-	public static String title = "Square Legacy 2 [Build 1 : 10/31/17]";
+	public static String title = "Accelerated Square Legacy 2 [Build 1 : 10/31/17]";
 	private static Game g = new Game(title);
+	//private static LWJGL lwjgl = new LWJGL(title);
 
 	public static Game get() {
 		return g;
@@ -29,9 +32,10 @@ public class Boot {
     	for (String s : args) {
     		launch_args.put(s, true);
     	}
-		
+    	
+		//lwjgl.start();
+    	
 		g.Launch(g);
-		
 
 	}
 	

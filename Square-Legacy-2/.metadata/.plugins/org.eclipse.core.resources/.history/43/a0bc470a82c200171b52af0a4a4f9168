@@ -1,0 +1,27 @@
+package com.IB.SL.AlphaLWJGL;
+
+public class Matrix4f {
+	
+	public static final int SIZE = 4 * 4;
+	public float[] matrix = new float[SIZE];
+	
+	public Matrix4f() {
+	}
+	
+	public static Matrix4f identity() {
+		Matrix4f returnMat = new Matrix4f();
+		
+		returnMat.matrix[0 + 0 * 4] = 1.0f;
+		returnMat.matrix[1 + 1 * 4] = 1.0f;
+		returnMat.matrix[2 + 2 * 4] = 1.0f;
+		returnMat.matrix[3 + 3 * 4] = 1.0f;
+
+	}
+	
+	public static Matrix4f translate(Vector3f vector) {
+		Matrix4f returnMat = identity();
+		return returnMat;
+		
+	}
+
+}

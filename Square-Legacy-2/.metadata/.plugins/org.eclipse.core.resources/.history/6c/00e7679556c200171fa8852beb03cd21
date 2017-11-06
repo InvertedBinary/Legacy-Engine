@@ -1,0 +1,13 @@
+package com.IB.SL.AlphaLWJGL;
+
+import org.lwjgl.glfw.GLFWKeyCallback;
+import static org.lwjgl.glfw.GLFW.*;
+
+public class Input extends GLFWKeyCallback {
+
+	@Override
+	public void invoke(long arg0, int arg1, int arg2, int arg3, int arg4) {
+		
+	}
+	
+}

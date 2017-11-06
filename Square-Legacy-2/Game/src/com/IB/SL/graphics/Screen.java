@@ -16,7 +16,6 @@ import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.overlays.Pebble;
 import com.IB.SL.level.tile.tiles.MyColor;
-import com.IB.SL.level.tile.tiles.TorchTile;
 import com.IB.SL.util.Vector2i;
 
 public class Screen {
@@ -46,7 +45,7 @@ public class Screen {
 	
 	
 	public void blendTiles(int xp, int yp, Tile tile1, Tile tile2){
-	      xp -= xOffset;
+	       xp -= xOffset;
 	       yp -= yOffset;
 	      
 	       int tileDict1[] = new int[tile1.sprite.SIZE - 1];
@@ -74,7 +73,7 @@ public class Screen {
 	               if(type >= 5) col = tileDict2[color];
 	              // col = MyColor.changeBrightness(col, Level.brightness, false);
 	               pixels[xa + ya * width] = col;
-	            }
+	        }
 	      }
 	    }
 	
@@ -108,31 +107,9 @@ public class Screen {
 	              // col = MyColor.changeBrightness(col, Level.brightness, false);
 	               pixels[xa + ya * width] = col;
 	            }
-	      }
+	      	}
 	    }
 
-	public void renderMiniMap(int xp, int yp, int color, int width2, int height2, int x, int y) {
-	      x *= 16;
-	      y *= 16;
-	      xp -= xOffset - x;
-	      yp -= yOffset - y;
-	      xp /= 16;
-	      yp /= 16;
-	      if (!(xp < 0 || xp >= width || yp < 0 || yp >= height || color == 0 || xp > width2 || yp < height2))
-	         pixels[xp + yp * width] = color;
-	   }
-	
-	public void renderMiniMap(int xp, int yp, SpriteSheet map, int width2, int height2) {
-			for (int y = 0; y < 32; y++) {
-				int ya = y + yp;
-				for (int x = 0; x < 32; x++) {
-					int xa = x + xp;
-					if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-					pixels[xa + ya * width] = map.pixels[(int) Boot.get().getPlayer().getX() / TileCoord.TILE_SIZE + (int) Boot.get().getPlayer().getY() / TileCoord.TILE_SIZE  * 32];
-				}
-			}
-	   }
-	
 	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed) {
 		if(fixed) {
 		xp -= xOffset;
@@ -217,27 +194,12 @@ public class Screen {
 	   
 	   public void renderAlphaSprite(int xp, int yp, Sprite sprite) {
 		   renderAlphaSprite(sprite, xp, yp);
+		  // System.out.println("true");
 	   }
 	
 	   public void renderAlphaSprite(Sprite sprite, int xp, int yp){
-		      for(int y = 0; y < sprite.getHeight(); y++){
-		         int ya = y + yp;
-		         for(int x = 0; x < sprite.getWidth(); x++){
-		            int xa = x + xp;
-		            if(xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-		            int color = sprite.pixels[x + y * sprite.getWidth()];
-		            if(color == ALPHA_COL) continue;
-
-		            if(hasAlpha(color)){
-		               int[] rgb1 = hexToRGB(color);            //spirte color as int array
-		               int[] rgb2 = hexToRGB(pixels[xa + ya * width]);   //pixel color as int array
-		               pixels[xa + ya * width] = blendColors(rgb1, rgb2);
-		            }else{
-		               pixels[xa + ya * width] = color;
-		            }
-		         }
-		      }
-		   }
+		   renderAlphaSprite(xp, yp, sprite, false);
+	   }
 	   
 	   public void renderAlphaSprite(int xp, int yp, Sprite sprite, boolean fixed){
 		   if(fixed) {
@@ -250,14 +212,14 @@ public class Screen {
 		            int xa = x + xp;
 		            if(xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
 		            int color = sprite.pixels[x + y * sprite.getWidth()];
-		            if(color == ALPHA_COL) continue;
-
+		            if(color != ALPHA_COL) {
 		            if(hasAlpha(color)){
 		               int[] rgb1 = hexToRGB(color);            //spirte color as int array
 		               int[] rgb2 = hexToRGB(pixels[xa + ya * width]);   //pixel color as int array
 		               pixels[xa + ya * width] = blendColors(rgb1, rgb2);
 		            }else{
 		               pixels[xa + ya * width] = color;
+		            }
 		            }
 		         }
 		      }
@@ -341,7 +303,7 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 	            int col = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 	            //	col -= 0xffFFFFFF;
 	            if (col != ALPHA_COL) {
-					//col = colSwitch(col, tilesx, tilesy);
+					col = colSwitch(col, tilesx, tilesy);
 	                  pixels[xa + ya * width] = col;
 	            }
 	         //--------------------------
@@ -390,145 +352,6 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 		      }
 		   }   
 	   
-	  /* public void renderTile(int xp, int yp, Tile tile, int col) {
-	      int tilesx = xp;
-	      int tilesy = yp;
-	      xp -= xOffset;
-	      yp -= yOffset;
-	      for (int y = 0; y <tile.sprite.SIZE; y++) {
-	         int ya = y + yp;
-	         for (int x = 0; x <tile.sprite.SIZE; x++) {
-	            int xa = x + xp;
-	            if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
-	            if (xa < 0) xa = 0;
-	         //New way for Day / Night Cycles   
-	            col = tile.sprite.pixels[x + y * tile.sprite.SIZE];
-	           /* if (col == 0xff1F1F1F) {
-	            	col += 0xff00FF00;
-	            }
-	            if (col != ALPHA_COL) {
-					col = colSwitch(col, tilesx, tilesy);
-	                  pixels[xa + ya * width] = col;
-	            }
-	         //--------------------------
-	         //   pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
-	         } 
-	      }
-	   }   */
-	   
-	   
-	   private int test(int tilesx, int tilesy) {
-		   boolean bool = false;
-	//IF TILE IS AN OVERLAY TILE, REPLACE Level.getTile WITH Level.getOverlayTile down below.
-	//ALSO CHECK IF IT IS NULL WITH if (Level.getOverlayTile(.......) != null)
-	//OR YOU CAN MAKE IT A try { .... } catch (NullPointerException e) { return 0; }
-	//THIS WAY IF IT IS NULL IT WILL RETURN 0!
-			   if (bool) {
-				   
-		  if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT), (tilesy >> Game.TILE_BIT_SHIFT)) 		  instanceof Pebble) return 1;
-		  if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) + 1) instanceof Pebble) return 1;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) - 1) instanceof Pebble) return 1;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 0) instanceof Pebble) return 1;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 0) instanceof Pebble) return 1;
-	      
-			/*  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) + 1).illuminator()) return 1;	
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) - 1).illuminator()) return 1;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 0).illuminator()) return 1;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 0).illuminator()) return 1;*/
-			  
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 1) instanceof Pebble) return 2;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) - 1) instanceof Pebble) return 2;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 1) instanceof Pebble) return 2;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) - 1) instanceof Pebble) return 2;
-			  
-		/*	  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 1).illuminator()) return 2;	
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) - 1).illuminator()) return 2;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 1).illuminator()) return 2;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) - 1).illuminator()) return 2;*/
-
-		  if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) + 0) instanceof Pebble) return 3;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) + 0) instanceof Pebble) return 3;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) + 2) instanceof Pebble) return 3;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) - 2) instanceof Pebble) return 3;      
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 2) instanceof Pebble) return 3;      
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) - 2) instanceof Pebble) return 3;      
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 2) instanceof Pebble) return 3;      
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) - 2) instanceof Pebble) return 3;   
-			  
-		/*	  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) + 0).illuminator()) return 3;	
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) + 0).illuminator()) return 3;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) + 2).illuminator()) return 3;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 0, (tilesy >> Game.TILE_BIT_SHIFT) - 2).illuminator()) return 3;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) + 2).illuminator()) return 3;	
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 1, (tilesy >> Game.TILE_BIT_SHIFT) - 2).illuminator()) return 3;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) + 2).illuminator()) return 3;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 1, (tilesy >> Game.TILE_BIT_SHIFT) - 2).illuminator()) return 3;*/
-
-		  if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) + 1) instanceof Pebble) return 4;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) - 1) instanceof Pebble) return 4;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) + 1) instanceof Pebble) return 4;
-	      if (Game.level.getOverlayTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) - 1) instanceof Pebble) return 4;  
-			   }
-			/*  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) + 1).illuminator()) return 4;	
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) + 2, (tilesy >> Game.TILE_BIT_SHIFT) - 1).illuminator()) return 4;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) + 1).illuminator()) return 4;
-			  if (level.getTile((tilesx >> Game.TILE_BIT_SHIFT) - 2, (tilesy >> Game.TILE_BIT_SHIFT) - 1).illuminator()) return 4;*/
-				   return 0;
-	   }
-	   
-		//Level level = Boot.get().getLevel();
-
-	   private void deterLightLevel(int tilesx, int tilesy) {
-		   /*boolean bool = false;
-	//IF TILE IS AN OVERLAY TILE, REPLACE Level.getTile WITH Level.getOverlayTile down below.
-	//ALSO CHECK IF IT IS NULL WITH if (Level.getOverlayTile(.......) != null)
-	//OR YOU CAN MAKE IT A try { .... } catch (NullPointerException e) { return 0; }
-	//THIS WAY IF IT IS NULL IT WILL RETURN 0!
-			   if (bool) {
-				   
-				   //HARD CODE: if(tilesx == 6 && tilesy == 23) {lightlevels[6][23] = 3; return;}
-			         
-			         
-			          if (level.getTile((tilesx), (tilesy)).solid()) {lightlevels[tilesx][tilesy] = 0; return;}
-			          if (level.getOverlayTile((tilesx), (tilesy)) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 1; return;}
-			             
-			             
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 1; return;}
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 1; return;}
-			          if (level.getOverlayTile((tilesx) + 1, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 1; return;}
-			          if (level.getOverlayTile((tilesx) - 1, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 1; return;}
-			          
-			          if (level.getOverlayTile((tilesx) + 1, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 2; return;}
-			          if (level.getOverlayTile((tilesx) + 1, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 2; return;}
-			          if (level.getOverlayTile((tilesx) - 1, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 2; return;}
-			          if (level.getOverlayTile((tilesx) - 1, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 2; return;}
-
-			          if (level.getOverlayTile((tilesx) + 2, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 3; return;}
-			          if (level.getOverlayTile((tilesx) - 2, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 3; return;}
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) + 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 3; return;}
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) - 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 3; return;}
-			          
-			          if (level.getOverlayTile((tilesx) + 3, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 5; return;}
-			          if (level.getOverlayTile((tilesx) - 3, (tilesy) + 0) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 5; return;}
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) + 3) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 5; return;}
-			          if (level.getOverlayTile((tilesx) + 0, (tilesy) - 3) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 5; return;}
-			          
-			          if (level.getOverlayTile((tilesx) + 2, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) + 2, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 2, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 2, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          
-			          if (level.getOverlayTile((tilesx) + 2, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) + 2, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 2, (tilesy) + 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 2, (tilesy) - 1) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          
-			          if (level.getOverlayTile((tilesx) + 1, (tilesy) + 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 1, (tilesy) + 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) - 1, (tilesy) - 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			          if (level.getOverlayTile((tilesx) + 1, (tilesy) - 2) instanceof TorchTile) {lightlevels[tilesx][tilesy] = 4; return;}
-			}*/
-	   }
 
 public void renderMob(double x2, double y2, Mob mob) {
 	  int tilesx = (int) x2;
@@ -869,7 +692,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
         }
 	   }
 	}
-	           }
+}
 }
 	  public void renderLight(int xp, int yp, int radius, Mob mob, int r, int g, int b) {
           int col = 0;
@@ -921,10 +744,10 @@ public void render32Mob(double x2, double y2, Mob mob) {
 				 if (col != ALPHA_COL) {
 					col = colSwitch(col, tilesx, tilesy);
 	                  pixels[(int) (xa + ya * width)] = col;
-	            }
-		}
+				}
 			}
 		}
+	}
 	
 	public void drawCir(int xp, int yp, int radius, int color, boolean fixed) {
 		if (fixed) {
@@ -1011,31 +834,9 @@ public void setOffset(int xOffset, int yOffset) {
 	}
 
 
-
-public int colSwitch(int col, int tilesx, int tilesy) {
-	  switch (test(tilesx, tilesy)) {
- 	  case 0:
-          col = MyColor.changeBrightness(col, Level.brightness, false);                        
- 	  break;
- 		
- 	  case 1:
-          col = MyColor.changeBrightness(col, Level.brightness / 10, false);   
- 	  break;
- 		
- 	  case 2:
-          col = MyColor.changeBrightness(col, Level.brightness >> 3, false);   
-      break;
-      		
-      case 3:
-          col = MyColor.changeBrightness(col, Level.brightness >> 2, false);   
-      break;
-      	
-      case 4:
-          col = MyColor.changeBrightness(col, Level.brightness >> 1, false);    
- 	  break;
-		   }
-	  return col;
-}
+	public int colSwitch(int col, int tilesx, int tilesy) {
+		return col;
+	}
 
 	  public void fade(int r, int g, int b) {
 		   int col = 0;
@@ -1068,192 +869,128 @@ public int colSwitch(int col, int tilesx, int tilesy) {
 				         }
 				      }
 		      
-	  }
+	}
 
-			public void drawLine(Player player, List<Entity> entities) {
-				int xp = (int) player.getX();
-				int yp = (int) player.getY();
-				xp -= xOffset;
-				yp -= yOffset;
-				int col = 0;
-			entities = Boot.get().getLevel().getEntities(player, 20);
-			for (int i = 0; i < entities.size(); i++) {
-				System.out.println("drawing: " + entities.get(i));
-				System.out.println("E: " + entities.get(i).getX() + " P: " + player.getX());
-				for (int y = (int) player.getY(); y < entities.get(i).getY(); y++) {
-					int ya = y + yp;
-					for (int x = (int)player.getX(); x < entities.get(i).getX(); x++) {
-						int xa = x + xp;
-						if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height) 
-							continue;
-						col = pixels[xa + ya * this.width];
-						pixels[xa + ya * this.width] = col;
-					}
+	public void drawLine(Player player, List<Entity> entities) {
+		int xp = (int) player.getX();
+		int yp = (int) player.getY();
+		xp -= xOffset;
+		yp -= yOffset;
+		int col = 0;
+		entities = Boot.get().getLevel().getEntities(player, 20);
+		for (int i = 0; i < entities.size(); i++) {
+			System.out.println("drawing: " + entities.get(i));
+			System.out.println("E: " + entities.get(i).getX() + " P: " + player.getX());
+			for (int y = (int) player.getY(); y < entities.get(i).getY(); y++) {
+				int ya = y + yp;
+				for (int x = (int) player.getX(); x < entities.get(i).getX(); x++) {
+					int xa = x + xp;
+					if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
+						continue;
+					col = pixels[xa + ya * this.width];
+					pixels[xa + ya * this.width] = col;
 				}
-				
-			}
 			}
 
-			public boolean shakeScreen() {
-				double xoff = Boot.get().xScroll;
-				double yoff = Boot.get().yScroll;
-				boolean shaking = true;
-				for (int i = 0; i < 10; i++) {
-					Boot.get().xScroll += i;
-					Boot.get().yScroll += i;
-					System.out.println(Boot.get().xScroll);
-					if (i >= 10) {
-						i = 0;
-						shaking = false;
-						Boot.get().xScroll = xoff;
-						Boot.get().yScroll = yoff;
-					}
-				}
-				return shaking;
+		}
+	}
+
+	public boolean shakeScreen() {
+		double xoff = Boot.get().xScroll;
+		double yoff = Boot.get().yScroll;
+		boolean shaking = true;
+		for (int i = 0; i < 10; i++) {
+			Boot.get().xScroll += i;
+			Boot.get().yScroll += i;
+			System.out.println(Boot.get().xScroll);
+			if (i >= 10) {
+				i = 0;
+				shaking = false;
+				Boot.get().xScroll = xoff;
+				Boot.get().yScroll = yoff;
 			}
+		}
+		return shaking;
+	}
 			
 			
-			
-			int renderX = 0, renderY = 0;
-			public void renderMiniMap(int xp, int yp, int size) {
-				int minimapSize = size;
-				int xoff = 0, yoff = 0;
-				//if (Game.getGame().gameState == Game.getGame().gameState.ingame_A) {
-				//System.out.println((int) Game.getGame().getPlayer().getX() / 16 + "," + (int)Game.getGame().getPlayer().getY() / 16);
-				try {
-					Sprite map;
-					//Sprite playerPos = new Sprite(1, 1, 0xff191970);
-					//Sprite border = new Sprite(minimapSize + 2, minimapSize + 2, 0xff262626);
-					int renderXt = (((int)Boot.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
-					int renderYt = (((int)Boot.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
-					
-					int px = (((int)Boot.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - renderXt);
-					int py = (((int)Boot.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - renderYt);
-					int ex = 0, ey = 0;
-					List<Entity> e = Boot.get().getLevel().entities;
+	int renderX = 0, renderY = 0;
 
-					
-					while (renderXt > 0) {
-						renderX = renderXt;
-						break;
-					}
-					
-					while (renderXt > 0) {
-						renderY = renderYt;
-						break;
-					}
-					
-					if (renderX <= 0) {
-						renderX = 0;
-					}
-					if (renderY <= 0) {
-						renderY = 0;
-					}
-					
-					
-					//System.out.println("LEVEL HEIGHT: " + (Game.getGame().level.height << 4) + " MINIMAP SIZE : " + minimapSize + " RENDER Y: " + renderY);
-					
-					
-					
-					if (renderX >= Boot.get().level.width - minimapSize) {
-						renderX = Boot.get().level.width - minimapSize;
-					}
-					if (renderY >= Boot.get().level.height - minimapSize) {
-						renderY = Boot.get().level.height - minimapSize;
-					}
-					
-						map = new Sprite(minimapSize, renderX, renderY, SpriteSheet.minimapDYN, 7);
-						
-					
-					//renderSprite((int)xp - 1, (int)yp - 1, border, false);
-					for (int y = 0; y < map.SIZE; y++) {
-						double ya = y + yp;
-						for (int x = 0; x < map.SIZE; x++) {
-							int xa = x + xp;
-							if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-						    // pixels[(int) ((int) (Game.getGame().getPlayer().getX() / 16) + (int) (Game.getGame().getPlayer().getY() / 16) * width)] = 0xffFF00FF;
-							//pixels[((int)(Game.getGame().getPlayer().getX() / 16) - (minimapSize / 2) + (int)yp - (int)(Game.getGame().getPlayer().getY() / 16) * width)] = 0xffFFD800;
-							//if (color != ALPHA_COL) { // 
-							//int d = (int) Math.sqrt((y - size) * (y - size) + (x - size) * (x - size));
-							//int d2 = (int) Math.pow((y - size) * (y - size) + (x - size) * (x - size), 0.8) - 10000000;
+	public void renderMiniMap(int xp, int yp, int size) {
+		int minimapSize = size;
+		int xoff = 0, yoff = 0;
+		try {
+			Sprite map;
+			int renderXt = (((int) Boot.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
+			int renderYt = (((int) Boot.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - (minimapSize / 2));
 
-						  //if (d <= size) {
-							map.pixels[px + py * map.getWidth()] = 0xff191970;
-							/*try {
-								
-							for(int i = 0; i < e.size(); i++) {
-								if (!(e.get(i) instanceof Player)) {
-								ex = (((int)e.get(i).getX() >> Game.TILE_BIT_SHIFT) - renderXt);
-								ey = (((int)e.get(i).getY() >> Game.TILE_BIT_SHIFT) - renderYt);
-								}
-							}
-							if (!(ex < renderX && ey < renderY && ex > renderX + size && ey > renderY + size)) {
-								System.out.println("TRUE");
-								map.pixels[ex + ey * map.getWidth()] = 0xff000000;
-							}
-							} catch (Exception err) {
-								
-							}*/
-							if (size == 45) {
-								
-							double dx = x - size / 2;
-							double dy = y - size / 2;
-							double dist = dx * dx + dy * dy;
+			int px = (((int) Boot.get().getPlayer().getX() >> Game.TILE_BIT_SHIFT) - renderXt);
+			int py = (((int) Boot.get().getPlayer().getY() >> Game.TILE_BIT_SHIFT) - renderYt);
+			int ex = 0, ey = 0;
+			List<Entity> e = Boot.get().getLevel().entities;
 
-							int color = 0;
-							if (dist <= 512) {
+			while (renderXt > 0) {
+				renderX = renderXt;
+				break;
+			}
+
+			while (renderXt > 0) {
+				renderY = renderYt;
+				break;
+			}
+
+			if (renderX <= 0) {
+				renderX = 0;
+			}
+			if (renderY <= 0) {
+				renderY = 0;
+			}
+
+			if (renderX >= Boot.get().level.width - minimapSize) {
+				renderX = Boot.get().level.width - minimapSize;
+			}
+			if (renderY >= Boot.get().level.height - minimapSize) {
+				renderY = Boot.get().level.height - minimapSize;
+			}
+
+			map = new Sprite(minimapSize, renderX, renderY, SpriteSheet.minimapDYN, 7);
+
+			for (int y = 0; y < map.SIZE; y++) {
+				double ya = y + yp;
+				for (int x = 0; x < map.SIZE; x++) {
+					int xa = x + xp;
+					if (xa < 0 || xa >= width || ya < 0 || ya >= height)
+						continue;
+					map.pixels[px + py * map.getWidth()] = 0xff191970;
+					if (size == 45) {
+
+						double dx = x - size / 2;
+						double dy = y - size / 2;
+						double dist = dx * dx + dy * dy;
+
+						int color = 0;
+						if (dist <= 512) {
 							color = map.pixels[x + y * map.getWidth()];
 							if (dist >= 480) {
 								color = 0xff000000;
 							}
-							}
-							if (dist <= 535) {								
-							pixels[(int) (xa + ya * width)] = color;
-							}
-							} else {
-								int color = map.pixels[x + y * map.getWidth()];
-								pixels[(int) (xa + ya * width)] = color;
-								
-							}
-					          //  }
 						}
-	
-							   //  renderSprite((int)xp + (minimapSize / 2) + yoff, (int)yp + (minimapSize / 2) + xoff, playerPos, false);
-							     //	Game.getGame().font8x8.render((int)213, 158, -2, (int)Game.getGame().getPlayer().getX() / 16 + "," + (int)Game.getGame().getPlayer().getY() / 16, this, false, false);
+						if (dist <= 535) {
+							pixels[(int) (xa + ya * width)] = color;
+						}
+					} else {
+						int color = map.pixels[x + y * map.getWidth()];
+						pixels[(int) (xa + ya * width)] = color;
 
-							}
-					}	catch (Exception e) {
-						//System.out.println("mini map exception");
 					}
 				}
-
-		
-				
-				
-				/*SpriteSheet sheet = SpriteSheet.minimapDYN;
-					for (int y = 0; y < (int)(Game.getGame().getPlayer().getY() / 16) + 32; y++) {
-						int ya = y + yp;
-						for (int x = 0; x < (int)(Game.getGame().getPlayer().getX() / 16) + 32; x++) {
-							int xa = x + xp;
-							if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-							pixels[xa + ya * width] = sheet.pixels[x + y * 32];
-							int color = sheet.pixels[x + y * 32];
-							if (color != ALPHA_COL) {
-							     pixels[xa + ya * width] = color;
-							}
-						}
-					}//(int)(Game.getGame().getPlayer().getY() / 16) +
-			}*/
-
-/*public int colSwitch(int col) {
-	col = MyColor.changeBrightness(col, Level.brightness, false);
-	return col;
-}*/
-
-
-
 			}
-//}
+		} catch (Exception e) {
+		}
+	}
+}
+
+
 
 
 

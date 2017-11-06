@@ -127,8 +127,8 @@ public class SpriteSheet {
 	/*public static SpriteSheet CopperGuardian_Sword1 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);
 	public static SpriteSheet CopperGuardian_Sword2 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);
 	public static SpriteSheet CopperGuardian_Sword3 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);*/
-	public static SpriteSheet Water_Main = new SpriteSheet("/Textures/sheets/03_WorldGen/animWater.png", 16, 32);
-	public static SpriteSheet water_anim = new SpriteSheet(Water_Main, 0, 0, 1, 1, 16);
+	public static SpriteSheet Water_Main = new SpriteSheet("/Textures/sheets/03_WorldGen/animWater.png", 32, 64);
+	public static SpriteSheet water_anim = new SpriteSheet(Water_Main, 0, 0, 1, 1, 32);
 	
 	public static SpriteSheet Occulus = new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/TheOcculos.png", 128, 96);
 	public static SpriteSheet Occulus_down = new SpriteSheet(Occulus, 0, 0, 2, 2, 32);

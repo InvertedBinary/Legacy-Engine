@@ -253,11 +253,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		for (int c = 0; c < 4; c++) {
 			double xt = ((x + xa) - c % 2 * 15 - 0) / TileCoord.TILE_SIZE;
 			double yt = ((y + ya) - c / 2 * 15 - 0) / TileCoord.TILE_SIZE;
-			if (this instanceof Player) {
-				/*if (((Player)this).ridingOn != null) {
-					yt = ((y + ya) - c / 2 * 15 + 14) / TileCoord.TILE_SIZE;
-				}*/
-			}
+
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
 			if (c % 2 == 0) ix = (int) Math.floor(xt);

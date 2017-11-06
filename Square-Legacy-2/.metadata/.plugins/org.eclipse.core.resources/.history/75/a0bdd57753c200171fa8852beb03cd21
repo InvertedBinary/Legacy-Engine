@@ -1,0 +1,51 @@
+package com.IB.SL.AlphaLWJGL;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+
+import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFWKeyCallback;
+
+public class LWJGL implements Runnable {
+
+	//TODO: Delete this class when done
+	String title;
+	private long window;
+	private boolean running = true;
+	private Thread thread;
+	   
+	public LWJGL(String title) {
+		this.title = title;
+        System.out.println("LWJGL Version " + Version.getVersion() + " is working.");
+	}
+
+	public void start() {
+		running = true;
+		thread = new Thread(this, "SL2");
+	}
+	
+	public void init() {
+		
+	}
+	
+	public void render() {
+		
+	}
+	
+	public void update() {
+		
+	}
+	
+	@Override
+	public void run() {
+		init();
+		while(running) {
+			update();
+			render();
+		}
+	}
+	
+}

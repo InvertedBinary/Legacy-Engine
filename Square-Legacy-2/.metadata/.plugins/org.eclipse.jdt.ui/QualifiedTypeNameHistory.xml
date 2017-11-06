@@ -12,4 +12,11 @@
 <fullyQualifiedTypeName name="com.IB.SL.input.Keyboard"/>
 <fullyQualifiedTypeName name="com.IB.SL.graphics.Screen"/>
 <fullyQualifiedTypeName name="com.IB.SL.Boot"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="javax.swing.Renderer"/>
+<fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
+<fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWVidMode"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWKeyCallback"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
 </qualifiedTypeNameHistroy>

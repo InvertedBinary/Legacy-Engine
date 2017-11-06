@@ -7,6 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.IB.SL.Boot"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-Dsun.java2d.opengl=true"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-resizeable -Dorg.lwjgl.util.Debug=true"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Game"/>
 </launchConfiguration>

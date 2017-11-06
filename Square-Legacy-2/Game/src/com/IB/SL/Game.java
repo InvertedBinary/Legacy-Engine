@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -96,7 +98,7 @@ public class Game extends Canvas implements Runnable {
 		
 	private Screen screen;
 	public WindowHandler windowHandler;
-	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	//private VolatileImage vImage = this.createVolatileImage(width, height);
 
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -205,6 +207,25 @@ public class Game extends Canvas implements Runnable {
 		
 		getMenu().addMenus();
 		getMenu().load(getMenu().MainMenu, true);
+		
+		this.frame.addComponentListener(new ComponentListener() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				System.out.println("Resized?");
+				/*frame.remove(Boot.get());
+				width = frame.getWidth() / scale;
+				height = frame.getHeight() / scale;
+				frame.add(Boot.get());*/
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {}
+			@Override
+			public void componentShown(ComponentEvent e) {}
+			@Override
+			public void componentHidden(ComponentEvent e) {}
+		});
+		
 		
 	}
 	
@@ -452,21 +473,10 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		level.update();
+		
+	
 
-		/*
-		 * if (swampLoaded) {
-		 * 
-		 * defaultLoaded = false; level = Level.Swamp; level.add(player);
-		 * player.removed = true; player.isRemoved(); player.update(); }
-		 */
-
-		/*
-		 * if (defaultLoaded) { swampLoaded = false; level.add(player);
-		 * player.removed = true; player.isRemoved(); player.update();
-		 * player.render(screen); screen.renderMob(296, 381, player); }
-		 */
 	}
-	String mat = "";
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -496,10 +506,56 @@ public class Game extends Canvas implements Runnable {
 				"Average FPS: " + fpsAVG, screen, false, true);
 		}
 		}
+		
+		/*time++;
+		for(int j = 0; j < screen.height; j++) {
+			for (int i = 0; i < screen.width; i++) {
+				screen.pixels[i + j * screen.width] = 0;												
+				if (i % 2 == 0) {
+						if (time % 2  == 0) {
+							screen.pixels[i + j * screen.width] = 0xffFF00FF;												
+						} else {
+							if (j % 2 == 0) {
+							screen.pixels[i + j * screen.width] = 0xff00FF00;												
+						}
+					}
+				}
+			}
+		}
+		
+		for (int y = 0; y < screen.height; y++) {
+			for (int x = 0; x < screen.width; x++) {
+				if (x < 0 || x >= width || y < 0 || y >= height) continue;
+				     screen.pixels[(int) (x + y * width)] += (int) (0x110000 * ((x - y + Math.round(Math.random() * 10)) / 2));
+			}
+		}*/
 
 		//System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
 		for (int i = 0; i < pixels.length; i++) {
+			/*if ((int)(Math.random() * 100) % 2 == 0) {
+		    screen.pixels[(int) i] += (int) (((Math.round(Math.random() * 100000))));
+			}
+			if ((int)(Math.random() * 50) % 60 == 0) {
+			for (int i1 = 0; i1 < 6; i1++) {
+				for (int j = screen.pixels.length - 1; j > 0; j--) {
+					if ((int)(i * 2) % 100 == 0) {
+						
+					int temp = screen.pixels[j];
+					double r = Math.random();
+						screen.pixels[j] = screen.pixels[j - 1];
+					screen.pixels[j - 1] = temp;
+					}
+				}
+			}
+			}
+			//}
+			if (Boot.get().getPlayer().mobhealth < 5) {
+			if (((int)(Math.random() * 1.2005) % 61418 == 0)) {// || this.getPlayer().ridingOn == null) {
 			pixels[i] = screen.pixels[i];
+				}
+			} else {*/
+				pixels[i] = screen.pixels[i];
+			//}
 		}
 
 		Graphics g = bs.getDrawGraphics();
@@ -550,12 +606,24 @@ public class Game extends Canvas implements Runnable {
 			}
 
 		}
+		
+		
 		//fontLayer.render(g);
 		g.dispose();
 		bs.show();
-	}
 
-    
+		
+//		frame.remove(this);
+//		width = frame.getWidth() / scale;
+//		height = frame.getHeight() / scale;
+//		frame.add(this);
+//		System.out.println(width);
+	}
+	
+	
+	
+	
+
     public void Launch(Game game) {
 		Boot.setWindowIcon("/Textures/sheets/wizard.png");
 		game.frame.setResizable(false);			
@@ -564,6 +632,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		game.frame.setTitle(Game.title);
 		game.frame.add(game);
+		//game.frame.remove(game);
 		if (Boot.launch_args.containsKey("-fullscreen")) {
 			game.frame.setUndecorated(true);
 			game.frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 			

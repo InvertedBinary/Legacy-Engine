@@ -570,3 +570,1407 @@ WARN  2017-10-30 22:38:41,149 (DiscoveryManager.java:440) cannot not perform a s
 WARN  2017-10-30 22:38:41,156 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
 WARN  2017-10-30 22:38:41,162 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
 WARN  2017-10-30 22:38:41,169 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
+WARN  2017-11-04 22:14:55,783 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.0.118:0
+WARN  2017-11-04 22:15:16,386 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:15:46,404 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:16:16,424 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:16:46,937 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:17:17,436 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:17:47,458 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:18:17,481 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:18:58,546 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/Saros91B43C8A server: xmpp.l.google.com
+service-unavailable(503)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:537)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:20:48,791 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:20:48,807 (MultiUserChatService.java:103) MUC service is not available, aborting connection request
+ERROR 2017-11-04 22:20:54,602 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-04 22:21:02,792 (Socks5Transport.java:411) [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host
+ERROR 2017-11-04 22:21:05,728 (Socks5Transport.java:440) An error occurred while establishing a response connection 
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:21:05,752 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA8339D67
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:21:18,761 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:21:46,543 (Socks5Transport.java:544) [SOCKS5Transport] could not establish a connection to 3robbie7@gmail.com/SarosA8339D67, remote side could not connect to any offered stream hosts: item-not-found(404) Could not establish socket with any provided host
+ERROR 2017-11-04 22:21:50,202 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA8339D67
+Could not establish socket with any provided host: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.cancelRequest(Socks5BytestreamRequest.java:277)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:247)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:34)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.handleResponse(Socks5Transport.java:315)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:471)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:22:16,565 (DataTransferManager.java:415) failed to connect to 3robbie7@gmail.com/SarosA8339D67 using transport: XMPP-Socks5-Transport
+java.io.IOException: [SOCKS5Transport] waiting for a response session timed out (30000ms) and could not establish a connection from this side, too:
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:592)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:512)
+	... 13 more
+WARN  2017-11-04 22:25:39,319 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:26:09,337 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:35:09,564 (CancelableProcess.java:299) OPN [remote side: 3robbie7@gmail.com/SarosA8339D67] I/O error occurred
+java.io.IOException: unknown SMACK Filetransfer API error
+	at de.fu_berlin.inf.dpp.negotiation.ProjectNegotiation.monitorFileTransfer(ProjectNegotiation.java:187)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.sendArchive(OutgoingProjectNegotiation.java:400)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.run(OutgoingProjectNegotiation.java:144)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingProjectJob.run(NegotiationHandler.java:164)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: error writing to output stream: 
+  -- caused by: java.io.IOException: Error while sending Data: service-unavailable(503) status=DEADLINE_EXCEEDED
+	at org.jivesoftware.smackx.filetransfer.FileTransfer.writeToStream(FileTransfer.java:219)
+	at org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer$2.run(OutgoingFileTransfer.java:233)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:35:09,584 (CancelableProcess.java:398) cancelled process OPN [remote side: 3robbie7@gmail.com/SarosA8339D67], error: I/O failure: unknown SMACK Filetransfer API error
+ERROR 2017-11-04 22:40:33,442 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-04 22:40:35,508 (Socks5Transport.java:411) [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host
+ERROR 2017-11-04 22:40:36,794 (Socks5Transport.java:440) An error occurred while establishing a response connection 
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:40:36,806 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA8339D67
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:44:28,943 (CancelableProcess.java:299) OPN [remote side: 3robbie7@gmail.com/SarosA8339D67] I/O error occurred
+java.io.IOException: unknown SMACK Filetransfer API error
+	at de.fu_berlin.inf.dpp.negotiation.ProjectNegotiation.monitorFileTransfer(ProjectNegotiation.java:187)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.sendArchive(OutgoingProjectNegotiation.java:400)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingProjectNegotiation.run(OutgoingProjectNegotiation.java:144)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingProjectJob.run(NegotiationHandler.java:164)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: error writing to output stream: 
+  -- caused by: java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.filetransfer.FileTransfer.writeToStream(FileTransfer.java:219)
+	at org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer$2.run(OutgoingFileTransfer.java:233)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:44:28,976 (CancelableProcess.java:398) cancelled process OPN [remote side: 3robbie7@gmail.com/SarosA8339D67], error: I/O failure: unknown SMACK Filetransfer API error
+WARN  2017-11-04 22:44:29,165 (CancelProjectSharingHandler.java:74) Inv[unknown user]: Received invitation cancel message
+ERROR 2017-11-04 22:44:31,094 (DataTransferManager.java:270) failed to send TransferDescription [elementName=ados, namespace=de.fu_berlin.inf.dpp, recipient=3robbie7@gmail.com/SarosA8339D67, sender=nathanrahmlow@gmail.com/Saros0AEE4ED8, compress=true], connection=[mode=IBB, id=saros-main-session] 3robbie7@gmail.com/SarosA8339D67:Stream is closed
+java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.write(InBandBytestreamSession.java:634)
+	at java.io.BufferedOutputStream.flushBuffer(Unknown Source)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendData(BinaryChannelConnection.java:525)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.splitAndSend(BinaryChannelConnection.java:560)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:325)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.sendActivities(ActivitySequencer.java:501)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.access$3(ActivitySequencer.java:482)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer$2.run(ActivitySequencer.java:152)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:44:31,104 (ActivitySequencer.java:504) failed to sent activities: [ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/projectile/XML_Projectile.java, project=Game], hash: 34777367, length: 4128, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Boot.java, project=Game], hash: 405876275, length: 3009, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/level/Level.java, project=Game], hash: 534235416, length: 53133, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Game.java, project=Game], hash: 267478318, length: 18997, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/mob/Mob.java, project=Game], hash: 1789338912, length: 8928, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/graphics/Screen.java, project=Game], hash: 282297393, length: 48716, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/projectile/XML_Projectile.java, project=Game], hash: 34777367, length: 4128, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Boot.java, project=Game], hash: 405876275, length: 3009, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/level/Level.java, project=Game], hash: 534235416, length: 53133, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Game.java, project=Game], hash: 267478318, length: 18997, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/mob/Mob.java, project=Game], hash: 1789338912, length: 8928, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/graphics/Screen.java, project=Game], hash: 282297393, length: 48716, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/projectile/XML_Projectile.java, project=Game], hash: 34777367, length: 4128, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Boot.java, project=Game], hash: 405876275, length: 3009, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/level/Level.java, project=Game], hash: 534235416, length: 53133, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/Game.java, project=Game], hash: 267478318, length: 18997, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/entity/mob/Mob.java, project=Game], hash: 1789338912, length: 8928, jupiterTimestamp: [0,0]), ChecksumActivity(path: SPath [path=src/com/IB/SL/graphics/Screen.java, project=Game], hash: 282297393, length: 48716, jupiterTimestamp: [0,0])]
+java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.write(InBandBytestreamSession.java:634)
+	at java.io.BufferedOutputStream.flushBuffer(Unknown Source)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendData(BinaryChannelConnection.java:525)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.splitAndSend(BinaryChannelConnection.java:560)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:325)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.sendActivities(ActivitySequencer.java:501)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.access$3(ActivitySequencer.java:482)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer$2.run(ActivitySequencer.java:152)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:44:39,272 (CollaborationUtils.java:130) cannot leave a non-running session
+WARN  2017-11-04 22:45:01,248 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:46:31,175 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/SarosA8339D67 server: xmpp.l.google.com
+service-unavailable(503)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:537)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:56:20,406 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:56:20,433 (MultiUserChatService.java:103) MUC service is not available, aborting connection request
+ERROR 2017-11-04 22:56:24,364 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-04 22:56:38,287 (Socks5Transport.java:411) [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host
+ERROR 2017-11-04 22:56:38,299 (Socks5Transport.java:440) An error occurred while establishing a response connection 
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:56:38,336 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA21B44D1
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:56:50,367 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:57:23,588 (Socks5Transport.java:544) [SOCKS5Transport] could not establish a connection to 3robbie7@gmail.com/SarosA21B44D1, remote side could not connect to any offered stream hosts: item-not-found(404) Could not establish socket with any provided host
+WARN  2017-11-04 22:57:23,684 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/SarosA21B44D1 server: xmpp.l.google.com
+service-unavailable(503)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:537)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:57:27,125 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA21B44D1
+Could not establish socket with any provided host: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.cancelRequest(Socks5BytestreamRequest.java:277)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:247)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:34)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.handleResponse(Socks5Transport.java:315)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:471)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:57:51,246 (BinaryChannelConnection.java:115) [mode=IBB, id=saros-main-session] 3robbie7@gmail.com/SarosA21B44D1 network error: Packets out of sequence
+java.io.IOException: Packets out of sequence
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBInputStream.loadBuffer(InBandBytestreamSession.java:373)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBInputStream.read(InBandBytestreamSession.java:310)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readUnsignedByte(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.readNextXMPPExtension(BinaryChannelConnection.java:347)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.access$2(BinaryChannelConnection.java:343)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection$ReceiverThread.run(BinaryChannelConnection.java:106)
+ERROR 2017-11-04 22:57:51,268 (DataTransferManager.java:270) failed to send TransferDescription [elementName=ping, namespace=de.fu_berlin.inf.dpp, recipient=3robbie7@gmail.com/SarosA21B44D1, sender=nathanrahmlow@gmail.com/Saros0AEE4ED8, compress=true], connection=[mode=IBB, id=saros-main-session] 3robbie7@gmail.com/SarosA21B44D1:Error while closing stream: service-unavailable(503)
+java.io.IOException: Error while closing stream: service-unavailable(503)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.closeByLocal(InBandBytestreamSession.java:213)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.close(InBandBytestreamSession.java:154)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IQIBBOutputStream.writeToXML(InBandBytestreamSession.java:768)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.flushBuffer(InBandBytestreamSession.java:707)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.flush(InBandBytestreamSession.java:691)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendTransferDescription(BinaryChannelConnection.java:544)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:322)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.timeout.ServerSessionTimeoutHandler$3.run(ServerSessionTimeoutHandler.java:103)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 22:57:51,283 (ServerSessionTimeoutHandler.java:113) failed to send ping to: 3robbie7@gmail.com/SarosA21B44D1
+java.io.IOException: Error while closing stream: service-unavailable(503)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.closeByLocal(InBandBytestreamSession.java:213)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.close(InBandBytestreamSession.java:154)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IQIBBOutputStream.writeToXML(InBandBytestreamSession.java:768)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.flushBuffer(InBandBytestreamSession.java:707)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.flush(InBandBytestreamSession.java:691)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendTransferDescription(BinaryChannelConnection.java:544)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:322)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.timeout.ServerSessionTimeoutHandler$3.run(ServerSessionTimeoutHandler.java:103)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:57:53,604 (DataTransferManager.java:415) failed to connect to 3robbie7@gmail.com/SarosA21B44D1 using transport: XMPP-Socks5-Transport
+java.io.IOException: [SOCKS5Transport] waiting for a response session timed out (30000ms) and could not establish a connection from this side, too:
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:592)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:512)
+	... 13 more
+WARN  2017-11-04 22:57:53,701 (DataTransferManager.java:415) failed to connect to 3robbie7@gmail.com/SarosA21B44D1 using transport: XMPP-IBB-Transport
+java.io.IOException: service-unavailable(503)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:50)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: service-unavailable(503)
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:62)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamManager.establishSession(InBandBytestreamManager.java:428)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamManager.establishSession(InBandBytestreamManager.java:74)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.establishBinaryChannel(ByteStreamTransport.java:131)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	... 12 more
+ERROR 2017-11-04 22:57:53,715 (SarosSXETransmitter.java:140) SXE sending whiteboard message failed because of an network error
+java.io.IOException: could not connect to 3robbie7@gmail.com/SarosA21B44D1, exhausted all available transport modes: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:438)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-04 22:58:24,494 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:58:54,513 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 22:59:24,521 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 23:09:00,668 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:09:00,699 (MultiUserChatService.java:103) MUC service is not available, aborting connection request
+ERROR 2017-11-04 23:09:02,966 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-04 23:09:03,514 (Socks5Transport.java:411) [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host
+ERROR 2017-11-04 23:09:03,994 (Socks5Transport.java:440) An error occurred while establishing a response connection 
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 23:09:04,003 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA21B44D1
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:09:30,624 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:09:37,075 (Socks5Transport.java:544) [SOCKS5Transport] could not establish a connection to 3robbie7@gmail.com/SarosA21B44D1, remote side could not connect to any offered stream hosts: item-not-found(404) Could not establish socket with any provided host
+ERROR 2017-11-04 23:09:37,419 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/SarosA21B44D1
+Could not establish socket with any provided host: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.cancelRequest(Socks5BytestreamRequest.java:277)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:247)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:34)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.handleResponse(Socks5Transport.java:315)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:471)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:10:07,086 (DataTransferManager.java:415) failed to connect to 3robbie7@gmail.com/SarosA21B44D1 using transport: XMPP-Socks5-Transport
+java.io.IOException: [SOCKS5Transport] waiting for a response session timed out (30000ms) and could not establish a connection from this side, too:
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:592)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:512)
+	... 13 more
+WARN  2017-11-04 23:41:46,973 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Boot.class because it does not exist
+WARN  2017-11-04 23:41:47,396 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Game$1.class because it does not exist
+WARN  2017-11-04 23:41:47,405 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Game.class because it does not exist
+WARN  2017-11-04 23:41:47,423 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/LWJGL.class because it does not exist
+WARN  2017-11-04 23:41:47,451 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/WindowHandler.class because it does not exist
+WARN  2017-11-04 23:41:47,463 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/Entity$HOSTILITY.class because it does not exist
+WARN  2017-11-04 23:41:47,473 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/Entity.class because it does not exist
+WARN  2017-11-04 23:41:47,486 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$DIRECTION.class because it does not exist
+WARN  2017-11-04 23:41:47,493 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$1.class because it does not exist
+WARN  2017-11-04 23:41:47,507 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$2.class because it does not exist
+WARN  2017-11-04 23:41:47,517 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$3.class because it does not exist
+WARN  2017-11-04 23:41:47,529 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State.class because it does not exist
+WARN  2017-11-04 23:41:47,541 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob.class because it does not exist
+WARN  2017-11-04 23:41:47,552 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Player.class because it does not exist
+WARN  2017-11-04 23:41:47,563 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/PlayerMP.class because it does not exist
+WARN  2017-11-04 23:41:47,572 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/XML_Mob.class because it does not exist
+WARN  2017-11-04 23:41:47,586 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/AStarTracker.class because it does not exist
+WARN  2017-11-04 23:41:47,594 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/Shooting.class because it does not exist
+WARN  2017-11-04 23:41:47,606 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/Tracker.class because it does not exist
+WARN  2017-11-04 23:41:47,618 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/UndeadCaster.class because it does not exist
+WARN  2017-11-04 23:41:47,627 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/WaterFamiliar.class because it does not exist
+WARN  2017-11-04 23:41:47,641 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/Zombie.class because it does not exist
+WARN  2017-11-04 23:41:47,649 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Alice.class because it does not exist
+WARN  2017-11-04 23:41:47,663 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Guard.class because it does not exist
+WARN  2017-11-04 23:41:47,675 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Horse.class because it does not exist
+WARN  2017-11-04 23:41:47,682 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Villager01.class because it does not exist
+WARN  2017-11-04 23:41:47,689 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Bleed.class because it does not exist
+WARN  2017-11-04 23:41:47,697 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/DamageIndicator.class because it does not exist
+WARN  2017-11-04 23:41:47,706 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/DefaultParticle.class because it does not exist
+WARN  2017-11-04 23:41:47,717 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Fire.class because it does not exist
+WARN  2017-11-04 23:41:47,729 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Particle.class because it does not exist
+WARN  2017-11-04 23:41:47,737 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Rock.class because it does not exist
+WARN  2017-11-04 23:41:47,746 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/RockShatter.class because it does not exist
+WARN  2017-11-04 23:41:47,763 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/VoidParticle.class because it does not exist
+WARN  2017-11-04 23:41:47,774 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/WalkingParticle.class because it does not exist
+WARN  2017-11-04 23:41:47,782 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/WallParticle.class because it does not exist
+WARN  2017-11-04 23:41:47,790 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/slimeParticle.class because it does not exist
+WARN  2017-11-04 23:41:47,807 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Arrow.class because it does not exist
+WARN  2017-11-04 23:41:47,818 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/BaskerBolt.class because it does not exist
+WARN  2017-11-04 23:41:47,825 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/BlinkBolt.class because it does not exist
+WARN  2017-11-04 23:41:47,832 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/DebugProjectile.class because it does not exist
+WARN  2017-11-04 23:41:47,852 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Projectile.class because it does not exist
+WARN  2017-11-04 23:41:47,859 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Rock.class because it does not exist
+WARN  2017-11-04 23:41:47,865 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/ThrowableRock.class because it does not exist
+WARN  2017-11-04 23:41:47,873 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/WizardProjectile.class because it does not exist
+WARN  2017-11-04 23:41:47,885 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/WizardProjectile2.class because it does not exist
+WARN  2017-11-04 23:41:47,891 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/XML_Projectile.class because it does not exist
+WARN  2017-11-04 23:41:47,936 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/BleedSpawner.class because it does not exist
+WARN  2017-11-04 23:41:47,946 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/FireParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:47,953 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/ParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:47,960 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/RockShatterSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,006 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/RockSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,018 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/Spawner$Type.class because it does not exist
+WARN  2017-11-04 23:41:48,025 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/Spawner.class because it does not exist
+WARN  2017-11-04 23:41:48,031 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/VoidParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,040 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/WalkingParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,053 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/WallParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,059 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/slimeParticleSpawner.class because it does not exist
+WARN  2017-11-04 23:41:48,066 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/AnimatedSprite.class because it does not exist
+WARN  2017-11-04 23:41:48,090 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Camera.class because it does not exist
+WARN  2017-11-04 23:41:48,117 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Screen.class because it does not exist
+WARN  2017-11-04 23:41:48,129 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Sprite.class because it does not exist
+WARN  2017-11-04 23:41:48,139 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/SpriteSheet.class because it does not exist
+WARN  2017-11-04 23:41:48,151 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/CheckBounds.class because it does not exist
+WARN  2017-11-04 23:41:48,162 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/GUI.class because it does not exist
+WARN  2017-11-04 23:41:48,175 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/UI.class because it does not exist
+WARN  2017-11-04 23:41:48,185 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/AudioMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,195 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/ConsoleMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,207 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/GameplayMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,235 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/MainMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,262 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/PauseMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,273 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/SettingsMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,285 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/UI_Menu.class because it does not exist
+WARN  2017-11-04 23:41:48,296 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/VideoMenu.class because it does not exist
+WARN  2017-11-04 23:41:48,307 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/TextBox$MyDispatcher.class because it does not exist
+WARN  2017-11-04 23:41:48,318 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/TextBox.class because it does not exist
+WARN  2017-11-04 23:41:48,325 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Button.class because it does not exist
+WARN  2017-11-04 23:41:48,341 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Clickable.class because it does not exist
+WARN  2017-11-04 23:41:48,351 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Root.class because it does not exist
+WARN  2017-11-04 23:41:48,363 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Slider.class because it does not exist
+WARN  2017-11-04 23:41:48,373 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Sprite.class because it does not exist
+WARN  2017-11-04 23:41:48,385 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Weather/Rain.class because it does not exist
+WARN  2017-11-04 23:41:48,396 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Weather/RainPart.class because it does not exist
+WARN  2017-11-04 23:41:48,408 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/font.class because it does not exist
+WARN  2017-11-04 23:41:48,435 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/font8x8.class because it does not exist
+WARN  2017-11-04 23:41:48,462 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/input/Keyboard.class because it does not exist
+WARN  2017-11-04 23:41:48,474 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/input/Mouse.class because it does not exist
+WARN  2017-11-04 23:41:48,484 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/BlueBed.class because it does not exist
+WARN  2017-11-04 23:41:48,496 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level$1.class because it does not exist
+WARN  2017-11-04 23:41:48,524 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level$2.class because it does not exist
+WARN  2017-11-04 23:41:48,535 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level.class because it does not exist
+WARN  2017-11-04 23:41:48,546 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Node.class because it does not exist
+WARN  2017-11-04 23:41:48,573 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/RayCast.class because it does not exist
+WARN  2017-11-04 23:41:48,585 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/TileCoord.class because it does not exist
+WARN  2017-11-04 23:41:48,592 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/VoidTile.class because it does not exist
+WARN  2017-11-04 23:41:48,608 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Interactable.class because it does not exist
+WARN  2017-11-04 23:41:48,617 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Location_Shrine.class because it does not exist
+WARN  2017-11-04 23:41:48,629 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Teleporter.class because it does not exist
+WARN  2017-11-04 23:41:48,640 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/Tile$stepSound.class because it does not exist
+WARN  2017-11-04 23:41:48,651 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/Tile.class because it does not exist
+WARN  2017-11-04 23:41:48,658 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Anvil.class because it does not exist
+WARN  2017-11-04 23:41:48,674 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueBed.class because it does not exist
+WARN  2017-11-04 23:41:48,702 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueMushroom.class because it does not exist
+WARN  2017-11-04 23:41:48,713 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueMushroomDirt.class because it does not exist
+WARN  2017-11-04 23:41:48,724 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Bone.class because it does not exist
+WARN  2017-11-04 23:41:48,751 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BottomChair.class because it does not exist
+WARN  2017-11-04 23:41:48,763 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BrokenSword.class because it does not exist
+WARN  2017-11-04 23:41:48,773 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Cactus.class because it does not exist
+WARN  2017-11-04 23:41:48,785 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Castle.class because it does not exist
+WARN  2017-11-04 23:41:48,791 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Cave.class because it does not exist
+WARN  2017-11-04 23:41:48,812 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/ColoredFlowers.class because it does not exist
+WARN  2017-11-04 23:41:48,823 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Counter.class because it does not exist
+WARN  2017-11-04 23:41:48,835 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Crossbone.class because it does not exist
+WARN  2017-11-04 23:41:48,846 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/DarkCastle.class because it does not exist
+WARN  2017-11-04 23:41:48,873 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/DirtPatch.class because it does not exist
+WARN  2017-11-04 23:41:48,885 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/FlowerCactus.class because it does not exist
+WARN  2017-11-04 23:41:48,892 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/GreenBed.class because it does not exist
+WARN  2017-11-04 23:41:48,924 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/GreenMushroom.class because it does not exist
+WARN  2017-11-04 23:41:48,953 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/LeftChair.class because it does not exist
+WARN  2017-11-04 23:41:48,960 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/OrangeBed.class because it does not exist
+WARN  2017-11-04 23:41:48,974 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/OvVoidTile.class because it does not exist
+WARN  2017-11-04 23:41:48,981 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerBL.class because it does not exist
+WARN  2017-11-04 23:41:48,987 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerBR.class because it does not exist
+WARN  2017-11-04 23:41:48,993 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerTL.class because it does not exist
+WARN  2017-11-04 23:41:49,002 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerTR.class because it does not exist
+WARN  2017-11-04 23:41:49,018 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCross.class because it does not exist
+WARN  2017-11-04 23:41:49,030 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndBottom.class because it does not exist
+WARN  2017-11-04 23:41:49,042 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndLeft.class because it does not exist
+WARN  2017-11-04 23:41:49,048 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndRight.class because it does not exist
+WARN  2017-11-04 23:41:49,055 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndTop.class because it does not exist
+WARN  2017-11-04 23:41:49,061 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathHorizontal.class because it does not exist
+WARN  2017-11-04 23:41:49,079 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathVertical.class because it does not exist
+WARN  2017-11-04 23:41:49,106 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Pebble.class because it does not exist
+WARN  2017-11-04 23:41:49,118 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Portal.class because it does not exist
+WARN  2017-11-04 23:41:49,125 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RedBed.class because it does not exist
+WARN  2017-11-04 23:41:49,147 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RedMushroom.class because it does not exist
+WARN  2017-11-04 23:41:49,155 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RightChair.class because it does not exist
+WARN  2017-11-04 23:41:49,164 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Skull.class because it does not exist
+WARN  2017-11-04 23:41:49,190 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Stove.class because it does not exist
+WARN  2017-11-04 23:41:49,218 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Table.class because it does not exist
+WARN  2017-11-04 23:41:49,230 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/TopChair.class because it does not exist
+WARN  2017-11-04 23:41:49,240 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Village.class because it does not exist
+WARN  2017-11-04 23:41:49,252 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/YellowFlowers.class because it does not exist
+WARN  2017-11-04 23:41:49,258 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/AnimatedTile.class because it does not exist
+WARN  2017-11-04 23:41:49,266 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Bluefog.class because it does not exist
+WARN  2017-11-04 23:41:49,290 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BookshelfBottom.class because it does not exist
+WARN  2017-11-04 23:41:49,302 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BookshelfTop.class because it does not exist
+WARN  2017-11-04 23:41:49,313 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BrickCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,340 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BrickWall.class because it does not exist
+WARN  2017-11-04 23:41:49,352 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CaveCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,358 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CaveWall.class because it does not exist
+WARN  2017-11-04 23:41:49,390 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobbleStone.class because it does not exist
+WARN  2017-11-04 23:41:49,417 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobbleStoneWall.class because it does not exist
+WARN  2017-11-04 23:41:49,430 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobblestoneCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,438 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ColorFlowers.class because it does not exist
+WARN  2017-11-04 23:41:49,453 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CrackedBrick.class because it does not exist
+WARN  2017-11-04 23:41:49,460 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DarkStone.class because it does not exist
+WARN  2017-11-04 23:41:49,473 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DeepLava.class because it does not exist
+WARN  2017-11-04 23:41:49,485 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DeepWater.class because it does not exist
+WARN  2017-11-04 23:41:49,493 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Dirt.class because it does not exist
+WARN  2017-11-04 23:41:49,513 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DirtCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,540 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DirtWall.class because it does not exist
+WARN  2017-11-04 23:41:49,552 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DoorTile.class because it does not exist
+WARN  2017-11-04 23:41:49,558 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DresserBottom.class because it does not exist
+WARN  2017-11-04 23:41:49,565 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DresserTop.class because it does not exist
+WARN  2017-11-04 23:41:49,591 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellBrick.class because it does not exist
+WARN  2017-11-04 23:41:49,602 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellBrickCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,613 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellCaveCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,640 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellCaveWall.class because it does not exist
+WARN  2017-11-04 23:41:49,652 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellSandCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,659 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellSandWall.class because it does not exist
+WARN  2017-11-04 23:41:49,690 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellbrickWall.class because it does not exist
+WARN  2017-11-04 23:41:49,717 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Hellsand.class because it does not exist
+WARN  2017-11-04 23:41:49,730 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Hellstone.class because it does not exist
+WARN  2017-11-04 23:41:49,739 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Ice.class because it does not exist
+WARN  2017-11-04 23:41:49,751 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrick.class because it does not exist
+WARN  2017-11-04 23:41:49,763 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrickCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,773 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrickWall.class because it does not exist
+WARN  2017-11-04 23:41:49,785 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceCaveCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,793 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceCaveWall.class because it does not exist
+WARN  2017-11-04 23:41:49,800 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSand.class because it does not exist
+WARN  2017-11-04 23:41:49,818 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSandCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,830 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSandWall.class because it does not exist
+WARN  2017-11-04 23:41:49,836 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Lava.class because it does not exist
+WARN  2017-11-04 23:41:49,843 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Metal.class because it does not exist
+WARN  2017-11-04 23:41:49,849 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MetalCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,856 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MetalWall.class because it does not exist
+WARN  2017-11-04 23:41:49,863 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MossCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,873 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MossWall.class because it does not exist
+WARN  2017-11-04 23:41:49,885 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MyColor.class because it does not exist
+WARN  2017-11-04 23:41:49,893 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ObsidianCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,924 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ObsidianWall.class because it does not exist
+WARN  2017-11-04 23:41:49,951 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/PathDirt.class because it does not exist
+WARN  2017-11-04 23:41:49,963 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Sand.class because it does not exist
+WARN  2017-11-04 23:41:49,970 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrick.class because it does not exist
+WARN  2017-11-04 23:41:49,977 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrickCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,984 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrickWall.class because it does not exist
+WARN  2017-11-04 23:41:49,990 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandCeiling.class because it does not exist
+WARN  2017-11-04 23:41:49,997 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandWall.class because it does not exist
+WARN  2017-11-04 23:41:50,018 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Snow.class because it does not exist
+WARN  2017-11-04 23:41:50,030 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrick.class because it does not exist
+WARN  2017-11-04 23:41:50,039 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrickCeiling.class because it does not exist
+WARN  2017-11-04 23:41:50,051 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrickWall.class because it does not exist
+WARN  2017-11-04 23:41:50,079 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Swamp.class because it does not exist
+WARN  2017-11-04 23:41:50,091 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Swirly.class because it does not exist
+WARN  2017-11-04 23:41:50,118 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Terrain.class because it does not exist
+WARN  2017-11-04 23:41:50,130 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/TorchTile.class because it does not exist
+WARN  2017-11-04 23:41:50,137 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WallTop.class because it does not exist
+WARN  2017-11-04 23:41:50,143 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Water.class because it does not exist
+WARN  2017-11-04 23:41:50,150 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Wood.class because it does not exist
+WARN  2017-11-04 23:41:50,162 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WoodCeiling.class because it does not exist
+WARN  2017-11-04 23:41:50,174 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WoodWall.class because it does not exist
+WARN  2017-11-04 23:41:50,181 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/bitBrick.class because it does not exist
+WARN  2017-11-04 23:41:50,187 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/bitMetal.class because it does not exist
+WARN  2017-11-04 23:41:50,195 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/LevelExit.class because it does not exist
+WARN  2017-11-04 23:41:50,224 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/MainLevel.class because it does not exist
+WARN  2017-11-04 23:41:50,251 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/Maps.class because it does not exist
+WARN  2017-11-04 23:41:50,262 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/SpawnHaven_Deprecated.class because it does not exist
+WARN  2017-11-04 23:41:50,274 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/XML_Level.class because it does not exist
+WARN  2017-11-04 23:41:50,281 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/GSM.class because it does not exist
+WARN  2017-11-04 23:41:50,288 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/GameState.class because it does not exist
+WARN  2017-11-04 23:41:50,306 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/INGAME.class because it does not exist
+WARN  2017-11-04 23:41:50,320 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/MENU.class because it does not exist
+WARN  2017-11-04 23:41:50,328 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Commands.class because it does not exist
+WARN  2017-11-04 23:41:50,341 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Debug.class because it does not exist
+WARN  2017-11-04 23:41:50,347 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State$1.class because it does not exist
+WARN  2017-11-04 23:41:50,353 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State$2.class because it does not exist
+WARN  2017-11-04 23:41:50,374 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State.class because it does not exist
+WARN  2017-11-04 23:41:50,384 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM.class because it does not exist
+WARN  2017-11-04 23:41:50,393 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/LoadProperties.class because it does not exist
+WARN  2017-11-04 23:41:50,407 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/SaveGame.class because it does not exist
+WARN  2017-11-04 23:41:50,414 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Sound.class because it does not exist
+WARN  2017-11-04 23:41:50,421 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Vector2i.class because it does not exist
+WARN  2017-11-04 23:51:23,865 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:51:23,955 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:51:23,963 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:51:26,110 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:51:26,137 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:51:26,297 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@6d4e11c5
+WARN  2017-11-04 23:52:23,218 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:52:23,294 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:52:23,303 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:52:23,430 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:52:23,439 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:52:25,672 (EditorAPI.java:298) could not get resource reference from editor part: org.eclipse.jdt.internal.ui.javaeditor.ClassFileEditor@52695539
+WARN  2017-11-04 23:53:22,528 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/SarosA21B44D1 server: xmpp.l.google.com
+service-unavailable(503)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:537)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 23:53:22,559 (BinaryChannelConnection.java:115) [mode=IBB, id=saros-main-session] 3robbie7@gmail.com/SarosA21B44D1 network error: Error while closing stream: service-unavailable(503)
+java.io.IOException: Error while closing stream: service-unavailable(503)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.closeByLocal(InBandBytestreamSession.java:213)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.close(InBandBytestreamSession.java:154)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBInputStream.loadBuffer(InBandBytestreamSession.java:372)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBInputStream.read(InBandBytestreamSession.java:310)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readUnsignedByte(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.readNextXMPPExtension(BinaryChannelConnection.java:347)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.access$2(BinaryChannelConnection.java:343)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection$ReceiverThread.run(BinaryChannelConnection.java:106)
+ERROR 2017-11-04 23:53:22,578 (DataTransferManager.java:270) failed to send TransferDescription [elementName=ados, namespace=de.fu_berlin.inf.dpp, recipient=3robbie7@gmail.com/SarosA21B44D1, sender=nathanrahmlow@gmail.com/Saros0AEE4ED8, compress=true], connection=[mode=IBB, id=saros-main-session] 3robbie7@gmail.com/SarosA21B44D1:Stream is closed
+java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.write(InBandBytestreamSession.java:634)
+	at java.io.BufferedOutputStream.flushBuffer(Unknown Source)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendTransferDescription(BinaryChannelConnection.java:544)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:322)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.sendActivities(ActivitySequencer.java:501)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.access$3(ActivitySequencer.java:482)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer$2.run(ActivitySequencer.java:152)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-04 23:53:22,589 (ActivitySequencer.java:504) failed to sent activities: [JupiterActivity(timestamp: [376,38], operation: Insert(1665,'L',1665), source: nathanrahmlow@gmail.com/Saros0AEE4ED8), TextSelectionActivity(offset: 1666, length: 0, src: nathanrahmlow@gmail.com/Saros0AEE4ED8, path: SPath [path=src/com/IB/SL/LWJGL.java, project=Game])]
+java.io.IOException: Stream is closed
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession$IBBOutputStream.write(InBandBytestreamSession.java:634)
+	at java.io.BufferedOutputStream.flushBuffer(Unknown Source)
+	at java.io.BufferedOutputStream.flush(Unknown Source)
+	at java.io.DataOutputStream.flush(Unknown Source)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.sendTransferDescription(BinaryChannelConnection.java:544)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.send(BinaryChannelConnection.java:322)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendInternal(DataTransferManager.java:268)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:216)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.sendActivities(ActivitySequencer.java:501)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.access$3(ActivitySequencer.java:482)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer$2.run(ActivitySequencer.java:152)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:53:54,454 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:54:24,680 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingA22E623E035 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:54:54,688 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/MessagingBCFD692E4B4 server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-04 23:55:56,584 (DiscoveryManager.java:451) Service Discovery failed on recipient 3robbie7@gmail.com/SarosA21B44D1 server: xmpp.l.google.com
+service-unavailable(503)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:537)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-05 00:02:48,179 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.createChat(ChatRoomsComposite.java:667)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite.access$4(ChatRoomsComposite.java:665)
+	at de.fu_berlin.inf.dpp.ui.widgets.chat.ChatRoomsComposite$5$2.run(ChatRoomsComposite.java:255)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:02:48,189 (MultiUserChatService.java:103) MUC service is not available, aborting connection request
+ERROR 2017-11-05 00:02:51,026 (XMPPUtils.java:345) discovery for service 'gmail.com' failed
+feature-not-implemented(501)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:587)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverItems(ServiceDiscoveryManager.java:550)
+	at de.fu_berlin.inf.dpp.net.util.XMPPUtils.getMultiUserChatService(XMPPUtils.java:343)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getMUCService(MUCNegotiationManager.java:168)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager.getOwnPreferences(MUCNegotiationManager.java:125)
+	at de.fu_berlin.inf.dpp.communication.chat.muc.negotiation.MUCNegotiationManager$1.considerClientPreferences(MUCNegotiationManager.java:72)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.determineSessionParameters(OutgoingSessionNegotiation.java:397)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:191)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+WARN  2017-11-05 00:02:51,687 (Socks5Transport.java:411) [SOCKS5Transport] Couldn't accept request but still trying to establish a response connection: Could not establish socket with any provided host
+ERROR 2017-11-05 00:02:52,146 (Socks5Transport.java:440) An error occurred while establishing a response connection 
+item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishResponseSession(Socks5Transport.java:631)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:108)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport$1.call(Socks5Transport.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-05 00:02:52,157 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/Saros668BF63A
+java.io.IOException: [SOCKS5Transport] Neither connection could be established. 
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptNewRequest(Socks5Transport.java:446)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:474)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:03:18,124 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:03:24,980 (Socks5Transport.java:544) [SOCKS5Transport] could not establish a connection to 3robbie7@gmail.com/Saros668BF63A, remote side could not connect to any offered stream hosts: item-not-found(404) Could not establish socket with any provided host
+ERROR 2017-11-05 00:03:25,357 (ByteStreamTransport.java:105) could not establish bytestream connection to 3robbie7@gmail.com/Saros668BF63A
+Could not establish socket with any provided host: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.cancelRequest(Socks5BytestreamRequest.java:277)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:247)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamRequest.accept(Socks5BytestreamRequest.java:34)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.handleResponse(Socks5Transport.java:315)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.acceptRequest(Socks5Transport.java:471)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport$1.incomingBytestreamRequest(ByteStreamTransport.java:77)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.processRequest(InitiationListener.java:91)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener.access$000(InitiationListener.java:37)
+	at org.jivesoftware.smackx.bytestreams.socks5.InitiationListener$1.run(InitiationListener.java:63)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:03:54,990 (DataTransferManager.java:415) failed to connect to 3robbie7@gmail.com/Saros668BF63A using transport: XMPP-Socks5-Transport
+java.io.IOException: [SOCKS5Transport] waiting for a response session timed out (30000ms) and could not establish a connection from this side, too:
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:592)
+	at de.fu_berlin.inf.dpp.net.internal.ByteStreamTransport.connect(ByteStreamTransport.java:48)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectInternal(DataTransferManager.java:412)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:242)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:88)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:64)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendWithoutDispatch(SarosSXETransmitter.java:137)
+	at de.fu_berlin.inf.dpp.whiteboard.net.SarosSXETransmitter.sendAndAwait(SarosSXETransmitter.java:162)
+	at de.fu_berlin.inf.dpp.whiteboard.sxe.net.SXEOutgoingSynchronizationProcess.start(SXEOutgoingSynchronizationProcess.java:58)
+	at de.fu_berlin.inf.dpp.whiteboard.net.WhiteboardManager$1.postOutgoingInvitationCompleted(WhiteboardManager.java:96)
+	at de.fu_berlin.inf.dpp.project.SarosSessionManager.postOutgoingInvitationCompleted(SarosSessionManager.java:667)
+	at de.fu_berlin.inf.dpp.negotiation.OutgoingSessionNegotiation.start(OutgoingSessionNegotiation.java:202)
+	at de.fu_berlin.inf.dpp.ui.eventhandler.NegotiationHandler$OutgoingInvitationJob.run(NegotiationHandler.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+Caused by: item-not-found(404) Could not establish socket with any provided host
+	at org.jivesoftware.smack.util.SyncPacketSend.getReply(SyncPacketSend.java:54)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:481)
+	at org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager.establishSession(Socks5BytestreamManager.java:83)
+	at de.fu_berlin.inf.dpp.net.internal.Socks5Transport.establishBinaryChannel(Socks5Transport.java:512)
+	... 13 more
+WARN  2017-11-05 00:05:13,926 (SharedResourcesManager.java:645) could not delete file L/Game/bin/.gitignore because it does not exist
+WARN  2017-11-05 00:05:14,656 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Boot.class because it does not exist
+WARN  2017-11-05 00:05:14,666 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Game$1.class because it does not exist
+WARN  2017-11-05 00:05:14,703 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/Game.class because it does not exist
+WARN  2017-11-05 00:05:14,714 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/LWJGL.class because it does not exist
+WARN  2017-11-05 00:05:14,737 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/WindowHandler.class because it does not exist
+WARN  2017-11-05 00:05:14,749 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/Entity$HOSTILITY.class because it does not exist
+WARN  2017-11-05 00:05:14,759 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/Entity.class because it does not exist
+WARN  2017-11-05 00:05:14,771 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$DIRECTION.class because it does not exist
+WARN  2017-11-05 00:05:14,782 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$1.class because it does not exist
+WARN  2017-11-05 00:05:14,793 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$2.class because it does not exist
+WARN  2017-11-05 00:05:14,804 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State$3.class because it does not exist
+WARN  2017-11-05 00:05:14,815 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob$State.class because it does not exist
+WARN  2017-11-05 00:05:14,826 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Mob.class because it does not exist
+WARN  2017-11-05 00:05:14,837 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/Player.class because it does not exist
+WARN  2017-11-05 00:05:14,848 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/PlayerMP.class because it does not exist
+WARN  2017-11-05 00:05:14,871 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/XML_Mob.class because it does not exist
+WARN  2017-11-05 00:05:14,881 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/AStarTracker.class because it does not exist
+WARN  2017-11-05 00:05:14,893 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/Shooting.class because it does not exist
+WARN  2017-11-05 00:05:14,904 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/debug/Tracker.class because it does not exist
+WARN  2017-11-05 00:05:14,915 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/UndeadCaster.class because it does not exist
+WARN  2017-11-05 00:05:14,922 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/WaterFamiliar.class because it does not exist
+WARN  2017-11-05 00:05:14,928 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/hostile/Zombie.class because it does not exist
+WARN  2017-11-05 00:05:14,937 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Alice.class because it does not exist
+WARN  2017-11-05 00:05:14,944 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Guard.class because it does not exist
+WARN  2017-11-05 00:05:14,951 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Horse.class because it does not exist
+WARN  2017-11-05 00:05:14,957 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/mob/peaceful/Villager01.class because it does not exist
+WARN  2017-11-05 00:05:14,964 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Bleed.class because it does not exist
+WARN  2017-11-05 00:05:14,977 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/DamageIndicator.class because it does not exist
+WARN  2017-11-05 00:05:14,984 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/DefaultParticle.class because it does not exist
+WARN  2017-11-05 00:05:14,993 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Fire.class because it does not exist
+WARN  2017-11-05 00:05:15,003 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Particle.class because it does not exist
+WARN  2017-11-05 00:05:15,010 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/Rock.class because it does not exist
+WARN  2017-11-05 00:05:15,017 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/RockShatter.class because it does not exist
+WARN  2017-11-05 00:05:15,025 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/VoidParticle.class because it does not exist
+WARN  2017-11-05 00:05:15,034 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/WalkingParticle.class because it does not exist
+WARN  2017-11-05 00:05:15,042 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/WallParticle.class because it does not exist
+WARN  2017-11-05 00:05:15,048 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/particle/slimeParticle.class because it does not exist
+WARN  2017-11-05 00:05:15,058 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Arrow.class because it does not exist
+WARN  2017-11-05 00:05:15,081 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/BaskerBolt.class because it does not exist
+WARN  2017-11-05 00:05:15,093 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/BlinkBolt.class because it does not exist
+WARN  2017-11-05 00:05:15,102 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/DebugProjectile.class because it does not exist
+WARN  2017-11-05 00:05:15,116 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Projectile.class because it does not exist
+WARN  2017-11-05 00:05:15,122 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/Rock.class because it does not exist
+WARN  2017-11-05 00:05:15,129 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/ThrowableRock.class because it does not exist
+WARN  2017-11-05 00:05:15,139 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/WizardProjectile.class because it does not exist
+WARN  2017-11-05 00:05:15,159 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/WizardProjectile2.class because it does not exist
+WARN  2017-11-05 00:05:15,169 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/projectile/XML_Projectile.class because it does not exist
+WARN  2017-11-05 00:05:15,184 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/BleedSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,191 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/FireParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,200 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/ParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,208 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/RockShatterSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,214 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/RockSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,222 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/Spawner$Type.class because it does not exist
+WARN  2017-11-05 00:05:15,233 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/Spawner.class because it does not exist
+WARN  2017-11-05 00:05:15,241 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/VoidParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,248 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/WalkingParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,254 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/WallParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,260 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/entity/spawner/slimeParticleSpawner.class because it does not exist
+WARN  2017-11-05 00:05:15,268 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/AnimatedSprite.class because it does not exist
+WARN  2017-11-05 00:05:15,277 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Camera.class because it does not exist
+WARN  2017-11-05 00:05:15,284 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Screen.class because it does not exist
+WARN  2017-11-05 00:05:15,291 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Sprite.class because it does not exist
+WARN  2017-11-05 00:05:15,300 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/SpriteSheet.class because it does not exist
+WARN  2017-11-05 00:05:15,315 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/CheckBounds.class because it does not exist
+WARN  2017-11-05 00:05:15,326 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/GUI.class because it does not exist
+WARN  2017-11-05 00:05:15,337 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/UI.class because it does not exist
+WARN  2017-11-05 00:05:15,348 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/AudioMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,361 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/ConsoleMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,370 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/GameplayMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,383 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/MainMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,389 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/PauseMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,396 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/SettingsMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,410 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/UI_Menu.class because it does not exist
+WARN  2017-11-05 00:05:15,437 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/menu/VideoMenu.class because it does not exist
+WARN  2017-11-05 00:05:15,449 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/TextBox$MyDispatcher.class because it does not exist
+WARN  2017-11-05 00:05:15,455 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/TextBox.class because it does not exist
+WARN  2017-11-05 00:05:15,462 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Button.class because it does not exist
+WARN  2017-11-05 00:05:15,500 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Clickable.class because it does not exist
+WARN  2017-11-05 00:05:15,519 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Root.class because it does not exist
+WARN  2017-11-05 00:05:15,527 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Slider.class because it does not exist
+WARN  2017-11-05 00:05:15,546 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/UI/part/UI_Sprite.class because it does not exist
+WARN  2017-11-05 00:05:15,553 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Weather/Rain.class because it does not exist
+WARN  2017-11-05 00:05:15,561 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/Weather/RainPart.class because it does not exist
+WARN  2017-11-05 00:05:15,579 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/font.class because it does not exist
+WARN  2017-11-05 00:05:15,586 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/graphics/font8x8.class because it does not exist
+WARN  2017-11-05 00:05:15,594 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/input/Keyboard.class because it does not exist
+WARN  2017-11-05 00:05:15,604 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/input/Mouse.class because it does not exist
+WARN  2017-11-05 00:05:15,612 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/BlueBed.class because it does not exist
+WARN  2017-11-05 00:05:15,618 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level$1.class because it does not exist
+WARN  2017-11-05 00:05:15,625 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level$2.class because it does not exist
+WARN  2017-11-05 00:05:15,633 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Level.class because it does not exist
+WARN  2017-11-05 00:05:15,643 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/Node.class because it does not exist
+WARN  2017-11-05 00:05:15,651 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/RayCast.class because it does not exist
+WARN  2017-11-05 00:05:15,692 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/TileCoord.class because it does not exist
+WARN  2017-11-05 00:05:15,702 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/VoidTile.class because it does not exist
+WARN  2017-11-05 00:05:15,710 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Interactable.class because it does not exist
+WARN  2017-11-05 00:05:15,717 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Location_Shrine.class because it does not exist
+WARN  2017-11-05 00:05:15,727 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/interactables/Teleporter.class because it does not exist
+WARN  2017-11-05 00:05:15,736 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/Tile$stepSound.class because it does not exist
+WARN  2017-11-05 00:05:15,749 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/Tile.class because it does not exist
+WARN  2017-11-05 00:05:15,757 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Anvil.class because it does not exist
+WARN  2017-11-05 00:05:15,766 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueBed.class because it does not exist
+WARN  2017-11-05 00:05:15,781 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueMushroom.class because it does not exist
+WARN  2017-11-05 00:05:15,788 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BlueMushroomDirt.class because it does not exist
+WARN  2017-11-05 00:05:15,815 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Bone.class because it does not exist
+WARN  2017-11-05 00:05:15,823 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BottomChair.class because it does not exist
+WARN  2017-11-05 00:05:15,832 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/BrokenSword.class because it does not exist
+WARN  2017-11-05 00:05:15,867 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Cactus.class because it does not exist
+WARN  2017-11-05 00:05:15,875 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Castle.class because it does not exist
+WARN  2017-11-05 00:05:15,882 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Cave.class because it does not exist
+WARN  2017-11-05 00:05:15,889 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/ColoredFlowers.class because it does not exist
+WARN  2017-11-05 00:05:15,897 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Counter.class because it does not exist
+WARN  2017-11-05 00:05:15,906 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Crossbone.class because it does not exist
+WARN  2017-11-05 00:05:15,914 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/DarkCastle.class because it does not exist
+WARN  2017-11-05 00:05:15,942 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/DirtPatch.class because it does not exist
+WARN  2017-11-05 00:05:15,951 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/FlowerCactus.class because it does not exist
+WARN  2017-11-05 00:05:15,962 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/GreenBed.class because it does not exist
+WARN  2017-11-05 00:05:15,971 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/GreenMushroom.class because it does not exist
+WARN  2017-11-05 00:05:15,983 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/LeftChair.class because it does not exist
+WARN  2017-11-05 00:05:15,990 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/OrangeBed.class because it does not exist
+WARN  2017-11-05 00:05:15,999 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/OvVoidTile.class because it does not exist
+WARN  2017-11-05 00:05:16,007 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerBL.class because it does not exist
+WARN  2017-11-05 00:05:16,120 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerBR.class because it does not exist
+WARN  2017-11-05 00:05:16,127 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerTL.class because it does not exist
+WARN  2017-11-05 00:05:16,139 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCornerTR.class because it does not exist
+WARN  2017-11-05 00:05:16,147 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathCross.class because it does not exist
+WARN  2017-11-05 00:05:16,154 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndBottom.class because it does not exist
+WARN  2017-11-05 00:05:16,196 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndLeft.class because it does not exist
+WARN  2017-11-05 00:05:16,205 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndRight.class because it does not exist
+WARN  2017-11-05 00:05:16,245 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathEndTop.class because it does not exist
+WARN  2017-11-05 00:05:16,253 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathHorizontal.class because it does not exist
+WARN  2017-11-05 00:05:16,263 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/PathVertical.class because it does not exist
+WARN  2017-11-05 00:05:16,312 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Pebble.class because it does not exist
+WARN  2017-11-05 00:05:16,319 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Portal.class because it does not exist
+WARN  2017-11-05 00:05:16,327 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RedBed.class because it does not exist
+WARN  2017-11-05 00:05:16,336 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RedMushroom.class because it does not exist
+WARN  2017-11-05 00:05:16,356 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/RightChair.class because it does not exist
+WARN  2017-11-05 00:05:16,364 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Skull.class because it does not exist
+WARN  2017-11-05 00:05:16,394 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Stove.class because it does not exist
+WARN  2017-11-05 00:05:16,411 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Table.class because it does not exist
+WARN  2017-11-05 00:05:16,511 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/TopChair.class because it does not exist
+WARN  2017-11-05 00:05:16,518 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/Village.class because it does not exist
+WARN  2017-11-05 00:05:16,574 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/overlays/YellowFlowers.class because it does not exist
+WARN  2017-11-05 00:05:16,581 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/AnimatedTile.class because it does not exist
+WARN  2017-11-05 00:05:16,595 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Bluefog.class because it does not exist
+WARN  2017-11-05 00:05:16,622 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BookshelfBottom.class because it does not exist
+WARN  2017-11-05 00:05:16,637 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BookshelfTop.class because it does not exist
+WARN  2017-11-05 00:05:16,763 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BrickCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,783 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/BrickWall.class because it does not exist
+WARN  2017-11-05 00:05:16,790 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CaveCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,801 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CaveWall.class because it does not exist
+WARN  2017-11-05 00:05:16,809 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobbleStone.class because it does not exist
+WARN  2017-11-05 00:05:16,820 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobbleStoneWall.class because it does not exist
+WARN  2017-11-05 00:05:16,827 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CobblestoneCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,846 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ColorFlowers.class because it does not exist
+WARN  2017-11-05 00:05:16,853 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/CrackedBrick.class because it does not exist
+WARN  2017-11-05 00:05:16,864 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DarkStone.class because it does not exist
+WARN  2017-11-05 00:05:16,872 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DeepLava.class because it does not exist
+WARN  2017-11-05 00:05:16,879 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DeepWater.class because it does not exist
+WARN  2017-11-05 00:05:16,885 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Dirt.class because it does not exist
+WARN  2017-11-05 00:05:16,893 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DirtCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,902 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DirtWall.class because it does not exist
+WARN  2017-11-05 00:05:16,909 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DoorTile.class because it does not exist
+WARN  2017-11-05 00:05:16,915 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DresserBottom.class because it does not exist
+WARN  2017-11-05 00:05:16,922 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/DresserTop.class because it does not exist
+WARN  2017-11-05 00:05:16,928 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellBrick.class because it does not exist
+WARN  2017-11-05 00:05:16,936 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellBrickCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,943 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellCaveCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,949 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellCaveWall.class because it does not exist
+WARN  2017-11-05 00:05:16,956 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellSandCeiling.class because it does not exist
+WARN  2017-11-05 00:05:16,964 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellSandWall.class because it does not exist
+WARN  2017-11-05 00:05:16,984 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/HellbrickWall.class because it does not exist
+WARN  2017-11-05 00:05:16,991 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Hellsand.class because it does not exist
+WARN  2017-11-05 00:05:16,999 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Hellstone.class because it does not exist
+WARN  2017-11-05 00:05:17,006 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Ice.class because it does not exist
+WARN  2017-11-05 00:05:17,012 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrick.class because it does not exist
+WARN  2017-11-05 00:05:17,019 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrickCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,027 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceBrickWall.class because it does not exist
+WARN  2017-11-05 00:05:17,036 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceCaveCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,043 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceCaveWall.class because it does not exist
+WARN  2017-11-05 00:05:17,049 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSand.class because it does not exist
+WARN  2017-11-05 00:05:17,056 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSandCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,066 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/IceSandWall.class because it does not exist
+WARN  2017-11-05 00:05:17,073 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Lava.class because it does not exist
+WARN  2017-11-05 00:05:17,079 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Metal.class because it does not exist
+WARN  2017-11-05 00:05:17,086 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MetalCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,093 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MetalWall.class because it does not exist
+WARN  2017-11-05 00:05:17,102 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MossCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,110 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MossWall.class because it does not exist
+WARN  2017-11-05 00:05:17,117 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/MyColor.class because it does not exist
+WARN  2017-11-05 00:05:17,123 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ObsidianCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,130 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/ObsidianWall.class because it does not exist
+WARN  2017-11-05 00:05:17,138 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/PathDirt.class because it does not exist
+WARN  2017-11-05 00:05:17,145 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Sand.class because it does not exist
+WARN  2017-11-05 00:05:17,156 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrick.class because it does not exist
+WARN  2017-11-05 00:05:17,165 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrickCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,182 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandBrickWall.class because it does not exist
+WARN  2017-11-05 00:05:17,191 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,199 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/SandWall.class because it does not exist
+WARN  2017-11-05 00:05:17,208 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Snow.class because it does not exist
+WARN  2017-11-05 00:05:17,215 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrick.class because it does not exist
+WARN  2017-11-05 00:05:17,241 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrickCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,249 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/StoneBrickWall.class because it does not exist
+WARN  2017-11-05 00:05:17,269 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Swamp.class because it does not exist
+WARN  2017-11-05 00:05:17,277 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Swirly.class because it does not exist
+WARN  2017-11-05 00:05:17,283 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Terrain.class because it does not exist
+WARN  2017-11-05 00:05:17,291 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/TorchTile.class because it does not exist
+WARN  2017-11-05 00:05:17,304 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WallTop.class because it does not exist
+WARN  2017-11-05 00:05:17,312 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Water.class because it does not exist
+WARN  2017-11-05 00:05:17,319 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/Wood.class because it does not exist
+WARN  2017-11-05 00:05:17,327 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WoodCeiling.class because it does not exist
+WARN  2017-11-05 00:05:17,346 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/WoodWall.class because it does not exist
+WARN  2017-11-05 00:05:17,353 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/bitBrick.class because it does not exist
+WARN  2017-11-05 00:05:17,366 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/tile/tiles/bitMetal.class because it does not exist
+WARN  2017-11-05 00:05:17,376 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/LevelExit.class because it does not exist
+WARN  2017-11-05 00:05:17,383 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/MainLevel.class because it does not exist
+WARN  2017-11-05 00:05:17,390 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/Maps.class because it does not exist
+WARN  2017-11-05 00:05:17,398 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/SpawnHaven_Deprecated.class because it does not exist
+WARN  2017-11-05 00:05:17,407 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/level/worlds/XML_Level.class because it does not exist
+WARN  2017-11-05 00:05:17,413 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/GSM.class because it does not exist
+WARN  2017-11-05 00:05:17,420 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/GameState.class because it does not exist
+WARN  2017-11-05 00:05:17,427 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/INGAME.class because it does not exist
+WARN  2017-11-05 00:05:17,435 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/states/MENU.class because it does not exist
+WARN  2017-11-05 00:05:17,462 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Commands.class because it does not exist
+WARN  2017-11-05 00:05:17,471 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Debug.class because it does not exist
+WARN  2017-11-05 00:05:17,479 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State$1.class because it does not exist
+WARN  2017-11-05 00:05:17,486 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State$2.class because it does not exist
+WARN  2017-11-05 00:05:17,505 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM$State.class because it does not exist
+WARN  2017-11-05 00:05:17,511 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/FSM.class because it does not exist
+WARN  2017-11-05 00:05:17,518 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/LoadProperties.class because it does not exist
+WARN  2017-11-05 00:05:17,527 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/SaveGame.class because it does not exist
+WARN  2017-11-05 00:05:17,535 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Sound.class because it does not exist
+WARN  2017-11-05 00:05:17,549 (SharedResourcesManager.java:645) could not delete file L/Game/bin/com/IB/SL/util/Vector2i.class because it does not exist
+WARN  2017-11-05 00:05:17,561 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/easyogg.jar because it does not exist
+WARN  2017-11-05 00:05:17,570 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/jogg-0.0.7.jar because it does not exist
+WARN  2017-11-05 00:05:17,577 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/jorbis-0.0.15.jar because it does not exist
+WARN  2017-11-05 00:05:17,584 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/src/org/newdawn/easyogg/OggClip$1.class because it does not exist
+WARN  2017-11-05 00:05:17,591 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/src/org/newdawn/easyogg/OggClip$2.class because it does not exist
+WARN  2017-11-05 00:05:17,599 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/src/org/newdawn/easyogg/OggClip$InternalException.class because it does not exist
+WARN  2017-11-05 00:05:17,615 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/src/org/newdawn/easyogg/OggClip.class because it does not exist
+WARN  2017-11-05 00:05:17,628 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/src/org/newdawn/easyogg/TestOgg.class because it does not exist
+WARN  2017-11-05 00:05:17,636 (SharedResourcesManager.java:645) could not delete file L/Game/bin/old_easyogg/startup2.jar because it does not exist
+WARN  2017-11-05 00:05:17,648 (SharedResourcesManager.java:645) could not delete file L/Game/bin/startup2.jar because it does not exist
+WARN  2017-11-05 00:05:17,654 (SharedResourcesManager.java:645) could not delete file L/Game/bin/test.bat because it does not exist
+ERROR 2017-11-05 00:06:28,578 (EditorManager.java:1271) replaceText should be '1' is ':'
+ERROR 2017-11-05 00:06:29,071 (EditorManager.java:1271) replaceText should be '3' is ' '
+ERROR 2017-11-05 00:06:31,342 (EditorManager.java:1271) replaceText should be '0' is ' '
+ERROR 2017-11-05 00:07:49,077 (ActivitySequencer.java:504) failed to sent activities: [ChecksumActivity(path: SPath [path=src/com/IB/SL/Boot.java, project=Game], hash: 934900501, length: 3096, jupiterTimestamp: [73,95]), ChecksumActivity(path: SPath [path=src/com/IB/SL/LWJGL.java, project=Game], hash: -811456344, length: 5144, jupiterTimestamp: [0,0])]
+java.io.IOException: not connected to a XMPP server
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.sendData(DataTransferManager.java:200)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPTransmitter.send(XMPPTransmitter.java:90)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.sendActivities(ActivitySequencer.java:501)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer.access$3(ActivitySequencer.java:482)
+	at de.fu_berlin.inf.dpp.project.internal.ActivitySequencer$2.run(ActivitySequencer.java:152)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 2017-11-05 00:07:49,092 (BinaryChannelConnection.java:176) failed to gracefully close connection [mode=IBB, id=default] 3robbie7@gmail.com/SarosA8339D67
+java.io.IOException: Error while closing stream: service-unavailable(503)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.closeByLocal(InBandBytestreamSession.java:213)
+	at org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamSession.close(InBandBytestreamSession.java:154)
+	at de.fu_berlin.inf.dpp.net.internal.XMPPByteStreamAdapter.close(XMPPByteStreamAdapter.java:32)
+	at de.fu_berlin.inf.dpp.net.internal.BinaryChannelConnection.close(BinaryChannelConnection.java:174)
+	at de.fu_berlin.inf.dpp.net.internal.ConnectionPool.close(ConnectionPool.java:50)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.disposeConnection(DataTransferManager.java:510)
+	at de.fu_berlin.inf.dpp.net.internal.DataTransferManager.connectionStateChanged(DataTransferManager.java:520)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.setConnectionState(XMPPConnectionService.java:405)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.disconnect(XMPPConnectionService.java:304)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.disconnectXMPPInternal(ConnectionHandler.java:225)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.disconnect(ConnectionHandler.java:211)
+	at de.fu_berlin.inf.dpp.ui.actions.ChangeXMPPAccountAction$7.run(ChangeXMPPAccountAction.java:218)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:07:53,447 (CollaborationUtils.java:130) cannot leave a non-running session
+WARN  2017-11-05 00:08:19,875 (DiscoveryManager.java:451) Service Discovery failed on recipient 1gc7oyaliizh30e410yy232spp@public.talk.google.com/MessagingA73DD72D6FD server: xmpp.l.google.com
+No response from the server.: 
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:534)
+	at org.jivesoftware.smackx.ServiceDiscoveryManager.discoverInfo(ServiceDiscoveryManager.java:489)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.performServiceDiscovery(DiscoveryManager.java:448)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.queryFeatureSupport(DiscoveryManager.java:380)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager.access$3(DiscoveryManager.java:347)
+	at de.fu_berlin.inf.dpp.net.xmpp.discovery.DiscoveryManager$2.run(DiscoveryManager.java:326)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2017-11-05 00:08:19,883 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
+WARN  2017-11-05 00:08:19,919 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
+WARN  2017-11-05 00:08:19,930 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
+WARN  2017-11-05 00:08:19,957 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server
+WARN  2017-11-05 00:08:19,969 (DiscoveryManager.java:440) cannot not perform a service discovery because not connected to a XMPP server

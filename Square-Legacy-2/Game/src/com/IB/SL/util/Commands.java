@@ -106,10 +106,10 @@ public class Commands {
 		break;
 				case "tp": 
 					if (Modifier.equals("$")) {
-						Modifier = ""+(int)Boot.get().getPlayer().x/16;
+						Modifier = ""+(int)Boot.get().getPlayer().x/TileCoord.TILE_SIZE;
 					}
 					if (Modifier2.equals("$")) {
-						Modifier2 = ""+(int)Boot.get().getPlayer().y/16;
+						Modifier2 = ""+(int)Boot.get().getPlayer().y/TileCoord.TILE_SIZE;
 					}
 				Boot.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
@@ -225,7 +225,7 @@ public class Commands {
 					Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 		break;
 				case "spawn":
-					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x / 16, Boot.get().getPlayer().y / 16, "/XML/Entities/" + Modifier + ".xml"));
+					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x / TileCoord.TILE_SIZE, Boot.get().getPlayer().y / TileCoord.TILE_SIZE, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "xmload":
 					player.setPositionXML(0, 0, "/XML/Levels/" + Modifier, true);
