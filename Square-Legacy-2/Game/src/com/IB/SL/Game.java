@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -62,7 +63,6 @@ public class Game extends Canvas implements Runnable {
 	public static String title = "";
 	public double xScroll, yScroll;
 	
-	public static Level level;
 	private Player player;
 	public int frames = 0;
 	public static int mouseMotionTime = 0;
@@ -84,6 +84,9 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	public static String PlayerName = "Player";
 	File screenshots = null;
+	
+	public Stack<Level> levels = new Stack<Level>();
+	
 	public static float Ag = 32f/9.8f;
 
 	int saveTime = 0;
@@ -191,8 +194,8 @@ public class Game extends Canvas implements Runnable {
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
 
-			setLevel(new XML_Level(Maps.XML_Haven));
-			playerSpawn = new TileCoord(52, 72);
+		setLevel(new XML_Level(Maps.XML_Haven));
+		playerSpawn = new TileCoord(52, 72);
 		
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
@@ -234,11 +237,11 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void setLevel(Level level) {
-		this.level = level;
+		this.levels.push(level);
 	}
 	
 	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException {
-		List<PlayerMP> players = level.players;
+		List<PlayerMP> players = getLevel().players;
 		System.out.println("Saved Screenshot as: " + fileName + "_" + System.currentTimeMillis() + ".png");
 		Robot robot = new Robot();
 		Rectangle capRectange = currentFrame.getBounds();
@@ -415,19 +418,6 @@ public class Game extends Canvas implements Runnable {
 	public void updateMode() {
 		// adminCmds();
 		
-		if (getMenu().ConsoleMenu.enabled == false) {	
-			if (key.console) {
-				getMenu().load(getMenu().ConsoleMenu, true);
-			}
-
-		} else if (key.console) {
-			getMenu().unload(getMenu().ConsoleMenu);
-		}
-		
-		if (key.Pause) {
-			Boot.get().getMenu().load(gui.menu.MainMenu, false);
-		}
-
 			autoSave();
 		if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
 			devModeOn = true;
@@ -472,7 +462,7 @@ public class Game extends Canvas implements Runnable {
 		this.mouseMotionTime--;
 		}
 
-		level.update();
+		getLevel().update();
 		
 	
 
@@ -494,7 +484,7 @@ public class Game extends Canvas implements Runnable {
 		//}
 
 		
-			level.render((int) (xScroll), (int) (yScroll), screen);
+			getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			gui.render(screen);
 			//player.renderGUI(screen);
 		
@@ -575,9 +565,9 @@ public class Game extends Canvas implements Runnable {
 			g.fillRect(Mouse.getX() - 4, Mouse.getY() - 4, 38, 38);
 			g.setFont(new Font("Verdana", 0, 16));
 			g.setColor(Color.WHITE);
-			g.drawString("Player[UUID]: " + level.getPlayers(), 10, 40);
+			g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 40);
 			// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
-			g.drawString("Tile: " + level.returnTile() + " || Overlay: " + level.returnOverlayTile(), 10, 60);
+			g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
 			g.drawString("X: " + (int) getPlayer().getX() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().getY() / TileCoord.TILE_SIZE, 10, 20);
 			g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale, Mouse.getX() - 103, Mouse.getY() + 70);
 			//screen.drawLine(getPlayer(), level.entities);
@@ -665,7 +655,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public Level getLevel() {
-		return level;
+		return levels.peek();
 	}
 
 	public GUI getGui() {

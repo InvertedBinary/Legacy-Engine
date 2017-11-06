@@ -5433,3 +5433,18 @@ java.lang.NullPointerException: productPlugin must not be null
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY com.genuitec.eclipse.monitor 4 2 2017-11-05 23:00:00.002
+!MESSAGE Problems occurred when invoking code from plug-in: "com.genuitec.eclipse.monitor".
+!STACK 0
+java.lang.IllegalArgumentException: Scheduling delay is negative
+	at org.eclipse.core.runtime.Assert.isLegal(Assert.java:63)
+	at org.eclipse.core.internal.jobs.JobManager.schedule(JobManager.java:1240)
+	at org.eclipse.core.internal.jobs.InternalJob.schedule(InternalJob.java:382)
+	at org.eclipse.core.runtime.jobs.Job.schedule(Job.java:662)
+	at com.genuitec.eclipse.monitor.internal.providers.WebclipseMetricsProvider$2.done(WebclipseMetricsProvider.java:81)
+	at org.eclipse.core.internal.jobs.JobListeners.doNotify(JobListeners.java:77)
+	at org.eclipse.core.internal.jobs.JobListeners.done(JobListeners.java:115)
+	at org.eclipse.core.internal.jobs.JobManager.endJob(JobManager.java:695)
+	at org.eclipse.core.internal.jobs.WorkerPool.endJob(WorkerPool.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:76)

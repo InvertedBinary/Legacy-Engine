@@ -946,11 +946,11 @@ public void setOffset(int xOffset, int yOffset) {
 				renderY = 0;
 			}
 
-			if (renderX >= Boot.get().level.width - minimapSize) {
-				renderX = Boot.get().level.width - minimapSize;
+			if (renderX >= Boot.get().getLevel().width - minimapSize) {
+				renderX = Boot.get().getLevel().width - minimapSize;
 			}
-			if (renderY >= Boot.get().level.height - minimapSize) {
-				renderY = Boot.get().level.height - minimapSize;
+			if (renderY >= Boot.get().getLevel().height - minimapSize) {
+				renderY = Boot.get().getLevel().height - minimapSize;
 			}
 
 			map = new Sprite(minimapSize, renderX, renderY, SpriteSheet.minimapDYN, 7);
@@ -962,26 +962,24 @@ public void setOffset(int xOffset, int yOffset) {
 					if (xa < 0 || xa >= width || ya < 0 || ya >= height)
 						continue;
 					map.pixels[px + py * map.getWidth()] = 0xff191970;
-					if (size == 45) {
-
+					if (size == 75) {
 						double dx = x - size / 2;
 						double dy = y - size / 2;
 						double dist = dx * dx + dy * dy;
 
 						int color = 0;
-						if (dist <= 512) {
+						if (dist <= 1024) {
 							color = map.pixels[x + y * map.getWidth()];
-							if (dist >= 480) {
+							if (dist >= 900) {
 								color = 0xff000000;
 							}
 						}
-						if (dist <= 535) {
+						if (dist <= 1024) {
 							pixels[(int) (xa + ya * width)] = color;
 						}
 					} else {
 						int color = map.pixels[x + y * map.getWidth()];
 						pixels[(int) (xa + ya * width)] = color;
-
 					}
 				}
 			}

@@ -10,6 +10,8 @@ public class Keyboard implements KeyListener {
 	private final int numOfKeys = 520;
 	
 	private boolean[] keys = new boolean[numOfKeys]; //65536
+	
+	private boolean[] ticks = new boolean[numOfKeys];
 
 	private boolean[] toggles = new boolean[numOfKeys];
 	public int[] toggle_helper = new int[numOfKeys];
@@ -70,9 +72,9 @@ public class Keyboard implements KeyListener {
 		toggleDevModeInfo = keys[KeyEvent.VK_C];
 		commandMode = keys[KeyEvent.VK_ALT];
 		DevMode = keys[KeyEvent.VK_CONTROL];
-		Pause = keys[KeyEvent.VK_ESCAPE];
 	
-		console = keys[KeyEvent.VK_BACK_QUOTE];
+		Pause = ticks[KeyEvent.VK_ESCAPE];
+		console = ticks[KeyEvent.VK_BACK_QUOTE];
 		
 		/**
 		 * gameState Keys:
@@ -142,11 +144,15 @@ public class Keyboard implements KeyListener {
 		ctrl = keys[KeyEvent.VK_CONTROL];
 		arrow_Left = keys[KeyEvent.VK_LEFT];
 		arrow_Right = keys[KeyEvent.VK_RIGHT];
+	
+	
+		for (int i = 0; i < ticks.length; i++) {
+			ticks[i] = false;
+		}
 	}
 
 	
 	public void keyPressed(KeyEvent e) {
-		
 		keys[e.getKeyCode()] = true;
 		
 		if (keys[e.getKeyCode()] && toggles[e.getKeyCode()] == false) {
@@ -165,6 +171,8 @@ public class Keyboard implements KeyListener {
 		if (toggles[e.getKeyCode()] == true) {
 			toggle_helper[e.getKeyCode()]++;
 		}
+		
+		ticks[e.getKeyCode()] = true;
 	}
 
 	public void keyTyped(KeyEvent e) {

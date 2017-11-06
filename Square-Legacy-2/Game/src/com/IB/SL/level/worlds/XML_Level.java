@@ -1,6 +1,7 @@
 package com.IB.SL.level.worlds;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -77,8 +78,7 @@ public class XML_Level extends Level{
 					this.id = Integer.parseInt(eElement.getAttribute("id"));
 					this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
 					this.minimap_enabled = Boolean.parseBoolean(((Element) eElement.getElementsByTagName("minimap").item(0)).getAttribute("enabled"));
-					SpriteSheet.minimapDYN = new SpriteSheet(this.Level_Dir + "/level.png", 104);
-
+					SpriteSheet.minimapDYN = new SpriteSheet(this.Level_Dir + "/level.png", (ImageIO.read(XML_Level.class.getResource((this.Level_Dir + "/level.png")))).getWidth());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -118,7 +118,7 @@ public class XML_Level extends Level{
 				try {
 				Element eElement = (Element) ((Element)nNode).getElementsByTagName("entity").item(i);
 				XML_Mob m = BuildXMLMob(eElement);
-				m.setProperties(eElement);
+				//m.setProperties(eElement);
 				add(m);
 				} catch (Exception e) {	
 					e.printStackTrace();

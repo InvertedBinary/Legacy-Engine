@@ -16,7 +16,7 @@ import com.IB.SL.AlphaLWJGL.LWJGL;
 
 public class Boot {
 
-	public static String title = "Accelerated Square Legacy 2 [Build 1 : 10/31/17]";
+	public static String title = "Square Legacy 2 [Build 1 : 10/31/17]";
 	private static Game g = new Game(title);
 	//private static LWJGL lwjgl = new LWJGL(title);
 

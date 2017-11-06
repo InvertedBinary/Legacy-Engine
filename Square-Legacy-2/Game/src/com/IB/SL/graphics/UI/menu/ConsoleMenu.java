@@ -7,7 +7,7 @@ import com.IB.SL.graphics.UI.part.TextBox;
 
 public class ConsoleMenu extends UI_Menu {
 
-	transient public TextBox cmd;
+	public transient TextBox cmd;
 
 	public ConsoleMenu(int x, int y, Sprite bg) {
 		this.bg = bg;
@@ -32,9 +32,25 @@ public class ConsoleMenu extends UI_Menu {
 		cmd = null;
 	}
 	
+	public void updateUnloaded() {
+		if (enabled == false) {
+			if (getKey() != null) {
+				if (getKey().console) {
+					load(this, false);
+					getKey().console = false;
+				}
+			}
+		}
+	}
 	
 	public void update() {
 		cmd.update();
+		
+		if (getKey() != null) {
+			if (getKey().console) {
+				unload(this);
+			}
+		}
 	}
 	
 	public void render(Screen screen) {

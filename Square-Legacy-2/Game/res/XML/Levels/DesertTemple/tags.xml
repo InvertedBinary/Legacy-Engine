@@ -10,14 +10,17 @@
    	 <null_tile_sprite sprite="Sand" />
     </props>
     <exits>
-   	 <exit to="/XML/Levels/SpawnHaven" x="52" y="70" xo="0" yo="37" w="50" h="13" />
+   	 <exit to="/XML/Levels/DesertCastle" x="19" y="98" xo="0" yo="62" w="100" h="13" />
     </exits>
-    <!--<custom_mobs>
-   	 <entity x="24" y="19" tags="DesertPreist.xml" uid="0">
-   		 <speed>1</speed>
+    <custom_mobs>
+      <entity x="40" y="40" tags="RobotBob.xml" uid="0">
+      <speed>0.5</speed>
    	 </entity>
+      <entity x="41" y="41" tags="DesertMan.xml" uid="0">
+      <speed>0.75</speed>
+     </entity>
     </custom_mobs>
-    <mobs>
-   	 <entity x="27" y="19" tags="DesertPreist.xml" uid="69" />
+    <!--<mobs>
+   	 <entity x="55" y="55" tags="TestZombie.xml" uid="69" />
     </mobs>-->
 </level>

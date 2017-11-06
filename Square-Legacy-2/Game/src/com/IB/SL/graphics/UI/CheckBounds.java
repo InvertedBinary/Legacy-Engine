@@ -18,7 +18,6 @@ public class CheckBounds extends UI implements Serializable{
 	public String save3 = "(Open)";
 	public String save4 = "(Open)";
 	transient public TextBox name;
-	transient public TextBox cmd;
 
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale, boolean temp) {
 		if (toScale) {

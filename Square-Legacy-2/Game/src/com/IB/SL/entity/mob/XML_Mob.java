@@ -18,6 +18,7 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.UI.GUI;
+import com.IB.SL.level.Level;
 
 public class XML_Mob extends Mob {
 	
@@ -96,7 +97,7 @@ public class XML_Mob extends Mob {
 		this.speed = Double.parseDouble(eElement.getElementsByTagName("speed").item(0).getTextContent());
 		this.maxhealth = Double.parseDouble(eElement.getElementsByTagName("maxhealth").item(0).getTextContent());
 		this.mobhealth = maxhealth;
-		this.rarity = Integer.parseInt(eElement.getElementsByTagName("rarity").item(0).getTextContent());
+		//this.rarity = Integer.parseInt(eElement.getElementsByTagName("rarity").item(0).getTextContent());
 		this.Exp = Integer.parseInt(eElement.getElementsByTagName("exp").item(0).getTextContent());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,13 +147,18 @@ public class XML_Mob extends Mob {
 	}
 	
 	public void update() {
-		time = (time % 60 == 0) ? 0 : time++;
+		time++;
+		
+		if (time > 60) {
+			time = 0;
+		}
+		
 		if (time % 8 == 0) {
 			this.hurt = false;
 		}
 		
-		if (level.brightness <= 0) {
-			visability = level.brightness * -1 / 2;
+		if (Level.brightness <= 0) {
+			visability = Level.brightness * -1 / 2;
 		} else {
 			visability = 0;
 		}
@@ -212,9 +218,9 @@ public class XML_Mob extends Mob {
 	private void moveSimple() {
 		xa = 0;
 		ya = 0;
-		players = level.getPlayers(this, 125 - visability);
-		List<Player> players2 = level.getPlayers(this, 215 - visability);
-		entities = level.getEntities(this, 150 - visability, hostility.NEU, hostility.PASS);
+		players = level.getPlayers(this, 325 - visability);
+		List<Player> players2 = level.getPlayers(this, 415 - visability);
+		entities = level.getEntities(this, 350 - visability, hostility.NEU, hostility.PASS);
 
 		if (entities.size() > 0) {
 			if (players2.size() > 0) {
@@ -244,7 +250,8 @@ public class XML_Mob extends Mob {
 			// updateShooting();
 
 		} else {
-			if (time % (random.nextInt(50) + 30) == 0) {
+			//TODO: Still funky..
+			if (time % (random.nextInt(100) + 60) == 0) {
 				xa = random.nextInt(3) - 1;
 				ya = random.nextInt(3) - 1;
 				if (random.nextInt(2) == 0) {

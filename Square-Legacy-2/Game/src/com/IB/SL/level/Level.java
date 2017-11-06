@@ -714,9 +714,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	private void renderMiniMap(Screen screen) {
 		if (minimap_enabled == true) {
-			int size = 45;
-			int x = 254;
-			int y = 1;
+			int size = 75;
+			int x = Game.width - size - 5;
+			int y = 5;
 			//x = 10;
 			//y = 110;
 			

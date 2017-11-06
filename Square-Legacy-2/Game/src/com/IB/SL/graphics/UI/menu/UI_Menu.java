@@ -1,7 +1,9 @@
 package com.IB.SL.graphics.UI.menu;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
@@ -9,6 +11,7 @@ import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
 import com.IB.SL.graphics.UI.UI;
 import com.IB.SL.graphics.UI.part.UI_Button;
+import com.IB.SL.input.Keyboard;
 
 public class UI_Menu {
 	
@@ -28,8 +31,8 @@ public class UI_Menu {
 	public final static byte SUS_UPD = 1;
 	public final static byte SUS_NON = 0;
 	
-	public ArrayList<UI_Menu> menus = new ArrayList<UI_Menu>();
 	public static ArrayList<UI_Menu> history = new ArrayList<UI_Menu>();
+	public static ArrayList<UI_Menu> menus = new ArrayList<UI_Menu>();
 
 	public static MainMenu MainMenu;
 	public static PauseMenu PauseMenu;
@@ -42,14 +45,11 @@ public class UI_Menu {
 	public static VideoMenu vidMenu;
 
 	public void addMenus() {
-		this.menus.add(settingsMenu = new SettingsMenu(0, 0, Sprite.pauseOptions));
-		this.menus.add(MainMenu = new MainMenu(0, 0, Sprite.Title));
-		this.menus.add(ConsoleMenu = new ConsoleMenu(0, 0, Sprite.bgFade));
+		menus.add(settingsMenu = new SettingsMenu(0, 0, Sprite.pauseOptions));
+		menus.add(MainMenu = new MainMenu(0, 0, Sprite.Title));
+		menus.add(ConsoleMenu = new ConsoleMenu(0, 0, Sprite.bgFade));
 
-	//	this.menus.add(gpMenu = new GameplayMenu(0, 0, Sprite.SettingsGameplay));
-	//	this.menus.add(audMenu = new AudioMenu(0, 0, Sprite.SettingsAudio));
-	//	this.menus.add(vidMenu = new VideoMenu(0, 0, Sprite.SettingsVideo));
-		this.menus.add(PauseMenu = new PauseMenu(0, 0, Sprite.pauseMenu));
+		menus.add(PauseMenu = new PauseMenu(0, 0, Sprite.pauseMenu));
 
 		current = MainMenu;
 	}
@@ -58,6 +58,9 @@ public class UI_Menu {
 		this.x = x;
 		this.y = y;
 		ui = new UI();
+	}
+	
+	public void updateUnloaded() {
 	}
 	
 	public void update() {
@@ -105,14 +108,14 @@ public class UI_Menu {
 	public void load(UI_Menu menu, boolean override) {
 		System.out.println("Attempting to load: " + menu);
 		if (current == null || override == true) {
-		if (menu != null) {
-		if (current != null) {
-			unload(current);
-		}
-		current = menu; 
-		current.enabled = true;
-		current.onLoad();
-		}
+			if (menu != null) {
+				if (current != null) {
+					unload(current);
+				}
+				current = menu;
+				current.enabled = true;
+				current.onLoad();
+			}
 		}
 	}
 	
@@ -137,6 +140,10 @@ public class UI_Menu {
 	}
   }
 }
+	public Keyboard getKey() {
+		return Boot.get().key;
+	}
+	
 	public void onLoad() {
 		
 	}

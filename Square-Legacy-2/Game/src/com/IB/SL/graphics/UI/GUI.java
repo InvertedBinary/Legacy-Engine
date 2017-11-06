@@ -54,17 +54,14 @@ public class GUI extends CheckBounds {
 			name = new TextBox(90, 38, 204, 20, Boot.get().key, 12, false);
 		}
 
-		if (cmd == null) {
-			cmd = new TextBox(5, 5, 266, 19, Boot.get().key, -1, false);
-			cmd.desc = "Command:";
-			cmd.useCmds = true;
-			cmd.acceptable.add("!");
-			cmd.acceptable.add(",");
-			cmd.acceptable.add(".");
-		}
-			cmd.update();
 		// expBar.update();
+		for (int i = 0; i < menu.menus.size(); i++) {
+			menu.menus.get(i).updateUnloaded();
+		}
+		
 			menu.update();
+			
+
 	}
 
 	public void render(Screen screen) {
