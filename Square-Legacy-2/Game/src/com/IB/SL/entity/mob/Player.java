@@ -509,7 +509,8 @@ public class Player extends Mob implements Serializable{
 		this.x = (x);
 		this.y = (y);
 		//Boot.get().getLevel().loadMobs(LvlId);
-	}	
+	}
+	
 	public void setPosition(double x, double y, int LvlId, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);
@@ -551,8 +552,6 @@ public class Player extends Mob implements Serializable{
 	private transient Sprite arrow = Sprite.QuestArrow;
 
 	public void render(Screen screen) {
-		Boot.get().xScroll = this.getX() - screen.width / 2;
-		Boot.get().yScroll = this.getY() - screen.height / 2;
 		this.animSprite.setFrameRate((int)this.speed * 2);
 		sprite = animSprite.getSprite();
 		screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff), sprite);

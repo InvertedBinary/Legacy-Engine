@@ -37,7 +37,7 @@ import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.Maps;
-import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
+import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
@@ -191,7 +191,7 @@ public class Game extends Canvas implements Runnable {
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
 
-			setLevel(new SpawnHaven_Deprecated(Maps.SpawnHaven));
+			setLevel(new XML_Level(Maps.XML_Haven));
 			playerSpawn = new TileCoord(52, 72);
 		
 		// TileCoord playerSpawn = new TileCoord(296, 381);
@@ -487,7 +487,8 @@ public class Game extends Canvas implements Runnable {
 		}
 		screen.clear();
 		
-		
+		Boot.get().xScroll = getPlayer().getX() - screen.width / 2;
+		Boot.get().yScroll = getPlayer().getY() - screen.height / 2;
 	//if (!screen.shakeScreen()) {
 
 		//}

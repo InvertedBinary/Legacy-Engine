@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import com.IB.SL.Boot;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
+import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.interactables.Location_Shrine;
@@ -76,6 +77,8 @@ public class XML_Level extends Level{
 					this.id = Integer.parseInt(eElement.getAttribute("id"));
 					this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
 					this.minimap_enabled = Boolean.parseBoolean(((Element) eElement.getElementsByTagName("minimap").item(0)).getAttribute("enabled"));
+					SpriteSheet.minimapDYN = new SpriteSheet(this.Level_Dir + "/level.png", 104);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

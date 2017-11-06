@@ -2,7 +2,7 @@
 <level>
 	<props id="0">
 		<name>Spawn Haven</name>
-		<minimap enabled="false" />
+		<minimap enabled="true" />
 		<tile_sheet bitm="" />
 		<spawnlist  tags=".xml" />
 		<playlist tags=".xml" />
