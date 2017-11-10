@@ -1,9 +1,22 @@
 package com.IB.SL.level.tile;
 
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.VoidTile;
+import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.level.tile.overlays.Anvil;
 import com.IB.SL.level.tile.overlays.BlueBed;
 import com.IB.SL.level.tile.overlays.BlueMushroom;
@@ -117,6 +130,63 @@ public class Tile {
 	
 	public enum stepSound {
 		Organic, Hard, Squishy, Water;
+	}
+	
+	public static HashMap<Integer, Tile> TileIndex = new HashMap<Integer, Tile>();
+
+	public static Tile returnTile(int hex) {
+		return TileIndex.get(hex);
+	}
+	
+	public String XML_String = "";
+
+	public Tile() {
+		
+	}
+	
+	public void readXML(String path) {
+		this.XML_String = path;
+		try {
+		InputStream fXmlFile = getClass().getResourceAsStream(path);
+		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		doc.getDocumentElement().normalize();
+		
+		//System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		buildTiles(doc);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void buildTiles(Document doc) {
+		NodeList nList = doc.getElementsByTagName("Tiles");
+		System.out.println("--------------TILES--------------");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			System.out.println("\nCurrent Element : " + nNode.getNodeName());
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				for (int i = 0; i < (((Element) nNode).getElementsByTagName("tile").getLength()); i++) {
+					try {
+						Element e = (Element) ((Element) nNode).getElementsByTagName("tile").item(i);
+						int hex = Long.decode(e.getAttribute("hex")).intValue();
+						boolean solid = (Boolean.parseBoolean(e.getAttribute("solid")));
+						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
+						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExit")));
+						Field field = Sprite.class.getField(e.getAttribute("sprite"));
+						Sprite sp = (Sprite) field.get(field.getType());
+						String name = (e.getTextContent());
+
+						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, hex, solid, solidTwo, isExit);
+						TileIndex.put(hex, t);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 	
 	public Sprite sprite;

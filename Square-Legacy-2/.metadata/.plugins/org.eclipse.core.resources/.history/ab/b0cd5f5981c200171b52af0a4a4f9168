@@ -1,9 +1,0 @@
-package com.IB.SL.AlphaLWJGL;
-
-public class Vector3f {
-	
-	public float x = 0.0f;
-	public float y = 0.0f;
-	public float z = 0.0f;
-
-}

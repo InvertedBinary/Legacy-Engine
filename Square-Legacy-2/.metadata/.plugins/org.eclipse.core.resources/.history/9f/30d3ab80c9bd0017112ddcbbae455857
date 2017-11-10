@@ -1,7 +1,0 @@
-package com.IB.SL.level.worlds;
-
-public class LevelExit {
-
-	public LevelExit(String xml, int xo, int yo, int w, int h) {
-	}
-}

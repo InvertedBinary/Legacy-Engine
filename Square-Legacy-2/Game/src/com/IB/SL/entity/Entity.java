@@ -32,7 +32,6 @@ public class Entity implements Serializable {
 	protected transient int xBound = 0;
 	protected transient int yBound = 0;
 	public int xOffset = -16, yOffset = -24;
-	
 	public transient boolean riding = false;;
 	public transient boolean ySort = true;
 	public long Exp;

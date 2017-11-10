@@ -19,6 +19,7 @@ import com.IB.SL.graphics.Sprite;
 
 public class XML_Projectile extends Projectile {
 	
+	private static final long serialVersionUID = 1L;
 	public String XML_String = "";
 	public int RoF = 0;
 	
@@ -31,7 +32,6 @@ public class XML_Projectile extends Projectile {
 		this.init(x, y, angle);
 		this.origin = origin;
 		readXML(XML);
-
 	}
 	
 	public void init(double x, double y, double angle) {
@@ -103,8 +103,8 @@ public class XML_Projectile extends Projectile {
 		//this.master_sprite = sprite;
 		
 		r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
-		nx = speed * Math.cos(angle);
-		ny = speed * Math.sin(angle);
+		nx += speed * Math.cos(angle);
+		ny += speed * Math.sin(angle);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

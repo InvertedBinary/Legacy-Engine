@@ -48,7 +48,7 @@ import com.IB.SL.util.Sound;
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;	
 	
-	public Tile tile;
+	public static Tile tile;
 	public GUI gui;
 	private Thread thread;
 	public JFrame frame; 
@@ -196,7 +196,10 @@ public class Game extends Canvas implements Runnable {
 
 		setLevel(new XML_Level(Maps.XML_Haven));
 		playerSpawn = new TileCoord(52, 72);
+		tile = new Tile();
 		
+		tile.readXML("/XML/Tiles/TileDefinitions.xml");
+
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
 		//level.add(getPlayer());
@@ -487,7 +490,7 @@ public class Game extends Canvas implements Runnable {
 			getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			gui.render(screen);
 			//player.renderGUI(screen);
-		
+
 		if (showAVG) { 
 		if (fpsAVG < 200) {			
 		font8x8.render(-5, this.height - 17, -3, 0xDB0000,
@@ -497,56 +500,10 @@ public class Game extends Canvas implements Runnable {
 				"Average FPS: " + fpsAVG, screen, false, true);
 		}
 		}
-		
-		/*time++;
-		for(int j = 0; j < screen.height; j++) {
-			for (int i = 0; i < screen.width; i++) {
-				screen.pixels[i + j * screen.width] = 0;												
-				if (i % 2 == 0) {
-						if (time % 2  == 0) {
-							screen.pixels[i + j * screen.width] = 0xffFF00FF;												
-						} else {
-							if (j % 2 == 0) {
-							screen.pixels[i + j * screen.width] = 0xff00FF00;												
-						}
-					}
-				}
-			}
-		}
-		
-		for (int y = 0; y < screen.height; y++) {
-			for (int x = 0; x < screen.width; x++) {
-				if (x < 0 || x >= width || y < 0 || y >= height) continue;
-				     screen.pixels[(int) (x + y * width)] += (int) (0x110000 * ((x - y + Math.round(Math.random() * 10)) / 2));
-			}
-		}*/
-
+	
 		//System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
 		for (int i = 0; i < pixels.length; i++) {
-			/*if ((int)(Math.random() * 100) % 2 == 0) {
-		    screen.pixels[(int) i] += (int) (((Math.round(Math.random() * 100000))));
-			}
-			if ((int)(Math.random() * 50) % 60 == 0) {
-			for (int i1 = 0; i1 < 6; i1++) {
-				for (int j = screen.pixels.length - 1; j > 0; j--) {
-					if ((int)(i * 2) % 100 == 0) {
-						
-					int temp = screen.pixels[j];
-					double r = Math.random();
-						screen.pixels[j] = screen.pixels[j - 1];
-					screen.pixels[j - 1] = temp;
-					}
-				}
-			}
-			}
-			//}
-			if (Boot.get().getPlayer().mobhealth < 5) {
-			if (((int)(Math.random() * 1.2005) % 61418 == 0)) {// || this.getPlayer().ridingOn == null) {
-			pixels[i] = screen.pixels[i];
-				}
-			} else {*/
 				pixels[i] = screen.pixels[i];
-			//}
 		}
 
 		Graphics g = bs.getDrawGraphics();

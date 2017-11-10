@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Tiles>
+	<tile sprite="CobbleStone" hex="0xffF2F2F2" solid="false" projSolid="false" isExitTile="false">Cobblestone</tile>
+	<tile sprite="Grass" hex="0xff00CC00" solid="false" projSolid="false" isExitTile="false">Grass</tile>
+</Tiles>

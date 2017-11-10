@@ -1,6 +1,5 @@
 package com.IB.SL.level;
 
-import java.awt.Rectangle;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import com.IB.SL.Boot;
@@ -26,6 +26,7 @@ import com.IB.SL.entity.spawner.Spawner;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Weather.Rain;
 import com.IB.SL.level.tile.Tile;
+import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
@@ -1297,7 +1298,20 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}*/
 	
 
-	public Tile getTile(int x, int y) {				
+	public Tile getTile(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height) {
+			return Tile.VoidTile;
+		}
+		
+		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
+		if (t == null) {
+			t = Tile.VoidTile;
+		} else {
+		}
+		return t;
+	}
+	
+	public Tile getTileLegacy(int x, int y) {				
 		
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.VoidTile;
@@ -1434,11 +1448,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			   return Tile.WoodWall;
 			if (tiles[x + y * width] == SwirlyHex)
 			   return Tile.swirly;
-
-			
-			
 		return Tile.VoidTile;
-
 	}
 	
 	public Tile getOverlayTile(int x, int y) {

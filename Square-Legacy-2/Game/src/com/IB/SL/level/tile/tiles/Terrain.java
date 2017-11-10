@@ -4,6 +4,7 @@ import com.IB.SL.Game;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.tile.Tile;
+import com.IB.SL.level.tile.Tile.stepSound;
 
 public class Terrain extends Tile {
 
@@ -13,7 +14,6 @@ public class Terrain extends Tile {
 	
 	public Terrain(Sprite sprite) {
 		super(sprite);
-		this.sprite = sprite;
 	}
 	
 	public Terrain(Sprite sprite, stepSound st, int hex) {

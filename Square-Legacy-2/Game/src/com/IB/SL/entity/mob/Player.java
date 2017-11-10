@@ -120,8 +120,8 @@ public class Player extends Mob implements Serializable{
 		this.Lvl = 1;
 		this.xBound = 8;
 		this.yBound = 8;
-		this.xOffset = 0;
-		this.yOffset = 0;
+		this.xOffset = -16;
+		this.yOffset = -16;
 		this.money = 30;
 		this.hostility = hostility.PLAYER;
 
@@ -423,6 +423,8 @@ public class Player extends Mob implements Serializable{
 			XML_Projectile Test_Arrow = new XML_Projectile(x, y, Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
 			XML_Projectile Test_Arrow2 = new XML_Projectile(x, y, Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
 			Test_Arrow2.sprite = Sprite.WizardProjectile2;
+			Test_Arrow.nx += xa;
+			Test_Arrow.ny += ya;
 			level.add(Test_Arrow);
 			
 			level.add(Test_Arrow2);
@@ -554,16 +556,17 @@ public class Player extends Mob implements Serializable{
 	public void render(Screen screen) {
 		this.animSprite.setFrameRate(6 -  (int)this.speed / 2);
 		sprite = animSprite.getSprite();
-		screen.renderMobSpriteUniversal((int) (x - 8 + xOff), (int) (y - 15 + yOff), sprite);
+		this.xOffset = -22;
+		this.yOffset = -45;
+		screen.renderMobSpriteUniversal((int) (x + xOff + xOffset), (int) (y + yOff + yOffset), sprite);
 
-		if (Boot.get().devModeOn) {
+		if (Game.devModeOn) {
 			screen.drawRect((int) x - 8, (int) y - 15, 64, 64, 0x0093FF, true);
 			try {
 				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int) y,
 					raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);
 				} catch (NullPointerException e) {
 			}
-			// Friendly Mobs Minimap Color: 0xff00FF21
 		}
 
 	}
@@ -715,25 +718,22 @@ public class Player extends Mob implements Serializable{
 	screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
 	}
 	
-	
 		if (buildMode) {
 		gui.renderBuild(screen, this);
 		}
 	
-	
 		String text = (int)Boot.get().getPlayer().getX() / TileCoord.TILE_SIZE + "," + (int)Boot.get().getPlayer().getY() / TileCoord.TILE_SIZE;
 		//screen.renderSprite(1064/ Game.scale, 530 / Game.scale, gui.renderHealthExperiment(screen, this, 20), false);
-		
 		if (!level.minimap_enabled) {
-			Boot.get().font8x8.render((int)Game.width - text.length() * 8, 3, -3, text, screen, false, false);
-			Boot.get().font8x8.render((int)Game.width - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font.render((int)Game.width - text.length() * 16, 3, -3, text, screen, false, false);
+			Boot.get().font.render((int)Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else if (!level.minimap_collapsed){
 			//screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12, 0xff262626), false);
-			Boot.get().font8x8.render((int)Game.width - 35 - text.length() * 8, 3, -3, text, screen, false, false);
-			Boot.get().font8x8.render((int)Game.width - 35 - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font.render((int)Game.width - 35 - text.length() * 16, 3, -3, text, screen, false, false);
+			Boot.get().font.render((int)Game.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		} else {
-			Boot.get().font8x8.render((int)Game.width - text.length() * 8, 3, -3, text, screen, false, false);	
-			Boot.get().font8x8.render((int)Game.width - text.length() * 8 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
+			Boot.get().font.render((int)Game.width - text.length() * 16, 3, -3, text, screen, false, false);	
+			Boot.get().font.render((int)Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen, false, false);
 		}
 
 		

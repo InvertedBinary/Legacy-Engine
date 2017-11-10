@@ -1,25 +1,32 @@
 package com.IB.SL.graphics;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import com.IB.SL.level.TileCoord;
 
 
 public class Sprite {
 	
-	/**
-	 * 
-	 */
-	// ACROSS THEN DOWN KID
-	//Down the pink space is 16!
 	public final int SIZE;
 	private int x, y;
 	private int width, height;
 	public int[] pixels;
 	public SpriteSheet sheet;
 	
-	//MiniMap(s)
+	public static HashMap<String, Sprite> sprite = new HashMap<String, Sprite>();
+	
+	public Sprite get(String s) {
+		Sprite result = this.VoidTile;
+		if (sprite.containsKey(s)) {
+			result = sprite.get(s);
+		}
+		return result;
+	}
+	
+	//MiniMap
 	public static Sprite MiniMap = new Sprite(32 , 0, 0, SpriteSheet.minimap);
+	
 	//GUIS
 	public static Sprite Title = new Sprite(300, 168, 0, 0, SpriteSheet.title);
 	public static Sprite bgFade = new Sprite(300, 168, 0, 0, SpriteSheet.bgFade);

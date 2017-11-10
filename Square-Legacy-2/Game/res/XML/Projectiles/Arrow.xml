@@ -5,7 +5,7 @@
 		<damage>1</damage>
 		<speed>3</speed>
 		<range min="80" max="260" />
-		<fire-sound><!--  --></fire-sound>>
+		<fire-sound><!--  --></fire-sound>
 		<movement rof="25" rot="true" shape="arc" />
 		<!-- VALID 'shape' VARS: 'arc', 'simple', 'drop' -->
 		<sprite name="Arrow" xOffset="-8" yOffset="-15" />

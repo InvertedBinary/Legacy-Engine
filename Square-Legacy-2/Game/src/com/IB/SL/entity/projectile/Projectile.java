@@ -23,7 +23,8 @@ public abstract class Projectile extends Entity {
 	protected double xOrigin, yOrigin;
 	public double angle;
 	public double x, y;
-	protected double nx, ny;
+	public double nx;
+	public double ny;
 	protected float zz, za;
 	protected double distance;
 	protected double range;
