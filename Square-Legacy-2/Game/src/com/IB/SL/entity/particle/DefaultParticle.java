@@ -10,8 +10,8 @@ public class DefaultParticle extends Particle {
 
 	public DefaultParticle(int x, int y, int life, int amount, int hex) {
 		super(x, y, life, amount);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = new Sprite(1, hex);
@@ -24,8 +24,8 @@ public class DefaultParticle extends Particle {
 	
 	public DefaultParticle(int x, int y, int life, int amount, int hex, int size) {
 		super(x, y, life, amount);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = new Sprite(size, hex);
@@ -38,8 +38,8 @@ public class DefaultParticle extends Particle {
 	
 	public DefaultParticle(int x, int y, int life, int amount, Sprite spr) {
 		super(x, y, life, amount);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = spr;

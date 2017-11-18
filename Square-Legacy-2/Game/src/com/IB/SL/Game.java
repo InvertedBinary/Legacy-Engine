@@ -58,8 +58,6 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 640; // 300 //520
 	public static int height = 360; // 168 //335
 	public static int scale = 2;
-	public static final int TILE_BIT_SHIFT = 5;
-
 	public static String title = "";
 	public double xScroll, yScroll;
 	
@@ -84,11 +82,8 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	public static String PlayerName = "Player";
 	File screenshots = null;
-	
 	public Stack<Level> levels = new Stack<Level>();
 	
-	public static float Ag = 32f/9.8f;
-
 	int saveTime = 0;
 	/**
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol:
@@ -103,7 +98,6 @@ public class Game extends Canvas implements Runnable {
 	public WindowHandler windowHandler;
 	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	//private VolatileImage vImage = this.createVolatileImage(width, height);
-
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	private int time = 0;
@@ -470,6 +464,9 @@ public class Game extends Canvas implements Runnable {
 	
 
 	}
+	com.IB.SL.util.shape.Rectangle rec1 = new com.IB.SL.util.shape.Rectangle(60, 40);
+
+	com.IB.SL.util.shape.Rectangle rec2 = new com.IB.SL.util.shape.Rectangle(100, 0, 60, 40);
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -480,8 +477,8 @@ public class Game extends Canvas implements Runnable {
 		}
 		screen.clear();
 		
-		Boot.get().xScroll = getPlayer().getX() - screen.width / 2;
-		Boot.get().yScroll = getPlayer().getY() - screen.height / 2;
+		Boot.get().xScroll = getPlayer().x() - screen.width / 2;
+		Boot.get().yScroll = getPlayer().y() - screen.height / 2;
 	//if (!screen.shakeScreen()) {
 
 		//}
@@ -489,8 +486,15 @@ public class Game extends Canvas implements Runnable {
 		
 			getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			gui.render(screen);
-			//player.renderGUI(screen);
 
+		
+		rec1.draw(screen);
+		
+		rec2.draw(screen);
+		rec2.angularTranslate(1f, (float)(Math.PI / 3));
+		//rec2.translate(10, 10);
+		
+			
 		if (showAVG) { 
 		if (fpsAVG < 200) {			
 		font8x8.render(-5, this.height - 17, -3, 0xDB0000,
@@ -525,7 +529,7 @@ public class Game extends Canvas implements Runnable {
 			g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 40);
 			// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
 			g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
-			g.drawString("X: " + (int) getPlayer().getX() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().getY() / TileCoord.TILE_SIZE, 10, 20);
+			g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
 			g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale, Mouse.getX() - 103, Mouse.getY() + 70);
 			//screen.drawLine(getPlayer(), level.entities);
 			g.setColor(Color.gray);

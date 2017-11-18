@@ -3,7 +3,7 @@ package com.IB.SL.level.interactables;
 import java.util.List;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -27,16 +27,16 @@ public class Location_Shrine extends Interactable {
 	}
 	
 	public Location_Shrine(int x, int y) {
-		this.x = x << Game.TILE_BIT_SHIFT;
-		this.y = y << Game.TILE_BIT_SHIFT;
+		this.setX(x << VARS.TILE_BIT_SHIFT);
+		this.setY(y << VARS.TILE_BIT_SHIFT);
 		//p_spawn = t;
 		this.mobhealth = 1000;
 		this.invulnerable = true;
 		this.ySort = true;
 	}
 	public Location_Shrine(int x, int y, TileCoord t) {
-		this.x = x << Game.TILE_BIT_SHIFT;
-		this.y = y << Game.TILE_BIT_SHIFT;
+		this.setX(x << VARS.TILE_BIT_SHIFT);
+		this.setY(y << VARS.TILE_BIT_SHIFT);
 		p_spawn = t;
 		sx = t.x();
 		sy = t.y();
@@ -48,7 +48,7 @@ public class Location_Shrine extends Interactable {
 	
 	List<PlayerMP> players;
 	public void update() {
-		players = level.getPlayersFixed((int) x + 17, (int) y + 16, 24);
+		players = level.getPlayersFixed((int) x() + 17, (int) y() + 16, 24);
 
 		if (players.size() > 0) {
 			for (int i = 0; i < players.size(); i++) {
@@ -64,14 +64,14 @@ public class Location_Shrine extends Interactable {
 
 	public void render(Screen screen) {
 		if (Boot.get().devModeOn) {
-			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
+			Debug.drawRect(screen, (int)x(), (int)y(), 32, 32, 0xFF00FF, true);
 		}
 		sprite = Sprite.loc_shrine;
-		screen.renderMobSpriteUniversal((int)x, (int)y - 16, sprite);
+		screen.renderMobSpriteUniversal((int)x(), (int)y() - 16, sprite);
 		if (players != null) {
 			if (players.size() > 0) {
 				String st = "Press F to Set Spawn";
-				font.render((int)x - ((st.length() * 8) / 2) + 20, (int)y - 39, 0xffFFFFFF, st, screen, true, true);
+				font.render((int)x() - ((st.length() * 8) / 2) + 20, (int)y() - 39, 0xffFFFFFF, st, screen, true, true);
 			}
 		}
 	}

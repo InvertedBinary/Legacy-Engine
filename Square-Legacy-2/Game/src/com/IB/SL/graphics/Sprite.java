@@ -25,8 +25,6 @@ public class Sprite {
 	}
 	
 	//MiniMap
-	public static Sprite MiniMap = new Sprite(32 , 0, 0, SpriteSheet.minimap);
-	
 	//GUIS
 	public static Sprite Title = new Sprite(300, 168, 0, 0, SpriteSheet.title);
 	public static Sprite bgFade = new Sprite(300, 168, 0, 0, SpriteSheet.bgFade);
@@ -247,8 +245,6 @@ public class Sprite {
 	
 	public static Sprite swordInDirt = new Sprite(16, 18, 16, SpriteSheet.blocks);
 	
-	public static Sprite Carraige = new Sprite(128, 32, 0, 0, SpriteSheet.Carraige);
-
 	//Staves:
 	public static Sprite wand_ArcaneTwig = new Sprite(16, 7, 8, SpriteSheet.Equipment_Main);
 	public static Sprite wand_FlareScepter = new Sprite(16, 2, 8, SpriteSheet.Equipment_Main);
@@ -377,7 +373,6 @@ public class Sprite {
 	public static Sprite Geartrap_Display = new Sprite(16, 4, 3, SpriteSheet.spells_Display);
 	public static Sprite Kunai_Display = new Sprite(16, 11, 1, SpriteSheet.spells_Display);
 	
-	public static Sprite SiphonSucc_Display = new Sprite(16, 0, 0, SpriteSheet.Siphon_down);
 	public static Sprite OpticalProjectile = new Sprite(16, 2, 9, SpriteSheet.spells);
 	public static Sprite RedShockwave = new Sprite(16, 4, 8, SpriteSheet.spells);
 	public static Sprite Pulsefire = new Sprite(16, 0, 13, SpriteSheet.spells);
@@ -465,8 +460,6 @@ public class Sprite {
 	//public static Sprite Torch = resize(Torch, 0.4);
 	
 	//New Blocks Update Beta 2.0
-	public static Sprite Occulus = new Sprite(32, 0, 0, SpriteSheet.Occulus);
-
 	
 	public static Sprite playerback = new Sprite(16, 0, 0, SpriteSheet.player_downstill);
 	public static Sprite playerup = new Sprite(16, 0, 0, SpriteSheet.player_upstill);
@@ -543,9 +536,6 @@ public class Sprite {
 	public static Sprite Wood = new Sprite(TileCoord.TILE_SIZE, 1, 1, SpriteSheet.blocks);
 	public static Sprite WoodCeiling = new Sprite(TileCoord.TILE_SIZE, 4, 16, SpriteSheet.blocks);
 	public static Sprite WoodWall = new Sprite(TileCoord.TILE_SIZE, 4, 17, SpriteSheet.blocks);
-	public static Sprite Dumby = new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.UndeadCaster_down);
-	
-	
 	
 	public static Sprite Cactus = new Sprite(TileCoord.TILE_SIZE, 26, 16, SpriteSheet.blocks);
 	public static Sprite FlowerCactus = new Sprite(TileCoord.TILE_SIZE, 27, 16, SpriteSheet.blocks);

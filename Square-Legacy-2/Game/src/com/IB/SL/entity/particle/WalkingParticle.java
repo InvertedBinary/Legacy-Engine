@@ -8,8 +8,8 @@ public class WalkingParticle extends Particle {
 	public WalkingParticle(int x, int y, int life, int amount, Sprite sprite) {
 		super(x,y,life,amount);
 
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		this.sprite = sprite;
@@ -40,7 +40,7 @@ public class WalkingParticle extends Particle {
 		
 
 		public void render(Screen screen) {
-			screen.renderParticle((int)x - 8, (int)y - 14, sprite, true);
+			screen.renderParticle((int)x() - 8, (int)y() - 14, sprite, true);
 		}
 
 }

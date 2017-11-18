@@ -12,6 +12,7 @@ import java.util.Random;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
 import com.IB.SL.entity.mob.Mob;
@@ -212,7 +213,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	public static boolean minimap_enabled = false;
 	public static boolean minimap_collapsed = false;
 	
-	public int radius = 10;
 	public int time = 0;
     public boolean day = false, night = false;
 	        
@@ -297,9 +297,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
 					if (e instanceof XML_Mob) {
-						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE), (((XML_Mob)temp[i]).XML_String));
+						e = temp[i].getClass().getConstructor(new Class[] {Double.TYPE, Double.TYPE, String.class}).newInstance((int)(temp[i].x() / TileCoord.TILE_SIZE), (int)(temp[i].y() / TileCoord.TILE_SIZE), (((XML_Mob)temp[i]).XML_String));
 					} else {						
-					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE));
+					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].x() / TileCoord.TILE_SIZE), (int)(temp[i].y() / TileCoord.TILE_SIZE));
 					}
 					e.onLoad(temp[i]);
 					e.mobhealth = temp[i].mobhealth;
@@ -339,7 +339,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					Entity e = temp[i];
 						System.out.println("LOADING Entity >>>>>>>>>>>>>>>>>>>>>>>>>> " + (e.getClass()));
 					//Entity.getClass().getConstructor(new Class[] {Integer.TYPE}).newInstance(item.slot);
-					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].getX() / TileCoord.TILE_SIZE), (int)(temp[i].getY() / TileCoord.TILE_SIZE));
+					e = temp[i].getClass().getConstructor(new Class[] {Integer.TYPE, Integer.TYPE}).newInstance((int)(temp[i].x() / TileCoord.TILE_SIZE), (int)(temp[i].y() / TileCoord.TILE_SIZE));
 				//Entity e = temp[i].getClass().newInstance();
 				/*	Field[] fields = temp[i].getClass().getDeclaredFields();
 					Field[] fields2 = e.getClass().getDeclaredFields();
@@ -440,7 +440,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		 Tile tile;
 		 String tileString = "";
 		 try {
-		tile = getTile((int)getPlayerAt(0).getX() >> Game.TILE_BIT_SHIFT, (int)getPlayerAt(0).getY() >> Game.TILE_BIT_SHIFT);
+		tile = getTile((int)getPlayerAt(0).x() >> VARS.TILE_BIT_SHIFT, (int)getPlayerAt(0).y() >> VARS.TILE_BIT_SHIFT);
 		tileString = tile.toString();
 		tileString = tileString.replace("com.IB.SL.level.tile.", "");
 		tileString = tileString.substring(0,tileString.indexOf("@"));
@@ -453,7 +453,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	 public String returnOverlayTile() {	 
 		 Tile tile;
 		 String tileString = "";
-		tile = getOverlayTile((int)getPlayerAt(0).getX() >> Game.TILE_BIT_SHIFT, (int)getPlayerAt(0).getY() >> Game.TILE_BIT_SHIFT);
+		tile = getOverlayTile((int)getPlayerAt(0).x() >> VARS.TILE_BIT_SHIFT, (int)getPlayerAt(0).y() >> VARS.TILE_BIT_SHIFT);
 		if(tile != null) {
 		tileString= tile.toString();
 		tileString = tileString.replace("com.IB.SL.level.tile.", "");
@@ -482,7 +482,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	 
 	 public String returnTile(List<Entity> entities) {	 
 		 Tile tile;
-			tile = getTile((int)entities.get(0).getX() >> Game.TILE_BIT_SHIFT, (int)entities.get(0).getY() >> Game.TILE_BIT_SHIFT);
+			tile = getTile((int)entities.get(0).x() >> VARS.TILE_BIT_SHIFT, (int)entities.get(0).y() >> VARS.TILE_BIT_SHIFT);
 			String tileString = tile.toString();
 			tileString = tileString.replace("com.IB.SL.level.tile.", "");
 			tileString = tileString.substring(0,tileString.indexOf("@"));
@@ -491,15 +491,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		 
 	 
 	 
-	 boolean radius1;
-	 boolean radius2;
 	 transient private Vector2i start;
 	 transient private Vector2i goal;
 	
 	 transient private Comparator<Entity> ySort = new Comparator<Entity>() {
 		    public int compare(Entity e1, Entity e2) {
-		      if (e1.y > e2.y) return 1; // Shift Up
-		      if (e1.y < e2.y) return -1; // Shift Down
+		      if (e1.y() > e2.y()) return 1; // Shift Up
+		      if (e1.y() < e2.y()) return -1; // Shift Down
 		      return 0;
 		    }
 		  };
@@ -535,11 +533,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						int sx, sy, lx, rx, ty, by;
 						do {
 							
-						lx = (int)(Boot.get().getPlayer().x / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
-						rx = (int)(Boot.get().getPlayer().x / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
+						lx = (int)(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
+						rx = (int)(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().width / TileCoord.TILE_SIZE) / 2) + 8);
 						
-						ty = (int)(Boot.get().getPlayer().y / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
-						by = (int)(Boot.get().getPlayer().y / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
+						ty = (int)(Boot.get().getPlayer().y() / TileCoord.TILE_SIZE) - (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
+						by = (int)(Boot.get().getPlayer().y() / TileCoord.TILE_SIZE) + (int)(((Boot.get().getScreen().height / TileCoord.TILE_SIZE) / 2) + 5);
 						sx = myRandom(lx - 4, rx + 4);
 						sy = myRandom(ty - 4, by + 4);
 						
@@ -618,24 +616,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}*/
 
 		
-		if (radius <= 10) {
-			radius1 = true;
-			radius2 = false;
-		}
-		
-		if (radius >= 100) {
-			radius2 = true;
-			radius1 = false;
-		}
-		if (radius1) {
-			radius++;
-			radius++;
-		}
-		if (radius2) {
-			radius--;
-			radius--;
-		}
-		
 		returnTile();
 		//System.out.println(returnTile(tile));
 		checkTile();
@@ -686,26 +666,20 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		for (int i = 0; i < players.size(); i++) {
 				players.get(i).update();				
 		}
-		
-		
-	
-		
+
 		Water.update();
 		
 		}
-
-	
 
 	public List<Projectile> getProjectiles() {
 		return Projectiles;
 	}
 
-
 	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset) {
 		boolean solidtwo = false;
 		for (int c = 0; c < 4; c++) {
-			int xt = (x - c % 2 * size - xOffset) >> Game.TILE_BIT_SHIFT;
-			int yt = (y - c / 2 * size - yOffset) >> Game.TILE_BIT_SHIFT;
+			int xt = (x - c % 2 * size - xOffset) >> VARS.TILE_BIT_SHIFT;
+			int yt = (y - c / 2 * size - yOffset) >> VARS.TILE_BIT_SHIFT;
 			if (getTile(xt, yt).solidtwo())
 				solidtwo = true;
 		}
@@ -718,8 +692,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			int size = 75;
 			int x = Game.width - size - 5;
 			int y = 5;
-			//x = 10;
-			//y = 110;
 			
 			if (Boot.get().getPlayer().input.map) {
 				size = 200;
@@ -727,57 +699,18 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 				 y = 0;
 			}
 				
-			if (!this.minimap_collapsed) {
+			if (!minimap_collapsed) {
 			screen.renderMiniMap(x, y, size);
 			}
 		}
 	}
 	
-	 /*  private void renderMiniMap(Screen screen, int width, int height, int x, int y) {
-		 //  System.out.println("DRAWING");
-		      screen.drawFillRect(x, y, width, height, 0x000000, false);
-		      for (int i = 0; i < players.size(); i++) {
-		         screen.renderMiniMap((int)players.get(i).getX(), (int)players.get(i).getY(), 0xff0000ff, width, height, x, y);
-		      }
-		      for (int i = 0; i < entities.size(); i++) {
-		         screen.renderMiniMap((int)entities.get(i).getX(), (int)entities.get(i).getY(), 0xffff0000, width, height, x, y);
-		      }
-		      screen.drawRect(x, y, width, height, 0x9B9B9B, false);
-
-		   }*/
-	
-	 /* private void renderMiniMap(Screen screen, int width, int height, int x, int y) {
-		    screen.drawFillRect(x, y, width, height, 0x000000, false);
-		    /*  for (int i = 0; i < tilesList.size(); i++) {
-		         screen.renderMiniMap(tileCoord.x(), tileCoord.y(), tilesList.get(i).getColor(), width, height, x, y);
-		      }
-		      for (int i = 0; i < players.size(); i++) {
-		         screen.renderMiniMap((int)players.get(i).getX(), (int)players.get(i).getY(), 0xffFF00FF, width, height, x, y);
-		      }
-		      for (int i = 0; i < entities.size(); i++) {
-		         screen.renderMiniMap((int)entities.get(i).getX(), (int)entities.get(i).getY(), 0xffff0000, width, height, x, y);
-		      }
-		      screen.drawRect(x, y, width, height, 0x9B9B9B, false);
-
-		   }*/
-	
-	  private void renderMiniMap(Screen screen, int width, int height, int x, int y) {
-		  screen.drawFillRect(x, y, width, height, 0x000000, false);
-     
-		 // screen.renderMiniMap(x, y, SpriteSheet.maps_Spawn, width, height);
-		  
-      screen.drawRect(x, y, width, height, 0x9B9B9B, false);
-
-   }
-	  
-	  
-	
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
-		int x0 = xScroll >> Game.TILE_BIT_SHIFT;
-		int x1 = (xScroll + screen.width + TileCoord.TILE_SIZE) >> Game.TILE_BIT_SHIFT;
-		int y0 = yScroll >> Game.TILE_BIT_SHIFT;
-		int y1 = (yScroll + screen.height + TileCoord.TILE_SIZE) >> Game.TILE_BIT_SHIFT;
+		int x0 = xScroll >> VARS.TILE_BIT_SHIFT;
+		int x1 = (xScroll + screen.width + TileCoord.TILE_SIZE) >> VARS.TILE_BIT_SHIFT;
+		int y0 = yScroll >> VARS.TILE_BIT_SHIFT;
+		int y1 = (yScroll + screen.height + TileCoord.TILE_SIZE) >> VARS.TILE_BIT_SHIFT;
 				for (int y = y0; y < y1; y++) {
 					  for (int x =x0; x < x1; x++) {
 						// renderMiniMap(screen, 32, 32, 40, 40);
@@ -1081,13 +1014,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i).hostility == host) {
 			Entity entity = entities.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1100,13 +1033,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host, HOSTILITY host2) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i).hostility == host || entities.get(i).hostility == host2) {
 			Entity entity = entities.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1119,12 +1052,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	public List<Entity> getEntities(Entity e, int radius, List<Entity> entities) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1136,12 +1069,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	public List<Entity> getEntities(Entity e, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1157,8 +1090,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		int ey = yy;
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1173,8 +1106,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		int ex = x;
 		int ey = y;
 		for (Entity e : entities) {
-			int xx = (int) e.getX();
-			int yy = (int) e.getY();
+			int xx = (int) e.x();
+			int yy = (int) e.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1190,8 +1123,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		int ey = yy;
 		for (int i = 0; i < entitiesList.size(); i++) {
 			Entity entity = entitiesList.get(i);
-			int x = (int) entity.getX();
-			int y = (int) entity.getY();
+			int x = (int) entity.x();
+			int y = (int) entity.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1203,12 +1136,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 
 	public List<Player> getPlayers(Entity e, int radius) {
 		List<Player> result = new ArrayList<Player>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < players.size(); i++) {
 			Player player = players.get(i);
-			int x = (int) player.getX();
-			int y = (int) player.getY();
+			int x = (int) player.x();
+			int y = (int) player.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1220,12 +1153,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	public List<PlayerMP> getPlayers(Entity e, int radius, boolean no) {
 		List<PlayerMP> result = new ArrayList<PlayerMP>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < players.size(); i++) {
 			PlayerMP player = players.get(i);
-			int x = (int) player.getX();
-			int y = (int) player.getY();
+			int x = (int) player.x();
+			int y = (int) player.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1242,8 +1175,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		int ey = (int) yy;
 		for (int i = 0; i < players.size(); i++) {
 			PlayerMP player = players.get(i);
-			int x = (int) player.getX();
-			int y = (int) player.getY();
+			int x = (int) player.x();
+			int y = (int) player.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1258,12 +1191,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 
 	public boolean getPlayersBool(Entity e, int radius) {
 		boolean there = false;
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.x();
+		int ey = (int) e.y();
 		for (int i = 0; i < players.size(); i++) {
 			PlayerMP player = players.get(i);
-			int x = (int) player.getX();
-			int y = (int) player.getY();
+			int x = (int) player.x();
+			int y = (int) player.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1282,8 +1215,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		int ey = (int) yy;
 		for (int i = 0; i < players.size(); i++) {
 			PlayerMP player = players.get(i);
-			int x = (int) player.getX();
-			int y = (int) player.getY();
+			int x = (int) player.x();
+			int y = (int) player.y();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -1584,7 +1517,7 @@ public void resetLevelPostDeath(Player player) {
 			mob.mobhealth -= (damage);
 			mob.hurt = true;
 			try {
-				add(new DamageIndicator((int) (mob.getX() - mob.getSprite().getWidth() / 2), (int) ((y - (mob.getSprite().getHeight() * 1.5))), 15, 1, dmgInd, 0xffDD0011));
+				add(new DamageIndicator((int) (mob.x() - mob.getSprite().getWidth() / 2), (int) ((y - (mob.getSprite().getHeight() * 1.5))), 15, 1, dmgInd, 0xffDD0011));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1692,8 +1625,8 @@ public void resetLevelPostDeath(Player player) {
 		int index = getPlayerMPIndexUUID(UUID);
 		PlayerMP player = (PlayerMP) this.players.get(index);
 		
-		player.x = x;
-		player.y = y;
+		player.setX(x);
+		player.setY(y);
 		player.walking = walking;
 		player.setDir(direction);
 		
@@ -1709,8 +1642,8 @@ public void resetLevelPostDeath(Player player) {
 		int index = getPlayerMPIndex(tp);
 		PlayerMP player = (PlayerMP) this.players.get(index);
 		
-		getClientPlayer().setX((int)player.x);
-		getClientPlayer().setY((int)player.y);
+		getClientPlayer().setX((int)player.x());
+		getClientPlayer().setY((int)player.y());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

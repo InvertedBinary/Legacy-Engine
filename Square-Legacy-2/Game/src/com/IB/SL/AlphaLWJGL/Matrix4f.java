@@ -33,11 +33,11 @@ public class Matrix4f {
 		float r = (float)Math.toRadians(angle);
 		float cos = (float)Math.cos(r);
 		float sin = (float)Math.sin(r);
-		
-		result.matrix[0 + 0 * 4] = cos;
-		result.matrix[1 + 0 * 4] = sin;
-		result.matrix[0 + 1 * 4] = -sin;
-		result.matrix[1 + 1 * 4] = cos;
+
+		result.matrix[0 + 0 * 4] = cos;   // 
+		result.matrix[1 + 0 * 4] = sin;   //
+		result.matrix[0 + 1 * 4] = -sin;  //
+		result.matrix[1 + 1 * 4] = cos;   //
 		
 		return result;
 	}

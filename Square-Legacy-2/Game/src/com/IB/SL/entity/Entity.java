@@ -13,8 +13,9 @@ import com.IB.SL.level.Level;
 
 public class Entity implements Serializable {
 
-	public double x;
-	public double y;
+	public PVector pos = new PVector();
+	public PVector vel = new PVector();
+	
 	public transient Sprite sprite;
 	public transient boolean removed = false;
 	public transient Level level;
@@ -57,8 +58,8 @@ public class Entity implements Serializable {
 	}
 	
 	public Entity(double x, double y, Sprite sprite, int id) {
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.sprite = sprite;
 		this.id = id;
 		this.UID = genUUID();
@@ -86,14 +87,14 @@ public class Entity implements Serializable {
 	}
 	
 	public Rectangle getBounds() {
-		return r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+		return r = new Rectangle((int)x(), (int)y(), sprite.getWidth(), sprite.getHeight());
 	}
 	
 	public void update() {
 
 	}
 	public void render (Screen screen) {
-		if (sprite != null) screen.renderSprite((int)x, (int)y, Sprite.VoidTile, true);
+		if (sprite != null) screen.renderSprite((int)x(), (int)y(), Sprite.VoidTile, true);
 	}
 	
 	public boolean remove() {
@@ -113,20 +114,20 @@ public class Entity implements Serializable {
 		return Lvl;
 	}
 	
-	public double getX() {
-		return x;
+	public double x() {
+		return pos.x;
 	}
 	
-	public double getY() {
-		return y;
+	public double y() {
+		return pos.y;
 	}
 	
-	public void setX(double value) {
-		x = value;
+	public void setX(double val) {
+		pos.setX(val);
 	}
 	
-	public void setY(double value) {
-		y = value;
+	public void setY(double val) {
+		pos.setY(val);
 	}
 	
 	public Sprite getSprite() {
@@ -145,19 +146,19 @@ public class Entity implements Serializable {
 	}
 	
 	public double getoX(){
-	      return x - xOffset;
+	      return x() - xOffset;
 	   }
 	   
 	   public double getoY(){
-	      return y - yOffset;
+	      return y() - yOffset;
 	   }
 	   
 	   public double getoXB(){
-	      return x + xBound - xOffset;
+	      return x() + xBound - xOffset;
 	   }
 	   
 	   public double getoYB(){
-	      return y + yBound - yOffset;
+	      return y() + yBound - yOffset;
 	   }
 	
 	   

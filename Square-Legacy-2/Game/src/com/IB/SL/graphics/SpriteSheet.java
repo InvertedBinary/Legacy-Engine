@@ -53,13 +53,11 @@ public class SpriteSheet {
 
 	//public static SpriteSheet inventory1 = new SpriteSheet("/Textures/sheets/00_MobSheets/inventorytab1.png", 128, 96);
 	//public static SpriteSheet HealthPotion = new SpriteSheet("/Textures/sheets/00_MobSheets/HealthPotion.png", 8);
-	public static SpriteSheet slimePart = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Slimes/slimeyParticle.png", 16, 16);
 
 //	public static SpriteSheet water_anim = new SpriteSheet(blocks, 0, 6, 3, 1, 16);
 	
 	
 	public static SpriteSheet title = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/Menu.png", 300);
-	public static SpriteSheet ibLOGO = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/ibLOGO.png", 300);
 	public static SpriteSheet robobob = new SpriteSheet("/Textures/sheets/00_MobSheets/robobob.png", 20);
 	public static SpriteSheet robotbob = new SpriteSheet(robobob, 0, 0, 1, 1, 20);
 	public static SpriteSheet bgFade = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/fade.png", 300, 168);
@@ -80,7 +78,6 @@ public class SpriteSheet {
 	public static SpriteSheet Water1 = new SpriteSheet(anim_Water, 0, 0, 1, 2, 16);
 	//public static SpriteSheet Water2 = new SpriteSheet(anim_Water, 1, 0, 1, 3, 16);
 
-	public static SpriteSheet minimap = new SpriteSheet("/levels/minimap_worldmap.png", 32);
 	public static SpriteSheet minimapDYN = new SpriteSheet("/overlays/levels/WorldMap.png", 1024);
 	public static SpriteSheet minimap_hidden = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/MapClose.png", 45, 10);
 
@@ -101,7 +98,6 @@ public class SpriteSheet {
 	public static SpriteSheet anim_eb = new SpriteSheet(expbar, 0, 0, 1, 151, 156, 32);
 
 	public static SpriteSheet Zombie = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/zombie.png", 128, 96);
-	public static SpriteSheet PZombie = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/PoisonZombie.png", 128, 96);
 	public static SpriteSheet abilitybox = new SpriteSheet("/Textures/sheets/01_GUI/abilitybox.png", 20, 20);
 	public static SpriteSheet abilitybox2 = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/Frame.png", 18, 18);
 	
@@ -122,33 +118,12 @@ public class SpriteSheet {
 	public static SpriteSheet Mace_SwooshBase = new SpriteSheet("/Textures/sheets/04_Attacks/MaceSwish.png", 32, 512);
 	public static SpriteSheet Mace_Swoosh = new SpriteSheet(Mace_SwooshBase, 0, 0, 1, 16, 32);
 
-	public static SpriteSheet CopperGuardian = new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/CopperGuardian.png", 128, 512);
-	public static SpriteSheet CopperGuardian_Main = new SpriteSheet(CopperGuardian, 0, 0, 1, 4, 128);
 	/*public static SpriteSheet CopperGuardian_Sword1 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);
 	public static SpriteSheet CopperGuardian_Sword2 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);
 	public static SpriteSheet CopperGuardian_Sword3 = new SpriteSheet(CopperGuardian, 0, 0, 2, 2, 90);*/
 	public static SpriteSheet Water_Main = new SpriteSheet("/Textures/sheets/03_WorldGen/animWater.png", 32, 64);
 	public static SpriteSheet water_anim = new SpriteSheet(Water_Main, 0, 0, 1, 1, 32);
 	
-	public static SpriteSheet Occulus = new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/TheOcculos.png", 128, 96);
-	public static SpriteSheet Occulus_down = new SpriteSheet(Occulus, 0, 0, 2, 2, 32);
-	public static SpriteSheet Occulus_up = new SpriteSheet(Occulus, 1, 0, 2, 2, 32);
-	public static SpriteSheet Occulus_left = new SpriteSheet(Occulus, 3, 0, 2, 2, 32);
-	public static SpriteSheet Occulus_right = new SpriteSheet(Occulus, 2, 0, 2, 2, 32);
-	
-	public static SpriteSheet Swarm= new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/SwarmofRyzanKoh.png", 64, 128);
-	public static SpriteSheet Swarm_anim = new SpriteSheet(Swarm, 0, 0, 1, 2, 64);
-	
-	public static SpriteSheet FrozenKing= new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/FrozenKing.png", 64, 1024);
-	public static SpriteSheet FrozenKing_anim = new SpriteSheet(FrozenKing, 0, 0, 1, 16, 64);
-	
-	
-	public static SpriteSheet Horse = new SpriteSheet("/Textures/sheets/00_MobSheets/Neutral/Horse.png", 128, 96);
-	public static SpriteSheet Horse_left = new SpriteSheet(Horse, 0, 0, 1, 3, 32);
-	public static SpriteSheet Horse_right = new SpriteSheet(Horse, 1, 0, 1, 3, 32);
-	
-	public static SpriteSheet Carraige = new SpriteSheet("/Textures/sheets/00_MobSheets/Neutral/Wagon.png", 128, 96);
-	public static SpriteSheet Carraige_right = new SpriteSheet(Carraige, 0, 0, 3, 1, 32);
 
 	public static SpriteSheet zombie_down = new SpriteSheet(Zombie, 0, 0, 1, 3, 16);
 	public static SpriteSheet zombie_up = new SpriteSheet(Zombie, 1, 0, 1, 3, 16);
@@ -167,126 +142,10 @@ public class SpriteSheet {
 	public static SpriteSheet zombie02_left = new SpriteSheet(zombie02, 2, 0, 1, 3, 16);
 	public static SpriteSheet zombie02_right = new SpriteSheet(zombie02, 3, 0, 1, 3, 16);
 	
-	public static SpriteSheet pzombie_down = new SpriteSheet(PZombie, 0, 0, 1, 3, 16);
-	public static SpriteSheet pzombie_up = new SpriteSheet(PZombie, 1, 0, 1, 3, 16);
-	public static SpriteSheet pzombie_left = new SpriteSheet(PZombie, 2, 0, 1, 3, 16);
-	public static SpriteSheet pzombie_right = new SpriteSheet(PZombie, 3, 0, 1, 3, 16);
-	
 	public static SpriteSheet player_rightstill = new SpriteSheet(player, 3, 4, 1, 1, 16);
 	public static SpriteSheet player_leftstill = new SpriteSheet(player, 2, 4, 1, 1, 16);
 	public static SpriteSheet player_upstill = new SpriteSheet(player, 1, 3, 1, 1, 16);
 	public static SpriteSheet player_downstill = new SpriteSheet(player, 0, 3, 1, 1, 16);
-	
-	public static SpriteSheet UndeadCaster = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/UndeadCaster.png", 128, 96);
-	public static SpriteSheet UndeadCaster_down = new SpriteSheet(UndeadCaster, 0, 0, 1, 3, 16);
-	public static SpriteSheet UndeadCaster_up = new SpriteSheet(UndeadCaster, 1, 0, 1, 3, 16);
-	public static SpriteSheet UndeadCaster_left = new SpriteSheet(UndeadCaster, 2, 0, 1, 3, 16);
-	public static SpriteSheet UndeadCaster_right = new SpriteSheet(UndeadCaster, 3, 0, 1, 3, 16);
-
-	public static SpriteSheet Cultist = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Cultist.png", 128, 96);
-	public static SpriteSheet Cultist_down = new SpriteSheet(Cultist, 0, 0, 1, 3, 16);
-	public static SpriteSheet Cultist_up = new SpriteSheet(Cultist, 1, 0, 1, 3, 16);
-	public static SpriteSheet Cultist_left = new SpriteSheet(Cultist, 2, 0, 1, 3, 16);
-	public static SpriteSheet Cultist_right = new SpriteSheet(Cultist, 3, 0, 1, 3, 16);
-	
-	public static SpriteSheet Siphon = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Void/Siphon.png", 128, 96);
-	public static SpriteSheet Siphon_down = new SpriteSheet(Siphon, 0, 0, 1, 2, 16);
-	public static SpriteSheet Siphon_up = new SpriteSheet(Siphon, 1, 0, 1, 2, 16);
-	public static SpriteSheet Siphon_left = new SpriteSheet(Siphon, 3, 0, 1, 2, 16);
-	public static SpriteSheet Siphon_right = new SpriteSheet(Siphon, 2, 0, 1, 2, 16);
-	
-	public static SpriteSheet Basker = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Basker.png", 128, 96);
-	public static SpriteSheet Basker_anim = new SpriteSheet(Basker, 0, 0, 1, 3, 16);
-	
-	public static SpriteSheet DeathStalk = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/DeathStalk.png", 128, 96);
-	public static SpriteSheet DeathStalk_anim = new SpriteSheet(DeathStalk, 0, 0, 1, 3, 16);
-	
-	public static SpriteSheet DesertFly = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/DesertFly.png", 128, 96);
-	public static SpriteSheet DesertFly_anim = new SpriteSheet(DesertFly, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet Fairy = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Fairy.png", 128, 96);
-	public static SpriteSheet Fairy_anim = new SpriteSheet(Fairy, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet FairyVanguard = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/FairyTank.png", 128, 96);
-	public static SpriteSheet FairyVanguard_anim = new SpriteSheet(FairyVanguard, 0, 0, 1, 2, 32);
-	
-	public static SpriteSheet FairyWingsmith = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/FairyMage.png", 128, 96);
-	public static SpriteSheet FairyWingsmith_anim = new SpriteSheet(FairyWingsmith, 0, 0, 1, 2, 32);
-	
-	public static SpriteSheet Flot = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Flot.png", 128, 96);
-	public static SpriteSheet Flot_anim = new SpriteSheet(Flot, 0, 0, 1, 3, 32);
-	
-	public static SpriteSheet FluxWisp = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/FluxWisp.png", 128, 96);
-	public static SpriteSheet FluxWisp_anim = new SpriteSheet(FluxWisp, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet GreenFairy = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/GreenFairy.png", 128, 96);
-	public static SpriteSheet GreenFairy_anim = new SpriteSheet(GreenFairy, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet PurpleFairy = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/PurpleFairy.png", 128, 96);
-	public static SpriteSheet PurpleFairy_anim = new SpriteSheet(PurpleFairy, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet RedFairy = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/RedFairy.png", 128, 96);
-	public static SpriteSheet RedFairy_anim = new SpriteSheet(RedFairy, 0, 0, 1, 2, 16);
-	
-	public static SpriteSheet Archer = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Archer.png", 128, 96);
-	public static SpriteSheet Archer_down = new SpriteSheet(Archer, 0, 0, 1, 3, 16);
-	public static SpriteSheet Archer_up = new SpriteSheet(Archer, 1, 0, 1, 3, 16);
-	public static SpriteSheet Archer_right = new SpriteSheet(Archer, 3, 0, 1, 3, 16);
-	public static SpriteSheet Archer_left = new SpriteSheet(Archer, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet DesertBeetle = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/DesertBeatle.png", 128, 96);
-	public static SpriteSheet DesertBeetle_down = new SpriteSheet(DesertBeetle, 0, 0, 1, 2, 16);
-	public static SpriteSheet DesertBeetle_up = new SpriteSheet(DesertBeetle, 1, 0, 1, 2, 16);
-	public static SpriteSheet DesertBeetle_left = new SpriteSheet(DesertBeetle, 3, 0, 1, 2, 16);
-	public static SpriteSheet DesertBeetle_right = new SpriteSheet(DesertBeetle, 2, 0, 1, 2, 16);
-	
-	public static SpriteSheet FireElemental = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/FireElemental.png", 128, 96);
-	public static SpriteSheet FireElemental_down = new SpriteSheet(FireElemental, 0, 0, 1, 4, 16);
-	public static SpriteSheet FireElemental_up = new SpriteSheet(FireElemental, 1, 0, 1, 4, 16);
-	public static SpriteSheet FireElemental_left = new SpriteSheet(FireElemental, 3, 0, 1, 4, 16);
-	public static SpriteSheet FireElemental_right = new SpriteSheet(FireElemental, 2, 0, 1, 4, 16);
-	
-	public static SpriteSheet Gazer = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Gazer.png", 128, 96);
-	public static SpriteSheet Gazer_down = new SpriteSheet(Gazer, 0, 0, 1, 3, 16);
-	public static SpriteSheet Gazer_up = new SpriteSheet(Gazer, 1, 0, 1, 3, 16);
-	public static SpriteSheet Gazer_right = new SpriteSheet(Gazer, 3, 0, 1, 3, 16);
-	public static SpriteSheet Gazer_left = new SpriteSheet(Gazer, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet Ranger = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Ranger.png", 128, 96);
-	public static SpriteSheet Ranger_down = new SpriteSheet(Ranger, 0, 0, 1, 3, 16);
-	public static SpriteSheet Ranger_up = new SpriteSheet(Ranger, 1, 0, 1, 3, 16);
-	public static SpriteSheet Ranger_right = new SpriteSheet(Ranger, 3, 0, 1, 3, 16);
-	public static SpriteSheet Ranger_left = new SpriteSheet(Ranger, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet RockGolem = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/RockGolem.png", 128, 96);
-	public static SpriteSheet RockGolem_down = new SpriteSheet(RockGolem, 0, 0, 1, 3, 16);
-	public static SpriteSheet RockGolem_up = new SpriteSheet(RockGolem, 1, 0, 1, 3, 16);
-	public static SpriteSheet RockGolem_left = new SpriteSheet(RockGolem, 3, 0, 1, 3, 16);
-	public static SpriteSheet RockGolem_right = new SpriteSheet(RockGolem, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet PlagueRat = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/PlagueRat.png", 128, 96);
-	public static SpriteSheet PlagueRat_down = new SpriteSheet(PlagueRat, 0, 0, 1, 3, 16);
-	public static SpriteSheet PlagueRat_up = new SpriteSheet(PlagueRat, 1, 0, 1, 3, 16);
-	public static SpriteSheet PlagueRat_right = new SpriteSheet(PlagueRat, 3, 0, 1, 3, 16);
-	public static SpriteSheet PlagueRat_left = new SpriteSheet(PlagueRat, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet SkeletalMage = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/skeletalMage.png", 128, 96);
-	public static SpriteSheet SkeletalMage_down = new SpriteSheet(SkeletalMage, 0, 0, 1, 3, 16);
-	public static SpriteSheet SkeletalMage_up = new SpriteSheet(SkeletalMage, 1, 0, 1, 3, 16);
-	public static SpriteSheet SkeletalMage_left = new SpriteSheet(SkeletalMage, 3, 0, 1, 3, 16);
-	public static SpriteSheet SkeletalMage_right = new SpriteSheet(SkeletalMage, 2, 0, 1, 3, 16);
-	
-	public static SpriteSheet VoidSlinger = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/VoidSlinger.png", 128, 96);
-	public static SpriteSheet VoidSlinger_down = new SpriteSheet(VoidSlinger, 0, 0, 1, 6, 16);
-	public static SpriteSheet VoidSlinger_up = new SpriteSheet(VoidSlinger, 1, 0, 1, 6, 16);
-	public static SpriteSheet VoidSlinger_left = new SpriteSheet(VoidSlinger, 3, 0, 1, 6, 16);
-	public static SpriteSheet VoidSlinger_right = new SpriteSheet(VoidSlinger, 2, 0, 1, 6, 16);
-	
-	public static SpriteSheet VoidBoss = new SpriteSheet("/Textures/sheets/00_MobSheets/Bosses/VoidBoss.png", 256, 128);
-	public static SpriteSheet VoidBoss_down = new SpriteSheet(VoidBoss, 0, 0, 1, 2, 64);
-	public static SpriteSheet VoidBoss_up = new SpriteSheet(VoidBoss, 1, 0, 1, 2, 64);
-	public static SpriteSheet VoidBoss_left = new SpriteSheet(VoidBoss, 3, 0, 1, 2, 64);
-	public static SpriteSheet VoidBoss_right = new SpriteSheet(VoidBoss, 2, 0, 1, 2, 64);
 	
 	
 	public static SpriteSheet VC = new SpriteSheet("/Textures/sheets/00_MobSheets/Minions/VoidCharger.png", 128, 96);
@@ -353,27 +212,8 @@ public class SpriteSheet {
 	public static SpriteSheet Guard_left = new SpriteSheet(Guard, 2, 0, 1, 5, 16);
 	public static SpriteSheet Guard_right = new SpriteSheet(Guard, 3, 0, 1, 5, 16);
 	
-	public static SpriteSheet Slimey = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Slimes/Slimey.png", 128, 96);
-	public static SpriteSheet Slimey_down = new SpriteSheet(Slimey, 0, 0, 1, 3, 16);
-	public static SpriteSheet Slimey_up = new SpriteSheet(Slimey, 1, 0, 1, 3, 16);
-	public static SpriteSheet Slimey_left = new SpriteSheet(Slimey, 2, 0, 1, 3, 16);
-	public static SpriteSheet Slimey_right = new SpriteSheet(Slimey, 3, 0, 1, 3, 16);
-	
-	public static SpriteSheet Slime = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Generic/Slimes/Slime.png", 128, 96);
-	public static SpriteSheet Slime_down = new SpriteSheet(Slime, 0, 0, 1, 3, 16);
-	public static SpriteSheet Slime_up = new SpriteSheet(Slime, 1, 0, 1, 3, 16);
-	public static SpriteSheet Slime_left = new SpriteSheet(Slime, 2, 0, 1, 3, 16);
-	public static SpriteSheet Slime_right = new SpriteSheet(Slime, 3, 0, 1, 3, 16);
-	
 	public static SpriteSheet FrostSpirit = new SpriteSheet("/Textures/sheets/00_MobSheets/Aggressive/Frost/FrostSpirit.png", 128, 96);
 	public static SpriteSheet FrostSpirit_down = new SpriteSheet(FrostSpirit, 0, 0, 1, 3, 16);
-	
-	
-	public static SpriteSheet Optical = new SpriteSheet("/Textures/sheets/00_MobSheets/Minions/FlyEye.png", 128, 96);
-	public static SpriteSheet Optical_down = new SpriteSheet(Optical, 0, 0, 1, 3, 16);
-	public static SpriteSheet Optical_up = new SpriteSheet(Optical, 1, 0, 1, 3, 16);
-	public static SpriteSheet Optical_left = new SpriteSheet(Optical, 2, 0, 1, 3, 16);
-	public static SpriteSheet Optical_right = new SpriteSheet(Optical, 3, 0, 1, 3, 16);
 	
 	
 	public static SpriteSheet chests = new SpriteSheet(blocks, 3, 0, 1, 3, 16);
@@ -384,19 +224,6 @@ public class SpriteSheet {
 	
 	public static SpriteSheet Buttons = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/Buttons.png", 256, 256);
 	
-	
-	public static SpriteSheet WElemental = new SpriteSheet("/Textures/sheets/00_MobSheets/Minions/WaterElemental.png", 128, 96);
-	public static SpriteSheet WElemental_down = new SpriteSheet(WElemental, 0, 0, 1, 3, 16);
-	public static SpriteSheet WElemental_up = new SpriteSheet(WElemental, 1, 0, 1, 3, 16);
-	public static SpriteSheet WElemental_left = new SpriteSheet(WElemental, 3, 0, 1, 3, 16);
-	public static SpriteSheet WElemental_right = new SpriteSheet(WElemental, 2, 0, 1, 3, 16);
-	
-	
-	public static SpriteSheet FElemental = new SpriteSheet("/Textures/sheets/00_MobSheets/Minions/FireElemental.png", 128, 96);
-	public static SpriteSheet FElemental_down = new SpriteSheet(FElemental, 0, 0, 1, 3, 16);
-	public static SpriteSheet FElemental_up = new SpriteSheet(FElemental, 1, 0, 1, 3, 16);
-	public static SpriteSheet FElemental_left = new SpriteSheet(FElemental, 3, 0, 1, 3, 16);
-	public static SpriteSheet FElemental_right = new SpriteSheet(FElemental, 2, 0, 1, 3, 16);
 	
 	private Sprite[] sprites;
 	

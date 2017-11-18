@@ -40,8 +40,8 @@ public class Zombie extends Mob{
 		this.mobhealth = this.maxhealth;
 		gui = new GUI();
 		this.Exp = 5;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.id = 10;
 		this.name = "Zombie";
 		this.speed = 0.5;
@@ -89,20 +89,20 @@ public class Zombie extends Mob{
 			if (players2.size() > 0) {
 			Entity e = entities.get(0);
 			tracking = e;
-				if ((int)x < (int)e.getX() + 20) xa+= this.speed;
-				if ((int)x > (int)e.getX() - 20) xa-= this.speed;
-				if ((int)y < (int)e.getY() + 20) ya+= this.speed;
-				if ((int)y > (int)e.getY() - 20) ya-= this.speed;
+				if ((int)x() < (int)e.x() + 20) xa+= this.speed;
+				if ((int)x() > (int)e.x() - 20) xa-= this.speed;
+				if ((int)y() < (int)e.y() + 20) ya+= this.speed;
+				if ((int)y() > (int)e.y() - 20) ya-= this.speed;
 				updateMobShooting(e);
 					}
 				} else if (players.size() > 0) {
 					p = players.get(0);
 					tracking = p;
 				//	Debug.drawLine(Game.getGame().getScreen(), (int)x / 16, (int)y / 16, (int)player.x / 16, (int)player.y / 16, 0xff000000, true);
-					if ((int)x < (int)p.getX() + 20) xa+= this.speed;
-					if ((int)x > (int)p.getX() - 20) xa-= this.speed;
-					if ((int)y < (int)p.getY() + 20) ya+= this.speed;
-					if ((int)y > (int)p.getY() - 20) ya-= this.speed;
+					if ((int)x() < (int)p.x() + 20) xa+= this.speed;
+					if ((int)x() > (int)p.x() - 20) xa-= this.speed;
+					if ((int)y() < (int)p.y() + 20) ya+= this.speed;
+					if ((int)y() > (int)p.y() - 20) ya-= this.speed;
 					updateShooting();
 					
 		} else {
@@ -188,17 +188,17 @@ public class Zombie extends Mob{
 	public void render(Screen screen) {
 		xOffset = -8;
 		yOffset = -15;
-		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
+		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x() - 16, (int)y() - 24, gui.renderMobHealthExperiment(this, 20), true);
 
 		sprite = animSprite.getSprite();
-		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
+		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
 		if (Boot.get().devModeOn) {
-			screen.drawRect((int)x + xOffset, (int)y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
+			screen.drawRect((int)x() + xOffset, (int)y() + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000, true);
 			try {
 			if (players.size() > 0 || entities.size() > 0) {
 				if (tracking != null) {
 					
-				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int)y, (int)tracking.x, (int)tracking.y), 0xffFF3AFB, true);				
+				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x(), (int)y(), (int)tracking.x(), (int)tracking.y()), 0xffFF3AFB, true);				
 				}
 			}
 				} catch (Exception e) {
@@ -211,28 +211,28 @@ public class Zombie extends Mob{
 
     private void updateMobShooting(Entity e) {
         if (fireRate <= 0) {
-            double px = e.getX();
-            double py = e.getY();
-            double sx = this.getX();
-            double sy = this.getY();
+            double px = e.x();
+            double py = e.y();
+            double sx = this.x();
+            double sy = this.y();
             double dx = px - sx;
             double dy = py - sy;
             double dir = Math.atan2(dy, dx);
-            RockTHROWING(x, y + 4, dir, this);
+            RockTHROWING(x(), y() + 4, dir, this);
             fireRate = ThrowableRock.FIRE_RATE;
         }
     }	
     private void updateShooting() {
         List<Player> players = level.getPlayers(this, 150 - visability);  
         if ((players.size() > 0) && fireRate <= 0) {
-            double px = level.getClientPlayer().getX();
-            double py = level.getClientPlayer().getY();
-            double sx = this.getX();
-            double sy = this.getY();
+            double px = level.getClientPlayer().x();
+            double py = level.getClientPlayer().y();
+            double sx = this.x();
+            double sy = this.y();
             double dx = px - sx;
             double dy = py - sy;
             double dir = Math.atan2(dy, dx);
-            RockTHROWING(x, y + 4, dir, this);
+            RockTHROWING(x(), y() + 4, dir, this);
 			level.getClientPlayer().incombat = true;
             fireRate = ThrowableRock.FIRE_RATE;
         }

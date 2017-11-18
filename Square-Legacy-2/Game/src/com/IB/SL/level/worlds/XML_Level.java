@@ -1,7 +1,7 @@
 package com.IB.SL.level.worlds;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 import com.IB.SL.Boot;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
+import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
@@ -59,12 +60,48 @@ public class XML_Level extends Level{
 		initExits(doc);
 		initMobs(doc);
 		initCustomMobs(doc);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
+	
+	public void render(int xScroll, int yScroll, Screen screen) {
+		super.render(xScroll, yScroll, screen);
+		//System.out.println("XML_Level.render()");
+		//recs.add(new Rectangle(0, 0, 20, 20));
+		/*if (recs.size() == 0) {
+			gentrangles();
+		}*/
+		for (int i = 0; i < recs.size(); i++) {
+			Rectangle r = recs.get(i);
+			System.out.println("Drawing.. " + recs.size());
+			screen.drawRect(r.x, r.y, r.width, r.height, 0xffFF00FF, true);
+		}
+	}
+	
+	ArrayList<Rectangle> recs = new ArrayList<Rectangle>();
+	/*public void gentrangles() {
+		Rectangle rec = new Rectangle();
+		int rx = -1, ry = -1;
+		for (int y = 0; y < this.height; y++) {
+			for (int x = 0; x < this.width; x++) {
+				if (this.getTile(x, y).solid()) {
+					if (rx == -1 && ry == -1) {
+					rx = x;
+					ry = y;
+					}
+				} else if (rx == -1 && ry == -1) {
+					rec = new Rectangle(rx<<4, ry<<4, (rx - x)<<4, (ry - y)<<4);
+					recs.add(rec);
+					rx = -1; ry = -1;
+				}
+			}
+		}
+		if (height != 0 && width != 0) {
+		//recs.add(new Rectangle());
+		}
+	}*/
 	
 	public void initLevel(Document doc) {
 		NodeList nList = doc.getElementsByTagName("props");

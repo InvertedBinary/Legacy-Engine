@@ -1,0 +1,38 @@
+package com.IB.SL.util.shape;
+
+public class Rectangle extends Polygon {
+
+	float w, h;
+	
+	public Rectangle(float w, float h) {
+		this.w = w;
+		this.h = h;
+		initShape();
+	}
+	
+	public Rectangle(float xo, float yo, float w, float h) {
+		this.xo = xo;
+		this.yo = yo;
+		this.w = w;
+		this.h = h;
+		initShape();
+	}
+	
+	public void initShape() {
+		addVertex(xo, yo); //Top left
+		addVertex(xo + w, yo + h); //Bottom right
+		addVertex(xo + w, yo); //Top right
+		addVertex(xo, yo + h); // Bottom left
+		
+		CC_VERTS();
+	}
+	
+	public void RESET_SHAPE_TO_DEFAULT() {
+		this.vertices = FACTORY_VERTS;
+	}
+	
+	
+	
+	
+	
+}

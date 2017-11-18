@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.spawner.WallParticleSpawner;
@@ -30,8 +30,8 @@ public class Teleporter extends Interactable {
 
 	
 	public Teleporter(int x, int y) {
-		this.x = x << Game.TILE_BIT_SHIFT;
-		this.y = y << Game.TILE_BIT_SHIFT;
+		this.setX(x << VARS.TILE_BIT_SHIFT);
+		this.setY(y << VARS.TILE_BIT_SHIFT);
 		this.isRandom = true;
 		this.mobhealth = 1000;
 		this.invulnerable = true;
@@ -40,10 +40,10 @@ public class Teleporter extends Interactable {
 	
 	
 	public Teleporter(int x, int y, int dx, int dy) {
-		this.x = x << Game.TILE_BIT_SHIFT;
-		this.y = y << Game.TILE_BIT_SHIFT;
-		this.dx = dx << Game.TILE_BIT_SHIFT;
-		this.dy = dy << Game.TILE_BIT_SHIFT;
+		this.setX(x << VARS.TILE_BIT_SHIFT);
+		this.setY(y << VARS.TILE_BIT_SHIFT);
+		this.dx = dx << VARS.TILE_BIT_SHIFT;
+		this.dy = dy << VARS.TILE_BIT_SHIFT;
 		this.isRandom = false;
 		this.mobhealth = 1000;
 		this.invulnerable = true;
@@ -53,18 +53,18 @@ public class Teleporter extends Interactable {
 	
 	int xpa = 0; int ypa = 0;
 	public void drawParticles(Entity e, double rate) {
-		if ((int)x < (int)e.getX() + 20) xpa+= this.speed;
-		if ((int)y < (int)e.getY() + 20) ypa+= this.speed;
+		if ((int)x() < (int)e.x() + 20) xpa+= this.speed;
+		if ((int)y() < (int)e.y() + 20) ypa+= this.speed;
 		
-		if (xpa == x) {
+		if (xpa == x()) {
 			xpa = 0;
 		}
-		if (ypa == y) {
+		if (ypa == y()) {
 			ypa = 0;
 		}
 		
 	//	System.out.println("TRUE " + xpa + "," + ypa);
-		level.add(new WallParticleSpawner((int)((int)e.getX() + xpa), (int)((int)e.getY() + ypa), 100, 1, level));
+		level.add(new WallParticleSpawner((int)((int)e.x() + xpa), (int)((int)e.y() + ypa), 100, 1, level));
 	}
 	
 	
@@ -83,15 +83,15 @@ public class Teleporter extends Interactable {
 		*/
 		Player player = Boot.get().getLevel().getClientPlayer();
 
-		if (PlayerTele(x,y, level, player)) {
+		if (PlayerTele(x(),y(), level, player)) {
 			
 			if (isRandom) {
 			while(!level.returnTileXY(sx, sy).toString().equals(level.tile.Wood.toString()) && !level.returnTileXY(sx, sy).toString().equals(level.tile.CobbleStone.toString())) {
 			sx = (dropChance.nextInt((1024 - 1) + 1) + 1);
 			sy = (dropChance.nextInt((1024 - 1) + 1) + 1);
 			}
-				player.setX(sx << Game.TILE_BIT_SHIFT);
-				player.setY(sy << Game.TILE_BIT_SHIFT);
+				player.setX(sx << VARS.TILE_BIT_SHIFT);
+				player.setY(sy << VARS.TILE_BIT_SHIFT);
 					sx = 0;
 					sy = 0;
 				//remove();
@@ -117,12 +117,12 @@ public class Teleporter extends Interactable {
 		if (!player.riding) {
 		int xp = 0;
 		int yp = 0;
-			xp = (int) player.getX();
-			yp = (int) player.getY();
-				if(xp < (int) x + sprite.getWidth()
-	            && xp > (int) x 
-	            && yp < (int) y + sprite.getHeight()
-	            && yp > (int) y 
+			xp = (int) player.x();
+			yp = (int) player.y();
+				if(xp < (int) x() + sprite.getWidth()
+	            && xp > (int) x() 
+	            && yp < (int) y() + sprite.getHeight()
+	            && yp > (int) y() 
 	           
 	            ) {
 					Transport = true;
@@ -154,12 +154,12 @@ public class Teleporter extends Interactable {
 	
 	public void render(Screen screen) {
 		if (Boot.get().devModeOn) {
-			Debug.drawRect(screen, (int)x, (int)y, 32, 32, 0xFF00FF, true);
+			Debug.drawRect(screen, (int)x(), (int)y(), 32, 32, 0xFF00FF, true);
 		}
-		int radius = level.radius / 2 + 5;
-		screen.renderLight((int)x - 34 + radius, (int)y - 30 + radius, 50 - radius, 20, 20, 40);
+		//int radius = level.radius / 2 + 5;
+		//screen.renderLight((int)x - 34 + radius, (int)y - 30 + radius, 50 - radius, 20, 20, 40);
 		sprite = anim_Teleport.getSprite();
-		screen.renderMobSpriteUniversal((int)x, (int)y, sprite);
+		screen.renderMobSpriteUniversal((int)x(), (int)y(), sprite);
 	}
 	
 }

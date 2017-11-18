@@ -3,7 +3,7 @@ package com.IB.SL.entity.mob.hostile;
 import java.util.List;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.WizardProjectile2;
@@ -22,10 +22,15 @@ import com.IB.SL.util.Vector2i;
 
 public class UndeadCaster extends Mob {
 
-	transient private AnimatedSprite down = new AnimatedSprite(SpriteSheet.UndeadCaster_down, 16, 16, 2);
-	transient private AnimatedSprite up = new AnimatedSprite(SpriteSheet.UndeadCaster_up, 16, 16, 3);
-	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.UndeadCaster_left, 16, 16, 2);
-	transient private AnimatedSprite right = new AnimatedSprite(SpriteSheet.UndeadCaster_right, 16, 16, 2);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
+			16, 16, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
+			16, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
+			16, 16, 2);
+	private AnimatedSprite right = new AnimatedSprite(
+			SpriteSheet.zombie_right, 16, 16, 2);
+	
 	transient private GUI gui;
 	transient private AnimatedSprite animSprite = down;
 	transient double xa = 0;
@@ -54,8 +59,8 @@ public class UndeadCaster extends Mob {
 		gui = new GUI();
 		this.entityState = entityState.Wander;
 		this.speed = 0.5;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.id = 7;
 		this.hostility = hostility.AGR;
 		this.rarity = 4;
@@ -68,22 +73,22 @@ public class UndeadCaster extends Mob {
 		if (players.size() > 0 && entityState != entityState.Evade && entityState != entityState.Flee) {
 			xa = 0;
 			ya = 0;
-			double px = level.getPlayerAt(0).getX();
-			double py = (int) level.getPlayerAt(0).getY();
-			Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int) getY() >> Game.TILE_BIT_SHIFT);
+			double px = level.getPlayerAt(0).x();
+			double py = (int) level.getPlayerAt(0).y();
+			Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int) y() >> VARS.TILE_BIT_SHIFT);
 			Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 			if (time % 1 == 0)
 				path = level.findPath(start, destination);
 			if (path != null) {
 				if (path.size() > 0) {
 					Vector2i vec = path.get(path.size() - 1).tile;
-					if (x < vec.getX() << 4)
+					if (x() < vec.getX() << 4)
 						xa++;
-					if (x > vec.getX() << 4)
+					if (x() > vec.getX() << 4)
 						xa--;
-					if (y < vec.getY() << 4)
+					if (y() < vec.getY() << 4)
 						ya++;
-					if (y > vec.getY() << 4)
+					if (y() > vec.getY() << 4)
 						ya--;
 				}
 
@@ -92,9 +97,9 @@ public class UndeadCaster extends Mob {
 			if (players.size() > 0) {
 				xa = 0;
 				ya = 0;
-				double px = level.getPlayerAt(0).getX();
-				double py = (int) level.getPlayerAt(0).getY();
-				Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int) getY() >> Game.TILE_BIT_SHIFT);
+				double px = level.getPlayerAt(0).x();
+				double py = (int) level.getPlayerAt(0).y();
+				Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int) y() >> VARS.TILE_BIT_SHIFT);
 				Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 				if (time % 1 == 0)
 					path = level.findPath(start, destination);
@@ -102,13 +107,13 @@ public class UndeadCaster extends Mob {
 					if (path.size() > 0) {
 						Vector2i vec = path.get(path.size() - 1).tile;
 						if (!raycast.hasCollided()) {
-							if (x < vec.getX() << 4)
+							if (x() < vec.getX() << 4)
 								xa--;
-							if (x > vec.getX() << 4)
+							if (x() > vec.getX() << 4)
 								xa++;
-							if (y < vec.getY() << 4)
+							if (y() < vec.getY() << 4)
 								ya--;
-							if (y > vec.getY() << 4)
+							if (y() > vec.getY() << 4)
 								ya++;
 						} else {
 							entityState = entityState.Attack;
@@ -120,22 +125,22 @@ public class UndeadCaster extends Mob {
 			if (players.size() > 0) {
 				xa = 0;
 				ya = 0;
-				double px = level.getPlayerAt(0).getX();
-				double py = (int) level.getPlayerAt(0).getY();
-				Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int) getY() >> Game.TILE_BIT_SHIFT);
+				double px = level.getPlayerAt(0).x();
+				double py = (int) level.getPlayerAt(0).y();
+				Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int) y() >> VARS.TILE_BIT_SHIFT);
 				Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 				if (time % 1 == 0)
 					path = level.findPath(start, destination);
 				if (path != null) {
 					if (path.size() > 0) {
 						Vector2i vec = path.get(path.size() - 1).tile;
-						if (x < vec.getX() << 4)
+						if (x() < vec.getX() << 4)
 							xa--;
-						if (x > vec.getX() << 4)
+						if (x() > vec.getX() << 4)
 							xa++;
-						if (y < vec.getY() << 4)
+						if (y() < vec.getY() << 4)
 							ya--;
-						if (y > vec.getY() << 4)
+						if (y() > vec.getY() << 4)
 							ya++;
 					}
 				}
@@ -163,7 +168,7 @@ public class UndeadCaster extends Mob {
 		if (time % 8 == 0) {
 			this.hurt = false;
 		}
-		raycastFlee = level.RayCast(new Vector2i(x, y - 8), dirInt, (int) 20);
+		raycastFlee = level.RayCast(new Vector2i(x(), y() - 8), dirInt, (int) 20);
 		if (level.brightness <= 0) {
 			visability = (int) (level.brightness * -1 / 2);
 		} else {
@@ -259,18 +264,18 @@ public class UndeadCaster extends Mob {
 		xOffset = -8;
 		yOffset = -15;
 		if (this.mobhealth < this.maxhealth)
-			screen.renderSprite((int) x - 16, (int) y - 24, gui.renderMobHealthExperiment(this, 20), true);
+			screen.renderSprite((int) x() - 16, (int) y() - 24, gui.renderMobHealthExperiment(this, 20), true);
 		sprite = animSprite.getSprite();
-		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
+		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
 		if (Boot.get().devModeOn) {
-			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
+			screen.drawRect((int) x() + xOffset, (int) y() + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
-			screen.drawRect((int) x - 8, (int) y - 15, sprite.getWidth(), sprite.getHeight(), 0xFF00FF, true);
-			Debug.drawRect(screen, (int) x + xOffset, (int) y + yOffset, 16, 16, 0xff6600CC, true);
+			screen.drawRect((int) x() - 8, (int) y() - 15, sprite.getWidth(), sprite.getHeight(), 0xFF00FF, true);
+			Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, 16, 16, 0xff6600CC, true);
 
 			try {
 				if (players.size() > 0) {
-					Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int) y,
+					Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x(), (int) y(),
 							raycastFlee.rayVector.x, raycastFlee.rayVector.y), 0xffFF3AFB, true);
 				}
 			} catch (NullPointerException e) {
@@ -285,16 +290,16 @@ public class UndeadCaster extends Mob {
 		 * if (entities.get(i).hostility == entities.get(i).hostility.NEU) { }
 		 */
 		if ((players.size() > 0) && fireRate <= 0 && entityState != entityState.Flee) {
-			double px = level.getClientPlayer().getX();
-			double py = level.getClientPlayer().getY();
-			double sx = this.getX();
-			double sy = this.getY();
+			double px = level.getClientPlayer().x();
+			double py = level.getClientPlayer().y();
+			double sx = this.x();
+			double sy = this.y();
 			double dx = px - sx;
 			double dy = py - sy;
 			double dir = Math.atan2(dy, dx);
-			raycast = level.RayCast(new Vector2i(x, y), dir, (int) 10);
+			raycast = level.RayCast(new Vector2i(x(), y()), dir, (int) 10);
 			if (!raycast.hasCollided()) {
-				shootingtracker(x, y + 4, dir);
+				shootingtracker(x(), y() + 4, dir);
 				level.getClientPlayer().incombat = true;
 				Sound.Play(Sound.Spell2, false);
 				fireRate = WizardProjectile2.FIRE_RATE;

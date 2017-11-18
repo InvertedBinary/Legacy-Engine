@@ -7,8 +7,8 @@ public class Rock extends Particle {
 	
 	public Rock(int x, int y, int life, int amount) {
 		super(x, y, life, amount);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = Sprite.RockTHROWING;
@@ -39,7 +39,7 @@ public class Rock extends Particle {
 		
 
 		public void render(Screen screen) {
-			screen.renderParticle((int)x - 8, (int)y - 14, sprite, true);
+			screen.renderParticle((int)x() - 8, (int)y() - 14, sprite, true);
 		}
 
 }

@@ -3,7 +3,7 @@ package com.IB.SL.entity.mob.peaceful;
 import java.util.List;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -32,8 +32,8 @@ public class Alice extends Mob{
 		this.maxhealth = 5;
 		this.mobhealth = this.maxhealth;
 		this.Exp = 4;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.id = 0;
 		this.name = "Alice";
 		this.speed = 0.5;
@@ -49,7 +49,7 @@ public class Alice extends Mob{
 			if (ent.get(0).hostility == hostility.AGR) {
 			if (time % 30 == 0) {
 			for (int i = 0; i < ent.size(); i++) {
-				Boot.get().getLevel().damage((int)x, (int)y, (Mob)ent.get(0), 0, 1, name, 0);
+				Boot.get().getLevel().damage((int)x(), (int)y(), (Mob)ent.get(0), 0, 1, name, 0);
 					}
 				}
 			}
@@ -63,18 +63,18 @@ public class Alice extends Mob{
 	      if (entities.size() > 0) {
 	         xa = 0;
 	         ya = 0;
-	         double px = entities.get(0).getX();
-	         double py = (int) entities.get(0).getY();
-	         Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int)getY() >> Game.TILE_BIT_SHIFT);
+	         double px = entities.get(0).x();
+	         double py = (int) entities.get(0).y();
+	         Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int)y() >> VARS.TILE_BIT_SHIFT);
 	         Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 	      /*   if (time % 1 == 0) */path = level.findPath(start, destination);
 	         if (path != null) {
 	            if (path.size() > 0) {
 	               Vector2i vec = path.get(path.size() - 1).tile;
-	               if (x < vec.getX() << 4) xa++;
-	               if (x > vec.getX() << 4) xa--;
-	               if (y < vec.getY() << 4) ya++;
-	               if (y > vec.getY() << 4) ya--;
+	               if (x() < vec.getX() << 4) xa++;
+	               if (x() > vec.getX() << 4) xa--;
+	               if (y() < vec.getY() << 4) ya++;
+	               if (y() > vec.getY() << 4) ya--;
 	            }
 	         }
 	      
@@ -132,10 +132,10 @@ public class Alice extends Mob{
 	public void render(Screen screen) {
 		this.xOffset = -8;
 		this.yOffset = -16;
-		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, Boot.get().gui.renderMobHealthExperiment(this, 20), true);
+		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x() - 16, (int)y() - 24, Boot.get().gui.renderMobHealthExperiment(this, 20), true);
 
 		sprite = animSprite.getSprite();
-		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
+		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
 		
 
 	}

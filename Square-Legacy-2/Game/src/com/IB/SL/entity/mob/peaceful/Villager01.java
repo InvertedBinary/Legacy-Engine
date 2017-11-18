@@ -35,8 +35,8 @@ public class Villager01 extends Mob{
 	double ya = 0;
 	
 	public Villager01(int x, int y) {
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		
 		/*this.xBound = 8;
 		this.yBound = 6;*/
@@ -154,14 +154,14 @@ public class Villager01 extends Mob{
 		this.xOffset = -8;
 		this.yOffset = -16;
 
-		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
+		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
 		//CheckDialogue(screen);
 
 	}
 	
 	public void renderGUI(Screen screen) {
 		if (this.mobhealth < this.maxhealth) 
-			screen.renderSprite((int) x - 16, (int)y - 25, Boot.get().gui.renderMobHealthExperiment(this, 20), true);
+			screen.renderSprite((int) x() - 16, (int)y() - 25, Boot.get().gui.renderMobHealthExperiment(this, 20), true);
 
 	}
 

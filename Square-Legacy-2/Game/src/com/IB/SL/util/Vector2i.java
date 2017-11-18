@@ -1,5 +1,8 @@
 package com.IB.SL.util;
 
+import com.IB.SL.Boot;
+import com.IB.SL.graphics.Screen;
+
 public class Vector2i {
 
 	public int x;
@@ -13,13 +16,13 @@ public class Vector2i {
 		set(vector.x, vector.y);
 	}
 
-	public Vector2i(double d, double e) {
-		set(d, e);
+	public Vector2i(double x, double y) {
+		set(x, y);
 	}
 
-	public void set(double d, double e) {
-		this.x = (int) d;
-		this.y = (int) e;
+	public void set(double x, double y) {
+		this.x = (int) x;
+		this.y = (int) y;
 	}
 
 	public int getX() {
@@ -64,4 +67,5 @@ public class Vector2i {
 		assert false : "hashCode not designed";
 		return 42; //any constant
 	}
+
 }
