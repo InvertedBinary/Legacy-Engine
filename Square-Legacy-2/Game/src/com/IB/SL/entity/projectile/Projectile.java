@@ -275,7 +275,7 @@ public abstract class Projectile extends Entity {
 	protected void moveArc() {
 		this.range = 1000;
 		//if (y + ny < yOrigin) {
-		za += (VARS.Ago);
+		za += (VARS.Ag);
 		if (zz < 0f) {
 			zz = 0f;
 			za *= -0f;

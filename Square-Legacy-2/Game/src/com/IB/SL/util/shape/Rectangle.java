@@ -20,19 +20,11 @@ public class Rectangle extends Polygon {
 	
 	public void initShape() {
 		addVertex(xo, yo); //Top left
-		addVertex(xo + w, yo + h); //Bottom right
 		addVertex(xo + w, yo); //Top right
+		addVertex(xo + w, yo + h); //Bottom right
 		addVertex(xo, yo + h); // Bottom left
 		
 		CC_VERTS();
 	}
-	
-	public void RESET_SHAPE_TO_DEFAULT() {
-		this.vertices = FACTORY_VERTS;
-	}
-	
-	
-	
-	
 	
 }

@@ -15,8 +15,7 @@ public class Vertex {
 	}
 	
 	public void transform(Vertex v) {
-		this.x = v.x;
-		this.y = v.y;
+		Set(v.x, v.y);
 	}
 	
 	public void translate(float x, float y) {
@@ -28,4 +27,9 @@ public class Vertex {
 		translate(v.x, v.y);
 	}
 	
+	public void rotate(float angle) {
+		float nx = (float)(x * Math.cos(angle) - y * Math.sin(angle));
+		float ny = (float)(y * Math.cos(angle) + x * Math.sin(angle));
+		Set(nx, ny);
+	}
 }

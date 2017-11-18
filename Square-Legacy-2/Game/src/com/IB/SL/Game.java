@@ -42,6 +42,8 @@ import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
+import com.IB.SL.util.shape.Polygon;
+import com.IB.SL.util.shape.Vertex;
 
 @SuppressWarnings("static-access")
 
@@ -467,6 +469,8 @@ public class Game extends Canvas implements Runnable {
 	com.IB.SL.util.shape.Rectangle rec1 = new com.IB.SL.util.shape.Rectangle(60, 40);
 
 	com.IB.SL.util.shape.Rectangle rec2 = new com.IB.SL.util.shape.Rectangle(100, 0, 60, 40);
+	
+	Polygon poly1 = new Polygon(new Vertex(0, 0), new Vertex(60, 40), new Vertex(60, 0), new Vertex(0 , 40), new Vertex(30, 80));
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -487,22 +491,22 @@ public class Game extends Canvas implements Runnable {
 			getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			gui.render(screen);
 
-		
-		rec1.draw(screen);
+		poly1.draw(screen);
 		
 		rec2.draw(screen);
-		rec2.angularTranslate(1f, (float)(Math.PI / 3));
+		//rec2.angularTranslate(1f, (float)(Math.PI / 0.5));
 		//rec2.translate(10, 10);
+		//poly1.rotate(0.001f);
+		//rec2.rotate(0.001f);
 		
-			
-		if (showAVG) { 
-		if (fpsAVG < 200) {			
-		font8x8.render(-5, this.height - 17, -3, 0xDB0000,
-				"Average FPS: " + fpsAVG, screen, false, true);
-		} else {
-			font8x8.render(-5, this.height - 17, -3, 0x00ff00,
-				"Average FPS: " + fpsAVG, screen, false, true);
-		}
+		if (showAVG) {
+			if (fpsAVG < 200) {
+				font8x8.render(-5, this.height - 17, -3, 0xDB0000, 
+					"Average FPS: " + fpsAVG, screen, false, true);
+			} else {
+				font8x8.render(-5, this.height - 17, -3, 0x00ff00, 
+					"Average FPS: " + fpsAVG, screen, false, true);
+			}
 		}
 	
 		//System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
@@ -518,6 +522,8 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Opaque);
 
 		if (devModeOn == true || Mouse.getButton() == 2) {
+			try {
+				
 			g.setColor(Opaque);
 			// g.fillRect(10, 80, 100, 1);
 			g.fill3DRect(0, 0, 545, 95, false);
@@ -557,6 +563,9 @@ public class Game extends Canvas implements Runnable {
 				// g.drawString("Button: " + Mouse.getButton(), 415, 80);
 			}
 
+			} catch (Exception e) {
+				
+			}
 		}
 		
 		

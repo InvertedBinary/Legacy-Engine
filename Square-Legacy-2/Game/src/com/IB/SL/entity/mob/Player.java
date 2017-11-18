@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
-import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.entity.projectile.XML_Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -34,7 +33,6 @@ import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
-import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
@@ -354,12 +352,12 @@ public class Player extends Mob implements Serializable{
 					walking = false;
 				}
 			} else {
-				setX(x() + vel.x);
-				setY(y() + vel.y);
+				setX(x() + xa * speed);
+				setY(y() + ya * speed);
 			}
 			
 			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
-			pos.add(vel);
+			pos().add(vel());
 		}
 		
 		clear();
@@ -396,8 +394,8 @@ public class Player extends Mob implements Serializable{
 			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
 			XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
 			Test_Arrow2.sprite = Sprite.WizardProjectile2;
-			Test_Arrow.nx += vel.x;
-			Test_Arrow.ny += vel.y;
+			Test_Arrow.nx += vel().x;
+			Test_Arrow.ny += vel().y;
 			level.add(Test_Arrow);
 			
 			level.add(Test_Arrow2);
@@ -531,6 +529,7 @@ public class Player extends Mob implements Serializable{
 		this.xOffset = -22;
 		this.yOffset = -45;
 		screen.renderMobSpriteUniversal((int) (x() + xOff + xOffset), (int) (y() + yOff + yOffset), sprite);
+	
 	}
 	
 	public int roundTo(int number, int multiple) {
