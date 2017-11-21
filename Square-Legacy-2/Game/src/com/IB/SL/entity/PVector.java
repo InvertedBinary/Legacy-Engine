@@ -39,6 +39,11 @@ public class PVector {
 		this.y += vector.y;
 		return this;
 	}
+	
+	public PVector addResult(PVector vector) {
+		PVector p = new PVector(x + vector.x, y + vector.y);
+		return p;
+	}
 
 	public PVector subtract(PVector vector) {
 		this.x += vector.x;

@@ -4,12 +4,6 @@ public class Rectangle extends Polygon {
 
 	float w, h;
 	
-	public Rectangle(float w, float h) {
-		this.w = w;
-		this.h = h;
-		initShape();
-	}
-	
 	public Rectangle(float xo, float yo, float w, float h) {
 		this.xo = xo;
 		this.yo = yo;
@@ -23,8 +17,8 @@ public class Rectangle extends Polygon {
 		addVertex(xo + w, yo); //Top right
 		addVertex(xo + w, yo + h); //Bottom right
 		addVertex(xo, yo + h); // Bottom left
-		
-		CC_VERTS();
+		this.vertices.add(new Vertex(xo, yo));
+		init();
 	}
 	
 }

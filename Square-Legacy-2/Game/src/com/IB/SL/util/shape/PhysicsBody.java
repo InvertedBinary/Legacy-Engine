@@ -3,6 +3,7 @@ package com.IB.SL.util.shape;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.PVector;
+import com.IB.SL.graphics.Screen;
 import com.IB.SL.util.PropertyEngine;
 
 public class PhysicsBody extends PropertyEngine {
@@ -31,5 +32,20 @@ public class PhysicsBody extends PropertyEngine {
 		set(VARS.PHYS_AWAKE, true);
 		set(VARS.PHYS_CANSLEEP, false);
 		set(VARS.PHYS_CANFLOAT, false);
+		set(VARS.REND_WIREFRAME, false);
+	}
+	
+	public void move() {
+		pos.add(vel);
+		
+		bounds.translate((float)pos.x, (float)pos.y);
+	}
+	
+	public void draw(Screen screen) {
+		if (!get(VARS.REND_WIREFRAME)) {
+		this.bounds.draw(screen);
+		} else {
+		this.bounds.drawWireframe(screen);
+		}
 	}
 }

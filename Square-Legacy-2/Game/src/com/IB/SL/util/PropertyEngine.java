@@ -3,7 +3,7 @@ package com.IB.SL.util;
 import java.util.HashMap;
 
 public class PropertyEngine {
-	private HashMap<String, Boolean> properties = new HashMap<>();
+	HashMap<String, Boolean> properties = new HashMap<>();
 
 	public boolean get(String s) {
 		boolean b = false;

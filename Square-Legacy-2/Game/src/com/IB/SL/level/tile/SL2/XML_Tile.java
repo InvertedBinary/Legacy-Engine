@@ -4,6 +4,8 @@ import com.IB.SL.VARS;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.tile.Tile;
+import com.IB.SL.util.shape.PhysicsBody;
+import com.IB.SL.util.shape.Rectangle;
 
 public class XML_Tile extends Tile {
 
@@ -14,6 +16,8 @@ public class XML_Tile extends Tile {
 	public boolean solidTwo = false;
 	public boolean isExit = false;
 	public String name = "";
+	
+	public PhysicsBody pb;
 	
 	public XML_Tile(String name, Sprite sprite, stepSound st, int hex, boolean solid, boolean solidTwo, boolean isExit) {
 		this.sprite = sprite;

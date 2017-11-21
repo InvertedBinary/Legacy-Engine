@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
@@ -42,6 +43,7 @@ import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
+import com.IB.SL.util.shape.PhysicsBody;
 import com.IB.SL.util.shape.Polygon;
 import com.IB.SL.util.shape.Vertex;
 
@@ -466,12 +468,16 @@ public class Game extends Canvas implements Runnable {
 	
 
 	}
-	com.IB.SL.util.shape.Rectangle rec1 = new com.IB.SL.util.shape.Rectangle(60, 40);
-
-	com.IB.SL.util.shape.Rectangle rec2 = new com.IB.SL.util.shape.Rectangle(100, 0, 60, 40);
-	
-	Polygon poly1 = new Polygon(new Vertex(0, 0), new Vertex(60, 40), new Vertex(60, 0), new Vertex(0 , 40), new Vertex(30, 80));
-
+	com.IB.SL.util.shape.Rectangle rec2 = new com.IB.SL.util.shape.Rectangle(50, 50, 60, 40);
+	float polyx = 200;
+	float polyy = 150;
+	Polygon poly1 = new Polygon(
+			new Vertex(0 + polyx, 0 + polyy), 
+			new Vertex(0 + polyx, 40 + polyy),
+			new Vertex(30 + polyx, 80 + polyy),
+			new Vertex(60 + polyx, 40 + polyy), 
+			new Vertex(60 + polyx, 0 + polyy)
+	);
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -484,21 +490,46 @@ public class Game extends Canvas implements Runnable {
 		Boot.get().xScroll = getPlayer().x() - screen.width / 2;
 		Boot.get().yScroll = getPlayer().y() - screen.height / 2;
 	//if (!screen.shakeScreen()) {
-
 		//}
+		
+		getLevel().render((int) (xScroll), (int) (yScroll), screen);
+		gui.render(screen);
+		
+		PhysicsBody pb1 = new PhysicsBody(getPlayer(), poly1);
+		PhysicsBody pb2 = new PhysicsBody(getPlayer(), rec2);
 
-		
-			getLevel().render((int) (xScroll), (int) (yScroll), screen);
-			gui.render(screen);
+			if (key.left) {
+				pb1.vel.x = -0.5f;
+			} else if (key.right) {
+				pb1.vel.x = 0.5f;
+			}
 
-		poly1.draw(screen);
-		
-		rec2.draw(screen);
-		//rec2.angularTranslate(1f, (float)(Math.PI / 0.5));
-		//rec2.translate(10, 10);
-		//poly1.rotate(0.001f);
-		//rec2.rotate(0.001f);
-		
+			if (key.up) {
+				pb1.vel.y = -0.5f;
+			} else if (key.down) {
+				pb1.vel.y = 0.5f;
+			}
+		PVector predict = pb1.pos.addResult(pb1.vel);
+		Polygon p = new Polygon(pb1.bounds);
+		p.translate((float)predict.x, (float)predict.y);
+
+		if (p.intersects(rec2)) {
+			double xm = pb1.vel.x;
+			double ym = pb1.vel.y;
+			
+			if (xm != 0) {
+				pb1.vel.x = 0;
+			}
+			if (ym != 0) {
+				pb1.vel.y = 0;
+			}
+		}
+		pb1.move();
+		pb2.move();
+			
+		pb1.draw(screen);
+		pb2.draw(screen);
+
 		if (showAVG) {
 			if (fpsAVG < 200) {
 				font8x8.render(-5, this.height - 17, -3, 0xDB0000, 

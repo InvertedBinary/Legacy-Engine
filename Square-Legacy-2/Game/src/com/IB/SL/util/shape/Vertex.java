@@ -32,4 +32,19 @@ public class Vertex {
 		float ny = (float)(y * Math.cos(angle) + x * Math.sin(angle));
 		Set(nx, ny);
 	}
+	
+	public void rotate(float angle, Vertex center) {
+		float xx = x;
+		float yy = y;
+		double x1 = xx - center.x;
+		double y1 = yy - center.y;
+
+		double x2 = x1 * Math.cos(angle) - y1 * Math.sin(angle);
+		double y2 = x1 * Math.sin(angle) + y1 * Math.cos(angle);
+
+		xx = (float) (x2 + center.x);
+		yy = (float) (y2 + center.y);
+		
+		Set(xx, yy);
+	}
 }

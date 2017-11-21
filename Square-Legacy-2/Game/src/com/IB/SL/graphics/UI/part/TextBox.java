@@ -182,7 +182,6 @@ private class MyDispatcher implements KeyEventDispatcher {
 	}
 	
 	public void addCharacter(char c) {
-		
 		String beforeCaret = text.substring(0, caretPos);
 		String postCaret = text.substring(caretPos, text.length());
 		
@@ -195,9 +194,8 @@ private class MyDispatcher implements KeyEventDispatcher {
 					break;
 				}
 			}
-			
 		}
-}
+	}
 	
 	
 	 public String getText(boolean use) {
@@ -366,7 +364,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 					if (focused || text.length() > 0) {
 					font16.render(x - 8, y + (height / 2) - 8, -2, renderString, screen, false, false);
 					} else {
-						font16.render(x - 8, y + (height / 2) - 8, -2, desc, screen, false, false);
+					font16.render(x - 8, y + (height / 2) - 8, -2, desc, screen, false, false);
 					}
 				}
 				
