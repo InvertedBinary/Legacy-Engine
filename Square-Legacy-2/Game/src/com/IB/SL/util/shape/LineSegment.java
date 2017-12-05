@@ -5,10 +5,12 @@ public class LineSegment extends Polygon {
 	Vertex origin;
 	Vertex endPoint;
 	float length;
+	float angle;
 	
 	public LineSegment(Vertex p, float length, float angle) {
 		this.origin = p;
 		this.length = length;
+		this.angle = angle;
 		
 		float xlen = ((float)Math.cos(angle) * length);
 		float ylen = ((float)Math.sin(angle) * length);
@@ -25,6 +27,8 @@ public class LineSegment extends Polygon {
 		this.endPoint = p2;
 		
 		this.length = getDistance(p1, p2);
+		
+		this.angle = -1;
 		
 		this.addVertex(p1);
 		this.addVertex(p2);
