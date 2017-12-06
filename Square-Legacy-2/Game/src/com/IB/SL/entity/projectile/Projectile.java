@@ -7,6 +7,7 @@ import javax.sound.sampled.Clip;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -74,7 +75,7 @@ public abstract class Projectile extends Entity {
 	
 	public Vector2i getCollisionPoint() {
 		if (sprite != null) {
-			return new Vector2i((int) getX() + (sprite.SIZE / 2), (int) getY() + (sprite.SIZE / 2));
+			return new Vector2i((int) x() + (sprite.SIZE / 2), (int) y() + (sprite.SIZE / 2));
 		} else {
 			return null;
 		}
@@ -87,10 +88,10 @@ public abstract class Projectile extends Entity {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != null && e.getSprite() != null && !e.invulnerable) {
-			if (mdpx   > (e.getX() + e.xOffset)  && mdpx < (e.getX() + e.xOffset)  + e.getSprite().getWidth()) {
-				if (mdpy > (e.getY() + e.yOffset)  && mdpy < (e.getY() + e.yOffset)  + e.getSprite().getHeight() + 8) {
-					int SP_X = (int) (mdpx - (e.x) - e.xOffset);
-					int SP_Y = (int) (mdpy - (e.y) - (e.yOffset + 8));
+			if (mdpx   > (e.x() + e.xOffset)  && mdpx < (e.x() + e.xOffset)  + e.getSprite().getWidth()) {
+				if (mdpy > (e.y() + e.yOffset)  && mdpy < (e.y() + e.yOffset)  + e.getSprite().getHeight() + 8) {
+					int SP_X = (int) (mdpx - (e.x()) - e.xOffset);
+					int SP_Y = (int) (mdpy - (e.y()) - (e.yOffset + 8));
 					
 					try {
 					if (e.getSprite().pixels[(SP_X) + (SP_Y) * e.getSprite().getWidth()] != 0xffFF3AFB) {
@@ -179,10 +180,10 @@ public abstract class Projectile extends Entity {
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i).invulnerable || entities.get(i) == mob || entities.get(i).hostility == mob.hostility) {	
 			} else {
-			if (x < entities.get(i).getX() + 5
-	            && x > entities.get(i).getX() - 5
-	            && y < entities.get(i).getY() + 5
-	            && y >  entities.get(i).getY() - 5
+			if (x < entities.get(i).x() + 5
+	            && x > entities.get(i).x() - 5
+	            && y < entities.get(i).y() + 5
+	            && y >  entities.get(i).y() - 5
 	            ) {
 				remove();
     				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).id, 0);				
@@ -207,15 +208,15 @@ public abstract class Projectile extends Entity {
 	protected void PlayerCollision(List<PlayerMP> players, Projectile proj) {
 		
 		for (int i = 0; i < players.size(); i++) {
-			if (x < players.get(i).getX() + 5
-					&& x > players.get(i).getX() - 5
-					&& y <  players.get(i).getY() + 5
-					&& y >  players.get(i).getY() - 5
+			if (x < players.get(i).x() + 5
+					&& x > players.get(i).x() - 5
+					&& y <  players.get(i).y() + 5
+					&& y >  players.get(i).y() - 5
 					) {
 				if (!players.get(i).invulnerable) {
 				remove();
 				if (!Boot.get().devModeOn) {
-					level.damagePlayer((int)proj.getX(), (int)proj.getY(), players.get(i), 0, proj.damage, "projectile", 0);
+					level.damagePlayer((int)proj.x(), (int)proj.y(), players.get(i), 0, proj.damage, "projectile", 0);
 					proj.addEffect(players.get(i));
 				}
 				players.get(i).incombat = true;
@@ -272,10 +273,9 @@ public abstract class Projectile extends Entity {
 	}
 	
 	protected void moveArc() {
-		Game.Ag = 16f/9.8f;
 		this.range = 1000;
 		//if (y + ny < yOrigin) {
-		za += (Game.Ag);
+		za += (VARS.Ag);
 		if (zz < 0f) {
 			zz = 0f;
 			za *= -0f;

@@ -9,10 +9,14 @@ import com.IB.SL.graphics.SpriteSheet;
 
 public class Shooting extends Mob{
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.UndeadCaster_down, 16, 16, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.UndeadCaster_up, 16, 16, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.UndeadCaster_left, 16, 16, 2);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.UndeadCaster_right, 16, 16, 2);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
+			16, 16, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
+			16, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
+			16, 16, 2);
+	private AnimatedSprite right = new AnimatedSprite(
+			SpriteSheet.zombie_right, 16, 16, 2);
 	
 	private AnimatedSprite animSprite = down;
 	private int time = 0;
@@ -21,11 +25,11 @@ public class Shooting extends Mob{
 	
 	public Shooting(int x, int y) {
 		this.mobhealth = 1;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.name = "Mob.testMob.Shooter01.name";
 		this.mobhealth = 5000;
-		sprite = Sprite.Dumby;
+		sprite = Sprite.Anvil;
 	}
 	
 	@Override
@@ -66,15 +70,15 @@ public class Shooting extends Mob{
 		}
 		}
 		Player p = level.getClientPlayer();
-		double dx = p.getX() - x;
-		double dy = p.getY() - y;
+		double dx = p.x() - x();
+		double dy = p.y() - y();
 		double dir = Math.atan2(dy, dx);
 	}
 
 	@Override
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob((int) (x - 8), (int) (y - 15),  this);
+		screen.renderMob((int) (x() - 8), (int) (y() - 15),  this);
 	}
 
 }

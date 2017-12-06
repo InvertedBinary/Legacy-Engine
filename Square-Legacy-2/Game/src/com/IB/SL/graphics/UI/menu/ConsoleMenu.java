@@ -25,6 +25,7 @@ public class ConsoleMenu extends UI_Menu {
 			cmd.acceptable.add(",");
 			cmd.acceptable.add(".");
 		}
+		cmd.setText("!");
 	}
 	
 	public void onUnload() {
@@ -45,7 +46,7 @@ public class ConsoleMenu extends UI_Menu {
 	
 	public void update() {
 		cmd.update();
-		
+		cmd.focused = true;
 		if (getKey() != null) {
 			if (getKey().console) {
 				unload(this);

@@ -48,8 +48,8 @@ public class XML_Mob extends Mob {
 	
 	public XML_Mob(double x, double y, String XML) {
 		readXML(XML);
-		this.x = x * 32;
-		this.y = y * 32;
+		this.setX(x * 32);
+		this.setY(y * 32);
 	}
 	
 	public void readXML(String path) {
@@ -226,26 +226,26 @@ public class XML_Mob extends Mob {
 			if (players2.size() > 0) {
 				Entity e = entities.get(0);
 				tracking = e;
-				if ((int) x < (int) e.getX() + 20)
+				if ((int) x() < (int) e.x() + 20)
 					xa += this.speed;
-				if ((int) x > (int) e.getX() - 20)
+				if ((int) x() > (int) e.x() - 20)
 					xa -= this.speed;
-				if ((int) y < (int) e.getY() + 20)
+				if ((int) y() < (int) e.y() + 20)
 					ya += this.speed;
-				if ((int) y > (int) e.getY() - 20)
+				if ((int) y() > (int) e.y() - 20)
 					ya -= this.speed;
 				//updateMobShooting(e);
 			}
 		} else if (players.size() > 0) {
 			p = players.get(0);
 			tracking = p;
-			if ((int) x < (int) p.getX() + 20)
+			if ((int) x() < (int) p.x() + 20)
 				xa += this.speed;
-			if ((int) x > (int) p.getX() - 20)
+			if ((int) x() > (int) p.x() - 20)
 				xa -= this.speed;
-			if ((int) y < (int) p.getY() + 20)
+			if ((int) y() < (int) p.y() + 20)
 				ya += this.speed;
-			if ((int) y > (int) p.getY() - 20)
+			if ((int) y() > (int) p.y() - 20)
 				ya -= this.speed;
 			// updateShooting();
 
@@ -270,10 +270,10 @@ public class XML_Mob extends Mob {
 	
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x - 16, (int)y - 24, gui.renderMobHealthExperiment(this, 20), true);
+		if (this.mobhealth < this.maxhealth) screen.renderSprite((int) x() - 16, (int)y() - 24, gui.renderMobHealthExperiment(this, 20), true);
 		//gui.renderName(screen, "Zombie", (int)x - 14, (int)y- 25, -4, true, true);
 		sprite = animSprite.getSprite();
-		screen.renderMobSpriteUniversal((int) (x + xOffset), (int) (y + yOffset), sprite);
+		screen.renderMobSpriteUniversal((int) (x() + xOffset), (int) (y() + yOffset), sprite);
 	
 	}
 }

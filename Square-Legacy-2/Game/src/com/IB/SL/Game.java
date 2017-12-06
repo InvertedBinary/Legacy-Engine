@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
@@ -42,6 +43,9 @@ import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
+import com.IB.SL.util.shape.PhysicsBody;
+import com.IB.SL.util.shape.Polygon;
+import com.IB.SL.util.shape.Vertex;
 
 @SuppressWarnings("static-access")
 
@@ -58,8 +62,6 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 640; // 300 //520
 	public static int height = 360; // 168 //335
 	public static int scale = 2;
-	public static final int TILE_BIT_SHIFT = 5;
-
 	public static String title = "";
 	public double xScroll, yScroll;
 	
@@ -84,11 +86,8 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	public static String PlayerName = "Player";
 	File screenshots = null;
-	
 	public Stack<Level> levels = new Stack<Level>();
 	
-	public static float Ag = 32f/9.8f;
-
 	int saveTime = 0;
 	/**
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol:
@@ -103,7 +102,6 @@ public class Game extends Canvas implements Runnable {
 	public WindowHandler windowHandler;
 	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	//private VolatileImage vImage = this.createVolatileImage(width, height);
-
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	private int time = 0;
@@ -470,7 +468,16 @@ public class Game extends Canvas implements Runnable {
 	
 
 	}
-
+	com.IB.SL.util.shape.Rectangle rec2 = new com.IB.SL.util.shape.Rectangle(50, 50, 60, 40);
+	float polyx = 200;
+	float polyy = 150;
+	Polygon poly1 = new Polygon(
+			new Vertex(0 + polyx, 0 + polyy), 
+			new Vertex(0 + polyx, 40 + polyy),
+			new Vertex(30 + polyx, 80 + polyy),
+			new Vertex(60 + polyx, 40 + polyy), 
+			new Vertex(60 + polyx, 0 + polyy)
+	);
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -480,25 +487,57 @@ public class Game extends Canvas implements Runnable {
 		}
 		screen.clear();
 		
-		Boot.get().xScroll = getPlayer().getX() - screen.width / 2;
-		Boot.get().yScroll = getPlayer().getY() - screen.height / 2;
+		Boot.get().xScroll = getPlayer().x() - screen.width / 2;
+		Boot.get().yScroll = getPlayer().y() - screen.height / 2;
 	//if (!screen.shakeScreen()) {
-
 		//}
-
 		
-			getLevel().render((int) (xScroll), (int) (yScroll), screen);
-			gui.render(screen);
-			//player.renderGUI(screen);
+		getLevel().render((int) (xScroll), (int) (yScroll), screen);
+		gui.render(screen);
+		
+		PhysicsBody pb1 = new PhysicsBody(getPlayer(), poly1);
+		PhysicsBody pb2 = new PhysicsBody(getPlayer(), rec2);
 
-		if (showAVG) { 
-		if (fpsAVG < 200) {			
-		font8x8.render(-5, this.height - 17, -3, 0xDB0000,
-				"Average FPS: " + fpsAVG, screen, false, true);
-		} else {
-			font8x8.render(-5, this.height - 17, -3, 0x00ff00,
-				"Average FPS: " + fpsAVG, screen, false, true);
+			if (key.left) {
+				pb1.vel.x = -0.5f;
+			} else if (key.right) {
+				pb1.vel.x = 0.5f;
+			}
+
+			if (key.up) {
+				pb1.vel.y = -0.5f;
+			} else if (key.down) {
+				pb1.vel.y = 0.5f;
+			}
+		PVector predict = pb1.pos.addResult(pb1.vel);
+		Polygon p = new Polygon(pb1.bounds);
+		p.translate((float)predict.x, (float)predict.y);
+
+		if (p.intersects(rec2)) {
+			double xm = pb1.vel.x;
+			double ym = pb1.vel.y;
+			
+			if (xm != 0) {
+				pb1.vel.x = 0;
+			}
+			if (ym != 0) {
+				pb1.vel.y = 0;
+			}
 		}
+		pb1.move();
+		pb2.move();
+			
+		pb1.draw(screen);
+		pb2.draw(screen);
+
+		if (showAVG) {
+			if (fpsAVG < 200) {
+				font8x8.render(-5, this.height - 17, -3, 0xDB0000, 
+					"Average FPS: " + fpsAVG, screen, false, true);
+			} else {
+				font8x8.render(-5, this.height - 17, -3, 0x00ff00, 
+					"Average FPS: " + fpsAVG, screen, false, true);
+			}
 		}
 	
 		//System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
@@ -514,6 +553,8 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Opaque);
 
 		if (devModeOn == true || Mouse.getButton() == 2) {
+			try {
+				
 			g.setColor(Opaque);
 			// g.fillRect(10, 80, 100, 1);
 			g.fill3DRect(0, 0, 545, 95, false);
@@ -525,7 +566,7 @@ public class Game extends Canvas implements Runnable {
 			g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 40);
 			// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
 			g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
-			g.drawString("X: " + (int) getPlayer().getX() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().getY() / TileCoord.TILE_SIZE, 10, 20);
+			g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
 			g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale, Mouse.getX() - 103, Mouse.getY() + 70);
 			//screen.drawLine(getPlayer(), level.entities);
 			g.setColor(Color.gray);
@@ -553,6 +594,9 @@ public class Game extends Canvas implements Runnable {
 				// g.drawString("Button: " + Mouse.getButton(), 415, 80);
 			}
 
+			} catch (Exception e) {
+				
+			}
 		}
 		
 		

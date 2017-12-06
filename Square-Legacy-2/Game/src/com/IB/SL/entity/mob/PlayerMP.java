@@ -60,7 +60,7 @@ public class PlayerMP extends Player {
 		animSprite = right;
 		}
 		this.sprite = animSprite.getSprite();
-		screen.renderMobSpriteUniversal((int) (x - 8), (int) (y - 15),  sprite);
+		screen.renderMobSpriteUniversal((int) (x() - 8), (int) (y() - 15),  sprite);
 		} else {
 			super.render(screen);
 		}

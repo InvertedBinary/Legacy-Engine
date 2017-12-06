@@ -12,8 +12,8 @@ public class DamageIndicator extends Particle{
 	public DamageIndicator(int x, int y, int life, int amount, String text, int color) {
 		super(x,y,life,amount);
 
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		this.sprite = Sprite.bleed;
@@ -46,7 +46,7 @@ public class DamageIndicator extends Particle{
 
 		public void render(Screen screen) {
             try {
-            	Boot.get().font8x8.render((int)x, (int)y, -4, this.color, this.text, screen, true, false);
+            	Boot.get().font8x8.render((int)x(), (int)y(), -4, this.color, this.text, screen, true, false);
             	//screen.renderText((int)x - 8, (int)y - 14, text, 0xff);
             } catch (NullPointerException e) {
             	e.printStackTrace();

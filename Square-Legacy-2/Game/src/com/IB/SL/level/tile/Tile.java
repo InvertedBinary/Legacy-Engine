@@ -179,6 +179,12 @@ public class Tile {
 						Sprite sp = (Sprite) field.get(field.getType());
 						String name = (e.getTextContent());
 
+						System.out.println("HEX: " + (hex)
+										+ ", AA: " + (hex >> 24)
+										+ ", RR: " + (hex >> 0)
+										+ ", GG: " + (hex >> 8)
+										+ ", BB: " + (hex >> 16));
+
 						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, hex, solid, solidTwo, isExit);
 						TileIndex.put(hex, t);
 					} catch (Exception e) {

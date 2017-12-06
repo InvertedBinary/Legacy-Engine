@@ -13,10 +13,14 @@ import com.IB.SL.util.Sound;
 
 public class Tracker extends Mob{
 	
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.UndeadCaster_down, 16, 16, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.UndeadCaster_up, 16, 16, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.UndeadCaster_left, 16, 16, 2);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.UndeadCaster_right, 16, 16, 2);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
+			16, 16, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
+			16, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
+			16, 16, 2);
+	private AnimatedSprite right = new AnimatedSprite(
+			SpriteSheet.zombie_right, 16, 16, 2);
 	
 	private AnimatedSprite animSprite = down;
 	double xa = 0;
@@ -29,8 +33,8 @@ public class Tracker extends Mob{
 	
 	public Tracker(int x, int y) {
 		this.mobhealth = 5;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.name = "Mob.TrackerMob.testMob.name";
 		sprite = Sprite.playerback;
 	}
@@ -42,10 +46,10 @@ public class Tracker extends Mob{
 		List<Player> players = level.getPlayers(this, 75);
 		if (players.size() > 0) {
 		Player player = players.get(0);
-		if ((int)x < (int)player.getX() + 20) xa+= this.speed;
-		if ((int)x > (int)player.getX() - 20) xa-= this.speed;
-		if ((int)y < (int)player.getY() + 20) ya+= this.speed;
-		if ((int)y > (int)player.getY() - 20) ya-= this.speed;
+		if ((int)x() < (int)player.x() + 20) xa+= this.speed;
+		if ((int)x() > (int)player.x() - 20) xa-= this.speed;
+		if ((int)y() < (int)player.y() + 20) ya+= this.speed;
+		if ((int)y() > (int)player.y() - 20) ya-= this.speed;
 	
 		} else {
 
@@ -111,20 +115,20 @@ public class Tracker extends Mob{
 	
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob((int) (x - 8), (int) (y - 15), this);
+		screen.renderMob((int) (x() - 8), (int) (y() - 15), this);
 	}
 
     private void updateShooting() {
         List<Player> players = level.getPlayers(this, 75);  
         if ((players.size() > 0) && fireRate <= 0 && justspawnedtracker == false) {
-            double px = level.getClientPlayer().getX();
-            double py = level.getClientPlayer().getY();
-            double sx = this.getX();
-            double sy = this.getY();
+            double px = level.getClientPlayer().x();
+            double py = level.getClientPlayer().y();
+            double sx = this.x();
+            double sy = this.y();
             double dx = px - sx;
             double dy = py - sy;
             double dir = Math.atan2(dy, dx);
-            shootingtracker(x, y + 4, dir);
+            shootingtracker(x(), y() + 4, dir);
 			Sound.Play(Sound.Spell2, false);
             fireRate = WizardProjectile2.FIRE_RATE;
         }

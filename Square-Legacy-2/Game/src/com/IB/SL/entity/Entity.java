@@ -1,6 +1,5 @@
 package com.IB.SL.entity;
 
-import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.UUID;
@@ -10,11 +9,15 @@ import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
+import com.IB.SL.util.shape.PhysicsBody;
+import com.IB.SL.util.shape.Rectangle;
 
 public class Entity implements Serializable {
 
-	public double x;
-	public double y;
+	Rectangle bounds = new Rectangle(0, 0, 32, 32);
+	
+	public transient PhysicsBody body = new PhysicsBody(this, bounds);
+	
 	public transient Sprite sprite;
 	public transient boolean removed = false;
 	public transient Level level;
@@ -40,7 +43,7 @@ public class Entity implements Serializable {
 	public transient boolean invulnerable;
 	public Integer id = -1;
 	public transient String UID = "";
-	transient public Rectangle r;
+	transient public java.awt.Rectangle r;
 	public transient String name;
 	public int rarity = -1;
 	transient public boolean incombat;
@@ -57,12 +60,12 @@ public class Entity implements Serializable {
 	}
 	
 	public Entity(double x, double y, Sprite sprite, int id) {
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.sprite = sprite;
 		this.id = id;
 		this.UID = genUUID();
-		r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+		r = new java.awt.Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
 	}
 	
 	
@@ -85,15 +88,15 @@ public class Entity implements Serializable {
 		this.UID = uid;
 	}
 	
-	public Rectangle getBounds() {
-		return r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+	public java.awt.Rectangle getBounds() {
+		return r = new java.awt.Rectangle((int)x(), (int)y(), sprite.getWidth(), sprite.getHeight());
 	}
 	
 	public void update() {
 
 	}
 	public void render (Screen screen) {
-		if (sprite != null) screen.renderSprite((int)x, (int)y, Sprite.VoidTile, true);
+		if (sprite != null) screen.renderSprite((int)x(), (int)y(), Sprite.VoidTile, true);
 	}
 	
 	public boolean remove() {
@@ -113,20 +116,36 @@ public class Entity implements Serializable {
 		return Lvl;
 	}
 	
-	public double getX() {
-		return x;
+	public double x() {
+		return pos().x;
 	}
 	
-	public double getY() {
-		return y;
+	public double y() {
+		return pos().y;
 	}
 	
-	public void setX(double value) {
-		x = value;
+	public void setX(double val) {
+		pos().setX(val);
 	}
 	
-	public void setY(double value) {
-		y = value;
+	public void setY(double val) {
+		pos().setY(val);
+	}
+	
+	public PVector pos() {
+		return body.pos;
+	}
+	
+	public PVector vel() {
+		return body.vel;
+	}
+	
+	public void setPos(PVector pos) {
+		this.body.pos = pos;
+	}
+	
+	public void setVel(PVector vel) {
+		this.body.vel = vel;
 	}
 	
 	public Sprite getSprite() {
@@ -145,19 +164,19 @@ public class Entity implements Serializable {
 	}
 	
 	public double getoX(){
-	      return x - xOffset;
+	      return x() - xOffset;
 	   }
 	   
 	   public double getoY(){
-	      return y - yOffset;
+	      return y() - yOffset;
 	   }
 	   
 	   public double getoXB(){
-	      return x + xBound - xOffset;
+	      return x() + xBound - xOffset;
 	   }
 	   
 	   public double getoYB(){
-	      return y + yBound - yOffset;
+	      return y() + yBound - yOffset;
 	   }
 	
 	   

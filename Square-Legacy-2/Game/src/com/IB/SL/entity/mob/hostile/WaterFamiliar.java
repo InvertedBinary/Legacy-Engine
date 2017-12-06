@@ -3,7 +3,7 @@ package com.IB.SL.entity.mob.hostile;
 import java.util.List;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
@@ -19,11 +19,16 @@ import com.IB.SL.util.Vector2i;
 
 public class WaterFamiliar extends Mob {
 
-	transient private AnimatedSprite down = new AnimatedSprite(SpriteSheet.WElemental_down, 16, 16, 0);
-	transient private AnimatedSprite up = new AnimatedSprite(SpriteSheet.WElemental_up, 16, 16, 0);
-	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.WElemental_left, 16, 16, 0);
-	transient private AnimatedSprite right = new AnimatedSprite(SpriteSheet.WElemental_right, 16, 16, 0);
-
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
+			16, 16, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
+			16, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
+			16, 16, 2);
+	private AnimatedSprite right = new AnimatedSprite(
+			SpriteSheet.zombie_right, 16, 16, 2);
+	
+	
 	transient private AnimatedSprite animSprite = down;
 
 	transient double xa = 0;
@@ -44,8 +49,8 @@ public class WaterFamiliar extends Mob {
 		this.mobhealth = this.maxhealth;
 		gui = new GUI();
 		this.Exp = 0;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.id = 53432;
 		this.name = "Water Familiar";
 		this.speed = 0.8;
@@ -80,44 +85,44 @@ public class WaterFamiliar extends Mob {
 		if (entities.size() > 0) {
 			xa = 0;
 			ya = 0;
-			double px = entities.get(0).getX();
-			double py = (int) entities.get(0).getY();
-			start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int) getY() >> Game.TILE_BIT_SHIFT);
+			double px = entities.get(0).x();
+			double py = (int) entities.get(0).y();
+			start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int) y() >> VARS.TILE_BIT_SHIFT);
 			destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 			if (time % 1 == 0)
 				path = level.findPath(start, destination);
 			if (path != null) {
 				if (path.size() > 0) {
 					Vector2i vec = path.get(path.size() - 1).tile;
-					if (x < vec.getX() << 4)
+					if (x() < vec.getX() << 4)
 						xa++;
-					if (x > vec.getX() << 4)
+					if (x() > vec.getX() << 4)
 						xa--;
-					if (y < vec.getY() << 4)
+					if (y() < vec.getY() << 4)
 						ya++;
-					if (y > vec.getY() << 4)
+					if (y() > vec.getY() << 4)
 						ya--;
 				}
 			}
 		} else if (players.size() > 0) {
 			xa = 0;
 			ya = 0;
-			double px = level.getPlayerAt(0).getX();
-			double py = (int) level.getPlayerAt(0).getY();
-			Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int) getY() >> Game.TILE_BIT_SHIFT);
+			double px = level.getPlayerAt(0).x();
+			double py = (int) level.getPlayerAt(0).y();
+			Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int) y() >> VARS.TILE_BIT_SHIFT);
 			Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 			if (time % 1 == 0)
 				path = level.findPath(start, destination);
 			if (path != null) {
 				if (path.size() > 0) {
 					Vector2i vec = path.get(path.size() - 1).tile;
-					if (x < vec.getX() << 4)
+					if (x() < vec.getX() << 4)
 						xa++;
-					if (x > vec.getX() << 4)
+					if (x() > vec.getX() << 4)
 						xa--;
-					if (y < vec.getY() << 4)
+					if (y() < vec.getY() << 4)
 						ya++;
-					if (y > vec.getY() << 4)
+					if (y() > vec.getY() << 4)
 						ya--;
 				}
 			}
@@ -137,7 +142,7 @@ public class WaterFamiliar extends Mob {
 		}
 
 		if (maxlife <= 0) {
-			level.add(new WallParticleSpawner((int) (x), (int) (y), 50, 20, level));
+			level.add(new WallParticleSpawner((int) (x()), (int) (y()), 50, 20, level));
 			remove();
 		}
 		players = level.getPlayers(this, 150);
@@ -150,7 +155,7 @@ public class WaterFamiliar extends Mob {
 		move();
 		if (walking) {
 			animSprite.update();
-			level.add(new WallParticleSpawner((int) (x), (int) (y), 55, 1, level));
+			level.add(new WallParticleSpawner((int) (x()), (int) (y()), 55, 1, level));
 		} else
 			animSprite.setFrame(0);
 		if (ya < 0) {
@@ -173,13 +178,13 @@ public class WaterFamiliar extends Mob {
 
 	public void render(Screen screen) {
 		if (this.mobhealth < this.maxhealth)
-			screen.renderSprite((int) x - 16, (int) y - 20, gui.renderMobHealthExperiment(this, 20), true);
+			screen.renderSprite((int) x() - 16, (int) y() - 20, gui.renderMobHealthExperiment(this, 20), true);
 		this.xOffset = -8;
 		this.yOffset = -15;
 		sprite = animSprite.getSprite();
-		screen.renderMobSprite((int) (x + xOffset), (int) (y + yOffset), this);
+		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
 		if (Boot.get().devModeOn) {
-			screen.drawRect((int) x + xOffset, (int) y + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
+			screen.drawRect((int) x() + xOffset, (int) y() + yOffset, sprite.getWidth(), sprite.getHeight(), 0xFF0000,
 					true);
 		}
 	}

@@ -13,14 +13,14 @@ import com.IB.SL.util.Vector2i;
 
 public class AStarTracker extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.UndeadCaster_down,
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
 			16, 16, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.UndeadCaster_up, 16,
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
 			16, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.UndeadCaster_left,
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
 			16, 16, 2);
 	private AnimatedSprite right = new AnimatedSprite(
-			SpriteSheet.UndeadCaster_right, 16, 16, 2);
+			SpriteSheet.zombie_right, 16, 16, 2);
 
 	private AnimatedSprite animSprite = down;
 	double xa = 0;
@@ -31,8 +31,8 @@ public class AStarTracker extends Mob {
 	private double speed = 0.5;
 
 	public AStarTracker(int x, int y) {
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		sprite = Sprite.playerback;
 		this.name = "Undead Caster";
 	}
@@ -42,18 +42,18 @@ public class AStarTracker extends Mob {
 	      if (players.size() > 0) {
 	         xa = 0;
 	         ya = 0;
-	         int px = (int) level.getPlayerAt(0).getX();
-	         int py = (int) level.getPlayerAt(0).getY();
-	         Vector2i start = new Vector2i((int) getX() >> 4, (int)getY() >> 4);
+	         int px = (int) level.getPlayerAt(0).x();
+	         int py = (int) level.getPlayerAt(0).y();
+	         Vector2i start = new Vector2i((int) x() >> 4, (int)y() >> 4);
 	         Vector2i destination = new Vector2i(px >> 4, py >> 4);
 	         if (time % 1 == 0) path = level.findPath(start, destination);
 	         if (path != null) {
 	            if (path.size() > 0) {
 	               Vector2i vec = path.get(path.size() - 1).tile;
-	               if (x < vec.getX() << 4) xa++;
-	               if (x > vec.getX() << 4) xa--;
-	               if (y < vec.getY() << 4) ya++;
-	               if (y > vec.getY() << 4) ya--;
+	               if (x() < vec.getX() << 4) xa++;
+	               if (x() > vec.getX() << 4) xa--;
+	               if (y() < vec.getY() << 4) ya++;
+	               if (y() > vec.getY() << 4) ya--;
 	            }
 	         }
 	      } else {
@@ -99,7 +99,7 @@ public class AStarTracker extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob((int) (x - 8), (int) (y - 15), this);
+		screen.renderMob((int) (x() - 8), (int) (y() - 15), this);
 	}
 
 }

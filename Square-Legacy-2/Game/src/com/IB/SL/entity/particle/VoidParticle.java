@@ -7,8 +7,8 @@ public class VoidParticle extends Particle {
 	
 	public VoidParticle(int x, int y, int life, int amount) {
 		super(x,y,life,amount);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = Sprite.VoidParticle;

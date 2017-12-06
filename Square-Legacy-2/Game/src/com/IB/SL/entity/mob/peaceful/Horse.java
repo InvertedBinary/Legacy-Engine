@@ -13,8 +13,8 @@ import com.IB.SL.level.Node;
 
 public class Horse extends Mob {
 
-	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.Horse_left, 32, 32, 3);
-	transient private AnimatedSprite right = new AnimatedSprite(SpriteSheet.Horse_right, 32, 32, 3);
+	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left, 32, 32, 3);
+	transient private AnimatedSprite right = new AnimatedSprite(SpriteSheet.zombie_right, 32, 32, 3);
 
 	transient private AnimatedSprite animSprite = left;
 	transient double xa = 0;
@@ -40,8 +40,8 @@ public class Horse extends Mob {
 	
 	public Horse(int x, int y) {
 		this.mobhealth = 150;
-		this.x = x << 4;
-		this.y = y << 4;
+		this.setX(x << 4);
+		this.setY(y << 4);
 		this.ox = x;
 		this.oy = y;
 		this.f_id = (new Random().nextInt(5000));
@@ -153,9 +153,9 @@ public class Horse extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		if (this.dir == DIRECTION.RIGHT) {
-			screen.render32Mob((int) (x - 14), (int) (y - 15), this);
+			screen.render32Mob((int) (x() - 14), (int) (y() - 15), this);
 		} else {
-			screen.render32Mob((int) (x - 18), (int) (y - 15), this);
+			screen.render32Mob((int) (x() - 18), (int) (y() - 15), this);
 		}
 	}
 

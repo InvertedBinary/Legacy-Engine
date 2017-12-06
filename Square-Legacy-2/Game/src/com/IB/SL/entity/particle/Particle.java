@@ -13,8 +13,8 @@ public class Particle extends Entity{
 	transient protected double xa, ya, za;
 	
 	public Particle(int x, int y, int life, int amount) {
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
 		this.xx = x;
 		this.yy = y;
 		sprite = Sprite.particle_def;

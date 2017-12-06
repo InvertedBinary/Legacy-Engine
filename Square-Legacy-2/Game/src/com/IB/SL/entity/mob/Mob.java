@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.hostile.Zombie;
 import com.IB.SL.entity.particle.DefaultParticle;
@@ -44,7 +45,7 @@ public abstract  class Mob extends Entity implements Serializable {
 	}
 	
 	public Rectangle getBounds(Entity e) {
-	    return new Rectangle((int) x - (sprite.getWidth() >> 1), (int) y - (sprite.getHeight() >> 1), sprite.getWidth(), sprite.getHeight());
+	    return new Rectangle((int) x() - (sprite.getWidth() >> 1), (int) y() - (sprite.getHeight() >> 1), sprite.getWidth(), sprite.getHeight());
 	}
 	
 	public DIRECTION dir;
@@ -54,104 +55,60 @@ public abstract  class Mob extends Entity implements Serializable {
 			move(0, ya);
 			return;
 		}
-			if (xa > 0) dir = DIRECTION.RIGHT; 
-			if (xa < 0) dir = DIRECTION.LEFT; 
-			if (ya > 0) dir = DIRECTION.DOWN;
-			if (ya < 0) dir = DIRECTION.UP; 
-		
-		try {
-			
-			if (level.getPlayersFixedBool((int)Boot.get().getPlayer().getX() - 8, (int)Boot.get().getPlayer().getY() - 15, 20)) {
-	//	List<PlayerMP> players = level.getPlayersFixed((int)this.x + 8, (int) this.y + 8, 20);
-			while (xa != 0) {
-				if (Math.abs(xa) > 1) {
-					if (!collision(abs(xa), ya)/* && !eCol(convert(xa), 0)*/) {
-							if (!eCol(convert(xa), 0)) {
-								this.x += abs(xa);
-							}
-					}
-					xa -= abs(xa);
-				} else {
-					if (!collision(abs(xa), ya)/* && !eCol(convert(xa), 0)*/) {
-						if (!eCol(convert(xa), 0)) {
-						this.x += xa;
-						}
-				}
-					xa = 0;
-			}
-		}
-		while (ya != 0) {
-			if (Math.abs(ya) > 1) {
-				if (!collision(xa, abs(ya))/* && !eCol(0, convert(ya))*/) {
-					if (!eCol(0, convert(ya))) {
-						this.y += abs(ya);
-					}
-				}
-				ya -= abs(ya);
-			} else {
-				if (!collision(xa, abs(ya))/* && !eCol(0, convert(ya))*/) {
-					if (!eCol(0, convert(ya))) {
-					this.y += ya;
-					}
-			}
-				ya = 0;
-			}
-		}
-		} else {
-		
+		if (xa > 0) dir = DIRECTION.RIGHT;
+		if (xa < 0) dir = DIRECTION.LEFT;
+		if (ya > 0) dir = DIRECTION.DOWN;
+		if (ya < 0) dir = DIRECTION.UP;
+
 		while (xa != 0) {
-				if (Math.abs(xa) > 1) {
-					if (!collision(abs(xa), ya)/* && !eCol(convert(xa), 0)*/) {
-								this.x += abs(xa);
-					}
-					xa -= abs(xa);
-				} else {
-					if (!collision(abs(xa), ya)/* && !eCol(convert(xa), 0)*/) {
-						this.x += xa;
+			if (Math.abs(xa) > 1) {
+				if (!collision(abs(xa), ya)) {
+					this.setX(this.x() + abs(xa));
 				}
-					xa = 0;
+				xa -= abs(xa);
+			} else {
+				if (!collision(abs(xa), ya)) {
+					this.setX(this.x() + xa);
+				}
+				xa = 0;
 			}
 		}
 		while (ya != 0) {
 			if (Math.abs(ya) > 1) {
-				if (!collision(xa, abs(ya))/* && !eCol(0, convert(ya))*/) {
-						this.y += abs(ya);
+				if (!collision(xa, abs(ya))) {
+					this.setY(this.y() + abs(ya));
 				}
 				ya -= abs(ya);
 			} else {
-				if (!collision(xa, abs(ya))/* && !eCol(0, convert(ya))*/) {
-					this.y += ya;
-			}
+				if (!collision(xa, abs(ya))) {
+					this.setY(this.y() + ya);
+				}
 				ya = 0;
 			}
 		}
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
 	}
-		
-	}
+	
 		
 
 	public void pull(Entity e, double rate) {
 		double xpa = 0, ypa = 0;
-		         double px = (int) e.getX();
-		         double py = (int) e.getY();
-		         Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int)getY() >> Game.TILE_BIT_SHIFT);
+		         double px = (int) e.x();
+		         double py = (int) e.y();
+		         Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int)y() >> VARS.TILE_BIT_SHIFT);
 		         Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 		         pathPull = level.findPath(start, destination);
 		         if (pathPull != null) {
 		            if (pathPull.size() > 0) {
 		               Vector2i vec = pathPull.get(pathPull.size() - 1).tile;
-		               if (x < vec.getX() << 4) xpa += rate;
-		               if (x > vec.getX() << 4) xpa -= rate;
-		               if (y < vec.getY() << 4) ypa += rate;
-		               if (y > vec.getY() << 4) ypa -= rate;
+		               if (x() < vec.getX() << 4) xpa += rate;
+		               if (x() > vec.getX() << 4) xpa -= rate;
+		               if (y() < vec.getY() << 4) ypa += rate;
+		               if (y() > vec.getY() << 4) ypa -= rate;
 		            }
 		         }
 		      if (xpa != 0 || ypa != 0) {
 		    	  move(xpa, ypa);
-		    	  level.add(new DefaultParticle((int) (x), (int) (y), 4, 2, 0x000000, 4));
+		    	  level.add(new DefaultParticle((int) (x()), (int) (y()), 4, 2, 0x000000, 4));
 		    	  walking  = true;
 		      } else {
 		    	  walking = false;
@@ -163,7 +120,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		double xpa = 0, ypa = 0;
 		         double px = x;
 		         double py = y;
-		         Vector2i start = new Vector2i((int) getX() >> Game.TILE_BIT_SHIFT, (int)getY() >> Game.TILE_BIT_SHIFT);
+		         Vector2i start = new Vector2i((int) x() >> VARS.TILE_BIT_SHIFT, (int)y() >> VARS.TILE_BIT_SHIFT);
 		         Vector2i destination = new Vector2i(px / TileCoord.TILE_SIZE, py / TileCoord.TILE_SIZE);
 		         pathPull = level.findPath(start, destination);
 		         if (pathPull != null) {
@@ -251,8 +208,8 @@ public abstract  class Mob extends Entity implements Serializable {
 	protected boolean collision(double xa, double ya) {
 		solid = false;
 		for (int c = 0; c < 4; c++) {
-			double xt = ((x + xa) - c % 2 * 15 + 0) / TileCoord.TILE_SIZE;
-			double yt = ((y + ya) - c / 2 * 15 + 0) / TileCoord.TILE_SIZE;
+			double xt = ((x() + xa) - c % 2 * 15 + 0) / TileCoord.TILE_SIZE;
+			double yt = ((y() + ya) - c / 2 * 15 + 0) / TileCoord.TILE_SIZE;
 
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);

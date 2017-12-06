@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
-import com.IB.SL.entity.Entity;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.entity.projectile.XML_Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -88,8 +88,6 @@ public class Player extends Mob implements Serializable{
 	private  int healthRegenRate = 1;
 	private  int manaRegenRate = 1;
 	private  int staminaRegenRate = 1;
-	double xa = 0;
-	double ya = 0;
 	public boolean noclip = false;
 	transient private List<Node> path = null;
 	transient double Pathtime = 0;
@@ -108,8 +106,8 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	public Player(int x, int y, Keyboard input, String username) { 
-		this.x = (int)x;
-		this.y = (int)y;
+		this.setX((int)x);
+		this.setY((int)y);
 		this.name = username;
 		this.input = input; 
 		init();
@@ -138,7 +136,7 @@ public class Player extends Mob implements Serializable{
 		this.stamina = maxstamina;
 
 
-		System.out.println("ADDING NEW PLAYER: " + this.x + "," + this.y);
+		System.out.println("ADDING NEW PLAYER: " + this.x() + "," + this.y());
 	}
 	
 	
@@ -156,7 +154,7 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	public void invokeSave(Player p) {
-		this.currentLevelId = Game.currentLevelId;
+		/*this.currentLevelId = Game.currentLevelId;
 		for (int i = 0; i < level.entities.size(); i++) {
 			System.out.println("[===] " + level.entities.get(i).getClass());
 		}
@@ -167,7 +165,7 @@ public class Player extends Mob implements Serializable{
 			System.out.println("  |==|  " + es[i]);
 		}
 		es = null;
-		SaveGame.save(p);
+		SaveGame.save(p);*/
 	}
 	
 	public void invokeLoad(Player p) {
@@ -184,7 +182,7 @@ public class Player extends Mob implements Serializable{
 		p.Lvl = temp.Lvl;
 		p.kills = temp.kills;
 		p.money = temp.money;
-		setPosition(temp.x, temp.y, temp.currentLevelId, false);
+		setPosition(temp.x(), temp.y(), temp.currentLevelId, false);
 
 		p.mobhealth = temp.mobhealth;
 		p.mana = temp.mana;
@@ -234,7 +232,7 @@ public class Player extends Mob implements Serializable{
 		}
 		//AFK
 		
-        raycastDIR = level.RayCast(new Vector2i(x, y), dirInt, (int)3);
+        raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int)3);
 		if (loadedProp == false) {
 			loadPlayer();
 			loadedProp = true;	
@@ -243,8 +241,8 @@ public class Player extends Mob implements Serializable{
 		
 		Pathtime++;
 		//System.out.println(1 + (this.stat_ATC / 3));
-			tileX = (int) x >> Game.TILE_BIT_SHIFT;
-			tileY = (int) y >> Game.TILE_BIT_SHIFT;
+			tileX = (int) x() >> VARS.TILE_BIT_SHIFT;
+			tileY = (int) y() >> VARS.TILE_BIT_SHIFT;
 			try {
 				if (!this.riding) {
 		if (level.getOverlayTile(tileX, tileY).exit()) {
@@ -311,9 +309,6 @@ public class Player extends Mob implements Serializable{
 			//speed = 1;
 		}
 		
-		 xa = 0;
-		 ya = 0;
-		
 		if (input != null) {
 		if (input.Sprint && walking)  { // 300
 			speed = 4;
@@ -328,65 +323,41 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		
+		 int xa = 0;
+		 int ya = 0;
+		
 	//	if (inventoryOn == false) {
-			if (this == level.getClientPlayer()) {
-			if (input.up) {
-				if (riding) {
-					yOff = 3;
-				} else {
+		if (this == level.getClientPlayer()) {
+		if (input.up) {
 			animSprite = up;
-			dirInt = 5;
-			yOff = 0;
-				}
-			ya-= speed;
+			ya -= speed;
 		} else if (input.down) {
-				if (riding) {
-					yOff = -3;
-				} else {
 			animSprite = down;
-			yOff = 0;
-			dirInt = 8;
-				}
-			ya+= speed;
+			ya += speed;
 		}
 		if (input.left) {
-				animSprite = left;				
-				xOff = 0;
-			xa-= speed;
-			if (!input.up && !input.down) {
-				dirInt = 3;				
-			} else {
-				dirInt = 0;
-			}
+			animSprite = left;				
+			xa -= speed;
 		} else if (input.right) {
-				animSprite = right;				
-				xOff = 0;
-			xa+= speed;
-			if (!input.up && !input.down) {
-				dirInt = 0;
+			animSprite = right;				
+			xa += speed;
+			} 
+		}
+		
+			if (!noclip) {
+				if (xa != 0 || ya != 0) {
+					move(xa, ya);
+					walking = true;
+				} else {
+					walking = false;
+				}
 			} else {
-				dirInt = 3;				
+				setX(x() + xa * speed);
+				setY(y() + ya * speed);
 			}
-		} 
-			}
-		
-		if (!noclip) {			
-		if (xa != 0 || ya != 0) {
-			move(xa, ya);
-			walking = true;
 			
-	    	
-		} else {
-			walking = false;
-		
-		}
-		} else {
-			x+= xa;
-			y+= ya;
-		}
-		
-		
-		//}
+			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
+			pos().add(vel());
 		}
 		
 		clear();
@@ -420,11 +391,11 @@ public class Player extends Mob implements Serializable{
 		
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
-			XML_Projectile Test_Arrow = new XML_Projectile(x, y, Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
-			XML_Projectile Test_Arrow2 = new XML_Projectile(x, y, Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
+			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
+			XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
 			Test_Arrow2.sprite = Sprite.WizardProjectile2;
-			Test_Arrow.nx += xa;
-			Test_Arrow.ny += ya;
+			Test_Arrow.nx += vel().x;
+			Test_Arrow.ny += vel().y;
 			level.add(Test_Arrow);
 			
 			level.add(Test_Arrow2);
@@ -485,8 +456,7 @@ public class Player extends Mob implements Serializable{
 				this.mana += (Math.pow(1, 0.45) + 1);
 				System.out.println("Player Mana: " + this.mana);
 			}
-		}	
-		
+		}		
 	
 	public void setPosition(TileCoord tileCoord) {
 		this.setX(tileCoord.x());
@@ -508,8 +478,8 @@ public class Player extends Mob implements Serializable{
 
 		this.removed = false;
 		Boot.get().getLevel().add(this);
-		this.x = (x);
-		this.y = (y);
+		this.setX((x));
+		this.setY((y));
 		//Boot.get().getLevel().loadMobs(LvlId);
 	}
 	
@@ -542,8 +512,8 @@ public class Player extends Mob implements Serializable{
 		}
 		this.removed = false;
 		Boot.get().getLevel().add(this);
-		this.x = (x);
-		this.y = (y);
+		this.setX((x));
+		this.setY((y));
 		//Boot.get().getLevel().loadMobs(LvlId);
 	}
 	
@@ -558,17 +528,8 @@ public class Player extends Mob implements Serializable{
 		sprite = animSprite.getSprite();
 		this.xOffset = -22;
 		this.yOffset = -45;
-		screen.renderMobSpriteUniversal((int) (x + xOff + xOffset), (int) (y + yOff + yOffset), sprite);
-
-		if (Game.devModeOn) {
-			screen.drawRect((int) x - 8, (int) y - 15, 64, 64, 0x0093FF, true);
-			try {
-				Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x, (int) y,
-					raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);
-				} catch (NullPointerException e) {
-			}
-		}
-
+		screen.renderMobSpriteUniversal((int) (x() + xOff + xOffset), (int) (y() + yOff + yOffset), sprite);
+	
 	}
 	
 	public int roundTo(int number, int multiple) {
@@ -660,7 +621,7 @@ public class Player extends Mob implements Serializable{
 		int x = (screen.xo);
 		int y = (screen.yo);
 		
-		screen.renderPlaceTile(x << 4, y << 4, toPlace);
+		screen.renderPlaceTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, toPlace);
 
 		for (int i = 0; i < history.size(); i++) {
 			int xo = 2; 
@@ -683,7 +644,7 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		if (Mouse.getButton() == 3) {
-			if (level.getTile(x, y).getHex() != 0xffFF00FF) {
+			if (level.getTile(x, y).getHex() != Screen.ALPHA_COL) {
 			Tile getTile = level.getTile(x, y);
 			if (!history.contains(getTile)) {
 			history.add(0, getTile );
@@ -722,7 +683,7 @@ public class Player extends Mob implements Serializable{
 		gui.renderBuild(screen, this);
 		}
 	
-		String text = (int)Boot.get().getPlayer().getX() / TileCoord.TILE_SIZE + "," + (int)Boot.get().getPlayer().getY() / TileCoord.TILE_SIZE;
+		String text = (int)Boot.get().getPlayer().x() / TileCoord.TILE_SIZE + "," + (int)Boot.get().getPlayer().y() / TileCoord.TILE_SIZE;
 		//screen.renderSprite(1064/ Game.scale, 530 / Game.scale, gui.renderHealthExperiment(screen, this, 20), false);
 		if (!level.minimap_enabled) {
 			Boot.get().font.render((int)Game.width - text.length() * 16, 3, -3, text, screen, false, false);
@@ -790,8 +751,17 @@ public class Player extends Mob implements Serializable{
 		screen.renderSprite(223, gui.yOffH, gui.renderBar(60, gui.healthbar, maxhealth, mobhealth), false); // 130
 		}
 	//	screen.renderSprite(0, 143, gui.expBar.getSprite(), false);
-	
-}
+		
+		if (Game.devModeOn) {
+			screen.drawRect((int) x() - 8, (int) y() - 15, 64, 64, 0x0093FF, true);
+			//this.pos.draw(screen);
+			try {
+				//Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x(), (int) y(),
+				//	raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);
+				} catch (NullPointerException e) {
+			}
+		}
+	}
 
 	public String getUUID() {
 		return UID;

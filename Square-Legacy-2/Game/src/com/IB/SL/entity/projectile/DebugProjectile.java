@@ -63,8 +63,8 @@ public class DebugProjectile extends Projectile {
 			Boot.log("===============================================", false);
 			Boot.log("ID: " + ee.id, true);
 			Boot.log("HOSTILITY: " + ee.hostility, true);
-			Boot.log("X: " + ee.getX() / 16, true);
-			Boot.log("Y: " + ee.getY() / 16, true);
+			Boot.log("X: " + ee.x() / 16, true);
+			Boot.log("Y: " + ee.y() / 16, true);
 			Boot.log("===============================================", false);
 			remove();
 			return true;
