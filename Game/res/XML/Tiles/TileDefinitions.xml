@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Tiles>
+	<!-- Terrain -->
+	<tile sprite="Grass" hex="0xff00CC00" solid="false" projSolid="false" isExitTile="false">Grass</tile>
+	<tile sprite="Swamp" hex="0xff956533" solid="false" projSolid="false" isExitTile="false">Swamp</tile>
+	<tile sprite="CobbleStone" hex="0xffF2F2F2" solid="false" projSolid="false" isExitTile="false">Cobblestone</tile>
+	<tile sprite="PathDirt" hex="0xff99A53D" solid="false" projSolid="false" isExitTile="false">PathDirt</tile>
+
+	<!-- Floor -->
+	<tile sprite="CobbleStone" hex="0xff4C4C4C" solid="false" projSolid="false" isExitTile="false">StoneBrick</tile>
+	<tile sprite="Wood" hex="0xffFFBC75" solid="false" projSolid="false" isExitTile="false">Wood</tile>
+	<tile sprite="Sand" hex="0xffFFFCB2" solid="false" projSolid="false" isExitTile="false">Sand</tile>
+	<tile sprite="SandBrick" hex="0xffD8D697" solid="false" projSolid="false" isExitTile="false">SandBrick</tile>
+
+	<!-- Walls -->
+	<tile sprite="CobbleStoneWall" hex="0xff727272" solid="true" projSolid="true" isExitTile="false">CobbleStoneWall</tile>
+	<tile sprite="StoneBrickWall" hex="0xff333333" solid="true" projSolid="true" isExitTile="false">StoneBrickWall</tile>
+	<tile sprite="SandBrickWall" hex="0xffBFBC85" solid="true" projSolid="true" isExitTile="false">SandBrickWall</tile>
+	<tile sprite="SandWall" hex="0xffE5E3A0" solid="true" projSolid="true" isExitTile="false">SandBrickWall</tile>
+
+	<!-- Ceilings -->
+	<tile sprite="CobblestoneCeiling" hex="0xff7F7F7F" solid="true" projSolid="true" isExitTile="false">CobbleStoneCeiling</tile>
+	<tile sprite="StoneBrickCeiling" hex="0xff3F3F3F" solid="true" projSolid="true" isExitTile="false">StoneBrickCeil</tile>
+	<tile sprite="SandBrickCeiling" hex="0xffCCC98E" solid="true" projSolid="true" isExitTile="false">SandBrickCeil</tile>
+</Tiles>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity>
+	<projectile id="4001">
+		<name>Arrow</name>
+		<damage>1</damage>
+		<speed>3</speed>
+		<range min="80" max="260" />
+		<fire-sound><!--  --></fire-sound>
+		<movement rof="25" rot="true" shape="arc" />
+		<!-- VALID 'shape' VARS: 'arc', 'simple', 'drop' -->
+		<sprite name="Arrow" xOffset="-8" yOffset="-15" />
+		<effect><!--  --></effect>
+		<behavior>linear</behavior>
+	</projectile>
+</entity>
+
+ <!-- VALID BEHAVIOR*: -->
+ <!-- linear, sin, tracking, none -->
+ 
+  <!-- *= Not implemented -->
+ 
+
+
+

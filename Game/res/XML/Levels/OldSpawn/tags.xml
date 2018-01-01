@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<level>
+    <props id="0">
+   	 <name>Old Spawn</name>
+   	 <minimap enabled="false" w="20" h="20" />
+   	 <tile_sheet bitm="" />
+   	 <spawnlist tags=".xml" />
+   	 <playlist tags=".xml" />
+   	 <time-cycle enabled="false" />
+   	 <null_tile_sprite sprite="Sand" />
+    </props>
+    <exits>
+   	 <exit to="/XML/Levels/SpawnHaven" x="52" y="77" xo="217" yo="445" w="3" h="7" />
+    </exits>
+    <custom_mobs>
+    <entity x="218" y="449" tags="RobotBob.xml" uid="0">
+      <speed>0.95</speed>
+   	 </entity>
+    </custom_mobs>
+    <!--<mobs>
+   	 <entity x="55" y="55" tags="TestZombie.xml" uid="69" />
+    </mobs>-->
+</level>

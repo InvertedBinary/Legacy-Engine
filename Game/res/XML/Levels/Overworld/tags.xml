@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<level>
+	<props id="0">
+		<name>Spawn Haven</name>
+		<tile-map>/XML/levels/SpawnHaven/level.png</tile-map>
+		<overlay-map>/XML/levels/SpawnHaven/overlay.png</overlay-map>
+		<minimap>false</minimap>
+		<exits>
+			<exit id="0" to=".xml" receiver="0" xt="" yt="" xo="" yo="" w="" h="" />
+		</exits>
+	</props>
+	<entity>
+	</entity>
+</level>

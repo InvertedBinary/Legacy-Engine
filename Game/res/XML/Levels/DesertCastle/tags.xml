@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<level>
+    <props id="0">
+     <name>Desert Castle</name>
+     <minimap enabled="false" w="20" h="20" />
+     <tile_sheet bitm="" />
+     <spawnlist tags=".xml" />
+     <playlist tags=".xml" />
+     <time-cycle enabled="false" />
+     <null_tile_sprite sprite="Sand" />
+    </props>
+    <exits>
+      <exit to="/XML/Levels/OldSpawn" x="222" y="448" xo="15" yo="98" w="2" h="2" />
+    </exits>
+    <custom_mobs>
+    <entity x="40" y="40" tags="RobotBob.xml" uid="0">
+        <speed>0.95</speed>
+    </entity>
+    </custom_mobs>
+    <!--<mobs>
+     <entity x="55" y="55" tags="TestZombie.xml" uid="69" />
+    </mobs>-->
+</level>

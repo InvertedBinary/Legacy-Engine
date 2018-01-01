@@ -1,0 +1,137 @@
+Grass- 00FF00
+CobbleGrassLeft- 00FC00
+Cobblestone- 7F7F7F
+DirtSign- 7F7F00
+Badflowers-0AFF0A
+CobbleGrassTop- 00F900
+CobbleGrassRight- 00F700
+CobbleGrassBottom- 00F400
+SandSign-FFFBB2
+CobbleGrassTopRight- 00F200
+CobbleGrassTopLeft- 00EF00
+CobbleGrassBottomRight- 00ED00
+CobbleGrassBottomLeft- 00EA00
+SwampPathRightTop- FFFF00
+SandPathRightTop- FCFC00
+Path-F9F900
+SandPathHorizon- F7F700
+GrassPathBottomRight- F4F400
+DirtPathBottomRight- F2F200
+CobblePathBottomRight- EFEF00
+SnowPathBottomRight- EDED00
+SwampPathBottomRight- EAEA00
+SandPathBottomRight- E8E800
+GrassPathBottomLeft- E5E500
+DirtPathBottomLeft- E0E000
+CobblePathBottomLeft- DDDD00
+GrassPillar- 00DD00
+SwampPathBottomLeft- DBDB00
+SandPathBottomLeft- D8D800
+GrassPathTopLeft- D6D600
+DirtPathTopLeft- D3D300
+CobblePathTopLeft- CECE00
+SnowPathTopLeft- CCCC00
+SwampPathTopLeft- C9C900
+SandPathTopLeft- C6C600
+GrassPathTopRight- C4C400
+DirtPathTopRight- C1C100
+CobblePathTopRight- BFBF00
+SnowPathTopRight- BCBC00
+StoneBrickWall- 333333
+GoodFlowers- 0BFF0B
+StoneBrickFloor- 444444
+SwampSign- EE00EE
+CobbleSign-FFFFFF
+DirtPathHorizon- B7B700
+CobblePathHorizon- B5B500
+SnowPathHorizon- B2B200
+SwampPathHorizon- AFAF00
+WoodWall- F2A129
+TownChestClose-
+TownChestOpen-
+WoodFloor- F2A125
+SnowPathBottomLeft- AAAA00
+GrassPathVertical- A8A800
+DirtPathVertical- A5A509
+CobblePathVertical- A3A300
+SnowPathVertical- A0A000
+SwampPathVertical- 9E9E00
+SandPathVertical- 9B9B00
+GrassPathHorizon- 999900
+Brick- 990000
+StoneBrickPillar- 191919
+DarkStoneBrick- 161616
+Dirt-C96500
+CobbleGrassBottomLeftCorner- 00E500
+CobbleGrassBottomRightCorner- 00E200
+CobbleGrassTopRightCorner- 00E000
+CobbleGrassTopLeftCorner- 00DB00
+Cobblepillar- c0c0c0
+Hellstone- FF0000
+SnowDeadTree- FDFDFD
+DungeonChestClose-
+DungeonChestOpen-
+BlackStone- 101010
+IceSnow- F2F2FF
+MoldStone- B7CCB7
+BlueCloud- 0000CC
+Error Tile- ??????
+Water- 0000FF
+Obsidian- 000022
+IceSnowMountain- 00FFFF
+GrassMountain- 003300
+CrackedStoneBrick- 969696
+BlueMushroom- 969697
+BlueMushroomStone- 96969A
+RedMushroom- 979696
+RedMushroomStone-9A9696
+GreenMushroom- 969796
+GreenMushroomStone- 969A96
+Lava- FFB400
+DirtMountain- 6D3300
+Sand- DDFFB2
+GrassRocks- 808680
+SandRocks- 868080
+DirtRocks- 808086
+Desk- 528452
+BookShelf- 63A063
+Dresser- 5A915A
+Bed- 4F914F
+GrassSign- 2A722A
+Spikes- 0A0A0A
+Snow-FFFFFF
+SnowMushroom-FDFDFD
+SnowRocks- 868680
+SnowPineTree- FCFCFC
+GrassPineTree- 02ff02
+GrassTree- 05ff05
+Swamp- 05FFFF
+SwampRocks- 808686
+SwampMushroom-05FDFD
+Cactus-09F8F8
+SwampMountain-05FBFB
+SandMountain- 09F6F6
+SandBrick- 09F7F7
+HellBrick- 330000
+IceBrick-F9F9F9
+PalmTree- 09F2F2
+FlowerCactus- 09F4F4
+Ice- A3A3FF
+SwampDeadTree- A3A369
+SwampPetrifiedTree- 9E9E66
+GrassDeadTree- 9EC666
+SkullSticks- 110000
+TelePad-
+Stone- 808080
+SnowMountain- EDEDED
+StoneStalagmite- 838383
+IceSnowStalagmite- EAEAEA
+GrassDirt- 11FF11
+GrassDirtSword- 10FF10
+SnowSign- E8E8E8
+Dark brick - 070707
+Void- 000000
+Strange Grass-
+Strange Ice- 
+Darkwater 2200FF
+

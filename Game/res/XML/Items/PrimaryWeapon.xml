@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<item>
+	<props id="####">
+		<name>A Weapon</name>
+		<equip_slot>-1</equip_slot>
+		<rarity>4</rarity>
+		<level_req>0</level_req>
+		<sprite xOffset="0" yOffset="0">SPRITE</sprite>
+		<icon xOffset="0" yOffset="0">DISPLAY</icon>
+	</props>
+	<stats>
+		<VIT>0,5</VIT>
+		<END>2</END>
+		<STR>0</STR>
+		<AGI>0</AGI>
+		<RES>0</RES>
+		<FAI>0</FAI>
+		<INT>0</INT>
+		<WIS>0</WIS>
+	</stats>
+	<use>
+		<call num="1" spread="0" initial="m">Arrow.xml</call>
+	</use>
+</item>
+ 
+ <!-- EQUIPMENT SLOTS*: -->
+ <!-- -1 = NO Slot (Not equipment) -->
+ <!--  0 = Head -->
+ <!--  1 = Chest -->
+ <!--  2 = Arms -->
+ <!--  3 = Legs -->
+ <!--  4 = Feet -->
+ <!--  5 = MSC1 -->
+ <!--  6 = MSC2 -->
+ <!--  7 = Weapon -->
+
+ <!-- *= Not implemented -->
+ 
