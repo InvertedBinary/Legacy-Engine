@@ -30,7 +30,11 @@
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/jogg-0.0.7.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/jorbis-0.0.15.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/startup2.jar"/>
-        </jar>
+			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-jme-3.0.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-jse-3.0.1.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-sources-3.0.1.jar"/>
+       
+	   </jar>
 	<!--javac srcdir="${sourceDir}" destdir="${outputDir}" /-->
     </target>
 </project>
