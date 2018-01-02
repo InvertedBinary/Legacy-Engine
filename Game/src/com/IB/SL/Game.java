@@ -180,7 +180,7 @@ public class Game extends Canvas implements Runnable {
 		screenshots = new File(LoadProperties.basePath + "/screenshots");
 		Sound.loadOggs();
 		folderCreation();
-	
+		
 		setGui(new GUI());
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);

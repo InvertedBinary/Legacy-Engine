@@ -228,17 +228,14 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		loadLevel(path);
 		generateLevel();
 		// add(new ParticleSpawner(29 * TileCoord.TILE_SIZE, 31*TileCoord.TILE_SIZE, 13, 35, this));
-
 	}
 	
 	public String Level_Dir;
 	public Level(String path, boolean foo) { 
 		this.Level_Dir = path;
 		String XML = path + "/tags.xml";
-		String LUA = path + "/script.lua";
 		LoadXML(XML);
 		loadLevel(path);
-		loadLua(LUA);
 	}
 	
 	public void LoadXML(String XML) {

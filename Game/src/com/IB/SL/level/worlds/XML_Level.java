@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,9 +40,11 @@ public class XML_Level extends Level{
 	public ArrayList<LevelExit> exits;
 	
 	public String XML_String = "";
+	public String LUA_String = "";
 	public String name = "";
 	public int id = -1;
-	
+	boolean loadedLua = false;
+
 	protected void loadLevel(String path) {
 		SpawnList.clear();
 		
@@ -50,9 +53,12 @@ public class XML_Level extends Level{
 		this.tiles = readTiles(path + "/level.png");
 		this.overlayTiles = readTiles(path + "/overlay.png");
 		this.torchTiles = readTiles(path + "/overlay.png");
-		
+		LUA_String = path + "/script.lua";
+
 		add(new XML_Mob(55, 73, "TestZombie.xml"));
 		//add(new Location_Shrine(50, 50, new TileCoord(673, 228)));
+		
+		loadLua(LUA_String);
 	} 
 	
 	public XML_Level(String path) {
@@ -64,11 +70,11 @@ public class XML_Level extends Level{
 	}
 	
 	public void loadLua(String lua) {
-		File luaFile = new File(lua);
-		if (luaFile.exists()) {
+		URL script = XML_Level.class.getResource(lua);
+		if (script != null) {
 			Globals globals = JsePlatform.standardGlobals();
-			LuaValue level = CoerceJavaToLua.coerce(this);
-			globals.set("level", level);
+			globals.set("level", CoerceJavaToLua.coerce(this));
+			//globals.set("client", CoerceJavaToLua.coerce(Boot.get().getPlayer()));
 			LuaValue chunk = globals.loadfile(lua);
 			chunk.call();
 		}
@@ -91,7 +97,10 @@ public class XML_Level extends Level{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+
+	public void update() {
+
 	}
 	
 	public void render(int xScroll, int yScroll, Screen screen) {
@@ -144,9 +153,9 @@ public class XML_Level extends Level{
 					this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
 					this.minimap_enabled = Boolean.parseBoolean(((Element) eElement.getElementsByTagName("minimap").item(0)).getAttribute("enabled"));
 					SpriteSheet.minimapDYN = new SpriteSheet(this.Level_Dir + "/level.png", (ImageIO.read(XML_Level.class.getResource((this.Level_Dir + "/level.png")))).getWidth());
+					
 					String hexString = ((Element) eElement.getElementsByTagName("null_tile_sprite").item(0)).getAttribute("tile");
 					int hex = Long.decode(hexString).intValue();
-					System.out.println("VOID TILE HEX: " + hex);
 					Tile.VoidTile.sprite = Tile.TileIndex.get(hex).sprite;
 				
 				} catch (Exception e) {

@@ -217,6 +217,7 @@ public class Player extends Mob implements Serializable{
 	public void update() {		
 		this.buildMode = input.buildMode;
 		
+
 		try {
 			
 		if (input.save){
