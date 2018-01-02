@@ -188,12 +188,11 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
+		tile = new Tile();
+		tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 		setLevel(new XML_Level(Maps.XML_Haven));
 		playerSpawn = new TileCoord(52, 72);
-		tile = new Tile();
-		
-		tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));

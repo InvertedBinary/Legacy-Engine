@@ -7,6 +7,7 @@
 		<rarity><!--  --></rarity>
 		<hostility>HOSTILITY.AGR</hostility>
 		<exp>5</exp>
+		<behavior>TestZombie.lua</behavior>
 	</mob>
 	<sprite size ="16" xOffset="-8" yOffset="-15">
 		<down length="3">zombie01_down</down>
@@ -14,9 +15,6 @@
 		<left length="3">zombie01_left</left>
 		<right length="3">zombie01_right</right>
 	</sprite>
-	<attack type="projectile">
-	<!--  -->
-	</attack>
 </entity>
 
 

@@ -148,8 +148,7 @@ public class XML_Level extends Level{
 					int hex = Long.decode(hexString).intValue();
 					System.out.println("VOID TILE HEX: " + hex);
 					Tile.VoidTile.sprite = Tile.TileIndex.get(hex).sprite;
-					
-					
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

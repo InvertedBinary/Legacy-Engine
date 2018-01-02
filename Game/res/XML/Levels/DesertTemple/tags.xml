@@ -2,7 +2,7 @@
 <level>
     <props id="0">
    	 <name>Desert Temple</name>
-   	 <minimap enabled="false" w="20" h="20" />
+   	 <minimap enabled="true" w="20" h="20" />
    	 <tile_sheet bitm="" />
    	 <spawnlist tags=".xml" />
    	 <playlist tags=".xml" />
