@@ -66,7 +66,7 @@ public class XML_Mob extends Mob {
 		
 		doc.getDocumentElement().normalize();
 		
-		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		//System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
 		
 		initMob(doc);
 		initSprite(doc);
@@ -79,10 +79,8 @@ public class XML_Mob extends Mob {
 	
 	public void initMob(Document doc) {
 		NodeList nList = doc.getElementsByTagName("mob");
-		System.out.println("----------------------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				try {

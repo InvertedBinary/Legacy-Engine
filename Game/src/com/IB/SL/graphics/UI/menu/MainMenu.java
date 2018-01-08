@@ -30,14 +30,13 @@ public class MainMenu extends UI_Menu {
 	public void onLoad() {
 		suspend = this.SUS_ALL;
 		if (Boot.get() != null) {
-			
-		if (Boot.get().getLevel() != null) {
-		if (Boot.get().getLevel().players.size() > 0) {
-		Boot.get().getPlayer().remove();
+			if (Boot.get().getLevel() != null) {
+				if (Boot.get().getLevel().players.size() > 0) {
+					Boot.get().getPlayer().remove();
+				}
+			}
 		}
-		}
-		}
-		
+
 	}
 	
 	public void onUnload() {
@@ -72,6 +71,7 @@ public class MainMenu extends UI_Menu {
 		if (Boot.get().getLevel().players.size() == 0) {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
+			Boot.get().getLevel().loadLua();
 		}
 	}
 	

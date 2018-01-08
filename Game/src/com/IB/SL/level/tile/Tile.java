@@ -163,10 +163,9 @@ public class Tile {
 	
 	public void buildTiles(Document doc) {
 		NodeList nList = doc.getElementsByTagName("Tiles");
-		System.out.println("--------------TILES--------------");
+		//System.out.println("--------------TILES--------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element : " + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				for (int i = 0; i < (((Element) nNode).getElementsByTagName("tile").getLength()); i++) {
 					try {

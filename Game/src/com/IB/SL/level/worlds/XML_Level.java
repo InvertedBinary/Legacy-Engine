@@ -2,7 +2,6 @@ package com.IB.SL.level.worlds;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -29,6 +28,7 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.tile.Tile;
+import com.IB.SL.util.LuaScript;
 
 public class XML_Level extends Level{
 		
@@ -39,12 +39,13 @@ public class XML_Level extends Level{
 
 	public ArrayList<LevelExit> exits;
 	
-	public String XML_String = "";
-	public String LUA_String = "";
-	public String name = "";
+	private String XML_String = "";
+	private String LUA_String = "";
+	private String name = "";
 	public int id = -1;
-	boolean loadedLua = false;
-
+	
+	private final String level_path;
+	
 	protected void loadLevel(String path) {
 		SpawnList.clear();
 		
@@ -53,35 +54,56 @@ public class XML_Level extends Level{
 		this.tiles = readTiles(path + "/level.png");
 		this.overlayTiles = readTiles(path + "/overlay.png");
 		this.torchTiles = readTiles(path + "/overlay.png");
-		LUA_String = path + "/script.lua";
 
 		add(new XML_Mob(55, 73, "TestZombie.xml"));
 		//add(new Location_Shrine(50, 50, new TileCoord(673, 228)));
-		
-		loadLua(LUA_String);
+		//initLua();
 	} 
+	
+	public void initLua() {
+		loadLua();
+	}
 	
 	public XML_Level(String path) {
 		super(path, true);
+		level_path = path;
 	}
 	
 	public void LoadXML(String XML) {
 		readXML(XML);
 	}
 	
-	public void loadLua(String lua) {
-		URL script = XML_Level.class.getResource(lua);
+	public void loadLua() {
+		try {
+		this.LUA_String = level_path + "/script.lua";
+		LuaScript ls = new LuaScript(LUA_String);
+		ls.addGlobal("level", this);
+		ls.addGlobal("pc", getClientPlayer());
+		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
+		
+		Thread thread = new Thread(ls);
+		thread.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void executeLua() {
+		this.LUA_String = level_path + "/script.lua";
+
+		URL script = XML_Level.class.getResource(LUA_String);
 		if (script != null) {
 			Globals globals = JsePlatform.standardGlobals();
 			globals.set("level", CoerceJavaToLua.coerce(this));
-			//globals.set("client", CoerceJavaToLua.coerce(Boot.get().getPlayer()));
-			LuaValue chunk = globals.loadfile(lua);
+			globals.set("pc", CoerceJavaToLua.coerce(getClientPlayer()));
+			LuaValue chunk = globals.loadfile(LUA_String);
 			chunk.call();
 		}
 	}
 	
 	public void readXML(String path) {
 		this.XML_String = path;
+
 		try {
 		InputStream fXmlFile = getClass().getResourceAsStream(path);
 		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
@@ -89,7 +111,6 @@ public class XML_Level extends Level{
 		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
 		
-		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
 		initLevel(doc);
 		initExits(doc);
 		initMobs(doc);
@@ -98,10 +119,7 @@ public class XML_Level extends Level{
 			e.printStackTrace();
 		}
 	}
-
-	public void update() {
-
-	}
+	
 	
 	public void render(int xScroll, int yScroll, Screen screen) {
 		super.render(xScroll, yScroll, screen);
@@ -142,10 +160,8 @@ public class XML_Level extends Level{
 	
 	public void initLevel(Document doc) {
 		NodeList nList = doc.getElementsByTagName("props");
-		System.out.println("----------------------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				try {
@@ -168,10 +184,8 @@ public class XML_Level extends Level{
 	public void initExits(Document doc) {
 		exits = new ArrayList<LevelExit>();
 		NodeList nList = doc.getElementsByTagName("exits");
-		System.out.println("--------------EXITS--------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				for (int i = 0; i < (((Element) nNode).getElementsByTagName("exit").getLength()); i++) {
 					try {
@@ -187,10 +201,8 @@ public class XML_Level extends Level{
 
 	public void initCustomMobs(Document doc) {
 		NodeList nList = doc.getElementsByTagName("custom_mobs");
-		System.out.println("--------------Custom_Mobs--------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				for (int i = 0; i < (((Element)nNode).getElementsByTagName("entity").getLength()); i++) {
 				try {
@@ -208,10 +220,8 @@ public class XML_Level extends Level{
 	
 	public void initMobs(Document doc) {
 		NodeList nList = doc.getElementsByTagName("mobs");
-		System.out.println("--------------Mobs--------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				for (int i = 0; i < (((Element)nNode).getElementsByTagName("entity").getLength()); i++) {
 				try {

@@ -242,7 +242,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		
 	}
 	
-	public void loadLua(String lua) {
+	public void loadLua() {
 		
 	}
 	

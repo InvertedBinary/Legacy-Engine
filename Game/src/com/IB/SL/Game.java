@@ -178,9 +178,9 @@ public class Game extends Canvas implements Runnable {
 		loadProp = new LoadProperties();
 		loadProp.createDataFolder();
 		screenshots = new File(LoadProperties.basePath + "/screenshots");
-		Sound.loadOggs();
+		//Sound.loadOggs();
 		folderCreation();
-		
+	
 		setGui(new GUI());
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
@@ -188,11 +188,12 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
-		tile = new Tile();
-		tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 		setLevel(new XML_Level(Maps.XML_Haven));
 		playerSpawn = new TileCoord(52, 72);
+		tile = new Tile();
+		
+		tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
@@ -247,7 +248,9 @@ public class Game extends Canvas implements Runnable {
 					new File(fileName + "_" + System.currentTimeMillis()
 							+ ".png"));
 		} catch (IOException e) {
+
 			System.out.println(e);
+
 		}
 
 	}
@@ -457,9 +460,6 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		getLevel().update();
-		
-	
-
 	}
 
 	public void render() {

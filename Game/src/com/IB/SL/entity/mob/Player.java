@@ -217,7 +217,6 @@ public class Player extends Mob implements Serializable{
 	public void update() {		
 		this.buildMode = input.buildMode;
 		
-
 		try {
 			
 		if (input.save){
@@ -479,15 +478,18 @@ public class Player extends Mob implements Serializable{
 		}
 
 		this.currentLevelId = -1;
-		
-		Boot.get().setLevel(new XML_Level(XML));
+		XML_Level newLevel = new XML_Level(XML);
+		Boot.get().setLevel(newLevel);
 		//Sound.switchMusic(Sound.Windwalker, 1f);
-
+		
 		Boot.get().getLevel().add(this);
+
 		this.removed = false;
 		this.setX((x));
 		this.setY((y));
+		newLevel.initLua();
 		//Boot.get().getLevel().loadMobs(LvlId);
+		
 	}
 	
 	public void setPosition(double x, double y, int LvlId, boolean tileMult) {

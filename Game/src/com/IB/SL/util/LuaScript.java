@@ -1,0 +1,42 @@
+package com.IB.SL.util;
+
+import java.net.URL;
+
+import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import org.luaj.vm2.lib.jse.JsePlatform;
+
+import com.IB.SL.Boot;
+import com.IB.SL.level.worlds.XML_Level;
+
+public class LuaScript implements Runnable {
+
+	public final String path;
+	public final Globals globals;
+	public final URL script;
+
+	
+	public LuaScript(String path) {
+		this.path = path;
+		this.script = XML_Level.class.getResource(path);
+		if (script == null) {
+			Boot.log("Missing script at: " + path, "LuaScript.java", true);
+		}
+		this.globals = JsePlatform.standardGlobals();
+	}
+	
+	public void addGlobal(String name, Object obj) {
+		globals.set(name, CoerceJavaToLua.coerce(obj));
+	}
+	
+	public void run() {
+		if (script != null) {
+			//globals.set("level", (this));
+			//globals.set("pc", CoerceJavaToLua.coerce(getClientPlayer()));
+			LuaValue chunk = globals.loadfile(path);
+			chunk.call();
+		}
+	}
+	
+}
