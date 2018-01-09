@@ -1,2 +1,3 @@
-# Square-Legacy-2
-The second installment of the Square Legacy series.
+# Legacy Engine
+
+A simple 2D game engine with support for Xml and Lua scripting.
