@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <level>
 	<props id="0">
-		<name>Spawn Haven</name>
+		<name>a10</name>
 		<minimap enabled="false" w="20" h="20" />
 		<tile_sheet bitm="" />
 		<spawnlist tags=".xml" />

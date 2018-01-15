@@ -74,22 +74,33 @@ public class XML_Level extends Level{
 	}
 	
 	public Thread luaThread;
+	LuaScript ls;
+	boolean loadedLua = false;
 	public void loadLua() {
 		try {
 		this.LUA_String = level_path + "/script.lua";
-		LuaScript ls = new LuaScript(LUA_String);
+		ls = new LuaScript(LUA_String);
 		ls.addGlobal("level", this);
 		ls.addGlobal("pc", getClientPlayer());
 		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
 		
 		luaThread = new Thread(ls, "LUA For " + LUA_String);
 		luaThread.start();
+		loadedLua = true;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}//TODO: Thread.join() somewhere!
+		}
 	}
 	
-	private void executeLua() {
+	public void killLua() {
+		this.loadedLua = false;
+	}
+	
+	public boolean runningLua() {
+		return this.loadedLua;
+	}
+	
+	/*private void executeLua() {
 		this.LUA_String = level_path + "/script.lua";
 
 		URL script = XML_Level.class.getResource(LUA_String);
@@ -100,7 +111,7 @@ public class XML_Level extends Level{
 			LuaValue chunk = globals.loadfile(LUA_String);
 			chunk.call();
 		}
-	}
+	}*/
 	
 	public void readXML(String path) {
 		this.XML_String = path;

@@ -15,6 +15,7 @@ public class LuaScript implements Runnable {
 	public final String path;
 	public final Globals globals;
 	public final URL script;
+	LuaValue chunk;
 
 	
 	public LuaScript(String path) {
@@ -24,6 +25,7 @@ public class LuaScript implements Runnable {
 			Boot.log("Missing script at: " + path, "LuaScript.java", true);
 		}
 		this.globals = JsePlatform.standardGlobals();
+		chunk = globals.loadfile(path);
 	}
 	
 	public void addGlobal(String name, Object obj) {
@@ -32,11 +34,7 @@ public class LuaScript implements Runnable {
 	
 	public void run() {
 		if (script != null) {
-			//globals.set("level", (this));
-			//globals.set("pc", CoerceJavaToLua.coerce(getClientPlayer()));
-			LuaValue chunk = globals.loadfile(path);
 			chunk.call();
 		}
 	}
-	
 }

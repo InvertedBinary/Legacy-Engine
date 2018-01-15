@@ -415,6 +415,7 @@ public class Player extends Mob implements Serializable{
 		this.setY(tileCoord.y());
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void setPositionXML(double x, double y, String XML, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);
@@ -423,17 +424,16 @@ public class Player extends Mob implements Serializable{
 			y *= TileCoord.TILE_SIZE;
 		}
 
-		try {
-			Thread lt = ((XML_Level)Boot.get().getLevel()).luaThread;
-
-			if (!lt.isAlive())
-			((XML_Level)Boot.get().getLevel()).luaThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (((XML_Level)Boot.get().getLevel()).luaThread.isAlive()) {
+			((XML_Level)Boot.get().getLevel()).killLua();
+			((XML_Level)Boot.get().getLevel()).luaThread.interrupt();
+			((XML_Level)Boot.get().getLevel()).luaThread.stop();
 		}
 		
 		this.currentLevelId = -1;
 		XML_Level newLevel = new XML_Level(XML);
+		
+		
 		Boot.get().setLevel(newLevel);
 		//Sound.switchMusic(Sound.Windwalker, 1f);
 		
@@ -443,7 +443,9 @@ public class Player extends Mob implements Serializable{
 		this.setX((x));
 		this.setY((y));
 		newLevel.initLua();
-		//Boot.get().getLevel().loadMobs(LvlId);
+		
+		
+		//((XML_Level)Boot.get().levels.get(Boot.get().levels.size() - 1)).luaThread.stop();
 		
 	}
 	

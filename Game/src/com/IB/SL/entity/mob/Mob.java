@@ -232,8 +232,8 @@ public abstract  class Mob extends Entity implements Serializable {
 	protected boolean collision(double xa, double ya) {
 		solid = false;
 		for (int c = 0; c < 4; c++) {
-			double xt = ((x() + xa) - c % 2 * 15 + 0) / TileCoord.TILE_SIZE;
-			double yt = ((y() + ya) - c / 2 * 15 + 0) / TileCoord.TILE_SIZE;
+			double xt = ((x() + xa) - c % 2 * 15 + 24) / TileCoord.TILE_SIZE;
+			double yt = ((y() + ya) - c / 2 * 15 + 15) / TileCoord.TILE_SIZE;
 
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
