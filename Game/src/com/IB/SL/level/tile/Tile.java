@@ -16,6 +16,7 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.VoidTile;
+import com.IB.SL.level.tile.SL2.Air;
 import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.level.tile.overlays.Anvil;
 import com.IB.SL.level.tile.overlays.BlueBed;
@@ -268,14 +269,17 @@ public class Tile {
 	public static Tile StoneBrickCeiling = new StoneBrickCeiling(Sprite.StoneBrickCeiling);
 	public static Tile StoneBrickWall = new StoneBrickWall(Sprite.StoneBrickWall);
 	public static Tile Swamp = new Swamp(Sprite.Swamp);
+	
 	public static Tile VoidTile = new VoidTile(Sprite.VoidTile);
+	public static Tile Air = new Air(Sprite.VoidTile);
+
 	//public static Tile Water = new Water();
 	public static Tile Wood = new Wood(Sprite.Wood);
 	public static Tile WoodCeiling = new WoodCeiling(Sprite.WoodCeiling);
 	public static Tile WoodWall = new WoodWall(Sprite.WoodWall);
 	public static Tile swirly = new Swirly(Sprite.Swirly);
 	public static Tile DoorTile = new DoorTile(Sprite.Door);
-
+	
 	
 	/**
 	 * Overlay

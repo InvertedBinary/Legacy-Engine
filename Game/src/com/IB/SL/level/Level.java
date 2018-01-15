@@ -25,6 +25,7 @@ import com.IB.SL.entity.particle.Particle;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.entity.spawner.Spawner;
 import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.Weather.Rain;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.SL2.XML_Tile;
@@ -708,13 +709,32 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 	}
 	
+	int bgcolor = 0xffBED0CA;
+	SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/paralax/bg.png", 640, 360);
+	SpriteSheet pl_first = new SpriteSheet("/XML/Levels/a10/assets/paralax/first_layer.png", 149, 35);
+	SpriteSheet pl_second = new SpriteSheet("/XML/Levels/a10/assets/paralax/second_layer.png", 234, 92);
+	SpriteSheet pl_third = new SpriteSheet("/XML/Levels/a10/assets/paralax/third_layer.png", 352, 297);
+
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
 		int x0 = xScroll >> VARS.TILE_BIT_SHIFT;
 		int x1 = (xScroll + screen.width + TileCoord.TILE_SIZE) >> VARS.TILE_BIT_SHIFT;
 		int y0 = yScroll >> VARS.TILE_BIT_SHIFT;
 		int y1 = (yScroll + screen.height + TileCoord.TILE_SIZE) >> VARS.TILE_BIT_SHIFT;
-				for (int y = y0; y < y1; y++) {
+		
+		try {
+			
+		//screen.renderSheet(0, 0, pl_bg, false);
+		screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
+		
+		//screen.renderSheet(0, 37, pl_first, false);
+		//screen.renderSheet(0, 36, pl_second, false);
+		//screen.renderSheet(0, 63, pl_third, false);
+		} catch (Exception e) {
+			
+		}
+
+		for (int y = y0; y < y1; y++) {
 					  for (int x =x0; x < x1; x++) {
 						// renderMiniMap(screen, 32, 32, 40, 40);
 					    Tile tile = getTile(x,y);
@@ -1239,6 +1259,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			return Tile.VoidTile;
 		}
 		
+		if (Boot.get().getScreen().hasAlpha(tiles[x + y * width])) {
+			return Tile.Air;
+		}
+		
+		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
 		if (t == null) {
 			t = Tile.VoidTile;
@@ -1624,22 +1649,6 @@ public void resetLevelPostDeath(Player player) {
 
 
 	
-	public void movePlayer(String UUID, double x, double y, boolean walking, DIRECTION direction, int lvl, double mobhealth) {
-		int index = getPlayerMPIndexUUID(UUID);
-		PlayerMP player = (PlayerMP) this.players.get(index);
-		
-		player.setX(x);
-		player.setY(y);
-		player.walking = walking;
-		player.setDir(direction);
-		
-		if (player.Lvl != lvl) {
-			player.Lvl = lvl;
-		}
-		player.mobhealth = mobhealth;
-		}
-
-
 	public void MPTeleport(String tp) {
 		try {
 		int index = getPlayerMPIndex(tp);

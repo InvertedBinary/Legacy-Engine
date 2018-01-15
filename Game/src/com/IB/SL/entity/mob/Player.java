@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
+import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.entity.projectile.XML_Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -45,7 +46,6 @@ public class Player extends Mob implements Serializable{
 	 * 
 	 */
 	private transient  static final long serialVersionUID = -8911018741301426797L;
-	private transient  int manaregen = 0;
 	public transient  Keyboard input;
 	public transient  Sprite sprite;
 	public transient  Tile tile;
@@ -57,7 +57,7 @@ public class Player extends Mob implements Serializable{
 	//public transient Level level;
 	transient int walkingPacketTime = 0;
 	public transient  AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
-	public transient  AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
+	public transient  AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
 	public transient  AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
 	public transient  AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 64, 64, 7);
 	
@@ -78,17 +78,10 @@ public class Player extends Mob implements Serializable{
 	public transient boolean commandModeOn = false;
 	private transient boolean cmdReleased = true;
 	public transient boolean swimming = false;
-	public transient int healthregen = 0;
-	public transient int staminaregen = 0;
-	public transient int staminaDegen = 0;
-	private transient int manaTimer;
 	public transient GUI gui;
 	public transient LoadProperties loadProp;
 	private  int tileX;
 	private  int tileY;
-	private  int healthRegenRate = 1;
-	private  int manaRegenRate = 1;
-	private  int staminaRegenRate = 1;
 	public boolean noclip = false;
 	transient private List<Node> path = null;
 	transient double Pathtime = 0;
@@ -269,34 +262,18 @@ public class Player extends Mob implements Serializable{
 		int expNeeded = expCounter;
 		
 		time++;
-		staminaregen++;
-		staminaDegen++;
-		healthregen++;
 		
-		if (this.mana < this.maxmana) {
-		manaTimer++;
-		}
-		if (manaTimer > 165) {
-		manaregen++;
-		manaregen = 0;
-		manaTimer = 0;
-		regenMana();
-
-		}
-		
-			if (walking) {
-					animSprite.update();					
-			} else animSprite.setFrame(0);
+		animSprite.update();					
+			
+		if (!walking) {
+				animSprite = idle;
+				this.animSprite.setFrameRate(8);
+			} else {
+				this.animSprite.setFrameRate(6 -  (int)this.speed / 2);
+			}
 		
 	//	if (abilityCooldown > 0) abilityCooldown--;
 		if (fireRate > 0) fireRate--;
-		
-		if (!sprinting && stamina < maxstamina) {
-			if (staminaregen % staminaRegenRate == 0) {
-				stamina += (Math.pow(1, 0.45) + 1);
-				staminaregen = 0;
-			}
-		}
 		
 		if (!moving) {
 			xOff = 0;
@@ -325,17 +302,18 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		
-		 int xa = 0;
-		 int ya = 0;
+		 double xa = 0;
+		 double ya = 0;
+		 double yv = 0;
 		
 	//	if (inventoryOn == false) {
 		if (this == level.getClientPlayer()) {
 		if (input.up) {
-			animSprite = up;
-			ya -= speed;
+			//animSprite = up;
+			yv -= speed;
 		} else if (input.down) {
-			animSprite = down;
-			ya += speed;
+			//animSprite = down;
+			yv += speed;
 		}
 		if (input.left) {
 			animSprite = left;				
@@ -347,17 +325,37 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		
+		PVector Gravity = new PVector();
+		Gravity.y = VARS.Ag;
+		
+		this.vel().add(Gravity);
+		
+		ya = vel().y;
+		
+		if (this.input.jump & this.canJump) {
+			this.vel().y = -6.5;
+		}
+		
+		if (this.vel().y > 53) {
+			this.vel().y = 53;
+		}
+		
+		//System.out.println(this.vel());
+		
+		if (xa != 0) {
+			walking = true;
+		} else {
+			walking = false;
+		}
+		
 			if (!noclip) {
-				if (xa != 0 || ya != 0) {
-					move(xa, ya);
-					walking = true;
-				} else {
-					walking = false;
-				}
+				move(xa, ya);
 			} else {
 				setX(x() + xa * speed);
-				setY(y() + ya * speed);
+				setY(y() + yv * speed);
 			}
+			
+
 			
 			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
 			//body.set(VARS.PHYS_NOGRAV, false);
@@ -368,8 +366,6 @@ public class Player extends Mob implements Serializable{
 		
 		clear();
 	
-			regenHealth();
-						
 			if (this == level.getClientPlayer()) {
 			updateBuild();
 			}
@@ -393,8 +389,7 @@ public class Player extends Mob implements Serializable{
 				
 		updateShooting();
 			}
-		
-		
+	
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
 			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
@@ -415,55 +410,6 @@ public class Player extends Mob implements Serializable{
 		}
 	}
 	
-	public boolean checkMana(int amount) {
-		if (this.mana >= amount) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean checkStamina(int amount) {
-		if (this.stamina >= amount) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean useMana(int amount) {
-		if (checkMana(amount)) {
-			this.mana -= amount;	
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean useStamina(int amount) {
-		if (checkStamina(amount)) {
-			this.stamina -= amount;	
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-		
-	private void regenHealth() {
-		if (this.mobhealth < this.maxhealth && (healthregen % healthRegenRate) == 0 && incombat == false) {
-				healthregen = 0;
-				this.mobhealth += (Math.pow(1, 0.45) + 1);
-				System.out.println("Player Health: " + this.mobhealth);
-			}
-		}
-	
-	private void regenMana() {
-		if (this.mana < this.maxmana && (manaregen % manaRegenRate) == 0) {
-				manaregen = 0;
-				this.mana += (Math.pow(1, 0.45) + 1);
-				System.out.println("Player Mana: " + this.mana);
-			}
-		}		
-	
 	public void setPosition(TileCoord tileCoord) {
 		this.setX(tileCoord.x());
 		this.setY(tileCoord.y());
@@ -477,6 +423,15 @@ public class Player extends Mob implements Serializable{
 			y *= TileCoord.TILE_SIZE;
 		}
 
+		try {
+			Thread lt = ((XML_Level)Boot.get().getLevel()).luaThread;
+
+			if (!lt.isAlive())
+			((XML_Level)Boot.get().getLevel()).luaThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		this.currentLevelId = -1;
 		XML_Level newLevel = new XML_Level(XML);
 		Boot.get().setLevel(newLevel);
@@ -533,7 +488,6 @@ public class Player extends Mob implements Serializable{
 	private transient Sprite arrow = Sprite.QuestArrow;
 
 	public void render(Screen screen) {
-		this.animSprite.setFrameRate(6 -  (int)this.speed / 2);
 		sprite = animSprite.getSprite();
 		this.xOffset = -22;
 		this.yOffset = -45;

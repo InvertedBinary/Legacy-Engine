@@ -129,6 +129,54 @@ public class Screen {
 		}
 	}
 	
+	
+	public void renderParallax(int bg_hex, SpriteSheet f, SpriteSheet s, SpriteSheet t, int yo) {
+		int color = 0;
+		for (int y = 0; y < height; y++) {
+			int ya = y;
+			for (int x = 0; x < width; x++) {
+				int xa = x;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height)
+					continue;
+
+				color = bg_hex;
+				
+				if (x + y * f.SPRITE_WIDTH < f.pixels.length) {
+				int color_f = f.pixels[x + y * f.SPRITE_WIDTH];
+				if (color_f != ALPHA_COL) { color = color_f; }
+				}
+				
+				if (x + y * s.SPRITE_WIDTH < s.pixels.length) {
+					int color_s = s.pixels[xa + ya * s.SPRITE_WIDTH];
+					if (color_s != ALPHA_COL) { color = color_s; }
+				}
+				
+				int color_t = t.pixels[xa + ya * t.SPRITE_WIDTH];
+				if (color_t != ALPHA_COL) { color = color_t; }
+				
+				
+				//System.out.println("Y: " + y + " YA: " + ya);
+
+
+				pixels[xa + (ya + yo) * width] = color;
+			}
+		}
+	}
+	
+	/**
+	 * 		for (int y = 0; y < s.SPRITE_HEIGHT; y++) {
+			int ya = y + sf;
+			for (int x = 0; x < width; x++) {
+				int xa = x;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				color = s.pixels[x + y * s.SPRITE_WIDTH];
+				if (color != ALPHA_COL) {
+				     pixels[xa + ya * width] = color;
+				}
+			}
+		}
+	 */
+	
 	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
 		if(fixed) {
 		xp -= xOffset;
@@ -178,7 +226,7 @@ public class Screen {
 		      return ((newR & 0xFF) << 16) | ((newG & 0xFF) << 8) | ((newB & 0xFF) << 0);
 		   }
 	
-	   private boolean hasAlpha(int hex){
+	   public boolean hasAlpha(int hex){
 		      if(((hex >> 24) & 0xFF) < 255) return true;
 		      return false;
 	   }

@@ -1,5 +1,6 @@
-/lwjgl3/
 /com/
+/.gitignore
+/lwjgl3/
 /old_easyogg/
 /startup2.jar
 /test.bat

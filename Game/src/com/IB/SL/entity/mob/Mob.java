@@ -11,6 +11,7 @@ import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.mob.hostile.Zombie;
 import com.IB.SL.entity.particle.DefaultParticle;
 import com.IB.SL.entity.projectile.DebugProjectile;
@@ -49,12 +50,15 @@ public abstract  class Mob extends Entity implements Serializable {
 	}
 	
 	public DIRECTION dir;
+	public boolean canJump = false;
+	
 	public void move(double xa, double ya) {
 		if (xa != 0 && ya != 0) {
 			move(xa, 0);
 			move(0, ya);
 			return;
 		}
+		
 		if (xa > 0) dir = DIRECTION.RIGHT;
 		if (xa < 0) dir = DIRECTION.LEFT;
 		if (ya > 0) dir = DIRECTION.DOWN;
@@ -77,17 +81,37 @@ public abstract  class Mob extends Entity implements Serializable {
 			if (Math.abs(ya) > 1) {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + abs(ya));
+					this.canJump = false;
+				} else {
+					if (this.vel().y > 0) {
+					doFallDamage();
+					this.vel().y = 0;
+					this.canJump = true;
+					}
 				}
 				ya -= abs(ya);
 			} else {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + ya);
+					this.canJump = false;
+				} else {
+					if (this.vel().y > 0) {
+					doFallDamage();
+					this.vel().y = 0;
+					this.canJump = true;
+					}
 				}
 				ya = 0;
 			}
 		}
 	}
 	
+	public void doFallDamage() {
+		if (this.vel().y > 10) {
+			this.mobhealth -= this.vel().y / 8;
+			System.out.println(this.mobhealth);
+		}
+	}
 		
 
 	public void pull(Entity e, double rate) {

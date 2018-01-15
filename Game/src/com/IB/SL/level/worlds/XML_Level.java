@@ -73,6 +73,7 @@ public class XML_Level extends Level{
 		readXML(XML);
 	}
 	
+	public Thread luaThread;
 	public void loadLua() {
 		try {
 		this.LUA_String = level_path + "/script.lua";
@@ -81,11 +82,11 @@ public class XML_Level extends Level{
 		ls.addGlobal("pc", getClientPlayer());
 		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
 		
-		Thread thread = new Thread(ls);
-		thread.start();
+		luaThread = new Thread(ls, "LUA For " + LUA_String);
+		luaThread.start();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}//TODO: Thread.join() somewhere!
 	}
 	
 	private void executeLua() {
