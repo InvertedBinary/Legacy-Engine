@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Tiles>
 	<!-- Terrain -->
-	<tile sprite="Grass" hex="0xff00CC00" solid="false" projSolid="false" isExitTile="false">Grass</tile>
+	<tile sprite="Grass" hex="0xff00CC00" solid="true" projSolid="true" isExitTile="false">Grass</tile>
 	<tile sprite="Swamp" hex="0xff956533" solid="false" projSolid="false" isExitTile="false">Swamp</tile>
 	<tile sprite="CobbleStone" hex="0xffF2F2F2" solid="false" projSolid="false" isExitTile="false">Cobblestone</tile>
 	<tile sprite="PathDirt" hex="0xff99A53D" solid="false" projSolid="false" isExitTile="false">PathDirt</tile>

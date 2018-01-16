@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<level>
+	<props id="0">
+		<name>a10</name>
+		<minimap enabled="false" w="20" h="20" />
+		<tile_sheet bitm="" />
+		<spawnlist tags=".xml" />
+		<playlist tags=".xml" />
+		<time-cycle enabled="false" />
+		<null_tile_sprite tile="0xff956533" />
+	</props>
+	<exits>
+		<exit to="/XML/Levels/DesertTemple" x="50" y="61" xo="28" yo="79" w="48" h="13" />
+		<exit to="/XML/Levels/Tutorial" x="72" y="35" xo="80" yo="36" w="2" h="8" />
+	</exits>
+	<custom_mobs>
+		<entity x="40" y="40" tags="RobotBob.xml" uid="0">
+			<speed>0.5</speed>
+		</entity>
+	</custom_mobs>
+	<mobs>
+		<entity x="52" y="70" tags="TestZombie.xml" uid="4" />
+		<entity x="52" y="75" tags="TestZombie.xml" uid="4" />
+	</mobs>
+</level>

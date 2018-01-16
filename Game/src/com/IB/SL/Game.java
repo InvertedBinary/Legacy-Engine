@@ -188,12 +188,12 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
-
-		setLevel(new XML_Level(Maps.XML_Haven));
-		playerSpawn = new TileCoord(52, 72);
 		tile = new Tile();
-		
 		tile.readXML("/XML/Tiles/TileDefinitions.xml");
+		
+
+		setLevel(new XML_Level(Maps.ForestLevel));
+		playerSpawn = new TileCoord(0, 20);
 
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));
@@ -267,7 +267,6 @@ public class Game extends Canvas implements Runnable {
 		running = true;
 		thread = new Thread(this, "Game");
 		thread.start();
-		
 	}
 
 	public synchronized void stop() {
@@ -472,8 +471,14 @@ public class Game extends Canvas implements Runnable {
 		}
 		screen.clear();
 		
-		Boot.get().xScroll = getPlayer().x() - screen.width / 2;
-		Boot.get().yScroll = getPlayer().y() - screen.height / 2;
+		
+		
+		double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2 : getPlayer().x() - screen.width / 2;
+		double ySp = getPlayer().y() - screen.height / 2;
+		
+		Boot.get().xScroll = xSp;
+		Boot.get().yScroll = ySp;
+		
 		
 		getLevel().render((int) (xScroll), (int) (yScroll), screen);
 		gui.render(screen);

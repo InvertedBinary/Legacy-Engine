@@ -1,4 +1,4 @@
-print("Loading Lua for DesertTemple level")
+print("Loading Lua for a10 level")
 
 local z = luajava.newInstance("com.IB.SL.entity.mob.XML_Mob", 62, 50, "/XML/Entities/TestZombie.xml");
 level:add(z);

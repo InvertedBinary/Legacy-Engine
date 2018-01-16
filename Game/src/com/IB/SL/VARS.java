@@ -16,7 +16,7 @@ public class VARS {
 	public static final float PPM = 32f; // PIXELS PER METER
 	public static final float TPM = 1f;  // TILES PER METER
 	
-	public static final float Ag = PPM/9.8f; // Gravitational Acceleration
+	public static final float Ag = 1/PPM * 9.8f; // Gravitational Acceleration
 	public static final float Afr = PPM/100; //TODO: MOVE TO BE TILE PROPERTY!!
 	
 	//Collision bits

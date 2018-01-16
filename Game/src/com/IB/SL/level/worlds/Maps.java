@@ -14,6 +14,8 @@ public class Maps implements Serializable{
 	
 	public static String SpawnHaven = ("/levels/SpawnHaven.png");
 	public static String XML_Haven = ("/XML/Levels/SpawnHaven");
+	
+	public static String ForestLevel = ("/XML/Levels/a10");
 	public static String Tutorial_World = ("/levels/Tutorial.png");
 
 }
