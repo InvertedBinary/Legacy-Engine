@@ -38,11 +38,14 @@ import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.Maps;
+import com.IB.SL.level.worlds.Tiled_Level;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
-import com.IB.SL.util.Sound;
-import com.IB.SL.util.shape.PhysicsBody;
+
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 
 @SuppressWarnings("static-access")
 
@@ -181,6 +184,8 @@ public class Game extends Canvas implements Runnable {
 		//Sound.loadOggs();
 		folderCreation();
 	
+		this.StartDiscord();
+		
 		setGui(new GUI());
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
@@ -193,6 +198,8 @@ public class Game extends Canvas implements Runnable {
 		
 
 		setLevel(new XML_Level(Maps.ForestLevel));
+		Tiled_Level TL = new Tiled_Level("XML/Levels/b10");
+		
 		playerSpawn = new TileCoord(0, 20);
 
 		// TileCoord playerSpawn = new TileCoord(296, 381);
@@ -226,8 +233,20 @@ public class Game extends Canvas implements Runnable {
 			@Override
 			public void componentHidden(ComponentEvent e) {}
 		});
-		
-		
+	}
+	
+	public void StartDiscord(){
+//		   DiscordEventHandlers handler = new DiscordEventHandlers();
+//		   DiscordRPC.discordInitialize("402613263986327552", handler, true);
+	}
+	
+	public static String lvl_name = "test;";
+	public static void createNewPresence(){
+//		  DiscordRichPresence rich = new DiscordRichPresence();
+//		  rich.details = "On Level: " + (lvl_name);
+//		  rich.state = "Located at: " + (int)Boot.get().getPlayer().x()/32 + " , " + (int)Boot.get().getPlayer().y()/32;  
+//
+//		  DiscordRPC.discordUpdatePresence(rich);
 	}
 	
 	public UI_Menu getMenu() {
@@ -335,6 +354,7 @@ public class Game extends Canvas implements Runnable {
 				frames = 0;
 			}
 		}
+		//DiscordRPC.discordShutdown();
 		stop();
 	}
 	
@@ -615,12 +635,18 @@ public class Game extends Canvas implements Runnable {
 	public GUI getGui() {
 		return gui;
 	}
+	
+	public Keyboard getInput() {
+		return this.key;
+	}
 
 	public void setGui(GUI gui) {
 		this.gui = gui;
 	}
 	
 	public void quit() {
+//		DiscordRPC.discordShutdown();
+
 		System.out.println("Saving & Closing Application");
 			save(false);			
 		System.exit(0);

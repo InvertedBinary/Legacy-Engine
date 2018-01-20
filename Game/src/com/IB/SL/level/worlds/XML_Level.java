@@ -22,6 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.IB.SL.Boot;
+import com.IB.SL.Game;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.graphics.Screen;
@@ -41,7 +42,7 @@ public class XML_Level extends Level{
 	
 	private String XML_String = "";
 	private String LUA_String = "";
-	private String name = "";
+	public String level_name = "";
 	public int id = -1;
 	
 	private final String level_path;
@@ -82,6 +83,7 @@ public class XML_Level extends Level{
 		ls = new LuaScript(LUA_String);
 		ls.addGlobal("level", this);
 		ls.addGlobal("pc", getClientPlayer());
+		ls.addGlobal("key", Boot.get().getInput());
 		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
 		
 		luaThread = new Thread(ls, "LUA For " + LUA_String);
@@ -178,7 +180,10 @@ public class XML_Level extends Level{
 				Element eElement = (Element) nNode;
 				try {
 					this.id = Integer.parseInt(eElement.getAttribute("id"));
-					this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
+					this.level_name = (eElement.getElementsByTagName("name").item(0).getTextContent());
+					
+					Game.lvl_name = level_name;
+					
 					this.minimap_enabled = Boolean.parseBoolean(((Element) eElement.getElementsByTagName("minimap").item(0)).getAttribute("enabled"));
 					SpriteSheet.minimapDYN = new SpriteSheet(this.Level_Dir + "/level.png", (ImageIO.read(XML_Level.class.getResource((this.Level_Dir + "/level.png")))).getWidth());
 					

@@ -7,8 +7,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
@@ -16,7 +19,6 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
 import com.IB.SL.entity.mob.Mob;
-import com.IB.SL.entity.mob.Mob.DIRECTION;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.entity.mob.XML_Mob;
@@ -28,13 +30,12 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.Weather.Rain;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
 
 
-public class Level implements Serializable {
+public class Level extends DefaultHandler implements Serializable {
 	/**
 	 * 
 	 */
@@ -225,6 +226,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 
 	}
 
+	
+
+	
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
@@ -688,7 +692,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 				solidtwo = true;
 		}
 		return solidtwo;
-
 	}
 	
 	private void renderMiniMap(Screen screen) {

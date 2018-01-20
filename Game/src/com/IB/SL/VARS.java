@@ -2,6 +2,9 @@ package com.IB.SL;
 
 public class VARS {
 	
+	//VALIDATIONS
+	public static final String VAL_TILED_VER = "1.1.1";
+	
 	//DRAWING
 	public static final String REND_LOCALLY = "relative";
 	public static final String REND_WIREFRAME = "wireframe";
