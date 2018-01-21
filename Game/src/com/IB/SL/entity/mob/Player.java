@@ -382,19 +382,19 @@ public class Player extends Mob implements Serializable{
 			cmdReleased = false;
 		}
 		
-		if(!input.commandMode) cmdReleased = true;
-		
-		if(input.commandMode && commandModeOn && cmdReleased){
-			commandModeOn = false;
-			cmdReleased = false;
-				
+			if (!input.commandMode)
+				cmdReleased = true;
+
+			if (input.commandMode && commandModeOn && cmdReleased) {
+				commandModeOn = false;
+				cmdReleased = false;
 			}
-		
-			}
-				
+
+		}
+
 		updateShooting();
-			}
-	
+	}
+
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
 			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);

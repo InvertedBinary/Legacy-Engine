@@ -16,18 +16,19 @@ import com.IB.SL.VARS;
 import com.IB.SL.level.Level;
 
 public class Tiled_Level extends Level {
+	private static final long serialVersionUID = 1L;
 
 	String path = "";
 	
 	String tiled_xml = "";
 	String tiled_version = "";
 	
-	boolean readingTiles = false;
+	boolean readingLayer = false;
+	int current_layer = -1;
 
 	String tile_string = "";
 	String overlay_string = "";
 
-	int current_layer = -1;
 	
 	public Tiled_Level(String path) {
 		super(path);
@@ -82,7 +83,7 @@ public class Tiled_Level extends Level {
              
              case "data": {
             	 if (attributes.getValue("encoding").equals("csv")) {
-            		 readingTiles = true;
+            		 readingLayer = true;
             	 } else {
             		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "Tiled_Level.java", true);
             		 Boot.get().quit();
@@ -94,11 +95,11 @@ public class Tiled_Level extends Level {
 	
 	@Override
     public void characters(char ch[], int start, int length) throws SAXException {
-		if (readingTiles && this.current_layer == 0) {
+		if (readingLayer && this.current_layer == 0) {
            this.tile_string += ((new String(ch, start, length)));
 		}
 		
-		if (readingTiles && this.current_layer == 1) {
+		if (readingLayer && this.current_layer == 1) {
 	       this.overlay_string += ((new String(ch, start, length)));
 		}
     }
@@ -107,7 +108,7 @@ public class Tiled_Level extends Level {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		switch (qName) {
         case "data": {
-			this.readingTiles = false;
+			this.readingLayer = false;
 
 			if (this.current_layer == 0) {
 				this.tiles = explodeTileString(this.tile_string);

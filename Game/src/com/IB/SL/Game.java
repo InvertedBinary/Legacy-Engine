@@ -242,6 +242,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public static String lvl_name = "test;";
+
 	public static void createNewPresence(){
 //		  DiscordRichPresence rich = new DiscordRichPresence();
 //		  rich.details = "On Level: " + (lvl_name);

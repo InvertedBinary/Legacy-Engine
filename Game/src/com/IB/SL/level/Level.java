@@ -1258,11 +1258,10 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	
 	
 	public Tile getOverlayTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) return null;
+		if (x < 0 || y < 0 || x >= width || y >= height || (overlayTiles[x + y * width]) == 0) return null;
 		
 		Tile t = Tile.TileIndex.get((overlayTiles[x + y * width]));
-		t = (t == null) ? Tile.VoidTile : t;
-
+		
 		return t;
 	}
 

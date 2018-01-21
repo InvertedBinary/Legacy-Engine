@@ -83,11 +83,7 @@ public abstract  class Mob extends Entity implements Serializable {
 					this.setY(this.y() + abs(ya));
 					this.canJump = false;
 				} else {
-					if (this.vel().y > 0) {
-					doFallDamage();
-					this.vel().y = 0;
-					this.canJump = true;
-					}
+					this.yAxisCollisionResponse(ya);
 				}
 				ya -= abs(ya);
 			} else {
@@ -95,14 +91,22 @@ public abstract  class Mob extends Entity implements Serializable {
 					this.setY(this.y() + ya);
 					this.canJump = false;
 				} else {
-					if (this.vel().y > 0) {
-					doFallDamage();
-					this.vel().y = 0;
-					this.canJump = true;
-					}
+					this.yAxisCollisionResponse(ya);
 				}
 				ya = 0;
 			}
+		}
+	}
+	
+	public void yAxisCollisionResponse(double ya) {
+		if (this.vel().y > 0) {
+		doFallDamage();
+		this.vel().y = 0;
+		this.canJump = true;
+		}
+		if (ya < 0) {
+			this.vel().y = VARS.Ag;
+			this.canJump = false;
 		}
 	}
 	
