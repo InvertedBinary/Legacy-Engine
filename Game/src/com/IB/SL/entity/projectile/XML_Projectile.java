@@ -54,7 +54,7 @@ public class XML_Projectile extends Projectile {
 		
 		doc.getDocumentElement().normalize();
 		
-		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		//System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
 		
 		initProjectile(doc);
 		
@@ -66,10 +66,10 @@ public class XML_Projectile extends Projectile {
 	
 	public void initProjectile(Document doc) {
 		NodeList nList = doc.getElementsByTagName("projectile");
-		System.out.println("----------------------------");
+		//System.out.println("----------------------------");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
+			//System.out.println("\nCurrent Element :" + nNode.getNodeName());
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				try {

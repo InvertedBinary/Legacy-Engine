@@ -342,11 +342,16 @@ public class Player extends Mob implements Serializable{
 		
 		//System.out.println(this.vel());
 		
+		if (xa != 0 || ya != 0) {
+			Game.createNewPresence();
+		}
+		
 		if (xa != 0) {
 			walking = true;
 		} else {
 			walking = false;
 		}
+		
 		
 			if (!noclip) {
 				move(xa, ya);
@@ -377,19 +382,19 @@ public class Player extends Mob implements Serializable{
 			cmdReleased = false;
 		}
 		
-		if(!input.commandMode) cmdReleased = true;
-		
-		if(input.commandMode && commandModeOn && cmdReleased){
-			commandModeOn = false;
-			cmdReleased = false;
-				
+			if (!input.commandMode)
+				cmdReleased = true;
+
+			if (input.commandMode && commandModeOn && cmdReleased) {
+				commandModeOn = false;
+				cmdReleased = false;
 			}
-		
-			}
-				
+
+		}
+
 		updateShooting();
-			}
-	
+	}
+
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
 			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
@@ -446,7 +451,8 @@ public class Player extends Mob implements Serializable{
 		
 		
 		//((XML_Level)Boot.get().levels.get(Boot.get().levels.size() - 1)).luaThread.stop();
-		
+		Game.createNewPresence();
+
 	}
 	
 	public void setPosition(double x, double y, int LvlId, boolean tileMult) {
@@ -724,7 +730,8 @@ public class Player extends Mob implements Serializable{
 		if (Game.devModeOn) {
 			//screen.drawRect((int) x() - 8, (int) y() - 15, 64, 64, 0x0093FF, true);
 			body.draw(screen);
-			//this.pos.draw(screen);
+			//this.pos().draw(screen);
+			//this.vel().draw(screen);
 			try {
 				//Boot.get().getScreen().drawVectors(Boot.get().getLevel().BresenhamLine((int) x(), (int) y(),
 				//	raycastDIR.rayVector.x, raycastDIR.rayVector.y), 0xffFF3AFB, true);

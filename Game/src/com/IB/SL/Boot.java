@@ -16,7 +16,7 @@ import com.IB.SL.AlphaLWJGL.LWJGL;
 
 public class Boot {
 
-	public static String title = "Square Legacy 2 [Build 1 : 10/31/17]";
+	public static String title = "Legacy Engine [Build 1 : 10/31/17 - 1/20/18]";
 	private static Game g = new Game(title);
 	//private static LWJGL lwjgl = new LWJGL(title);
 
@@ -34,6 +34,7 @@ public class Boot {
     	}
     	
 		//lwjgl.start();
+    	
     	
 		g.Launch(g);
 
@@ -103,7 +104,7 @@ public class Boot {
 	
 	public static void log(String text, String outboundClass, boolean err) {
 		if (!err) {			
-			System.out.println(" >> " + text);
+			System.out.println(outboundClass + " >> " + text);
 		} else {
 			System.err.print(outboundClass + " >> ALERT: ");
 				System.out.println(text);

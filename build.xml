@@ -33,7 +33,7 @@
 			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-jme-3.0.1.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-jse-3.0.1.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/luaj-sources-3.0.1.jar"/>
-       
+       		<zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/Game/lib/discord-rpc-0.9-BETA-4.jar"/>
 	   </jar>
 	<!--javac srcdir="${sourceDir}" destdir="${outputDir}" /-->
     </target>

@@ -328,7 +328,7 @@ public void renderTile(int xp, int yp, Sprite sprite) {
 			//if (color != ALPHA_COL) pixels[xa + ya * width] = color;
 				if (color != ALPHA_COL) {
 					pixels[xa + ya * width] = color;
-				    color = MyColor.changeBrightness(color, Level.brightness, false);
+				    //color = MyColor.changeBrightness(color, Level.brightness, false);
 				    pixels[(int) (xa + ya * width)] = color;
 				}
 	}

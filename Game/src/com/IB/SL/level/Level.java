@@ -7,8 +7,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
@@ -16,7 +19,6 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
 import com.IB.SL.entity.mob.Mob;
-import com.IB.SL.entity.mob.Mob.DIRECTION;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.entity.mob.XML_Mob;
@@ -28,13 +30,12 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.Weather.Rain;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.level.tile.tiles.Water;
 import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
 
 
-public class Level implements Serializable {
+public class Level extends DefaultHandler implements Serializable {
 	/**
 	 * 
 	 */
@@ -225,6 +226,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 
 	}
 
+	
+
+	
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
@@ -688,7 +692,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 				solidtwo = true;
 		}
 		return solidtwo;
-
 	}
 	
 	private void renderMiniMap(Screen screen) {
@@ -741,8 +744,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					    tile.render(x,y,screen);
 					    Tile overlayTile = getOverlayTile(x,y);
 					    if (overlayTile != null) overlayTile.render(x,y,screen);
-					    Tile torchTiles = getTorchTile(x,y);
-					    if (torchTiles != null) torchTiles.render(x,y,screen);
+					    //Tile torchTiles = getTorchTile(x,y);
+					    //if (torchTiles != null) torchTiles.render(x,y,screen);
 					    if (setTiles != null) setTiles.render(x, y, screen);
 
 					  }
@@ -1253,26 +1256,26 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		tiles_anim.add(e);
 	}*/
 	
+	
+	public Tile getOverlayTile(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height || (overlayTiles[x + y * width]) == 0) return null;
+		
+		Tile t = Tile.TileIndex.get((overlayTiles[x + y * width]));
+		
+		return t;
+	}
 
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return Tile.VoidTile;
-		}
-		
-		if (Boot.get().getScreen().hasAlpha(tiles[x + y * width])) {
-			return Tile.Air;
-		}
-		
+		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.VoidTile;
 		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
-		if (t == null) {
-			t = Tile.VoidTile;
-		} else {
-		}
+		t = (t == null) ? Tile.VoidTile : t;
+
 		return t;
 	}
 	
-	public Tile getTileLegacy(int x, int y) {				
+	@Deprecated
+	public Tile getTile_Legacy(int x, int y) {				
 		
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.VoidTile;
@@ -1412,7 +1415,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		return Tile.VoidTile;
 	}
 	
-	public Tile getOverlayTile(int x, int y) {
+	@Deprecated
+	public Tile getOverlayTile_Legacy(int x, int y) {
 		  if (x < 0 || y < 0 || x >= width || y >= height) return null;
 		//  if (overlayTiles != null) {
 		    if (overlayTiles[x + y * width] == Cactus)
@@ -1509,11 +1513,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		
 	}
 	
-public void resetLevelPostDeath(Player player) {
+
+	public void resetLevelPostDeath(Player player) {
 	//add(player);
 	//player.setPosition(52, 78, Maps.spawnHavenId, true);
 	}
 
+	@Deprecated
 	public Tile getTorchTile(int x, int y) {
 		  if (x < 0 || y < 0 || x >= width || y >= height) return null;
 		//  if (torchTiles != null) {
