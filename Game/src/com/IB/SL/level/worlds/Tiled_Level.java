@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.level.Level;
-import com.IB.SL.level.tile.Tile;
 
 public class Tiled_Level extends Level {
 
@@ -24,8 +23,11 @@ public class Tiled_Level extends Level {
 	String tiled_version = "";
 	
 	boolean readingTiles = false;
-	int[] xml_tiles;
+
 	String tile_string = "";
+	String overlay_string = "";
+
+	int current_layer = -1;
 	
 	public Tiled_Level(String path) {
 		super(path);
@@ -64,9 +66,18 @@ public class Tiled_Level extends Level {
               	
            	  this.width = Integer.parseInt(attributes.getValue("width"));
            	  this.height = Integer.parseInt(attributes.getValue("height"));
-           	  xml_tiles = new int[width * height];
            	  
            	  break;
+             }
+             
+             case "layer": {
+            	 String ln = attributes.getValue("name");
+            	 if (ln.equals("Tiles")) {
+            		 this.current_layer = 0;
+            	 } else if (ln.equals("Overlays")) {
+            		 this.current_layer = 1;
+            	 }
+            	 break;
              }
              
              case "data": {
@@ -76,14 +87,19 @@ public class Tiled_Level extends Level {
             		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "Tiled_Level.java", true);
             		 Boot.get().quit();
             	 }
+            	 break;
              }
         }
 	}
 	
 	@Override
     public void characters(char ch[], int start, int length) throws SAXException {
-		if (readingTiles) {
+		if (readingTiles && this.current_layer == 0) {
            this.tile_string += ((new String(ch, start, length)));
+		}
+		
+		if (readingTiles && this.current_layer == 1) {
+	       this.overlay_string += ((new String(ch, start, length)));
 		}
     }
 	
@@ -92,76 +108,41 @@ public class Tiled_Level extends Level {
 		switch (qName) {
         case "data": {
 			this.readingTiles = false;
-			
-			//System.out.println("TILES: " + this.tile_string);
-			List<String> items = Arrays.asList(tile_string.split("\\s*,\\s*"));
-			for (int i = 0; i < items.size(); i++) {
-				String str = items.get(i);
-				int id = -1;
-				
-				try {
-					id = Integer.parseInt(str);
-				} catch (NumberFormatException e) {}
-				
-				if (id != -1) {
-					xml_tiles[i] = id;
-				}
-			}
-			
 
-			this.tiles = xml_tiles;
-			this.overlayTiles = xml_tiles;
-			this.torchTiles = xml_tiles;
+			if (this.current_layer == 0) {
+				this.tiles = explodeTileString(this.tile_string);
+			}
+
+			if (this.current_layer == 1) {
+				//System.out.println("OVERLAY TILES: " + this.overlay_string);
+				this.overlayTiles = explodeTileString(this.overlay_string);
+			}
+			this.torchTiles = new int[width * height];
 		}
 
 		case "map": {
-			//for (int i = 0; i < tiles.length; i++) {
-			//	System.out.println(tiles[i]);
-			//}
 			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
 		}
 		}
 	}
 	
+	public int[] explodeTileString(String tiles) {
+     	int[] xml_tiles = new int[width * height];
 
-	/*public void readXML(String path, String root, String tag) {
-		try {
-			File fXmlFile = new File(path);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+		List<String> items = Arrays.asList(tiles.split("\\s*,\\s*"));
+		for (int i = 0; i < items.size(); i++) {
+			String str = items.get(i);
+			int id = -1;
 			
-			doc.getDocumentElement().normalize();
+			try {
+				id = Integer.parseInt(str);
+			} catch (NumberFormatException e) {}
 			
-			System.out.println("Root Element: " + doc.getDocumentElement());
-			
-			NodeList nList = doc.getElementsByTagName(root);
-			
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element e = (Element) nNode;
-					
-					
-					
-					getContent(e, "layer");
-		 //<layer name="Tile Layer 1" width="100" height="50" offsetx="2" offsety="-27.6667">
-
-				}
+			if (id != -1) {
+				xml_tiles[i] = id;
 			}
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			e.printStackTrace();
 		}
+		return xml_tiles;
 	}
 	
-	public String getContent(Element e, String tag) {
-		return e.getElementsByTagName(tag).item(0).getTextContent();
-	}
-	
-	public String getAttribute(Element e, String tag) {
-		return e.getAttribute(tag);
-	}*/
 }

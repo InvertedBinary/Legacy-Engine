@@ -744,8 +744,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					    tile.render(x,y,screen);
 					    Tile overlayTile = getOverlayTile(x,y);
 					    if (overlayTile != null) overlayTile.render(x,y,screen);
-					    Tile torchTiles = getTorchTile(x,y);
-					    if (torchTiles != null) torchTiles.render(x,y,screen);
+					    //Tile torchTiles = getTorchTile(x,y);
+					    //if (torchTiles != null) torchTiles.render(x,y,screen);
 					    if (setTiles != null) setTiles.render(x, y, screen);
 
 					  }
@@ -1256,29 +1256,27 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		tiles_anim.add(e);
 	}*/
 	
+	
+	public Tile getOverlayTile(int x, int y) {
+		if (x < 0 || y < 0 || x >= width || y >= height) return null;
+		
+		Tile t = Tile.TileIndex.get((overlayTiles[x + y * width]));
+		t = (t == null) ? Tile.VoidTile : t;
+
+		return t;
+	}
 
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return Tile.VoidTile;
-		}
-		
-	/*	if (Boot.get().getScreen().hasAlpha(tiles[x + y * width])) {
-			return Tile.Air;
-		}*/
-		
+		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.VoidTile;
 		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
-		//System.out.println("TILE INDEX: " + Tile.TileIndex.toString());
+		t = (t == null) ? Tile.VoidTile : t;
 
-		
-		if (t == null) {
-			t = Tile.VoidTile;
-		} else {
-		}
 		return t;
 	}
 	
-	public Tile getTileLegacy(int x, int y) {				
+	@Deprecated
+	public Tile getTile_Legacy(int x, int y) {				
 		
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.VoidTile;
@@ -1418,7 +1416,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		return Tile.VoidTile;
 	}
 	
-	public Tile getOverlayTile(int x, int y) {
+	@Deprecated
+	public Tile getOverlayTile_Legacy(int x, int y) {
 		  if (x < 0 || y < 0 || x >= width || y >= height) return null;
 		//  if (overlayTiles != null) {
 		    if (overlayTiles[x + y * width] == Cactus)
@@ -1515,11 +1514,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		
 	}
 	
-public void resetLevelPostDeath(Player player) {
+
+	public void resetLevelPostDeath(Player player) {
 	//add(player);
 	//player.setPosition(52, 78, Maps.spawnHavenId, true);
 	}
 
+	@Deprecated
 	public Tile getTorchTile(int x, int y) {
 		  if (x < 0 || y < 0 || x >= width || y >= height) return null;
 		//  if (torchTiles != null) {

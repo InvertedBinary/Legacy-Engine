@@ -8,27 +8,6 @@
 	<!-- Scenery -->
 	<tile sprite="DresserTop" id="580" solid="true" projSolid="true" isExitTile="false">DresserTop</tile>
 	<tile sprite="DresserBottom" id="612" solid="true" projSolid="true" isExitTile="false">DresserBottom</tile>
+	<tile sprite="RedBed" id="561" solid="false" projSolid="false" isExitTile="false">RedBed</tile>
 
-	
-	
-	<tile sprite="Swamp" id="0xff956533" solid="false" projSolid="false" isExitTile="false">Swamp</tile>
-	<tile sprite="CobbleStone" id="0xffF2F2F2" solid="false" projSolid="false" isExitTile="false">Cobblestone</tile>
-	<tile sprite="PathDirt" id="0xff99A53D" solid="false" projSolid="false" isExitTile="false">PathDirt</tile>
-
-	<!-- Floor -->
-	<tile sprite="CobbleStone" id="0xff4C4C4C" solid="false" projSolid="false" isExitTile="false">StoneBrick</tile>
-	<tile sprite="Wood" id="0xffFFBC75" solid="false" projSolid="false" isExitTile="false">Wood</tile>
-	<tile sprite="Sand" id="0xffFFFCB2" solid="false" projSolid="false" isExitTile="false">Sand</tile>
-	<tile sprite="SandBrick" id="0xffD8D697" solid="false" projSolid="false" isExitTile="false">SandBrick</tile>
-
-	<!-- Walls -->
-	<tile sprite="CobbleStoneWall" id="0xff727272" solid="true" projSolid="true" isExitTile="false">CobbleStoneWall</tile>
-	<tile sprite="StoneBrickWall" id="0xff333333" solid="true" projSolid="true" isExitTile="false">StoneBrickWall</tile>
-	<tile sprite="SandBrickWall" id="0xffBFBC85" solid="true" projSolid="true" isExitTile="false">SandBrickWall</tile>
-	<tile sprite="SandWall" id="0xffE5E3A0" solid="true" projSolid="true" isExitTile="false">SandBrickWall</tile>
-
-	<!-- Ceilings -->
-	<tile sprite="CobblestoneCeiling" id="0xff7F7F7F" solid="true" projSolid="true" isExitTile="false">CobbleStoneCeiling</tile>
-	<tile sprite="StoneBrickCeiling" id="0xff3F3F3F" solid="true" projSolid="true" isExitTile="false">StoneBrickCeil</tile>
-	<tile sprite="SandBrickCeiling" id="0xffCCC98E" solid="true" projSolid="true" isExitTile="false">SandBrickCeil</tile>
 </Tiles>
