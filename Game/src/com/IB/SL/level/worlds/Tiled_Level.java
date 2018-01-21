@@ -1,24 +1,20 @@
 package com.IB.SL.level.worlds;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.level.Level;
+import com.IB.SL.level.tile.Tile;
 
 public class Tiled_Level extends Level {
 
@@ -26,7 +22,11 @@ public class Tiled_Level extends Level {
 	
 	String tiled_xml = "";
 	String tiled_version = "";
-
+	
+	boolean readingTiles = false;
+	int[] xml_tiles;
+	String tile_string = "";
+	
 	public Tiled_Level(String path) {
 		super(path);
 		
@@ -38,7 +38,7 @@ public class Tiled_Level extends Level {
 	}
 	
 	protected void loadLevel(String path) {
-		path =  this.tiled_xml;
+		path = this.tiled_xml;
 		
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
@@ -51,41 +51,80 @@ public class Tiled_Level extends Level {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-	  	System.out.println("TiledMap Pre-Height: " + height);
-
         switch (qName) {
              case "map": {
               this.tiled_version = attributes.getValue("tiledversion");
-              Boot.log(this.tiled_version.equals(VARS.VAL_TILED_VER) ? "Using a Valid Version of Tiled!" : "This Version of Tiled may not be Supported!", "Tiled_Level", false);
+              Boot.log(this.tiled_version.equals(VARS.VAL_TILED_VER) ? "Using a Valid Version of Tiled!" : "This Version of Tiled may not be Supported!", "Tiled_Level.java", false);
               	
            	  this.width = Integer.parseInt(attributes.getValue("width"));
            	  this.height = Integer.parseInt(attributes.getValue("height"));
-           	  	System.out.println("TiledMap Post-Height: " + height);
+           	  xml_tiles = new int[width * height];
+           	  
            	  break;
+             }
+             
+             case "data": {
+            	 if (attributes.getValue("encoding").equals("csv")) {
+            		 readingTiles = true;
+            	 } else {
+            		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "Tiled_Level.java", true);
+            		 Boot.get().quit();
+            	 }
              }
         }
 	}
-
-	// A start tag is encountered.
-	/*@Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes)
-         throws SAXException {
 	
-    }*/
-	
-	
-    
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-         switch (qName) {
-         }
+	@Override
+    public void characters(char ch[], int start, int length) throws SAXException {
+		if (readingTiles) {
+           this.tile_string += ((new String(ch, start, length)));
+		}
     }
+	
+	@Override
+	public void endElement(String uri, String localName, String qName) throws SAXException {
+		switch (qName) {
+        case "data": {
+			this.readingTiles = false;
+			
+			//System.out.println("TILES: " + this.tile_string);
+			List<String> items = Arrays.asList(tile_string.split("\\s*,\\s*"));
+			for (int i = 0; i < items.size(); i++) {
+				String str = items.get(i);
+				int id = -1;
+				
+				try {
+					id = Integer.parseInt(str);
+				} catch (NumberFormatException e) {}
+				
+				if (id != -1) {
+					xml_tiles[i] = id;
+				}
+			}
+			
 
-	public void readXML(String path, String root, String tag) {
+			this.tiles = xml_tiles;
+			this.overlayTiles = xml_tiles;
+			this.torchTiles = xml_tiles;
+		}
+
+		case "map": {
+			//for (int i = 0; i < tiles.length; i++) {
+			//	System.out.println(tiles[i]);
+			//}
+			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
+		}
+		}
+	}
+	
+
+	/*public void readXML(String path, String root, String tag) {
 		try {
 			File fXmlFile = new File(path);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -124,5 +163,5 @@ public class Tiled_Level extends Level {
 	
 	public String getAttribute(Element e, String tag) {
 		return e.getAttribute(tag);
-	}
+	}*/
 }

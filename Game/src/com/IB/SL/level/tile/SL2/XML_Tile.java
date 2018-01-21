@@ -11,7 +11,7 @@ public class XML_Tile extends Tile {
 
 
 	public stepSound st;
-	public int hex;
+	public int id;
 	public boolean solid = false;
 	public boolean solidTwo = false;
 	public boolean isExit = false;
@@ -22,7 +22,7 @@ public class XML_Tile extends Tile {
 	public XML_Tile(String name, Sprite sprite, stepSound st, int hex, boolean solid, boolean solidTwo, boolean isExit) {
 		this.sprite = sprite;
 		this.st = st;
-		this.hex = hex;
+		this.id = hex;
 		this.solid = solid;
 		this.solidTwo = solidTwo;
 		this.isExit = isExit;
@@ -32,15 +32,15 @@ public class XML_Tile extends Tile {
 	public XML_Tile(Sprite sprite, stepSound st, int hex) {
 		super(sprite);
 		this.st = st;
-		this.hex = hex;
+		this.id = hex;
 	}
 	
 	public void render(int x, int y, Screen screen) {
 		screen.renderTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, sprite);
 }
 	
-	public int getHex() {
-		return hex;
+	public int getID() {
+		return id;
 	}
 	
 	public stepSound StepSound() {

@@ -155,6 +155,7 @@ public class Tile {
 		doc.getDocumentElement().normalize();
 		
 		//System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
+		TileIndex.put(0, Air);
 		buildTiles(doc);
 
 		} catch (Exception e) {
@@ -171,7 +172,8 @@ public class Tile {
 				for (int i = 0; i < (((Element) nNode).getElementsByTagName("tile").getLength()); i++) {
 					try {
 						Element e = (Element) ((Element) nNode).getElementsByTagName("tile").item(i);
-						int hex = Long.decode(e.getAttribute("hex")).intValue();
+						//int hex = Long.decode(e.getAttribute("hex")).intValue();
+						int id = Integer.parseInt(e.getAttribute("id"));
 						boolean solid = (Boolean.parseBoolean(e.getAttribute("solid")));
 						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
 						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExit")));
@@ -185,8 +187,8 @@ public class Tile {
 										+ ", GG: " + (hex >> 8)
 										+ ", BB: " + (hex >> 16));*/
 
-						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, hex, solid, solidTwo, isExit);
-						TileIndex.put(hex, t);
+						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, id, solid, solidTwo, isExit);
+						TileIndex.put(id, t);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

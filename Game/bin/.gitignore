@@ -1,11 +1,5 @@
-/com/
-/easyogg.jar
-/jogg-0.0.7.jar
-/jorbis-0.0.15.jar
-/luaj-jme-3.0.1.jar
-/luaj-jse-3.0.1.jar
-/luaj-sources-3.0.1.jar
 /lwjgl3/
+/com/
 /old_easyogg/
 /startup2.jar
 /test.bat

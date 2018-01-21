@@ -197,10 +197,11 @@ public class Game extends Canvas implements Runnable {
 		tile.readXML("/XML/Tiles/TileDefinitions.xml");
 		
 
-		setLevel(new XML_Level(Maps.ForestLevel));
+		//setLevel(new XML_Level(Maps.ForestLevel));
 		Tiled_Level TL = new Tiled_Level("XML/Levels/b10");
+		setLevel(TL);
 		
-		playerSpawn = new TileCoord(0, 20);
+		playerSpawn = new TileCoord(1, 38);
 
 		// TileCoord playerSpawn = new TileCoord(296, 381);
 		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, Entity.genUUID(), null, -1));

@@ -1262,12 +1262,15 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			return Tile.VoidTile;
 		}
 		
-		if (Boot.get().getScreen().hasAlpha(tiles[x + y * width])) {
+	/*	if (Boot.get().getScreen().hasAlpha(tiles[x + y * width])) {
 			return Tile.Air;
-		}
+		}*/
 		
 		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
+		//System.out.println("TILE INDEX: " + Tile.TileIndex.toString());
+
+		
 		if (t == null) {
 			t = Tile.VoidTile;
 		} else {
