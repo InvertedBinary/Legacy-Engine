@@ -580,8 +580,12 @@ public class Sprite {
 	public static Sprite Stove = new Sprite(TileCoord.TILE_SIZE, 23, 19, SpriteSheet.blocks);
 
 
-
 	
+	// NEW TILES:
+	public static Sprite CabinetTop = new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.blocks);
+	public static Sprite CabinetBottom = new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.blocks);
+	public static Sprite Barrier = new Sprite(1, 1, 0xffFF00FF);
+
 	protected Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1;
 		this.width = width;

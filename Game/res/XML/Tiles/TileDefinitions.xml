@@ -6,8 +6,12 @@
 	<tile sprite="PathDirt" id="16" solid="true" projSolid="true" isExitTile="false">PathDirt</tile>
 
 	<!-- Scenery -->
-	<tile sprite="DresserTop" id="580" solid="true" projSolid="true" isExitTile="false">DresserTop</tile>
-	<tile sprite="DresserBottom" id="612" solid="true" projSolid="true" isExitTile="false">DresserBottom</tile>
+	<tile sprite="CabinetTop" id="580" solid="true" projSolid="true" isExitTile="false">DresserTop</tile>
+	<tile sprite="CabinetBottom" id="612" solid="true" projSolid="true" isExitTile="false">DresserBottom</tile>
 	<tile sprite="RedBed" id="561" solid="false" projSolid="false" isExitTile="false">RedBed</tile>
 
+	<!-- Map Tools -->
+	<tile sprite="Barrier" id="1024" solid="true" projSolid="false" isExitTile="false">Barrier</tile>
+
+	
 </Tiles>

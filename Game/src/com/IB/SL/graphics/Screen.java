@@ -21,7 +21,7 @@ import com.IB.SL.util.Vector2i;
 
 public class Screen {
 
-	public int width, height;
+	public int width, height; // 20 TILES LONG
 	public int[] pixels;
 	public int xOffset, yOffset;
 	private Random random = new Random();

@@ -498,10 +498,19 @@ public class Game extends Canvas implements Runnable {
 		double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2 : getPlayer().x() - screen.width / 2;
 		double ySp = getPlayer().y() - screen.height / 2;
 		
-		Boot.get().xScroll = xSp;
-		Boot.get().yScroll = ySp;
+		double rScroll = xSp + (screen.width);
+		double bScroll = ySp + (screen.height);
 		
-		
+		double maxw = getLevel().width << VARS.TILE_BIT_SHIFT;
+		double maxh = getLevel().height << VARS.TILE_BIT_SHIFT;
+
+		if (xSp < 0) {
+			xScroll = 0;
+		} else {
+			Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+		}
+		Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
+			
 		getLevel().render((int) (xScroll), (int) (yScroll), screen);
 		gui.render(screen);
 				
