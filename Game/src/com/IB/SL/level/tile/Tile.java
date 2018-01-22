@@ -177,7 +177,7 @@ public class Tile {
 						boolean solid = (Boolean.parseBoolean(e.getAttribute("solid")));
 						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
 						boolean jumpThrough = (Boolean.parseBoolean(e.getAttribute("jumpThrough")));
-						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExit")));
+						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExitTile")));
 						Field field = Sprite.class.getField(e.getAttribute("sprite"));
 						Sprite sp = (Sprite) field.get(field.getType());
 						String name = (e.getTextContent());

@@ -38,11 +38,12 @@ public class Tiled_Level extends Level {
 	public HashMap<String, String> props = new HashMap<String, String>();
 	
 	public ArrayList<LevelExit> exits;
+;
 
 	
 	public Tiled_Level(String path) {
 		super(path);
-		
+
 		String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
 
 		this.tiled_xml = path + "/" + lvn + ".tmx";
@@ -52,8 +53,7 @@ public class Tiled_Level extends Level {
 	
 	protected void loadLevel(String path) {
 		path = this.tiled_xml;
-		exits = new ArrayList<LevelExit>();
-
+		
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
 		
@@ -108,13 +108,12 @@ public class Tiled_Level extends Level {
              }
              
              case "object": {
-            	 this.props = new HashMap<String, String>();
             	 this.current_object_type = attributes.getValue("type");
-            	 if (this.current_object_type == "Exit_Zone") {
+            	 if (this.current_object_type.equals("Exit_Zone")) {
             		 this.props.put("x", attributes.getValue("x"));
-            		 this.props.put("y", attributes.getValue("x"));
-            		 this.props.put("width", attributes.getValue("x"));
-            		 this.props.put("height", attributes.getValue("x"));
+            		 this.props.put("y", attributes.getValue("y"));
+            		 this.props.put("width", attributes.getValue("width"));
+            		 this.props.put("height", attributes.getValue("height"));
             	 }
             	 break;
              }
@@ -155,22 +154,30 @@ public class Tiled_Level extends Level {
 		}
 
         case "properties": {
-        	if (this.current_object_type == "Exit_Zone") {
+        	if (this.current_object_type != null) {
+        	if (this.current_object_type.equals("Exit_Zone")) {
         		LevelExit e = new LevelExit(this.toInt(props.get("x")), this.toInt(props.get("y")), this.toInt(props.get("width")), this.toInt(props.get("height")), props.get("To"), this.toInt(props.get("To_X")), this.toInt(props.get("To_Y")));
-        		this.exits.add(e);
+        		addExit(e);
+        		}
         	}
+        	this.props = new HashMap<String, String>();
         }
 
         case "map": {
 			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
 		}
-		
-		
 		}
 	}
 	
+	public void addExit(LevelExit e) {
+		if (this.exits == null) {
+			this.exits = new ArrayList<LevelExit>();
+		}
+		exits.add(e);
+	}
+	
 	public int toInt(String s) {
-		return Integer.parseInt(s);
+		return (int)Double.parseDouble(s);
 	}
 	
 	public int[] explodeTileString(String tiles) {

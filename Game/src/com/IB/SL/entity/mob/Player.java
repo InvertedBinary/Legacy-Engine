@@ -32,6 +32,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.MainLevel;
 import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
+import com.IB.SL.level.worlds.Tiled_Level;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
@@ -242,7 +243,7 @@ public class Player extends Mob implements Serializable{
 		tileY = (int) y() >> VARS.TILE_BIT_SHIFT;
 		try {
 			if (level.getOverlayTile(tileX, tileY).exit()) {
-				level.checkExits(this, level, tileX, tileY);
+				level.checkExits(this, level, (int)x(), (int)y());
 			}
 		} catch (Exception e) {
 
@@ -422,10 +423,26 @@ public class Player extends Mob implements Serializable{
 	
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
 		System.out.println("Got request to switch level");
+		if (tileMult) {
+			x *= TileCoord.TILE_SIZE;
+			y *= TileCoord.TILE_SIZE;
+		}
+		this.currentLevelId = -1;
+
+		Tiled_Level newLevel = new Tiled_Level(XML);
+		Boot.get().setLevel(newLevel);
+		Boot.get().getLevel().add(this);
+
+		this.removed = false;
+		this.setX((x));
+		this.setY((y));
+		//newLevel.initLua();
+		
+		Game.createNewPresence();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Deprecated
+	@SuppressWarnings("deprecation")
 	public void setPositionXML(double x, double y, String XML, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);
@@ -434,10 +451,12 @@ public class Player extends Mob implements Serializable{
 			y *= TileCoord.TILE_SIZE;
 		}
 
-		if (((XML_Level)Boot.get().getLevel()).luaThread.isAlive()) {
-			((XML_Level)Boot.get().getLevel()).killLua();
-			((XML_Level)Boot.get().getLevel()).luaThread.interrupt();
-			((XML_Level)Boot.get().getLevel()).luaThread.stop();
+		if (Boot.get().getLevel() instanceof XML_Level) {
+			if (((XML_Level) Boot.get().getLevel()).luaThread.isAlive()) {
+				((XML_Level) Boot.get().getLevel()).killLua();
+				((XML_Level) Boot.get().getLevel()).luaThread.interrupt();
+				((XML_Level) Boot.get().getLevel()).luaThread.stop();
+			}
 		}
 		
 		this.currentLevelId = -1;
