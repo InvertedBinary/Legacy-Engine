@@ -2,7 +2,6 @@ package com.IB.SL.entity.mob;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;

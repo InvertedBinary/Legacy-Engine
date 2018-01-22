@@ -15,8 +15,6 @@ import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.level.worlds.Maps;
-import com.IB.SL.level.worlds.XML_Level;
 
 public class Commands {
 

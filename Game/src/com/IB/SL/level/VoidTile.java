@@ -1,6 +1,5 @@
 package com.IB.SL.level;
 
-import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;

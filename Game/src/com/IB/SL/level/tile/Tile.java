@@ -176,6 +176,7 @@ public class Tile {
 						int id = Integer.parseInt(e.getAttribute("id"));
 						boolean solid = (Boolean.parseBoolean(e.getAttribute("solid")));
 						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
+						boolean jumpThrough = (Boolean.parseBoolean(e.getAttribute("jumpThrough")));
 						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExit")));
 						Field field = Sprite.class.getField(e.getAttribute("sprite"));
 						Sprite sp = (Sprite) field.get(field.getType());
@@ -187,7 +188,7 @@ public class Tile {
 										+ ", GG: " + (hex >> 8)
 										+ ", BB: " + (hex >> 16));*/
 
-						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, id, solid, solidTwo, isExit);
+						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, id, solid, solidTwo, jumpThrough, isExit);
 						TileIndex.put(id, t);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -364,6 +365,10 @@ public class Tile {
 	}
 
 	public boolean solidtwo() {
+		return false;
+	}
+	
+	public boolean jumpThrough() {
 		return false;
 	}
 

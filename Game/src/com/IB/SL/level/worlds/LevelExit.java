@@ -4,24 +4,34 @@ import org.w3c.dom.Element;
 
 public class LevelExit {
 	
-	public String xml;
-	public int tx, ty;
-	public int xo, yo, w, h;
+	public String path;
+	public int send_x, send_y;
+	public int x, y, w, h;
 	
 	public LevelExit(Element eElement) {
-		xml = (eElement.getAttribute("to"));
+		path = (eElement.getAttribute("to"));
 		
-		tx = Integer.parseInt(eElement.getAttribute("x"));
-		ty = Integer.parseInt(eElement.getAttribute("y"));
+		send_x = Integer.parseInt(eElement.getAttribute("x"));
+		send_y = Integer.parseInt(eElement.getAttribute("y"));
 		
-		xo = Integer.parseInt(eElement.getAttribute("xo"));
-		yo = Integer.parseInt(eElement.getAttribute("yo"));
+		x = Integer.parseInt(eElement.getAttribute("xo"));
+		y = Integer.parseInt(eElement.getAttribute("yo"));
 		
 		w = Integer.parseInt(eElement.getAttribute("w"));
 		h = Integer.parseInt(eElement.getAttribute("h"));
 	}
 	
+	public LevelExit(int x, int y, int w, int h, String path, int sx, int sy) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.path = path;
+		this.send_x = sx;
+		this.send_y = sy;
+	}
+	
 	public String toString() {
-		return "A level exit to: " + this.xml + " at x: " + tx + " and y: " + ty;
+		return "A level exit to: " + this.path + " at x: " + send_x + " and y: " + send_y;
 	}
 }

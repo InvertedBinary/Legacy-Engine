@@ -15,7 +15,6 @@ import com.IB.SL.input.Mouse;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.tile.overlays.Pebble;
 import com.IB.SL.level.tile.tiles.MyColor;
 import com.IB.SL.util.Vector2i;
 

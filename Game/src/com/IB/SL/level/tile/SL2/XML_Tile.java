@@ -5,7 +5,6 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.util.shape.PhysicsBody;
-import com.IB.SL.util.shape.Rectangle;
 
 public class XML_Tile extends Tile {
 
@@ -15,16 +14,18 @@ public class XML_Tile extends Tile {
 	public boolean solid = false;
 	public boolean solidTwo = false;
 	public boolean isExit = false;
+	public boolean jumpThrough;
 	public String name = "";
 	
 	public PhysicsBody pb;
 	
-	public XML_Tile(String name, Sprite sprite, stepSound st, int hex, boolean solid, boolean solidTwo, boolean isExit) {
+	public XML_Tile(String name, Sprite sprite, stepSound st, int hex, boolean solid, boolean solidTwo, boolean jumpThrough, boolean isExit) {
 		this.sprite = sprite;
 		this.st = st;
 		this.id = hex;
 		this.solid = solid;
 		this.solidTwo = solidTwo;
+		this.jumpThrough = jumpThrough;
 		this.isExit = isExit;
 		this.name = name;
 	}
@@ -57,6 +58,10 @@ public class XML_Tile extends Tile {
 	
 	public boolean exit() {
 		return isExit;
+	}
+	
+	public boolean jumpThrough() {
+		return jumpThrough;
 	}
 	
 }

@@ -420,7 +420,12 @@ public class Player extends Mob implements Serializable{
 		this.setY(tileCoord.y());
 	}
 	
+	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
+		System.out.println("Got request to switch level");
+	}
+	
 	@SuppressWarnings("deprecation")
+	@Deprecated
 	public void setPositionXML(double x, double y, String XML, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);
@@ -455,6 +460,7 @@ public class Player extends Mob implements Serializable{
 
 	}
 	
+	@Deprecated
 	public void setPosition(double x, double y, int LvlId, boolean tileMult) {
 		//Entity[] es = level.entities.toArray(new Entity[level.entities.size()]);
 		//level.saveMobs(es);

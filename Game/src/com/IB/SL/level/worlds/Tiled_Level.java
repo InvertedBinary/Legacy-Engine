@@ -1,7 +1,9 @@
 package com.IB.SL.level.worlds;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
+import com.IB.SL.entity.mob.Player;
 import com.IB.SL.level.Level;
 
 public class Tiled_Level extends Level {
@@ -24,10 +27,17 @@ public class Tiled_Level extends Level {
 	String tiled_version = "";
 	
 	boolean readingLayer = false;
+	boolean readingObjects = false;
 	int current_layer = -1;
+	String current_object_layer = "";
+	String current_object_type = "";
 
 	String tile_string = "";
 	String overlay_string = "";
+
+	public HashMap<String, String> props = new HashMap<String, String>();
+	
+	public ArrayList<LevelExit> exits;
 
 	
 	public Tiled_Level(String path) {
@@ -42,7 +52,8 @@ public class Tiled_Level extends Level {
 	
 	protected void loadLevel(String path) {
 		path = this.tiled_xml;
-		
+		exits = new ArrayList<LevelExit>();
+
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
 		
@@ -90,6 +101,28 @@ public class Tiled_Level extends Level {
             	 }
             	 break;
              }
+             
+             case "objectgroup": {
+            	 this.current_object_layer = attributes.getValue("name");
+            	 break;
+             }
+             
+             case "object": {
+            	 this.props = new HashMap<String, String>();
+            	 this.current_object_type = attributes.getValue("type");
+            	 if (this.current_object_type == "Exit_Zone") {
+            		 this.props.put("x", attributes.getValue("x"));
+            		 this.props.put("y", attributes.getValue("x"));
+            		 this.props.put("width", attributes.getValue("x"));
+            		 this.props.put("height", attributes.getValue("x"));
+            	 }
+            	 break;
+             }
+             
+             case "property": {
+            	 this.props.put(attributes.getValue("name"), attributes.getValue("value"));
+            	 break;
+             }
         }
 	}
 	
@@ -121,10 +154,23 @@ public class Tiled_Level extends Level {
 			this.torchTiles = new int[width * height];
 		}
 
-		case "map": {
+        case "properties": {
+        	if (this.current_object_type == "Exit_Zone") {
+        		LevelExit e = new LevelExit(this.toInt(props.get("x")), this.toInt(props.get("y")), this.toInt(props.get("width")), this.toInt(props.get("height")), props.get("To"), this.toInt(props.get("To_X")), this.toInt(props.get("To_Y")));
+        		this.exits.add(e);
+        	}
+        }
+
+        case "map": {
 			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
 		}
+		
+		
 		}
+	}
+	
+	public int toInt(String s) {
+		return Integer.parseInt(s);
 	}
 	
 	public int[] explodeTileString(String tiles) {
@@ -144,6 +190,18 @@ public class Tiled_Level extends Level {
 			}
 		}
 		return xml_tiles;
+	}
+	
+	public void checkExits(Player player, Level level, int x, int y) {
+		// refresh();
+		for (int i = 0; i < exits.size(); i++) {
+			LevelExit exit = exits.get(i);
+			if (x >= exit.x && x <= (exit.x + exit.w)) {
+				if (y >= exit.y && y <= (exit.y + exit.h)) {
+					player.setPositionTiled(exit.send_x, exit.send_y, exit.path, true);
+				}
+			}
+		}
 	}
 	
 }

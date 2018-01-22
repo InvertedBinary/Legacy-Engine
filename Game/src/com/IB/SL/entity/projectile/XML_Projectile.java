@@ -1,6 +1,5 @@
 package com.IB.SL.entity.projectile;
 
-import java.awt.Rectangle;
 import java.io.InputStream;
 import java.util.concurrent.ThreadLocalRandom;
 

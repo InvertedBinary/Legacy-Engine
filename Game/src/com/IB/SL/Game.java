@@ -37,15 +37,9 @@ import com.IB.SL.input.Mouse;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.Tiled_Level;
-import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
-
-import net.arikia.dev.drpc.DiscordEventHandlers;
-import net.arikia.dev.drpc.DiscordRPC;
-import net.arikia.dev.drpc.DiscordRichPresence;
 
 @SuppressWarnings("static-access")
 

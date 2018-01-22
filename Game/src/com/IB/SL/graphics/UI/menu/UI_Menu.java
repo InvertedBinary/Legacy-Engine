@@ -1,7 +1,6 @@
 package com.IB.SL.graphics.UI.menu;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
