@@ -52,15 +52,16 @@ public class Tiled_Level extends Level {
 	}
 	
 	protected void loadLevel(String path) {
-		path = this.tiled_xml;
-		
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
 		
 		System.out.println("Loading A Tiled Level..");
 		try {
+			String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
 			sp = parserFactory.newSAXParser();
-			sp.parse("E:\\Dev\\Square Legacy 2\\Square-Legacy-2\\Game\\res\\XML\\Levels\\b10\\b10.tmx", this);
+			//sp.parse("E:\\Dev\\Square Legacy 2\\Square-Legacy-2\\Game\\res\\XML\\Levels\\b10\\b10.tmx", this);
+			System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
+			sp.parse(Tiled_Level.class.getResourceAsStream(path + "/" + lvn + ".tmx"), this);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -201,6 +202,7 @@ public class Tiled_Level extends Level {
 	
 	public void checkExits(Player player, Level level, int x, int y) {
 		// refresh();
+		System.out.println("NUM EXITS: " + exits.size());
 		for (int i = 0; i < exits.size(); i++) {
 			LevelExit exit = exits.get(i);
 			if (x >= exit.x && x <= (exit.x + exit.w)) {

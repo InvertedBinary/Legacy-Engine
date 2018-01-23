@@ -166,8 +166,9 @@ public class Player extends Mob implements Serializable{
 		SaveGame.save(p);*/
 	}
 	
+	@Deprecated
 	public void invokeLoad(Player p) {
-		try {
+		/*try {
 		loadProp.loadPrefs(Boot.get());;
 		Player temp = SaveGame.load();
 
@@ -197,7 +198,7 @@ public class Player extends Mob implements Serializable{
 		
 		} catch (Exception e) {
 			
-		}
+		}*/
 	}
 	
 	boolean addedAbility = false;
@@ -422,7 +423,7 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
-		System.out.println("Got request to switch level");
+		System.out.println("Got request to load a Tiled level.");
 		if (tileMult) {
 			x *= TileCoord.TILE_SIZE;
 			y *= TileCoord.TILE_SIZE;

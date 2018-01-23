@@ -2,6 +2,8 @@
 <Tiles>
 	<!-- Terrain -->
 	<tile sprite="Grass" id="581" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Grass</tile>
+	<tile sprite="Swamp" id="613" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Swamp</tile>
+
 	<tile sprite="Dirt" id="48" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Dirt</tile>
 	<tile sprite="PathDirt" id="16" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">PathDirt</tile>
 

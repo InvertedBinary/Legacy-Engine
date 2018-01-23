@@ -711,10 +711,10 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 	
 	int bgcolor = 0xffBED0CA;
-	SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/paralax/bg.png", 640, 360);
-	SpriteSheet pl_first = new SpriteSheet("/XML/Levels/a10/assets/paralax/first_layer.png", 149, 35);
-	SpriteSheet pl_second = new SpriteSheet("/XML/Levels/a10/assets/paralax/second_layer.png", 234, 92);
-	SpriteSheet pl_third = new SpriteSheet("/XML/Levels/a10/assets/paralax/third_layer.png", 352, 297);
+	/*SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/parallax/bg.png", 640, 360);
+	SpriteSheet pl_first = new SpriteSheet("/XML/Levels/a10/assets/parallax/first_layer.png", 149, 35);
+	SpriteSheet pl_second = new SpriteSheet("/XML/Levels/a10/assets/parallax/second_layer.png", 234, 92);
+	SpriteSheet pl_third = new SpriteSheet("/XML/Levels/a10/assets/parallax/third_layer.png", 352, 297);*/
 
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
@@ -726,7 +726,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		try {
 			
 		//screen.renderSheet(0, 0, pl_bg, false);
-		screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
+		//screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
 		
 		//screen.renderSheet(0, 37, pl_first, false);
 		//screen.renderSheet(0, 36, pl_second, false);

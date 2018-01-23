@@ -192,7 +192,7 @@ public class Game extends Canvas implements Runnable {
 		
 
 		//setLevel(new XML_Level(Maps.ForestLevel));
-		Tiled_Level TL = new Tiled_Level("XML/Levels/b10");
+		Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
 		setLevel(TL);
 		
 		playerSpawn = new TileCoord(1, 38);
