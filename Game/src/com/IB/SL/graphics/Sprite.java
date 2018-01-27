@@ -798,6 +798,30 @@ public class Sprite {
 		return sprites;
 	}
 	
+	public Sprite(Sprite s, Sprite s2) {
+		SIZE = s.SIZE;
+		if (s.SIZE != s2.SIZE) {
+			for (int i = 0; i < height * width; i++) {
+				pixels[i] = 0;
+			}
+		} else {
+			this.width = s.width;
+			this.height = s.height;
+			pixels = new int[SIZE * SIZE];
+			this.x = x * SIZE;
+			this.y = y * SIZE;
+			this.sheet = s.sheet;
+			
+			for (int i = 0; i < height * width; i++) {
+				if (s2.pixels[i] != Screen.ALPHA_COL) {
+					pixels[i] = s2.pixels[i];
+				} else {
+					pixels[i] = s.pixels[i];
+				}
+			} 
+		}
+	}
+	
 	private void setColor(int color) {
 		for (int i = 0; i < height * width; i++) {
 			pixels[i] = color;

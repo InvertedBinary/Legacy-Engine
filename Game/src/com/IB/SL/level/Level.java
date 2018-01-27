@@ -42,6 +42,7 @@ public class Level extends DefaultHandler implements Serializable {
 	protected int[] tilesInt;
 	public int[] tiles;
 	public int[] overlayTiles;
+	@Deprecated
 	public int[] torchTiles;
 	transient public Tile tile;
 	public static int nighttime = 0, daytime = 0;
@@ -740,8 +741,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						// renderMiniMap(screen, 32, 32, 40, 40);
 					    Tile tile = getTile(x,y);
 					    tile.render(x,y,screen);
-					    Tile overlayTile = getOverlayTile(x,y);
-					    if (overlayTile != null) overlayTile.render(x,y,screen);
+					   // Tile overlayTile = getOverlayTile(x,y);
+					   // if (overlayTile != null) overlayTile.render(x,y,screen);
 					    //Tile torchTiles = getTorchTile(x,y);
 					    //if (torchTiles != null) torchTiles.render(x,y,screen);
 					    if (setTiles != null) setTiles.render(x, y, screen);
@@ -1529,6 +1530,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		//  }
 		//return null;
 	}
+	
 	public boolean getTile(double x, double y, Tile tile) {
 		return false;
 	}

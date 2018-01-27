@@ -8,7 +8,6 @@ public class Air extends Tile {
 
 	public Air(Sprite sprite) {
 		super(sprite);
-
 	}
 	
 	public void render(int x, int y, Screen screen) {

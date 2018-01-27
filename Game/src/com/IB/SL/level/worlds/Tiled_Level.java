@@ -14,9 +14,14 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
+import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
+import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
+import com.IB.SL.level.tile.Tile;
+import com.IB.SL.level.tile.Tile.stepSound;
+import com.IB.SL.level.tile.SL2.XML_Tile;
 
 public class Tiled_Level extends Level {
 	private static final long serialVersionUID = 1L;
@@ -137,6 +142,9 @@ public class Tiled_Level extends Level {
 		}
     }
 	
+	public int[] t_layer1 = new int[width * height];
+	public int[] t_layer2 = new int[width * height];
+
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		switch (qName) {
@@ -144,12 +152,12 @@ public class Tiled_Level extends Level {
 			this.readingLayer = false;
 
 			if (this.current_layer == 0) {
-				this.tiles = explodeTileString(this.tile_string);
+				this.t_layer1 = explodeTileString(this.tile_string);
 			}
 
 			if (this.current_layer == 1) {
 				//System.out.println("OVERLAY TILES: " + this.overlay_string);
-				this.overlayTiles = explodeTileString(this.overlay_string);
+				this.t_layer2 = explodeTileString(this.overlay_string);
 			}
 			this.torchTiles = new int[width * height];
 		}
@@ -166,6 +174,38 @@ public class Tiled_Level extends Level {
 
         case "map": {
 			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
+			
+			Tile t = new Tile();
+			t.readXML("/XML/Tiles/TileDefinitions.xml");
+			for (int i = 0; i < (width * height); i++) {
+				if (t_layer2 != null && t_layer1 != null) {
+					if (t_layer2[i] == 0) {
+						continue;
+					}
+					Tile t1 = Tile.TileIndex.get(t_layer1[i]);
+					Tile t2 = Tile.TileIndex.get(t_layer2[i]);
+					if (t1 != null && t2 != null) {
+							
+						Sprite sp = t1.sprite;
+						Sprite sp2 = t2.sprite;
+						Sprite sp3;
+						if (t_layer1[i] == 0) {
+							sp3 = sp2;
+						} else {
+							sp3 = new Sprite(sp, sp2);
+						}
+						XML_Tile ct = new XML_Tile("Compound", sp3, stepSound.Hard, 
+								(1000 + i), t1.solid() || t2.solid(), t1.solidtwo() || t2.solidtwo(), 
+								t1.jumpThrough() || t2.jumpThrough(), t1.exit() || t2.exit());
+
+						Tile.TileIndex.put((1000 + i), ct);
+						t_layer1[i] = (1000 + i);
+					}
+				}
+			}
+			
+			this.tiles = t_layer1;
+			this.overlayTiles = t_layer2;
 		}
 		}
 	}
