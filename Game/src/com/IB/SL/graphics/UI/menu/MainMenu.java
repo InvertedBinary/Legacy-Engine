@@ -28,7 +28,7 @@ public class MainMenu extends UI_Menu {
 	}
 	
 	public void onLoad() {
-		suspend = this.SUS_ALL;
+		suspend = UI_Menu.SUS_ALL;
 		if (Boot.get() != null) {
 			if (Boot.get().getLevel() != null) {
 				if (Boot.get().getLevel().players.size() > 0) {
@@ -40,7 +40,7 @@ public class MainMenu extends UI_Menu {
 	}
 	
 	public void onUnload() {
-		suspend = this.SUS_NON;
+		suspend = UI_Menu.SUS_NON;
 	}
 	
 	public void updateUnloaded() {

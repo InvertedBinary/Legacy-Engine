@@ -196,7 +196,6 @@ public static int Castle = 0xffAAAAAA;
 public static int Village = 0xff69A009;
 public static int Table = 0xff6FAA0A;
 	
-transient Tile setTiles;
 transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
 			if (n1.fCost < n0.fCost)
@@ -745,7 +744,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 					   // if (overlayTile != null) overlayTile.render(x,y,screen);
 					    //Tile torchTiles = getTorchTile(x,y);
 					    //if (torchTiles != null) torchTiles.render(x,y,screen);
-					    if (setTiles != null) setTiles.render(x, y, screen);
+					   // if (setTiles != null) setTiles.render(x, y, screen);
 
 					  }
 					}
@@ -1256,6 +1255,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}*/
 	
 	
+	@Deprecated
 	public Tile getOverlayTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height || (overlayTiles[x + y * width]) == 0) return null;
 		

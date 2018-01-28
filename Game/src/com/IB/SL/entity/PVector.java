@@ -70,6 +70,11 @@ public class PVector {
 		return false;
 	}
 	
+	public int hashCode() {
+	    assert false : "hashCode not designed";
+	    return 42; // any arbitrary constant will do
+	}
+	
 	public String toString() {
 		return "X: " + x + ", Y: " + y;
 	}

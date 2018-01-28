@@ -249,7 +249,7 @@ public abstract  class Mob extends Entity implements Serializable {
 				solid = true;
 				continue;
 			}
-			if (level.getOverlayTile(ix, iy) != null) {
+			/*if (level.getOverlayTile(ix, iy) != null) {
 			if (level.getOverlayTile(ix, iy).solid()) { 
 				solid = true;
 				continue;
@@ -259,7 +259,7 @@ public abstract  class Mob extends Entity implements Serializable {
 				solid = true;
 			}
 			
-			}
+			}*/
 			if (level.getTile(ix, iy).jumpThrough() && (ya > 0) && Math.abs(dif) < .31) {
 				solid = true;
 			}

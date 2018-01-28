@@ -170,7 +170,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 			
 		//	System.out.println("BEFORE: " + beforeCaret.substring(0, beforeCaret.length() - 1) + " AFTER: " + postCaret);
 			
-			if (text.length() - 1 >= 0 && text != "") {
+			if (text.length() - 1 >= 0 && !text.equals("")) {
 					text = newText;
 					
 					if (caretPos > 0) {

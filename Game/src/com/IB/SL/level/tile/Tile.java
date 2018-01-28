@@ -148,7 +148,7 @@ public class Tile {
 	public void readXML(String path) {
 		this.XML_String = path;
 		try {
-		InputStream fXmlFile = getClass().getResourceAsStream(path);
+		InputStream fXmlFile = Tile.class.getResourceAsStream(path);
 		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
 		Document doc = dBuilder.parse(fXmlFile);

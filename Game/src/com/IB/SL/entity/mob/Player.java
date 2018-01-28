@@ -48,7 +48,6 @@ public class Player extends Mob implements Serializable{
 	 */
 	private transient  static final long serialVersionUID = -8911018741301426797L;
 	public transient  Keyboard input;
-	public transient  Sprite sprite;
 	public transient  Tile tile;
 	transient double xOff = 0;
 	transient double yOff = 0;
@@ -140,17 +139,7 @@ public class Player extends Mob implements Serializable{
 	
 	
 	
-	//TODO: Check out where it's called??
-	public boolean loadPlayer() {
-		try { 
-			
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return true;
-	}
-	
+	@Deprecated
 	public void invokeSave(Player p) {
 		/*this.currentLevelId = Game.currentLevelId;
 		for (int i = 0; i < level.entities.size(); i++) {
@@ -210,8 +199,6 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	public void update() {		
-		this.buildMode = input.buildMode;
-		
 		try {
 			
 		if (input.save){
@@ -233,7 +220,7 @@ public class Player extends Mob implements Serializable{
 		
         raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int)3);
 		if (loadedProp == false) {
-			loadPlayer();
+			//loadPlayer();
 			loadedProp = true;	
 		}
 
@@ -291,6 +278,8 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		if (input != null) {
+		this.buildMode = input.buildMode;
+			
 		if (input.Sprint && walking)  { // 300
 			speed = 4;
 			sprinting = true;
@@ -319,10 +308,10 @@ public class Player extends Mob implements Serializable{
 		}
 		if (input.left) {
 			animSprite = left;				
-			xa -= speed;
+			this.vel().x = -speed;
 		} else if (input.right) {
 			animSprite = right;				
-			xa += speed;
+			this.vel().x = speed;
 			} 
 		}
 		
@@ -333,6 +322,9 @@ public class Player extends Mob implements Serializable{
 		this.vel().add(Gravity);
 		
 		ya = vel().y;
+		xa = vel().x;
+		
+		
 		
 		if (this.input.jump & this.canJump) {
 			this.vel().y = -6.5;
@@ -362,7 +354,7 @@ public class Player extends Mob implements Serializable{
 				setY(y() + yv * speed);
 			}
 			
-
+			this.vel().x = 0;
 			
 			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
 			//body.set(VARS.PHYS_NOGRAV, false);
@@ -522,7 +514,9 @@ public class Player extends Mob implements Serializable{
 	private transient Sprite arrow = Sprite.QuestArrow;
 
 	public void render(Screen screen) {
+		
 		sprite = animSprite.getSprite();
+
 		this.xOffset = -22;
 		this.yOffset = -45;
 		xOffset = 0;
@@ -608,6 +602,7 @@ public class Player extends Mob implements Serializable{
 		}
 	}	
 	
+	@Deprecated
 	public void renderBuildGUI(Screen screen) {
 		switchBlocks_key();
 		gui.font8x8.render(113, 5, -2, 0xff000000, "BUILD MODE", screen, false, false);

@@ -23,7 +23,7 @@ public class Water extends Tile  {
 
 	public Water(Sprite sprite) {
 		super(sprite);
-		this.sprite = sprite;
+		//Water.sprite = sprite;
 	}
 
 	public static void update() {

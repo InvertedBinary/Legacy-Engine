@@ -15,7 +15,7 @@ import com.IB.SL.util.shape.Rectangle;
 
 public class Entity extends PropertyEngine implements Serializable {
 
-	Rectangle bounds = new Rectangle(0, 0, 32, 32);
+	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);
 	
 	public transient Sprite sprite;

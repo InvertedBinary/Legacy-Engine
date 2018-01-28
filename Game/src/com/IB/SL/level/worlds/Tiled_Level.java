@@ -194,12 +194,13 @@ public class Tiled_Level extends Level {
 						} else {
 							sp3 = new Sprite(sp, sp2);
 						}
-						XML_Tile ct = new XML_Tile("Compound", sp3, stepSound.Hard, 
-								(1000 + i), t1.solid() || t2.solid(), t1.solidtwo() || t2.solidtwo(), 
+						int id = (1024 + i);
+						XML_Tile ct = new XML_Tile("Compound_Tile", sp3, stepSound.Hard, 
+								id, t1.solid() || t2.solid(), t1.solidtwo() || t2.solidtwo(), 
 								t1.jumpThrough() || t2.jumpThrough(), t1.exit() || t2.exit());
 
-						Tile.TileIndex.put((1000 + i), ct);
-						t_layer1[i] = (1000 + i);
+						Tile.TileIndex.put(id, ct);
+						t_layer1[i] = (id);
 					}
 				}
 			}
