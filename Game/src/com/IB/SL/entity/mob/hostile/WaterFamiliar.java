@@ -19,13 +19,13 @@ import com.IB.SL.util.Vector2i;
 
 public class WaterFamiliar extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
+	transient private AnimatedSprite down = new AnimatedSprite(SpriteSheet.zombie_down,
 			16, 16, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
+	transient private AnimatedSprite up = new AnimatedSprite(SpriteSheet.zombie_up, 16,
 			16, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
+	transient private AnimatedSprite left = new AnimatedSprite(SpriteSheet.zombie_left,
 			16, 16, 2);
-	private AnimatedSprite right = new AnimatedSprite(
+	transient private AnimatedSprite right = new AnimatedSprite(
 			SpriteSheet.zombie_right, 16, 16, 2);
 	
 	

@@ -15,13 +15,12 @@ import com.IB.SL.input.Mouse;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.tile.overlays.Pebble;
 import com.IB.SL.level.tile.tiles.MyColor;
 import com.IB.SL.util.Vector2i;
 
 public class Screen {
 
-	public int width, height;
+	public int width, height; // 20 TILES LONG
 	public int[] pixels;
 	public int xOffset, yOffset;
 	private Random random = new Random();
@@ -586,7 +585,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
 				      int b = (col & 0xff);
 				      if (r < 0) r = 0;
 				      if (g < 0) g = 0;
-				      if (b < 0) b = 0;
+				      //if (b < 0) b = 0;
 				      if (r > 255) r = 255;
 				      if (g > 255) g = 255;
 				      if (b > 255) b = 255;
@@ -942,25 +941,6 @@ public void setOffset(int xOffset, int yOffset) {
 		}
 	}
 	
-	public boolean shakeScreen() {
-		double xoff = Boot.get().xScroll;
-		double yoff = Boot.get().yScroll;
-		boolean shaking = true;
-		for (int i = 0; i < 10; i++) {
-			Boot.get().xScroll += i;
-			Boot.get().yScroll += i;
-			System.out.println(Boot.get().xScroll);
-			if (i >= 10) {
-				i = 0;
-				shaking = false;
-				Boot.get().xScroll = xoff;
-				Boot.get().yScroll = yoff;
-			}
-		}
-		return shaking;
-	}
-			
-			
 	int renderX = 0, renderY = 0;
 
 	public void renderMiniMap(int xp, int yp, int size) {

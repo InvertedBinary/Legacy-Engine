@@ -21,7 +21,6 @@ public class GUI extends CheckBounds {
 	transient public font font;
 	transient public font8x8 font8x8;
 
-	// TODO: Red outline on screen -- lowhealth
 	public transient int displayTime = 0;
 	transient public int displayTimeM = 0;
 	transient public int displayTimeS = 0;
@@ -42,7 +41,7 @@ public class GUI extends CheckBounds {
 	public boolean displayH = true, displayM = true, displayS = true;
 	public int yOffM = 130, yOffH = 143, yOffS = 156;
 	
-	public UI_Menu menu = new UI_Menu();
+	public transient UI_Menu menu = new UI_Menu();
 
 	public GUI() {
 		font = new font();

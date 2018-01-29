@@ -12,8 +12,6 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.util.HashMap;
 
-import com.IB.SL.AlphaLWJGL.LWJGL;
-
 public class Boot {
 
 	public static String title = "Legacy Engine [Build 1 : 10/31/17 - 1/20/18]";

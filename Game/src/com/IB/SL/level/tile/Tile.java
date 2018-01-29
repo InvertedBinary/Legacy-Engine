@@ -148,7 +148,7 @@ public class Tile {
 	public void readXML(String path) {
 		this.XML_String = path;
 		try {
-		InputStream fXmlFile = getClass().getResourceAsStream(path);
+		InputStream fXmlFile = Tile.class.getResourceAsStream(path);
 		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
 		Document doc = dBuilder.parse(fXmlFile);
@@ -176,7 +176,8 @@ public class Tile {
 						int id = Integer.parseInt(e.getAttribute("id"));
 						boolean solid = (Boolean.parseBoolean(e.getAttribute("solid")));
 						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
-						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExit")));
+						boolean jumpThrough = (Boolean.parseBoolean(e.getAttribute("jumpThrough")));
+						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExitTile")));
 						Field field = Sprite.class.getField(e.getAttribute("sprite"));
 						Sprite sp = (Sprite) field.get(field.getType());
 						String name = (e.getTextContent());
@@ -187,7 +188,7 @@ public class Tile {
 										+ ", GG: " + (hex >> 8)
 										+ ", BB: " + (hex >> 16));*/
 
-						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, id, solid, solidTwo, isExit);
+						XML_Tile t = new XML_Tile(name, sp, stepSound.Hard, id, solid, solidTwo, jumpThrough, isExit);
 						TileIndex.put(id, t);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -364,6 +365,10 @@ public class Tile {
 	}
 
 	public boolean solidtwo() {
+		return false;
+	}
+	
+	public boolean jumpThrough() {
 		return false;
 	}
 

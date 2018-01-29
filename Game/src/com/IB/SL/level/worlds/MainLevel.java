@@ -6,17 +6,14 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.peaceful.Guard;
 import com.IB.SL.entity.mob.peaceful.Horse;
-import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.interactables.Location_Shrine;
 import com.IB.SL.level.interactables.Teleporter;
-import com.IB.SL.util.Sound;
 
 public class MainLevel extends Level{
 		

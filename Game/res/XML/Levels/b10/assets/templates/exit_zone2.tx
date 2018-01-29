@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object type="Exit_Zone" width="64" height="160">
+  <properties>
+   <property name="To" value="/XML/Levels/b10"/>
+   <property name="To_X" type="float" value="10"/>
+   <property name="To_Y" type="float" value="0"/>
+  </properties>
+ </object>
+</template>

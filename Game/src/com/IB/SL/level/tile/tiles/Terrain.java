@@ -4,7 +4,6 @@ import com.IB.SL.VARS;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.tile.Tile.stepSound;
 
 public class Terrain extends Tile {
 

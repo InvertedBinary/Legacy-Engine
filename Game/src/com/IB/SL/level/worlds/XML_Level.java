@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,10 +11,6 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import org.luaj.vm2.lib.jse.JsePlatform;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -282,9 +277,9 @@ public class XML_Level extends Level{
 		// refresh();
 		for (int i = 0; i < exits.size(); i++) {
 			LevelExit exit = exits.get(i);
-			if (x >= exit.xo && x <= (exit.xo + exit.w)) {
-				if (y >= exit.yo && y <= (exit.yo + exit.h)) {
-					player.setPositionXML(exit.tx, exit.ty, exit.xml, true);
+			if (x >= exit.x && x <= (exit.x + exit.w)) {
+				if (y >= exit.y && y <= (exit.y + exit.h)) {
+					player.setPositionXML(exit.send_x, exit.send_y, exit.path, true);
 				}
 			}
 		}

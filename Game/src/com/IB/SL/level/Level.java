@@ -9,8 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.IB.SL.Boot;
@@ -44,6 +42,7 @@ public class Level extends DefaultHandler implements Serializable {
 	protected int[] tilesInt;
 	public int[] tiles;
 	public int[] overlayTiles;
+	@Deprecated
 	public int[] torchTiles;
 	transient public Tile tile;
 	public static int nighttime = 0, daytime = 0;
@@ -197,7 +196,6 @@ public static int Castle = 0xffAAAAAA;
 public static int Village = 0xff69A009;
 public static int Table = 0xff6FAA0A;
 	
-transient Tile setTiles;
 transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
 			if (n1.fCost < n0.fCost)
@@ -713,10 +711,10 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 	
 	int bgcolor = 0xffBED0CA;
-	SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/paralax/bg.png", 640, 360);
-	SpriteSheet pl_first = new SpriteSheet("/XML/Levels/a10/assets/paralax/first_layer.png", 149, 35);
-	SpriteSheet pl_second = new SpriteSheet("/XML/Levels/a10/assets/paralax/second_layer.png", 234, 92);
-	SpriteSheet pl_third = new SpriteSheet("/XML/Levels/a10/assets/paralax/third_layer.png", 352, 297);
+	/*SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/parallax/bg.png", 640, 360);
+	SpriteSheet pl_first = new SpriteSheet("/XML/Levels/a10/assets/parallax/first_layer.png", 149, 35);
+	SpriteSheet pl_second = new SpriteSheet("/XML/Levels/a10/assets/parallax/second_layer.png", 234, 92);
+	SpriteSheet pl_third = new SpriteSheet("/XML/Levels/a10/assets/parallax/third_layer.png", 352, 297);*/
 
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
@@ -728,7 +726,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		try {
 			
 		//screen.renderSheet(0, 0, pl_bg, false);
-		screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
+		//screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
 		
 		//screen.renderSheet(0, 37, pl_first, false);
 		//screen.renderSheet(0, 36, pl_second, false);
@@ -742,11 +740,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 						// renderMiniMap(screen, 32, 32, 40, 40);
 					    Tile tile = getTile(x,y);
 					    tile.render(x,y,screen);
-					    Tile overlayTile = getOverlayTile(x,y);
-					    if (overlayTile != null) overlayTile.render(x,y,screen);
+					   // Tile overlayTile = getOverlayTile(x,y);
+					   // if (overlayTile != null) overlayTile.render(x,y,screen);
 					    //Tile torchTiles = getTorchTile(x,y);
 					    //if (torchTiles != null) torchTiles.render(x,y,screen);
-					    if (setTiles != null) setTiles.render(x, y, screen);
+					   // if (setTiles != null) setTiles.render(x, y, screen);
 
 					  }
 					}
@@ -1257,6 +1255,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}*/
 	
 	
+	@Deprecated
 	public Tile getOverlayTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height || (overlayTiles[x + y * width]) == 0) return null;
 		
@@ -1531,6 +1530,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		//  }
 		//return null;
 	}
+	
 	public boolean getTile(double x, double y, Tile tile) {
 		return false;
 	}

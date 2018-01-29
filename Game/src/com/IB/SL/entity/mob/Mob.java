@@ -7,11 +7,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.mob.hostile.Zombie;
 import com.IB.SL.entity.particle.DefaultParticle;
 import com.IB.SL.entity.projectile.DebugProjectile;
@@ -20,7 +18,6 @@ import com.IB.SL.entity.projectile.ThrowableRock;
 import com.IB.SL.entity.projectile.WizardProjectile;
 import com.IB.SL.entity.projectile.WizardProjectile2;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.level.Level;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Vector2i;
@@ -244,10 +241,29 @@ public abstract  class Mob extends Entity implements Serializable {
 			if (c % 2 == 0) ix = (int) Math.floor(xt);
 			if (c / 2 == 0) iy = (int) Math.floor(yt);
 			
-			if (level.getTile(ix, iy).solid()) solid = true;
-			if (level.getOverlayTile(ix, iy) != null) {
-			if (level.getOverlayTile(ix, iy).solid()) solid = true;
+			double dya = (ya + ((this.y() + 32)/32));
+			double dif = (iy) - dya;
+			//System.out.println("IY: " + iy + " , " + ya + " , " + dya + " DIF: " + dif);
+			
+			if (level.getTile(ix, iy).solid()) { 
+				solid = true;
+				continue;
 			}
+			/*if (level.getOverlayTile(ix, iy) != null) {
+			if (level.getOverlayTile(ix, iy).solid()) { 
+				solid = true;
+				continue;
+			}
+			
+			if (level.getOverlayTile(ix, iy).jumpThrough() && (ya > 0) && Math.abs(dif) < .31) {
+				solid = true;
+			}
+			
+			}*/
+			if (level.getTile(ix, iy).jumpThrough() && (ya > 0) && Math.abs(dif) < .31) {
+				solid = true;
+			}
+			
 		}
 		return solid;
 	}

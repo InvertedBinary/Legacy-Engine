@@ -1,13 +1,20 @@
 <?xml version="1.0"?>
 <Tiles>
 	<!-- Terrain -->
-	<tile sprite="Grass" id="581" solid="true" projSolid="true" isExitTile="false">Grass</tile>
-	<tile sprite="Dirt" id="48" solid="true" projSolid="true" isExitTile="false">Dirt</tile>
-	<tile sprite="PathDirt" id="16" solid="true" projSolid="true" isExitTile="false">PathDirt</tile>
+	<tile sprite="Grass" id="581" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Grass</tile>
+	<tile sprite="Swamp" id="613" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Swamp</tile>
+
+	<tile sprite="Dirt" id="48" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Dirt</tile>
+	<tile sprite="PathDirt" id="16" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">PathDirt</tile>
 
 	<!-- Scenery -->
-	<tile sprite="DresserTop" id="580" solid="true" projSolid="true" isExitTile="false">DresserTop</tile>
-	<tile sprite="DresserBottom" id="612" solid="true" projSolid="true" isExitTile="false">DresserBottom</tile>
-	<tile sprite="RedBed" id="561" solid="false" projSolid="false" isExitTile="false">RedBed</tile>
+	<tile sprite="CabinetTop" id="580" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">DresserTop</tile>
+	<tile sprite="CabinetBottom" id="612" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">DresserBottom</tile>
+	<tile sprite="RedBed" id="561" solid="false" projSolid="false" jumpThrough="true" isExitTile="false">RedBed</tile>
 
+	<!-- Map Tools -->
+	<tile sprite="Barrier" id="1024" solid="true" projSolid="false" jumpThrough="false" isExitTile="false">Barrier</tile>
+	<tile sprite="RedBed" id="1023" solid="false" projSolid="false" jumpThrough="false" isExitTile="true">Exit</tile>
+
+	
 </Tiles>
