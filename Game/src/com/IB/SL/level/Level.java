@@ -16,6 +16,7 @@ import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.Entity.HOSTILITY;
+import com.IB.SL.entity.emitter.Emitter;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
@@ -23,9 +24,7 @@ import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.entity.particle.DamageIndicator;
 import com.IB.SL.entity.particle.Particle;
 import com.IB.SL.entity.projectile.Projectile;
-import com.IB.SL.entity.spawner.Spawner;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.Weather.Rain;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.tiles.Water;
@@ -50,9 +49,9 @@ public class Level extends DefaultHandler implements Serializable {
 	public List<Projectile> Projectiles = new ArrayList<Projectile>();
 	public List<Particle> particles = new ArrayList<Particle>();
 	public List<PlayerMP> players = new ArrayList<PlayerMP>();
+	public List<Emitter> emitters = new ArrayList<Emitter>();
 
 	public List<Entity> entitiesList = new ArrayList<Entity>();
-	public List<Spawner> Spawner = new ArrayList<Spawner>();
 
 	//public List<AnimatedTile> tiles_anim = new ArrayList<AnimatedTile>();
 	double addX, addY;
@@ -670,7 +669,11 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			particles.get(i).update();
 		}
 		for (int i = 0; i < players.size(); i++) {
-				players.get(i).update();				
+			players.get(i).update();				
+		}
+		
+		for (int i = 0; i < emitters.size(); i++) {
+			emitters.get(i).update();
 		}
 
 		Water.update();
@@ -832,9 +835,9 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			if (players.get(i).isRemoved())
 				players.remove(i);
 		}
-		for (int i = 0; i < Spawner.size(); i++) {
-			if (Spawner.get(i).isRemoved())
-			Spawner.remove(i);
+		for (int i = 0; i < emitters.size(); i++) {
+			if (emitters.get(i).isRemoved())
+			emitters.remove(i);
 		}
 	}
 
@@ -847,8 +850,8 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 			Projectiles.add((Projectile) e);
 		} else if (e instanceof Player) {
 			players.add((PlayerMP) e);
-		} else if (e instanceof Spawner) {
-			Spawner.add((Spawner) e);
+		} else if (e instanceof Emitter) {
+			emitters.add((Emitter) e);
 		} else {
 			entities.add(e);
 			if (e instanceof Mob) {

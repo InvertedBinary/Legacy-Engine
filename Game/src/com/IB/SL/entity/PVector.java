@@ -13,17 +13,22 @@ public class PVector {
 		set(0, 0);
 	}
 
-	public PVector(PVector vector) {
-		set(vector.x, vector.y);
+	public PVector(PVector vec) {
+		set(vec);
 	}
 
-	public PVector(double d, double e) {
-		set(d, e);
+	public PVector(double x, double y) {
+		set(x, y);
 	}
 
-	public void set(double d, double e) {
-		this.x = (int) d;
-		this.y = (int) e;
+	public void set(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void set(PVector vec) {
+		this.x = vec.x;
+		this.y = vec.y;
 	}
 
 	public double getX() {

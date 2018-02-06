@@ -5,8 +5,8 @@ import java.util.Random;
 
 import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.emitter.WallParticleSpawner;
 import com.IB.SL.entity.mob.Mob;
-import com.IB.SL.entity.spawner.WallParticleSpawner;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.util.Sound;

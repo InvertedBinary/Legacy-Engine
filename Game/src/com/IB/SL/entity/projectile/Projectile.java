@@ -11,9 +11,6 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.spawner.BleedSpawner;
-import com.IB.SL.entity.spawner.ParticleSpawner;
-import com.IB.SL.entity.spawner.RockShatterSpawner;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.util.Sound;
@@ -99,9 +96,9 @@ public abstract class Projectile extends Entity {
 							Sound.Play(p.collisionSound, false);
 						}
 						if (p.breakParticle == 1) {
-							level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
+							//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 						}
-						Boot.get().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
+						//Boot.get().getLevel().add(new BleedSpawner((int) (p.x + p.nx), (int)(p.y + p.ny), 15, 8, level));
 						return e;
 							}
 						} catch (Exception err) {
@@ -187,16 +184,16 @@ public abstract class Projectile extends Entity {
 	            ) {
 				remove();
     				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).id, 0);				
-				level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
+				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
 					Sound.Play(proj.collisionSound, false);
 				}
 				if (proj.breakParticle == 1) {
-					level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
+					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 				}
 				if (entities.get(i).mobhealth <= 0){
 					entities.get(i).remove();
-					Boot.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
+					//Boot.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
 
 					}
 				}
@@ -220,17 +217,17 @@ public abstract class Projectile extends Entity {
 					proj.addEffect(players.get(i));
 				}
 				players.get(i).incombat = true;
-				level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
+				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
 					Sound.Play(proj.collisionSound, false);
 				}
 				if (proj.breakParticle == 1) {
-					level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
+					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 				}
 				if (players.get(i).mobhealth <= 0){
 					//players.get(i).onPlayerDeath();
 					//Game.switchState(Boot.get().gameState.DEATH);
-					level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
+					//level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");
 					//Game.Dead = true;	
 					}

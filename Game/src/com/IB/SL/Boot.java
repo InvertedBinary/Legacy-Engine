@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Boot {
 
@@ -90,6 +91,14 @@ public class Boot {
 	
 	public void setMousePos(int framex, int framey) {
 		moveMouse(new Point(framex, framey));
+	}
+	
+	public static int randInt(int min, int max) {
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
+	}
+	
+	public static double randDouble(int min, int max) {
+		return ThreadLocalRandom.current().nextDouble(min, max);
 	}
 	
 	public static void log(String text, boolean err) {

@@ -113,5 +113,6 @@
 	<classpathentry kind="lib" path="res/lib/luaj-3.0.1/lib/luaj-jse-3.0.1.jar"/>
 	<classpathentry kind="lib" path="res/lib/luaj-3.0.1/lib/luaj-sources-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/discord-rpc-0.9-BETA-4.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.1.21.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

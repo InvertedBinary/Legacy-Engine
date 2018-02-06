@@ -2,8 +2,8 @@ package com.IB.SL.entity.projectile;
 
 import java.util.List;
 
+import com.IB.SL.entity.emitter.WallParticleSpawner;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.spawner.WallParticleSpawner;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 

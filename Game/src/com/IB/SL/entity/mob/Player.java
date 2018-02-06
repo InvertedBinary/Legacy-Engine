@@ -36,7 +36,6 @@ import com.IB.SL.level.worlds.Tiled_Level;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
-import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.shape.Rectangle;
