@@ -93,7 +93,7 @@ public class XML_Mob extends Mob {
 	
 	public void setProperties(Element eElement) {
 		try {
-		this.id = Integer.parseInt(eElement.getAttribute("id"));
+		//this.id = Integer.parseInt(eElement.getAttribute("id"));
 		this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
 		this.speed = Double.parseDouble(eElement.getElementsByTagName("speed").item(0).getTextContent());
 		this.maxhealth = Double.parseDouble(eElement.getElementsByTagName("maxhealth").item(0).getTextContent());

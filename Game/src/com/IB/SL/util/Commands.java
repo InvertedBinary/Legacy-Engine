@@ -93,8 +93,8 @@ public class Commands {
 				switch (Command.toLowerCase()) {
 			/*	case "help": JOptionPane.showMessageDialog(Game.frame, HelpText, "Help", JOptionPane.INFORMATION_MESSAGE);
 		break;	*/
-				case "tpp": Boot.get().getLevel().MPTeleport(Modifier);
-		break;
+			//	case "tpp": Boot.get().getLevel().MPTeleport(Modifier);
+		//break;
 				case "nospawns":
 					if (Boot.launch_args.containsKey("-nospawns")) {
 						boolean g = Boot.launch_args.get("-nospawns");						

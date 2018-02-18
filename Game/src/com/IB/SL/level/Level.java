@@ -59,8 +59,7 @@ public class Level extends DefaultHandler implements Serializable {
 	double tx, ty;
 	double otx, oty;
 	
-	
-	public static int bitBrickHex = 0xffFF0000; 
+	public static int bitBrickHex = 0xffFF0000;
 	public static int bitMetalHex = 0xffCCCCCC;
 	public static int BluefogHex = 0xff000059;
 	public static int BookshelfBottomHex = 0xffD9F2C6;
@@ -134,76 +133,76 @@ public class Level extends DefaultHandler implements Serializable {
 	 * Overworld
 	 */
 
-public static int Cactus = 0xff00F700;
-public static int FlowerCactus = 0xff00ED00;
-public static int ColoredFlowers = 0xffFFDB00;
-public static int YellowFlowers = 0xffFFFF00;
-public static int AnvilHex = 0xff494949;
-public static int StoveHex = 0xff303030;
+	public static int Cactus = 0xff00F700;
+	public static int FlowerCactus = 0xff00ED00;
+	public static int ColoredFlowers = 0xffFFDB00;
+	public static int YellowFlowers = 0xffFFFF00;
+	public static int AnvilHex = 0xff494949;
+	public static int StoveHex = 0xff303030;
 
 	/**
 	 * Overworld & Dungeon
 	 */
 
-public static int Torch = 0xFFFF6A00;
-public static int Pebble = 0xffD3D3D3;
-public static int BlueMushroom = 0xff1111FF;
-public static int BlueMushroomDirt = 0xff1010ED;
-public static int RedMushroom = 0xffFF1111;
-public static int RedMushroomDirt = 0xffFF1111;
-public static int GreenMushroom = 0xff11FF11;
-public static int GreenMushroomDirt = 0xff11FF11;
-public static int DirtPatch = 0xffB8DD00;
-public static int RedmushroomDirt = 0xffED1010;
+	public static int Torch = 0xFFFF6A00;
+	public static int Pebble = 0xffD3D3D3;
+	public static int BlueMushroom = 0xff1111FF;
+	public static int BlueMushroomDirt = 0xff1010ED;
+	public static int RedMushroom = 0xffFF1111;
+	public static int RedMushroomDirt = 0xffFF1111;
+	public static int GreenMushroom = 0xff11FF11;
+	public static int GreenMushroomDirt = 0xff11FF11;
+	public static int DirtPatch = 0xffB8DD00;
+	public static int RedmushroomDirt = 0xffED1010;
 
 	/**
 	 * Dungeon
 	 */
 
-public static int Bone = 0xffFCFCFC;
-public static int CrossedBones = 0xffF9F9F9;
-public static int Skull = 0xffF7F7F7;
-public static int DarkCastle = 0xff444444;
-public static int Cave = 0xff545454;
-public static int Portal = 0xff7421A1;
-public static int PathVertical = 0xff333A00;
-public static int PathHorizontal = 0xff3B4400;
-public static int PathCross = 0xff485400;
-public static int PathCornerTL = 0xff515E00;
-public static int PathCornerTR = 0xff5D6D00;
-public static int PathCornerBL = 0xff657700;
-public static int PathCornerBR = 0xff728700;
-public static int PathEndLeft = 0xff7B9100;
-public static int PathEndRight = 0xff88A000;
-public static int PathEndTop = 0xff8EAA00;
-public static int PathEndBottom = 0xff9BBA00;
-public static int BrokenSword = 0xffA3C400;
+	public static int Bone = 0xffFCFCFC;
+	public static int CrossedBones = 0xffF9F9F9;
+	public static int Skull = 0xffF7F7F7;
+	public static int DarkCastle = 0xff444444;
+	public static int Cave = 0xff545454;
+	public static int Portal = 0xff7421A1;
+	public static int PathVertical = 0xff333A00;
+	public static int PathHorizontal = 0xff3B4400;
+	public static int PathCross = 0xff485400;
+	public static int PathCornerTL = 0xff515E00;
+	public static int PathCornerTR = 0xff5D6D00;
+	public static int PathCornerBL = 0xff657700;
+	public static int PathCornerBR = 0xff728700;
+	public static int PathEndLeft = 0xff7B9100;
+	public static int PathEndRight = 0xff88A000;
+	public static int PathEndTop = 0xff8EAA00;
+	public static int PathEndBottom = 0xff9BBA00;
+	public static int BrokenSword = 0xffA3C400;
 
 	/**
 	 * Village
 	 */
 
-public static int RedBed = 0xffFF0C0C;
-public static int BlueBed = 0xff0C0CFF;
-public static int GreenBed = 0xff0CFF0C;
-public static int OrangeBed = 0xffFFDB0C;
-public static int TopChair = 0xff8ADD0D;
-public static int BottomChair = 0xff87D30C;
-public static int LeftChair = 0xff80C40B;
-public static int RightChair = 0xff79BA0B;
-public static int Castle = 0xffAAAAAA;
-public static int Village = 0xff69A009;
-public static int Table = 0xff6FAA0A;
+	public static int RedBed = 0xffFF0C0C;
+	public static int BlueBed = 0xff0C0CFF;
+	public static int GreenBed = 0xff0CFF0C;
+	public static int OrangeBed = 0xffFFDB0C;
+	public static int TopChair = 0xff8ADD0D;
+	public static int BottomChair = 0xff87D30C;
+	public static int LeftChair = 0xff80C40B;
+	public static int RightChair = 0xff79BA0B;
+	public static int Castle = 0xffAAAAAA;
+	public static int Village = 0xff69A009;
+	public static int Table = 0xff6FAA0A;
 	
-transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
-		public int compare(Node n0, Node n1) {
-			if (n1.fCost < n0.fCost)
-				return +1;
-			if (n1.fCost > n0.fCost)
-				return -1;
-			return 0;
+	transient private Comparator<Node> nodeSorter = new Comparator<Node>()
+	{
+		public int compare(Node n0, Node n1)
+			{
+				if (n1.fCost < n0.fCost) return +1;
+				if (n1.fCost > n0.fCost) return -1;
+				return 0;
 
-		}
+			}
 	};
 
 //	public static String currentLevel = spawn.toString();
@@ -215,38 +214,35 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	public int time = 0;
     public boolean day = false, night = false;
 	        
-	public Level(int width, int height) {
-		this.width = width;
-		this.height = height;
-		tilesInt = new int[width * height];
-		generateLevel();
+	public Level(int width, int height)
+		{
+			this.width = width;
+			this.height = height;
+			tilesInt = new int[width * height];
+			generateLevel();
+		}
 
-	}
-
-	
-
-	
-	public Level(String path) {
-		loadLevel(path);
-		generateLevel();
-		// add(new ParticleSpawner(29 * TileCoord.TILE_SIZE, 31*TileCoord.TILE_SIZE, 13, 35, this));
-	}
+	public Level(String path)
+		{
+			loadLevel(path);
+			generateLevel();
+			// add(new ParticleSpawner(29 * TileCoord.TILE_SIZE, 31*TileCoord.TILE_SIZE, 13,
+			// 35, this));
+		}
 	
 	public String Level_Dir;
-	public Level(String path, boolean foo) { 
-		this.Level_Dir = path;
-		String XML = path + "/tags.xml";
-		LoadXML(XML);
-		loadLevel(path);
-	}
+	public Level(String path, boolean foo)
+		{
+			this.Level_Dir = path;
+			String XML = path + "/tags.xml";
+			LoadXML(XML);
+			loadLevel(path);
+		}
 	
-	public void LoadXML(String XML) {
-		
-	}
+	@Deprecated
+	public void LoadXML(String XML) {}
 	
-	public void loadLua() {
-		
-	}
+	public void loadLua() {}
 	
 	/*private String getName() {
 		return Level.currentLevel;
@@ -274,12 +270,13 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}*/
 	
 	
-	
+	@Deprecated
 	public void saveMobs(Entity[] es) {
 		//System.out.println("SAVING TO: " + SaveGame.mobsFileName + Game.currentLevelId);
 		SaveGame.save(es, SaveGame.mobsFileName + Game.currentLevelId);
 	}
 	
+	@Deprecated
 	public void loadMobs(int levelID) {
 		Entity[] temp = SaveGame.loadEntities(levelID);
 		if (temp != null) {
@@ -324,6 +321,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 	}
 	
+	@Deprecated
 	public void loadMobs() {
 		Entity[] temp = SaveGame.loadEntities();
 		if (temp != null) {
@@ -382,6 +380,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}*/
 	}
 	
+	@Deprecated
 	protected void generateLevel() {
 
 	}
@@ -392,12 +391,43 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}*/
 	}
 	
-	public void updateTest() {
-			//loadLevel("/levels/Swamp.png");
+	public static Entity createEntity(String msg)
+		{
+			System.out.println("CREATING ENTITY: " + msg);
+			int eid = Integer.parseInt(msg.substring(msg.indexOf("id_e=") + 5, msg.indexOf("&")));
+			String UUID =  (msg.substring(msg.indexOf("id=") + 3, msg.indexOf("@")));
+			double x = Double.parseDouble(msg.substring(msg.indexOf("x=") + 2, msg.indexOf(",")));
+			double y = Double.parseDouble(msg.substring(msg.indexOf("y=") + 2));
+			//System.out.println("EID: " + eid /* + " ID: " + id */ + " X: " + x + " Y: " + y);
+
+			Entity e = null;
+			switch (eid) {
+			case 0:
+				e = new PlayerMP(x, y, "TEST_PL", UUID);
+				break;
+			}
+			return e;
+		}
+	
+	public static String entityStringBuilder(Entity e) {
+			String result = "ADD|id_e=0&id=25@x=96,y=1248";
+			String eid, UUID, x, y;
+			if (e instanceof Player) {
+			 eid = "0";
+			} else {
+			 eid = "-1";
+			}
+			 UUID = e.UUID;
+			 x = "" + e.x();
+			 y = "" + e.y();
+			
+			result = "ADD|id_e=" + eid + "&id=" + UUID + "@x=" + x + ",y=" + y;
+					
+		return result;
 	}
 	
+	@Deprecated
 	 public void time1() {
-		 
 	      if (brightness <= -50) {
 	         night = true;
 	         day = false;
@@ -429,6 +459,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	      brightness++;
 	   }
 	 
+	
 	 public void checkTile() {
 		 if (players.size() > 0) {
 			 for (int i = 0; i < players.size(); i++) {
@@ -614,8 +645,6 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		*/
 		Collections.sort(entitiesList, ySort);
 
-		updateTest();
-		
 		/*for (int i = 0; i < tiles_anim.size(); i++) {
 			tiles_anim.get(i).update();
 		}*/
@@ -881,7 +910,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}
 
 	public Player getClientPlayer() {
-		return players.get(0);
+		return Boot.get().getPlayer();
 	}
 	
 	
@@ -1039,6 +1068,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	}*/
 	
 	
+	@Deprecated
 	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
@@ -1057,7 +1087,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host, HOSTILITY host2) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
@@ -1076,7 +1106,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntities(Entity e, int radius, List<Entity> entities) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
@@ -1093,7 +1123,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntities(Entity e, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
@@ -1110,7 +1140,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntitiesFixed(int xx, int yy, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = xx;
@@ -1127,7 +1157,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntities(int x, int y, int radius)  {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = x;
@@ -1143,7 +1173,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<Entity> getEntitiesListFixed(int xx, int yy, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = xx;
@@ -1177,7 +1207,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 		return result;
 	}
-	
+	@Deprecated
 	public List<PlayerMP> getPlayers(Entity e, int radius, boolean no) {
 		List<PlayerMP> result = new ArrayList<PlayerMP>();
 		int ex = (int) e.x();
@@ -1195,7 +1225,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		return result;
 	}
 	
-	
+	@Deprecated
 	public boolean getPlayersFixedBool(int xx, int yy, int radius) {
 		boolean there = false;
 		int ex = (int) xx;
@@ -1215,7 +1245,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 			return there;
 	}
-
+	@Deprecated
 	public boolean getPlayersBool(Entity e, int radius) {
 		boolean there = false;
 		int ex = (int) e.x();
@@ -1235,7 +1265,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 			return there;
 	}
-	
+	@Deprecated
 	public List<PlayerMP> getPlayersFixed(int xx, int yy, int radius) {
 		List<PlayerMP> result = new ArrayList<PlayerMP>();
 		int ex = (int) xx;
@@ -1510,12 +1540,12 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	//}
 		//return null;
 	}
-	
+	@Deprecated
 	public void resetLevel(Player player) {
 		
 	}
 	
-
+	@Deprecated
 	public void resetLevelPostDeath(Player player) {
 	//add(player);
 	//player.setPosition(52, 78, Maps.spawnHavenId, true);
@@ -1546,6 +1576,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 	protected static java.util.Random Random = new Random();
 	public static java.util.Random random = Random;
 	
+	@Deprecated
 	public void damage(int x, int y, Entity mob, long Exp, double damage, String name, int ExpV) {
 		int color;
 		String dmgInd = "" + damage;
@@ -1572,6 +1603,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		}
 	}
 
+	@Deprecated
 	public void damagePlayer(int x, int y, PlayerMP player, long Exp, double damage, String name, int ExpV) {
 			int color;
 			int chance = (random.nextInt((101 - 1) + 1) + 1);
@@ -1620,7 +1652,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		return entities;
 	}
 
-	   public void removePlayerMP(String UUID) {
+	/*   public void removePlayerMP(String UUID) {
 	     System.out.println("REMOVING PLAYER... " + UUID);
 		   int index = 0;
 	        for (Player e : players) {
@@ -1668,7 +1700,7 @@ transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	
 	public void addDoorTile(int x, int y) {

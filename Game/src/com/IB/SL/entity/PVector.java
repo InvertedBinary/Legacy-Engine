@@ -4,87 +4,101 @@ import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.util.Debug;
 
-public class PVector {
+public class PVector
+{
 
-	public double x;
-	public double y;
+	private double x;
+	private double y;
 
-	public PVector() {
-		set(0, 0);
-	}
+	public PVector()
+		{
+			set(0, 0);
+		}
 
-	public PVector(PVector vec) {
-		set(vec);
-	}
+	public PVector(PVector vec)
+		{
+			set(vec);
+		}
 
-	public PVector(double x, double y) {
-		set(x, y);
-	}
+	public PVector(double x, double y)
+		{
+			set(x, y);
+		}
 
-	public void set(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	public void set(PVector vec) {
-		this.x = vec.x;
-		this.y = vec.y;
-	}
+	public void set(double x, double y)
+		{
+			this.x = x;
+			this.y = y;
+		}
 
-	public double getX() {
-		return x;
-	}
+	public void set(PVector vec)
+		{
+			this.x = vec.x;
+			this.y = vec.y;
+		}
 
-	public double getY() {
-		return y;
-	}
+	public PVector add(PVector vector)
+		{
+			this.x += vector.x;
+			this.y += vector.y;
+			return this;
+		}
 
-	public PVector add(PVector vector) {
-		this.x += vector.x;
-		this.y += vector.y;
-		return this;
-	}
-	
-	public PVector addResult(PVector vector) {
-		PVector p = new PVector(x + vector.x, y + vector.y);
-		return p;
-	}
+	public PVector addResult(PVector vector)
+		{
+			PVector p = new PVector(x + vector.x, y + vector.y);
+			return p;
+		}
 
-	public PVector subtract(PVector vector) {
-		this.x += vector.x;
-		this.y += vector.y;
-		return this;
-	}
+	public PVector subtract(PVector vector)
+		{
+			this.x += vector.x;
+			this.y += vector.y;
+			return this;
+		}
 
-	public PVector setX(double x) {
-		this.x = x;
-		return this;
-	}
-
-	public PVector setY(double y) {
-		this.y = y;
-		return this;
-	}
-
-	public boolean equals(Object object) {
-		if (!(object instanceof PVector))
+	public boolean equals(Object object)
+		{
+			if (!(object instanceof PVector)) return false;
+			PVector vec = (PVector) object;
+			if (vec.getX() == this.getX() && vec.getY() == this.getY()) return true;
 			return false;
-		PVector vec = (PVector) object;
-		if (vec.getX() == this.getX() && vec.getY() == this.getY())
-			return true;
-		return false;
-	}
+		}
+
+	public int hashCode()
+		{
+			assert false : "hashCode not designed";
+			return 42; // any arbitrary constant will do
+		}
+
+	public String toString()
+		{
+			return "X: " + x + ", Y: " + y;
+		}
+
+	public void draw(Screen screen)
+		{
+			Debug.drawTriangle(screen, Boot.get().font8x8, x, y, x * 1.5, y * 1.5);
+		}
 	
-	public int hashCode() {
-	    assert false : "hashCode not designed";
-	    return 42; // any arbitrary constant will do
-	}
+	public double getX() { return x; }
+	public double getY() { return y; }
 	
-	public String toString() {
-		return "X: " + x + ", Y: " + y;
-	}
+	public double x() { return getX(); }
+	public double y() { return getY(); }	
 	
-	public void draw(Screen screen) {
-		Debug.drawTriangle(screen, Boot.get().font8x8, x, y, x * 1.5, y * 1.5);
-	}
+	public void x(double val) { this.setX(val); }
+	public void y(double val) { this.setY(val); }
+	
+	public PVector setX(double x)
+		{
+			this.x = x;
+			return this;
+		}
+
+	public PVector setY(double y)
+		{
+			this.y = y;
+			return this;
+		}
 }

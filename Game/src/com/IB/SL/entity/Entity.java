@@ -22,6 +22,7 @@ public class Entity extends PropertyEngine implements Serializable {
 	public transient boolean removed = false;
 	public transient Level level;
 	
+	
 	public int STAT_VIT;
 	public int STAT_END;
 	public int STAT_STR;
@@ -59,13 +60,12 @@ public class Entity extends PropertyEngine implements Serializable {
 	public int Lvl = 1;
 	public transient double speed;
 	public transient boolean invulnerable;
-	public Integer id = -1;
-	public transient String UID = "";
 	transient public java.awt.Rectangle r;
 	public transient String name;
 	public int rarity = -1;
 	transient public boolean incombat;
 
+	public String UUID = "-1";
 	
 	public enum HOSTILITY {
 		AGR, PASS, NEU, BOSS, PLAYER
@@ -77,15 +77,21 @@ public class Entity extends PropertyEngine implements Serializable {
 		
 	}
 	
-	public Entity(double x, double y, Sprite sprite, int id) {
+	public Entity(double x, double y, Sprite sprite, String UUID) {
 		this.setX(x);
 		this.setY(y);
 		this.sprite = sprite;
-		this.id = id;
-		this.UID = genUUID();
+		this.UUID = UUID;
 		r = new java.awt.Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
 	}
 	
+	public void setUUID(String val) {
+			this.UUID = val;
+	}
+	
+	public String getUUID() {
+			return this.UUID;
+	}
 	
 	public void onLoad(Entity e) {
 		
@@ -97,14 +103,6 @@ public class Entity extends PropertyEngine implements Serializable {
 //	public void setBounds(Sprite sprite) {
 //		rectBounds = new Rectangle((int) x - (sprite.getWidth() >> 1), (int) y - (sprite.getHeight() >> 1), sprite.getWidth(), sprite.getHeight());
 //	}
-	
-	public String getUUID() {
-		return UID;
-	}
-	
-	public void setUUID(String uid) {
-		this.UID = uid;
-	}
 	
 	public java.awt.Rectangle getBounds() {
 		return r = new java.awt.Rectangle((int)x(), (int)y(), sprite.getWidth(), sprite.getHeight());
@@ -135,11 +133,19 @@ public class Entity extends PropertyEngine implements Serializable {
 	}
 	
 	public double x() {
-		return pos().x;
+		return pos().x();
 	}
 	
 	public double y() {
-		return pos().y;
+		return pos().y();
+	}
+	
+	public void x(double val) {
+		setX(val);
+	}
+	
+	public void y(double val) {
+		setY(val);
 	}
 	
 	public void setX(double val) {
@@ -197,14 +203,6 @@ public class Entity extends PropertyEngine implements Serializable {
 	      return y() + yBound - yOffset;
 	   }
 	
-	   
-	   public static String genUUID() {
-		    UUID uId = UUID.randomUUID();
-		    
-		    return String.valueOf(uId);
-	   }
-
-
 	   public int convert(double value) {
 	      return value < 0 ? -1 : 1;
 	   }
@@ -288,16 +286,6 @@ public class Entity extends PropertyEngine implements Serializable {
 	}
 	
 	
-	public int getID() {
-		if (id == null) {
-			id = -1;
-			return -1;
-		} else {
-			return id;
-		}
-		
-		}
-
 	public void renderGUI(Screen screen) {
 		
 	}

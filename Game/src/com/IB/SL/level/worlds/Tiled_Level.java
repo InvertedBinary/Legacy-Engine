@@ -73,7 +73,7 @@ public class Tiled_Level extends Level {
 			e.printStackTrace();
 		}
 		
-		add(new Emitter(64, 1216, new PVector(1, -5), new Sprite(1 + Boot.randInt(0, 0), 0xffFFFF00), 20, 300, 1, this));
+		//add(new Emitter(64, 1216, new PVector(1, -5), new Sprite(1 + Boot.randInt(0, 0), 0xffFFFF00), 20, 300, 1, this));
 	}
 
 	@Override

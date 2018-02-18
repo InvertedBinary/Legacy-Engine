@@ -51,7 +51,6 @@ public class WaterFamiliar extends Mob {
 		this.Exp = 0;
 		this.setX(x << 4);
 		this.setY(y << 4);
-		this.id = 53432;
 		this.name = "Water Familiar";
 		this.speed = 0.8;
 		this.hostility = HOSTILITY.NEU;

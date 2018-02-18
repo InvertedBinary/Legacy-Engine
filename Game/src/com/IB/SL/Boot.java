@@ -13,110 +13,145 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Boot {
+import com.IB.SL.level.Level;
+import com.IB.SL.network.Client;
+import com.IB.SL.network.server.GameServer;
 
-	public static String title = "Legacy Engine [Build 1 : 10/31/17 - 1/20/18]";
+public class Boot
+{
+
+	public static String title = "Legacy Engine [Build 1 : 10/31/17]";
 	private static Game g = new Game(title);
-	//private static LWJGL lwjgl = new LWJGL(title);
+	// private static LWJGL lwjgl = new LWJGL(title);
+	private static GameServer s;
+	public static Client c;
+	
+	private static int port = 7381;
+	
+	public static HashMap<String, Boolean> launch_args;
 
-	public static Game get() {
-		return g;
-	}
-	
-    public static  HashMap<String, Boolean>  launch_args;
-	
-	public static void main(String[] args) {
-    	launch_args = new HashMap<String, Boolean>();
+	public static void main(String[] args)
+		{
+			launch_args = new HashMap<String, Boolean>();
 
-    	for (String s : args) {
-    		launch_args.put(s, true);
-    	}
-    	
-		//lwjgl.start();
-    	
-    	
-		g.Launch(g);
+			System.out.println("----------- R U N - T I M E   A R G S  ------------");
+			for (String s : args) {
+				launch_args.put(s, true);
+				System.out.println(s + ": " + true);
+			}
+			System.out.println("---------------------------------------------------");
+			
+			
+			if (launch_args.containsKey("-connect")) {
+				if (!launch_args.containsKey("-mode_dedi")) {
+					try {
+						c = new Client("localhost", 7381);
+				        c.startClient();
+					} catch (Exception e) {
+						log("Unsuccessful Connection Attempt.. is the server running?", true);
+					}
+				} else {
+					s = new GameServer(Boot.port);
+					try {
+						s.run();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			g.Launch(g);
 
-	}
-	
-    public static void setWindowIcon(String path) {
-    	g.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				Game.class.getResource(path)));
-    	
-    }
-    
-    public static Cursor setMouseIcon(String path) {
-    	Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = null;
-		image = Toolkit.getDefaultToolkit().getImage(
-				Game.class.getResource(path));
-
-		Point hotspot = new Point(0, 0);
-		Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
-		g.frame.setCursor(cursor);
-		return cursor;
-    }
-	
-	public static void centerMouse() {
-		int centreFrameX = g.frame.getX() + (g.frame.getWidth() / 2);
-		int centreFrameY = g.frame.getY() + (g.frame.getHeight() / 2);
-		moveMouse(new Point(centreFrameX, centreFrameY));
-	}
-	
-	public static void moveMouse(Point p) {
-	    GraphicsEnvironment ge = 
-	        GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    GraphicsDevice[] gs = ge.getScreenDevices();
-	    for (GraphicsDevice device: gs) { 
-	        GraphicsConfiguration[] configurations =
-	            device.getConfigurations();
-	        for (GraphicsConfiguration config: configurations) {
-	            Rectangle bounds = config.getBounds();
-	            if(bounds.contains(p)) {
-	                Point b = bounds.getLocation(); 
-	                Point s = new Point(p.x - b.x, p.y - b.y);
-	                try {
-	                    Robot r = new Robot(device);
-	                    r.mouseMove(s.x, s.y);
-	                } catch (AWTException e) {
-	                    e.printStackTrace();
-	                }
-
-	                return;
-	            }
-	        }
-	    }
-	    return;
-	}
-	
-	public void setMousePos(int framex, int framey) {
-		moveMouse(new Point(framex, framey));
-	}
-	
-	public static int randInt(int min, int max) {
-		return ThreadLocalRandom.current().nextInt(min, max + 1);
-	}
-	
-	public static double randDouble(int min, int max) {
-		return ThreadLocalRandom.current().nextDouble(min, max);
-	}
-	
-	public static void log(String text, boolean err) {
-		if (!err) {			
-			System.out.println(" >> " + text);
-		} else {
-			System.err.println(" >> ALERT: " + text);			
+			// lwjgl.start();
+			
+			/*
+			 * try { ServerTest.main(new String[0]); } catch (Exception e) {
+			 * e.printStackTrace(); }
+			 */
 		}
-	}
 	
-	public static void log(String text, String outboundClass, boolean err) {
-		if (!err) {			
-			System.out.println(outboundClass + " >> " + text);
-		} else {
-			System.err.print(outboundClass + " >> ALERT: ");
+	public static Game get() { return g; }
+	public static Level getLevel() { return get().getLevel(); }
+
+	public static void setWindowIcon(String path)
+		{
+			g.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
+		}
+
+	public static Cursor setMouseIcon(String path)
+		{
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			Image image = null;
+			image = Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path));
+
+			Point hotspot = new Point(0, 0);
+			Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
+			g.frame.setCursor(cursor);
+			return cursor;
+		}
+
+	public static void centerMouse()
+		{
+			int centreFrameX = g.frame.getX() + (g.frame.getWidth() / 2);
+			int centreFrameY = g.frame.getY() + (g.frame.getHeight() / 2);
+			moveMouse(new Point(centreFrameX, centreFrameY));
+		}
+
+	public static void moveMouse(Point p)
+		{
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			GraphicsDevice[] gs = ge.getScreenDevices();
+			for (GraphicsDevice device : gs) {
+				GraphicsConfiguration[] configurations = device.getConfigurations();
+				for (GraphicsConfiguration config : configurations) {
+					Rectangle bounds = config.getBounds();
+					if (bounds.contains(p)) {
+						Point b = bounds.getLocation();
+						Point s = new Point(p.x - b.x, p.y - b.y);
+						try {
+							Robot r = new Robot(device);
+							r.mouseMove(s.x, s.y);
+						} catch (AWTException e) {
+							e.printStackTrace();
+						}
+
+						return;
+					}
+				}
+			}
+			return;
+		}
+
+	public void setMousePos(int framex, int framey)
+		{
+			moveMouse(new Point(framex, framey));
+		}
+
+	public static int randInt(int min, int max)
+		{
+			return ThreadLocalRandom.current().nextInt(min, max + 1);
+		}
+
+	public static double randDouble(int min, int max)
+		{
+			return ThreadLocalRandom.current().nextDouble(min, max);
+		}
+
+	public static void log(String text, boolean important)
+		{
+			if (!important) {
+				System.out.println(" >> " + text);
+			} else {
+				System.err.println(" >> ALERT: " + text);
+			}
+		}
+
+	public static void log(String text, String outboundClass, boolean important)
+		{
+			if (!important) {
+				System.out.println(outboundClass + " >> " + text);
+			} else {
+				System.err.print(outboundClass + " >> ALERT: ");
 				System.out.println(text);
+			}
 		}
-	}
-	
-
 }

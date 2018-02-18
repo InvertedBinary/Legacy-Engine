@@ -40,8 +40,8 @@ public class Particle2D extends Entity {
 		
 		this.vel().add(Gravity);
 		
-		ya = vel().y;
-		xa = vel().x;
+		ya = vel().y();
+		xa = vel().x();
 		
 		move(xa, ya);
 		
@@ -56,15 +56,15 @@ public class Particle2D extends Entity {
 		if (!collision(x() + x, y() + y)) {
 			this.setX(x() + x);
 		} else {
-			vel().x = -xa/3;
+			vel().x(vel().x() -xa/3);
 		}
 		
 		if (!collision(x(), y() + y)) {
 			this.setY(y() + y);
 		} else {
 			if (ya > 0.5) {
-			vel().y = -ya/2;
-			vel().x = xa - xa/3;
+			vel().y(vel().y() -ya/2);
+			vel().x(xa - xa/3);
 			}
 		}
 	}

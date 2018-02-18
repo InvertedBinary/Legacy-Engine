@@ -183,7 +183,7 @@ public abstract class Projectile extends Entity {
 	            && y >  entities.get(i).y() - 5
 	            ) {
 				remove();
-    				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).id, 0);				
+    				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).UUID, 0);				
 				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
 					Sound.Play(proj.collisionSound, false);

@@ -41,7 +41,6 @@ public class Villager01 extends Mob{
 		/*this.xBound = 8;
 		this.yBound = 6;*/
 
-		this.id = 8;
 		this.name = "fish";
 		this.maxhealth = 20;
 		this.mobhealth = maxhealth;

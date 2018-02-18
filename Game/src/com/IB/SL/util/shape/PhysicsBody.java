@@ -22,8 +22,8 @@ public class PhysicsBody extends PropertyEngine {
 	}
 	
 	public PhysicsBody(int x, int y, Entity e, Polygon p) {
-		this.pos.x = x;
-		this.pos.y = y;
+		this.pos.x(x);
+		this.pos.y(y);
 		init(e, p);
 	}
 	
@@ -39,13 +39,13 @@ public class PhysicsBody extends PropertyEngine {
 	public void update() {
 		Vertex v = bounds.vertices.get(0);
 		
-		if (pos.x != v.x || pos.y != v.y) {
-		bounds.translateTo((float) pos.x, (float) pos.y);
+		if (pos.x() != v.x || pos.y() != v.y) {
+		bounds.translateTo((float) pos.x(), (float) pos.y());
 		}
 	}
 
 	public void move() {
-		if (!get(VARS.PHYS_NOGRAV)) vel.y += (VARS.Ag / 9980);
+		if (!get(VARS.PHYS_NOGRAV)) vel.y(vel.y() + (VARS.Ag / 9980));
 
 		pos.add(vel);
 	}

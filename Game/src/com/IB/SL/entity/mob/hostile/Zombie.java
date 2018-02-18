@@ -42,7 +42,6 @@ public class Zombie extends Mob{
 		this.Exp = 5;
 		this.setX(x << 4);
 		this.setY(y << 4);
-		this.id = 10;
 		this.name = "Zombie";
 		this.speed = 0.5;
 		this.rarity = 4;

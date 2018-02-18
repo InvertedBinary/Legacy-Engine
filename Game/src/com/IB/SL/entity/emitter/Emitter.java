@@ -45,8 +45,8 @@ public class Emitter extends Entity {
 		PVector Pos_emit = new PVector(x(), y());
 		for (int i = 0; i < amount; i++) {
 			PVector V_emit = new PVector(this.V_emit);
-			V_emit.x = V_emit.x + Boot.randDouble(0, 3);
-			V_emit.y = V_emit.y + Boot.randDouble(-3, 0);
+			V_emit.setX(V_emit.x() + Boot.randDouble(0, 3));
+			V_emit.setY(V_emit.y() + Boot.randDouble(-3, 0));
 			level.add(new Particle2D(Pos_emit, V_emit, 
 					sprite, life, amount));
 		}

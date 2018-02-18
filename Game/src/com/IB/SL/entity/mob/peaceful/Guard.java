@@ -68,7 +68,6 @@ public class Guard extends Mob{
 		this.setY(y << 4);
 		this.p1 = point1;
 		this.p2 = point2;
-		this.id = 5439;
 		this.name = "Guard";
 		this.hostility = hostility.NEU;
 		this.maxhealth = 20;
