@@ -93,7 +93,7 @@ public class Player extends Mob implements Serializable{
 	
 	
 	public Player(Keyboard input) {
-		this.name = Boot.get().PlayerName;
+		this.name = "P1";
 		this.input = input;
 		sprite = Sprite.playerback;
 	}
@@ -198,7 +198,7 @@ public class Player extends Mob implements Serializable{
 	}
 	
 	
-	 PVector pv = null;
+	PVector pv = null;
 
 	public void update() {		
 		/*try {
@@ -252,9 +252,9 @@ public class Player extends Mob implements Serializable{
 		if (!walking) {
 				animSprite = idle;
 				this.animSprite.setFrameRate(8);
-			} else {
+		} else {
 				this.animSprite.setFrameRate(6 -  (int)this.speed / 2);
-			}
+		}
 		
 	//	if (abilityCooldown > 0) abilityCooldown--;
 		if (fireRate > 0) fireRate--;
@@ -312,29 +312,45 @@ public class Player extends Mob implements Serializable{
 			this.vel().x(speed);
 			} 
 		
-		if (this.input.jump & this.canJump) {
+		if ((this.input.jump || this.input.up) & this.canJump) {
 			this.vel().y(-6.5);
 		}
 		
 		}
 		} else {
+			walking = false;
+			if (vel().x() > 0) {
+				animSprite = right;
+				walking = true;
+			} else if (vel().x() < 0) {
+				animSprite = left;
+				walking = true;
+			}
 		}
 			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
 			//body.set(VARS.PHYS_NOGRAV, false);
 			//if (!body.bounds.intersects(Boot.get().pb.bounds)) {
 			//body.move();
 			//}
-		PVector Gravity = new PVector();
-		Gravity.y(VARS.Ag);
+
 		
-		this.vel().add(Gravity);
+		//this.pv.add(Gravity);
 		
-		if (this.equals(Boot.get().getPlayer())) {
+		if (this.isClientPlayer()) {
+			PVector Gravity = new PVector();
+			Gravity.y(VARS.Ag);
+			
+			this.vel().add(Gravity);
+			if (Boot.isConnected) {
 		if (!((vel().x() == pv.x()) && (vel().y() == pv.y()))) {
 			Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
 			Boot.c.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
-			pv = new PVector(vel());
+			pv.set(vel());
+			}
 		}
+		
+		//this.pv.add(Gravity);
+
 		
 		if (xa != 0 || ya != 0) {
 			Game.createNewPresence();
@@ -342,10 +358,6 @@ public class Player extends Mob implements Serializable{
 		
 		ya = vel().y();
 		xa = vel().x();
-		
-		if (this.vel().y() > 53) {
-			this.vel().y(53);
-		}
 		
 		if (xa != 0) {
 			walking = true;
@@ -361,6 +373,8 @@ public class Player extends Mob implements Serializable{
 			}
 			
 			this.vel().x(0);
+			//this.pv.y(vel().y());
+			
 		} else {
 			ya = vel().y();
 			xa = vel().x();
@@ -391,6 +405,10 @@ public class Player extends Mob implements Serializable{
 		}
 
 		updateShooting();
+	}
+	
+	public boolean isClientPlayer() {
+			return this.equals(Boot.get().getPlayer());
 	}
 
 	public void updateShooting() {

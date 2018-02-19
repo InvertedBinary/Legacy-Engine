@@ -395,25 +395,30 @@ public class Level extends DefaultHandler implements Serializable {
 		{
 			System.out.println("CREATING ENTITY: " + msg);
 			int eid = Integer.parseInt(msg.substring(msg.indexOf("id_e=") + 5, msg.indexOf("&")));
-			String UUID =  (msg.substring(msg.indexOf("id=") + 3, msg.indexOf("@")));
+			String UUID = (msg.substring(msg.indexOf("id=") + 3, msg.indexOf("@")));
 			double x = Double.parseDouble(msg.substring(msg.indexOf("x=") + 2, msg.indexOf(",")));
-			double y = Double.parseDouble(msg.substring(msg.indexOf("y=") + 2));
+			double y = Double.parseDouble(msg.substring(msg.indexOf("y=") + 2, msg.indexOf("#")));
 			//System.out.println("EID: " + eid /* + " ID: " + id */ + " X: " + x + " Y: " + y);
 
 			Entity e = null;
 			switch (eid) {
 			case 0:
-				e = new PlayerMP(x, y, "TEST_PL", UUID);
+				String usrn = (msg.substring(msg.indexOf("un=") + 2));
+				e = new PlayerMP(x, y, usrn, UUID);
+				e.name = usrn;
 				break;
 			}
 			return e;
 		}
 	
 	public static String entityStringBuilder(Entity e) {
-			String result = "ADD|id_e=0&id=25@x=96,y=1248";
-			String eid, UUID, x, y;
+			String result = "ADD|id_e=0&id=25@x=96,y=1248#un=usrn";
+			String eid, UUID, x, y, usrn;
+			usrn = "";
 			if (e instanceof Player) {
 			 eid = "0";
+			 if(e.name != null)
+				 usrn = e.name;
 			} else {
 			 eid = "-1";
 			}
@@ -421,7 +426,7 @@ public class Level extends DefaultHandler implements Serializable {
 			 x = "" + e.x();
 			 y = "" + e.y();
 			
-			result = "ADD|id_e=" + eid + "&id=" + UUID + "@x=" + x + ",y=" + y;
+			result = "ADD|id_e=" + eid + "&id=" + UUID + "@x=" + x + ",y=" + y + "#un=" + usrn;
 					
 		return result;
 	}

@@ -311,7 +311,7 @@ public static LoadProperties loadPrefs() {
 		
 		
 		File saveDir = new File(home);
-		saveDir = new File(saveDir, root + "/Saves/" + Game.PlayerName);
+		saveDir = new File(saveDir, root + "/Saves/" + Boot.get().getPlayer().name);
 		
 		if (!saveDir.exists()) {
 			saveDir.mkdir();

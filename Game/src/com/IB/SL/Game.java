@@ -77,7 +77,6 @@ public class Game extends Canvas implements Runnable
 	public static boolean devModeInfoOn = false;
 	public TileCoord playerSpawn;
 	public TileCoord playerRespawn = new TileCoord(52, 72);
-	public static String PlayerName = "Player";
 	File screenshots = null;
 	public Stack<Level> levels = new Stack<Level>();
 
@@ -97,7 +96,7 @@ public class Game extends Canvas implements Runnable
 	// private VolatileImage vImage = this.createVolatileImage(width, height);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	private int time = 0;
+	public int conTime = 0;
 
 	private void folderCreation()
 		{
@@ -186,7 +185,7 @@ public class Game extends Canvas implements Runnable
 			playerSpawn = new TileCoord(1, 38);
 
 			// TileCoord playerSpawn = new TileCoord(296, 381);
-			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, this.PlayerName, "-1", null, -1));
+			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();
@@ -390,7 +389,7 @@ public class Game extends Canvas implements Runnable
 				autoSave = false;
 				disabledSave = true;
 			}
-			this.PlayerName = name;
+			//this.PlayerName = name;
 			getPlayer().name = name;
 			// getPlayer().reset(getPlayer());
 			getPlayer().invokeLoad(getPlayer());
@@ -481,6 +480,12 @@ public class Game extends Canvas implements Runnable
 
 	public void update()
 		{
+			conTime++;
+			
+			if(conTime > 120) {
+				conTime = 0;
+			}
+			 
 			if (mouseMotionTime > 0) {
 				this.mouseMotionTime--;
 			}

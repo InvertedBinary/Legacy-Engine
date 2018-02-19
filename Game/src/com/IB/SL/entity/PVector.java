@@ -73,7 +73,7 @@ public class PVector
 
 	public String toString()
 		{
-			return "X: " + x + ", Y: " + y;
+			return "<" + x + ", " + y + ">";
 		}
 
 	public void draw(Screen screen)

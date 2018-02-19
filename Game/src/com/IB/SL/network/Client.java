@@ -49,7 +49,9 @@ public class Client implements Runnable
 
 	public void sendMessage(String msg)
 		{
+			if (Boot.isConnected) {
 			clientHandler.sendMessage(msg);
+			}
 		}
 	
 	
@@ -103,7 +105,7 @@ public class Client implements Runnable
             });
 
             ChannelFuture f = b.connect(host, port).sync();
-
+            Boot.isConnected = true;
             //Channel channel = bs.connect(host, port).sync().channel();
 			//BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             
@@ -120,6 +122,7 @@ public class Client implements Runnable
         } finally {
         	Boot.log("Reached client finally..", true);
             workerGroup.shutdownGracefully();
+            Boot.isConnected = false;
         }
     }
 	}

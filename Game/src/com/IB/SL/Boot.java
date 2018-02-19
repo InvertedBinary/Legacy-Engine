@@ -32,9 +32,11 @@ public class Boot
 	public static Client c;
 	
 	private static int port = 7381;
-	private static String host = "localhost";
+	public static String host = "localhost";
 	
 	public static HashMap<String, Boolean> launch_args;
+	
+	public static boolean isConnected = false;
 
 	public static void main(String[] args)
 		{
@@ -47,33 +49,19 @@ public class Boot
 			}
 			System.out.println("---------------------------------------------------");
 			
-				try {
-					String path = "./server.txt";
-					FileInputStream fis = new FileInputStream(path);
-					BufferedReader in = new BufferedReader(new InputStreamReader(fis));	
-					host = in.readLine();
-					System.out.println("Host file found! Will attempt a connection to: " + host);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-					host = "localhost";
-					System.out.println("Host file is corrupted, using localhost!");
-				}
 			
-			if (!launch_args.containsKey("-nonconnect")) {
-				if (!launch_args.containsKey("-mode_dedi")) {
-					try {
-						c = new Client(host, 7381);
-				        c.startClient();
-					} catch (Exception e) {
-						log("Unsuccessful Connection Attempt.. is the server running?", true);
-					}
-				} else {
-					s = new GameServer(Boot.port);
-					try {
-						s.run();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			if (!launch_args.containsKey("-mode_dedi")) {
+				c = new Client(host, 7381);
+
+				if (launch_args.containsKey("doconnect")) {
+					tryConnect(true);
+				}
+			} else {
+				s = new GameServer(Boot.port);
+				try {
+					s.run();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 			g.Launch(g);
@@ -84,6 +72,29 @@ public class Boot
 			 * try { ServerTest.main(new String[0]); } catch (Exception e) {
 			 * e.printStackTrace(); }
 			 */
+		}
+	
+	public static void tryConnect(boolean useHostFile)
+		{
+		if (useHostFile) {
+			try {
+				String path = "./server.txt";
+				FileInputStream fis = new FileInputStream(path);
+				BufferedReader in = new BufferedReader(new InputStreamReader(fis));	
+				host = in.readLine();
+				System.out.println("Host file found! Will attempt a connection to: " + host);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				host = "localhost";
+				System.out.println("Host file is corrupt, using localhost!");
+			}
+		}
+			try {
+				c = new Client(host, 7381);
+		        c.startClient();
+			} catch (Exception e) {
+				log("Unsuccessful Connection Attempt.. is the server running?", true);
+			}
 		}
 	
 	public static Game get() { return g; }

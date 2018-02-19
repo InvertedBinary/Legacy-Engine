@@ -18,15 +18,6 @@ import com.IB.SL.level.TileCoord;
 
 public class Commands {
 
-	static String newline = System.getProperty("line.separator");
-	static String HelpText = 
-			"Note: Commands Are NOT CaSe SeNsItIvE" + newline +
-			"Help: (Shows this screen) " + newline + 
-			"Speed: (Sets Player Speed)" + newline + 
-			"Exp: (Adds/Subs Player EXP)" + newline +
-			"Time: (Sets Time), (Works Best At Total Night/Day)" + newline +
-			"TP: (Multi-player: TPs to another player)";
-	
 	public void updateCommandMode(String cmd, Player player) {
 		ArrayList<String> cmds = new ArrayList<String>();
 		int args = 0;
@@ -86,6 +77,7 @@ public class Commands {
 		cmds.add("spawn");
 		cmds.add("xmload");
 		cmds.add("tload");
+		cmds.add("con");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -232,6 +224,28 @@ public class Commands {
 				case "tload":
 					player.setPositionTiled(0, 0, "/XML/Levels/" + Modifier, true);
 		break;
+				case "con":
+					if (Modifier2.equals("")) {
+						Boot.host = "localhost";
+						Boot.get().getPlayer().name = Modifier;
+					} else {
+						Boot.get().getPlayer().name = Modifier2;
+						Boot.host = Modifier;
+					}
+					Boot.tryConnect(false);
+					
+					boolean attempting = true;
+					Boot.get().conTime = 0;
+					while (attempting) {
+						attempting = !Boot.isConnected;
+						if ((Boot.get().conTime >= 120) || Boot.isConnected) {
+							attempting = false;
+						}
+						System.out.println("in connection loop!");
+					}
+					
+					Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");
 		break;
@@ -248,126 +262,3 @@ public class Commands {
 			
 	}
 }
-/*
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void updateCommandMode(String cmd, Player player) {
-		ArrayList<String> cmds = new ArrayList<String>();
-		int args = 0;
-		String Command = "", Modifier = "", Modifier2 = "";
-		
-		for (int i = 0; i < cmd.toCharArray().length; i++) {
-			if (cmd.toCharArray()[i] == ',') {
-				args++;
-			}
-		}
-		
-		System.out.println("ARUMENTS: " + args);
-		
-		if (args == 0) {
-		 Command = cmd.substring(0, cmd.indexOf(" "));
-		 Modifier = cmd.substring(cmd.indexOf(" ") + 1, cmd.length());
-		} else if (args == 1) {
-			 Command = cmd.substring(0, cmd.indexOf(" "));
-			 Modifier = cmd.substring(cmd.indexOf(" ") + 1, cmd.indexOf(","));
-			 Modifier2 = cmd.substring(cmd.indexOf(",", Modifier.length() - 1) + 1, cmd.length());
-			 
-			 System.out.println("MODIFIER: " + Modifier + " MOD 2: " + Modifier2);
-		}
-		
-		cmds.add("help");
-		cmds.add("tp");
-		cmds.add("tpp");
-		cmds.add("speed");
-		cmds.add("exp");
-		cmds.add("time");
-		cmds.add("money");
-		cmds.add("ip");
-		
-			if (Command != null && Command.length() > 0) {
-					if (cmds.contains(Command.toLowerCase())) {
-						try {
-				switch (Command.toLowerCase()) {
-			/*	case "help": JOptionPane.showMessageDialog(Game.frame, HelpText, "Help", JOptionPane.INFORMATION_MESSAGE);
-		break;	*/
-		/*		case "tpp": Game.getGame().getLevel().MPTeleport(Modifier);
-		break;
-				case "tp": Game.getGame().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
-		break;
-				case "ip": Game.getGame().PersonNameGetter = (Modifier);
-		break;
-				case "speed": 
-				{
-					try {
-						double WalkingSpeedInt = Double.parseDouble(Modifier);
-						System.out.println("Set Speed Equal To " + WalkingSpeedInt);
-						player.speed = WalkingSpeedInt;
-						
-					}catch (NumberFormatException e) {
-					}
-					
-				}
-		break;
-				case "exp":
-					try {
-							player.ExpC += Double.parseDouble(Modifier);
-							System.out.println("Added: " + Modifier + "To Current EXP");
-						} catch (Exception e) {
-							e.printStackTrace();
-					}
-		break;
-				case "money":
-					try {
-							player.money += Double.parseDouble(Modifier);
-							System.out.println(Modifier + " Gold Added");
-						} catch (Exception e) {
-							e.printStackTrace();
-					}
-		break;
-				case "time":
-					try {
-					int time = Integer.parseInt(Modifier);
-							Level.brightness = time;
-							if(time > 0) {
-								Level.daytime = 2600;		
-							}
-							if (time <= 0) {
-								Level.nighttime = 2500;
-							}
-							System.out.println("Set Time To: " + time);
-							time = 0;
-					} catch (Exception e) {
-					e.printStackTrace();
-			}
-		break;
-				case "": 
-					System.out.println("... Finished CMD Lap");
-				}
-				Command = "";
-				
-	} catch (Exception e) {
-	System.err.println("Improper CMD, try again!");
-	JOptionPane.showMessageDialog (Game.frame, "Improper CMD Arg", "Oh noes!", JOptionPane.ERROR_MESSAGE);
-	player.commandModeOn = true;
-	updateCommandMode(player, true);
-	}
-	} else {
-	JOptionPane.showMessageDialog (Game.frame, "Invalid Command", "Command Mode", JOptionPane.ERROR_MESSAGE);
-	player.commandModeOn = true;
-	updateCommandMode(player, true);		
-	}
-		}
-		}
-
-	
-}*/
