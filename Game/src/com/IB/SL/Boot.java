@@ -10,6 +10,11 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,6 +32,7 @@ public class Boot
 	public static Client c;
 	
 	private static int port = 7381;
+	private static String host = "localhost";
 	
 	public static HashMap<String, Boolean> launch_args;
 
@@ -41,11 +47,22 @@ public class Boot
 			}
 			System.out.println("---------------------------------------------------");
 			
+				try {
+					String path = "./server.txt";
+					FileInputStream fis = new FileInputStream(path);
+					BufferedReader in = new BufferedReader(new InputStreamReader(fis));	
+					host = in.readLine();
+					System.out.println("Host file found! Will attempt a connection to: " + host);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+					host = "localhost";
+					System.out.println("Host file is corrupted, using localhost!");
+				}
 			
-			if (launch_args.containsKey("-connect")) {
+			if (!launch_args.containsKey("-nonconnect")) {
 				if (!launch_args.containsKey("-mode_dedi")) {
 					try {
-						c = new Client("localhost", 7381);
+						c = new Client(host, 7381);
 				        c.startClient();
 					} catch (Exception e) {
 						log("Unsuccessful Connection Attempt.. is the server running?", true);
