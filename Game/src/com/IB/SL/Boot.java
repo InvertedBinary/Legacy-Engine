@@ -82,6 +82,7 @@ public class Boot
 				FileInputStream fis = new FileInputStream(path);
 				BufferedReader in = new BufferedReader(new InputStreamReader(fis));	
 				host = in.readLine();
+				in.close();
 				System.out.println("Host file found! Will attempt a connection to: " + host);
 			} catch (IOException e1) {
 				e1.printStackTrace();
