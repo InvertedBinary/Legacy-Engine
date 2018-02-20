@@ -621,9 +621,6 @@ public class Sprite {
 		this.y = y;
 		this.sheet = sheet;
 		load();
-		
-	
-	
 	}
 	
 	
@@ -821,6 +818,7 @@ public class Sprite {
 			} 
 		}
 	}
+	
 	
 	private void setColor(int color) {
 		for (int i = 0; i < height * width; i++) {

@@ -182,7 +182,11 @@ public class Game extends Canvas implements Runnable
 			Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
 			setLevel(TL);
 
-			playerSpawn = new TileCoord(1, 38);
+			if (TL.spawnpoint != null) {
+				playerSpawn = TL.spawnpoint;
+			} else {
+				playerSpawn = new TileCoord(0, 0);
+			}
 
 			// TileCoord playerSpawn = new TileCoord(296, 381);
 			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
@@ -490,11 +494,6 @@ public class Game extends Canvas implements Runnable
 				this.mouseMotionTime--;
 			}
 
-			if (this.getInput().c) {
-				String msg = "ADD|id_e=0&id=25@x=96,y=1248";
-				Boot.c.sendMessage(msg);
-			}
-			
 			getLevel().update();
 		}
 

@@ -12,12 +12,12 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.IB.SL.entity.mob.Player;
 import com.IB.SL.level.Level;
 import com.IB.SL.network.Client;
 import com.IB.SL.network.server.GameServer;
@@ -53,7 +53,7 @@ public class Boot
 			if (!launch_args.containsKey("-mode_dedi")) {
 				c = new Client(host, 7381);
 
-				if (launch_args.containsKey("doconnect")) {
+				if (launch_args.containsKey("-doconnect")) {
 					tryConnect(true);
 				}
 			} else {
@@ -100,6 +100,7 @@ public class Boot
 	
 	public static Game get() { return g; }
 	public static Level getLevel() { return get().getLevel(); }
+	public static Player getPlayer() { return get().getPlayer(); }
 
 	public static void setWindowIcon(String path)
 		{

@@ -27,14 +27,6 @@ public class XML_Projectile extends Projectile {
 		this.angle = angle();
 		this.origin = origin;
 		readXML(XML);
-		System.out.println(this.speed + " , " + origin.vel().calcMagn());
-		/*double Pv = origin.vel().calcMagn();
-		
-		double Pvx = Pv * Math.cos(angle);
-		double Pvy = Pv * Math.sin(angle);
-		
-		nx += Pvx;
-		ny += Pvy;*/
 	}
 	
 	public XML_Projectile(double x, double y, double angle, String XML) {
