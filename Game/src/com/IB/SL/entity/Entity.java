@@ -164,6 +164,14 @@ public class Entity extends PropertyEngine implements Serializable {
 		return body.vel;
 	}
 	
+	public double vx() {
+		return vel().x();
+	}
+	
+	public double vy() {
+		return vel().y();
+	}
+	
 	public void setPos(PVector pos) {
 		this.body.pos = pos;
 	}

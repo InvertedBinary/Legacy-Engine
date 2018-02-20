@@ -27,7 +27,7 @@ import com.IB.SL.level.tile.SL2.XML_Tile;
 public class Tiled_Level extends Level {
 	private static final long serialVersionUID = 1L;
 
-	String path = "";
+	public String path = "";
 	
 	String tiled_xml = "";
 	String tiled_version = "";

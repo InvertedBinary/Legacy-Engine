@@ -512,6 +512,7 @@ public class Game extends Canvas implements Runnable
 			double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2
 					: getPlayer().x() - screen.width / 2;
 			double ySp = getPlayer().y() - screen.height / 2;
+			
 
 			double rScroll = xSp + (screen.width);
 			double bScroll = ySp + (screen.height);

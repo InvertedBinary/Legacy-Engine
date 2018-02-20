@@ -372,7 +372,6 @@ public class Player extends Mob implements Serializable{
 				setY(y() + yv * speed);
 			}
 			
-			this.vel().x(0);
 			//this.pv.y(vel().y());
 			
 		} else {
@@ -380,6 +379,16 @@ public class Player extends Mob implements Serializable{
 			xa = vel().x();
 			move(xa, ya);
 		}
+		
+		if (Boot.isConnected) {
+			if (isClientPlayer()) {
+				updateShooting();
+			}
+		} else {
+			updateShooting();
+		}
+		
+		this.vel().x(0);
 		
 			clear();
 	
@@ -401,10 +410,7 @@ public class Player extends Mob implements Serializable{
 				commandModeOn = false;
 				cmdReleased = false;
 			}
-
 		}
-
-		updateShooting();
 	}
 	
 	public boolean isClientPlayer() {
@@ -413,14 +419,14 @@ public class Player extends Mob implements Serializable{
 
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
-			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
-			XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
-			Test_Arrow2.sprite = Sprite.WizardProjectile2;
-			Test_Arrow.nx += vel().x();
-			Test_Arrow.ny += vel().y();
+			XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/XML/Projectiles/Arrow.xml", this);
+			//XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
+			//Test_Arrow2.sprite = Sprite.WizardProjectile2;
+			//Test_Arrow.nx += vel().x();
+			//Test_Arrow.ny += vel().y();
 			level.add(Test_Arrow);
 			
-			level.add(Test_Arrow2);
+			//level.add(Test_Arrow2);
 		}
 	}
 	

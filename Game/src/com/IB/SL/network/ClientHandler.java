@@ -62,6 +62,14 @@ public class ClientHandler extends SimpleChannelInboundHandler<String>
 				}
 			}
 			
+			if (msg.startsWith("LEV|")) {
+				String TILED_PATH = msg.substring(msg.indexOf("PATH=") + 5, msg.indexOf("@"));
+				double x = Double.parseDouble(msg.substring(msg.indexOf("x=") + 2, msg.indexOf(",")));
+				double y = Double.parseDouble(msg.substring(msg.indexOf("y=") + 2));
+				
+				Boot.get().getPlayer().setPositionTiled(x, y, TILED_PATH, false);
+			}
+			
 			if (msg.startsWith("POS|")) {
 				String toFind = (msg.substring(msg.indexOf("id=") + 3, msg.indexOf("@")));
 				if (!toFind.equals(Boot.get().getPlayer().UUID)) {

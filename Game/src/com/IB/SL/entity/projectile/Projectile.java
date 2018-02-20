@@ -236,10 +236,13 @@ public abstract class Projectile extends Entity {
 		}
 	}
 	
-	public static double angle() {
-		double dx = Mouse.getX() - Game.getWindowWidth() / 2;
-		double dy = Mouse.getY() - Game.getWindowHeight() / 2;
-		double dir = Math.atan2(dy + 28, dx + 16);
+	public double angle() {
+			//TODO: Convert projectile x,y to PVector!
+		double dx = Mouse.getX() - ((x - Boot.get().xScroll) * 2);
+		double dy = Mouse.getY() - ((y - Boot.get().yScroll) * 2);
+		///double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+		///double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+		double dir = Math.atan2(dy + 32, dx + 16);
 		return dir;
 	}
 	
@@ -252,22 +255,24 @@ public abstract class Projectile extends Entity {
 	public void addEffect(PlayerMP playerMP) {}
 	protected void move() {}
 	
-	protected void moveSimple() {
-		this.x += this.nx;
-		this.y += this.ny;
-		if (distance() > range) {
-			remove();
+	protected void moveSimple()
+		{
+			this.x += this.nx;
+			this.y += this.ny;
+			if (distance() > range) {
+				remove();
+			}
 		}
-	}
-	
-	protected void moveDropArc() {
-		x += nx;
-		y += ny -= 1000;
-		if (distance() > range) {
-			//level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
-			remove();
+
+	protected void moveDropArc()
+		{
+			x += nx;
+			y += ny -= 1000;
+			if (distance() > range) {
+				// level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
+				remove();
+			}
 		}
-	}
 	
 	protected void moveArc() {
 		this.range = 1000;
