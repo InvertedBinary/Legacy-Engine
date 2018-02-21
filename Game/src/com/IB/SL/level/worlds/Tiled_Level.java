@@ -33,7 +33,7 @@ public class Tiled_Level extends Level {
 	
 	boolean readingLayer = false;
 	boolean readingObjects = false;
-	Integer current_layer = null;
+	Integer current_layer = -1;
 	String current_object_layer = "";
 	String current_object_type = "";
 
@@ -90,12 +90,18 @@ public class Tiled_Level extends Level {
  				if (tile_strings == null) {
 					tile_strings = new ArrayList<>();
 				}
+ 				
  				if (current_layer == null) {
  					current_layer = -1;
  				}
             	 
+            	/* if (ln.equals("Tiles")) {
+            		 this.current_layer = 0;
+            	 } else if (ln.equals("Overlays")) {
+            		 this.current_layer = 1;
+            	 }*/
           	 		this.current_layer++;
-          	 		System.out.println(ln + " : " + current_layer);
+          	 		//System.out.println(ln + " : " + current_layer);
             	 break;
              }
              

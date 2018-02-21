@@ -342,7 +342,7 @@ public class Player extends Mob implements Serializable{
 			
 			this.vel().add(Gravity);
 			if (Boot.isConnected) {
-		if (!((vel().x() == pv.x()) && (vel().y() == pv.y()))) {
+		if ((vel().x() != pv.x()) || (vel().y() != pv.y())) {
 			Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
 			Boot.c.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
 			pv.set(vel());
@@ -389,6 +389,7 @@ public class Player extends Mob implements Serializable{
 		}
 		
 		this.vel().x(0);
+		this.pv.x(0);
 		
 			clear();
 	
