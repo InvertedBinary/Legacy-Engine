@@ -6,6 +6,7 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.UI.part.UI_Button;
+import com.IB.SL.level.Level;
 
 public class MainMenu extends UI_Menu {
 
@@ -68,10 +69,11 @@ public class MainMenu extends UI_Menu {
 	
 	public void continueGame() {
 		Boot.get().getMenu().unload(Boot.get().getMenu().current);
-		if (Boot.get().getLevel().players.size() == 0) {
+		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
-			Boot.get().getLevel().loadLua();
+		Boot.get().getLevel().loadLua();
+		Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
 		}
 	}
 	

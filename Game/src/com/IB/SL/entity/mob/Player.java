@@ -36,7 +36,6 @@ import com.IB.SL.level.worlds.Tiled_Level;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
-import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.shape.Rectangle;
@@ -94,14 +93,14 @@ public class Player extends Mob implements Serializable{
 	
 	
 	public Player(Keyboard input) {
-		this.name = Boot.get().PlayerName;
+		this.name = "P1";
 		this.input = input;
 		sprite = Sprite.playerback;
 	}
 	
-	public Player(int x, int y, Keyboard input, String username) { 
-		this.setX((int)x);
-		this.setY((int)y);
+	public Player(double x, double y, Keyboard input, String username) { 
+		this.setX(x);
+		this.setY(y);
 		this.name = username;
 		this.input = input; 
 		init();
@@ -198,8 +197,11 @@ public class Player extends Mob implements Serializable{
 		}
 	}
 	
+	
+	PVector pv = null;
+
 	public void update() {		
-		try {
+		/*try {
 			
 		if (input.save){
 			invokeSave(this);
@@ -212,25 +214,18 @@ public class Player extends Mob implements Serializable{
 			}
 			input.load = false;
 		}
-		
+	
 		} catch (Exception e) {
 			
-		}
-		//AFK
+		}*/
 		
         raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int)3);
-		if (loadedProp == false) {
-			//loadPlayer();
-			loadedProp = true;	
-		}
-
 		
 		Pathtime++;
-		// System.out.println(1 + (this.stat_ATC / 3));
 		tileX = (int) x() >> VARS.TILE_BIT_SHIFT;
 		tileY = (int) y() >> VARS.TILE_BIT_SHIFT;
 		try {
-			if (level.getOverlayTile(tileX, tileY).exit()) {
+			if (level.getTile(tileX, tileY).exit()) {
 				level.checkExits(this, level, (int)x(), (int)y());
 			}
 		} catch (Exception e) {
@@ -257,9 +252,9 @@ public class Player extends Mob implements Serializable{
 		if (!walking) {
 				animSprite = idle;
 				this.animSprite.setFrameRate(8);
-			} else {
+		} else {
 				this.animSprite.setFrameRate(6 -  (int)this.speed / 2);
-			}
+		}
 		
 	//	if (abilityCooldown > 0) abilityCooldown--;
 		if (fireRate > 0) fireRate--;
@@ -277,6 +272,14 @@ public class Player extends Mob implements Serializable{
 			//speed = 1;
 		}
 		
+		 double xa = 0;
+		 double ya = 0;
+		 double yv = 0;
+				 
+		 if (pv == null) {
+			 pv = new PVector(vel());
+		 }
+		 
 		if (input != null) {
 		this.buildMode = input.buildMode;
 			
@@ -292,11 +295,6 @@ public class Player extends Mob implements Serializable{
 			sprinting = false;
 		}
 		
-		
-		 double xa = 0;
-		 double ya = 0;
-		 double yv = 0;
-		
 	//	if (inventoryOn == false) {
 		if (this == level.getClientPlayer()) {
 		if (input.up) {
@@ -308,44 +306,64 @@ public class Player extends Mob implements Serializable{
 		}
 		if (input.left) {
 			animSprite = left;				
-			this.vel().x = -speed;
+			this.vel().x(-speed);
 		} else if (input.right) {
 			animSprite = right;				
-			this.vel().x = speed;
+			this.vel().x(speed);
 			} 
+		
+		if ((this.input.jump || this.input.up) & this.canJump) {
+			this.vel().y(-6.5);
 		}
 		
+		}
+		} else {
+			walking = false;
+			if (vel().x() > 0) {
+				animSprite = right;
+				walking = true;
+			} else if (vel().x() < 0) {
+				animSprite = left;
+				walking = true;
+			}
+		}
+			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
+			//body.set(VARS.PHYS_NOGRAV, false);
+			//if (!body.bounds.intersects(Boot.get().pb.bounds)) {
+			//body.move();
+			//}
+
 		
-		PVector Gravity = new PVector();
-		Gravity.y = VARS.Ag;
+		//this.pv.add(Gravity);
 		
-		this.vel().add(Gravity);
-		
-		ya = vel().y;
-		xa = vel().x;
-		
-		
-		
-		if (this.input.jump & this.canJump) {
-			this.vel().y = -6.5;
+		if (this.isClientPlayer()) {
+			PVector Gravity = new PVector();
+			Gravity.y(VARS.Ag);
+			
+			this.vel().add(Gravity);
+			if (Boot.isConnected) {
+		if (!((vel().x() == pv.x()) && (vel().y() == pv.y()))) {
+			Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
+			Boot.c.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
+			pv.set(vel());
+			}
 		}
 		
-		if (this.vel().y > 53) {
-			this.vel().y = 53;
-		}
-		
-		//System.out.println(this.vel());
+		//this.pv.add(Gravity);
+
 		
 		if (xa != 0 || ya != 0) {
 			Game.createNewPresence();
 		}
+		
+		ya = vel().y();
+		xa = vel().x();
 		
 		if (xa != 0) {
 			walking = true;
 		} else {
 			walking = false;
 		}
-		
 		
 			if (!noclip) {
 				move(xa, ya);
@@ -354,16 +372,25 @@ public class Player extends Mob implements Serializable{
 				setY(y() + yv * speed);
 			}
 			
-			this.vel().x = 0;
+			//this.pv.y(vel().y());
 			
-			//System.out.println("POS: " + pos.toString() + " VEL: " + vel.toString());
-			//body.set(VARS.PHYS_NOGRAV, false);
-			//if (!body.bounds.intersects(Boot.get().pb.bounds)) {
-			//body.move();
-			//}
+		} else {
+			ya = vel().y();
+			xa = vel().x();
+			move(xa, ya);
 		}
 		
-		clear();
+		if (Boot.isConnected) {
+			if (isClientPlayer()) {
+				updateShooting();
+			}
+		} else {
+			updateShooting();
+		}
+		
+		this.vel().x(0);
+		
+			clear();
 	
 			if (this == level.getClientPlayer()) {
 			updateBuild();
@@ -383,22 +410,23 @@ public class Player extends Mob implements Serializable{
 				commandModeOn = false;
 				cmdReleased = false;
 			}
-
 		}
-
-		updateShooting();
+	}
+	
+	public boolean isClientPlayer() {
+			return this.equals(Boot.get().getPlayer());
 	}
 
 	public void updateShooting() {
 		if (Mouse.getButton() == 1) {
-			XML_Projectile Test_Arrow = new XML_Projectile(x(), y(), Projectile.angle(), "/XML/Projectiles/Arrow.xml", this);
-			XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
-			Test_Arrow2.sprite = Sprite.WizardProjectile2;
-			Test_Arrow.nx += vel().x;
-			Test_Arrow.ny += vel().y;
+			XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/XML/Projectiles/Arrow.xml", this);
+			//XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle() + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
+			//Test_Arrow2.sprite = Sprite.WizardProjectile2;
+			//Test_Arrow.nx += vel().x();
+			//Test_Arrow.ny += vel().y();
 			level.add(Test_Arrow);
 			
-			level.add(Test_Arrow2);
+			//level.add(Test_Arrow2);
 		}
 	}
 	
@@ -760,15 +788,6 @@ public class Player extends Mob implements Serializable{
 			}
 		}
 	}
-
-	public String getUUID() {
-		return UID;
-	}
-	
-	public void setUID(String UUID) {
-		UID = UUID;
-	}
-
 }
 
 

@@ -34,7 +34,6 @@ public class Alice extends Mob{
 		this.Exp = 4;
 		this.setX(x << 4);
 		this.setY(y << 4);
-		this.id = 0;
 		this.name = "Alice";
 		this.speed = 0.5;
 		this.hostility = HOSTILITY.NEU;

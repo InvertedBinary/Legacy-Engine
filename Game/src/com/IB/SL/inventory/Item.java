@@ -106,7 +106,7 @@ public class Item extends Entity {
 	
 	public void setProperties(Element e) {
 		try {
-		this.id = Integer.parseInt(getTag(e, "id"));
+		//this.id = Integer.parseInt(getTag(e, "id"));
 		this.name = getTag(e, "name");
 		this.rarity = Integer.parseInt(getTag(e, "rarity"));
 		this.required_level = Integer.parseInt(getTag(e, "level_req"));

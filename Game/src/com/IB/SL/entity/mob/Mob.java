@@ -96,24 +96,27 @@ public abstract  class Mob extends Entity implements Serializable {
 	}
 	
 	public void yAxisCollisionResponse(double ya) {
-		if (this.vel().y > 0) {
+		if (this.vel().y() > 0) {
 		doFallDamage();
-		this.vel().y = 0;
+		this.vel().y(0);
 		this.canJump = true;
 		}
 		if (ya < 0) {
-			this.vel().y = VARS.Ag;
+			this.vel().y(VARS.Ag);
 			this.canJump = false;
 		}
 	}
 	
 	public void doFallDamage() {
-		if (this.vel().y > 10) {
-			this.mobhealth -= this.vel().y / 8;
+		if (this.vel().y() > 10) {
+			this.damageMob(this.vel().y() / 8);
 			System.out.println(this.mobhealth);
 		}
 	}
 		
+	public void damageMob(double pts) {
+		this.mobhealth -= pts;
+	}
 
 	public void pull(Entity e, double rate) {
 		double xpa = 0, ypa = 0;

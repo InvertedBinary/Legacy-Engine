@@ -22,6 +22,13 @@ public class XML_Projectile extends Projectile {
 	public String XML_String = "";
 	public int RoF = 0;
 	
+	public XML_Projectile(double x, double y, String XML, Entity origin) {
+		this.init(x, y, 0);
+		this.angle = angle();
+		this.origin = origin;
+		readXML(XML);
+	}
+	
 	public XML_Projectile(double x, double y, double angle, String XML) {
 		this.init(x, y, angle);
 		readXML(XML);
@@ -33,15 +40,15 @@ public class XML_Projectile extends Projectile {
 		readXML(XML);
 	}
 	
-	public void init(double x, double y, double angle) {
-		this.sprite = Sprite.WizardProjectile;
-		this.xOrigin = x;
-		this.yOrigin = y;
-		this.x = x;
-		this.y = y;
-		this.angle = angle;
-		
-	}
+	public void init(double x, double y, double angle)
+		{
+			this.sprite = Sprite.WizardProjectile;
+			this.xOrigin = x;
+			this.yOrigin = y;
+			this.x = x;
+			this.y = y;
+			this.angle = angle;
+		}
 	
 	public void readXML(String path) {
 		this.XML_String = path;
@@ -113,7 +120,7 @@ public class XML_Projectile extends Projectile {
 	public void update() {
 		time++;
 		
-		this.moveArc();
+		this.moveSimple();
 	}
 	
 	public void render(Screen screen) {

@@ -36,19 +36,16 @@ public class WallParticle extends Particle {
 		}
 		
 		private void move(double x, double y) {
-				if (collision(x, y)) {
-					this.xa *= -0.2;
-					this.ya *= -0.2;
-					this.za *= -0.2;
-				}
-				this.xx += xa;
-				this.yy += ya;
-				this.zz += za;
-	
+			if (collision(x, y)) {
+				this.xa *= -0.5;
+				this.ya *= -0.5;
+				this.za *= -0.5;
 			}
-			
-			
+			this.xx += xa;
+			this.yy += ya;
+			this.zz += za;
 
+		}
 		
 		public boolean collision(double x, double y) {
 			boolean solidtwo = false;

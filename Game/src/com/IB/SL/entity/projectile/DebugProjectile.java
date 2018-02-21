@@ -5,8 +5,8 @@ import java.util.Random;
 
 import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.emitter.WallParticleSpawner;
 import com.IB.SL.entity.mob.Mob;
-import com.IB.SL.entity.spawner.WallParticleSpawner;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.util.Sound;
@@ -60,7 +60,7 @@ public class DebugProjectile extends Projectile {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
 			Boot.log("===============================================", false);
-			Boot.log("ID: " + ee.id, true);
+			Boot.log("ID: " + ee.UUID, true);
 			Boot.log("HOSTILITY: " + ee.hostility, true);
 			Boot.log("X: " + ee.x() / 16, true);
 			Boot.log("Y: " + ee.y() / 16, true);

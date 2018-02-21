@@ -2,8 +2,10 @@ package com.IB.SL.entity.mob;
 
 import java.net.InetAddress;
 
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.input.Keyboard;
 
@@ -21,49 +23,38 @@ public class PlayerMP extends Player {
 	
 	public int attempt;
 	
-	public PlayerMP(int x, int y, Keyboard input, String username, String UUID, InetAddress ipAddress, int port) {
+	public PlayerMP(int x, int y, Keyboard input, String username, String UUID) {
 		super(x, y, input, username);
 		this.ipAddress = ipAddress;
 		this.port = port;
-		this.setUID(UUID);
+		this.setUUID(UUID);
 	}
 
+	@Deprecated
 	public PlayerMP(int x, int y, String username, String UUID, InetAddress ipAddress, int port) {
 		super(x, y, null, username);
 		this.ipAddress = ipAddress;
 		this.port = port;
-		this.setUID(UUID);
+		this.setUUID(UUID);
+	}
+	
+	public PlayerMP(double x, double y, String username, String id) {
+		super(x, y, null, username);
+		this.setUUID(id);
+		this.name = username;
 	}
 	
 	@Override
 	public void update() {
 		super.update();
-		if (walking && !riding && !raycastDIR.hasCollided()) {
-			animSprite.update();					
-	} else {
-		animSprite.setFrame(0);			
-		}
 	}
 	
 	@Override
 	public void render(Screen screen) {
-		if (this != level.getClientPlayer()) {
-		
-	if (this.getDir() == dir.UP) {
-		animSprite = up;
-	} else if (this.getDir() == dir.DOWN) {
-		animSprite = down;
-	}
-	 if (this.getDir() == dir.LEFT) {
-		 animSprite = left;
-	} else if (this.getDir() == dir.RIGHT) {
-		animSprite = right;
-		}
-		this.sprite = animSprite.getSprite();
-		screen.renderMobSpriteUniversal((int) (x() - 8), (int) (y() - 15),  sprite);
-		} else {
-			super.render(screen);
-		}
+		super.render(screen);
+		if (Boot.isConnected)
+			Boot.get().font8x8.render((int)x() - ((name.length() / 2) * 6) + 22, (int)y() - 5, -2, 0xffFFFFFF, name, screen, true, false);
+
 	}
 	
 }

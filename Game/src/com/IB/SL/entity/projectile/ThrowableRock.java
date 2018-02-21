@@ -6,8 +6,6 @@ import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.entity.spawner.RockShatterSpawner;
-import com.IB.SL.entity.spawner.RockSpawner;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.util.Sound;
@@ -60,7 +58,7 @@ public class ThrowableRock extends Projectile{
 		}
 		
 		if (level.tileCollision((int) (x + nx), (int) (y + ny), 4, -2, 8)) {
-			level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 25, 4, level));
+			//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 25, 4, level));
 			Sound.Play(Sound.Rock, false);
 			 remove();
 	}
@@ -77,7 +75,7 @@ public class ThrowableRock extends Projectile{
 		x += nx;
 		y += ny -= mod;
 		if (distance() > range) {
-			level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
+			//level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
 			remove();
 		}
 	}
