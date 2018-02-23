@@ -1,9 +1,13 @@
 package com.IB.SL.util.shape;
 
+import com.IB.SL.graphics.Screen;
+import com.IB.SL.util.Debug;
+
 public class LineSegment extends Polygon {
 	
-	Vertex origin;
-	Vertex endPoint;
+	public Vertex origin;
+	public Vertex endPoint;
+	public int color = 0xffFFFFFF;
 	float length;
 	
 	public LineSegment(Vertex p, float length, float angle) {
@@ -20,6 +24,18 @@ public class LineSegment extends Polygon {
 		initShape();
 	}
 	
+	public LineSegment(float x, float y, float x2, float y2) {
+		this.origin = new Vertex(x, y);
+		this.endPoint = new Vertex(x2, y2);
+		
+		this.length = getDistance(origin, endPoint);
+		
+		this.addVertex(origin);
+		this.addVertex(endPoint);
+		
+		initShape();
+	}
+	
 	public LineSegment(Vertex p1, Vertex p2) {
 		this.origin = p1;
 		this.endPoint = p2;
@@ -30,6 +46,10 @@ public class LineSegment extends Polygon {
 		this.addVertex(p2);
 		
 		initShape();
+	}
+	
+	public void drawLine(Screen screen, boolean fixed) {
+		Debug.drawLine(screen, (int)origin.x, (int)origin.y, (int)endPoint.x, (int)endPoint.y, color, true);
 	}
 	
 	public void initShape() {

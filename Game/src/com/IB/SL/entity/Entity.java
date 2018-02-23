@@ -108,6 +108,10 @@ public class Entity extends PropertyEngine implements Serializable {
 		return r = new java.awt.Rectangle((int)x(), (int)y(), sprite.getWidth(), sprite.getHeight());
 	}
 	
+	public void added() {
+			
+	}
+	
 	public void update() {
 
 	}

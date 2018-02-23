@@ -86,6 +86,18 @@ public class PVector
 			Debug.drawTriangle(screen, Boot.get().font8x8, x, y, x * 1.5, y * 1.5);
 		}
 	
+	public void drawVectors(Screen screen, PVector v)
+		{
+			Debug.drawLine(screen, (int)x(), (int)y(), (int)v.x(), (int)v.y(), 0xFF00FF, true);
+		}
+	
+	public double dot(PVector v)
+		{
+			return (this.x() * v.x()) + (this.y() * v.y());
+		}
+	
+	
+	
 	public double getX() { return x; }
 	public double getY() { return y; }
 	

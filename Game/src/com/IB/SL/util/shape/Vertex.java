@@ -47,4 +47,10 @@ public class Vertex {
 		
 		Set(xx, yy);
 	}
+	
+	@Override
+	public String toString()
+		{
+			return "| VERTEX ~ (" + x + ", " + y + ") |";
+		}
 }

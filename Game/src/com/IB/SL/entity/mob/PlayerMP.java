@@ -54,7 +54,6 @@ public class PlayerMP extends Player {
 		super.render(screen);
 		if (Boot.isConnected)
 			Boot.get().font8x8.render((int)x() - ((name.length() / 2) * 6) + 22, (int)y() - 5, -2, 0xffFFFFFF, name, screen, true, false);
-
 	}
 	
 }

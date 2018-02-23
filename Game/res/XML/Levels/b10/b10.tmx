@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="46">
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="55">
  <tileset firstgid="1" source="assets/blocks32.tsx"/>
  <layer name="Tiles" width="100" height="50">
   <data encoding="csv">
@@ -232,6 +232,9 @@
  <objectgroup color="#ff41ff" name="Collision_mask">
   <object id="45" name="ground" type="c_mask" x="0" y="1344">
    <polyline points="0,0 192,0 256,64 384,96 416,64 416,32 448,32 448,-32 480,-32 512,96"/>
+  </object>
+  <object id="54" name="ground" type="c_mask" x="544" y="1440">
+   <polyline points="0,0 32,-32 64,0"/>
   </object>
  </objectgroup>
 </map>

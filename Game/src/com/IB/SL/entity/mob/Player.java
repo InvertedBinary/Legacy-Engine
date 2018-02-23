@@ -25,6 +25,7 @@ import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.UI.GUI;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
+import com.IB.SL.level.Level;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.RayCast;
 import com.IB.SL.level.TileCoord;
@@ -53,7 +54,7 @@ public class Player extends Mob implements Serializable{
 	public boolean buildMode = false;
 
 	//private transient transient Inventory inventory;
-	//public transient Level level;
+	//public transient vel level;
 	transient int walkingPacketTime = 0;
 	public transient  AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
 	public transient  AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
@@ -92,6 +93,7 @@ public class Player extends Mob implements Serializable{
 	//TODO: Generate UUID and send instead of USErname
 	
 	
+	@Deprecated
 	public Player(Keyboard input) {
 		this.name = "P1";
 		this.input = input;
@@ -135,7 +137,22 @@ public class Player extends Mob implements Serializable{
 		System.out.println("ADDING NEW PLAYER: " + this.x() + "," + this.y());
 	}
 	
+	public void added() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+			Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+			}
+		}
+	}
 	
+	public boolean remove() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+				Boot.c.sendMessage("REM|id=" + UUID);
+			}
+		}
+		return super.remove();
+	}
 	
 	
 	@Deprecated
@@ -388,31 +405,30 @@ public class Player extends Mob implements Serializable{
 			updateShooting();
 		}
 		
-		this.vel().x(0);
-		this.pv.x(0);
-		
-			clear();
-	
-			if (this == level.getClientPlayer()) {
-			updateBuild();
-			}
-						
-		//command mode TOGGLE
-			if (input != null) {
-		if(input.commandMode && !commandModeOn && cmdReleased){
-			commandModeOn = true;
-			cmdReleased = false;
-		}
-		
-			if (!input.commandMode)
-				cmdReleased = true;
+			this.vel().x(0);
+			this.pv.x(0);
 
-			if (input.commandMode && commandModeOn && cmdReleased) {
-				commandModeOn = false;
-				cmdReleased = false;
+			clear();
+
+			if (this == level.getClientPlayer()) {
+				updateBuild();
+			}
+
+			// command mode TOGGLE
+			if (input != null) {
+				if (input.commandMode && !commandModeOn && cmdReleased) {
+					commandModeOn = true;
+					cmdReleased = false;
+				}
+
+				if (!input.commandMode) cmdReleased = true;
+
+				if (input.commandMode && commandModeOn && cmdReleased) {
+					commandModeOn = false;
+					cmdReleased = false;
+				}
 			}
 		}
-	}
 	
 	public boolean isClientPlayer() {
 			return this.equals(Boot.get().getPlayer());
@@ -431,18 +447,20 @@ public class Player extends Mob implements Serializable{
 		}
 	}
 	
-	private void clear() {
-		for (int i = 0; i < level.getProjectiles().size(); i++) {
-			Projectile p = level.getProjectiles().get(i);
-			if (p.isRemoved()) level.getProjectiles().remove(i);
+	private void clear()
+		{
+			for (int i = 0; i < level.getProjectiles().size(); i++) {
+				Projectile p = level.getProjectiles().get(i);
+				if (p.isRemoved()) level.getProjectiles().remove(i);
+			}
 		}
-	}
 	
-	public void setPosition(TileCoord tileCoord) {
-		this.setX(tileCoord.x());
-		this.setY(tileCoord.y());
-	}
-	
+	public void setPosition(TileCoord tileCoord)
+		{
+			this.setX(tileCoord.x());
+			this.setY(tileCoord.y());
+		}
+
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
 		System.out.println("Got request to load a Tiled level.");
 		if (tileMult) {
@@ -592,14 +610,15 @@ public class Player extends Mob implements Serializable{
 	transient public ArrayList<Tile> history = new ArrayList<Tile>();
 	transient Tile toPlace = Tile.Wood;
 	
-	
+	@Deprecated
 	public void swapBlock(int index) {
+		/*
 		if (history.get(index) != null) {
 		Tile old = history.get(0);
 		history.set(0, history.get(index));
 		history.set(index, old);
 		switchTimer = 15;
-		}
+		}*/
 	}
 	
 	int switchTimer = 00;

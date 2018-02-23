@@ -148,13 +148,7 @@ public class Commands {
 				break;
 				
 				case "dbg":
-				
-				/*	if (!Boot.get().gameState.equals(Boot.get().gameState.INGAME_A)) {
-						Game.switchState(Boot.get().gameState.INGAME_A);						
-					} else {
-						Game.switchState(Boot.get().gameState.INGAME);
-					}
-					*/
+					Boot.drawDebug = true;
 				break;
 		
 				case "avg": 
@@ -244,7 +238,7 @@ public class Commands {
 						System.out.println("in connection loop!");
 					}
 					
-					Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+					//Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

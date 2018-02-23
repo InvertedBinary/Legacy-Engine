@@ -822,6 +822,8 @@ public class Level extends DefaultHandler implements Serializable {
 				 }
 		//screen.renderSprite(644 * TileCoord.TILE_SIZE, 206 * TileCoord.TILE_SIZE, Sprite.robobob, true);
 		 renderMiniMap(screen);
+		 
+		 drawExtendedLevel(screen);
 
 		//screen.renderLight(277 * TileCoord.TILE_SIZE, 477 * TileCoord.TILE_SIZE, 40, 20, 20, 20, "test");
 
@@ -849,6 +851,9 @@ public class Level extends DefaultHandler implements Serializable {
 	
 		remove();
 	}
+	
+	public void drawExtendedLevel(Screen screen) {}
+	
 	private void remove() {
 		for(int i = 0; i < entitiesList.size(); i++){
 	         if(entitiesList.get(i).isRemoved()) entitiesList.remove(i);
@@ -884,6 +889,7 @@ public class Level extends DefaultHandler implements Serializable {
 			Projectiles.add((Projectile) e);
 		} else if (e instanceof Player) {
 			players.add((PlayerMP) e);
+			e.added();
 		} else if (e instanceof Emitter) {
 			emitters.add((Emitter) e);
 		} else {

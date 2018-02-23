@@ -73,7 +73,6 @@ public class MainMenu extends UI_Menu {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
 		Boot.get().getLevel().loadLua();
-		Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
 		}
 	}
 	

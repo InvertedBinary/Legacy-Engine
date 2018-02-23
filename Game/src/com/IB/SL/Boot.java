@@ -38,6 +38,8 @@ public class Boot
 	
 	public static boolean isConnected = false;
 
+	public static boolean drawDebug = false;
+	
 	public static void main(String[] args)
 		{
 			launch_args = new HashMap<String, Boolean>();
