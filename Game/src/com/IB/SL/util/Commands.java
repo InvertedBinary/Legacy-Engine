@@ -73,6 +73,7 @@ public class Commands {
 		cmds.add("spawn");
 		cmds.add("ld");
 		cmds.add("con");
+		cmds.add("svr");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -223,6 +224,8 @@ public class Commands {
 					}
 					
 					//Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+		break;
+				case "svr":
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

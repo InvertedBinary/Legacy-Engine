@@ -358,6 +358,7 @@ public class Player extends Mob implements Serializable{
 			Gravity.y(VARS.Ag);
 			
 			this.vel().add(Gravity);
+			
 			if (Boot.isConnected) {
 		if ((vel().x() != pv.x()) || (vel().y() != pv.y())) {
 			Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());

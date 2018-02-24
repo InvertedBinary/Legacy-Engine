@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="55">
+<map version="1.0" tiledversion="1.1.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="62">
  <tileset firstgid="1" source="assets/blocks32.tsx"/>
  <layer name="Tiles" width="100" height="50">
   <data encoding="csv">
@@ -235,6 +235,15 @@
   </object>
   <object id="54" name="ground" type="c_mask" x="544" y="1440">
    <polyline points="0,0 32,-32 64,0"/>
+  </object>
+  <object id="55" name="groun" type="c_mask" x="512" y="1440">
+   <polyline points="0,0 32,-32 32,0"/>
+  </object>
+  <object id="56" name="ground" type="c_mask" x="618.25" y="1456.56">
+   <polyline points="0,0 179.5,-28.5 203,6.5 341,-43 389.5,-35 629.75,-48.5625"/>
+  </object>
+  <object id="59" name="grou" type="c_mask" x="1248" y="1408">
+   <polyline points="0,0 128,0 160,-32 256,-32 288,-64 352,-64 384,-96 416,-96 448,-128 992,-128 1024,-96 1120,-96 1152,-64 1312,-64 1344,-96 1408,-96 1440,-128 1504,-128 1536,-160 1600,-160 1632,-192 1792,-192 1824,-224 1856,-256 1952,-256"/>
   </object>
  </objectgroup>
 </map>

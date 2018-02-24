@@ -1,5 +1,7 @@
 package com.IB.SL.util.shape;
 
+import java.util.ArrayList;
+
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.PVector;
@@ -48,6 +50,14 @@ public class PhysicsBody extends PropertyEngine {
 		if (!get(VARS.PHYS_NOGRAV)) vel.y(vel.y() + (VARS.Ag / 9980));
 
 		pos.add(vel);
+	}
+	
+	public ArrayList<Vertex> verts() {
+			return bounds.vertices;
+	}
+	
+	public Vertex getVert(int index) {
+			return verts().get(index);
 	}
 	
 	public void draw(Screen screen) {

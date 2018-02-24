@@ -7,6 +7,14 @@ public class LineSegment extends Polygon {
 	
 	public Vertex origin;
 	public Vertex endPoint;
+	
+	public Vertex left_pt;
+	public Vertex right_pt;
+	public Vertex top_pt;
+	public Vertex bot_pt;
+	
+	public float slope;
+	
 	public int color = 0xffFFFFFF;
 	float length;
 	
@@ -28,6 +36,22 @@ public class LineSegment extends Polygon {
 		this.origin = new Vertex(x, y);
 		this.endPoint = new Vertex(x2, y2);
 		
+		this.left_pt = origin;
+		this.right_pt = endPoint;
+		
+		this.top_pt = origin;
+		this.bot_pt = endPoint;
+		
+		if (x > x2) {
+			this.left_pt = endPoint;
+			this.right_pt = origin;
+		}
+		
+		if (y > y2) {
+			this.top_pt = endPoint;
+			this.bot_pt = origin;
+		}
+		
 		this.length = getDistance(origin, endPoint);
 		
 		this.addVertex(origin);
@@ -39,6 +63,24 @@ public class LineSegment extends Polygon {
 	public LineSegment(Vertex p1, Vertex p2) {
 		this.origin = p1;
 		this.endPoint = p2;
+		
+		
+		this.left_pt = origin;
+		this.right_pt = endPoint;
+		
+		this.top_pt = origin;
+		this.bot_pt = endPoint;
+		
+		if (p1.x > p2.x) {
+			this.left_pt = endPoint;
+			this.right_pt = origin;
+		}
+		
+		if (p1.y > p2.y) {
+			this.top_pt = endPoint;
+			this.bot_pt = origin;
+		}
+		
 		
 		this.length = getDistance(p1, p2);
 		
@@ -53,6 +95,7 @@ public class LineSegment extends Polygon {
 	}
 	
 	public void initShape() {
+		this.slope = (this.endPoint.y - this.origin.y) / (this.endPoint.x - this.origin.x);
 		init();
 	}
 	

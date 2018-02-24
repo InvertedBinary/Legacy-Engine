@@ -11,9 +11,12 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -59,12 +62,7 @@ public class Boot
 					tryConnect(true);
 				}
 			} else {
-				s = new GameServer(Boot.port);
-				try {
-					s.run();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				tryServer();
 			}
 			g.Launch(g);
 
@@ -74,6 +72,16 @@ public class Boot
 			 * try { ServerTest.main(new String[0]); } catch (Exception e) {
 			 * e.printStackTrace(); }
 			 */
+		}
+	
+	public static void tryServer()
+		{
+			s = new GameServer(Boot.port);
+			try {
+				s.run();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	
 	public static void tryConnect(boolean useHostFile)

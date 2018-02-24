@@ -2,13 +2,13 @@ package com.IB.SL.entity;
 
 import java.io.Serializable;
 import java.util.Random;
-import java.util.UUID;
 
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
+import com.IB.SL.util.AABB;
 import com.IB.SL.util.PropertyEngine;
 import com.IB.SL.util.shape.PhysicsBody;
 import com.IB.SL.util.shape.Rectangle;
@@ -17,10 +17,12 @@ public class Entity extends PropertyEngine implements Serializable {
 
 	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);
-	
+
 	public transient Sprite sprite;
 	public transient boolean removed = false;
 	public transient Level level;
+	
+	public transient AABB aabb;
 	
 	
 	public int STAT_VIT;
@@ -104,8 +106,11 @@ public class Entity extends PropertyEngine implements Serializable {
 //		rectBounds = new Rectangle((int) x - (sprite.getWidth() >> 1), (int) y - (sprite.getHeight() >> 1), sprite.getWidth(), sprite.getHeight());
 //	}
 	
-	public java.awt.Rectangle getBounds() {
-		return r = new java.awt.Rectangle((int)x(), (int)y(), sprite.getWidth(), sprite.getHeight());
+	public AABB getBounds() {
+		if (this.aabb == null) {
+			this.aabb = new AABB(this.x(), this.y(), this.sprite.getWidth(), this.sprite.getHeight());
+		}
+		return this.aabb;
 	}
 	
 	public void added() {
