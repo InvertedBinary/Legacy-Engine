@@ -137,7 +137,7 @@ public class Commands {
 				break;
 				
 				case "dbg":
-					Boot.drawDebug = true;
+					Boot.drawDebug = !Boot.drawDebug;
 				break;
 		
 				case "avg": 

@@ -651,78 +651,17 @@ public class Player extends Mob implements Serializable{
 		}
 	}	
 	
-	@Deprecated
-	public void renderBuildGUI(Screen screen) {
-		switchBlocks_key();
-		gui.font8x8.render(113, 5, -2, 0xff000000, "BUILD MODE", screen, false, false);
-		gui.font8x8.render(112, 5, -2, 0xffFFFFFF, "BUILD MODE", screen, false, false);
-		
-		if (history.size() == 0) {
-			history.add(Tile.Wood);
-		}
-		
-		toPlace = history.get(0);
-		
-		int x = (screen.xo);
-		int y = (screen.yo);
-		
-		screen.renderPlaceTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, toPlace);
-
-		for (int i = 0; i < history.size(); i++) {
-			int xo = 2; 
-			int yo = Game.height - 25;
-			screen.drawRect(xo + (i * 19) - 1, yo - 1, 17, 17, 0xff000000, false);
-			screen.renderSprite(xo + (i * 19), yo, history.get(i).sprite, false);
-		//	screen.renderAlphaSprite(0, 0, sprite.gray);
-			if (i != 9) {
-				gui.font.render(xo + (i * 19) - 17, yo, "" + (i + 1), screen, false, false);
-			} else {
-				gui.font.render(xo + (i * 19) - 17, yo, "" + 0, screen, false, false);
-
-			}
-		}
-		
-		if (history.size() > 9) {
-			for (int i = 10; i < history.size(); i++) {
-				history.remove(i);
-			}
-		}
-		
-		if (Mouse.getButton() == 3) {
-			if (level.getTile(x, y).getHex() != Screen.ALPHA_COL) {
-			Tile getTile = level.getTile(x, y);
-			if (!history.contains(getTile)) {
-			history.add(0, getTile );
-			} else {
-				history.remove(getTile);
-				history.add(0, getTile);
-			}
-			System.out.println("Switched to tile: " + toPlace);
-			}
-		}
-		
-		if (Mouse.getButton() == 2) {
-			saveLevel(level.tiles, "saved.png");
-			saveLevel(level.overlayTiles, "ov_saved.png");
-			Mouse.setMouseB(-1);
-		}
-		
-		if (Mouse.getButton() == 1) {
-			this.level.tiles[x + y *  level.width] = toPlace.getHex();
-			SpriteSheet.minimapDYN.pixels[x + y * SpriteSheet.minimapDYN.getWidth()] = toPlace.getHex();
-		}
-		
-	}
 	
 	public void renderGUI(Screen screen) {
-		
-		if(buildMode) {
-			renderBuildGUI(screen);
+		if (Boot.drawDebug) {
+			if (this.XT_YT_ls != null) {
+			this.XT_YT_ls.drawLine(screen, true);
+			}
 		}
 	
-	if (level.minimap_collapsed) {
-	screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
-	}
+			if (level.minimap_collapsed) {
+				screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
+			}
 	
 		if (buildMode) {
 		gui.renderBuild(screen, this);
