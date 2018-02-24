@@ -70,14 +70,10 @@ public class Commands {
 		cmds.add("tcl");
 		cmds.add("weather");
 		cmds.add("nospawns");
-		cmds.add("gs3");
-		cmds.add("stage");
-		cmds.add("cq");
-		cmds.add("load");
 		cmds.add("spawn");
-		cmds.add("xmload");
-		cmds.add("tload");
+		cmds.add("ld");
 		cmds.add("con");
+		cmds.add("svr");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -105,10 +101,6 @@ public class Commands {
 				Boot.get().getPlayer().setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
 		break;
-				case "load":
-					int id = Integer.parseInt(Modifier);	
-							Boot.get().getPlayer().setPosition(0, 0, id, false);
-					break;
 				case "speed": 
 				{
 					try {
@@ -128,14 +120,11 @@ public class Commands {
 					} else if (Modifier.equalsIgnoreCase("clear")) {
 						Boot.get().getLevel().isRaining = false;
 					}
-		break;
+					break;
 		
 				case "tcl":
 					player.noclip = !player.noclip;
 				break;
-				case "gs3":
-					//Boot.get().switchState(Boot.get().gameState.INGAME_A);
-					break;
 				
 				case "dir":
 					File f = new File(SaveGame.createSaveFolder());
@@ -148,18 +137,11 @@ public class Commands {
 				break;
 				
 				case "dbg":
-				
-				/*	if (!Boot.get().gameState.equals(Boot.get().gameState.INGAME_A)) {
-						Game.switchState(Boot.get().gameState.INGAME_A);						
-					} else {
-						Game.switchState(Boot.get().gameState.INGAME);
-					}
-					*/
+					Boot.drawDebug = !Boot.drawDebug;
 				break;
 		
 				case "avg": 
 				{
-					
 					Game.showAVG = !Game.showAVG;
 					String fileName;
 					if (Modifier.equals("$log-start")) {
@@ -218,10 +200,7 @@ public class Commands {
 				case "spawn":
 					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE, Boot.get().getPlayer().y() / TileCoord.TILE_SIZE, "/XML/Entities/" + Modifier + ".xml"));
 		break;
-				case "xmload":
-					player.setPositionXML(0, 0, "/XML/Levels/" + Modifier, true);
-		break;
-				case "tload":
+				case "ld":
 					player.setPositionTiled(0, 0, "/XML/Levels/" + Modifier, true);
 		break;
 				case "con":
@@ -244,7 +223,9 @@ public class Commands {
 						System.out.println("in connection loop!");
 					}
 					
-					Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+					//Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+		break;
+				case "svr":
 		break;
 				case "": 
 					System.out.println("... Finished CMD Lap");

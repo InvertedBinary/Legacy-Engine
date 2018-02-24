@@ -17,6 +17,7 @@ import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.tiles.MyColor;
 import com.IB.SL.util.Vector2i;
+import com.IB.SL.util.shape.LineSegment;
 
 public class Screen {
 

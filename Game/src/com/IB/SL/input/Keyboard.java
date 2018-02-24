@@ -27,16 +27,22 @@ public class Keyboard implements KeyListener {
 	
 	public void suspendInput() {
 		this.suspended = true;
-		for (int i = 0; i < keys.length; i++) {
-			keys[i] = false;
-		}
-		for (int i = 0; i < toggles.length; i++) {
-			toggles[i] = false;
-		}
+		keys = new boolean[numOfKeys];
+		
+		ticks = new boolean[numOfKeys];
+
+		toggles = new boolean[numOfKeys];
+		toggle_helper = new int[numOfKeys];
 	}
 	
 	public void resumeInput() {
 		this.suspended = false;
+		keys = new boolean[numOfKeys];
+		
+		ticks = new boolean[numOfKeys];
+
+		toggles = new boolean[numOfKeys];
+		toggle_helper = new int[numOfKeys];
 	}
 	
 	public void update() {
@@ -69,9 +75,6 @@ public class Keyboard implements KeyListener {
 		generalActivator = keys[KeyEvent.VK_F];
 		
 		buildMode = toggles[KeyEvent.VK_B];
-		toggles[KeyEvent.VK_B] = toggles[KeyEvent.VK_B];
-		
-		
 		
 		}
 		

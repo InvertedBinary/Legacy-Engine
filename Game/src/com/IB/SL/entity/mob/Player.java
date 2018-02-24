@@ -25,6 +25,7 @@ import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.UI.GUI;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
+import com.IB.SL.level.Level;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.RayCast;
 import com.IB.SL.level.TileCoord;
@@ -53,7 +54,7 @@ public class Player extends Mob implements Serializable{
 	public boolean buildMode = false;
 
 	//private transient transient Inventory inventory;
-	//public transient Level level;
+	//public transient vel level;
 	transient int walkingPacketTime = 0;
 	public transient  AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
 	public transient  AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
@@ -92,6 +93,7 @@ public class Player extends Mob implements Serializable{
 	//TODO: Generate UUID and send instead of USErname
 	
 	
+	@Deprecated
 	public Player(Keyboard input) {
 		this.name = "P1";
 		this.input = input;
@@ -135,7 +137,22 @@ public class Player extends Mob implements Serializable{
 		System.out.println("ADDING NEW PLAYER: " + this.x() + "," + this.y());
 	}
 	
+	public void added() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+			Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+			}
+		}
+	}
 	
+	public boolean remove() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+				Boot.c.sendMessage("REM|id=" + UUID);
+			}
+		}
+		return super.remove();
+	}
 	
 	
 	@Deprecated
@@ -341,8 +358,9 @@ public class Player extends Mob implements Serializable{
 			Gravity.y(VARS.Ag);
 			
 			this.vel().add(Gravity);
+			
 			if (Boot.isConnected) {
-		if (!((vel().x() == pv.x()) && (vel().y() == pv.y()))) {
+		if ((vel().x() != pv.x()) || (vel().y() != pv.y())) {
 			Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
 			Boot.c.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
 			pv.set(vel());
@@ -388,30 +406,30 @@ public class Player extends Mob implements Serializable{
 			updateShooting();
 		}
 		
-		this.vel().x(0);
-		
-			clear();
-	
-			if (this == level.getClientPlayer()) {
-			updateBuild();
-			}
-						
-		//command mode TOGGLE
-			if (input != null) {
-		if(input.commandMode && !commandModeOn && cmdReleased){
-			commandModeOn = true;
-			cmdReleased = false;
-		}
-		
-			if (!input.commandMode)
-				cmdReleased = true;
+			this.vel().x(0);
+			this.pv.x(0);
 
-			if (input.commandMode && commandModeOn && cmdReleased) {
-				commandModeOn = false;
-				cmdReleased = false;
+			clear();
+
+			if (this == level.getClientPlayer()) {
+				updateBuild();
+			}
+
+			// command mode TOGGLE
+			if (input != null) {
+				if (input.commandMode && !commandModeOn && cmdReleased) {
+					commandModeOn = true;
+					cmdReleased = false;
+				}
+
+				if (!input.commandMode) cmdReleased = true;
+
+				if (input.commandMode && commandModeOn && cmdReleased) {
+					commandModeOn = false;
+					cmdReleased = false;
+				}
 			}
 		}
-	}
 	
 	public boolean isClientPlayer() {
 			return this.equals(Boot.get().getPlayer());
@@ -430,18 +448,20 @@ public class Player extends Mob implements Serializable{
 		}
 	}
 	
-	private void clear() {
-		for (int i = 0; i < level.getProjectiles().size(); i++) {
-			Projectile p = level.getProjectiles().get(i);
-			if (p.isRemoved()) level.getProjectiles().remove(i);
+	private void clear()
+		{
+			for (int i = 0; i < level.getProjectiles().size(); i++) {
+				Projectile p = level.getProjectiles().get(i);
+				if (p.isRemoved()) level.getProjectiles().remove(i);
+			}
 		}
-	}
 	
-	public void setPosition(TileCoord tileCoord) {
-		this.setX(tileCoord.x());
-		this.setY(tileCoord.y());
-	}
-	
+	public void setPosition(TileCoord tileCoord)
+		{
+			this.setX(tileCoord.x());
+			this.setY(tileCoord.y());
+		}
+
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
 		System.out.println("Got request to load a Tiled level.");
 		if (tileMult) {
@@ -591,14 +611,15 @@ public class Player extends Mob implements Serializable{
 	transient public ArrayList<Tile> history = new ArrayList<Tile>();
 	transient Tile toPlace = Tile.Wood;
 	
-	
+	@Deprecated
 	public void swapBlock(int index) {
+		/*
 		if (history.get(index) != null) {
 		Tile old = history.get(0);
 		history.set(0, history.get(index));
 		history.set(index, old);
 		switchTimer = 15;
-		}
+		}*/
 	}
 	
 	int switchTimer = 00;
@@ -630,78 +651,17 @@ public class Player extends Mob implements Serializable{
 		}
 	}	
 	
-	@Deprecated
-	public void renderBuildGUI(Screen screen) {
-		switchBlocks_key();
-		gui.font8x8.render(113, 5, -2, 0xff000000, "BUILD MODE", screen, false, false);
-		gui.font8x8.render(112, 5, -2, 0xffFFFFFF, "BUILD MODE", screen, false, false);
-		
-		if (history.size() == 0) {
-			history.add(Tile.Wood);
-		}
-		
-		toPlace = history.get(0);
-		
-		int x = (screen.xo);
-		int y = (screen.yo);
-		
-		screen.renderPlaceTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, toPlace);
-
-		for (int i = 0; i < history.size(); i++) {
-			int xo = 2; 
-			int yo = Game.height - 25;
-			screen.drawRect(xo + (i * 19) - 1, yo - 1, 17, 17, 0xff000000, false);
-			screen.renderSprite(xo + (i * 19), yo, history.get(i).sprite, false);
-		//	screen.renderAlphaSprite(0, 0, sprite.gray);
-			if (i != 9) {
-				gui.font.render(xo + (i * 19) - 17, yo, "" + (i + 1), screen, false, false);
-			} else {
-				gui.font.render(xo + (i * 19) - 17, yo, "" + 0, screen, false, false);
-
-			}
-		}
-		
-		if (history.size() > 9) {
-			for (int i = 10; i < history.size(); i++) {
-				history.remove(i);
-			}
-		}
-		
-		if (Mouse.getButton() == 3) {
-			if (level.getTile(x, y).getHex() != Screen.ALPHA_COL) {
-			Tile getTile = level.getTile(x, y);
-			if (!history.contains(getTile)) {
-			history.add(0, getTile );
-			} else {
-				history.remove(getTile);
-				history.add(0, getTile);
-			}
-			System.out.println("Switched to tile: " + toPlace);
-			}
-		}
-		
-		if (Mouse.getButton() == 2) {
-			saveLevel(level.tiles, "saved.png");
-			saveLevel(level.overlayTiles, "ov_saved.png");
-			Mouse.setMouseB(-1);
-		}
-		
-		if (Mouse.getButton() == 1) {
-			this.level.tiles[x + y *  level.width] = toPlace.getHex();
-			SpriteSheet.minimapDYN.pixels[x + y * SpriteSheet.minimapDYN.getWidth()] = toPlace.getHex();
-		}
-		
-	}
 	
 	public void renderGUI(Screen screen) {
-		
-		if(buildMode) {
-			renderBuildGUI(screen);
+		if (Boot.drawDebug) {
+			if (this.XT_YT_ls != null) {
+			this.XT_YT_ls.drawLine(screen, true);
+			}
 		}
 	
-	if (level.minimap_collapsed) {
-	screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
-	}
+			if (level.minimap_collapsed) {
+				screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
+			}
 	
 		if (buildMode) {
 		gui.renderBuild(screen, this);

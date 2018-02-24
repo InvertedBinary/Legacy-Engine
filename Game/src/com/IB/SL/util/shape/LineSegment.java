@@ -1,9 +1,21 @@
 package com.IB.SL.util.shape;
 
+import com.IB.SL.graphics.Screen;
+import com.IB.SL.util.Debug;
+
 public class LineSegment extends Polygon {
 	
-	Vertex origin;
-	Vertex endPoint;
+	public Vertex origin;
+	public Vertex endPoint;
+	
+	public Vertex left_pt;
+	public Vertex right_pt;
+	public Vertex top_pt;
+	public Vertex bot_pt;
+	
+	public float slope;
+	
+	public int color = 0xffFFFFFF;
 	float length;
 	
 	public LineSegment(Vertex p, float length, float angle) {
@@ -20,9 +32,55 @@ public class LineSegment extends Polygon {
 		initShape();
 	}
 	
+	public LineSegment(float x, float y, float x2, float y2) {
+		this.origin = new Vertex(x, y);
+		this.endPoint = new Vertex(x2, y2);
+		
+		this.left_pt = origin;
+		this.right_pt = endPoint;
+		
+		this.top_pt = origin;
+		this.bot_pt = endPoint;
+		
+		if (x > x2) {
+			this.left_pt = endPoint;
+			this.right_pt = origin;
+		}
+		
+		if (y > y2) {
+			this.top_pt = endPoint;
+			this.bot_pt = origin;
+		}
+		
+		this.length = getDistance(origin, endPoint);
+		
+		this.addVertex(origin);
+		this.addVertex(endPoint);
+		
+		initShape();
+	}
+	
 	public LineSegment(Vertex p1, Vertex p2) {
 		this.origin = p1;
 		this.endPoint = p2;
+		
+		
+		this.left_pt = origin;
+		this.right_pt = endPoint;
+		
+		this.top_pt = origin;
+		this.bot_pt = endPoint;
+		
+		if (p1.x > p2.x) {
+			this.left_pt = endPoint;
+			this.right_pt = origin;
+		}
+		
+		if (p1.y > p2.y) {
+			this.top_pt = endPoint;
+			this.bot_pt = origin;
+		}
+		
 		
 		this.length = getDistance(p1, p2);
 		
@@ -32,7 +90,12 @@ public class LineSegment extends Polygon {
 		initShape();
 	}
 	
+	public void drawLine(Screen screen, boolean fixed) {
+		Debug.drawLine(screen, (int)origin.x, (int)origin.y, (int)endPoint.x, (int)endPoint.y, color, true);
+	}
+	
 	public void initShape() {
+		this.slope = (this.endPoint.y - this.origin.y) / (this.endPoint.x - this.origin.x);
 		init();
 	}
 	

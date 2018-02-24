@@ -21,7 +21,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 
 	private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 	private final HashMap<String, String> users = new HashMap<>();
-	
+					//IP ADDRESS, UUID
 	
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -84,7 +84,18 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 			
 			//ADD|eid=0&id=25@x=0,y=1
 			if(msg.startsWith("ADD|")) {
-				addEntity(ctx, msg);
+					addEntity(ctx, msg);
+			}
+			
+			if (msg.startsWith("REM|")) {
+				for(Player p : Boot.getLevel().players) {
+					if (p.UUID.equals(users.get(ctx.channel().remoteAddress().toString()))) {
+						for(Channel channel : channels) {
+							channel.writeAndFlush("REM|id=" + p.UUID + "\n");
+						}
+						p.remove();
+					}
+				}
 			}
 			
 			if(msg.startsWith("POS|")) {
@@ -133,11 +144,20 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 	public void addEntity(ChannelHandlerContext ctx, String msg)
 		{
 			Entity e = Level.createEntity(msg);
-			Boot.get().getLevel().add(e);
 			if (e instanceof Player) {
-			e.UUID = this.users.get(ctx.channel().remoteAddress().toString());
+				/*for (Player p : Boot.getLevel().players) {
+					if (p.UUID.equals(users.get(ctx.channel().remoteAddress().toString()))) {
+						return;
+					}
+				}*/
+
+				e.UUID = this.users.get(ctx.channel().remoteAddress().toString());
 			}
+
 			
+
+			Boot.get().getLevel().add(e);
+
 			for (Channel channel : channels) {
 				if (!channel.remoteAddress().equals(ctx.channel().remoteAddress())) {
 					channel.writeAndFlush(Level.entityStringBuilder(e) + "\n");

@@ -7,6 +7,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
@@ -20,7 +21,11 @@ import com.IB.SL.entity.projectile.WizardProjectile2;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
+import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.util.AABB;
 import com.IB.SL.util.Vector2i;
+import com.IB.SL.util.shape.LineSegment;
+import com.IB.SL.util.shape.Vertex;
 
 public abstract  class Mob extends Entity implements Serializable {
 	
@@ -232,13 +237,47 @@ public abstract  class Mob extends Entity implements Serializable {
 		level.add(zb);
 
 	}
-	 
+	LineSegment XT_YT_ls;
 	protected boolean collision(double xa, double ya) {
+			solid = false;
+
+			double xt = ((x() + xa));
+			double yt = ((y() + ya));
+			AABB aabb = new AABB(this.getBounds());
+			aabb.moveTo(xt, yt);
+			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 56f));
+			if (((Tiled_Level) Boot.getLevel()).solid_geometry == null) {
+				return false;
+			}
+
+			for (int i = 0; i < ((Tiled_Level) Boot.getLevel()).solid_geometry.size(); i++) {
+				LineSegment ls = ((Tiled_Level) Boot.getLevel()).solid_geometry.get(i);
+
+				if (ls.intersectsLine(XT_YT_ls)) {
+					//System.out.println(i + ":: " + ls.origin.x);
+					if (Math.abs(ls.slope) <= 3) {
+						if (xa != 0 && ya == 0) {
+							move(0, -Math.abs(1 - (vx() * (ls.slope / 10))));
+							// this.y(this.y() );
+						}
+					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY) {
+						if (canJump == true) {
+						this.canJump = false;
+							move(ls.slope / 4, 0);
+							}
+						}
+					solid = true;
+				}
+			}
+			return solid;
+		}
+
+	/*protected boolean collision(double xa, double ya) {
 		solid = false;
 		for (int c = 0; c < 4; c++) {
 			double xt = ((x() + xa) - c % 2 * 15 + 24) / TileCoord.TILE_SIZE;
 			double yt = ((y() + ya) - c / 2 * 2 + 24) / TileCoord.TILE_SIZE;
-
+			
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
 			if (c % 2 == 0) ix = (int) Math.floor(xt);
@@ -252,6 +291,7 @@ public abstract  class Mob extends Entity implements Serializable {
 				solid = true;
 				continue;
 			}
+			
 			/*if (level.getOverlayTile(ix, iy) != null) {
 			if (level.getOverlayTile(ix, iy).solid()) { 
 				solid = true;
@@ -262,14 +302,14 @@ public abstract  class Mob extends Entity implements Serializable {
 				solid = true;
 			}
 			
-			}*/
+			}*//*
 			if (level.getTile(ix, iy).jumpThrough() && (ya > 0) && Math.abs(dif) < .31) {
 				solid = true;
 			}
 			
 		}
 		return solid;
-	}
+	}*/
 	
 	public enum State {
 

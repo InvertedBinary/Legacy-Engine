@@ -16,12 +16,16 @@ import org.xml.sax.SAXException;
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
+import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.Tile.stepSound;
 import com.IB.SL.level.tile.SL2.XML_Tile;
+import com.IB.SL.util.Debug;
+import com.IB.SL.util.shape.LineSegment;
+import com.IB.SL.util.shape.Vertex;
 
 public class Tiled_Level extends Level {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +37,7 @@ public class Tiled_Level extends Level {
 	
 	boolean readingLayer = false;
 	boolean readingObjects = false;
-	Integer current_layer = null;
+	Integer current_layer = -1;
 	String current_object_layer = "";
 	String current_object_type = "";
 
@@ -43,6 +47,7 @@ public class Tiled_Level extends Level {
 	public ArrayList<LevelExit> exits;
 	public TileCoord spawnpoint;
 	public ArrayList<int[]> tilels;
+	public ArrayList<LineSegment> solid_geometry;
 
 	public Tiled_Level(String path) {
 		super(path);
@@ -90,12 +95,18 @@ public class Tiled_Level extends Level {
  				if (tile_strings == null) {
 					tile_strings = new ArrayList<>();
 				}
+ 				
  				if (current_layer == null) {
  					current_layer = -1;
  				}
             	 
+            	/* if (ln.equals("Tiles")) {
+            		 this.current_layer = 0;
+            	 } else if (ln.equals("Overlays")) {
+            		 this.current_layer = 1;
+            	 }*/
           	 		this.current_layer++;
-          	 		System.out.println(ln + " : " + current_layer);
+          	 		//System.out.println(ln + " : " + current_layer);
             	 break;
              }
              
@@ -111,21 +122,71 @@ public class Tiled_Level extends Level {
              
              case "objectgroup": {
             	 this.current_object_layer = attributes.getValue("name");
+            	 if (current_object_layer.equals("Collision_mask")) {
+            		 this.props.put("color", attributes.getValue("color"));
+            	 }
             	 break;
              }
              
              case "object": {
             	 this.current_object_type = attributes.getValue("type");
-            	 if (this.current_object_type.equals("Exit_Zone")) {
+            	 if (current_object_type == null)
+            		 break;
+            	 
+            	 if (this.current_object_type.equalsIgnoreCase("Exit_Zone")) {
             		 this.props.put("x", attributes.getValue("x"));
             		 this.props.put("y", attributes.getValue("y"));
             		 this.props.put("width", attributes.getValue("width"));
             		 this.props.put("height", attributes.getValue("height"));
-            	 } else if (this.current_object_type.equals("SpawnPoint")) {
+            	 } else if (this.current_object_type.equalsIgnoreCase("SpawnPoint")) {
+            		 this.props.put("x", attributes.getValue("x"));
+            		 this.props.put("y", attributes.getValue("y"));
+            	 } else if (this.current_object_type.equalsIgnoreCase("c_mask")) {
             		 this.props.put("x", attributes.getValue("x"));
             		 this.props.put("y", attributes.getValue("y"));
             	 }
             	 break;
+             }
+             
+             case "polyline": {
+            	 if (this.current_object_type.equalsIgnoreCase("c_mask")) {
+            		 if (this.solid_geometry == null) {
+            			 this.solid_geometry = new ArrayList<>();
+            		 }
+            		 
+					ArrayList<Vertex> pts = new ArrayList<>();
+
+					String coords = attributes.getValue("points");
+					String c_array[] = coords.split("\\s+");
+					for (String s : c_array) {
+						String c_xy[] = s.split(",");
+						float x = Float.parseFloat(c_xy[0]) + Float.parseFloat(this.props.get("x"));
+						float y = Float.parseFloat(c_xy[1]) + Float.parseFloat(this.props.get("y"));
+						pts.add(new Vertex(x, y));
+					}
+					
+					Vertex v1 = null;
+					Vertex v2 = null;
+					for (int i = 0; i < pts.size(); i++) {
+						Vertex v = pts.get(i);
+
+						if (i % 2 == 0) {
+							v2 = v;
+						} else {
+							v1 = v;
+						}
+						
+						
+						if (v1 != null && v2 != null) {
+							LineSegment ls = new LineSegment(v1, v2);
+							ls.color = Long.decode("0x" + this.props.get("color").substring(1)).intValue();
+							this.solid_geometry.add(ls);
+									
+						}
+					}
+					
+            	 System.out.println("Adding some new geometry.. " + solid_geometry);
+            	 }
              }
              
              case "property": {
@@ -138,7 +199,7 @@ public class Tiled_Level extends Level {
 	@Override
     public void characters(char ch[], int start, int length) throws SAXException {
 			if (readingLayer) {
-				System.out.println("CURRENTLAYER: " + current_layer);
+				//System.out.println("CURRENTLAYER: " + current_layer);
 				if (tile_strings.size() == current_layer) {
 				tile_strings.add(((new String(ch, start, length))));
 				} else {
@@ -184,7 +245,7 @@ public class Tiled_Level extends Level {
 			}
 
         case "map": {
-			Boot.log("Level fully loaded..", "Tiled_Level.java", false);
+			Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
 			
 			Tile t = new Tile();
 			t.readXML("/XML/Tiles/TileDefinitions.xml");
@@ -267,6 +328,17 @@ public class Tiled_Level extends Level {
 		return xml_tiles;
 	}
 	
+	public void drawExtendedLevel(Screen screen)
+		{
+			if (Boot.drawDebug) {
+				if (this.solid_geometry != null) {
+					for (LineSegment ln : this.solid_geometry) {
+						ln.drawLine(screen, true);
+					}
+				}
+			}
+		}
+
 	public void checkExits(Player player, Level level, int x, int y) {
 		// refresh();
 		System.out.println("NUM EXITS: " + exits.size());

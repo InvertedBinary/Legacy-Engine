@@ -6,6 +6,7 @@
 
 	<tile sprite="Dirt" id="48" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">Dirt</tile>
 	<tile sprite="PathDirt" id="16" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">PathDirt</tile>
+	<tile sprite="PathCornerTL" id="594" solid="false" projSolid="false" jumpThrough="false" isExitTile="false">PathCornerTL</tile>
 
 	<!-- Scenery -->
 	<tile sprite="CabinetTop" id="580" solid="true" projSolid="true" jumpThrough="false" isExitTile="false">DresserTop</tile>

@@ -249,6 +249,8 @@ public class Polygon extends PropertyEngine {
 	}
 	
 	public void draw(Screen screen) {
+		//System.out.println("DRAWING..");
+
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(i);
 			Vertex v2;
