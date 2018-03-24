@@ -98,6 +98,32 @@ public class LineSegment extends Polygon {
 		this.slope = (this.endPoint.y - this.origin.y) / (this.endPoint.x - this.origin.x);
 		init();
 	}
+	//TODO: left off
+	public boolean intersectsLine(LineSegment ls, boolean test) {
+			if (this.slope == ls.slope) {
+				if (Math.round(this.top_pt.y) == Math.round(ls.top_pt.y)) {
+					
+				}
+			}
+			
+			Vertex p1 = origin;
+			Vertex q1 = endPoint;
+			Vertex p2 = ls.origin;
+			Vertex q2 = ls.endPoint;
+			
+			int o  = calcOrientation(p1, q1, p2);
+			int o2 = calcOrientation(p1, q1, q2);
+			int o3 = calcOrientation(p2, q2, p1);
+			int o4 = calcOrientation(p2, q2, q1);
+			
+			//System.out.println("O: " + o + " , " + o2 + " , " + o3 + " , " + o4);
+			
+			if ((o != o2) && (o3 != o4)) {
+				return true;
+			}
+			
+			return false;
+		}
 	
 	public boolean intersectsLine(LineSegment ls) {
 		Vertex p1 = origin;

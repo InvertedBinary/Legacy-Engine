@@ -2,11 +2,11 @@ package com.IB.SL.entity.emitter;
 
 import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.particle.Particle2D;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
+import com.IB.SL.util.math.PVector;
 
 public class Emitter extends Entity {
 	private static final long serialVersionUID = 1L;

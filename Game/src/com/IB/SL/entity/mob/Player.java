@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.entity.projectile.XML_Projectile;
 import com.IB.SL.graphics.AnimatedSprite;
@@ -39,6 +38,7 @@ import com.IB.SL.util.Commands;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
+import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.Rectangle;
 
 public class Player extends Mob implements Serializable{
@@ -329,7 +329,7 @@ public class Player extends Mob implements Serializable{
 			this.vel().x(speed);
 			} 
 		
-		if ((this.input.jump || this.input.up) & this.canJump) {
+		if ((this.input.jump || this.input.up) && this.canJump && !this.sliding) {
 			this.vel().y(-6.5);
 		}
 		
@@ -474,6 +474,11 @@ public class Player extends Mob implements Serializable{
 		Boot.get().setLevel(newLevel);
 		Boot.get().getLevel().add(this);
 
+		if (x == -1 && y == -1) {
+			x = newLevel.spawnpoint.x() / 32;
+			y = newLevel.spawnpoint.y() / 32;
+		}
+		
 		this.removed = false;
 		this.setX((x));
 		this.setY((y));
@@ -659,7 +664,7 @@ public class Player extends Mob implements Serializable{
 			}
 		}
 	
-			if (level.minimap_collapsed) {
+			if (Level.minimap_collapsed) {
 				screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
 			}
 	

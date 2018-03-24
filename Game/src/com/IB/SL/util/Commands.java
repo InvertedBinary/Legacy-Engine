@@ -201,7 +201,7 @@ public class Commands {
 					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE, Boot.get().getPlayer().y() / TileCoord.TILE_SIZE, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "ld":
-					player.setPositionTiled(0, 0, "/XML/Levels/" + Modifier, true);
+					player.setPositionTiled(-1, -1, "/XML/Levels/" + Modifier, true);
 		break;
 				case "con":
 					if (Modifier2.equals("")) {

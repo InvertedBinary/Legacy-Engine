@@ -3,6 +3,8 @@ package com.IB.SL.entity;
 import java.io.Serializable;
 import java.util.Random;
 
+import org.xml.sax.helpers.DefaultHandler;
+
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.Screen;
@@ -10,10 +12,11 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.util.AABB;
 import com.IB.SL.util.PropertyEngine;
+import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.PhysicsBody;
 import com.IB.SL.util.shape.Rectangle;
 
-public class Entity extends PropertyEngine implements Serializable {
+public class Entity extends DefaultHandler implements Serializable {
 
 	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);

@@ -1,22 +1,42 @@
-<?xml version="1.0"?>
-<entity>
-	<mob id="3001">
-		<name>Zombie</name>
-		<maxhealth>10</maxhealth>
-		<speed>0.5</speed>
-		<rarity><!--  --></rarity>
-		<hostility>HOSTILITY.AGR</hostility>
-		<exp>5</exp>
-		<behavior>TestZombie.lua</behavior>
-	</mob>
-	<sprite size ="16" xOffset="-8" yOffset="-15">
-		<down length="3">zombie01_down</down>
-		<up length="3">zombie01_up</up>
-		<left length="3">zombie01_left</left>
-		<right length="3">zombie01_right</right>
-	</sprite>
+﻿<entity>
+     <props>
+          <name>Zombie</name>
+          <id>0</id>
+          <hp>5.00</hp>
+          <speed>1.00</speed>
+          <rarity>0</rarity>
+          <hostility>Aggressive</hostility>
+          <xp_min>3.00</xp_min>
+          <xp_max>5.00</xp_max>
+          <dsp_index>1</dsp_index>
+          <essential>false</essential>
+          <det_radius>5</det_radius>
+     </props>
+     <sprite>
+          <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
+          <xOffset>0.00</xOffset>
+          <yOffset>0.00</yOffset>
+          <width>232</width>
+          <height>232</height>
+          <static_spr>Zombie</static_spr>
+          <dspl_spr>Zombie02</dspl_spr>
+     </sprite>
+     <anims>
+          <right>zombie01_right</right>
+          <left>zombie01_left</left>
+          <jump>zombie01_jump</jump>
+     </anims>
+     <collision>
+          <xOffset>0</xOffset>
+          <yOffset>28</yOffset>
+          <width>8</width>
+          <height>64</height>
+     </collision>
+     <scripts>
+          <behavior>simple_mob_behavior.lua</behavior>
+          <trigger>simple_mob_trigger_volume.lua</trigger>
+          <equipped>unused.lua</equipped>
+          <combat>zombie_combat.lua</combat>
+     </scripts>
+     <event_scripts />
 </entity>
-
-
-
-

@@ -16,16 +16,17 @@ public class ConsoleMenu extends UI_Menu {
 	
 	public void onLoad() {
 		Boot.get().getPlayer().input.suspendInput();
-		
+
 		if (cmd == null) {
 			cmd = new TextBox(5, 5, 266, 19, Boot.get().key, -1, false);
-			cmd.desc = "Command:";
+			cmd.desc = "Execute Command:";
 			cmd.useCmds = true;
 			cmd.acceptable.add("!");
 			cmd.acceptable.add(",");
 			cmd.acceptable.add(".");
 		}
-		cmd.setText("!");
+		cmd.focused = true;
+		cmd.update();
 	}
 	
 	public void onUnload() {
@@ -46,7 +47,6 @@ public class ConsoleMenu extends UI_Menu {
 	
 	public void update() {
 		cmd.update();
-		cmd.focused = true;
 		if (getKey() != null) {
 			if (getKey().console) {
 				unload(this);

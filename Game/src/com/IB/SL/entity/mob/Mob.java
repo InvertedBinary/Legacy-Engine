@@ -238,14 +238,19 @@ public abstract  class Mob extends Entity implements Serializable {
 
 	}
 	LineSegment XT_YT_ls;
+	public boolean sliding = false;
+	
+	
 	protected boolean collision(double xa, double ya) {
+			boolean prev_solid = solid;
 			solid = false;
 
 			double xt = ((x() + xa));
 			double yt = ((y() + ya));
 			AABB aabb = new AABB(this.getBounds());
 			aabb.moveTo(xt, yt);
-			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 56f));
+			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 42f, (float)yt + 62f)); //=>38, 60
+			//TODO: Add collision for parallel lines 
 			if (((Tiled_Level) Boot.getLevel()).solid_geometry == null) {
 				return false;
 			}
@@ -253,19 +258,29 @@ public abstract  class Mob extends Entity implements Serializable {
 			for (int i = 0; i < ((Tiled_Level) Boot.getLevel()).solid_geometry.size(); i++) {
 				LineSegment ls = ((Tiled_Level) Boot.getLevel()).solid_geometry.get(i);
 
-				if (ls.intersectsLine(XT_YT_ls)) {
+				if (ls.intersectsLine(XT_YT_ls , true)) {
 					//System.out.println(i + ":: " + ls.origin.x);
 					if (Math.abs(ls.slope) <= 3) {
 						if (xa != 0 && ya == 0) {
+							if (ls.slope != 0) {
 							move(0, -Math.abs(1 - (vx() * (ls.slope / 10))));
 							// this.y(this.y() );
+							sliding = false;
+							}
 						}
 					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY) {
 						if (canJump == true) {
-						this.canJump = false;
+						this.sliding = true;
 							move(ls.slope / 4, 0);
-							}
 						}
+					} else if (Math.abs(ls.slope) == Double.POSITIVE_INFINITY) {
+						this.sliding = false;
+						if (xa != 0 && ya == 0) {
+							this.solid = false;
+						}
+					} else {
+						sliding = false;
+					}
 					solid = true;
 				}
 			}

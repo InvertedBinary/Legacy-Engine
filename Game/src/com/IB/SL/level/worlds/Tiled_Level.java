@@ -123,7 +123,11 @@ public class Tiled_Level extends Level {
              case "objectgroup": {
             	 this.current_object_layer = attributes.getValue("name");
             	 if (current_object_layer.equals("Collision_mask")) {
-            		 this.props.put("color", attributes.getValue("color"));
+            		 String color = attributes.getValue("color");
+            		 if (color == null) {
+            			 color = "#ff00ff";
+            		 }
+            		 this.props.put("color", color);
             	 }
             	 break;
              }
@@ -179,7 +183,12 @@ public class Tiled_Level extends Level {
 						
 						if (v1 != null && v2 != null) {
 							LineSegment ls = new LineSegment(v1, v2);
-							ls.color = Long.decode("0x" + this.props.get("color").substring(1)).intValue();
+							if (this.props.containsKey("color")) {
+							String color = this.props.get("color").substring(1);
+								ls.color = Long.decode("0x" + color).intValue();
+							} else {
+								ls.color = 0xffFF00FF;
+							}
 							this.solid_geometry.add(ls);
 									
 						}
@@ -187,6 +196,7 @@ public class Tiled_Level extends Level {
 					
             	 System.out.println("Adding some new geometry.. " + solid_geometry);
             	 }
+            	 break;
              }
              
              case "property": {

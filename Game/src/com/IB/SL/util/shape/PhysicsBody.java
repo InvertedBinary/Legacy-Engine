@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.util.PropertyEngine;
+import com.IB.SL.util.math.PVector;
 
 public class PhysicsBody extends PropertyEngine {
 	public Polygon bounds;

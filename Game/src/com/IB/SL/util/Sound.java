@@ -9,6 +9,7 @@ import javax.sound.sampled.FloatControl;
 
 import org.newdawn.easyogg.OggClip;
 
+@Deprecated
 public class Sound {
 	
 	//Wavs
@@ -225,6 +226,7 @@ public class Sound {
 		
 		return clip;
 	}
+	
 	
 	public static void Play(Clip clip, boolean repeat) {
 		if (clip.isRunning()) clip.stop();
