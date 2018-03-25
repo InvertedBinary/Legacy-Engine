@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
+import com.IB.SL.entity.TagEntity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -56,6 +57,9 @@ public class Tiled_Level extends Level {
 		this.tiled_xml = path + "/" + lvn + ".tmx";
 		System.out.println("TILED: " + tiled_xml);
 		this.path = path;
+		
+		
+		add(new TagEntity("/XML/Entities/TestZombie.xml", false));
 	}
 	
 	protected void loadLevel(String path) {

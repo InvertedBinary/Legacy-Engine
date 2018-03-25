@@ -237,7 +237,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		level.add(zb);
 
 	}
-	LineSegment XT_YT_ls;
+	public LineSegment XT_YT_ls;
 	public boolean sliding = false;
 	
 	

@@ -221,7 +221,7 @@ public class XML_Mob extends Mob {
 		ya = 0;
 		players = level.getPlayers(this, 325 - visability);
 		List<Player> players2 = level.getPlayers(this, 415 - visability);
-		entities = level.getEntities(this, 350 - visability, hostility.NEU, hostility.PASS);
+		entities = level.getEntities(this, 350 - visability, "NEU", "PASS");
 
 		if (entities.size() > 0) {
 			if (players2.size() > 0) {

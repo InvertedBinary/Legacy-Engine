@@ -15,9 +15,9 @@
      <sprite>
           <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
           <xOffset>0.00</xOffset>
-          <yOffset>0.00</yOffset>
-          <width>232</width>
-          <height>232</height>
+          <yOffset>32.00</yOffset>
+          <width>64</width>
+          <height>64</height>
           <static_spr>Zombie</static_spr>
           <dspl_spr>Zombie02</dspl_spr>
      </sprite>

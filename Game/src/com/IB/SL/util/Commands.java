@@ -15,6 +15,7 @@ import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
+import com.IB.SL.level.worlds.Tiled_Level;
 
 public class Commands {
 
@@ -201,7 +202,12 @@ public class Commands {
 					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE, Boot.get().getPlayer().y() / TileCoord.TILE_SIZE, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "ld":
-					player.setPositionTiled(-1, -1, "/XML/Levels/" + Modifier, true);
+					if (Modifier.equals(""))
+						Modifier = ((Tiled_Level)Boot.getLevel()).path;
+					else
+						Modifier = "/XML/Levels/" + Modifier;
+					
+					player.setPositionTiled(-1, -1, Modifier, true);
 		break;
 				case "con":
 					if (Modifier2.equals("")) {

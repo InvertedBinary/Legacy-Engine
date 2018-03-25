@@ -114,7 +114,7 @@ public class Teleporter extends Interactable {
 		boolean Transport = false;
 		try {
 			
-		if (!player.riding) {
+		/*if (!player.riding) {
 		int xp = 0;
 		int yp = 0;
 			xp = (int) player.x();
@@ -127,7 +127,7 @@ public class Teleporter extends Interactable {
 	            ) {
 					Transport = true;
 				}
-		}
+		}*/
 		} catch (Exception e) {
 			Transport = false;
 		}

@@ -58,8 +58,14 @@ public class Entity extends DefaultHandler implements Serializable {
 
 	protected transient int xBound = 0;
 	protected transient int yBound = 0;
-	public int xOffset = -16, yOffset = -24;
-	public transient boolean riding = false;;
+	public transient int xOffset = -16, yOffset = -24, entWidth = 32, entHeight = 64;
+	public transient int render_xOffset = -16, render_yOffset = -24;
+	public transient double detection_radius = 0;
+	public transient int despawn_index = -1; //-1 => never despawn
+	public transient boolean essential = false;
+	
+	public transient EntityContainer parent_container;
+	
 	public transient boolean ySort = true;
 	public long Exp;
 	public int Lvl = 1;
@@ -71,12 +77,9 @@ public class Entity extends DefaultHandler implements Serializable {
 	transient public boolean incombat;
 
 	public String UUID = "-1";
-	
-	public enum HOSTILITY {
-		AGR, PASS, NEU, BOSS, PLAYER
-	}
-	
-	public transient HOSTILITY hostility;
+	public int ENTITY_ID = -1;
+
+	public transient String hostility;
 	
 	public Entity() {
 		
@@ -111,7 +114,7 @@ public class Entity extends DefaultHandler implements Serializable {
 	
 	public AABB getBounds() {
 		if (this.aabb == null) {
-			this.aabb = new AABB(this.x(), this.y(), this.sprite.getWidth(), this.sprite.getHeight());
+			this.aabb = new AABB(this.x(), this.y(), x() + xOffset, y() + yOffset);
 		}
 		return this.aabb;
 	}

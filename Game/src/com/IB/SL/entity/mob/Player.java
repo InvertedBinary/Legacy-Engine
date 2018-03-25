@@ -35,6 +35,7 @@ import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
 import com.IB.SL.level.worlds.Tiled_Level;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Commands;
+import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
@@ -49,8 +50,6 @@ public class Player extends Mob implements Serializable{
 	private transient  static final long serialVersionUID = -8911018741301426797L;
 	public transient  Keyboard input;
 	public transient  Tile tile;
-	transient double xOff = 0;
-	transient double yOff = 0;
 	public boolean buildMode = false;
 
 	//private transient transient Inventory inventory;
@@ -90,6 +89,9 @@ public class Player extends Mob implements Serializable{
 	private transient  int dirInt = 0;
 	public int currentLevelId = 0;
 	
+	public int cam_xOff = 0;
+	public int cam_yOff = 0;
+	
 	//TODO: Generate UUID and send instead of USErname
 	
 	
@@ -116,7 +118,7 @@ public class Player extends Mob implements Serializable{
 		this.xOffset = -16;
 		this.yOffset = -16;
 		this.money = 30;
-		this.hostility = hostility.PLAYER;
+		this.hostility = "PLAYER";
 
 		this.maxhealth = 20;
 		this.maxmana = 20;
@@ -277,8 +279,8 @@ public class Player extends Mob implements Serializable{
 		if (fireRate > 0) fireRate--;
 		
 		if (!moving) {
-			xOff = 0;
-			yOff = 0;
+			cam_xOff = 0;
+			cam_yOff = 0;
 		}
 		
 		if (swimming) {
@@ -570,13 +572,11 @@ public class Player extends Mob implements Serializable{
 		
 		sprite = animSprite.getSprite();
 
-		this.xOffset = -22;
-		this.yOffset = -45;
-		xOffset = 0;
-		yOffset = 0;
-		xOff = 0;
-		yOff = 0;
-		screen.renderMobSpriteUniversal((int) (x() + xOff + xOffset), (int) (y() + yOff + yOffset), sprite);
+		this.render_xOffset = 0;
+		this.render_yOffset = 0;
+		this.yOffset = 0;
+		this.xOffset = 16;
+		screen.renderMobSpriteUniversal((int) (x() + render_xOffset + cam_xOff), (int) (y() + render_yOffset + cam_yOff), sprite);
 	
 	}
 	
@@ -662,6 +662,9 @@ public class Player extends Mob implements Serializable{
 			if (this.XT_YT_ls != null) {
 			this.XT_YT_ls.drawLine(screen, true);
 			}
+			
+			Debug.drawRect(screen, (int)x() + render_xOffset, (int)y() + render_yOffset, sprite.getWidth(), sprite.getHeight(), 0xffFADE0F, true);
+			Debug.drawRect(screen, (int)x() + xOffset, (int)y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
 		}
 	
 			if (Level.minimap_collapsed) {

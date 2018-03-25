@@ -36,7 +36,7 @@ public class Alice extends Mob{
 		this.setY(y << 4);
 		this.name = "Alice";
 		this.speed = 0.5;
-		this.hostility = HOSTILITY.NEU;
+		this.hostility = "NEU";
 		sprite = Sprite.playerback;
 		new font8x8();
 	}
@@ -45,7 +45,7 @@ public class Alice extends Mob{
 	public void stab() {
 		try {
 			List <Entity> ent = level.getEntities(this, 20, entities);
-			if (ent.get(0).hostility == hostility.AGR) {
+			if (ent.get(0).hostility.equals("AGR")) {
 			if (time % 30 == 0) {
 			for (int i = 0; i < ent.size(); i++) {
 				Boot.get().getLevel().damage((int)x(), (int)y(), (Mob)ent.get(0), 0, 1, name, 0);
@@ -102,7 +102,7 @@ public class Alice extends Mob{
 		if (time % 8 == 0) {
 			this.hurt = false;
 		}
-		entities = level.getEntities(this, 150, HOSTILITY.AGR);
+		entities = level.getEntities(this, 150, "AGR");
 		stab();
 		time++;
 		move();

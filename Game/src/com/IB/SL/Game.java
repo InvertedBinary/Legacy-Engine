@@ -182,8 +182,6 @@ public class Game extends Canvas implements Runnable
 			Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
 			setLevel(TL);
 			
-			TL.add(new TagEntity("/XML/Entities/TestZombie.xml", false));
-
 			if (TL.spawnpoint != null) {
 				playerSpawn = TL.spawnpoint;
 			} else {
