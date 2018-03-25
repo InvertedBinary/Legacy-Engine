@@ -675,7 +675,8 @@ public class Level extends EntityContainer implements Serializable {
 			time = 0;
 			brightness = 50;
 		}*/
-		if (false) {	
+		if (!VARS.suspend_world) {
+		if (false) {
 		for (int i = 0; i < entities.size(); i++) {
 			if (this.getPlayersBool(entities.get(i), 350)) {  //TODO: Make a list of entities for entities that need to update even when the player is not within 350px
 					entities.get(i).update();
@@ -693,12 +694,14 @@ public class Level extends EntityContainer implements Serializable {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).update();
 		}
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).update();				
-		}
 		
 		for (int i = 0; i < emitters.size(); i++) {
 			emitters.get(i).update();
+		}
+		}
+		
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).update();				
 		}
 
 		Water.update();
@@ -900,7 +903,6 @@ public class Level extends EntityContainer implements Serializable {
 
 	public List<PlayerMP> getPlayers() {
 		return players;
-
 	}
 
 	public Player getPlayerAt(int index) {

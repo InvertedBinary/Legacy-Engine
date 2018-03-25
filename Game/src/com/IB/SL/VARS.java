@@ -30,6 +30,8 @@ public class VARS {
 	public static final byte BIT_OVERLAY = 32;
 	public static final byte BIT_UNUSED = 64;
 
+	public static boolean suspend_world = false;
+
 	//0000 0000 0000 0001 1
 	//0000 0000 0000 0010 2 
 	//0000 0000 0000 0100 4

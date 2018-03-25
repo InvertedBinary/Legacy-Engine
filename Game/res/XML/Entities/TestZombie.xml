@@ -3,14 +3,14 @@
           <name>Zombie</name>
           <id>0</id>
           <hp>5.00</hp>
-          <speed>1.00</speed>
+          <speed>2</speed>
           <rarity>0</rarity>
           <hostility>Aggressive</hostility>
           <xp_min>3.00</xp_min>
           <xp_max>5.00</xp_max>
           <dsp_index>1</dsp_index>
           <essential>false</essential>
-          <det_radius>5</det_radius>
+          <det_radius>1</det_radius>
      </props>
      <sprite>
           <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
@@ -28,9 +28,9 @@
      </anims>
      <collision>
           <xOffset>0</xOffset>
-          <yOffset>28</yOffset>
-          <width>8</width>
-          <height>64</height>
+          <yOffset>32</yOffset>
+          <width>32</width>
+          <height>32</height>
      </collision>
      <scripts>
           <behavior>simple_mob_behavior.lua</behavior>

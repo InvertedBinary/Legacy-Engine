@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.TagEntity;
+import com.IB.SL.entity.emitter.Emitter;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -25,6 +26,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.Tile.stepSound;
 import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.util.Debug;
+import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.LineSegment;
 import com.IB.SL.util.shape.Vertex;
 
@@ -57,8 +59,8 @@ public class Tiled_Level extends Level {
 		this.tiled_xml = path + "/" + lvn + ".tmx";
 		System.out.println("TILED: " + tiled_xml);
 		this.path = path;
-		
-		
+
+		add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
 		add(new TagEntity("/XML/Entities/TestZombie.xml", false));
 	}
 	

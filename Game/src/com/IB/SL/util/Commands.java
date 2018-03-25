@@ -11,6 +11,7 @@ import java.util.Date;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.level.Level;
@@ -75,6 +76,7 @@ public class Commands {
 		cmds.add("ld");
 		cmds.add("con");
 		cmds.add("svr");
+		cmds.add("sus");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -126,6 +128,10 @@ public class Commands {
 				case "tcl":
 					player.noclip = !player.noclip;
 				break;
+				
+				case "sus":
+					VARS.suspend_world = !VARS.suspend_world;
+					break;
 				
 				case "dir":
 					File f = new File(SaveGame.createSaveFolder());
