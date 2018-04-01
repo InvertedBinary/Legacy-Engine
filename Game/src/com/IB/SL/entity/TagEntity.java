@@ -18,8 +18,11 @@ import com.IB.SL.Boot;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
+import com.IB.SL.entity.projectile.Selector;
+import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
+import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.util.Debug;
 import com.IB.SL.util.math.PVector;
 
@@ -38,6 +41,15 @@ public class TagEntity extends Mob
 	private String current_tag;
 
 	public EntityContainer inventory;
+	
+	private transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
+	private transient AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
+	private transient AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 64, 64, 7);
+	private transient AnimatedSprite jump = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
+	
+	private transient AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
+
+	private transient AnimatedSprite anim = idle;
 
 	public TagEntity(String tag_name)
 		{
@@ -296,26 +308,28 @@ public class TagEntity extends Mob
 
 	public void update()
 		{
-			move();
+			if (VARS.do_possession && Selector.selected.equals((this))) {
+			} else {
+				move();
+			}
 		}
 
 	public void move()
 		{
 			double xa = 0, ya = 0;
 			List<PlayerMP> players = level.getPlayers();
-			
 
 			if (players.size() > 0) {
 				PlayerMP p = players.get(0);
 				int track_offset = (p.sprite.getWidth()) + render_xOffset + p.render_xOffset;
 				if ((int) x() <= (int) p.x() + track_offset && (int) x() >= (int) p.x() - track_offset) {
-					this.vel().x(0);
+					//this.vel().x(0);
 				} else {
-					if ((int) x() < (int) p.x() + track_offset) this.vel().x(speed);
-					if ((int) x() > (int) p.x() - track_offset) this.vel().x(-speed);
+					if ((int) x() < (int) p.x() + track_offset) this.vel().x(vel().x() + speed);
+					if ((int) x() > (int) p.x() - track_offset) this.vel().x(vel().x() - speed);
 				}
 			}
-
+			
 			PVector Gravity = new PVector();
 			Gravity.y(VARS.Ag);
 			
@@ -325,6 +339,12 @@ public class TagEntity extends Mob
 			xa = vel().x();
 
 			move(xa, ya);
+			
+			if (this.vx() > 0) {
+				vel().x(vel().x() - speed);
+			} else if (this.vx() < 0) {
+				vel().x(vel().x() + speed);
+			}
 			
 			if (xa != 0) {
 				walking = true;

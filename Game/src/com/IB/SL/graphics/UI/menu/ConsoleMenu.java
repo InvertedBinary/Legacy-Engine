@@ -1,13 +1,16 @@
 package com.IB.SL.graphics.UI.menu;
 
 import com.IB.SL.Boot;
+import com.IB.SL.entity.projectile.Selector;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.UI.part.TextBox;
+import com.IB.SL.util.Commands;
 
 public class ConsoleMenu extends UI_Menu {
 
-	public transient TextBox cmd;
+	public transient TextBox cmd_box;
+	public transient Commands cmds;
 
 	public ConsoleMenu(int x, int y, Sprite bg) {
 		this.bg = bg;
@@ -17,21 +20,26 @@ public class ConsoleMenu extends UI_Menu {
 	public void onLoad() {
 		Boot.get().getPlayer().input.suspendInput();
 
-		if (cmd == null) {
-			cmd = new TextBox(5, 5, 266, 19, Boot.get().key, -1, false);
-			cmd.desc = "Execute Command:";
-			cmd.useCmds = true;
-			cmd.acceptable.add("!");
-			cmd.acceptable.add(",");
-			cmd.acceptable.add(".");
+		if (cmd_box == null) {
+			cmd_box = new TextBox(5, 5, 266, 19, Boot.get().key, -1, false);
+			cmd_box.desc = "Execute Command:";
+			cmd_box.useCmds = true;
+			cmd_box.acceptable.add("!");
+			cmd_box.acceptable.add(",");
+			cmd_box.acceptable.add(".");
 		}
-		cmd.focused = true;
-		cmd.update();
+		
+		if (cmds == null) {
+			cmds = new Commands();
+		}
+		
+		cmd_box.focused = true;
+		cmd_box.update();
 	}
 	
 	public void onUnload() {
 		Boot.get().getPlayer().input.resumeInput();
-		cmd = null;
+		cmd_box = null;
 	}
 	
 	public void updateUnloaded() {
@@ -46,7 +54,7 @@ public class ConsoleMenu extends UI_Menu {
 	}
 	
 	public void update() {
-		cmd.update();
+		cmd_box.update();
 		if (getKey() != null) {
 			if (getKey().console) {
 				unload(this);
@@ -56,7 +64,11 @@ public class ConsoleMenu extends UI_Menu {
 	
 	public void render(Screen screen) {
 		screen.renderAlphaSprite(bg, x, y);
-		cmd.render(screen);
-		font8x8.render(x, y + 20, 1, 0xFFFFFF, cmd.history, screen, false, false);
+		cmd_box.render(screen);
+		font8x8.render(x, y + 20, 1, 0xFFFFFF, cmd_box.history, screen, false, false);
+		if (Selector.selected != null)
+			font8x8.render(x, Boot.get().height - 16, 1, 0xFFFFFF, Selector.selected.toString(), screen, false, false);
+		else
+			font8x8.render(x, Boot.get().height - 16, 1, 0xFFFFFF, "No Selection", screen, false, false);
 	}
 }

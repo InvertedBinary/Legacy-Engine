@@ -14,6 +14,7 @@ import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
+import com.IB.SL.entity.projectile.Selector;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.worlds.Tiled_Level;
@@ -77,6 +78,9 @@ public class Commands {
 		cmds.add("con");
 		cmds.add("svr");
 		cmds.add("sus");
+		cmds.add("kill");
+		cmds.add("grab");
+		cmds.add("push");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -131,7 +135,7 @@ public class Commands {
 				
 				case "sus":
 					VARS.suspend_world = !VARS.suspend_world;
-					break;
+				break;
 				
 				case "dir":
 					File f = new File(SaveGame.createSaveFolder());
@@ -146,7 +150,26 @@ public class Commands {
 				case "dbg":
 					Boot.drawDebug = !Boot.drawDebug;
 				break;
-		
+				
+				case "kill":
+					if (Selector.selected != null)
+						Selector.selected.remove();
+					
+					Selector.selected = null;
+				break;
+				
+				case "grab":
+					if (Selector.selected != null) {
+						VARS.do_possession = !VARS.do_possession;
+					}
+				break;
+				
+				case "push":
+					if (Selector.selected != null) {
+						Selector.selected.vel().set(Double.parseDouble(Modifier), Double.parseDouble(Modifier2));
+					}
+				break;
+				
 				case "avg": 
 				{
 					Game.showAVG = !Game.showAVG;

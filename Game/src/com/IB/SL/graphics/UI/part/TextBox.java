@@ -11,6 +11,7 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
 import com.IB.SL.graphics.UI.CheckBounds;
+import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.util.Sound;
@@ -228,7 +229,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 	
 	public void runCmd(String text) {
 		if (useCmds) {
-			Boot.get().getPlayer().cmd.updateCommandMode(finalText, Boot.get().getPlayer());
+			UI_Menu.ConsoleMenu.cmds.updateCommandMode(finalText, Boot.get().getPlayer());
 			reset(true);
 		}
 		focused = true;

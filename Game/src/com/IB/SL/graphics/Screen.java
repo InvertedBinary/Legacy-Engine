@@ -23,7 +23,8 @@ public class Screen {
 
 	public int width, height; // 20 TILES LONG
 	public int[] pixels;
-	public int xOffset, yOffset;
+	public static int xOffset;
+	public static int yOffset;
 	private Random random = new Random();
 	private static int s = 16;
 	private static int ss = 15;
