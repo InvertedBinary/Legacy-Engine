@@ -337,7 +337,7 @@ public class TagEntity extends Mob
 			
 			ya = vel().y();
 			xa = vel().x();
-
+			
 			move(xa, ya);
 			
 			if (this.vx() > 0) {
