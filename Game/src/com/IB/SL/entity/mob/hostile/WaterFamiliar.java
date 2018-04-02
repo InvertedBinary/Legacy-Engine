@@ -53,7 +53,7 @@ public class WaterFamiliar extends Mob {
 		this.setY(y << 4);
 		this.name = "Water Familiar";
 		this.speed = 0.8;
-		this.hostility = HOSTILITY.NEU;
+		this.hostility = "NEU";
 		sprite = Sprite.playerback;
 
 		this.maxlife = maxlife;
@@ -65,7 +65,7 @@ public class WaterFamiliar extends Mob {
 			List<Entity> ent = level.getEntities(this, 20, entities);
 			List<Player> p = level.getPlayers(this, 100);
 
-			if (ent.get(0).hostility == hostility.AGR) {
+			if (ent.get(0).hostility.equals("AGR")) {
 				if (time % 30 == 0) {
 					if (p.size() > 0) {
 					}
@@ -145,7 +145,7 @@ public class WaterFamiliar extends Mob {
 			remove();
 		}
 		players = level.getPlayers(this, 150);
-		entities = level.getEntities(this, 135, HOSTILITY.AGR);
+		entities = level.getEntities(this, 135, "AGR");
 		stab();
 		if (fireRate > 0) {
 			fireRate--;

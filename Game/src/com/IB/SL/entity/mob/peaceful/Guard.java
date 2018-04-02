@@ -69,7 +69,7 @@ public class Guard extends Mob{
 		this.p1 = point1;
 		this.p2 = point2;
 		this.name = "Guard";
-		this.hostility = hostility.NEU;
+		this.hostility = "NEU";
 		this.maxhealth = 20;
 		this.mobhealth = maxhealth;
 		this.speed = 0.5;
@@ -83,7 +83,7 @@ public class Guard extends Mob{
 			List <Entity> ent = level.getEntities(this, 20, entities);
 			List <Player> p = level.getPlayers(this, 100);
 
-			if (ent.get(0).hostility == hostility.AGR) {
+			if (ent.get(0).hostility.equals("AGR")) {
 			if (time % 30 == 0) {
 				if (p.size() > 0) {					
 				  if (time_swordSound > 55) {
@@ -226,7 +226,7 @@ public class Guard extends Mob{
 		players = level.getPlayers(this, 150);
 		
 		if (players.size() > 0) {			
-		entities = level.getEntities(this, 135, HOSTILITY.AGR);
+		entities = level.getEntities(this, 135, "AGR");
 		} else {
 			entities = level.getEntities(this, 135);
 		}

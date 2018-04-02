@@ -3,6 +3,8 @@ package com.IB.SL.entity;
 import java.io.Serializable;
 import java.util.Random;
 
+import org.xml.sax.helpers.DefaultHandler;
+
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.projectile.Projectile;
 import com.IB.SL.graphics.Screen;
@@ -10,10 +12,11 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.util.AABB;
 import com.IB.SL.util.PropertyEngine;
+import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.PhysicsBody;
 import com.IB.SL.util.shape.Rectangle;
 
-public class Entity extends PropertyEngine implements Serializable {
+public class Entity extends DefaultHandler implements Serializable {
 
 	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);
@@ -55,8 +58,14 @@ public class Entity extends PropertyEngine implements Serializable {
 
 	protected transient int xBound = 0;
 	protected transient int yBound = 0;
-	public int xOffset = -16, yOffset = -24;
-	public transient boolean riding = false;;
+	public transient int xOffset = -16, yOffset = -24, entWidth = 32, entHeight = 64;
+	public transient int render_xOffset = -16, render_yOffset = -24;
+	public transient double detection_radius = 0;
+	public transient int despawn_index = -1; //-1 => never despawn
+	public transient boolean essential = false;
+	
+	public transient EntityContainer parent_container;
+	
 	public transient boolean ySort = true;
 	public long Exp;
 	public int Lvl = 1;
@@ -68,12 +77,9 @@ public class Entity extends PropertyEngine implements Serializable {
 	transient public boolean incombat;
 
 	public String UUID = "-1";
-	
-	public enum HOSTILITY {
-		AGR, PASS, NEU, BOSS, PLAYER
-	}
-	
-	public transient HOSTILITY hostility;
+	public int ENTITY_ID = -1;
+
+	public transient String hostility;
 	
 	public Entity() {
 		
@@ -108,7 +114,7 @@ public class Entity extends PropertyEngine implements Serializable {
 	
 	public AABB getBounds() {
 		if (this.aabb == null) {
-			this.aabb = new AABB(this.x(), this.y(), this.sprite.getWidth(), this.sprite.getHeight());
+			this.aabb = new AABB(this.x(), this.y(), x() + xOffset, y() + yOffset);
 		}
 		return this.aabb;
 	}

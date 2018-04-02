@@ -46,7 +46,7 @@ public class Villager01 extends Mob{
 		this.mobhealth = maxhealth;
 		this.font8x8 = new font8x8();
 		sprite = Sprite.playerback;
-		this.hostility = hostility.PASS;
+		this.hostility = "PASS";
 	}
 	
 	

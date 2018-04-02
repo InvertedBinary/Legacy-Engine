@@ -2,11 +2,12 @@ package com.IB.SL.entity.emitter;
 
 import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.entity.particle.Particle2D;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
+import com.IB.SL.util.Debug;
+import com.IB.SL.util.math.PVector;
 
 public class Emitter extends Entity {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +25,22 @@ public class Emitter extends Entity {
 		this.setX(x);
 		this.setY(y);
 	}
-	
-	public void render(Screen screen) {
 
-	}
-	
+	public void render(Screen screen)
+		{
+
+		}
+
+	public void renderGUI(Screen screen)
+		{
+			if (Boot.drawDebug) {
+
+				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
+						sprite.getHeight(), 0xffFADE0F, true);
+				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
+			}
+		}
+
 	public void update() {
 		time++;
 		if (time > 7400) time = 0;

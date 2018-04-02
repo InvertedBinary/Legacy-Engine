@@ -22,7 +22,7 @@ import java.util.Stack;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import com.IB.SL.entity.Entity;
+import com.IB.SL.entity.TagEntity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
@@ -181,7 +181,7 @@ public class Game extends Canvas implements Runnable
 			// setLevel(new XML_Level(Maps.ForestLevel));
 			Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
 			setLevel(TL);
-
+			
 			if (TL.spawnpoint != null) {
 				playerSpawn = TL.spawnpoint;
 			} else {

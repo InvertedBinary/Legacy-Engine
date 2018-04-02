@@ -31,6 +31,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 				channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " has joined\n");
 				//TODO: Send current .xml level
 			}
+			
 			addUser(ctx);
 	}
 	

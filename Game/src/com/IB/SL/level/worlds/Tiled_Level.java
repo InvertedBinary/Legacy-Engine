@@ -15,6 +15,8 @@ import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
+import com.IB.SL.entity.TagEntity;
+import com.IB.SL.entity.emitter.Emitter;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -24,6 +26,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.Tile.stepSound;
 import com.IB.SL.level.tile.SL2.XML_Tile;
 import com.IB.SL.util.Debug;
+import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.LineSegment;
 import com.IB.SL.util.shape.Vertex;
 
@@ -56,6 +59,9 @@ public class Tiled_Level extends Level {
 		this.tiled_xml = path + "/" + lvn + ".tmx";
 		System.out.println("TILED: " + tiled_xml);
 		this.path = path;
+
+		add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
+		add(new TagEntity("/XML/Entities/TestZombie.xml", false));
 	}
 	
 	protected void loadLevel(String path) {
@@ -123,7 +129,11 @@ public class Tiled_Level extends Level {
              case "objectgroup": {
             	 this.current_object_layer = attributes.getValue("name");
             	 if (current_object_layer.equals("Collision_mask")) {
-            		 this.props.put("color", attributes.getValue("color"));
+            		 String color = attributes.getValue("color");
+            		 if (color == null) {
+            			 color = "#ff00ff";
+            		 }
+            		 this.props.put("color", color);
             	 }
             	 break;
              }
@@ -179,7 +189,12 @@ public class Tiled_Level extends Level {
 						
 						if (v1 != null && v2 != null) {
 							LineSegment ls = new LineSegment(v1, v2);
-							ls.color = Long.decode("0x" + this.props.get("color").substring(1)).intValue();
+							if (this.props.containsKey("color")) {
+							String color = this.props.get("color").substring(1);
+								ls.color = Long.decode("0x" + color).intValue();
+							} else {
+								ls.color = 0xffFF00FF;
+							}
 							this.solid_geometry.add(ls);
 									
 						}
@@ -187,6 +202,7 @@ public class Tiled_Level extends Level {
 					
             	 System.out.println("Adding some new geometry.. " + solid_geometry);
             	 }
+            	 break;
              }
              
              case "property": {

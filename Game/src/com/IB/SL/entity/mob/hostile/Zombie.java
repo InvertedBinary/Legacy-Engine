@@ -45,7 +45,7 @@ public class Zombie extends Mob{
 		this.name = "Zombie";
 		this.speed = 0.5;
 		this.rarity = 4;
-		this.hostility = HOSTILITY.AGR;
+		this.hostility = "AGR";
 		sprite = Sprite.playerback;
 		
 		Random rand = new Random();
@@ -81,7 +81,7 @@ public class Zombie extends Mob{
 		players = level.getPlayers(this, 125 - visability);
 		List<Player> players2 = level.getPlayers(this, 215 - visability);
 
-		entities = level.getEntities(this, 150 - visability, hostility.NEU, hostility.PASS);
+		entities = level.getEntities(this, 150 - visability, "NEU", "PASS");
 		
 				//if (entities.get(0).hostility == hostility.NEU || entities.get(0).hostility == hostility.PASS) {
 		if (entities.size() > 0) {

@@ -11,10 +11,13 @@ import java.util.Date;
 
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
+import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
+import com.IB.SL.entity.projectile.Selector;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
+import com.IB.SL.level.worlds.Tiled_Level;
 
 public class Commands {
 
@@ -74,6 +77,10 @@ public class Commands {
 		cmds.add("ld");
 		cmds.add("con");
 		cmds.add("svr");
+		cmds.add("sus");
+		cmds.add("kill");
+		cmds.add("grab");
+		cmds.add("push");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -126,6 +133,10 @@ public class Commands {
 					player.noclip = !player.noclip;
 				break;
 				
+				case "sus":
+					VARS.suspend_world = !VARS.suspend_world;
+				break;
+				
 				case "dir":
 					File f = new File(SaveGame.createSaveFolder());
 					if (Modifier.equals("")) {						
@@ -139,7 +150,26 @@ public class Commands {
 				case "dbg":
 					Boot.drawDebug = !Boot.drawDebug;
 				break;
-		
+				
+				case "kill":
+					if (Selector.selected != null)
+						Selector.selected.remove();
+					
+					Selector.selected = null;
+				break;
+				
+				case "grab":
+					if (Selector.selected != null) {
+						VARS.do_possession = !VARS.do_possession;
+					}
+				break;
+				
+				case "push":
+					if (Selector.selected != null) {
+						Selector.selected.vel().set(Double.parseDouble(Modifier), Double.parseDouble(Modifier2));
+					}
+				break;
+				
 				case "avg": 
 				{
 					Game.showAVG = !Game.showAVG;
@@ -201,7 +231,12 @@ public class Commands {
 					Boot.get().getLevel().add(new XML_Mob(Boot.get().getPlayer().x() / TileCoord.TILE_SIZE, Boot.get().getPlayer().y() / TileCoord.TILE_SIZE, "/XML/Entities/" + Modifier + ".xml"));
 		break;
 				case "ld":
-					player.setPositionTiled(0, 0, "/XML/Levels/" + Modifier, true);
+					if (Modifier.equals(""))
+						Modifier = ((Tiled_Level)Boot.getLevel()).path;
+					else
+						Modifier = "/XML/Levels/" + Modifier;
+					
+					player.setPositionTiled(-1, -1, Modifier, true);
 		break;
 				case "con":
 					if (Modifier2.equals("")) {

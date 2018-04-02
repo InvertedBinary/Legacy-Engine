@@ -1,5 +1,7 @@
 package com.IB.SL;
 
+import com.IB.SL.entity.Entity;
+
 public class VARS {
 	
 	//VALIDATIONS
@@ -22,6 +24,11 @@ public class VARS {
 	public static final float Ag = 1/PPM * 9.8f; // Gravitational Acceleration
 	public static final float Afr = PPM/100; //TODO: MOVE TO BE TILE PROPERTY!!
 	
+	
+	//DBG
+	public static boolean do_possession = false;
+	public static boolean suspend_world = false;
+	
 	//Collision bits
 	public static final byte BIT_ENTITY = 2;
 	public static final byte BIT_PLAYER = 4;
@@ -29,6 +36,7 @@ public class VARS {
 	public static final byte BIT_TILE = 16;
 	public static final byte BIT_OVERLAY = 32;
 	public static final byte BIT_UNUSED = 64;
+
 
 	//0000 0000 0000 0001 1
 	//0000 0000 0000 0010 2 

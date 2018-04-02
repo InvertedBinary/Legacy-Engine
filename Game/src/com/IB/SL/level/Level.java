@@ -9,13 +9,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import org.xml.sax.helpers.DefaultHandler;
-
 import com.IB.SL.Boot;
 import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.Entity.HOSTILITY;
+import com.IB.SL.entity.EntityContainer;
 import com.IB.SL.entity.emitter.Emitter;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
@@ -32,7 +30,7 @@ import com.IB.SL.util.SaveGame;
 import com.IB.SL.util.Vector2i;
 
 
-public class Level extends DefaultHandler implements Serializable {
+public class Level extends EntityContainer implements Serializable {
 	/**
 	 * 
 	 */
@@ -45,13 +43,6 @@ public class Level extends DefaultHandler implements Serializable {
 	public int[] torchTiles;
 	transient public Tile tile;
 	public static int nighttime = 0, daytime = 0;
-	public List<Entity> entities = new ArrayList<Entity>();
-	public List<Projectile> Projectiles = new ArrayList<Projectile>();
-	public List<Particle> particles = new ArrayList<Particle>();
-	public List<PlayerMP> players = new ArrayList<PlayerMP>();
-	public List<Emitter> emitters = new ArrayList<Emitter>();
-
-	public List<Entity> entitiesList = new ArrayList<Entity>();
 
 	//public List<AnimatedTile> tiles_anim = new ArrayList<AnimatedTile>();
 	double addX, addY;
@@ -684,7 +675,8 @@ public class Level extends DefaultHandler implements Serializable {
 			time = 0;
 			brightness = 50;
 		}*/
-		if (false) {	
+		if (!VARS.suspend_world) {
+		if (false) {
 		for (int i = 0; i < entities.size(); i++) {
 			if (this.getPlayersBool(entities.get(i), 350)) {  //TODO: Make a list of entities for entities that need to update even when the player is not within 350px
 					entities.get(i).update();
@@ -702,12 +694,14 @@ public class Level extends DefaultHandler implements Serializable {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).update();
 		}
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).update();				
-		}
 		
 		for (int i = 0; i < emitters.size(); i++) {
 			emitters.get(i).update();
+		}
+		}
+		
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).update();				
 		}
 
 		Water.update();
@@ -857,7 +851,7 @@ public class Level extends DefaultHandler implements Serializable {
 	private void remove() {
 		for(int i = 0; i < entitiesList.size(); i++){
 	         if(entitiesList.get(i).isRemoved()) entitiesList.remove(i);
-	      }
+	     }
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i).isRemoved())
 				entities.remove(i);
@@ -909,7 +903,6 @@ public class Level extends DefaultHandler implements Serializable {
 
 	public List<PlayerMP> getPlayers() {
 		return players;
-
 	}
 
 	public Player getPlayerAt(int index) {
@@ -1080,7 +1073,7 @@ public class Level extends DefaultHandler implements Serializable {
 	
 	
 	@Deprecated
-	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host) {
+	public List<Entity> getEntities(Entity e, int radius, String host) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
 		int ey = (int) e.y();
@@ -1099,7 +1092,7 @@ public class Level extends DefaultHandler implements Serializable {
 		return result;
 	}
 	@Deprecated
-	public List<Entity> getEntities(Entity e, int radius, HOSTILITY host, HOSTILITY host2) {
+	public List<Entity> getEntities(Entity e, int radius, String host, String host2) {
 		List<Entity> result = new ArrayList<Entity>();
 		int ex = (int) e.x();
 		int ey = (int) e.y();
@@ -1606,7 +1599,7 @@ public class Level extends DefaultHandler implements Serializable {
 				mob.death();
 				if (mob.remove()) {
 						Boot.get().getLevel().getClientPlayer().kills += 1;
-					if (mob.hostility != mob.hostility.PASS) {
+					if (mob.hostility != "PASS") {
 						Boot.get().getPlayer().money += (mob.maxhealth / 2);
 					}
 				}

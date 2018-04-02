@@ -2,9 +2,9 @@ package com.IB.SL.entity.particle;
 
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
-import com.IB.SL.entity.PVector;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
+import com.IB.SL.util.math.PVector;
 
 public class Particle2D extends Entity {
 	private static final long serialVersionUID = 1L;

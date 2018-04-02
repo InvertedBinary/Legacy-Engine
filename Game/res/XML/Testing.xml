@@ -1,0 +1,16 @@
+﻿<entity>
+     <props>
+          <name>Zombief</name>
+          <id>134</id>
+          <hp>23</hp>
+          <speed>3</speed>
+          <hostility>Aggressive</hostility>
+     </props>
+     <sprite>
+          <sheet>Locate Sheet..</sheet>
+     </sprite>
+     <anims />
+     <collision />
+     <behavior />
+     <event_scripts />
+</entity>

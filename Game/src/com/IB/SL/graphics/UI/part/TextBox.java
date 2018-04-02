@@ -11,6 +11,7 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
 import com.IB.SL.graphics.UI.CheckBounds;
+import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.util.Sound;
@@ -34,7 +35,7 @@ private boolean small;
 public String caret = "l";
 public String textWithCaret = text;
 public String renderString = "";
-int color;
+int color = 0xffFFFFFF;
 public int caretPos = 0;
 public boolean useCmds = false;
 public String history = "";
@@ -74,7 +75,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 	}
 	
 	public void addHistory() {
-		text = finalText.substring(finalText.indexOf("!") + 1, finalText.length());
+		text = finalText;
 		history += "\n" + text;
 		System.out.println("History:" + history);
 	}
@@ -228,10 +229,8 @@ private class MyDispatcher implements KeyEventDispatcher {
 	
 	public void runCmd(String text) {
 		if (useCmds) {
-			if (text.startsWith("!")) {
-			Boot.get().getPlayer().cmd.updateCommandMode(finalText.substring(1, finalText.length()), Boot.get().getPlayer());
+			UI_Menu.ConsoleMenu.cmds.updateCommandMode(finalText, Boot.get().getPlayer());
 			reset(true);
-			}
 		}
 		focused = true;
 	}
@@ -263,10 +262,9 @@ private class MyDispatcher implements KeyEventDispatcher {
 	int pressTime = 0;
 	boolean groove = false;
 	public void update() {
-		if (desc != "Command:" && maxLength == -1) {
+		if (desc != "Execute Command:" && maxLength == -1) {
 			xOffset = 0;
 		}
-				
 		
 		if (caretPos >= (this.width + 16) / 16) {
 			this.xOffset = (caretPos - (this.width + 16) / 16) * (-14);
@@ -280,7 +278,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 				color = 0xffffffff;
 			if(Mouse.getButton() == 1 && focused == false) {
 				focused = true;
-			Sound.Play(Sound.Click, false);
+			//Sound.Play(Sound.Click, false);
 			Mouse.setMouseB(-1);
 			}
 		} else {
