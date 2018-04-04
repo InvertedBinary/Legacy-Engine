@@ -11,15 +11,13 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.IB.SL.AlphaLWJGL.OGLEngine;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.level.Level;
 import com.IB.SL.network.Client;
@@ -29,19 +27,17 @@ public class Boot
 {
 
 	public static String title = "Legacy Engine [Build 1 : 10/31/17]";
-	private static Game g = new Game(title);
-	// private static LWJGL lwjgl = new LWJGL(title);
+	private static Game g;
+	private static OGLEngine GameOGL;
 	private static GameServer s;
 	public static Client c;
 	
 	private static int port = 7381;
 	public static String host = "localhost";
-	
 	public static HashMap<String, Boolean> launch_args;
-	
 	public static boolean isConnected = false;
-
 	public static boolean drawDebug = false;
+	
 	
 	public static void main(String[] args)
 		{
@@ -64,15 +60,18 @@ public class Boot
 			} else {
 				tryServer();
 			}
-			g.Launch(g);
-
-			// lwjgl.start();
 			
-			/*
-			 * try { ServerTest.main(new String[0]); } catch (Exception e) {
-			 * e.printStackTrace(); }
-			 */
+			tryLaunchGame();
 		}
+	
+	public static void tryLaunchGame()
+	{
+			//g = new Game(title);
+			//g.Launch(g);
+
+			GameOGL = new OGLEngine(title);
+	}
+	
 	
 	public static void tryServer()
 		{

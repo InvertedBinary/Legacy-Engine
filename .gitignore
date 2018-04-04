@@ -63,3 +63,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+RemoteSystemsTempFiles/
+
+Game/gliConfig_FullDebug\.ini

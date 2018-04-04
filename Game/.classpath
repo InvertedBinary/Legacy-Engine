@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="luaj-3.0.1/" kind="src" path="lib"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre-9.0.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_151"/>
 	<classpathentry kind="lib" path="res"/>
 	<classpathentry kind="lib" path="lib/easyogg.jar" sourcepath="lib/easyogg.jar"/>
 	<classpathentry kind="lib" path="lib/jogg-0.0.7.jar"/>
