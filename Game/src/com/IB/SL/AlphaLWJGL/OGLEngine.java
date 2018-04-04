@@ -34,9 +34,11 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.glfw.GLFW.*;
+
+import org.lwjgl.glfw.GLFW;
 
 import org.lwjgl.Version;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
@@ -136,6 +138,8 @@ public class OGLEngine
 	        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //WIREFRAME
 	        
 			while (!glfwWindowShouldClose(window)) {
+				processInput(window);
+				
 				glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		        glClear(GL_COLOR_BUFFER_BIT);
 		        
@@ -152,6 +156,12 @@ public class OGLEngine
 			glDeleteBuffers(VBO);
 
 			glfwTerminate();
+		}
+	
+	private void processInput(long window)
+		{
+			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
+				glfwSetWindowShouldClose(window, true);
 		}
 
 	private static GLFWFramebufferSizeCallback framebuffer_size_callback = new GLFWFramebufferSizeCallback()
