@@ -1,6 +1,6 @@
 package com.IB.SL.AlphaLWJGL.util;
 
-import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import static org.lwjgl.glfw.GLFW.*;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
