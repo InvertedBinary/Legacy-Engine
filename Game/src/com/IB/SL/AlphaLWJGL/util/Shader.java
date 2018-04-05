@@ -1,9 +1,6 @@
 package com.IB.SL.AlphaLWJGL.util;
 
-import static org.lwjgl.opengl.GL20.glAttachShader;
-import static org.lwjgl.opengl.GL20.glCreateProgram;
-import static org.lwjgl.opengl.GL20.glDeleteShader;
-import static org.lwjgl.opengl.GL20.glLinkProgram;
+import static org.lwjgl.opengl.GL20.*;
 
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
@@ -13,26 +10,31 @@ import org.lwjgl.opengl.GL11;
 public class Shader
 {
 	private String vertexPath, fragPath = "";
-	private int shaderProgram = 0;
-	private IO io = new IO();
+	private int shaderProgramID = 0;
+    private int vertShader = 0, fragShader = 0;
+	private Utils utils = new Utils();
 	
 	public Shader(String vertexPath, String fragPath)
 		{
 			this.vertexPath = vertexPath;
 			this.fragPath = fragPath;
 		}
-	
+
 	public int getShaderProgram()
-	{
-			if (shaderProgram == 0)
-				createShaders();
-			
-			return this.shaderProgram;
-	}
+		{
+			if (shaderProgramID == 0) 
+				createShaders(true);
+
+			return this.shaderProgramID;
+		}
+
+	public void use()
+		{
+			glUseProgram(shaderProgramID);
+		}
 	
-	public void createShaders()
+	public void createShaders(boolean create_program)
 	{
-		    int vertShader = 0, fragShader = 0;
 	        try {
 	            vertShader = compileShader(vertexPath, ARBVertexShader.GL_VERTEX_SHADER_ARB);
 	            fragShader = compileShader(fragPath, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
@@ -48,10 +50,16 @@ public class Shader
 	            }
 	        }
 	        
-	        shaderProgram = glCreateProgram();
-	        glAttachShader(shaderProgram, vertShader);
-	        glAttachShader(shaderProgram, fragShader);
-	        glLinkProgram(shaderProgram);
+	        if (create_program)
+	        	createProgram();
+	}
+	
+	public void createProgram()
+	{
+	        shaderProgramID = glCreateProgram();
+	        glAttachShader(shaderProgramID, vertShader);
+	        glAttachShader(shaderProgramID, fragShader);
+	        glLinkProgram(shaderProgramID);
 	        
 	        glDeleteShader(vertShader);
 	        glDeleteShader(fragShader);
@@ -65,7 +73,7 @@ public class Shader
 
 				if (shader == 0) return 0;
 
-				ARBShaderObjects.glShaderSourceARB(shader, io.readFileAsString(filename));
+				ARBShaderObjects.glShaderSourceARB(shader, utils.readFileAsString(filename));
 				ARBShaderObjects.glCompileShaderARB(shader);
 
 				if (ARBShaderObjects.glGetObjectParameteriARB(shader,
@@ -81,8 +89,86 @@ public class Shader
 	
 	private static String getLogInfo(int obj)
 		{
-			return ARBShaderObjects.glGetInfoLogARB(obj,
-					ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
+			return ARBShaderObjects.glGetInfoLogARB(obj, ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
 		}
 	
+	public void setFloats(String name, float... values) {
+			if (values.length > 4) {
+				setFloats(name, values[0], values[1], values[2], values[3]);
+				return;
+			}
+			
+			switch (values.length)
+			{
+			case 1:
+			    glUniform1f(glGetUniformLocation(shaderProgramID, name), values[0]); 
+			    break;
+			case 2:
+			    glUniform2f(glGetUniformLocation(shaderProgramID, name), values[0], values[1]); 
+			    break;
+			case 3:
+			    glUniform3f(glGetUniformLocation(shaderProgramID, name), values[0], values[1], values[2]); 
+			    break;
+			case 4:
+			    glUniform4f(glGetUniformLocation(shaderProgramID, name), values[0], values[1], values[2], values[3]); 
+			    break;
+			default:
+				System.out.println("Error setting uniform floats: Too many values!");
+				break;
+			}
+	}
+	
+	public void setInts(String name, int... values) {
+			if (values.length > 4) {
+				setInts(name, values[0], values[1], values[2], values[3]);
+				return;
+			}
+			
+			switch (values.length)
+			{
+			case 1:
+			    glUniform1i(glGetUniformLocation(shaderProgramID, name), values[0]); 
+			    break;
+			case 2:
+			    glUniform2i(glGetUniformLocation(shaderProgramID, name), values[0], values[1]); 
+			    break;
+			case 3:
+			    glUniform3i(glGetUniformLocation(shaderProgramID, name), values[0], values[1], values[2]); 
+			    break;
+			case 4:
+			    glUniform4i(glGetUniformLocation(shaderProgramID, name), values[0], values[1], values[2], values[3]); 
+			    break;
+			default:
+				System.out.println("Error setting uniform ints: Too many values!");
+				break;
+			}
+	}
+	
+	public void setBools(String name, boolean... values) {
+			if (values.length > 4) {
+				setBools(name, values[0], values[1], values[2], values[3]);
+				return;
+			}
+			
+			switch (values.length)
+			{
+			case 1:
+			    glUniform1i(glGetUniformLocation(shaderProgramID, name), intValue(values[0])); 
+			    break;
+			case 2:
+			    glUniform2i(glGetUniformLocation(shaderProgramID, name), intValue(values[0]), intValue(values[1])); 
+			    break;
+			case 3:
+			    glUniform3i(glGetUniformLocation(shaderProgramID, name), intValue(values[0]), intValue(values[1]), intValue(values[2])); 
+			    break;
+			case 4:
+			    glUniform4i(glGetUniformLocation(shaderProgramID, name), intValue(values[0]), intValue(values[1]), intValue(values[2]), intValue(values[3])); 
+			    break;
+			}
+	}
+	
+	public int intValue(boolean val)
+		{
+			return (val) ? 1 : 0;
+		}
 }

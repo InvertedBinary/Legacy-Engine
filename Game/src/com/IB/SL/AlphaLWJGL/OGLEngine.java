@@ -2,10 +2,20 @@ package com.IB.SL.AlphaLWJGL;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import javax.imageio.ImageIO;
+
+import static com.IB.SL.AlphaLWJGL.util.Utils.*;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
@@ -13,10 +23,11 @@ import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GLDebugMessageCallback;
 import org.lwjgl.opengl.GLUtil;
 
-import com.IB.SL.AlphaLWJGL.util.IO;
+import com.IB.SL.AlphaLWJGL.util.Utils;
 import com.IB.SL.AlphaLWJGL.util.Shader;
 
 public class OGLEngine
@@ -24,8 +35,6 @@ public class OGLEngine
 	String title = "";
 	private long window;
 	
-	private IO io = new IO();
-
 	public OGLEngine(String title)
 		{
 			System.out.println(this.title);
@@ -56,22 +65,37 @@ public class OGLEngine
 
 	public void init()
 		{
-			int shaderProgram;
 			Shader shaders = new Shader("/shaders/screen.vert", "/shaders/screen.frag");
-	        shaderProgram = shaders.getShaderProgram();
+	        shaders.getShaderProgram();
 	        
 	        float vertices[] = {
-	        	    // positions         // colors
-	        	     0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-	        	    -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-	        	     0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+	        	    // positions          // colors           // texture coords
+	        	     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+	        	     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+	        	    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+	        	    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	        	};
 	        
-	         int indices[] = {
-	               0, 1, 3, 
-	               1, 2, 3 
-	           };
-		    
+	        int indices[] = {
+	              0, 1, 3, 
+	              1, 2, 3 
+	        };
+	        
+	        float texCoords[] = {
+	        	0.0f, 0.0f,
+	        	1.0f, 0.0f,
+	        	0.5f, 1.0f
+	        };
+	        
+	        BufferedImage texture = null;
+				try {
+					//texture = ImageIO.read(new File("C:/wall.jpg"));
+					texture = ImageIO.read(Utils.getResourceAsFile("3D_Textures/wall.jpg"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        
+	        Utils.loadTexture(texture);
 	        
 	        int VBO, VAO, EBO;
 	        VAO = glGenVertexArrays();
@@ -85,11 +109,14 @@ public class OGLEngine
 	        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
 
-	        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * 4, 0);
+	        glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * FLOAT_SIZE, 0);
 	        glEnableVertexAttribArray(0);
 	        
-	        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * 4, 3 * 4);
+	        glVertexAttribPointer(1, 3, GL_FLOAT, false, 8 * FLOAT_SIZE, 3 * FLOAT_SIZE);
 	        glEnableVertexAttribArray(1);
+	        
+	        glVertexAttribPointer(2, 2, GL_FLOAT, false, 8 * FLOAT_SIZE, 6 * FLOAT_SIZE);
+	        glEnableVertexAttribArray(2);
 
 	        glBindBuffer(GL_ARRAY_BUFFER, 0); 
 		    glBindVertexArray(0);
@@ -102,16 +129,12 @@ public class OGLEngine
 				glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		        glClear(GL_COLOR_BUFFER_BIT);
 		        
-		        float timeValue = (float) GLFW.glfwGetTime();
-		        float greenValue = (float) ((Math.sin(timeValue) / 2.0f) + 0.5f);
-		        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-		        glUseProgram(shaderProgram);
-		        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+		        shaders.use();
 		        
 		        glBindVertexArray(VAO);
 		        
-		        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);			    //glDrawArrays(GL_TRIANGLES, 0, 3);
-		        glDrawArrays(GL_TRIANGLES, 0, 3);
+		        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		        //glDrawArrays(GL_TRIANGLES, 0, 3);
 		        
 				glfwSwapBuffers(window);
 				glfwPollEvents();
