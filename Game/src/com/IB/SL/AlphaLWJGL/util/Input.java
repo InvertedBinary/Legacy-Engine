@@ -1,4 +1,4 @@
-package com.IB.SL.AlphaLWJGL;
+package com.IB.SL.AlphaLWJGL.util;
 
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 

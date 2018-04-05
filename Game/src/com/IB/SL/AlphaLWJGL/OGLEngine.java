@@ -29,6 +29,7 @@ import org.lwjgl.opengl.GLUtil;
 
 import com.IB.SL.AlphaLWJGL.util.Utils;
 import com.IB.SL.AlphaLWJGL.util.Shader;
+import com.IB.SL.AlphaLWJGL.util.TextureHandler;
 
 public class OGLEngine
 {
@@ -95,7 +96,7 @@ public class OGLEngine
 					e.printStackTrace();
 				}
 	        
-	        Utils.loadTexture(texture);
+	        TextureHandler.loadTexture(texture);
 	        
 	        int VBO, VAO, EBO;
 	        VAO = glGenVertexArrays();
