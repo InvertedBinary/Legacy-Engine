@@ -10,35 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 public class IO
 {
-	private static String getLogInfo(int obj)
-		{
-			return ARBShaderObjects.glGetInfoLogARB(obj,
-					ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
-		}
 
-	public int createShader(String filename, int shaderType) throws Exception
-		{
-			int shader = 0;
-			try {
-				shader = ARBShaderObjects.glCreateShaderObjectARB(shaderType);
-
-				if (shader == 0) return 0;
-
-				ARBShaderObjects.glShaderSourceARB(shader, readFileAsString(filename));
-				ARBShaderObjects.glCompileShaderARB(shader);
-
-				if (ARBShaderObjects.glGetObjectParameteriARB(shader,
-						ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) == GL11.GL_FALSE)
-					throw new RuntimeException("Error creating shader: " + getLogInfo(shader));
-
-				return shader;
-			} catch (Exception exc) {
-				ARBShaderObjects.glDeleteObjectARB(shader);
-				throw exc;
-			}
-		}
-
-	private String readFileAsString(String filename) throws Exception
+	public String readFileAsString(String filename) throws Exception
 		{
 			StringBuilder source = new StringBuilder();
 			InputStream in = IO.class.getResourceAsStream(filename);;
