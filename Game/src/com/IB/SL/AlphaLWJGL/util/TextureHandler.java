@@ -1,11 +1,15 @@
 package com.IB.SL.AlphaLWJGL.util;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL14.*;
 import static org.lwjgl.opengl.GL30.*;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.ByteBuffer;
+
+import javax.imageio.ImageIO;
 
 import org.lwjgl.BufferUtils;
 
@@ -16,7 +20,7 @@ public class TextureHandler
 			      int[] pixels = new int[image.getWidth() * image.getHeight()];
 			        image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
 
-			        ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * Utils.BYTES_PER_PIXEL); //4 for RGBA, 3 for RGB
+			        ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * ResourceManager.BYTES_PER_PIXEL); //4 for RGBA, 3 for RGB
 			        
 			        for(int y = 0; y < image.getHeight(); y++){
 			            for(int x = 0; x < image.getWidth(); x++){
@@ -31,6 +35,7 @@ public class TextureHandler
 			        buffer.flip(); //FOR THE LOVE OF GOD DO NOT FORGET THIS
 
 			        int textureID = glGenTextures(); //Generate texture ID
+
 			        glBindTexture(GL_TEXTURE_2D, textureID); //Bind texture ID
 			        
 			        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
@@ -46,9 +51,23 @@ public class TextureHandler
 			        //Send texel data to OpenGL
 			        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 			        glGenerateMipmap(GL_TEXTURE_2D);
-			        
-			        
 			        //Return the texture ID so we can bind it later again
 			      return textureID;
 		}
+	   
+	   public static int createTexture(String res)
+	   {
+		        BufferedImage texture = null;
+					try {
+						texture = ImageIO.read(ResourceManager.getResourceAsFile(res));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+		        
+		        int textureID = TextureHandler.loadTexture(texture);
+		        
+		        return textureID;
+	   }
+	   
+	   
 }

@@ -12,7 +12,7 @@ public class Shader
 	private String vertexPath, fragPath = "";
 	private int shaderProgramID = 0;
     private int vertShader = 0, fragShader = 0;
-	private Utils utils = new Utils();
+	private ResourceManager utils = new ResourceManager();
 	
 	public Shader(String vertexPath, String fragPath)
 		{

@@ -2,12 +2,14 @@ package com.IB.SL.AlphaLWJGL;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL14.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static com.IB.SL.AlphaLWJGL.util.Utils.*;
+import static com.IB.SL.AlphaLWJGL.util.ResourceManager.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,6 +18,8 @@ import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 
+import com.IB.SL.AlphaLWJGL.math.Vec3;
+import com.IB.SL.AlphaLWJGL.math.Vec4;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
@@ -23,11 +27,12 @@ import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GLDebugMessageCallback;
 import org.lwjgl.opengl.GLUtil;
 
-import com.IB.SL.AlphaLWJGL.util.Utils;
+import com.IB.SL.AlphaLWJGL.util.ResourceManager;
 import com.IB.SL.AlphaLWJGL.util.Shader;
 import com.IB.SL.AlphaLWJGL.util.TextureHandler;
 
@@ -63,9 +68,13 @@ public class OGLEngine
 			GL.createCapabilities();
 			GLUtil.setupDebugMessageCallback();
 		}
-
+	
+	
 	public void init()
 		{
+			Vec3 x = new Vec3(1f, 2f, 3f);
+			
+		
 			Shader shaders = new Shader("/shaders/screen.vert", "/shaders/screen.frag");
 	        shaders.getShaderProgram();
 	        
@@ -88,15 +97,7 @@ public class OGLEngine
 	        	0.5f, 1.0f
 	        };
 	        
-	        BufferedImage texture = null;
-				try {
-					//texture = ImageIO.read(new File("C:/wall.jpg"));
-					texture = ImageIO.read(Utils.getResourceAsFile("3D_Textures/wall.jpg"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	        
-	        TextureHandler.loadTexture(texture);
+	        TextureHandler.createTexture("GL_Textures/wall.jpg");
 	        
 	        int VBO, VAO, EBO;
 	        VAO = glGenVertexArrays();
@@ -122,6 +123,7 @@ public class OGLEngine
 	        glBindBuffer(GL_ARRAY_BUFFER, 0); 
 		    glBindVertexArray(0);
 		    
+		    
 	        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //WIREFRAME
 	        
 			while (!glfwWindowShouldClose(window)) {
@@ -131,7 +133,6 @@ public class OGLEngine
 		        glClear(GL_COLOR_BUFFER_BIT);
 		        
 		        shaders.use();
-		        
 		        glBindVertexArray(VAO);
 		        
 		        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

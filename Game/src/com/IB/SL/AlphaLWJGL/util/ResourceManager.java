@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static com.IB.SL.AlphaLWJGL.util.Utils.*;
+import static com.IB.SL.AlphaLWJGL.util.ResourceManager.*;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -35,10 +35,10 @@ import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.openvr.Texture;
 import org.lwjgl.stb.STBImage;
 
-import com.IB.SL.AlphaLWJGL.util.Utils;
+import com.IB.SL.AlphaLWJGL.util.ResourceManager;
 import com.IB.SL.AlphaLWJGL.util.Shader;
 
-public class Utils
+public class ResourceManager
 {
 	public final static int FLOAT_SIZE = 4;
 	public final static int BYTES_PER_PIXEL = 4;
@@ -71,7 +71,7 @@ public class Utils
 	public String readFileAsString(String filename) throws Exception
 		{
 			StringBuilder source = new StringBuilder();
-			InputStream in = Utils.class.getResourceAsStream(filename);;
+			InputStream in = ResourceManager.class.getResourceAsStream(filename);;
 			Exception exception = null;
 			BufferedReader reader;
 			
