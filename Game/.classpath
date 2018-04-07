@@ -115,5 +115,6 @@
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jme-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jse-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-sources-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/joml-jdk8-1.9.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

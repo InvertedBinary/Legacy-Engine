@@ -11,11 +11,12 @@ public class Mat4
 	public static Mat4 identity() {
 		Mat4 result = new Mat4();
 		
-		result.matrix[0 + 0 * 4] = 1.0f;
-		result.matrix[1 + 1 * 4] = 1.0f;
-		result.matrix[2 + 2 * 4] = 1.0f;
-		result.matrix[3 + 3 * 4] = 1.0f;
-
+					//x + y * w
+		result.matrix[0 + 0 * 4] = 1.0f; // [1] 0 0 0
+		result.matrix[1 + 1 * 4] = 1.0f; // 0 [1] 0 0
+		result.matrix[2 + 2 * 4] = 1.0f; // 0 0 [1] 0 
+		result.matrix[3 + 3 * 4] = 1.0f; // 0 0 0 [1]
+		
 		return result;
 	}
 	

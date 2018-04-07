@@ -2,6 +2,10 @@ package com.IB.SL.AlphaLWJGL.util;
 
 import static org.lwjgl.opengl.GL20.*;
 
+import java.nio.FloatBuffer;
+
+import org.joml.Matrix4f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
@@ -165,6 +169,13 @@ public class Shader
 			    glUniform4i(glGetUniformLocation(shaderProgramID, name), intValue(values[0]), intValue(values[1]), intValue(values[2]), intValue(values[3])); 
 			    break;
 			}
+	}
+	
+	public void setMat4f(String name, Matrix4f val)
+	{
+		FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
+		int location = glGetUniformLocation(this.getShaderProgram(), name);
+		glUniformMatrix4fv(location, false, (val.get(buffer)));
 	}
 	
 	public int intValue(boolean val)

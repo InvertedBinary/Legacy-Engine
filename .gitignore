@@ -66,3 +66,5 @@ local.properties
 RemoteSystemsTempFiles/
 
 Game/gliConfig_FullDebug\.ini
+
+*.lnk
