@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -45,19 +46,21 @@ public class OGLEngine
 	String title = "";
 	public static int WIDTH = 1280;
 	public static int HEIGHT = 720;
+	public static int ASP_RATIO = 16/9;
 	private long window;
 
+	//camera
 	public static Camera camera = new Camera(new Vector3f(0.0f, 0.0f, 3.0f));
 	static float lastX = WIDTH / 2.0f;
 	static float lastY = HEIGHT / 2.0f;
 	static boolean firstMouse = true;
 	
+	//timing
 	float deltaTime = 0f;
 	float lastFrame = 0f;
 	
-	Vector3f cameraPos   = new Vector3f(0.0f, 0.0f,  3.0f);
-	Vector3f cameraFront = new Vector3f(0.0f, 0.0f, -1.0f);
-	Vector3f cameraUp    = new Vector3f(0.0f, 1.0f,  0.0f);
+	//lighting
+	public Vector3f lightPos = new Vector3f(1.2f, 1.0f, 2.0f);
 	
 	public OGLEngine(String title)
 	{
@@ -97,7 +100,7 @@ public class OGLEngine
 		glEnable(GL_DEPTH_TEST);
 
 		Shader shaders = new Shader("/shaders/screen.vert", "/shaders/screen.frag");
-		shaders.getShaderProgram();
+		Shader lampShader = new Shader("/shaders/lamp.vert", "/shaders/lamp.frag");
 
 		float vertices[] = {
 				// positions // colors // texture coords
@@ -108,161 +111,165 @@ public class OGLEngine
 		};
 		
 		float cubeVerts[] = {
-			    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-			     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-			     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		        //positions         //normals         //texture coords
+		        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+		         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
+		         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+		         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+		        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
+		        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-			    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-			    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+		         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+		         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+		        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 
-			    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+		        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+		        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+		        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-			     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+		         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+		         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+		         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-			    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-			     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+		         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
+		         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+		         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+		        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
+		        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
 
-			    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-			    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+		        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+		         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
+		         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+		         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+		        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
+		        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 			};
 		
-		Vector3f cubePositions[] = {
-				  new Vector3f( 0.0f,  0.0f,  0.0f), 
-				  new Vector3f( 2.0f,  5.0f, -15.0f), 
-				  new Vector3f(-1.5f, -2.2f, -2.5f),  
-				  new Vector3f(-3.8f, -2.0f, -12.3f),  
-				  new Vector3f( 2.4f, -0.4f, -3.5f),  
-				  new Vector3f(-1.7f,  3.0f, -7.5f),  
-				  new Vector3f( 1.3f, -2.0f, -2.5f),  
-				  new Vector3f( 1.5f,  2.0f, -2.5f), 
-				  new Vector3f( 1.5f,  0.2f, -1.5f), 
-				  new Vector3f(-1.3f,  1.0f, -1.5f)  
-				};
-
+		
 		int indices[] = { 0, 1, 3, 1, 2, 3 };
 
 		float texCoords[] = { 0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f };
 
-		TextureHandler.createTexture("GL_Textures/wall.jpg");
+		int diffuseMap = TextureHandler.createTexture("GL_Textures/container2.png");
+		int specularMap = TextureHandler.createTexture("GL_Textures/container2_spec.png");
 
+		
 		int VBO, VAO, EBO;
 		VAO = glGenVertexArrays();
 		VBO = glGenBuffers();
 		//EBO = glGenBuffers();
 		glBindVertexArray(VAO);
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, cubeVerts, GL_STATIC_DRAW);
 
+		glBindVertexArray(VAO);
 		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
 
 	    //position
-	    glVertexAttribPointer(0, 3, GL_FLOAT, false, 5 * FLOAT_SIZE, 0);
+	    glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * FLOAT_SIZE, 0);
 	    glEnableVertexAttribArray(0);
-	    //textures
-	    glVertexAttribPointer(1, 2, GL_FLOAT, false, 5 * FLOAT_SIZE, (3 * FLOAT_SIZE));
+	    
+	    //lighting normal vector
+	    glVertexAttribPointer(1, 3, GL_FLOAT, false, 8 * FLOAT_SIZE, (3 * FLOAT_SIZE));
 	    glEnableVertexAttribArray(1);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
+	   
+	    //texture
+	    glVertexAttribPointer(2, 2, GL_FLOAT, false, 8 * FLOAT_SIZE, (6 * FLOAT_SIZE));
+	    glEnableVertexAttribArray(2);
+	    
+		int lightVAO = glGenVertexArrays();
+		glBindVertexArray(lightVAO);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		
+	    glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * FLOAT_SIZE, 0);
+		glEnableVertexAttribArray(0);
+		
+		//glBindVertexArray(0);
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //WIREFRAME
 		
-		//Camera Direction
-		Vector3f cameraTarget = new Vector3f(0f, 0f, 0f);
-		Vector3f cameraDir = new Vector3f().normalize(new Vector3f().sub(cameraPos, cameraTarget));
-		
-		//Right Axis
-		Vector3f up = new Vector3f(0f, 1f, 0f);
-		Vector3f cameraRight = new Vector3f().normalize(new Vector3f().cross(up, cameraDir));
-		
-		//Up Axis
-		Vector3f cameraUp = new Vector3f().cross(cameraDir, cameraRight);
-		
-		Matrix4f view = new Matrix4f().lookAt(new Vector3f(0.0f, 0.0f, 3.0f), 
-		   	 new Vector3f(0.0f, 0.0f, 0.0f), 
-		     new Vector3f(0.0f, 1.0f, 0.0f));
-		
+	    shaders.use();
+	    shaders.setInts("material.diffuse", 0);
+	    shaders.setInts("material.specular", 1);
+
+	    
 		while (!glfwWindowShouldClose(window)) {
 			float currentFrame = (float) glfwGetTime();
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 			
 			processInput(window);
-
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			int x = 24;
+			switch (x) {
+			
+			}
+			int[] xd = new int[2];
+			xd[1] = 5;
+			//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
 			shaders.use();
+			//lightPos.x = 1f + (float)Math.sin(glfwGetTime()) * 2f;
+			//lightPos.x = (float)(Math.sin(glfwGetTime()) * (float)Math.cos(glfwGetTime()) ); 
+			//lightPos.z = (float)(Math.sin(glfwGetTime()) * (float)Math.cos(glfwGetTime()) ); 
+
+			//lightPos.z = (float)Math.cos(glfwGetTime() / 2f);
+			shaders.setFloats("asp_rat", this.ASP_RATIO);
+			shaders.setVec3("light.position", lightPos);
+			shaders.setVec3("viewPos", camera.Position);
 			
-			/*float radius = 10.0f;
-			float camX = (float) (Math.sin(glfwGetTime()) * radius);
-			float camZ = (float) (Math.cos(glfwGetTime()) * radius);
-			view = new Matrix4f().lookAt(
-					new Vector3f(camX, 0.0f, camZ), 
-					new Vector3f(0.0f, 0.0f, 0.0f), 
-					new Vector3f(0.0f, 1.0f, 0.0f));  */
+			shaders.setFloats("material.shininess", 64.0f);
 			
-			/*cameraPos = new Vector3f(0f, 0f, 3f);
-			cameraFront = new Vector3f(0f, 0f, -1f);
-			cameraUp = new Vector3f(0f, 1f, 0f);*/
+			shaders.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+			shaders.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+			shaders.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 			
-			//System.out.println("POS: " + cameraPos);
-			
-	//		Vector3f dest = new Vector3f();
-//			cameraPos.add(cameraFront, dest);
-			//view = new Matrix4f().lookAt(cameraPos, dest, cameraUp);
-			
-			view = new Matrix4f();
-			//System.out.println("VIEW: \n" + view);
+			Matrix4f view = new Matrix4f();
 			view = camera.getViewMatrix();
-			//view = view.lookAt(cameraPos, cameraPos.add(cameraPos, cameraFront), cameraUp);
-			//System.out.println("VIEW 2: \n" + view);
 			shaders.setMat4f("view", view);
 			
 			Matrix4f projection = new Matrix4f();
 			projection = projection.perspective((float) Math.toRadians(camera.Fov), WIDTH / HEIGHT, 0.1f, 100.0f);
 			shaders.setMat4f("projection", projection);
 			
+			Matrix4f model = new Matrix4f();
+			shaders.setMat4f("model", model);
 			
-			
+	        glActiveTexture(GL_TEXTURE0);
+	        glBindTexture(GL_TEXTURE_2D, diffuseMap);
+	        // bind specular map
+	        glActiveTexture(org.lwjgl.opengl.GL13.GL_TEXTURE1);
+	        glBindTexture(GL_TEXTURE_2D, specularMap);
 			
 			glBindVertexArray(VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 
-			for (int i = 0; i < 10; i++) {
-				Matrix4f model = new Matrix4f();
-				model = model.translate(cubePositions[i]);
-				//model = model.rotate(-(float) Math.toRadians(-55.0f), new Vector3f(1.0f, 0.0f, 0.0f)); 
-				model = model.rotate((float) (Math.toRadians(glfwGetTime() * (i - 5) * 1)), new Vector3f(1f, 0.3f, 0.5f));  
-				shaders.setMat4f("model", model);
-				glDrawArrays(GL_TRIANGLES, 0, 36);
-			}
+			lampShader.use();
+			lampShader.setMat4f("projection", projection);
+			lampShader.setMat4f("view", view);
+			model = new Matrix4f();
+			model = model.translate(lightPos);
+			//model = model.rotate(-(float) Math.toRadians(-55.0f), new Vector3f(1.0f, 0.0f, 0.0f)); 
+			//model = model.rotate((float) (Math.toRadians(glfwGetTime() * (i - 5) * 1)), new Vector3f(1f, 0.3f, 0.5f));  
+			model.scale(new Vector3f(0.2f));
+			lampShader.setMat4f("model", model);
+			glBindVertexArray(lightVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 			//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			//glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -272,6 +279,7 @@ public class OGLEngine
 		}
 
 		glDeleteVertexArrays(VAO);
+		glDeleteVertexArrays(lightVAO);
 		glDeleteBuffers(VBO);
 
 		glfwTerminate();

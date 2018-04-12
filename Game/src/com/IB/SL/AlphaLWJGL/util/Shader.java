@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL20.*;
 import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
@@ -176,6 +177,17 @@ public class Shader
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
 		int location = glGetUniformLocation(this.getShaderProgram(), name);
 		glUniformMatrix4fv(location, false, (val.get(buffer)));
+	}
+	
+	public void setVec3(String name, Vector3f val)
+	{
+		int location = glGetUniformLocation(this.getShaderProgram(), name);
+		glUniform3f(location, val.x, val.y, val.z);
+	}
+	
+	public void setVec3(String name, float x, float y, float z)
+	{
+		setVec3(name, new Vector3f(x, y, z));
 	}
 	
 	public int intValue(boolean val)

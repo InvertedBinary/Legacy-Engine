@@ -82,11 +82,6 @@ public class Camera
 	public Matrix4f getViewMatrix()
 	{
 		Matrix4f view = new Matrix4f();
-		/*view = view.lookAt(
-				new Vector3f(0.0f, 0.0f, 3.0f),  //POS
-				new Vector3f(0.0f, 0.0f, 0.0f),  //POS + FRONT
-				new Vector3f(0.0f, 1.0f, 0.0f)); //UP
-		*/
         view = view.lookAt(Position, Position.add(Front, new Vector3f()), Up /*up*/);
         return view;
 	}
@@ -94,7 +89,6 @@ public class Camera
 	public void ProcessKeyboard(int dir, float dt)
 	{
 		float vel = Speed * dt;
-		//System.out.println("DIR: " + dir + " POS: " + Position + " DT: " + dt + " VEL: " + vel);
 		switch (dir)
 		{
 		case FORWARD:
@@ -130,7 +124,6 @@ public class Camera
 		}
 		//Position.y = 0.0f;
 		updateCameraVectors();
-		//System.out.println("POS: " + Position);
 	}
 	
 	public void ProcessMouseMovement(float xO, float yO, boolean constrainPitch)
