@@ -12,6 +12,8 @@ import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL11;
 
+import com.IB.SL.Boot;
+
 public class Shader
 {
 	private String vertexPath, fragPath = "";
@@ -29,14 +31,31 @@ public class Shader
 		{
 			if (shaderProgramID == 0) 
 				createShaders(true);
-
+			
+			
 			return this.shaderProgramID;
 		}
 
 	public void use()
 		{
+			validateShaderStatus(true);
 			glUseProgram(shaderProgramID);
 		}
+	
+	public void validateShaderStatus(boolean attemptFix)
+	{
+		if (shaderProgramID == 0)
+			Boot.log("WARNING: INVALID SHADER PRGM!", "Shader", true);
+		
+		if (vertShader == 0)
+			Boot.log("WARNING: INVALID VERT SHADER!", "Shader", true);
+		
+		if (fragShader == 0)
+			Boot.log("WARNING: INVALID FRAG SHADER!", "Shader", true);
+		
+		if (vertShader == 0 || fragShader == 0 || shaderProgramID == 0)
+			createShaders(true);
+	}
 	
 	public void createShaders(boolean create_program)
 	{

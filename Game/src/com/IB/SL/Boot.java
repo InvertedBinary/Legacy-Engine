@@ -189,8 +189,7 @@ public class Boot
 			if (!important) {
 				System.out.println(outboundClass + " >> " + text);
 			} else {
-				System.err.print(outboundClass + " >> ALERT: ");
-				System.out.println(text);
+				System.err.println(outboundClass + " >> ALERT: " + text);
 			}
 		}
 }

@@ -1,9 +1,26 @@
 package com.IB.SL.AlphaLWJGL.util;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL14.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL31.*;
+import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GL33.*;
+import static org.lwjgl.opengl.GL40.*;
+import static org.lwjgl.opengl.GL41.*;
+import static org.lwjgl.opengl.GL42.*;
+import static org.lwjgl.opengl.GL43.*;
+import static org.lwjgl.opengl.GL44.*;
+import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
+
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,7 +32,7 @@ import org.lwjgl.BufferUtils;
 
 public class TextureHandler
 {
-	   public static int loadTexture(BufferedImage image){
+	   public static int loadTexture(BufferedImage image, int GL_TEX){
 			      
 			      int[] pixels = new int[image.getWidth() * image.getHeight()];
 			        image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
@@ -36,8 +53,9 @@ public class TextureHandler
 
 			        int textureID = glGenTextures(); //Generate texture ID
 
-			        glBindTexture(GL_TEXTURE_2D, textureID); //Bind texture ID
-			        
+			        glActiveTexture(GL_TEX);
+			        glBindTexture(GL_TEXTURE_2D, textureID);
+					
 			        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 			        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 			        /*float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
@@ -55,7 +73,7 @@ public class TextureHandler
 			      return textureID;
 		}
 	   
-	   public static int createTexture(String res)
+	   public static int createTexture(String res, int GL_TEX)
 	   {
 		        BufferedImage texture = null;
 					try {
@@ -64,10 +82,14 @@ public class TextureHandler
 						e.printStackTrace();
 					}
 		        
-		        int textureID = TextureHandler.loadTexture(texture);
+		        int textureID = TextureHandler.loadTexture(texture, GL_TEX);
 		        
 		        return textureID;
 	   }
 	   
+	   public static int createTexture(String res)
+	   {
+		   return createTexture(res, GL_TEXTURE0);
+	   }	   
 	   
 }

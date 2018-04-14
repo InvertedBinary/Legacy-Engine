@@ -2,8 +2,7 @@ package com.IB.SL.AlphaLWJGL;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
-import static org.lwjgl.opengl.GL13.glActiveTexture;
+import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL14.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -29,6 +28,7 @@ import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GLDebugMessageCallback;
@@ -46,7 +46,7 @@ public class OGLEngine
 	String title = "";
 	public static int WIDTH = 1280;
 	public static int HEIGHT = 720;
-	public static int ASP_RATIO = 16/9;
+	public static float ASPECT = (float)WIDTH / (float)HEIGHT;
 	private long window;
 
 	//camera
@@ -74,9 +74,12 @@ public class OGLEngine
 	{
 		if (!GLFW.glfwInit()) throw new IllegalStateException("UNABLE TO INIT GLFW");
 
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+
 		glfwDefaultWindowHints();
 		window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
 
+		
 		if (window == NULL) {
 			System.err.println("Creation of GLFW Window Failed!");
 			glfwTerminate();
@@ -89,6 +92,8 @@ public class OGLEngine
 		glfwSetScrollCallback(window, scroll_callback);
 		
 	    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	    
+	    //glfwSetWindowIcon(window, null);
 		
 		GL.createCapabilities();
 		GLUtil.setupDebugMessageCallback();
@@ -160,8 +165,8 @@ public class OGLEngine
 
 		float texCoords[] = { 0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 1.0f };
 
-		int diffuseMap = TextureHandler.createTexture("GL_Textures/container2.png");
-		int specularMap = TextureHandler.createTexture("GL_Textures/container2_spec.png");
+		int diffuseMap = TextureHandler.createTexture("GL_Textures/container2.png", GL_TEXTURE0);
+		int specularMap = TextureHandler.createTexture("GL_Textures/container2_spec.png", GL_TEXTURE1);
 
 		
 		int VBO, VAO, EBO;
@@ -213,12 +218,7 @@ public class OGLEngine
 			lastFrame = currentFrame;
 			
 			processInput(window);
-			int x = 24;
-			switch (x) {
 			
-			}
-			int[] xd = new int[2];
-			xd[1] = 5;
 			//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -229,7 +229,7 @@ public class OGLEngine
 			//lightPos.z = (float)(Math.sin(glfwGetTime()) * (float)Math.cos(glfwGetTime()) ); 
 
 			//lightPos.z = (float)Math.cos(glfwGetTime() / 2f);
-			shaders.setFloats("asp_rat", this.ASP_RATIO);
+			//shaders.setFloats("asp_rat",ASP_RATIO);
 			shaders.setVec3("light.position", lightPos);
 			shaders.setVec3("viewPos", camera.Position);
 			
@@ -244,16 +244,17 @@ public class OGLEngine
 			shaders.setMat4f("view", view);
 			
 			Matrix4f projection = new Matrix4f();
-			projection = projection.perspective((float) Math.toRadians(camera.Fov), WIDTH / HEIGHT, 0.1f, 100.0f);
+			projection = projection.perspective((float) Math.toRadians(camera.Fov), ASPECT, 0.1f, 100.0f);
 			shaders.setMat4f("projection", projection);
 			
 			Matrix4f model = new Matrix4f();
 			shaders.setMat4f("model", model);
 			
+	        // bind diffuse map
 	        glActiveTexture(GL_TEXTURE0);
 	        glBindTexture(GL_TEXTURE_2D, diffuseMap);
 	        // bind specular map
-	        glActiveTexture(org.lwjgl.opengl.GL13.GL_TEXTURE1);
+	        glActiveTexture(GL_TEXTURE1);
 	        glBindTexture(GL_TEXTURE_2D, specularMap);
 			
 			glBindVertexArray(VAO);
@@ -353,6 +354,7 @@ public class OGLEngine
 		{
 			OGLEngine.WIDTH = width;
 			OGLEngine.HEIGHT = height;
+			OGLEngine.ASPECT = WIDTH / HEIGHT;
 			glViewport(0, 0, width, height);
 		}
 	};
