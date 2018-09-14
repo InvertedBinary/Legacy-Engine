@@ -17,79 +17,83 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.IB.SL.AlphaLWJGL.OGLEngine;
+import com.IB.SL.AlphaLWJGL.OGL_TEST;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.level.Level;
 import com.IB.SL.network.Client;
 import com.IB.SL.network.server.GameServer;
+
+import GL_Real.GL_Main;
 
 public class Boot
 {
 
 	public static String title = "Legacy Engine [Build 1 : 10/31/17]";
 	private static Game g;
-	private static OGLEngine GameOGL;
+	private static OGL_TEST GameAlphaOGL;
+	private static GL_Main GameOGL;
 	private static GameServer s;
 	public static Client c;
-	
+
 	private static int port = 7381;
 	public static String host = "localhost";
 	public static HashMap<String, Boolean> launch_args;
 	public static boolean isConnected = false;
 	public static boolean drawDebug = false;
-	
-	
+
 	public static void main(String[] args)
-		{
-			launch_args = new HashMap<String, Boolean>();
+	{
+		launch_args = new HashMap<String, Boolean>();
 
-			System.out.println("----------- R U N - T I M E   A R G S  ------------");
-			for (String s : args) {
-				launch_args.put(s, true);
-				System.out.println(s + ": " + true);
-			}
-			System.out.println("---------------------------------------------------");
-			
-			
-			if (!launch_args.containsKey("-mode_dedi")) {
-				c = new Client(host, 7381);
-
-				if (launch_args.containsKey("-doconnect")) {
-					tryConnect(true);
-				}
-			} else {
-				tryServer();
-			}
-			
-			tryLaunchGame();
+		System.out.println("----------- R U N - T I M E   A R G S  ------------");
+		for (String s : args) {
+			launch_args.put(s, true);
+			System.out.println(s + ": " + true);
 		}
-	
+		System.out.println("---------------------------------------------------");
+
+		if (!launch_args.containsKey("-mode_dedi")) {
+			c = new Client(host, 7381);
+
+			if (launch_args.containsKey("-doconnect")) {
+				tryConnect(true);
+			}
+		} else {
+			tryServer();
+		}
+
+		tryLaunchGame();
+	}
+
 	public static void tryLaunchGame()
 	{
-			//g = new Game(title);
-			//g.Launch(g);
-
-			GameOGL = new OGLEngine(title);
-	}
-	
-	
-	public static void tryServer()
-		{
-			s = new GameServer(Boot.port);
-			try {
-				s.run();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (launch_args.containsKey("-legacy-gfx")) {
+			g = new Game(title);
+			g.Launch(g);
+		} else if (launch_args.containsKey("-alpha-opengl")) {
+			GameAlphaOGL = new OGL_TEST(title);
+		} else {
+			GameOGL = new GL_Main(title);
 		}
-	
+	}
+
+	public static void tryServer()
+	{
+		s = new GameServer(Boot.port);
+		try {
+			s.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void tryConnect(boolean useHostFile)
-		{
+	{
 		if (useHostFile) {
 			try {
 				String path = "./server.txt";
 				FileInputStream fis = new FileInputStream(path);
-				BufferedReader in = new BufferedReader(new InputStreamReader(fis));	
+				BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 				host = in.readLine();
 				in.close();
 				System.out.println("Host file found! Will attempt a connection to: " + host);
@@ -99,97 +103,118 @@ public class Boot
 				System.out.println("Host file is corrupt, using localhost!");
 			}
 		}
-			try {
-				c = new Client(host, 7381);
-		        c.startClient();
-			} catch (Exception e) {
-				log("Unsuccessful Connection Attempt.. is the server running?", true);
-			}
+		try {
+			c = new Client(host, 7381);
+			c.startClient();
+		} catch (Exception e) {
+			log("Unsuccessful Connection Attempt.. is the server running?", true);
 		}
-	
-	public static Game get() { return g; }
-	public static Level getLevel() { return get().getLevel(); }
-	public static Player getPlayer() { return get().getPlayer(); }
+	}
+
+	public static Game get()
+	{
+		return g;
+	}
+
+	public static Level getLevel()
+	{
+		return get().getLevel();
+	}
+
+	public static Player getPlayer()
+	{
+		return get().getPlayer();
+	}
 
 	public static void setWindowIcon(String path)
-		{
-			g.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
-		}
+	{
+		g.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
+	}
 
 	public static Cursor setMouseIcon(String path)
-		{
-			Toolkit toolkit = Toolkit.getDefaultToolkit();
-			Image image = null;
-			image = Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path));
+	{
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = null;
+		image = Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path));
 
-			Point hotspot = new Point(0, 0);
-			Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
-			g.frame.setCursor(cursor);
-			return cursor;
-		}
+		Point hotspot = new Point(0, 0);
+		Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
+		g.frame.setCursor(cursor);
+		return cursor;
+	}
 
 	public static void centerMouse()
-		{
-			int centreFrameX = g.frame.getX() + (g.frame.getWidth() / 2);
-			int centreFrameY = g.frame.getY() + (g.frame.getHeight() / 2);
-			moveMouse(new Point(centreFrameX, centreFrameY));
-		}
+	{
+		int centreFrameX = g.frame.getX() + (g.frame.getWidth() / 2);
+		int centreFrameY = g.frame.getY() + (g.frame.getHeight() / 2);
+		moveMouse(new Point(centreFrameX, centreFrameY));
+	}
 
 	public static void moveMouse(Point p)
-		{
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			GraphicsDevice[] gs = ge.getScreenDevices();
-			for (GraphicsDevice device : gs) {
-				GraphicsConfiguration[] configurations = device.getConfigurations();
-				for (GraphicsConfiguration config : configurations) {
-					Rectangle bounds = config.getBounds();
-					if (bounds.contains(p)) {
-						Point b = bounds.getLocation();
-						Point s = new Point(p.x - b.x, p.y - b.y);
-						try {
-							Robot r = new Robot(device);
-							r.mouseMove(s.x, s.y);
-						} catch (AWTException e) {
-							e.printStackTrace();
-						}
-
-						return;
+	{
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] gs = ge.getScreenDevices();
+		for (GraphicsDevice device : gs) {
+			GraphicsConfiguration[] configurations = device.getConfigurations();
+			for (GraphicsConfiguration config : configurations) {
+				Rectangle bounds = config.getBounds();
+				if (bounds.contains(p)) {
+					Point b = bounds.getLocation();
+					Point s = new Point(p.x - b.x, p.y - b.y);
+					try {
+						Robot r = new Robot(device);
+						r.mouseMove(s.x, s.y);
+					} catch (AWTException e) {
+						e.printStackTrace();
 					}
+
+					return;
 				}
 			}
-			return;
 		}
+		return;
+	}
 
 	public void setMousePos(int framex, int framey)
-		{
-			moveMouse(new Point(framex, framey));
-		}
+	{
+		moveMouse(new Point(framex, framey));
+	}
 
 	public static int randInt(int min, int max)
-		{
-			return ThreadLocalRandom.current().nextInt(min, max + 1);
-		}
+	{
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
+	}
 
 	public static double randDouble(int min, int max)
-		{
-			return ThreadLocalRandom.current().nextDouble(min, max);
-		}
+	{
+		return ThreadLocalRandom.current().nextDouble(min, max);
+	}
 
 	public static void log(String text, boolean important)
-		{
-			if (!important) {
-				System.out.println(" >> " + text);
-			} else {
-				System.err.println(" >> ALERT: " + text);
-			}
+	{
+		if (!important) {
+			System.out.println(" >> " + text);
+		} else {
+			System.err.println(" >> ALERT: " + text);
 		}
+	}
 
 	public static void log(String text, String outboundClass, boolean important)
+	{
+		boolean reportIncidentTime = true;
+		long nanoTimeOfLastEvent = -1;
+		
+		if (reportIncidentTime)
 		{
-			if (!important) {
-				System.out.println(outboundClass + " >> " + text);
-			} else {
-				System.err.println(outboundClass + " >> ALERT: " + text);
-			}
+			outboundClass = "[NT:" + System.nanoTime() + "] " + outboundClass;
 		}
+		
+		if (!important) {
+			System.out.println(outboundClass + " >> " + text);
+		} else {
+			System.err.println(outboundClass + " >> ALERT: " + text);
+			
+			nanoTimeOfLastEvent = System.nanoTime();
+		}
+	}
 }

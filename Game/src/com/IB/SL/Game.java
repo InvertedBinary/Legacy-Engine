@@ -326,12 +326,11 @@ public class Game extends Canvas implements Runnable
 				lastTime = now;
 				while (delta >= 1) {
 
-					// speedModif++;
-
-					// if (speedModif % 1 == 0) {
+					//speedModif++;
+					//if (speedModif % 1 == 0) {
 					update();
-					// speedModif = 0;
-					// }
+					//speedModif = 0;
+					//}
 
 					key.update();
 					gui.update();
@@ -339,6 +338,7 @@ public class Game extends Canvas implements Runnable
 					updates++;
 					delta--;
 				}
+				
 				if (!Boot.launch_args.containsKey("-mode_dedi")) {
 				render();
 				}

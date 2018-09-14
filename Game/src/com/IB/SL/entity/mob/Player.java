@@ -569,8 +569,10 @@ public class Player extends Mob implements Serializable
 			this.render_yOffset = 0;
 			this.yOffset = 0;
 			this.xOffset = 16;
-			screen.renderMobSpriteUniversal((int) (x() + render_xOffset + cam_xOff),
-					(int) (y() + render_yOffset + cam_yOff), sprite);
+			screen.renderMobSpriteUniversal(
+					(int) (x() + render_xOffset + cam_xOff),
+					(int) (y() + render_yOffset + cam_yOff), 
+					sprite);
 
 		}
 

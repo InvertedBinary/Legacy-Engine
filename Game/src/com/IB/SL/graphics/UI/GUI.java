@@ -156,6 +156,7 @@ public class GUI extends CheckBounds {
 		double s17 = s16 - Slope;// 6 OR 0.75
 		double s18 = s17 - Slope;// 4 OR 0.5
 		double s19 = s18 - Slope;// 2 OR 0.25
+		
 		if (mob.incombat || mob.mobhealth < mob.maxhealth) {
 			displayTime = 0;
 		} else if (displayTime < 151) {

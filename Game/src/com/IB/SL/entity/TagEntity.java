@@ -247,7 +247,7 @@ public class TagEntity extends Mob
 				//
 				break;
 			case "anims.jump":
-				//
+				//  
 				break;
 
 			case "collision.xOffset":

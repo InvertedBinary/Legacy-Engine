@@ -6,28 +6,28 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.tile.Tile;
 
-public class CobblestoneCeiling extends Tile {
+public class CobblestoneCeiling extends Tile
+{
 
 	public CobblestoneCeiling(Sprite sprite) {
 		super(sprite);
 
 	}
-	
+
 	public void render(int x, int y, Screen screen) {
 		screen.renderTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, CobblestoneCeiling);
-	
 
+	}
 
-}
-	
 	public boolean solid() {
 		return true;
-}
-	
+	}
+
 	public boolean solidtwo() {
 		return true;
-}	
-	public int  getHex() {
+	}
+
+	public int getHex() {
 		return Level.CobblestoneCeilingHex;
 	}
 }

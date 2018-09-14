@@ -26,6 +26,7 @@ import com.IB.SL.level.Level;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.util.LuaScript;
 
+@Deprecated
 public class XML_Level extends Level{
 		
 	public static boolean spawnASM = false;

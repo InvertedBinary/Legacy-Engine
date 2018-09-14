@@ -32,6 +32,7 @@ public class Camera
 	public float Speed = SPEED;
 	public float Sensitivity = SENSITIVITY;
 	public float Fov = FOV;
+	public boolean leftControl = false;
 	
 	public Vector3f Position = new Vector3f(0f, 0f, 3f);
 	public Vector3f Front = new Vector3f(0f, 0f, 0f);
@@ -92,16 +93,20 @@ public class Camera
 		switch (dir)
 		{
 		case FORWARD:
-			Position.add(Front.mul(vel, new Vector3f()));
+			if (leftControl) ProcessMouseMovement(0, 4, true);
+			else Position.add(Front.mul(vel, new Vector3f()));
 			break;
 		case BACKWARD:
-			Position.sub(Front.mul(vel, new Vector3f()));
+			if (leftControl) ProcessMouseMovement(0, -4, true);
+			else Position.sub(Front.mul(vel, new Vector3f()));
 			break;
 		case LEFT:
-			Position.sub(Right.mul(vel, new Vector3f()));
+			if (leftControl) ProcessMouseMovement(-4, 0, true);
+			else Position.sub(Right.mul(vel, new Vector3f()));
 			break;
 		case RIGHT:
-			Position.add(Right.mul(vel, new Vector3f()));
+			if (leftControl) ProcessMouseMovement(4, 0, true);
+			else Position.add(Right.mul(vel, new Vector3f()));
 			break;
 		case UP:
 			Position.add(Up.mul(vel, new Vector3f()));
@@ -110,19 +115,20 @@ public class Camera
 			Position.sub(Up.mul(vel, new Vector3f()));
 			break;
 		case ROT_RIGHT:
-			ProcessMouseMovement(1, 0, true);
+			ProcessMouseMovement(4, 0, true);
 			break;
 		case ROT_LEFT:
-			ProcessMouseMovement(-1, 0, true);
+			ProcessMouseMovement(-4, 0, true);
 			break;
 		case ROT_UP:
-			ProcessMouseMovement(0, 1, true);
+			ProcessMouseMovement(0, 4, true);
 			break;
 		case ROT_DOWN:
-			ProcessMouseMovement(0, -1, true);
+			ProcessMouseMovement(0, -4, true);
 			break;
 		}
 		//Position.y = 0.0f;
+		leftControl = false;
 		updateCameraVectors();
 	}
 	

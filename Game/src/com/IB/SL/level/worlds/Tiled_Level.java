@@ -324,10 +324,10 @@ public class Tiled_Level extends Level {
 	public int toInt(String s) {
 		return (int)Double.parseDouble(s);
 	}
-	
+
 	public int[] explodeTileString(String tiles) {
      	int[] xml_tiles = new int[width * height];
-
+     	
 		List<String> items = Arrays.asList(tiles.split("\\s*,\\s*"));
 		for (int i = 0; i < items.size(); i++) {
 			String str = items.get(i);
@@ -367,5 +367,4 @@ public class Tiled_Level extends Level {
 			}
 		}
 	}
-	
 }
