@@ -10,12 +10,19 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.prefs.Preferences;
+
+import org.ini4j.Ini;
+import org.ini4j.IniPreferences;
 
 import com.IB.SL.AlphaLWJGL.OGL_TEST;
 import com.IB.SL.entity.mob.Player;
@@ -27,17 +34,24 @@ import GL_Real.GL_Main;
 
 public class Boot
 {
-
+	public static int width = 640; // 300 //520
+	public static int height = 360; // 168 //335
+	public static int scale = 2;
+	
 	public static String title = "Legacy Engine [Build 1 : 10/31/17]";
+	
 	private static Game g;
 	private static OGL_TEST GameAlphaOGL;
 	private static GL_Main GameOGL;
 	private static GameServer s;
 	public static Client c;
-
+	
 	private static int port = 7381;
 	public static String host = "localhost";
+	
 	public static HashMap<String, Boolean> launch_args;
+	public static Preferences iniPrefs;
+	
 	public static boolean isConnected = false;
 	public static boolean drawDebug = false;
 
@@ -67,13 +81,46 @@ public class Boot
 
 	public static void tryLaunchGame()
 	{
-		if (launch_args.containsKey("-legacy-gfx")) {
-			g = new Game(title);
+		try {
+			Ini ini = new Ini(new File("le2.ini"));
+			iniPrefs = new IniPreferences(ini);
+
+			System.out.println();
+			System.out.println("Prefs.ini");
+
+			for(int i = 0; i < iniPrefs.childrenNames().length; i++) {
+				String prefNode = iniPrefs.childrenNames()[i];
+				Preferences node = iniPrefs.node(prefNode);
+				
+				System.out.println("/" + prefNode + "/");
+				
+				for(int j = 0; j < node.keys().length; j++) {
+					String prefKey = node.keys()[j];
+					System.out.println(" * " + prefKey + " = " + node.get(prefKey, null));
+				}
+			}
+			
+			System.out.println();
+			
+			width = iniPrefs.node("Frame").getInt("WinWidth", width);
+			height = iniPrefs.node("Frame").getInt("WinHeight", height);
+			scale = iniPrefs.node("Frame").getInt("DrawScale", scale);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		switch (iniPrefs.node("Graphics").getInt("EngineMode", 0)) {
+		case 0:
+			g = new Game();
 			g.Launch(g);
-		} else if (launch_args.containsKey("-alpha-opengl")) {
+			break;
+		case 1:
 			GameAlphaOGL = new OGL_TEST(title);
-		} else {
+			break;
+		case 2:
 			GameOGL = new GL_Main(title);
+			break;
 		}
 	}
 
@@ -217,4 +264,21 @@ public class Boot
 			nanoTimeOfLastEvent = System.nanoTime();
 		}
 	}
+	
+	public static void restart() {
+        StringBuilder cmd = new StringBuilder();
+          cmd.append(System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ");
+          for (String jvmArg : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
+              cmd.append(jvmArg + " ");
+          }
+          cmd.append("-cp ").append(ManagementFactory.getRuntimeMXBean().getClassPath()).append(" ");
+          cmd.append(Window.class.getName()).append(" ");
+
+          try {
+              Runtime.getRuntime().exec(cmd.toString());
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          System.exit(0);
+  }
 }

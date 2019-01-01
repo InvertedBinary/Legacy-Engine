@@ -1,6 +1,6 @@
-print("Loading Lua for a10 level")
+print("Loading Lua for b10 level")
 
-local z = luajava.newInstance("com.IB.SL.entity.mob.XML_Mob", 62, 50, "/XML/Entities/TestZombie.xml");
+local z = luajava.newInstance("com.IB.SL.entity.TagEntity", "/XML/Entities/TestZombie.xml", false);
 level:add(z);
 
 while level:runningLua() do

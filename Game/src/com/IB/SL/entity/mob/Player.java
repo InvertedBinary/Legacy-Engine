@@ -402,8 +402,8 @@ public class Player extends Mob implements Serializable
 
 			if (VARS.do_possession && Selector.selected != null)
 			{
-				Selector.selected.pos().set((Mouse.getX() / Game.scale + Screen.xOffset) + 0,
-						(Mouse.getY() / Game.scale + Screen.yOffset) - Selector.selected.sprite.getHeight());
+				Selector.selected.pos().set((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
+						(Mouse.getY() / Boot.scale + Screen.yOffset) - Selector.selected.sprite.getHeight());
 			}
 		}
 
@@ -417,8 +417,8 @@ public class Player extends Mob implements Serializable
 		{
 			if (Mouse.getButton() == 2) {
 				if (UI_Menu.ConsoleMenu.enabled) {
-					selection_tool = new Selector((Mouse.getX() / Game.scale + Screen.xOffset) + 0,
-							(Mouse.getY() / Game.scale + Screen.yOffset) + 0);
+					selection_tool = new Selector((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
+							(Mouse.getY() / Boot.scale + Screen.yOffset) + 0);
 					level.add(selection_tool);
 					selection_tool.update();
 				}
@@ -637,20 +637,20 @@ public class Player extends Mob implements Serializable
 			// screen.renderSprite(1064/ Game.scale, 530 / Game.scale,
 			// gui.renderHealthExperiment(screen, this, 20), false);
 			if (!level.minimap_enabled) {
-				Boot.get().font.render((int) Game.width - text.length() * 16, 3, -3, text, screen, false, false);
-				Boot.get().font.render((int) Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+				Boot.get().font.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+				Boot.get().font.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 						false, false);
 			} else
 				if (!level.minimap_collapsed) {
 					// screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12,
 					// 0xff262626), false);
-					Boot.get().font.render((int) Game.width - 35 - text.length() * 16, 3, -3, text, screen, false,
+					Boot.get().font.render((int) Boot.width - 35 - text.length() * 16, 3, -3, text, screen, false,
 							false);
-					Boot.get().font.render((int) Game.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
+					Boot.get().font.render((int) Boot.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
 							screen, false, false);
 				} else {
-					Boot.get().font.render((int) Game.width - text.length() * 16, 3, -3, text, screen, false, false);
-					Boot.get().font.render((int) Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+					Boot.get().font.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+					Boot.get().font.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 							false, false);
 				}
 

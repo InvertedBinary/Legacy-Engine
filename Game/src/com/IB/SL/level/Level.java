@@ -726,7 +726,7 @@ public class Level extends EntityContainer implements Serializable {
 	private void renderMiniMap(Screen screen) {
 		if (minimap_enabled == true) {
 			int size = 75;
-			int x = Game.width - size - 5;
+			int x = Boot.width - size - 5;
 			int y = 5;
 			
 			if (Boot.get().getPlayer().input.map) {

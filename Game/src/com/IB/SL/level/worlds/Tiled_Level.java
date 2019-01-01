@@ -15,8 +15,6 @@ import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
 import com.IB.SL.VARS;
-import com.IB.SL.entity.TagEntity;
-import com.IB.SL.entity.emitter.Emitter;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -25,8 +23,7 @@ import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.Tile.stepSound;
 import com.IB.SL.level.tile.SL2.XML_Tile;
-import com.IB.SL.util.Debug;
-import com.IB.SL.util.math.PVector;
+import com.IB.SL.util.LuaScript;
 import com.IB.SL.util.shape.LineSegment;
 import com.IB.SL.util.shape.Vertex;
 
@@ -60,9 +57,44 @@ public class Tiled_Level extends Level {
 		System.out.println("TILED: " + tiled_xml);
 		this.path = path;
 
-		add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
-		add(new TagEntity("/XML/Entities/TestZombie.xml", false));
+		//add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
+		//add(new TagEntity("/XML/Entities/TestZombie.xml", false));
+
+		initLua();
 	}
+	
+	public void killLua() {
+		this.loadedLua = false;
+	}
+	
+	public boolean runningLua() {
+		return this.loadedLua;
+	}
+	
+	public void initLua() {
+		loadLua();
+	}
+	
+	public Thread luaThread;
+	LuaScript ls;
+	boolean loadedLua = false;
+	public void loadLua() {
+		try {
+		String luaString = path + "/script.lua";
+		ls = new LuaScript(luaString);
+		ls.addGlobal("level", this);
+		//ls.addGlobal("pc", getClientPlayer());
+		//ls.addGlobal("key", Boot.get().getInput());
+		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
+		
+		luaThread = new Thread(ls, "LUA For " + luaString);
+		luaThread.start();
+		loadedLua = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	protected void loadLevel(String path) {
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -245,7 +277,7 @@ public class Tiled_Level extends Level {
         case "properties": {
         	if (this.current_object_type != null) {
         	if (this.current_object_type.equals("Exit_Zone")) {
-        		LevelExit e = new LevelExit(this.toInt(props.get("x")), this.toInt(props.get("y")), this.toInt(props.get("width")), this.toInt(props.get("height")), props.get("To"), this.toInt(props.get("To_X")), this.toInt(props.get("To_Y")));
+        		LevelExit e = new LevelExit(this.asInt(props.get("x")), this.asInt(props.get("y")), this.asInt(props.get("width")), this.asInt(props.get("height")), props.get("To"), this.asInt(props.get("To_X")), this.asInt(props.get("To_Y")));
         		addExit(e);
         		} 
         	}
@@ -255,7 +287,7 @@ public class Tiled_Level extends Level {
 			case "object": {
 				if (this.current_object_type != null) {
 					if (this.current_object_type.equals("SpawnPoint")) {
-						spawnpoint = new TileCoord(toInt(props.get("x")) / 32, toInt(props.get("y")) / 32);
+						spawnpoint = new TileCoord(asInt(props.get("x")) / 32, asInt(props.get("y")) / 32);
 					}
 				}
 			}
@@ -321,7 +353,7 @@ public class Tiled_Level extends Level {
 		exits.add(e);
 	}
 	
-	public int toInt(String s) {
+	public static int asInt(String s) {
 		return (int)Double.parseDouble(s);
 	}
 

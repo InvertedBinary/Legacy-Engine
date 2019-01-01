@@ -57,6 +57,15 @@ public class TagEntity extends Mob
 
 			init();
 		}
+	
+	public TagEntity(String tag_name, double xi, double yi) {
+		this.TAG = tag_name;
+		
+		init();
+		
+		this.x(xi);
+		this.y(yi);
+	}
 
 	public TagEntity(String path, boolean external)
 		{
@@ -65,6 +74,16 @@ public class TagEntity extends Mob
 
 			init();
 		}
+	
+	public TagEntity(String path, boolean external, double xi, double yi) {
+		this.external_tag = external;
+		this.PATH = path;
+
+		init();
+		
+		this.x(xi);
+		this.y(yi);
+	}
 
 	public void init()
 		{

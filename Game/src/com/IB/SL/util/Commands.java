@@ -81,6 +81,7 @@ public class Commands {
 		cmds.add("kill");
 		cmds.add("grab");
 		cmds.add("push");
+		cmds.add("restart");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -135,6 +136,10 @@ public class Commands {
 				
 				case "sus":
 					VARS.suspend_world = !VARS.suspend_world;
+				break;
+				
+				case "restart":
+					Boot.restart();
 				break;
 				
 				case "dir":

@@ -72,7 +72,7 @@ public class MainMenu extends UI_Menu {
 		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
-		Boot.get().getLevel().loadLua();
+		//Boot.get().getLevel().loadLua();
 		}
 	}
 	

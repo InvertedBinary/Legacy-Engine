@@ -52,10 +52,6 @@ public class Game extends Canvas implements Runnable
 	public Keyboard key;
 	public transient font font;
 
-	public static int width = 640; // 300 //520
-	public static int height = 360; // 168 //335
-	public static int scale = 2;
-	public static String title = "";
 	public double xScroll, yScroll;
 
 	private Player player;
@@ -85,14 +81,11 @@ public class Game extends Canvas implements Runnable
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol: (in-game); 4
 	 * = pause; 5 = modded/tampered; 6 = dead; 7 = Splash;
 	 */
-
-	public HashMap<String, Boolean> properties = new HashMap<String, Boolean>();
-
 	private boolean releasedDevInfo = true;
 
 	private Screen screen;
 	public WindowHandler windowHandler;
-	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	public BufferedImage image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
 	// private VolatileImage vImage = this.createVolatileImage(width, height);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
@@ -157,9 +150,8 @@ public class Game extends Canvas implements Runnable
 
 	ArrayList<String> materials = new ArrayList<String>();
 
-	public Game(String title)
+	public Game()
 		{
-			this.title = title;
 			loadProp = new LoadProperties();
 			loadProp.createDataFolder();
 			screenshots = new File(LoadProperties.basePath + "/screenshots");
@@ -169,9 +161,9 @@ public class Game extends Canvas implements Runnable
 			this.StartDiscord();
 
 			setGui(new GUI());
-			Dimension size = new Dimension(width * scale, height * scale);
+			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
 			setPreferredSize(size);
-			screen = new Screen(width, height);
+			screen = new Screen(Boot.width, Boot.height);
 			frame = new JFrame();
 			windowHandler = new WindowHandler(this);
 			key = new Keyboard();
@@ -277,12 +269,12 @@ public class Game extends Canvas implements Runnable
 
 	public static int getWindowWidth()
 		{
-			return width * scale;
+			return Boot.width * Boot.scale;
 		}
 
 	public static int getWindowHeight()
 		{
-			return height * scale;
+			return Boot.height * Boot.scale;
 		}
 
 	public synchronized void start()
@@ -349,7 +341,7 @@ public class Game extends Canvas implements Runnable
 					timer += 1000;
 					// System.out.println(updates + " ups, " + frames + " fps");
 
-					frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
+					frame.setTitle(Boot.title + " | " + updates + " ups, " + frames + " fps");
 
 					if (this.recAVG_FPS) {
 						fpsTotal += frames;
@@ -531,9 +523,9 @@ public class Game extends Canvas implements Runnable
 
 			if (showAVG) {
 				if (fpsAVG < 200) {
-					font8x8.render(-5, this.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
+					font8x8.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
 				} else {
-					font8x8.render(-5, this.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
+					font8x8.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
 				}
 			}
 
@@ -565,7 +557,7 @@ public class Game extends Canvas implements Runnable
 							10, 60);
 					g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: "
 							+ (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
-					g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale,
+					g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
 							Mouse.getX() - 103, Mouse.getY() + 70);
 					// screen.drawLine(getPlayer(), level.entities);
 					g.setColor(Color.gray);
@@ -610,12 +602,12 @@ public class Game extends Canvas implements Runnable
 	public void Launch(Game game)
 		{
 			if (!Boot.launch_args.containsKey("-mode_dedi")) {
-			Boot.setWindowIcon("/Textures/sheets/wizard.png");
-			game.frame.setResizable(false);
+			Boot.setWindowIcon("/icon.png");
+			game.frame.setResizable(Boot.iniPrefs.node("Frame").getBoolean("Resizeable", false));
 			if (Boot.launch_args.containsKey("-resizeable")) {
 				game.frame.setResizable(true);
 			}
-			game.frame.setTitle(Game.title);
+			game.frame.setTitle(Boot.title);
 			game.frame.add(game);
 			// game.frame.remove(game);
 			if (Boot.launch_args.containsKey("-fullscreen")) {

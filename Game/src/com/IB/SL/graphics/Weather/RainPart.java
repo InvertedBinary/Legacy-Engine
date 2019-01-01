@@ -46,7 +46,7 @@ public class RainPart {
 			}
 		} 
 		
-		if (this.y >= Boot.get().height){
+		if (this.y >= Boot.height){
 			x = ix;
 			y = -2 - sy;
 		}
@@ -94,7 +94,7 @@ public class RainPart {
 			}
 		} 
 		
-		if (this.y >= Boot.get().height){
+		if (this.y >= Boot.height){
 			x = ix;
 			y = -2 - sy;
 		}

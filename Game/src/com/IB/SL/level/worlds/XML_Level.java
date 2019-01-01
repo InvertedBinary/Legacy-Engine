@@ -54,12 +54,9 @@ public class XML_Level extends Level{
 
 		add(new XML_Mob(55, 73, "TestZombie.xml"));
 		//add(new Location_Shrine(50, 50, new TileCoord(673, 228)));
-		//initLua();
+		initLua();
 	} 
 	
-	public void initLua() {
-		loadLua();
-	}
 	
 	public XML_Level(String path) {
 		super(path, true);
@@ -68,6 +65,11 @@ public class XML_Level extends Level{
 	
 	public void LoadXML(String XML) {
 		readXML(XML);
+	}
+
+	public void initLua() {
+		System.out.println("Loading LUA:");
+		loadLua();
 	}
 	
 	public Thread luaThread;

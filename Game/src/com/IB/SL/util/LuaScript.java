@@ -20,7 +20,7 @@ public class LuaScript implements Runnable {
 	
 	public LuaScript(String path) {
 		this.path = path;
-		this.script = XML_Level.class.getResource(path);
+		this.script = LuaScript.class.getResource(path);
 		if (script == null) {
 			Boot.log("Missing script at: " + path, "LuaScript.java", true);
 		}
