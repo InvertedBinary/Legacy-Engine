@@ -200,10 +200,19 @@ public class Game extends Canvas implements Runnable
 				public void componentResized(ComponentEvent e)
 					{
 						System.out.println("Resized?");
-						/*
-						 * frame.remove(Boot.get()); width = frame.getWidth() / scale; height =
-						 * frame.getHeight() / scale; frame.add(Boot.get());
-						 */
+
+						Boot.width = frame.getWidth() / Boot.scale; 
+						Boot.height = frame.getHeight() / Boot.scale;
+						
+						image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
+						pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+						
+						screen.clear();
+
+						screen.width = Boot.width;
+						screen.height = Boot.height;
+						
+						screen.pixels = new int[Boot.width * Boot.height];
 					}
 
 				@Override
@@ -498,6 +507,7 @@ public class Game extends Canvas implements Runnable
 				image.setAccelerationPriority(1);
 				return;
 			}
+			
 			screen.clear();
 
 			double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2

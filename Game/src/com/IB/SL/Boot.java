@@ -102,8 +102,8 @@ public class Boot
 			
 			System.out.println();
 			
-			width = iniPrefs.node("Frame").getInt("WinWidth", width);
-			height = iniPrefs.node("Frame").getInt("WinHeight", height);
+			width = iniPrefs.node("Frame").getInt("PixelsWidth", width);
+			height = iniPrefs.node("Frame").getInt("PixelsHeight", height);
 			scale = iniPrefs.node("Frame").getInt("DrawScale", scale);
 			
 		} catch (Exception e) {
