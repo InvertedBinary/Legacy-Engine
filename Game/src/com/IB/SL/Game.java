@@ -199,20 +199,20 @@ public class Game extends Canvas implements Runnable
 				@Override
 				public void componentResized(ComponentEvent e)
 					{
-						System.out.println("Resized?");
+						screen.clear();
 
-						Boot.width = frame.getWidth() / Boot.scale; 
-						Boot.height = frame.getHeight() / Boot.scale;
+						System.out.println("Resized?");
+						
+						Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale; 
+						Boot.height = (frame.getHeight() - frame.getInsets().top - frame.getInsets().bottom) / Boot.scale;
+						
+						screen.clear();
+						screen.width = Boot.width;
+						screen.height = Boot.height;
+						screen.pixels = new int[Boot.width * Boot.height];
 						
 						image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
 						pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-						
-						screen.clear();
-
-						screen.width = Boot.width;
-						screen.height = Boot.height;
-						
-						screen.pixels = new int[Boot.width * Boot.height];
 					}
 
 				@Override
