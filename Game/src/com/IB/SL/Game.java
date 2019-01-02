@@ -352,7 +352,7 @@ public class Game extends Canvas implements Runnable
 
 				if (System.currentTimeMillis() - timer >= 1000) {
 					timer += 1000;
-					// System.out.println(updates + " ups, " + frames + " fps");
+					System.out.println(updates + " ups, " + frames + " fps");
 
 					frame.setTitle(Boot.title + " | " + updates + " ups, " + frames + " fps");
 
@@ -585,7 +585,8 @@ public class Game extends Canvas implements Runnable
 					g.fillRect(Mouse.getX() - 4, Mouse.getY() - 4, 38, 38);
 					g.setFont(new Font("Verdana", 0, 16));
 					g.setColor(Color.WHITE);
-					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 40);
+					g.drawString("Application: " + frame.getTitle(), 10, 22);
+					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
 					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
 					g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(),
 							10, 60);
@@ -649,7 +650,13 @@ public class Game extends Canvas implements Runnable
 			game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			game.frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
-			game.setFullscreen(Boot.prefsBool("Frame", "StartFullscreen", false));
+			
+			int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
+			if (windowMode == 1)
+				game.setBorderlessFullscreen(true);
+			else if (windowMode == 2)
+				setTrueFullscreen();
+			
 			Boot.setMouseIcon("/Textures/cursor.png");
 			Boot.centerMouse();
 			}
@@ -657,7 +664,7 @@ public class Game extends Canvas implements Runnable
 		}
 	
 	public boolean ChangingFullscreenState = false;
-	public void setFullscreen(boolean state) {
+	public void setBorderlessFullscreen(boolean state) {
 		ChangingFullscreenState = true;
 		if (state) {
 			frame.dispose();
@@ -674,6 +681,11 @@ public class Game extends Canvas implements Runnable
 			frame.setVisible(true);
 		
 		ChangingFullscreenState = false;
+	}
+	
+	public void setTrueFullscreen() {
+			frame.setBounds(getGraphicsConfiguration().getBounds());
+			getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
 	}
 
 	public Screen getScreen()

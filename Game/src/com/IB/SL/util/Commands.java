@@ -83,6 +83,7 @@ public class Commands {
 		cmds.add("push");
 		cmds.add("restart");
 		cmds.add("fullscr");
+		cmds.add("tfullscr");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -144,7 +145,11 @@ public class Commands {
 				break;
 				
 				case "fullscr":
-					Boot.get().setFullscreen(!Boot.get().frame.isUndecorated());
+					Boot.get().setBorderlessFullscreen(!Boot.get().frame.isUndecorated());
+				break;
+				
+				case "tfullscr":
+					Boot.get().setTrueFullscreen();
 				break;
 				
 				case "dir":

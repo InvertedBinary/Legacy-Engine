@@ -16,6 +16,7 @@ import com.IB.SL.entity.mob.peaceful.Villager01;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 
+@Deprecated
 public class SpawnHaven_Deprecated extends Level implements Serializable{
 	
 	/**
