@@ -65,6 +65,11 @@ public class Tiled_Level extends Level {
 	
 	public void killLua() {
 		this.loadedLua = false;
+		try {
+			luaThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean runningLua() {

@@ -302,7 +302,7 @@ public class Game extends Canvas implements Runnable
 	 * System.out.println(inet.isReachable(5000) ? "Host is reachable" :
 	 * "Host is NOT reachable");
 	 */
-
+	
 	public void run()
 		{
 			long lastTime = System.nanoTime();
@@ -328,16 +328,27 @@ public class Game extends Canvas implements Runnable
 					key.update();
 					gui.update();
 					updateMode();
+
+					if (Boot.prefsBool("Graphics", "LockFPS", false)) {
+						if (!Boot.launch_args.containsKey("-mode_dedi")) {
+							if (frame.isVisible())
+								render();
+						}
+					frames++;
+					}
+					
 					updates++;
 					delta--;
+					
 				}
 				
-				if (!Boot.launch_args.containsKey("-mode_dedi")) {
-					if (frame.isVisible())
-					render();
-				}
-
+				if (!Boot.prefsBool("Graphics", "LockFPS", false)) {
+					if (!Boot.launch_args.containsKey("-mode_dedi")) {
+						if (frame.isVisible())
+							render();
+					}
 				frames++;
+				}
 
 				if (System.currentTimeMillis() - timer >= 1000) {
 					timer += 1000;

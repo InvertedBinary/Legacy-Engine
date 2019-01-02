@@ -322,7 +322,6 @@ public class Player extends Mob implements Serializable
 					if ((this.input.jump || this.input.up) && this.canJump && !this.sliding) {
 						this.vel().y(-6.5);
 					}
-
 				}
 			} else { 
 				walking = false;
@@ -462,6 +461,8 @@ public class Player extends Mob implements Serializable
 			}
 			this.currentLevelId = -1;
 
+			((Tiled_Level) Boot.get().getLevel()).killLua();
+			
 			Tiled_Level newLevel = new Tiled_Level(XML);
 			Boot.get().setLevel(newLevel);
 			Boot.get().getLevel().add(this);

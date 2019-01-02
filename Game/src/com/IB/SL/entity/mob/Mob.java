@@ -249,7 +249,7 @@ public abstract  class Mob extends Entity implements Serializable {
 			double yt = ((y() + ya));
 			AABB aabb = new AABB(this.getBounds());
 			aabb.moveTo(xt, yt);
-			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 42f, (float)yt + 62f)); //=>38, 60
+			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 61f)); //=>38, 60
 			//TODO: Add collision for parallel lines 
 			if (((Tiled_Level) Boot.getLevel()).solid_geometry == null) {
 				return false;
