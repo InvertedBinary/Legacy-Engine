@@ -102,9 +102,9 @@ public class Boot
 			
 			System.out.println();
 			
-			width = iniPrefs.node("Frame").getInt("PixelsWidth", width);
-			height = iniPrefs.node("Frame").getInt("PixelsHeight", height);
-			scale = iniPrefs.node("Frame").getInt("DrawScale", scale);
+			width = prefsInt("Graphics", "PixelsWidth", width);
+			height = prefsInt("Graphics", "PixelsHeight", height);
+			scale = prefsInt("Graphics", "DrawScale", scale);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,6 +122,22 @@ public class Boot
 			GameOGL = new GL_Main(title);
 			break;
 		}
+	}
+	
+	public static int prefsInt(String node, String key, int dfVal) {
+		return iniPrefs.node(node).getInt(key, dfVal);
+	}
+	
+	public static boolean prefsBool(String node, String key, boolean dfVal) {
+		return iniPrefs.node(node).getBoolean(key, dfVal);
+	}
+	
+	public static String prefsStr(String node, String key, String dfVal) {
+		return iniPrefs.node(node).get(key, dfVal);
+	}
+	
+	public static double prefsDouble(String node, String key, double dfVal) {
+		return iniPrefs.node(node).getDouble(key, dfVal);
 	}
 
 	public static void tryServer()

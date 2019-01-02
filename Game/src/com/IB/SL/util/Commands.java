@@ -82,6 +82,7 @@ public class Commands {
 		cmds.add("grab");
 		cmds.add("push");
 		cmds.add("restart");
+		cmds.add("fullscr");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -140,6 +141,10 @@ public class Commands {
 				
 				case "restart":
 					Boot.restart();
+				break;
+				
+				case "fullscr":
+					Boot.get().setFullscreen(!Boot.get().frame.isUndecorated());
 				break;
 				
 				case "dir":

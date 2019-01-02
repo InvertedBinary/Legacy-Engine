@@ -67,6 +67,7 @@ public class Game extends Canvas implements Runnable
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 
+	public boolean FrameAdjusted = false;
 	public static boolean devModeOn = false;
 	private boolean devModeReleased = true;
 	public LoadProperties loadProp;
@@ -75,6 +76,7 @@ public class Game extends Canvas implements Runnable
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	File screenshots = null;
 	public Stack<Level> levels = new Stack<Level>();
+
 
 	int saveTime = 0;
 	/**
@@ -193,44 +195,34 @@ public class Game extends Canvas implements Runnable
 
 			getMenu().addMenus();
 			getMenu().load(getMenu().MainMenu, true);
-
-			this.frame.addComponentListener(new ComponentListener()
+			
+			frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width), Boot.prefsInt("Frame", "MinHeight", Boot.height)));
+			
+		this.frame.getRootPane().addComponentListener(new ComponentListener()
+		{
+			@Override
+			public void componentResized(ComponentEvent e)
 			{
-				@Override
-				public void componentResized(ComponentEvent e)
-					{
-						screen.clear();
+				System.out.println("Resized?");
+				FrameAdjusted = true;
+			}
 
-						System.out.println("Resized?");
-						
-						Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale; 
-						Boot.height = (frame.getHeight() - frame.getInsets().top - frame.getInsets().bottom) / Boot.scale;
-						
-						screen.clear();
-						screen.width = Boot.width;
-						screen.height = Boot.height;
-						screen.pixels = new int[Boot.width * Boot.height];
-						
-						image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
-						pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-					}
+			@Override
+			public void componentMoved(ComponentEvent e)
+			{
+			}
 
-				@Override
-				public void componentMoved(ComponentEvent e)
-					{
-					}
+			@Override
+			public void componentShown(ComponentEvent e)
+			{
+			}
 
-				@Override
-				public void componentShown(ComponentEvent e)
-					{
-					}
-
-				@Override
-				public void componentHidden(ComponentEvent e)
-					{
-					}
-			});
-		}
+			@Override
+			public void componentHidden(ComponentEvent e)
+			{
+			}
+		});
+	}
 
 	public void StartDiscord()
 		{
@@ -277,32 +269,32 @@ public class Game extends Canvas implements Runnable
 		}
 
 	public static int getWindowWidth()
-		{
-			return Boot.width * Boot.scale;
-		}
+	{
+		return Boot.width * Boot.scale;
+	}
 
 	public static int getWindowHeight()
-		{
-			return Boot.height * Boot.scale;
-		}
+	{
+		return Boot.height * Boot.scale;
+	}
 
 	public synchronized void start()
-		{
-			running = true;
-			thread = new Thread(this, "Game");
-			thread.start();
-		}
+	{
+		running = true;
+		thread = new Thread(this, "Game");
+		thread.start();
+	}
 
 	public synchronized void stop()
-		{
-			running = false;
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
+	{
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+
+	}
 
 	/*
 	 * inet = InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 });
@@ -341,7 +333,8 @@ public class Game extends Canvas implements Runnable
 				}
 				
 				if (!Boot.launch_args.containsKey("-mode_dedi")) {
-				render();
+					if (frame.isVisible())
+					render();
 				}
 
 				frames++;
@@ -482,6 +475,24 @@ public class Game extends Canvas implements Runnable
 				}
 			}
 		}
+	
+	public void AdjustImageToFrame() {
+		if (this.FrameAdjusted && Mouse.getButton() == -1)
+		screen.clear();
+		
+		Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale; 
+		Boot.height = (frame.getHeight() - frame.getInsets().top - frame.getInsets().bottom) / Boot.scale;
+		
+		screen.clear();
+		screen.width = Boot.width;
+		screen.height = Boot.height;
+		screen.pixels = new int[Boot.width * Boot.height];
+		
+		image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+		
+		this.FrameAdjusted = false;
+	}
 
 	public void update()
 		{
@@ -494,7 +505,9 @@ public class Game extends Canvas implements Runnable
 			if (mouseMotionTime > 0) {
 				this.mouseMotionTime--;
 			}
-
+			
+			this.AdjustImageToFrame();
+			
 			getLevel().update();
 		}
 
@@ -613,27 +626,44 @@ public class Game extends Canvas implements Runnable
 		{
 			if (!Boot.launch_args.containsKey("-mode_dedi")) {
 			Boot.setWindowIcon("/icon.png");
-			game.frame.setResizable(Boot.iniPrefs.node("Frame").getBoolean("Resizeable", false));
+			game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
 			if (Boot.launch_args.containsKey("-resizeable")) {
 				game.frame.setResizable(true);
 			}
 			game.frame.setTitle(Boot.title);
 			game.frame.add(game);
 			// game.frame.remove(game);
-			if (Boot.launch_args.containsKey("-fullscreen")) {
-				game.frame.setUndecorated(true);
-				game.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			}
 			// game.frame.setOpacity(0.01F);
 			game.frame.pack();
 			game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			game.frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
+			game.setFullscreen(Boot.prefsBool("Frame", "StartFullscreen", false));
 			Boot.setMouseIcon("/Textures/cursor.png");
 			Boot.centerMouse();
 			}
 			game.start();
 		}
+	
+	public boolean ChangingFullscreenState = false;
+	public void setFullscreen(boolean state) {
+		ChangingFullscreenState = true;
+		if (state) {
+			frame.dispose();
+			frame.setUndecorated(true);
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		} else {
+			frame.dispose();
+			frame.setUndecorated(false);
+			frame.setExtendedState(JFrame.NORMAL);
+			frame.setSize(new Dimension(Boot.prefsInt("Graphics", "PixelsWidth", Boot.width) * Boot.scale, Boot.prefsInt("Graphics", "PixelsHeight", Boot.height) * Boot.scale));
+			frame.setLocationRelativeTo(null);
+		}
+		if (!frame.isVisible())
+			frame.setVisible(true);
+		
+		ChangingFullscreenState = false;
+	}
 
 	public Screen getScreen()
 		{

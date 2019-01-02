@@ -26,6 +26,8 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	private static boolean doubleClick;
 	final static String nl = "n";
 	
+	public static boolean inFrame = false;
+	
 	   String print;
 
 	public static int getX() {
@@ -37,7 +39,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	public static int getButton() {
 		return getMouseB();
 	}
-
+	
 	public void moveMouse(Point p) {
 	    GraphicsEnvironment ge = 
 	        GraphicsEnvironment.getLocalGraphicsEnvironment();
