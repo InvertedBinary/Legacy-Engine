@@ -322,6 +322,14 @@ public class Player extends Mob implements Serializable
 					if ((this.input.jump || this.input.up) && this.canJump && !this.sliding) {
 						this.vel().y(-6.5);
 					}
+					
+					if (Mouse.getButton() == 1 && walking) {
+						if (Screen.xo << VARS.TILE_BIT_SHIFT > this.x()) {
+							this.animSprite = right;
+						} else {
+							this.animSprite = left;
+						}
+					}
 				}
 			} else { 
 				walking = false;
@@ -358,12 +366,13 @@ public class Player extends Mob implements Serializable
 
 				// this.pv.add(Gravity);
 
-				if (xa != 0 || ya != 0) {
-					Game.createNewPresence();
-				}
 
 				ya = vel().y();
 				xa = vel().x();
+
+				if (xa != 0 || (ya != 0 && ya != Gravity.y())) {
+					Game.createNewPresence();
+				}
 
 				if (xa != 0) {
 					walking = true;
@@ -616,8 +625,8 @@ public class Player extends Mob implements Serializable
 	public void renderGUI(Screen screen)
 		{
 			if (Boot.drawDebug) {
-				if (this.XT_YT_ls != null) {
-					this.XT_YT_ls.drawLine(screen, true);
+				if (this.feetLine != null) {
+					this.feetLine.drawLine(screen, true);
 				}
 
 				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),

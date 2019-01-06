@@ -378,8 +378,8 @@ public class TagEntity extends Mob
 	public void renderGUI(Screen screen)
 	{
 		if (Boot.drawDebug) {
-			if (this.XT_YT_ls != null) {
-				this.XT_YT_ls.drawLine(screen, true);
+			if (this.feetLine != null) {
+				this.feetLine.drawLine(screen, true);
 
 				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
 						sprite.getHeight(), 0xffFADE0F, true);

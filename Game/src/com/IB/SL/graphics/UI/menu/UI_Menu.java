@@ -47,8 +47,8 @@ public class UI_Menu extends DefaultHandler {
 	public static VideoMenu vidMenu;
 
 	public void addMenus() {
-		menus.add(settingsMenu = new SettingsMenu(0, 0, Sprite.pauseOptions));
 		menus.add(MainMenu = new MainMenu(0, 0, Sprite.Title));
+		menus.add(settingsMenu = new SettingsMenu(0, 0, Sprite.pauseOptions));
 		menus.add(ConsoleMenu = new ConsoleMenu(0, 0, Sprite.bgFade));
 
 		menus.add(PauseMenu = new PauseMenu(0, 0, Sprite.pauseMenu));
@@ -121,6 +121,9 @@ public class UI_Menu extends DefaultHandler {
 		}
 	}
 	
+	public void unloadCurrent() {
+		unload(current);
+	}
 
 	public void unload(UI_Menu menu) {
 		history.add(current);
@@ -157,7 +160,6 @@ public class UI_Menu extends DefaultHandler {
 	public void onUnload() {
 		
 	}
-	
 	
 	public int getX() {
 		return x;
