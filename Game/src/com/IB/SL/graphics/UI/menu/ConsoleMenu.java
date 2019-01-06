@@ -5,7 +5,7 @@ import com.IB.SL.entity.projectile.Selector;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.UI.part.TextBox;
-import com.IB.SL.util.Commands;
+import com.IB.SL.input.Commands;
 
 public class ConsoleMenu extends UI_Menu {
 

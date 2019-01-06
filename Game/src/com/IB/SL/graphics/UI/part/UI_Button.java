@@ -18,6 +18,8 @@ public class UI_Button extends UI_Root {
 	public boolean render = true;
 	public boolean isanim = false;
 	public boolean transAnim = false;
+	
+	private UI_ButtonListener listener;
 
 	public UI_Button(int x, int y, Sprite sprite) {
 		this.sprite = sprite;
@@ -49,15 +51,15 @@ public class UI_Button extends UI_Root {
 		this.height = height;
 	}
 	
+	public void addListener(UI_ButtonListener listener) {
+		this.listener = listener;
+	}
+	
 	public void update() {
 		if (checkBounds(x, y, width, height)) {
-			hover = true;
-			if (isanim && this.animSprite.getFrame() != 1) {
-				this.animSprite.setFrame(1);
-			}
+			ButtonHovered();
 			if (Mouse.getButton() == 1) {
-				this.clicked = true;
-				Mouse.setMouseB(-1);
+				ButtonClicked();
 			} else {
 				this.clicked = false;
 			}
@@ -67,6 +69,24 @@ public class UI_Button extends UI_Root {
 			}
 			hover = false;
 			clicked = false;
+		}
+	}
+	
+	public void ButtonClicked() {
+		if (listener != null)
+		listener.ButtonClick();
+		
+		this.clicked = true;
+		Mouse.setMouseB(-1);
+	}
+	
+	public void ButtonHovered() {
+		if (listener != null)
+		listener.ButtonHover();
+		
+		hover = true;
+		if (isanim && this.animSprite.getFrame() != 1) {
+			this.animSprite.setFrame(1);
 		}
 	}
 	

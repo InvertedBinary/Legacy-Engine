@@ -21,7 +21,7 @@ import com.IB.SL.entity.projectile.WizardProjectile2;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.util.AABB;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.shape.LineSegment;
@@ -251,12 +251,12 @@ public abstract  class Mob extends Entity implements Serializable {
 			aabb.moveTo(xt, yt);
 			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 61f)); //=>38, 60
 			//TODO: Add collision for parallel lines 
-			if (((Tiled_Level) Boot.getLevel()).solid_geometry == null) {
+			if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
 				return false;
 			}
 
-			for (int i = 0; i < ((Tiled_Level) Boot.getLevel()).solid_geometry.size(); i++) {
-				LineSegment ls = ((Tiled_Level) Boot.getLevel()).solid_geometry.get(i);
+			for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
+				LineSegment ls = ((TiledLevel) Boot.getLevel()).solid_geometry.get(i);
 
 				if (ls.intersectsLine(XT_YT_ls , true)) {
 					//System.out.println(i + ":: " + ls.origin.x);

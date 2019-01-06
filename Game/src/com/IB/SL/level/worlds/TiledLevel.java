@@ -27,7 +27,7 @@ import com.IB.SL.util.LuaScript;
 import com.IB.SL.util.shape.LineSegment;
 import com.IB.SL.util.shape.Vertex;
 
-public class Tiled_Level extends Level {
+public class TiledLevel extends Level {
 	private static final long serialVersionUID = 1L;
 
 	public String path = "";
@@ -49,9 +49,11 @@ public class Tiled_Level extends Level {
 	public ArrayList<int[]> tilels;
 	public ArrayList<LineSegment> solid_geometry;
 
-	public Tiled_Level(String path) {
+	public TiledLevel(String path) {
 		super(path);
 		String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
+		
+		Boot.get().lvl_name = lvn;
 
 		this.tiled_xml = path + "/" + lvn + ".tmx";
 		System.out.println("TILED: " + tiled_xml);
@@ -62,6 +64,8 @@ public class Tiled_Level extends Level {
 
 		initLua();
 	}
+	
+	
 	
 	public void killLua() {
 		this.loadedLua = false;
@@ -111,7 +115,7 @@ public class Tiled_Level extends Level {
 			sp = parserFactory.newSAXParser();
 			//sp.parse("E:\\Dev\\Square Legacy 2\\Square-Legacy-2\\Game\\res\\XML\\Levels\\b10\\b10.tmx", this);
 			System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
-			sp.parse(Tiled_Level.class.getResourceAsStream(path + "/" + lvn + ".tmx"), this);
+			sp.parse(TiledLevel.class.getResourceAsStream(path + "/" + lvn + ".tmx"), this);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -237,7 +241,7 @@ public class Tiled_Level extends Level {
 						}
 					}
 					
-            	 System.out.println("Adding some new geometry.. " + solid_geometry);
+            	 //System.out.println("Adding some new geometry.. " + solid_geometry);
             	 }
             	 break;
              }
@@ -298,7 +302,7 @@ public class Tiled_Level extends Level {
 			}
 
         case "map": {
-			Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
+			//Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
 			
 			Tile t = new Tile();
 			t.readXML("/XML/Tiles/TileDefinitions.xml");
@@ -385,8 +389,12 @@ public class Tiled_Level extends Level {
 		{
 			if (Boot.drawDebug) {
 				if (this.solid_geometry != null) {
-					for (LineSegment ln : this.solid_geometry) {
+					for (int i = 0; i < this.solid_geometry.size(); i++) {
+						LineSegment ln = solid_geometry.get(i);
+						Boot.get().font8x8.render((int)ln.midpoint().x, (int)ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
 						ln.drawLine(screen, true);
+						
+						ln.Perpendicular().drawLine(screen, true);
 					}
 				}
 			}

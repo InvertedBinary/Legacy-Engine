@@ -211,7 +211,7 @@ public class Polygon extends PropertyEngine {
 	public boolean intersects(Polygon p) {
 		for (int i = 0; i < sides.size(); i++) {
 			for (int j = 0; j < p.sides.size(); j++) {
-				if (sides.get(i).intersectsLine(p.sides.get(j))) {
+				if (sides.get(i).CollidesWithLine(p.sides.get(j))) {
 					return true;
 				}
 			}
@@ -223,7 +223,7 @@ public class Polygon extends PropertyEngine {
 		boolean result = false;
 		for (int i = 0; i < sides.size(); i++) {
 			LineSegment Pls = sides.get(i);
-			if (ls.intersectsLine(Pls)) {
+			if (ls.CollidesWithLine(Pls)) {
 				return true;
 			}
 		}

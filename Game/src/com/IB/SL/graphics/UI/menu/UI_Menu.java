@@ -2,6 +2,8 @@ package com.IB.SL.graphics.UI.menu;
 
 import java.util.ArrayList;
 
+import org.xml.sax.helpers.DefaultHandler;
+
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -10,9 +12,10 @@ import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
 import com.IB.SL.graphics.UI.UI;
 import com.IB.SL.graphics.UI.part.UI_Button;
+import com.IB.SL.graphics.UI.part.UI_Root;
 import com.IB.SL.input.Keyboard;
 
-public class UI_Menu {
+public class UI_Menu extends DefaultHandler {
 	
 	public Sprite bg;
 	public SpriteSheet s_bg;
@@ -135,10 +138,14 @@ public class UI_Menu {
 		current.onUnload();
 		current = null;
 		menu.enabled = false;
-		
+		}
+	  }
 	}
-  }
-}
+	
+	public void addUI(UI_Root component) {
+		this.ui.addUI(component);
+	}
+	
 	public Keyboard getKey() {
 		return Boot.get().key;
 	}

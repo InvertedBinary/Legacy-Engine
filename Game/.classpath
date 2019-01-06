@@ -109,7 +109,6 @@
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-yoga-sources.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-yoga.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl.jar"/>
-	<classpathentry kind="lib" path="lib/discord-rpc-0.9-BETA-4.jar"/>
 	<classpathentry kind="lib" path="lib/netty-all-4.1.21.Final.jar" sourcepath="lib/netty-all-4.1.21.Final.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jme-3.0.1.jar"/>
@@ -118,5 +117,6 @@
 	<classpathentry kind="lib" path="lib/joml-jdk8-1.9.9.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4-jdk14.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/discord-rpc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

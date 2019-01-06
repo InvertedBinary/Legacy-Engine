@@ -7,7 +7,7 @@ import com.IB.SL.Boot;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.level.Level;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -53,7 +53,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 	        String UUID = uuid.toString();
 			users.put(ctx.channel().remoteAddress().toString(), UUID); // TODO ADD AUTOMATED USER ID
 			
-			ctx.channel().writeAndFlush("LEV|PATH=" + ((Tiled_Level)Boot.getLevel()).path + "@x=" + ((Tiled_Level)Boot.getLevel()).spawnpoint.x() + ",y=" + ((Tiled_Level)Boot.getLevel()).spawnpoint.y() + "\n");
+			ctx.channel().writeAndFlush("LEV|PATH=" + ((TiledLevel)Boot.getLevel()).path + "@x=" + ((TiledLevel)Boot.getLevel()).spawnpoint.x() + ",y=" + ((TiledLevel)Boot.getLevel()).spawnpoint.y() + "\n");
 			
 			for (Entity e : Boot.getLevel().players) {
 				if (!e.removed) {

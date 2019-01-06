@@ -33,7 +33,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.MainLevel;
 import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
@@ -461,9 +461,9 @@ public class Player extends Mob implements Serializable
 			}
 			this.currentLevelId = -1;
 
-			((Tiled_Level) Boot.get().getLevel()).killLua();
+			((TiledLevel) Boot.get().getLevel()).killLua();
 			
-			Tiled_Level newLevel = new Tiled_Level(XML);
+			TiledLevel newLevel = new TiledLevel(XML);
 			Boot.get().setLevel(newLevel);
 			Boot.get().getLevel().add(this);
 

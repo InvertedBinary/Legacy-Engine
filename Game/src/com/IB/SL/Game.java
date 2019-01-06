@@ -16,28 +16,31 @@ import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import com.IB.SL.entity.TagEntity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.font;
 import com.IB.SL.graphics.font8x8;
 import com.IB.SL.graphics.UI.GUI;
+import com.IB.SL.graphics.UI.TagMenu;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
+
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 
 @SuppressWarnings("static-access")
 
@@ -173,7 +176,7 @@ public class Game extends Canvas implements Runnable
 			tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 			// setLevel(new XML_Level(Maps.ForestLevel));
-			Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
+			TiledLevel TL = new TiledLevel("/XML/Levels/b10");
 			setLevel(TL);
 			
 			if (TL.spawnpoint != null) {
@@ -194,7 +197,13 @@ public class Game extends Canvas implements Runnable
 			addMouseWheelListener(mouse);
 
 			getMenu().addMenus();
-			getMenu().load(getMenu().MainMenu, true);
+			//getMenu().load(getMenu().MainMenu, true);
+
+			System.out.println("-=-=-=-Begin Loading xMenu-=-=-=-");
+			TagMenu xMenu = new TagMenu("/XML/Menu/TestMenu", false);
+			System.out.println("-=-=-=-Finished Loading xMenu-=-=-=-");
+			
+			getMenu().load(xMenu, true);
 			
 			frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width), Boot.prefsInt("Frame", "MinHeight", Boot.height)));
 			
@@ -203,7 +212,7 @@ public class Game extends Canvas implements Runnable
 			@Override
 			public void componentResized(ComponentEvent e)
 			{
-				System.out.println("Resized?");
+				//System.out.println("Resized?");
 				FrameAdjusted = true;
 			}
 
@@ -226,20 +235,22 @@ public class Game extends Canvas implements Runnable
 
 	public void StartDiscord()
 		{
-			// DiscordEventHandlers handler = new DiscordEventHandlers();
-			// DiscordRPC.discordInitialize("402613263986327552", handler, true);
+			 DiscordEventHandlers handler = new DiscordEventHandlers();
+			 DiscordRPC.discordInitialize("402613263986327552", handler, true);
 		}
 
 	public static String lvl_name = "test;";
 
 	public static void createNewPresence()
 		{
-			// DiscordRichPresence rich = new DiscordRichPresence();
-			// rich.details = "On Level: " + (lvl_name);
-			// rich.state = "Located at: " + (int)Boot.get().getPlayer().x()/32 + " , " +
-			// (int)Boot.get().getPlayer().y()/32;
-			//
-			// DiscordRPC.discordUpdatePresence(rich);
+			 DiscordRichPresence rich = new DiscordRichPresence();
+			 rich.details = "On Level: " + (lvl_name);
+			 rich.state = "Located at: (" + (int)Boot.get().getPlayer().x()/32 + " , " +
+					 (int)Boot.get().getPlayer().y()/32 + ")";
+			 rich.largeImageKey = "ogimage";
+			 rich.largeImageText = "Meridian";
+			
+			 DiscordRPC.discordUpdatePresence(rich);
 		}
 
 	public UI_Menu getMenu()
@@ -352,7 +363,7 @@ public class Game extends Canvas implements Runnable
 
 				if (System.currentTimeMillis() - timer >= 1000) {
 					timer += 1000;
-					System.out.println(updates + " ups, " + frames + " fps");
+					//System.out.println(updates + " ups, " + frames + " fps");
 
 					frame.setTitle(Boot.title + " | " + updates + " ups, " + frames + " fps");
 
@@ -366,7 +377,7 @@ public class Game extends Canvas implements Runnable
 					frames = 0;
 				}
 			}
-			// DiscordRPC.discordShutdown();
+			 DiscordRPC.discordShutdown();
 			stop();
 		}
 
@@ -586,14 +597,12 @@ public class Game extends Canvas implements Runnable
 					g.setFont(new Font("Verdana", 0, 16));
 					g.setColor(Color.WHITE);
 					g.drawString("Application: " + frame.getTitle(), 10, 22);
-					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
-					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
-					g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(),
-							10, 60);
-					g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: "
-							+ (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
 					g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
 							Mouse.getX() - 103, Mouse.getY() + 70);
+					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
+					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
+					//g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
+					//g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
 					// screen.drawLine(getPlayer(), level.entities);
 					g.setColor(Color.gray);
 					// g.fill3DRect(1020, 618, 300, 300, true);
@@ -725,7 +734,7 @@ public class Game extends Canvas implements Runnable
 
 	public void quit()
 		{
-			// DiscordRPC.discordShutdown();
+		    DiscordRPC.discordShutdown();
 			System.out.println("Saving & Closing Application");
 			save(false);
 			Boot.c.stopClient();

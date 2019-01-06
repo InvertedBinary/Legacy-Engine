@@ -1,4 +1,4 @@
-package com.IB.SL.util;
+package com.IB.SL.input;
 
 import java.awt.Desktop;
 import java.io.BufferedWriter;
@@ -15,9 +15,11 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.XML_Mob;
 import com.IB.SL.entity.projectile.Selector;
+import com.IB.SL.graphics.UI.TagMenu;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
+import com.IB.SL.util.SaveGame;
 
 public class Commands {
 
@@ -84,6 +86,7 @@ public class Commands {
 		cmds.add("restart");
 		cmds.add("fullscr");
 		cmds.add("tfullscr");
+		cmds.add("menu");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -185,6 +188,10 @@ public class Commands {
 					}
 				break;
 				
+				case "menu":
+					Boot.get().getMenu().load(new TagMenu(Modifier), true);
+				break;
+				
 				case "avg": 
 				{
 					Game.showAVG = !Game.showAVG;
@@ -247,7 +254,7 @@ public class Commands {
 		break;
 				case "ld":
 					if (Modifier.equals(""))
-						Modifier = ((Tiled_Level)Boot.getLevel()).path;
+						Modifier = ((TiledLevel)Boot.getLevel()).path;
 					else
 						Modifier = "/XML/Levels/" + Modifier;
 					
