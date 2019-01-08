@@ -7,9 +7,9 @@ import com.IB.SL.input.Mouse;
 public class UI_Root {
 
 	public boolean enabled = true;
-	
+
 	public UI_Root() {
-		
+
 	}
 	
 	public void update() {

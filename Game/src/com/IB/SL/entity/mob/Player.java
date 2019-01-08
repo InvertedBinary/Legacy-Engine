@@ -647,20 +647,20 @@ public class Player extends Mob implements Serializable
 			// screen.renderSprite(1064/ Game.scale, 530 / Game.scale,
 			// gui.renderHealthExperiment(screen, this, 20), false);
 			if (!level.minimap_enabled) {
-				Boot.get().font.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
-				Boot.get().font.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+				Game.font16bit.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+				Game.font16bit.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 						false, false);
 			} else
 				if (!level.minimap_collapsed) {
 					// screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12,
 					// 0xff262626), false);
-					Boot.get().font.render((int) Boot.width - 35 - text.length() * 16, 3, -3, text, screen, false,
+					Game.font16bit.render((int) Boot.width - 35 - text.length() * 16, 3, -3, text, screen, false,
 							false);
-					Boot.get().font.render((int) Boot.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
+					Game.font16bit.render((int) Boot.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
 							screen, false, false);
 				} else {
-					Boot.get().font.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
-					Boot.get().font.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+					Game.font16bit.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+					Game.font16bit.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 							false, false);
 				}
 

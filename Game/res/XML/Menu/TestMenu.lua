@@ -1,11 +1,15 @@
-print("Loading Lua for TestMenu UI")
+print("Opening TestMenu UI")
+
+function onUnload()
+	print("Closing TestMenu UI")
+end
 
 function basicContinueGame()
-	mainmenu:continueGame()
+	menu:continueGame()
 end
 
 function advancedContinueGame()
-	mainmenu:continueGame()
+	menu:continueGame()
 end
 
 function luaTestClick()
@@ -16,3 +20,6 @@ function luaTestHover()
 	print("Button Hovered Over!")
 end
 
+function luaSliderTest(newPos)
+	print("NEW POSITION: "..newPos)
+end

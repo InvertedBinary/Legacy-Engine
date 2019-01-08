@@ -2,7 +2,7 @@ package com.IB.SL.graphics;
 
 import java.util.HashMap;
 
-public class font {
+public class Font16x {
 
 	public HashMap<String, Boolean> settings;
 	public int spacing;
@@ -17,7 +17,7 @@ public class font {
 										   "0123456789.,'" + // 5
 										   "'“”;:!@$%()-+"; // 6
 	
-	public font() {
+	public Font16x() {
 	}
 	
 	public void update() {

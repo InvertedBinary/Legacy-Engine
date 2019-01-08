@@ -9,14 +9,14 @@ import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Debug;
 
 public class Location_Shrine extends Interactable {
 	transient public static Sprite sprite;
 	
-	transient private font8x8 font = new font8x8();
+	transient private Font8x font = new Font8x();
 	transient TileCoord p_spawn;
 	private int sx = 0, sy = 0;
 	

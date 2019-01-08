@@ -15,11 +15,17 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
+import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
+import com.IB.SL.graphics.SpriteSheet;
+import com.IB.SL.graphics.UI.listeners.UI_ButtonListener;
+import com.IB.SL.graphics.UI.listeners.UI_SliderListener;
+import com.IB.SL.graphics.UI.listeners.UI_UnloadListener;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.graphics.UI.part.UI_Button;
-import com.IB.SL.graphics.UI.part.UI_ButtonListener;
+import com.IB.SL.graphics.UI.part.UI_Label;
+import com.IB.SL.graphics.UI.part.UI_Slider;
 import com.IB.SL.graphics.UI.part.UI_Sprite;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.util.LuaScript;
@@ -37,6 +43,8 @@ public class TagMenu extends UI_Menu
 	private String reading_tag;
 	private String current_tag;
 	
+	public UI_UnloadListener UnloadListener;
+	
 	public TagMenu(String tag_name)
 	{
 		this.TAG = tag_name;
@@ -51,7 +59,6 @@ public class TagMenu extends UI_Menu
 		this.PATH = path;
 		this.TAG = path.substring(path.lastIndexOf('/') + 1, path.length());
 
-
 		this.external_tag = external;
 		init();
 	}
@@ -61,6 +68,17 @@ public class TagMenu extends UI_Menu
 			this.unloadCurrent();
 			this.load(new TagMenu(PATH, external_tag), true);
 			Mouse.setMouseB(-1);
+		}
+	}
+	
+	public void updateUnloaded() {
+		if (enabled == false) {
+			if (getKey() != null) {
+				if (getKey().Pause) {
+					load(this, false);
+					getKey().Pause = false;
+				}
+			}
 		}
 	}
 	
@@ -74,6 +92,9 @@ public class TagMenu extends UI_Menu
 	}
 	
 	public void onUnload() {
+		if (this.UnloadListener != null)
+			this.UnloadListener.onUnload();
+		
 		killLua();
 	}
 	
@@ -172,6 +193,17 @@ public class TagMenu extends UI_Menu
 				break;			
 			case "global.audioloop":
 				break;
+			case "global.onUnload":
+				String onUnloadFunc = val;
+				
+				this.UnloadListener = new UI_UnloadListener() {
+					@Override
+					public void onUnload() {
+				        LuaValue UnloadCall = ls.globals.get(onUnloadFunc);
+				        UnloadCall.call();
+					}
+				};
+				break;
 			case "components.button":
 				/*for (int i = 0 ; i < current_attribs.getLength(); i++) {
 					System.out.println(current_attribs.getQName(i) + " :: " + current_attribs.getValue(i));
@@ -193,11 +225,13 @@ public class TagMenu extends UI_Menu
 					int hex = Long.decode(imagpth).intValue();
 					spr = new Sprite(w, h, hex);
 				} catch (NumberFormatException e) {
-					try {
-						Field field = Sprite.class.getField(imagpth);
-						spr = (Sprite) field.get(field.getType());
-					} catch (Exception e2) {
-						e2.printStackTrace();
+					if (!imagpth.endsWith(".png")) {
+						try {
+							Field field = Sprite.class.getField(imagpth);
+							spr = (Sprite) field.get(field.getType());
+						} catch (Exception e2) {
+							e2.printStackTrace();
+						}
 					}
 				}
 				
@@ -206,9 +240,11 @@ public class TagMenu extends UI_Menu
 				} else if (!trueAnim) {
 					btn = new UI_Button(x, y, spr, transAnim);
 				} else {
-					btn = new UI_Button(x, y, w, h);
+					SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/XML/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
+					AnimatedSprite animSpr = new AnimatedSprite(animSheet, 1, 1, 1);
+					btn = new UI_Button(x, y, animSpr);
 					//AnimatedSprite aspr = new AnimatedSprite();
-					//addUI(new UI_Button(x, y, aspr));
+					//addUI(new UI_Button(x, y, animSpr));
 				}
 				
 				btn.addListener(new UI_ButtonListener() {
@@ -229,23 +265,40 @@ public class TagMenu extends UI_Menu
 				
 				break;
 			case "components.label":
+				int lblx = (int)parseNum(pullAttrib("x", "0"));
+				int lbly = (int)parseNum(pullAttrib("y", "0"));
+				int lblhex = Long.decode(pullAttrib("color", "0")).intValue();
+				int lblhvhex = Long.decode(pullAttrib("hvcolor", "" + lblhex)).intValue();
+				String hyperlink = pullAttrib("hyperlink", "");
+
+				UI_Label uilbl = new UI_Label(lblx, lbly, val);
+				uilbl.color = lblhex;
+				uilbl.fallback_color = uilbl.color;
+				uilbl.hyperlink = hyperlink;
+				uilbl.hover_color = lblhvhex;
+				uilbl.spacing = -2;
+				uilbl.font_size = 8;
+				
+				addUI(uilbl);
+				
 				break;
 			case "components.image":
 				int imagx = (int)parseNum(pullAttrib("x", "0"));
 				int imagy = (int)parseNum(pullAttrib("y", "0"));
 				int imagw = (int)parseNum(pullAttrib("w", "0"));
 				int imagh = (int)parseNum(pullAttrib("h", "0"));
+				double imagr = Math.toRadians(parseNum(pullAttrib("r", "0")));
 				String imagimagpth = val;
 				
 				Sprite imagspr = Sprite.Grass;
 
 				try {					
 					int hex = Long.decode(imagimagpth).intValue();
-					imagspr = new Sprite(imagw, imagh, hex);
+					imagspr = Sprite.rotate(new Sprite(imagw, imagh, hex), imagr);
 				} catch (NumberFormatException e) {
 					try {
 						Field field = Sprite.class.getField(imagimagpth);
-						imagspr = (Sprite) field.get(field.getType());
+						imagspr = Sprite.rotate((Sprite) field.get(field.getType()), imagr);
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -254,6 +307,30 @@ public class TagMenu extends UI_Menu
 				UI_Sprite uis = new UI_Sprite(imagx, imagy, imagspr);
 				addUI(uis);
 				
+				break;
+			case "components.slider":
+				UI_Slider uiSlider;
+
+				int	sliderx  = (int)parseNum(pullAttrib("x",  "0"));
+				int slidery  = (int)parseNum(pullAttrib("y",  "0"));
+				int sliderw  = (int)parseNum(pullAttrib("w",  "0"));
+				int sliderxo = (int)parseNum(pullAttrib("xo", "" + sliderw/2));
+				String onPosUpdated = pullAttrib("onPosUpdated", "");
+
+				uiSlider = new UI_Slider(sliderx, slidery, sliderw, sliderxo);
+				uiSlider.railCol = Long.decode(pullAttrib("railColor", "" + uiSlider.railCol)).intValue();
+				uiSlider.slideCol = Long.decode(pullAttrib("slideCol", "" + uiSlider.slideCol)).intValue();
+
+
+				uiSlider.addListener(new UI_SliderListener() {
+					@Override
+					public void PositionChanged() {
+				        LuaValue PosCall = ls.globals.get(onPosUpdated);
+				        PosCall.call(LuaValue.valueOf(uiSlider.pos));
+					}
+				});
+				
+				addUI(uiSlider);
 				break;
 			default:
 				System.out.println(" - !! Unknown Menu Component !!: " + reading_tag);
@@ -290,7 +367,8 @@ public class TagMenu extends UI_Menu
 		ls = new LuaScript(luaString);
 		ls.addGlobal("level", this);
 		ls.addGlobal("g", Boot.get());
-		ls.addGlobal("mainmenu", MainMenu);
+		//ls.addGlobal("mainmenu", MainMenu);
+		ls.addGlobal("menu", this);
 		//ls.addGlobal("key", Boot.get().getInput());
 		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
 		

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.font;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.CheckBounds;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
@@ -18,8 +18,8 @@ import com.IB.SL.util.Sound;
 
 public class TextBox extends UI_Root implements KeyListener{
 	
-private font8x8 font;
-private font font16;
+private Font8x font;
+private Font16x font16;
 
 private boolean usingOwnKB = false;
 
@@ -86,8 +86,8 @@ private class MyDispatcher implements KeyEventDispatcher {
 		this.width = width;
 		this.height = height;
 		checkBounds = new CheckBounds();
-		font = new font8x8();
-		font16 = new font();
+		font = new Font8x();
+		font16 = new Font16x();
 		this.key = key;
 		this.small = small;
 		

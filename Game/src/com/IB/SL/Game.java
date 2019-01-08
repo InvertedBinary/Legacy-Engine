@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.font;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.GUI;
 import com.IB.SL.graphics.UI.TagMenu;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
@@ -53,7 +53,6 @@ public class Game extends Canvas implements Runnable
 	private Thread thread;
 	public JFrame frame;
 	public Keyboard key;
-	public transient font font;
 
 	public double xScroll, yScroll;
 
@@ -65,7 +64,8 @@ public class Game extends Canvas implements Runnable
 	public boolean autoSave = true;
 
 	private boolean running = false;
-	public transient font8x8 font8x8;
+	public static transient Font16x font16bit;
+	public static transient Font8x font8bit;
 	public static int currentLevelId;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
@@ -190,8 +190,8 @@ public class Game extends Canvas implements Runnable
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();
-			font = new font();
-			font8x8 = new com.IB.SL.graphics.font8x8();
+			font16bit = new Font16x();
+			font8bit = new Font8x();
 			addMouseListener(mouse);
 			addMouseMotionListener(mouse);
 			addMouseWheelListener(mouse);
@@ -232,7 +232,7 @@ public class Game extends Canvas implements Runnable
 			}
 		});
 	}
-
+	
 	public void StartDiscord()
 		{
 			 DiscordEventHandlers handler = new DiscordEventHandlers();
@@ -304,7 +304,7 @@ public class Game extends Canvas implements Runnable
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		quit();
 	}
 
 	/*
@@ -332,6 +332,7 @@ public class Game extends Canvas implements Runnable
 
 					//speedModif++;
 					//if (speedModif % 1 == 0) {
+					if (UI_Menu.suspend != UI_Menu.SUS_UPD && UI_Menu.suspend != UI_Menu.SUS_ALL)
 					update();
 					//speedModif = 0;
 					//}
@@ -556,21 +557,24 @@ public class Game extends Canvas implements Runnable
 			double maxw = getLevel().width << VARS.TILE_BIT_SHIFT;
 			double maxh = getLevel().height << VARS.TILE_BIT_SHIFT;
 
-			if (xSp < 0) {
-				xScroll = 0;
-			} else {
-				Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+				if (xSp < 0) {
+					xScroll = 0;
+				} else {
+					Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+				}
+				Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
+	
+			if (UI_Menu.suspend != UI_Menu.SUS_ALL) {
+				getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			}
-			Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
-
-			getLevel().render((int) (xScroll), (int) (yScroll), screen);
+			
 			gui.render(screen);
 
 			if (showAVG) {
 				if (fpsAVG < 200) {
-					font8x8.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
+					font8bit.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
 				} else {
-					font8x8.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
+					font8bit.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
 				}
 			}
 

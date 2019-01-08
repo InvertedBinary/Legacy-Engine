@@ -1,7 +1,7 @@
 package com.IB.SL.graphics;
 
 
-public class font8x8 {
+public class Font8x {
 
 	public int spacing;
 	
@@ -16,7 +16,7 @@ public class font8x8 {
 										   			 "0123456789.,'" + // 5
 										   			 "'“”;:!@$%()-+"; // 6
 	
-	public font8x8() {
+	public Font8x() {
 	}
 	
 	public void update() {

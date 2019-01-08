@@ -10,7 +10,7 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Vector2i;
@@ -38,7 +38,7 @@ public class Alice extends Mob{
 		this.speed = 0.5;
 		this.hostility = "NEU";
 		sprite = Sprite.playerback;
-		new font8x8();
+		new Font8x();
 	}
 	
 	

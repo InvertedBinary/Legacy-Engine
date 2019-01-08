@@ -86,7 +86,7 @@ public class Commands {
 		cmds.add("restart");
 		cmds.add("fullscr");
 		cmds.add("tfullscr");
-		cmds.add("menu");
+		cmds.add("ui");
 
 			if (Command != null && Command.length() > 0) {
 					if (cmds.contains(Command.toLowerCase())) {
@@ -188,7 +188,7 @@ public class Commands {
 					}
 				break;
 				
-				case "menu":
+				case "ui":
 					Boot.get().getMenu().load(new TagMenu(Modifier), true);
 				break;
 				

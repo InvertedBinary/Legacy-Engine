@@ -4,14 +4,18 @@
 		<title>Main Menu</title>
 		<background>Title</background>
 		<audioloop>somemusic.ogg</audioloop>
+		<onUnload>onUnload</onUnload>
 	</global>
 	<components>
 		<!--button x="0" y="0" w="30" h="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">Btn 0</button-->
-		<button x="150" y="140" w="108" h="12" transAnim="false" anim="false" image="0xFF00FF" onClick="basicContinueGame" onHover="luaTestHover">Btn 1</button>
+		<button x="150" y="130" w="108" h="12" transAnim="false" anim="false" image="0xFF00FF" onClick="basicContinueGame" onHover="luaTestHover">Btn 1</button>
 		<button x="180" y="75" transAnim="false" anim="false" image="Grass" onClick="luaTestClick" onHover="luaTestHover">Btn 4</button>
-		<!--button x="5" y="30" w="30" h="40" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">Btn 2</button-->
+		<button x="150" y="145" w="111" h="15" transAnim="false" image="ContinueGame.png" anim="true" onClick="basicContinueGame" onHover="luaTestHover">Btn 2</button>
 		<!--button x="10" y="60" w="40" h="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">Btn 3</button-->
-		<label x="0" y="50" w="10" h="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">Text</label>
-		<image x="230" y="82" w="30" h="10" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">abilitybox</image>
+		<label x="150" y="12" color="0xFFFFFF">Title Menu</label>
+		<label x="150" y="31" color="0x1a0dab" hvcolor="0x660099" hyperlink="www.moremeridian.com">Meridian Website</label>
+
+		<image x="230" y="82" w="30" h="10" r="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">abilitybox</image>
+		<slider x="150" y="60" w="108" xo="75" railColor="0xFFFF00" slideCol="0xFF0000" onPosUpdated="luaSliderTest">Slider 1</slider>
 	</components>
-</uiset>
+</uiset> 

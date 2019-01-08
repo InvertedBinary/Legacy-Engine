@@ -9,7 +9,7 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font8x;
 
 public class Villager01 extends Mob{
 	
@@ -27,7 +27,7 @@ public class Villager01 extends Mob{
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16, 16, 2);*/
 	transient private AnimatedSprite animSprite = down;
 	
-	transient private font8x8 font8x8;
+	transient private Font8x font8x8;
 	transient private String dialogue;
 	transient private int dialogueTime = 0;
 	transient private int time = 0;
@@ -44,7 +44,7 @@ public class Villager01 extends Mob{
 		this.name = "fish";
 		this.maxhealth = 20;
 		this.mobhealth = maxhealth;
-		this.font8x8 = new font8x8();
+		this.font8x8 = new Font8x();
 		sprite = Sprite.playerback;
 		this.hostility = "PASS";
 	}

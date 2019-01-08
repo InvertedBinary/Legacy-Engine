@@ -8,8 +8,8 @@ import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.font;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.UI;
 import com.IB.SL.graphics.UI.part.UI_Button;
 import com.IB.SL.graphics.UI.part.UI_Root;
@@ -20,8 +20,8 @@ public class UI_Menu extends DefaultHandler {
 	public Sprite bg;
 	public SpriteSheet s_bg;
 	public UI ui;
-	public font8x8 font8x8 = new font8x8();
-	public font font = new font();
+	public Font8x font8x8 = new Font8x();
+	public Font16x font = new Font16x();
 	public int x;
 	public int y;
 	public boolean enabled = false;
@@ -139,10 +139,19 @@ public class UI_Menu extends DefaultHandler {
 			btns.hover = false;
 		}
 		current.onUnload();
-		current = null;
 		menu.enabled = false;
+		current = null;
 		}
 	  }
+	}
+	
+	public void continueGame() {
+		Boot.get().getMenu().unload(Boot.get().getMenu().current);
+		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
+		Boot.get().getPlayer().removed = false;
+		Boot.get().getLevel().add(Boot.get().getPlayer());
+		//Boot.get().getLevel().loadLua();
+		}
 	}
 	
 	public void addUI(UI_Root component) {

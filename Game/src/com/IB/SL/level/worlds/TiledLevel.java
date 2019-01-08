@@ -391,7 +391,7 @@ public class TiledLevel extends Level {
 				if (this.solid_geometry != null) {
 					for (int i = 0; i < this.solid_geometry.size(); i++) {
 						LineSegment ln = solid_geometry.get(i);
-						Boot.get().font8x8.render((int)ln.midpoint().x, (int)ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
+						Boot.get().font8bit.render((int)ln.midpoint().x, (int)ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
 						ln.drawLine(screen, true);
 						
 						ln.Perpendicular().drawLine(screen, true);

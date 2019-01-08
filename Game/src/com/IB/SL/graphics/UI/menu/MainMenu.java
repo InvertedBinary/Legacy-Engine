@@ -57,22 +57,13 @@ public class MainMenu extends UI_Menu {
 	
 	public void update() {
 		if (btn_Continue.clicked) {
-			continueGame();
+			this.continueGame();
 		}
 		
 		if (getKey() != null) {
 			if (getKey().Pause) {
 				unload(this);
 			}
-		}
-	}
-	
-	public void continueGame() {
-		Boot.get().getMenu().unload(Boot.get().getMenu().current);
-		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
-		Boot.get().getPlayer().removed = false;
-		Boot.get().getLevel().add(Boot.get().getPlayer());
-		//Boot.get().getLevel().loadLua();
 		}
 	}
 	
