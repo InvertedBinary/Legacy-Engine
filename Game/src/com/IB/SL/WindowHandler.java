@@ -21,7 +21,9 @@ public class WindowHandler implements WindowListener, FocusListener{
 
 	@Override
 	public void windowClosed(WindowEvent event) {
-			Boot.get().quit();
+		//Boot.get().quit(); <= Should be called, but is being temporarily removed
+						      // as it gets called when switching in/out of fullscreen mode
+							  // causing it to end the process
 	}
 
 	@Override

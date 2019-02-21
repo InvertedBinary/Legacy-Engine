@@ -1,19 +1,31 @@
 package com.IB.SL.graphics.UI.part;
 
+import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
+import com.IB.SL.graphics.UI.listeners.UI_SliderListener;
+import com.IB.SL.input.Mouse;
 
 public class UI_Slider extends UI_Root {
 	
-	public int x = 0;
-	public int y = 0;
-	public int x2 = 16;
-	public int y2 = 3;
-	public int pos = 10;
+	public int x, y, width, pos;
 	
-	public UI_Slider(int x, int y, int StartPos) {
-		this.pos = StartPos;
+	public int railCol = 0xFFFFFF;
+	public int slideCol = 0x000000;
+	
+	UI_SliderListener listener;
+	
+	public UI_Slider(int x, int y, int width, int StartPos) {
 		this.x = x;
 		this.y = y;
+		this.width = width;
+		
+		if (StartPos < 0)
+			StartPos = 0;
+		
+		if (StartPos > width)
+			StartPos = width;
+		
+		this.pos = StartPos;
 	}
 	
 	public int getX() {
@@ -28,15 +40,39 @@ public class UI_Slider extends UI_Root {
 		return pos;
 	}
 	
+	private boolean dragging = false;
 	public void update() {
-		if (checkBounds(x, y - 5, x2, 10)) {
-			System.out.println("Slider Greenlit!");
+		if (checkBounds(x, y - 4, width, 4)) {
+			if (Mouse.getButton() == 1) {
+				this.dragging = true;
+			}
+		}
+		
+		if (Mouse.getButton() != 1)
+			this.dragging = false;
+		
+		if (dragging) {
+			int newPos = (Mouse.getX() / Boot.scale) - x;
+			if (newPos > width) {
+				newPos = width;
+			}
+			
+			if (newPos < 0) {
+				newPos = 0;
+			}
+			
+			this.pos = newPos;
+			this.listener.PositionChanged();
 		}
 	}
 	
 	public void render(Screen screen) {
-		//Debug.drawFillRect(screen, x, y, x + x2, y2, 0x000000, true);
+		screen.drawFillRect(x, y, width, 1, this.railCol, false);
+		screen.drawFillRect(x + pos - 1, y - 4, 2, 8, this.slideCol, false);
+	}
 
+	public void addListener(UI_SliderListener listener) {
+		this.listener = listener;
 	}
 	
 }

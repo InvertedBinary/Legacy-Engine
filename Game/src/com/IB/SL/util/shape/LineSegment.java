@@ -14,13 +14,15 @@ public class LineSegment extends Polygon {
 	public Vertex bot_pt;
 	
 	public float slope;
+	public float length;
+	public float angle;
 	
 	public int color = 0xffFFFFFF;
-	float length;
 	
 	public LineSegment(Vertex p, float length, float angle) {
 		this.origin = p;
 		this.length = length;
+		this.angle = angle;
 		
 		float xlen = ((float)Math.cos(angle) * length);
 		float ylen = ((float)Math.sin(angle) * length);
@@ -28,6 +30,22 @@ public class LineSegment extends Polygon {
 		this.addVertex(p);
 		endPoint = createVertex(xlen + origin.x, ylen + origin.y);
 		this.addVertex(endPoint);
+		
+		this.left_pt = origin;
+		this.right_pt = endPoint;
+		
+		this.top_pt = origin;
+		this.bot_pt = endPoint;
+		
+		if (origin.x > endPoint.x) {
+			this.left_pt = endPoint;
+			this.right_pt = origin;
+		}
+		
+		if (origin.y > endPoint.y) {
+			this.top_pt = endPoint;
+			this.bot_pt = origin;
+		}
 		
 		initShape();
 	}
@@ -84,10 +102,17 @@ public class LineSegment extends Polygon {
 		
 		this.length = getDistance(p1, p2);
 		
+		
 		this.addVertex(p1);
 		this.addVertex(p2);
 		
 		initShape();
+
+		this.angle = (float) Math.atan2(this.right_pt.y - this.left_pt.y, this.right_pt.x - this.left_pt.x);
+	}
+	
+	public Vertex midpoint() {
+		return new Vertex((this.left_pt.x + this.right_pt.x) / 2, (this.top_pt.y + this.bot_pt.y) / 2);
 	}
 	
 	public void drawLine(Screen screen, boolean fixed) {
@@ -95,14 +120,25 @@ public class LineSegment extends Polygon {
 	}
 	
 	public void initShape() {
-		this.slope = (this.endPoint.y - this.origin.y) / (this.endPoint.x - this.origin.x);
+		this.slope = (-this.right_pt.y - (-this.left_pt.y)) / (this.right_pt.x - this.left_pt.x);
 		init();
 	}
-	//TODO: left off
-	public boolean intersectsLine(LineSegment ls, boolean test) {
+	
+	public LineSegment Perpendicular() {
+		return new LineSegment(this.midpoint(), this.length, this.angle - (float)Math.PI/2);
+	}
+	
+	public LineSegment UnitPerpendicular() {
+		return new LineSegment(this.midpoint(), 1, this.angle - (float)Math.PI/2);
+	}
+	
+	public boolean CollidesWithLine(LineSegment ls) {
 			if (this.slope == ls.slope) {
 				if (Math.round(this.top_pt.y) == Math.round(ls.top_pt.y)) {
-					
+					if (this.right_pt.x < ls.left_pt.x || this.left_pt.x > ls.right_pt.x) {
+						return false;
+					}
+					return true;
 				}
 			}
 			
@@ -122,10 +158,24 @@ public class LineSegment extends Polygon {
 				return true;
 			}
 			
-			return false;
+		    if (o == 0 && onSegment(p1, p2, q1)) return true; 
+		    if (o2 == 0 && onSegment(p1, q2, q1)) return true; 
+		    if (o3 == 0 && onSegment(p2, p1, q2)) return true; 
+		    if (o4 == 0 && onSegment(p2, q1, q2)) return true; 
+		  
+		    return false;
 		}
 	
-	public boolean intersectsLine(LineSegment ls) {
+	public boolean onSegment(Vertex p, Vertex q, Vertex r) 
+	{ 
+	    if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && 
+	        q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) 
+	       return true; 
+	  
+	    return false; 
+	} 
+	
+	public boolean CrossesLine(LineSegment ls) {
 		Vertex p1 = origin;
 		Vertex q1 = endPoint;
 		Vertex p2 = ls.origin;
@@ -150,7 +200,9 @@ public class LineSegment extends Polygon {
 
 		if (val == 0) return 0;  // collinear
 
-		// clock or counterclock wise
-		return (val > 0)? 1: 2; 
+		// clock or counter-clock wise
+		return (val > 0)? 1 : 2; 
+		
+		
 		}
 	}

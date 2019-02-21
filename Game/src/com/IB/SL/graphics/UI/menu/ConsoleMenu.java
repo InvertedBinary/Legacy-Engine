@@ -5,7 +5,7 @@ import com.IB.SL.entity.projectile.Selector;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.UI.part.TextBox;
-import com.IB.SL.util.Commands;
+import com.IB.SL.input.Commands;
 
 public class ConsoleMenu extends UI_Menu {
 
@@ -67,8 +67,8 @@ public class ConsoleMenu extends UI_Menu {
 		cmd_box.render(screen);
 		font8x8.render(x, y + 20, 1, 0xFFFFFF, cmd_box.history, screen, false, false);
 		if (Selector.selected != null)
-			font8x8.render(x, Boot.get().height - 16, 1, 0xFFFFFF, Selector.selected.toString(), screen, false, false);
+			font8x8.render(x, Boot.height - 16, 1, 0xFFFFFF, Selector.selected.toString(), screen, false, false);
 		else
-			font8x8.render(x, Boot.get().height - 16, 1, 0xFFFFFF, "No Selection", screen, false, false);
+			font8x8.render(x, Boot.height - 16, 1, 0xFFFFFF, "No Selection", screen, false, false);
 	}
 }

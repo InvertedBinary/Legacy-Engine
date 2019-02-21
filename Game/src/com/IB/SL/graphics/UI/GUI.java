@@ -10,16 +10,16 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.font;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.graphics.UI.part.TextBox;
 
 public class GUI extends CheckBounds {
 	private static final long serialVersionUID = 1L;
 
-	transient public font font;
-	transient public font8x8 font8x8;
+	transient public Font16x font;
+	transient public Font8x font8x8;
 
 	public transient int displayTime = 0;
 	transient public int displayTimeM = 0;
@@ -44,8 +44,8 @@ public class GUI extends CheckBounds {
 	public transient UI_Menu menu = new UI_Menu();
 
 	public GUI() {
-		font = new font();
-		font8x8 = new font8x8();
+		font = new Font16x();
+		font8x8 = new Font8x();
 	}
 
 	public void update() {
@@ -156,6 +156,7 @@ public class GUI extends CheckBounds {
 		double s17 = s16 - Slope;// 6 OR 0.75
 		double s18 = s17 - Slope;// 4 OR 0.5
 		double s19 = s18 - Slope;// 2 OR 0.25
+		
 		if (mob.incombat || mob.mobhealth < mob.maxhealth) {
 			displayTime = 0;
 		} else if (displayTime < 151) {

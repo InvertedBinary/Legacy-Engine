@@ -2,7 +2,7 @@ package com.IB.SL.util;
 
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font8x;
 
 public class Debug {
 
@@ -22,7 +22,7 @@ public class Debug {
 		   screen.drawVectors(Boot.get().getLevel().BresenhamLine(x0, y0, x1, y1), colour, fixed);
 		}
 	   
-	   public static void drawTriangle(Screen screen, font8x8 font8x8, double x, double y, double x2, double y2) {
+	   public static void drawTriangle(Screen screen, Font8x font8x8, double x, double y, double x2, double y2) {
 
 			double a = (x  - (x2 * 16));
 			double b = (y - (y2 * 16));

@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="luaj-3.0.1/" kind="src" path="lib"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre-9.0.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_151"/>
 	<classpathentry kind="lib" path="res"/>
 	<classpathentry kind="lib" path="lib/easyogg.jar" sourcepath="lib/easyogg.jar"/>
 	<classpathentry kind="lib" path="lib/jogg-0.0.7.jar"/>
@@ -109,11 +109,14 @@
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-yoga-sources.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-yoga.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl.jar"/>
-	<classpathentry kind="lib" path="lib/discord-rpc-0.9-BETA-4.jar"/>
 	<classpathentry kind="lib" path="lib/netty-all-4.1.21.Final.jar" sourcepath="lib/netty-all-4.1.21.Final.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jme-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jse-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-sources-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/joml-jdk8-1.9.9.jar"/>
+	<classpathentry kind="lib" path="lib/ini4j-0.5.4-jdk14.jar"/>
+	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/discord-rpc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Game">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="C:/Users/Nate/eclipse/java-oxygen/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+
+    <path id="LWJGL3.userclasspath"/>
+    <path id="Game.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="res"/>
+        <pathelement location="lib/easyogg.jar"/>
+        <pathelement location="lib/jogg-0.0.7.jar"/>
+        <pathelement location="lib/jorbis-0.0.15.jar"/>
+        <pathelement location="lib/startup2.jar"/>
+        <path refid="LWJGL3.userclasspath"/>
+        <pathelement location="lib/lwjgl3/lwjgl-assimp-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-assimp-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-assimp-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-assimp.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-bgfx-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-bgfx-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-bgfx-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-bgfx.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-egl-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-egl-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-egl.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-glfw-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-glfw-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-glfw-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-glfw.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jawt-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jawt-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jawt.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jemalloc-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jemalloc-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jemalloc-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-jemalloc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-lmdb-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-lmdb-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-lmdb-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-lmdb.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nanovg-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nanovg-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nanovg-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nanovg.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nfd-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nfd-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nfd-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nfd.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nuklear-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nuklear-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nuklear-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-nuklear.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openal-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openal-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openal-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openal.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opencl-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opencl-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opencl.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengl-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengl-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengl-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengl.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengles-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengles-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengles-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-opengles.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openvr-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openvr-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openvr-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-openvr.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-ovr-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-ovr-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-ovr-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-ovr.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-par-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-par-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-par-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-par.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-rpmalloc-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-rpmalloc-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-rpmalloc-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-rpmalloc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-sse-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-sse-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-sse-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-sse.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-stb-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-stb-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-stb-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-stb.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyexr-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyexr-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyexr-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyexr.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyfd-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyfd-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyfd-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-tinyfd.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-vulkan-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-vulkan-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-vulkan.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-xxhash-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-xxhash-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-xxhash-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-xxhash.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-yoga-javadoc.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-yoga-natives-windows.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-yoga-sources.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl-yoga.jar"/>
+        <pathelement location="lib/lwjgl3/lwjgl.jar"/>
+        <pathelement location="lib/discord-rpc-0.9-BETA-4.jar"/>
+        <pathelement location="lib/netty-all-4.1.21.Final.jar"/>
+        <pathelement location="lib/luaj-3.0.1"/>
+        <pathelement location="lib/luaj-3.0.1/lib/luaj-jme-3.0.1.jar"/>
+        <pathelement location="lib/luaj-3.0.1/lib/luaj-jse-3.0.1.jar"/>
+        <pathelement location="lib/luaj-3.0.1/lib/luaj-sources-3.0.1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="lib">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="luaj-3.0.1/"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="lib"/>
+            <exclude name="luaj-3.0.1/"/>
+            <classpath refid="Game.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Boot">
+        <java classname="com.IB.SL.Boot" failonerror="true" fork="yes">
+            <classpath refid="Game.classpath"/>
+        </java>
+			<jar destfile="${dir.jarfile}/SL2.jar" filesetmanifest="mergewithoutmain">
+    </target>
+</project>

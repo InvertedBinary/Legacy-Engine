@@ -21,10 +21,10 @@ public class CheckBounds extends UI implements Serializable{
 
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale, boolean temp) {
 		if (toScale) {
-		x *= Boot.get().scale;
-		y *= Boot.get().scale;
-		width *= Boot.get().scale;
-		height *= Boot.get().scale;
+		x *= Boot.scale;
+		y *= Boot.scale;
+		width *= Boot.scale;
+		height *= Boot.scale;
 		}
 		
 		if (Mouse.getX() < x + width && Mouse.getX() > x && Mouse.getY() < y + height && Mouse.getY() > y ) {
@@ -36,10 +36,10 @@ public class CheckBounds extends UI implements Serializable{
 
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale) {
 		if (toScale) {
-		x *= Boot.get().scale;
-		y *= Boot.get().scale;
-		width *= Boot.get().scale;
-		height *= Boot.get().scale;
+		x *= Boot.scale;
+		y *= Boot.scale;
+		width *= Boot.scale;
+		height *= Boot.scale;
 		}
 		
 		System.out.println("X: " + Screen.xo + "," + x);

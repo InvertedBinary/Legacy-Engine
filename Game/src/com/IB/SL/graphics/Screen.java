@@ -517,9 +517,8 @@ public void render32Mob(double x2, double y2, Mob mob) {
 
 	                  pixels[(int) (xa + ya * width)] = col;
 	            }
-		}
-
 			}
+		}
 	}
 	
 	public void renderMobSpriteSwimming(int xp, int yp, Sprite sprite) {
@@ -538,10 +537,9 @@ public void render32Mob(double x2, double y2, Mob mob) {
 						col = colSwitch(col, tilesx, tilesy);
 
 	                  pixels[(int) (xa + ya * width)] = col;
-	            }
-		}
-
+				}
 			}
+		}
 	}
 
 	public void renderMobSpriteUniversal(int xp, int yp, Mob mob) {
@@ -563,10 +561,9 @@ public void render32Mob(double x2, double y2, Mob mob) {
 							col = 0xffFF0000;
 						}
 	                  pixels[(int) (xa + ya * width)] = col;
-	            }
-		}
-
+				}
 			}
+		}
 	}
 	
 	public void renderMobSpriteUniversal(int xp, int yp, Sprite sprite, int rr, int gg, int bb) {
@@ -597,12 +594,10 @@ public void render32Mob(double x2, double y2, Mob mob) {
 						//col = MyColor.tint(col, r, g, b);
 
 	                  pixels[(int) (xa + ya * width)] = col;
-	            }
-		}
-
+				}
 			}
+		}
 	}
-	
 	
 	
 	public void renderAI(int xp, int yp, Sprite sprite) {
@@ -879,8 +874,8 @@ public void render32Mob(double x2, double y2, Mob mob) {
 public void setOffset(int xOffset, int yOffset) {
 	this.xOffset = xOffset;
 	this.yOffset = yOffset;
-	xo = (Mouse.getX() / Game.scale + xOffset) / TileCoord.TILE_SIZE;
-    yo = (Mouse.getY() / Game.scale + yOffset) / TileCoord.TILE_SIZE;
+	xo = (Mouse.getX() / Boot.scale + xOffset) / TileCoord.TILE_SIZE;
+    yo = (Mouse.getY() / Boot.scale + yOffset) / TileCoord.TILE_SIZE;
 	}
 
 

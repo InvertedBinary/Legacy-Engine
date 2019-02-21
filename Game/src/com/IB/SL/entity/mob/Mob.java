@@ -21,7 +21,7 @@ import com.IB.SL.entity.projectile.WizardProjectile2;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.util.AABB;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.shape.LineSegment;
@@ -237,28 +237,89 @@ public abstract  class Mob extends Entity implements Serializable {
 		level.add(zb);
 
 	}
-	public LineSegment XT_YT_ls;
+	public LineSegment feetLine;
 	public boolean sliding = false;
 	
-	
 	protected boolean collision(double xa, double ya) {
+		solid = false;
+
+		double xt = ((x() + xa));
+		double yt = ((y() + ya));
+		
+		feetLine = new LineSegment(
+			new Vertex((float) xt + 24f, (float) yt + 60f), 
+			new Vertex((float)xt + 38f, (float)yt + 60f)
+		);
+
+		if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
+			return false;
+		}
+
+		for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
+			LineSegment ls = ((TiledLevel) Boot.getLevel()).solid_geometry.get(i);
+			
+			boolean collides = feetLine.CollidesWithLine(ls);
+			
+			if (collides) {
+				//is the player walking with the slope or down it?
+				int slopePolarity = PolarityOf(ls.slope);
+				int xaPolarity = PolarityOf(xa);
+				
+				/*if (this.pos().y() == ls.top_pt.y + 1) {
+					move(0, -1);
+				}*/
+
+				if (xa != 0) {
+					if (ls.slope == 0 || Math.abs(ls.slope) == Double.POSITIVE_INFINITY) {
+						return true;
+					}
+					
+					if (slopePolarity == xaPolarity) {
+						//They are walking with the slope?
+						double dy = ls.slope * (x() - ls.left_pt.x);
+						System.out.println("Y: " + y() + " DY: " + dy + " ls.left_pt.x : x(): " + ls.left_pt.x + " : " + x());
+  						//move(0, -Math.abs(dy));
+  					  	move(0, -Math.abs(1 - (vx() * (ls.slope / 10))));
+					} else {
+						//They are walking down the slope?
+						// Nothing special needs to happen really..
+					}
+				}
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int PolarityOf(double num) {
+		if (num < 0)
+			return -1;
+		if (num > 0)
+			return 1;
+		
+		return 0;
+	}
+	
+	@Deprecated
+	protected boolean old_polyline_collision(double xa, double ya) {
 			boolean prev_solid = solid;
 			solid = false;
 
 			double xt = ((x() + xa));
 			double yt = ((y() + ya));
-			AABB aabb = new AABB(this.getBounds());
-			aabb.moveTo(xt, yt);
-			XT_YT_ls = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 42f, (float)yt + 62f)); //=>38, 60
+			//AABB aabb = new AABB(this.getBounds());
+			//aabb.moveTo(xt, yt);
+			feetLine = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 60f)); //=>38, 60
 			//TODO: Add collision for parallel lines 
-			if (((Tiled_Level) Boot.getLevel()).solid_geometry == null) {
+			if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
 				return false;
 			}
 
-			for (int i = 0; i < ((Tiled_Level) Boot.getLevel()).solid_geometry.size(); i++) {
-				LineSegment ls = ((Tiled_Level) Boot.getLevel()).solid_geometry.get(i);
+			for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
+				LineSegment ls = ((TiledLevel) Boot.getLevel()).solid_geometry.get(i);
 
-				if (ls.intersectsLine(XT_YT_ls , true)) {
+				if (ls.CollidesWithLine(feetLine)) {
 					//System.out.println(i + ":: " + ls.origin.x);
 					if (Math.abs(ls.slope) <= 3) {
 						if (xa != 0 && ya == 0) {
@@ -268,7 +329,7 @@ public abstract  class Mob extends Entity implements Serializable {
 							sliding = false;
 							}
 						}
-					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY) {
+					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY && (feetLine.midpoint().x > ls.left_pt.x && feetLine.midpoint().x < ls.right_pt.x)) {
 						if (canJump == true) {
 						this.sliding = true;
 							move(ls.slope / 4, 0);

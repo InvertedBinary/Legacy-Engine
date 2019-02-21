@@ -33,7 +33,7 @@ import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.worlds.MainLevel;
 import com.IB.SL.level.worlds.Maps;
 import com.IB.SL.level.worlds.SpawnHaven_Deprecated;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
@@ -322,7 +322,14 @@ public class Player extends Mob implements Serializable
 					if ((this.input.jump || this.input.up) && this.canJump && !this.sliding) {
 						this.vel().y(-6.5);
 					}
-
+					
+					if (Mouse.getButton() == 1 && walking) {
+						if (Screen.xo << VARS.TILE_BIT_SHIFT > this.x()) {
+							this.animSprite = right;
+						} else {
+							this.animSprite = left;
+						}
+					}
 				}
 			} else { 
 				walking = false;
@@ -359,12 +366,13 @@ public class Player extends Mob implements Serializable
 
 				// this.pv.add(Gravity);
 
-				if (xa != 0 || ya != 0) {
-					Game.createNewPresence();
-				}
 
 				ya = vel().y();
 				xa = vel().x();
+
+				if (xa != 0 || (ya != 0 && ya != Gravity.y())) {
+					Game.createNewPresence();
+				}
 
 				if (xa != 0) {
 					walking = true;
@@ -402,8 +410,8 @@ public class Player extends Mob implements Serializable
 
 			if (VARS.do_possession && Selector.selected != null)
 			{
-				Selector.selected.pos().set((Mouse.getX() / Game.scale + Screen.xOffset) + 0,
-						(Mouse.getY() / Game.scale + Screen.yOffset) - Selector.selected.sprite.getHeight());
+				Selector.selected.pos().set((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
+						(Mouse.getY() / Boot.scale + Screen.yOffset) - Selector.selected.sprite.getHeight());
 			}
 		}
 
@@ -417,8 +425,8 @@ public class Player extends Mob implements Serializable
 		{
 			if (Mouse.getButton() == 2) {
 				if (UI_Menu.ConsoleMenu.enabled) {
-					selection_tool = new Selector((Mouse.getX() / Game.scale + Screen.xOffset) + 0,
-							(Mouse.getY() / Game.scale + Screen.yOffset) + 0);
+					selection_tool = new Selector((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
+							(Mouse.getY() / Boot.scale + Screen.yOffset) + 0);
 					level.add(selection_tool);
 					selection_tool.update();
 				}
@@ -462,7 +470,9 @@ public class Player extends Mob implements Serializable
 			}
 			this.currentLevelId = -1;
 
-			Tiled_Level newLevel = new Tiled_Level(XML);
+			((TiledLevel) Boot.get().getLevel()).killLua();
+			
+			TiledLevel newLevel = new TiledLevel(XML);
 			Boot.get().setLevel(newLevel);
 			Boot.get().getLevel().add(this);
 
@@ -569,8 +579,10 @@ public class Player extends Mob implements Serializable
 			this.render_yOffset = 0;
 			this.yOffset = 0;
 			this.xOffset = 16;
-			screen.renderMobSpriteUniversal((int) (x() + render_xOffset + cam_xOff),
-					(int) (y() + render_yOffset + cam_yOff), sprite);
+			screen.renderMobSpriteUniversal(
+					(int) (x() + render_xOffset + cam_xOff),
+					(int) (y() + render_yOffset + cam_yOff), 
+					sprite);
 
 		}
 
@@ -613,8 +625,8 @@ public class Player extends Mob implements Serializable
 	public void renderGUI(Screen screen)
 		{
 			if (Boot.drawDebug) {
-				if (this.XT_YT_ls != null) {
-					this.XT_YT_ls.drawLine(screen, true);
+				if (this.feetLine != null) {
+					this.feetLine.drawLine(screen, true);
 				}
 
 				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
@@ -635,20 +647,20 @@ public class Player extends Mob implements Serializable
 			// screen.renderSprite(1064/ Game.scale, 530 / Game.scale,
 			// gui.renderHealthExperiment(screen, this, 20), false);
 			if (!level.minimap_enabled) {
-				Boot.get().font.render((int) Game.width - text.length() * 16, 3, -3, text, screen, false, false);
-				Boot.get().font.render((int) Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+				Game.font16bit.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+				Game.font16bit.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 						false, false);
 			} else
 				if (!level.minimap_collapsed) {
 					// screen.renderSprite(275 - text.length() * 8, 1, new Sprite(50, 12,
 					// 0xff262626), false);
-					Boot.get().font.render((int) Game.width - 35 - text.length() * 16, 3, -3, text, screen, false,
+					Game.font16bit.render((int) Boot.width - 35 - text.length() * 16, 3, -3, text, screen, false,
 							false);
-					Boot.get().font.render((int) Game.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
+					Game.font16bit.render((int) Boot.width - 35 - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text,
 							screen, false, false);
 				} else {
-					Boot.get().font.render((int) Game.width - text.length() * 16, 3, -3, text, screen, false, false);
-					Boot.get().font.render((int) Game.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
+					Game.font16bit.render((int) Boot.width - text.length() * 16, 3, -3, text, screen, false, false);
+					Game.font16bit.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 							false, false);
 				}
 

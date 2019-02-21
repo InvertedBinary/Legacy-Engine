@@ -7,9 +7,9 @@ import com.IB.SL.input.Mouse;
 public class UI_Root {
 
 	public boolean enabled = true;
-	
+
 	public UI_Root() {
-		
+
 	}
 	
 	public void update() {
@@ -29,7 +29,7 @@ public class UI_Root {
 	}
 	
 	public boolean checkBounds(int x, int y, int width, int height) {
-		int scale = Boot.get().scale; 
+		int scale = Boot.scale; 
 		x *= scale;
 		y *= scale;
 		width *= scale;

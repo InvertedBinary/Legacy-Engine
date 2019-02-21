@@ -16,28 +16,31 @@ import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import com.IB.SL.entity.TagEntity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.font;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.GUI;
+import com.IB.SL.graphics.UI.TagMenu;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 import com.IB.SL.level.Level;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
-import com.IB.SL.level.worlds.Tiled_Level;
+import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.util.LoadProperties;
 import com.IB.SL.util.SaveGame;
+
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 
 @SuppressWarnings("static-access")
 
@@ -50,12 +53,7 @@ public class Game extends Canvas implements Runnable
 	private Thread thread;
 	public JFrame frame;
 	public Keyboard key;
-	public transient font font;
 
-	public static int width = 640; // 300 //520
-	public static int height = 360; // 168 //335
-	public static int scale = 2;
-	public static String title = "";
 	public double xScroll, yScroll;
 
 	private Player player;
@@ -66,11 +64,13 @@ public class Game extends Canvas implements Runnable
 	public boolean autoSave = true;
 
 	private boolean running = false;
-	public transient font8x8 font8x8;
+	public static transient Font16x font16bit;
+	public static transient Font8x font8bit;
 	public static int currentLevelId;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 
+	public boolean FrameAdjusted = false;
 	public static boolean devModeOn = false;
 	private boolean devModeReleased = true;
 	public LoadProperties loadProp;
@@ -80,19 +80,17 @@ public class Game extends Canvas implements Runnable
 	File screenshots = null;
 	public Stack<Level> levels = new Stack<Level>();
 
+
 	int saveTime = 0;
 	/**
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol: (in-game); 4
 	 * = pause; 5 = modded/tampered; 6 = dead; 7 = Splash;
 	 */
-
-	public HashMap<String, Boolean> properties = new HashMap<String, Boolean>();
-
 	private boolean releasedDevInfo = true;
 
 	private Screen screen;
 	public WindowHandler windowHandler;
-	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	public BufferedImage image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
 	// private VolatileImage vImage = this.createVolatileImage(width, height);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
@@ -157,9 +155,8 @@ public class Game extends Canvas implements Runnable
 
 	ArrayList<String> materials = new ArrayList<String>();
 
-	public Game(String title)
+	public Game()
 		{
-			this.title = title;
 			loadProp = new LoadProperties();
 			loadProp.createDataFolder();
 			screenshots = new File(LoadProperties.basePath + "/screenshots");
@@ -169,9 +166,9 @@ public class Game extends Canvas implements Runnable
 			this.StartDiscord();
 
 			setGui(new GUI());
-			Dimension size = new Dimension(width * scale, height * scale);
+			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
 			setPreferredSize(size);
-			screen = new Screen(width, height);
+			screen = new Screen(Boot.width, Boot.height);
 			frame = new JFrame();
 			windowHandler = new WindowHandler(this);
 			key = new Keyboard();
@@ -179,7 +176,7 @@ public class Game extends Canvas implements Runnable
 			tile.readXML("/XML/Tiles/TileDefinitions.xml");
 
 			// setLevel(new XML_Level(Maps.ForestLevel));
-			Tiled_Level TL = new Tiled_Level("/XML/Levels/b10");
+			TiledLevel TL = new TiledLevel("/XML/Levels/b10");
 			setLevel(TL);
 			
 			if (TL.spawnpoint != null) {
@@ -193,60 +190,67 @@ public class Game extends Canvas implements Runnable
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();
-			font = new font();
-			font8x8 = new com.IB.SL.graphics.font8x8();
+			font16bit = new Font16x();
+			font8bit = new Font8x();
 			addMouseListener(mouse);
 			addMouseMotionListener(mouse);
 			addMouseWheelListener(mouse);
 
 			getMenu().addMenus();
-			getMenu().load(getMenu().MainMenu, true);
+			//getMenu().load(getMenu().MainMenu, true);
 
-			this.frame.addComponentListener(new ComponentListener()
+			System.out.println("-=-=-=-Begin Loading xMenu-=-=-=-");
+			TagMenu xMenu = new TagMenu("/XML/Menu/TestMenu", false);
+			System.out.println("-=-=-=-Finished Loading xMenu-=-=-=-");
+			
+			getMenu().load(xMenu, true);
+			
+			frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width), Boot.prefsInt("Frame", "MinHeight", Boot.height)));
+			
+		this.frame.getRootPane().addComponentListener(new ComponentListener()
+		{
+			@Override
+			public void componentResized(ComponentEvent e)
 			{
-				@Override
-				public void componentResized(ComponentEvent e)
-					{
-						System.out.println("Resized?");
-						/*
-						 * frame.remove(Boot.get()); width = frame.getWidth() / scale; height =
-						 * frame.getHeight() / scale; frame.add(Boot.get());
-						 */
-					}
+				//System.out.println("Resized?");
+				FrameAdjusted = true;
+			}
 
-				@Override
-				public void componentMoved(ComponentEvent e)
-					{
-					}
+			@Override
+			public void componentMoved(ComponentEvent e)
+			{
+			}
 
-				@Override
-				public void componentShown(ComponentEvent e)
-					{
-					}
+			@Override
+			public void componentShown(ComponentEvent e)
+			{
+			}
 
-				@Override
-				public void componentHidden(ComponentEvent e)
-					{
-					}
-			});
-		}
-
+			@Override
+			public void componentHidden(ComponentEvent e)
+			{
+			}
+		});
+	}
+	
 	public void StartDiscord()
 		{
-			// DiscordEventHandlers handler = new DiscordEventHandlers();
-			// DiscordRPC.discordInitialize("402613263986327552", handler, true);
+			 DiscordEventHandlers handler = new DiscordEventHandlers();
+			 DiscordRPC.discordInitialize("402613263986327552", handler, true);
 		}
 
 	public static String lvl_name = "test;";
 
 	public static void createNewPresence()
 		{
-			// DiscordRichPresence rich = new DiscordRichPresence();
-			// rich.details = "On Level: " + (lvl_name);
-			// rich.state = "Located at: " + (int)Boot.get().getPlayer().x()/32 + " , " +
-			// (int)Boot.get().getPlayer().y()/32;
-			//
-			// DiscordRPC.discordUpdatePresence(rich);
+			 DiscordRichPresence rich = new DiscordRichPresence();
+			 rich.details = "On Level: " + (lvl_name);
+			 rich.state = "Located at: (" + (int)Boot.get().getPlayer().x()/32 + " , " +
+					 (int)Boot.get().getPlayer().y()/32 + ")";
+			 rich.largeImageKey = "ogimage";
+			 rich.largeImageText = "Meridian";
+			
+			 DiscordRPC.discordUpdatePresence(rich);
 		}
 
 	public UI_Menu getMenu()
@@ -276,32 +280,32 @@ public class Game extends Canvas implements Runnable
 		}
 
 	public static int getWindowWidth()
-		{
-			return width * scale;
-		}
+	{
+		return Boot.width * Boot.scale;
+	}
 
 	public static int getWindowHeight()
-		{
-			return height * scale;
-		}
+	{
+		return Boot.height * Boot.scale;
+	}
 
 	public synchronized void start()
-		{
-			running = true;
-			thread = new Thread(this, "Game");
-			thread.start();
-		}
+	{
+		running = true;
+		thread = new Thread(this, "Game");
+		thread.start();
+	}
 
 	public synchronized void stop()
-		{
-			running = false;
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
+	{
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		quit();
+	}
 
 	/*
 	 * inet = InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 });
@@ -309,7 +313,7 @@ public class Game extends Canvas implements Runnable
 	 * System.out.println(inet.isReachable(5000) ? "Host is reachable" :
 	 * "Host is NOT reachable");
 	 */
-
+	
 	public void run()
 		{
 			long lastTime = System.nanoTime();
@@ -326,30 +330,43 @@ public class Game extends Canvas implements Runnable
 				lastTime = now;
 				while (delta >= 1) {
 
-					// speedModif++;
-
-					// if (speedModif % 1 == 0) {
+					//speedModif++;
+					//if (speedModif % 1 == 0) {
+					if (UI_Menu.suspend != UI_Menu.SUS_UPD && UI_Menu.suspend != UI_Menu.SUS_ALL)
 					update();
-					// speedModif = 0;
-					// }
+					//speedModif = 0;
+					//}
 
 					key.update();
 					gui.update();
 					updateMode();
+
+					if (Boot.prefsBool("Graphics", "LockFPS", false)) {
+						if (!Boot.launch_args.containsKey("-mode_dedi")) {
+							if (frame.isVisible())
+								render();
+						}
+					frames++;
+					}
+					
 					updates++;
 					delta--;
+					
 				}
-				if (!Boot.launch_args.containsKey("-mode_dedi")) {
-				render();
-				}
-
+				
+				if (!Boot.prefsBool("Graphics", "LockFPS", false)) {
+					if (!Boot.launch_args.containsKey("-mode_dedi")) {
+						if (frame.isVisible())
+							render();
+					}
 				frames++;
+				}
 
 				if (System.currentTimeMillis() - timer >= 1000) {
 					timer += 1000;
-					// System.out.println(updates + " ups, " + frames + " fps");
+					//System.out.println(updates + " ups, " + frames + " fps");
 
-					frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
+					frame.setTitle(Boot.title + " | " + updates + " ups, " + frames + " fps");
 
 					if (this.recAVG_FPS) {
 						fpsTotal += frames;
@@ -361,7 +378,7 @@ public class Game extends Canvas implements Runnable
 					frames = 0;
 				}
 			}
-			// DiscordRPC.discordShutdown();
+			 DiscordRPC.discordShutdown();
 			stop();
 		}
 
@@ -481,6 +498,24 @@ public class Game extends Canvas implements Runnable
 				}
 			}
 		}
+	
+	public void AdjustImageToFrame() {
+		if (this.FrameAdjusted && Mouse.getButton() == -1)
+		screen.clear();
+		
+		Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale; 
+		Boot.height = (frame.getHeight() - frame.getInsets().top - frame.getInsets().bottom) / Boot.scale;
+		
+		screen.clear();
+		screen.width = Boot.width;
+		screen.height = Boot.height;
+		screen.pixels = new int[Boot.width * Boot.height];
+		
+		image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+		
+		this.FrameAdjusted = false;
+	}
 
 	public void update()
 		{
@@ -493,7 +528,9 @@ public class Game extends Canvas implements Runnable
 			if (mouseMotionTime > 0) {
 				this.mouseMotionTime--;
 			}
-
+			
+			this.AdjustImageToFrame();
+			
 			getLevel().update();
 		}
 
@@ -506,6 +543,7 @@ public class Game extends Canvas implements Runnable
 				image.setAccelerationPriority(1);
 				return;
 			}
+			
 			screen.clear();
 
 			double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2
@@ -519,21 +557,24 @@ public class Game extends Canvas implements Runnable
 			double maxw = getLevel().width << VARS.TILE_BIT_SHIFT;
 			double maxh = getLevel().height << VARS.TILE_BIT_SHIFT;
 
-			if (xSp < 0) {
-				xScroll = 0;
-			} else {
-				Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+				if (xSp < 0) {
+					xScroll = 0;
+				} else {
+					Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+				}
+				Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
+	
+			if (UI_Menu.suspend != UI_Menu.SUS_ALL) {
+				getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			}
-			Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
-
-			getLevel().render((int) (xScroll), (int) (yScroll), screen);
+			
 			gui.render(screen);
 
 			if (showAVG) {
 				if (fpsAVG < 200) {
-					font8x8.render(-5, this.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
+					font8bit.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
 				} else {
-					font8x8.render(-5, this.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
+					font8bit.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
 				}
 			}
 
@@ -559,14 +600,13 @@ public class Game extends Canvas implements Runnable
 					g.fillRect(Mouse.getX() - 4, Mouse.getY() - 4, 38, 38);
 					g.setFont(new Font("Verdana", 0, 16));
 					g.setColor(Color.WHITE);
-					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 40);
-					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
-					g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(),
-							10, 60);
-					g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: "
-							+ (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
-					g.drawString("Mouse X: " + (int) Mouse.getX() / scale + ", Mouse Y: " + Mouse.getY() / scale,
+					g.drawString("Application: " + frame.getTitle(), 10, 22);
+					g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
 							Mouse.getX() - 103, Mouse.getY() + 70);
+					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
+					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
+					//g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
+					//g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
 					// screen.drawLine(getPlayer(), level.entities);
 					g.setColor(Color.gray);
 					// g.fill3DRect(1020, 618, 300, 300, true);
@@ -610,28 +650,56 @@ public class Game extends Canvas implements Runnable
 	public void Launch(Game game)
 		{
 			if (!Boot.launch_args.containsKey("-mode_dedi")) {
-			Boot.setWindowIcon("/Textures/sheets/wizard.png");
-			game.frame.setResizable(false);
+			Boot.setWindowIcon("/icon.png");
+			game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
 			if (Boot.launch_args.containsKey("-resizeable")) {
 				game.frame.setResizable(true);
 			}
-			game.frame.setTitle(Game.title);
+			game.frame.setTitle(Boot.title);
 			game.frame.add(game);
 			// game.frame.remove(game);
-			if (Boot.launch_args.containsKey("-fullscreen")) {
-				game.frame.setUndecorated(true);
-				game.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			}
 			// game.frame.setOpacity(0.01F);
 			game.frame.pack();
 			game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			game.frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
+			
+			int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
+			if (windowMode == 1)
+				game.setBorderlessFullscreen(true);
+			else if (windowMode == 2)
+				setTrueFullscreen();
+			
 			Boot.setMouseIcon("/Textures/cursor.png");
 			Boot.centerMouse();
 			}
 			game.start();
 		}
+	
+	public boolean ChangingFullscreenState = false;
+	public void setBorderlessFullscreen(boolean state) {
+		ChangingFullscreenState = true;
+		if (state) {
+			frame.dispose();
+			frame.setUndecorated(true);
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		} else {
+			frame.dispose();
+			frame.setUndecorated(false);
+			frame.setExtendedState(JFrame.NORMAL);
+			frame.setSize(new Dimension(Boot.prefsInt("Graphics", "PixelsWidth", Boot.width) * Boot.scale, Boot.prefsInt("Graphics", "PixelsHeight", Boot.height) * Boot.scale));
+			frame.setLocationRelativeTo(null);
+		}
+		if (!frame.isVisible())
+			frame.setVisible(true);
+		
+		ChangingFullscreenState = false;
+	}
+	
+	public void setTrueFullscreen() {
+			frame.setBounds(getGraphicsConfiguration().getBounds());
+			getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
+	}
 
 	public Screen getScreen()
 		{
@@ -670,7 +738,7 @@ public class Game extends Canvas implements Runnable
 
 	public void quit()
 		{
-			// DiscordRPC.discordShutdown();
+		    DiscordRPC.discordShutdown();
 			System.out.println("Saving & Closing Application");
 			save(false);
 			Boot.c.stopClient();

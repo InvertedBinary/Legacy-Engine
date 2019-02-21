@@ -83,7 +83,7 @@ public class PVector
 
 	public void draw(Screen screen)
 		{
-			Debug.drawTriangle(screen, Boot.get().font8x8, x, y, x * 1.5, y * 1.5);
+			Debug.drawTriangle(screen, Boot.get().font8bit, x, y, x * 1.5, y * 1.5);
 		}
 	
 	public void drawVectors(Screen screen, PVector v)

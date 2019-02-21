@@ -548,8 +548,8 @@ public class Level extends EntityContainer implements Serializable {
 	int  ji = 0;
 	public int SpawnTime = 0;
 	public int SpawnTime_MOD = 120;
+	
 	public void update() {
-		
 	if (!Boot.launch_args.containsKey("-nospawns")) {
 		if (SpawnList.size() > 0) {
 		if (SpawnTime_MOD != -1) {				
@@ -726,7 +726,7 @@ public class Level extends EntityContainer implements Serializable {
 	private void renderMiniMap(Screen screen) {
 		if (minimap_enabled == true) {
 			int size = 75;
-			int x = Game.width - size - 5;
+			int x = Boot.width - size - 5;
 			int y = 5;
 			
 			if (Boot.get().getPlayer().input.map) {
@@ -1300,13 +1300,13 @@ public class Level extends EntityContainer implements Serializable {
 		
 		return t;
 	}
-
+	
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.VoidTile;
 		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
 		t = (t == null) ? Tile.VoidTile : t;
-
+		
 		return t;
 	}
 	
@@ -1705,6 +1705,7 @@ public class Level extends EntityContainer implements Serializable {
 			e.printStackTrace();
 		}
 	}*/
+
 
 	
 	public void addDoorTile(int x, int y) {

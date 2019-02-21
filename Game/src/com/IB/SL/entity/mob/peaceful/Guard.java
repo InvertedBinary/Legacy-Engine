@@ -11,7 +11,7 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.font8x8;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Sound;
@@ -73,7 +73,7 @@ public class Guard extends Mob{
 		this.maxhealth = 20;
 		this.mobhealth = maxhealth;
 		this.speed = 0.5;
-		new font8x8();
+		new Font8x();
 		sprite = Sprite.playerback;
 	}
 	
