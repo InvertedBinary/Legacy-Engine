@@ -233,51 +233,58 @@ public class Game extends Canvas implements Runnable
 		});
 	}
 	
-	public void StartDiscord()
-		{
-			 DiscordEventHandlers handler = new DiscordEventHandlers();
-			 DiscordRPC.discordInitialize("402613263986327552", handler, true);
-		}
+	public void StartDiscord() {
+		 DiscordEventHandlers handler = new DiscordEventHandlers();
+		 DiscordRPC.discordInitialize("402613263986327552", handler, true);
+	}
 
 	public static String lvl_name = "test;";
 
-	public static void createNewPresence()
-		{
+	public static void DiscordPlayerPosPresence() {
 			 DiscordRichPresence rich = new DiscordRichPresence();
 			 rich.details = "On Level: " + (lvl_name);
-			 rich.state = "Located at: (" + (int)Boot.get().getPlayer().x()/32 + " , " +
-					 (int)Boot.get().getPlayer().y()/32 + ")";
+			 rich.state = "Located at: (" + 
+					 (((int)Boot.get().getPlayer().x()) >> 5) + " , " +
+					 (((int)Boot.get().getPlayer().y()) >> 5) + ")";
 			 rich.largeImageKey = "ogimage";
 			 rich.largeImageText = "Meridian";
 			
 			 DiscordRPC.discordUpdatePresence(rich);
-		}
+	}
+	
+	public static void DiscordMenuPresence(String menuName) {
+		 DiscordRichPresence rich = new DiscordRichPresence();
+		 rich.details = "At A Menu:";
+		 rich.state = menuName;
+		 rich.largeImageKey = "ogimage";
+		 rich.largeImageText = "Meridian";
+		
+		 DiscordRPC.discordUpdatePresence(rich);
+	}
 
-	public UI_Menu getMenu()
-		{
-			return this.gui.menu;
-		}
+	public UI_Menu getMenu() {
+		return this.gui.menu;
+	}
 
-	public void setLevel(Level level)
-		{
-			this.levels.push(level);
-		}
+	public void setLevel(Level level) {
+		this.levels.push(level);
+	}
 
 	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException
-		{
-			System.out.println("Saved Screenshot as: " + fileName + "_" + System.currentTimeMillis() + ".png");
-			Robot robot = new Robot();
-			Rectangle capRectange = currentFrame.getBounds();
-			BufferedImage exportImage = robot.createScreenCapture(capRectange);
-			try {
-				ImageIO.write(exportImage, "png", new File(fileName + "_" + System.currentTimeMillis() + ".png"));
-			} catch (IOException e) {
+	{
+		System.out.println("Saved Screenshot as: " + fileName + "_" + System.currentTimeMillis() + ".png");
+		Robot robot = new Robot();
+		Rectangle capRectange = currentFrame.getBounds();
+		BufferedImage exportImage = robot.createScreenCapture(capRectange);
+		try {
+			ImageIO.write(exportImage, "png", new File(fileName + "_" + System.currentTimeMillis() + ".png"));
+		} catch (IOException e) {
 
-				System.out.println(e);
-
-			}
+			System.out.println(e);
 
 		}
+
+	}
 
 	public static int getWindowWidth()
 	{
@@ -339,6 +346,7 @@ public class Game extends Canvas implements Runnable
 
 					key.update();
 					gui.update();
+					Mouse.update();
 					updateMode();
 
 					if (Boot.prefsBool("Graphics", "LockFPS", false)) {
@@ -696,52 +704,53 @@ public class Game extends Canvas implements Runnable
 		ChangingFullscreenState = false;
 	}
 	
-	public void setTrueFullscreen() {
-			frame.setBounds(getGraphicsConfiguration().getBounds());
-			getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
+	public void setTrueFullscreen()
+	{
+		frame.setBounds(getGraphicsConfiguration().getBounds());
+		getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
 	}
 
 	public Screen getScreen()
-		{
-			return screen;
-		}
+	{
+		return screen;
+	}
 
 	public Player getPlayer()
-		{
-			return player;
-		}
+	{
+		return player;
+	}
 
 	public void setPlayer(Player player)
-		{
-			this.player = player;
-		}
+	{
+		this.player = player;
+	}
 
 	public Level getLevel()
-		{
-			return levels.peek();
-		}
+	{
+		return levels.peek();
+	}
 
 	public GUI getGui()
-		{
-			return gui;
-		}
+	{
+		return gui;
+	}
 
 	public Keyboard getInput()
-		{
-			return this.key;
-		}
+	{
+		return this.key;
+	}
 
 	public void setGui(GUI gui)
-		{
-			this.gui = gui;
-		}
+	{
+		this.gui = gui;
+	}
 
 	public void quit()
-		{
-		    DiscordRPC.discordShutdown();
-			System.out.println("Saving & Closing Application");
-			save(false);
-			Boot.c.stopClient();
-			System.exit(0);
-		}
+	{
+		DiscordRPC.discordShutdown();
+		System.out.println("Saving & Closing Application");
+		save(false);
+		Boot.c.stopClient();
+		System.exit(0);
+	}
 }

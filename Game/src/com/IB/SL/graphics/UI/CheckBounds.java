@@ -7,10 +7,9 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.UI.part.TextBox;
 import com.IB.SL.input.Mouse;
 
-@SuppressWarnings("static-access")
 public class CheckBounds extends UI implements Serializable{
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	public String desc = "";
 
 	public String save1 = "(Open)";

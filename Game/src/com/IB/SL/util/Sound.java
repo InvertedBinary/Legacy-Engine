@@ -146,7 +146,7 @@ public class Sound {
 	public static OggClip OasisSands;
 
 	public static OggClip lastTrack;
-
+	
 	public static void loadOggs() {
 		try {
 			/*Spell1Ogg = new OggClip(Spell1Path);
@@ -178,14 +178,17 @@ public class Sound {
 	}
 	
 	public static void PlayOgg(OggClip oggFile, boolean repeat, double volume) {
-		if (!oggFile.stopped()) oggFile.stop();
+		if (!oggFile.stopped()) 
+			oggFile.stop();
 		oggFile.setGain((float) volume);
-			if (repeat) {
-				oggFile.loop();
-			} else {
+		
+		if (repeat) {
+			oggFile.loop();
+		} else {
 			oggFile.play();
-			}
-			ogg = oggFile;
+		}
+		
+		ogg = oggFile;
 	}
 	
 	public static OggClip returnMusic() {
@@ -228,14 +231,20 @@ public class Sound {
 	}
 	
 	
+	public static void Play(Clip clip) {
+		Play(clip, false);
+	}
+	
 	public static void Play(Clip clip, boolean repeat) {
-		if (clip.isRunning()) clip.stop();
-			clip.setFramePosition(0);
-			if (repeat) {
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			} else {
+		if (clip.isRunning()) 
+			clip.stop();
+		clip.setFramePosition(0);
+		
+		if (repeat) {
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} else {
 			clip.start();
-			}
+		}
 	}
 	
 	public static void Stop() {

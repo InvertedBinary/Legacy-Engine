@@ -4,18 +4,22 @@ import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.UI.listeners.UI_ButtonListener;
-import com.IB.SL.input.Mouse;
+import com.IB.SL.util.Vector2i;
 
-public class UI_Button extends UI_Root {
+public class UI_Button extends UI_Root implements UI_Clickable {
 	
 	public Sprite sprite;
 	public AnimatedSprite animSprite;
+	
 	public int x;
 	public int y;
+	public int z;
+	
 	public int width;
 	public int height;
-	public boolean hover = false;
-	public boolean clicked = false;
+
+	public boolean hovering;
+	
 	public boolean render = true;
 	public boolean isanim = false;
 	public boolean transAnim = false;
@@ -56,39 +60,44 @@ public class UI_Button extends UI_Root {
 		this.listener = listener;
 	}
 	
+	@Override
 	public void update() {
-		if (checkBounds(x, y, width, height)) {
-			ButtonHovered();
-			if (Mouse.getButton() == 1) {
-				ButtonClicked();
-			} else {
-				this.clicked = false;
-			}
-		} else {
-			if (isanim) {
-				this.animSprite.setFrame(0);
-			}
-			hover = false;
-			clicked = false;
-		}
+		//
+	}
+
+	@Override
+	public boolean InBounds() {
+		return checkBounds(x, y, width, height);
 	}
 	
-	public void ButtonClicked() {
+	@Override
+	public void Clicked() {
 		if (listener != null)
 		listener.ButtonClick();
-		
-		this.clicked = true;
-		Mouse.setMouseB(-1);
 	}
 	
-	public void ButtonHovered() {
+	@Override
+	public void Hovered() {
 		if (listener != null)
 		listener.ButtonHover();
 		
-		hover = true;
+		this.hovering = true;
 		if (isanim && this.animSprite.getFrame() != 1) {
 			this.animSprite.setFrame(1);
 		}
+	}
+	
+	@Override
+	public void UnsetHover() {
+		if (isanim) {
+			this.animSprite.setFrame(0);
+		}
+		
+		this.hovering = false;
+	}
+	
+	@Override
+	public void Dragged() {
 	}
 	
 	public void render(Screen screen) {
@@ -97,7 +106,7 @@ public class UI_Button extends UI_Root {
 				this.sprite = animSprite.getSprite();
 			}
 			
-			if (transAnim && !this.hover || this.isanim) {
+			if (transAnim && !this.hovering || this.isanim) {
 				screen.renderAlphaSprite(x, y, sprite);
 			} else {
 				screen.renderSprite(x, y, sprite, false);
@@ -116,4 +125,10 @@ public class UI_Button extends UI_Root {
 	public Sprite getSprite() {
 		return sprite;
 	}
+
+	@Override
+	public void unload() {
+		hovering = false;		
+	}
+
 }

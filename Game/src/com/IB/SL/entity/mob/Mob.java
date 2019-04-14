@@ -247,9 +247,14 @@ public abstract  class Mob extends Entity implements Serializable {
 		double yt = ((y() + ya));
 		
 		feetLine = new LineSegment(
-			new Vertex((float) xt + 24f, (float) yt + 60f), 
-			new Vertex((float)xt + 38f, (float)yt + 60f)
+			new Vertex((float) xt + 22f, (float) yt + 60f), 
+			new Vertex((float)xt + 40f, (float)yt + 60f)
 		);
+		
+		/*feetLine = new LineSegment(
+				new Vertex((float) xt + 24f, (float) yt + 60f), 
+				new Vertex((float)xt + 38f, (float)yt + 60f)
+		);*/
 
 		if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
 			return false;
@@ -258,7 +263,12 @@ public abstract  class Mob extends Entity implements Serializable {
 		for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
 			LineSegment ls = ((TiledLevel) Boot.getLevel()).solid_geometry.get(i);
 			
-			boolean collides = feetLine.CollidesWithLine(ls);
+			boolean collides = false;
+			if (i == 48)
+				collides = feetLine.CollidesWithLine(ls, true);
+			else 
+				collides = feetLine.CollidesWithLine(ls, false);
+			
 			
 			if (collides) {
 				//is the player walking with the slope or down it?
@@ -276,10 +286,12 @@ public abstract  class Mob extends Entity implements Serializable {
 					
 					if (slopePolarity == xaPolarity) {
 						//They are walking with the slope?
-						double dy = ls.slope * (x() - ls.left_pt.x);
-						System.out.println("Y: " + y() + " DY: " + dy + " ls.left_pt.x : x(): " + ls.left_pt.x + " : " + x());
-  						//move(0, -Math.abs(dy));
-  					  	move(0, -Math.abs(1 - (vx() * (ls.slope / 10))));
+						if (slopePolarity == 1) {
+							//double dy = ls.slope * (feetLine.right_pt.x - ls.left_pt.x);
+							//System.out.println("Y: " + y() + " DY: " + dy + " ls.left_pt.x : plx): " + ls.left_pt.x + " : " + feetLine.left_pt.x);
+							//move(0, -Math.abs(6));
+						}
+						move(0, -Math.abs(1 - (vx() * (ls.slope / 10))));
 					} else {
 						//They are walking down the slope?
 						// Nothing special needs to happen really..

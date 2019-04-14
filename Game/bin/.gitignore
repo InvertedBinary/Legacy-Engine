@@ -1,1 +1,13 @@
+/.gitignore
+/easyogg.jar
+/jogg-0.0.7.jar
+/joml-jdk8-1.9.9.jar
+/jorbis-0.0.15.jar
+/luaj-jme-3.0.1.jar
+/luaj-jse-3.0.1.jar
+/luaj-sources-3.0.1.jar
+/lwjgl3/
+/GL_Real/
 /com/
+/netty-all-4.1.21.Final.jar
+/test.bat

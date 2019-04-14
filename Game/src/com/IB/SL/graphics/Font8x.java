@@ -14,7 +14,7 @@ public class Font8x {
 													 "abcdefghijklm" + // 3
 										   			 "nopqrstuvwxyz" + // 4
 										   			 "0123456789.,'" + // 5
-										   			 "'“”;:!@$%()-+"; // 6
+										   			 "'“”;:!@$%()-+" ; // 6
 	
 	public Font8x() {
 	}

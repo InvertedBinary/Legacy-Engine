@@ -1,4 +1,5 @@
 print("Opening TestMenu UI")
+GAME:DiscordMenuPresence("Test Main Menu")
 
 function onUnload()
 	print("Closing TestMenu UI")
@@ -21,5 +22,5 @@ function luaTestHover()
 end
 
 function luaSliderTest(newPos)
-	print("NEW POSITION: "..newPos)
+	print("NEW FPOSITION: "..newPos)
 end

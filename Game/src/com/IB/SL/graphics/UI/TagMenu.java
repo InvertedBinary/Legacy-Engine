@@ -15,6 +15,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.SL.Boot;
+import com.IB.SL.Game;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -272,7 +273,7 @@ public class TagMenu extends UI_Menu
 				String hyperlink = pullAttrib("hyperlink", "");
 
 				UI_Label uilbl = new UI_Label(lblx, lbly, val);
-				uilbl.color = lblhex;
+				uilbl.setDefaultColor(lblhex);
 				uilbl.fallback_color = uilbl.color;
 				uilbl.hyperlink = hyperlink;
 				uilbl.hover_color = lblhvhex;
@@ -367,6 +368,7 @@ public class TagMenu extends UI_Menu
 		ls = new LuaScript(luaString);
 		ls.addGlobal("level", this);
 		ls.addGlobal("g", Boot.get());
+		ls.addGlobal("GAME", Game.class);
 		//ls.addGlobal("mainmenu", MainMenu);
 		ls.addGlobal("menu", this);
 		//ls.addGlobal("key", Boot.get().getInput());

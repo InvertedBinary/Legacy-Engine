@@ -133,6 +133,10 @@ public class LineSegment extends Polygon {
 	}
 	
 	public boolean CollidesWithLine(LineSegment ls) {
+		return CollidesWithLine(ls, false);
+	}
+	
+	public boolean CollidesWithLine(LineSegment ls, boolean output) {
 			if (this.slope == ls.slope) {
 				if (Math.round(this.top_pt.y) == Math.round(ls.top_pt.y)) {
 					if (this.right_pt.x < ls.left_pt.x || this.left_pt.x > ls.right_pt.x) {
@@ -144,21 +148,26 @@ public class LineSegment extends Polygon {
 			
 			Vertex p1 = origin;
 			Vertex q1 = endPoint;
-			Vertex p2 = ls.origin;
-			Vertex q2 = ls.endPoint;
+			Vertex p2 = ls.left_pt;
+			Vertex q2 = ls.right_pt;
 			
 			int o  = calcOrientation(p1, q1, p2);
 			int o2 = calcOrientation(p1, q1, q2);
 			int o3 = calcOrientation(p2, q2, p1);
 			int o4 = calcOrientation(p2, q2, q1);
 			
-			//System.out.println("O: " + o + " , " + o2 + " , " + o3 + " , " + o4);
+			if (output) {
+				if (!(this.right_pt.x < ls.left_pt.x || this.left_pt.x > ls.right_pt.x) && !(this.top_pt.y > ls.bot_pt.y || this.bot_pt.y < ls.top_pt.y)) {
+					System.out.println("O: " + o + " , " + o2 + " , " + o3 + " , " + o4);
+				}
+			}
 			
 			if ((o != o2) && (o3 != o4)) {
 				return true;
 			}
 			
-		    if (o == 0 && onSegment(p1, p2, q1)) return true; 
+			
+		    if (o  == 0 && onSegment(p1, p2, q1)) return true; 
 		    if (o2 == 0 && onSegment(p1, q2, q1)) return true; 
 		    if (o3 == 0 && onSegment(p2, p1, q2)) return true; 
 		    if (o4 == 0 && onSegment(p2, q1, q2)) return true; 
@@ -166,8 +175,7 @@ public class LineSegment extends Polygon {
 		    return false;
 		}
 	
-	public boolean onSegment(Vertex p, Vertex q, Vertex r) 
-	{ 
+	public boolean onSegment(Vertex p, Vertex q, Vertex r) { 
 	    if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && 
 	        q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) 
 	       return true; 
@@ -196,12 +204,12 @@ public class LineSegment extends Polygon {
 	}
 	
 	public int calcOrientation(Vertex p1, Vertex p2, Vertex p3) {
-		float val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
+		double val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
 
 		if (val == 0) return 0;  // collinear
 
 		// clock or counter-clock wise
-		return (val > 0)? 1 : 2; 
+		return (val > 0) ? 1 : 2; 
 		
 		
 		}

@@ -12,8 +12,10 @@ import com.IB.SL.graphics.Font16x;
 import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.UI;
 import com.IB.SL.graphics.UI.part.UI_Button;
+import com.IB.SL.graphics.UI.part.UI_Clickable;
 import com.IB.SL.graphics.UI.part.UI_Root;
 import com.IB.SL.input.Keyboard;
+import com.IB.SL.input.Mouse;
 
 public class UI_Menu extends DefaultHandler {
 	
@@ -35,25 +37,11 @@ public class UI_Menu extends DefaultHandler {
 	
 	public static ArrayList<UI_Menu> history = new ArrayList<UI_Menu>();
 	public static ArrayList<UI_Menu> menus = new ArrayList<UI_Menu>();
-
-	public static MainMenu MainMenu;
-	public static PauseMenu PauseMenu;
 	
 	public static ConsoleMenu ConsoleMenu;
 	
-	public static SettingsMenu settingsMenu;
-	public static GameplayMenu gpMenu;
-	public static AudioMenu audMenu;
-	public static VideoMenu vidMenu;
-
 	public void addMenus() {
-		menus.add(MainMenu = new MainMenu(0, 0, Sprite.Title));
-		menus.add(settingsMenu = new SettingsMenu(0, 0, Sprite.pauseOptions));
 		menus.add(ConsoleMenu = new ConsoleMenu(0, 0, Sprite.bgFade));
-
-		menus.add(PauseMenu = new PauseMenu(0, 0, Sprite.pauseMenu));
-
-		current = MainMenu;
 	}
 	
 	public void init(int x, int y) {
@@ -70,8 +58,49 @@ public class UI_Menu extends DefaultHandler {
 			if (current.enabled) {
 				current.update();
 				if (current != null) {
-				current.ui.update();
+					current.ui.update();
 				}
+				distribute_input();
+			}
+		}
+	}
+	
+	private UI_Clickable focused = null;
+	private boolean pressed = false;
+	
+	private void distribute_input() {
+		if (focused == null && UI_Menu.current != null) {
+			for (UI_Clickable ele : current.ui.getClickables()) {
+				if (ele.InBounds() && (Mouse.getButton() != 1)) {
+					focused = ele;
+					break;
+				}
+			}
+		}
+		
+		if (focused != null) {
+			if (!focused.InBounds()) {
+				focused.UnsetHover();
+				pressed = false;
+				focused = null;
+			} else {
+				focused.Hovered();
+				if (Mouse.getButton() == 1) {
+					if (Mouse.dragX() != 0 || Mouse.dragY() != 0)
+						focused.Dragged();
+					
+					pressed = true;
+				}
+				
+				if (pressed && Mouse.getButton() == -1) {
+					focused.Clicked();
+					Mouse.setMouseB(-1);
+					pressed = false;
+				}
+			}
+		} else {
+			if (Mouse.getButton() != -1) {
+				//Process world input
 			}
 		}
 	}
@@ -132,17 +161,15 @@ public class UI_Menu extends DefaultHandler {
 	
 	private void unloadMenu(UI_Menu menu) {
 		if (menu != null) {
-		if (menu.enabled) {
-		ArrayList<UI_Button> buttons = menu.ui.ui_Buttons;
-		for (UI_Button btns : buttons) {
-			btns.clicked = false;
-			btns.hover = false;
+			if (menu.enabled) {
+				for (UI_Root elements : ui.getAll()) {
+					elements.unload();
+				}
+				current.onUnload();
+				menu.enabled = false;
+				current = null;
+			}
 		}
-		current.onUnload();
-		menu.enabled = false;
-		current = null;
-		}
-	  }
 	}
 	
 	public void continueGame() {

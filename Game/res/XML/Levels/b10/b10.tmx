@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="74">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="76">
  <tileset firstgid="1" source="assets/blocks32.tsx"/>
  <layer name="Tiles" width="100" height="50">
   <data encoding="csv">
@@ -257,8 +257,11 @@
   <object id="71" name="right bound" type="c_mask" x="3200" y="1152">
    <polyline points="0,0 0,-224"/>
   </object>
-  <object id="73" name="verticality test" type="c_mask" x="96" y="1312">
+  <object id="73" name="verticality test" type="c_mask" x="512" y="1280">
    <polyline points="0,0 0,-160"/>
+  </object>
+  <object id="74" name="slope test" type="c_mask" x="64" y="1312">
+   <polyline points="0,0 352.25,-4.25"/>
   </object>
  </objectgroup>
 </map>

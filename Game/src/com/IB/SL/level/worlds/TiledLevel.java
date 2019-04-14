@@ -146,6 +146,8 @@ public class TiledLevel extends Level {
  				if (current_layer == null) {
  					current_layer = -1;
  				}
+ 				
+ 				
             	 
             	/* if (ln.equals("Tiles")) {
             		 this.current_layer = 0;
@@ -200,6 +202,9 @@ public class TiledLevel extends Level {
              }
              
              case "polyline": {
+            	 if (this.current_object_type == null)
+            		 break;
+            	 
             	 if (this.current_object_type.equalsIgnoreCase("c_mask")) {
             		 if (this.solid_geometry == null) {
             			 this.solid_geometry = new ArrayList<>();
@@ -237,7 +242,6 @@ public class TiledLevel extends Level {
 								ls.color = 0xffFF00FF;
 							}
 							this.solid_geometry.add(ls);
-									
 						}
 					}
 					
@@ -353,8 +357,8 @@ public class TiledLevel extends Level {
 			//this.overlayTiles = this.tilels.get(1);
 			}
 		}
-	}
-	
+	}		
+			
 	public void addExit(LevelExit e) {
 		if (this.exits == null) {
 			this.exits = new ArrayList<LevelExit>();
@@ -381,12 +385,12 @@ public class TiledLevel extends Level {
 			if (id != -1) {
 				xml_tiles[i] = id;
 			}
-		}
+		}	
 		return xml_tiles;
-	}
-	
+	}		
+			
 	public void drawExtendedLevel(Screen screen)
-		{
+		{	
 			if (Boot.drawDebug) {
 				if (this.solid_geometry != null) {
 					for (int i = 0; i < this.solid_geometry.size(); i++) {
@@ -398,8 +402,8 @@ public class TiledLevel extends Level {
 					}
 				}
 			}
-		}
-
+		}	
+			
 	public void checkExits(Player player, Level level, int x, int y) {
 		// refresh();
 		System.out.println("NUM EXITS: " + exits.size());

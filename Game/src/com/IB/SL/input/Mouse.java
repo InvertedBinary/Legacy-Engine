@@ -20,16 +20,19 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	private static int mouseX = -1;
 	private static int mouseY = -1;
 	private static int mouseB = -1;
-	public static int dragDir = -1;
-	int previousX;
+	
+	private static int dragX = 0;
+	private static int dragY = 0;
+	
+	private static int previousX;
+	private static int previousY;
+	
 	public static int notch = 0;
 	private static boolean doubleClick;
 	final static String nl = "n";
 	
 	public static boolean inFrame = false;
 	
-	   String print;
-
 	public static int getX() {
 		return mouseX;// + (300 - Game.getGame().frame.getWidth() / Game.scale);
 	}
@@ -38,6 +41,11 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 	public static int getButton() {
 		return getMouseB();
+	}
+	
+	public static void update() {
+        dragX = 0;
+        dragY = 0;
 	}
 	
 	public void moveMouse(Point p) {
@@ -75,14 +83,18 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		mouseX = e.getX();
 		mouseY = e.getY();
 
-        int x = e.getX();
-        if (x < previousX) {
-            dragDir = 0;
-        } else if (x > previousX) {
-            dragDir = 1;
-        }
+        if (mouseX < previousX)
+            dragX = -1;
+        else if (mouseX > previousX)
+            dragX = 1;
+        
+        if (mouseY < previousY)
+            dragY = -1;
+        else if (mouseY > previousY)
+            dragY = 1;
 
-        previousX = x;
+        previousX = mouseX;
+        previousY = mouseY;
 	}
 
 
@@ -183,6 +195,9 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	public void mouseReleased(MouseEvent e) {
 		setMouseB(-1);
 		
+		dragX = 0;
+		dragY = 0;
+		
 	}
 	
 	/*public void doubleClick(MouseEvent e) {
@@ -200,9 +215,19 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	public static int getMouseB() {
 		return mouseB;
 	}
+	
 	public static void setMouseB(int mouseB) {
 		Mouse.mouseB = mouseB;
 	}
+	
+	public static int dragX() {
+		return dragX;
+	}
+	
+	public static int dragY() {
+		return dragY;
+	}
+	
 //	@Override
 	/*public void mouseWheelMoved(MouseWheelEvent arg0) {
 		// TODO Auto-generated method stub

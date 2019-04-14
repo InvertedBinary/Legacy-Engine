@@ -14,15 +14,30 @@ public class Sprite {
 	public int[] pixels;
 	public SpriteSheet sheet;
 	
-	public static HashMap<String, Sprite> sprite = new HashMap<String, Sprite>();
+	public static HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 	
 	public Sprite get(String s) {
 		Sprite result = this.VoidTile;
-		if (sprite.containsKey(s)) {
-			result = sprite.get(s);
+		if (sprites.containsKey(s)) {
+			result = sprites.get(s);
 		}
 		return result;
 	}
+	
+	public void put(String name, Sprite spr) {
+		sprites.put(name, spr);
+	}
+	
+	public void load_all(String dir) {
+		
+	}
+	
+	public void load(String path) {
+		
+	}
+	
+	// Defaults
+	public static Sprite nullSpr = new Sprite(TileCoord.TILE_SIZE, 0xffFF00FF);
 	
 	//MiniMap
 	//GUIS
@@ -609,11 +624,7 @@ public class Sprite {
 	}
 	
 	public Sprite(int width, int height, int x, int y, SpriteSheet sheet) {
-		if (width == height) {
-			SIZE = width * height;
-		} else {
-			SIZE = 0;
-		}
+		SIZE = (width == height) ? (width * height) : 0;
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
@@ -840,25 +851,23 @@ public class Sprite {
 		return height;
 	}
 			
-			private void load() {
-				for (int y = 0; y < height; y++) {
-					for (int x = 0; x < width; x++)
-						pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SPRITE_WIDTH];
-				}
-			}
-			
-			{
+	private void load() {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++)
+				pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SPRITE_WIDTH];
+		}
 	}
 
-			public int getX() {
-				return x;
-			}
-			public int getY() {
-				return y;
-			}
+	public int getX() {
+		return x;
+	}
 
-			public void setPosition(int x, int y) {
-				this.x = x;
-				this.y = y;
-			}
+	public int getY() {
+		return y;
+	}
+
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 }

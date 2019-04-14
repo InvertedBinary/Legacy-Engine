@@ -2,6 +2,7 @@ package com.IB.SL.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -17,6 +18,28 @@ public class SpriteSheet {
 	public final int SPRITE_WIDTH, SPRITE_HEIGHT;
 	private int width, height;
 	public int[] pixels;
+	
+	public static HashMap<String, SpriteSheet> sheets = new HashMap<>();
+	
+	public SpriteSheet get(String s) {
+		SpriteSheet result = null;
+		if (sheets.containsKey(s)) {
+			result = sheets.get(s);
+		}
+		return result;
+	}
+	
+	public void put(String name, SpriteSheet sheet) {
+		sheets.put(name, sheet);
+	}
+	
+	public void load_all(String dir) {
+		
+	}
+	
+	public void load(String path) {
+		
+	}
 	
 	
 	public static SpriteSheet Teleporter = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/Teleporter.png", 32, 512);
@@ -301,53 +324,64 @@ public class SpriteSheet {
 		}
 	}
 	
-	public SpriteSheet(String path, int size) {
-	this.path = path;
-			SIZE = size;
-			SPRITE_WIDTH = size;
-			SPRITE_HEIGHT = size;
-			pixels = new int[SIZE * SIZE];
-			load();
-}
-
-public SpriteSheet(String path, int width, int height) {
-	this.path = path;
-	SIZE = -1;
-	SPRITE_WIDTH = width;
-	SPRITE_HEIGHT = height;
-	pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
-	load();
-}
-
-public Sprite[] getSprites() {
-	return sprites; 
-	
-}
-
-public int getWidth() {
-	return width;
-}
-
-public int getHeight() {
-	return height;
-}
-public int[] getPixels() {
-	return pixels;
-}
-
-private void load() {
-	try {
-		System.out.print("Attempting To Fetch SpriteSheet At: " + path + "...");
-		BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path));
-		System.out.println(" Succeeded!");
-		 width = image.getWidth();
-		 height = image.getHeight();
-		 pixels = new int[width * height];
-		image.getRGB (0, 0, width, height, pixels, 0, width);
-	} catch (IOException e) {
-		e.printStackTrace();
-	} catch (Exception e) {
-		System.err.println(" Failed!");
+	public SpriteSheet(String path) {
+		this.path = path;
+		this.SIZE = -1;
+		
+		this.SPRITE_WIDTH = -1;
+		this.SPRITE_HEIGHT = -1;
+		
+		this.pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
+		load();
 	}
+	
+	public SpriteSheet(String path, int size) {
+		this.path = path;
+		SIZE = size;
+		SPRITE_WIDTH = size;
+		SPRITE_HEIGHT = size;
+		pixels = new int[SIZE * SIZE];
+		load();
+	}
+	
+	public SpriteSheet(String path, int width, int height) {
+		this.path = path;
+		SIZE = -1;
+		SPRITE_WIDTH = width;
+		SPRITE_HEIGHT = height;
+		pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
+		load();
+	}
+	
+	public Sprite[] getSprites() {
+		return sprites; 
+		
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	public int[] getPixels() {
+		return pixels;
+	}
+	
+	private void load() {
+		try {
+			System.out.print("Attempting To Fetch SpriteSheet At: " + path + "...");
+			BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path));
+			System.out.println(" Succeeded!");
+			width = image.getWidth();
+			height = image.getHeight();
+			pixels = new int[width * height];
+			image.getRGB(0, 0, width, height, pixels, 0, width);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.err.println(" Failed!");
+		}
 	}
 }

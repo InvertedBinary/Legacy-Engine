@@ -4,8 +4,9 @@ import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.UI.listeners.UI_SliderListener;
 import com.IB.SL.input.Mouse;
+import com.IB.SL.util.Sound;
 
-public class UI_Slider extends UI_Root {
+public class UI_Slider extends UI_Root implements UI_Clickable {
 	
 	public int x, y, width, pos;
 	
@@ -42,25 +43,31 @@ public class UI_Slider extends UI_Root {
 	
 	private boolean dragging = false;
 	public void update() {
-		if (checkBounds(x, y - 4, width, 4)) {
-			if (Mouse.getButton() == 1) {
-				this.dragging = true;
+		if (dragging) {
+			this.UpdateSliderPos();
+
+			if (Mouse.getButton() != 1) {
+				dragging = false;
+				PlayAudioFeedback();
 			}
 		}
+	}
+	
+	public void PlayAudioFeedback() {
+		Sound.Play(Sound.Click);
+	}
+	
+	private void UpdateSliderPos() {
+		int newPos = (Mouse.getX() / Boot.scale) - x;
+		if (newPos > width) {
+			newPos = width;
+		}
 		
-		if (Mouse.getButton() != 1)
-			this.dragging = false;
+		if (newPos < 0) {
+			newPos = 0;
+		}
 		
-		if (dragging) {
-			int newPos = (Mouse.getX() / Boot.scale) - x;
-			if (newPos > width) {
-				newPos = width;
-			}
-			
-			if (newPos < 0) {
-				newPos = 0;
-			}
-			
+		if (newPos != pos) {
 			this.pos = newPos;
 			this.listener.PositionChanged();
 		}
@@ -73,6 +80,31 @@ public class UI_Slider extends UI_Root {
 
 	public void addListener(UI_SliderListener listener) {
 		this.listener = listener;
+	}
+
+	@Override
+	public boolean InBounds() {
+		return checkBounds(x, y - 6, width, 10);
+	}
+
+	@Override
+	public void Clicked() {
+		PlayAudioFeedback();
+		this.UpdateSliderPos();
+	}
+
+	@Override
+	public void Hovered() { }
+
+	@Override
+	public void UnsetHover() { }
+	
+	@Override
+	public void Dragged() {
+		if (!dragging)
+			PlayAudioFeedback();
+
+		this.dragging = true;
 	}
 	
 }

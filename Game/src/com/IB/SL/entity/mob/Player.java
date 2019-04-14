@@ -371,7 +371,7 @@ public class Player extends Mob implements Serializable
 				xa = vel().x();
 
 				if (xa != 0 || (ya != 0 && ya != Gravity.y())) {
-					Game.createNewPresence();
+					Game.DiscordPlayerPosPresence();
 				}
 
 				if (xa != 0) {
@@ -486,7 +486,7 @@ public class Player extends Mob implements Serializable
 			this.setY((y));
 			// newLevel.initLua();
 
-			Game.createNewPresence();
+			Game.DiscordPlayerPosPresence();
 		}
 
 	@Deprecated
@@ -507,7 +507,7 @@ public class Player extends Mob implements Serializable
 					((XML_Level) Boot.get().getLevel()).luaThread.stop();
 				}
 			}
-
+			
 			this.currentLevelId = -1;
 			XML_Level newLevel = new XML_Level(XML);
 
@@ -523,7 +523,7 @@ public class Player extends Mob implements Serializable
 
 			// ((XML_Level)Boot.get().levels.get(Boot.get().levels.size() -
 			// 1)).luaThread.stop();
-			Game.createNewPresence();
+			Game.DiscordPlayerPosPresence();
 
 		}
 

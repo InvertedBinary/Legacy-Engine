@@ -14,6 +14,7 @@ import com.IB.SL.graphics.Font16x;
 import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.graphics.UI.part.TextBox;
+import com.IB.SL.input.Mouse;
 
 public class GUI extends CheckBounds {
 	private static final long serialVersionUID = 1L;
@@ -58,9 +59,7 @@ public class GUI extends CheckBounds {
 			menu.menus.get(i).updateUnloaded();
 		}
 		
-			menu.update();
-			
-
+		menu.update();
 	}
 
 	public void render(Screen screen) {
