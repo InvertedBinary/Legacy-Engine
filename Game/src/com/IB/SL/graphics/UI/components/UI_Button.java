@@ -1,5 +1,6 @@
 package com.IB.SL.graphics.UI.components;
 
+import com.IB.SL.audio.Audio;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
@@ -76,6 +77,8 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 	public void Clicked() {
 		if (listener != null)
 		listener.ButtonClick();
+		
+		Audio.Play("Click");
 	}
 	
 	@Override
@@ -138,7 +141,7 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 
 	@Override
 	public void OnDownClick() {
-		
+		Audio.Play("Click"); // Probably should let Lua handle this audio feedback eventually
 	}
 
 }
