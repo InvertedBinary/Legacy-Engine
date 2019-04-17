@@ -1,43 +1,13 @@
 package com.IB.SL.AlphaLWJGL.util;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 
-import org.lwjgl.opengl.ARBShaderObjects;
-import org.lwjgl.opengl.GL11;
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL14.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.system.MemoryUtil.*;
-import static com.IB.SL.AlphaLWJGL.util.ResourceManager.*;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.Version;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
-import org.lwjgl.opengl.ARBFragmentShader;
-import org.lwjgl.opengl.ARBVertexShader;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GLDebugMessageCallback;
-import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.openvr.Texture;
-import org.lwjgl.stb.STBImage;
-
-import com.IB.SL.AlphaLWJGL.util.ResourceManager;
-import com.IB.SL.AlphaLWJGL.util.Shader;
-
+@SuppressWarnings("unused")
 public class ResourceManager
 {
 	public final static int FLOAT_SIZE = 4;

@@ -1,6 +1,5 @@
 package com.IB.SL.entity.projectile;
 
-import java.util.List;
 import java.util.Random;
 
 import com.IB.SL.entity.Entity;

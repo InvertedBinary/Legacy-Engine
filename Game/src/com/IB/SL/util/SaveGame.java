@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.PlayerMP;
 

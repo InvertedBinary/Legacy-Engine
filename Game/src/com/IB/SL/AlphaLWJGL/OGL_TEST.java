@@ -1,46 +1,30 @@
 package com.IB.SL.AlphaLWJGL;
 
+import static com.IB.SL.AlphaLWJGL.util.ResourceManager.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
-import static org.lwjgl.opengl.GL14.*;
 import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static com.IB.SL.AlphaLWJGL.util.ResourceManager.*;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
+import org.joml.Math;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
-import org.lwjgl.opengl.ARBFragmentShader;
-import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GLDebugMessageCallback;
 import org.lwjgl.opengl.GLUtil;
 
 import com.IB.SL.AlphaLWJGL.util.Camera;
-import com.IB.SL.AlphaLWJGL.util.ResourceManager;
 import com.IB.SL.AlphaLWJGL.util.Shader;
 import com.IB.SL.AlphaLWJGL.util.TextureHandler;
-import org.joml.*;
-import org.joml.Math;
 
+@SuppressWarnings("unused")
 public class OGL_TEST
 {
 	String title = "";

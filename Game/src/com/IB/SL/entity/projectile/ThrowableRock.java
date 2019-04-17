@@ -8,7 +8,6 @@ import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
-import com.IB.SL.util.Sound;
 
 
 public class ThrowableRock extends Projectile{
@@ -27,7 +26,7 @@ public class ThrowableRock extends Projectile{
 		damage = 3;
 		this.mob = mob;
 		sprite = Sprite.RockTHROWING;
-		this.collisionSound = Sound.Rock;
+		//this.collisionSound = Sound.Rock;
 		this.breakParticle = 1;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -59,7 +58,7 @@ public class ThrowableRock extends Projectile{
 		
 		if (level.tileCollision((int) (x + nx), (int) (y + ny), 4, -2, 8)) {
 			//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 25, 4, level));
-			Sound.Play(Sound.Rock, false);
+			//Sound.Play(Sound.Rock, false);
 			 remove();
 	}
 		if (time > 400) {

@@ -8,13 +8,12 @@ import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.AnimatedSprite;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
-import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 
 public class Guard extends Mob{
@@ -87,7 +86,7 @@ public class Guard extends Mob{
 			if (time % 30 == 0) {
 				if (p.size() > 0) {					
 				  if (time_swordSound > 55) {
-		    		  Sound.Play(Sound.Sword, false);
+		    		  //Sound.Play(Sound.Sword, false);
 		    		  time_swordSound = 0;
 		    	  }
 				}

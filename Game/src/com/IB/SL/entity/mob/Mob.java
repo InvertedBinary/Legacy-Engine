@@ -22,7 +22,6 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.worlds.TiledLevel;
-import com.IB.SL.util.AABB;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.shape.LineSegment;
 import com.IB.SL.util.shape.Vertex;

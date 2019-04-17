@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
 import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
@@ -17,7 +16,6 @@ import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.level.tile.tiles.MyColor;
 import com.IB.SL.util.Vector2i;
-import com.IB.SL.util.shape.LineSegment;
 
 public class Screen {
 

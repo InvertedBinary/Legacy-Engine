@@ -7,14 +7,13 @@ import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.graphics.AnimatedSprite;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.Font16x;
-import com.IB.SL.graphics.Font8x;
+import com.IB.SL.graphics.UI.components.TextBox;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
-import com.IB.SL.graphics.UI.part.TextBox;
-import com.IB.SL.input.Mouse;
 
 public class GUI extends CheckBounds {
 	private static final long serialVersionUID = 1L;

@@ -21,13 +21,14 @@ import java.util.Stack;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.IB.SL.audio.Audio;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
-import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Font16x;
 import com.IB.SL.graphics.Font8x;
+import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.UI.GUI;
-import com.IB.SL.graphics.UI.TagMenu;
+import com.IB.SL.graphics.UI.menu.TagMenu;
 import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
@@ -163,7 +164,10 @@ public class Game extends Canvas implements Runnable
 			// Sound.loadOggs();
 			folderCreation();
 
-			this.StartDiscord();
+			StartDiscord();
+			Audio.Initialize();
+			
+			//Audio.PlayMusic("Hope", "Hope.mid");
 
 			setGui(new GUI());
 			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);

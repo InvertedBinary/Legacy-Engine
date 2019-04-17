@@ -9,7 +9,6 @@ import com.IB.SL.entity.emitter.WallParticleSpawner;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
-import com.IB.SL.util.Sound;
 
 
 public class WizardProjectile extends Projectile {
@@ -42,7 +41,7 @@ public class WizardProjectile extends Projectile {
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 		this.id = 4;
-		Sound.Play(Sound.Spell2,  false);
+		//Sound.Play(Sound.Spell2,  false);
 	}
 	
 

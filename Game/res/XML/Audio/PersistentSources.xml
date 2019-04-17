@@ -1,0 +1,5 @@
+﻿<audiosources>
+	<source name="Click" file="Click.ogg" vol="1.0" />
+	<!--source name="Hope" file="Hope.ogg" vol="1.0" /-->
+	<source name="Hope" file="Hope.mid" vol="1.0" />
+</audiosources>

@@ -3,10 +3,9 @@ package com.IB.SL.graphics.UI;
 import java.util.ArrayList;
 
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.UI.part.UI_Button;
-import com.IB.SL.graphics.UI.part.UI_Clickable;
-import com.IB.SL.graphics.UI.part.UI_Root;
-import com.IB.SL.graphics.UI.part.UI_Sprite;
+import com.IB.SL.graphics.UI.components.UI_Sprite;
+import com.IB.SL.graphics.UI.components.basic.UI_Clickable;
+import com.IB.SL.graphics.UI.components.basic.UI_Root;
 
 public class UI extends UI_Root{
 	//TODO: ADD FLAG FOR ELEMENT TRANSPARENCY

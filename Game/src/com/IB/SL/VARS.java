@@ -1,7 +1,5 @@
 package com.IB.SL;
 
-import com.IB.SL.entity.Entity;
-
 public class VARS {
 	
 	//VALIDATIONS

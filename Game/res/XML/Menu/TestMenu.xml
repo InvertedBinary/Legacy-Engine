@@ -5,6 +5,7 @@
 		<background>Title</background>
 		<audioloop>somemusic.ogg</audioloop>
 		<onUnload>onUnload</onUnload>
+		<macro>0x1B</macro>
 	</global>
 	<components>
 		<!--button x="0" y="0" w="30" h="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">Btn 0</button-->

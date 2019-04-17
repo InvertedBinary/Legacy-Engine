@@ -3,17 +3,14 @@ package com.IB.SL.entity.projectile;
 import java.util.List;
 import java.util.Random;
 
-import javax.sound.sampled.Clip;
-
 import com.IB.SL.Boot;
-import com.IB.SL.Game;
 import com.IB.SL.VARS;
+import com.IB.SL.audio.Audio;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.entity.mob.PlayerMP;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.input.Mouse;
-import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 
 public abstract class Projectile extends Entity {
@@ -28,7 +25,7 @@ public abstract class Projectile extends Entity {
 	protected double range;
 	public double damage;
 	public double manaCost;
-	protected Clip collisionSound;
+	protected String collisionSound;
 	protected int ExpV;
 	public Entity prevHit;
 	public int id = -1;
@@ -93,7 +90,7 @@ public abstract class Projectile extends Entity {
 					try {
 					if (e.getSprite().pixels[(SP_X) + (SP_Y) * e.getSprite().getWidth()] != 0xffFF3AFB) {
 						if (p.collisionSound != null) {
-							Sound.Play(p.collisionSound, false);
+							Audio.Play(p.collisionSound, p);
 						}
 						if (p.breakParticle == 1) {
 							//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
@@ -186,7 +183,7 @@ public abstract class Projectile extends Entity {
     				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).UUID, 0);				
 				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
-					Sound.Play(proj.collisionSound, false);
+					Audio.Play(proj.collisionSound, proj);
 				}
 				if (proj.breakParticle == 1) {
 					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
@@ -219,7 +216,7 @@ public abstract class Projectile extends Entity {
 				players.get(i).incombat = true;
 				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
-					Sound.Play(proj.collisionSound, false);
+					Audio.Play(proj.collisionSound, proj);
 				}
 				if (proj.breakParticle == 1) {
 					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));

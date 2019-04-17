@@ -11,13 +11,13 @@ import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.level.Level;
 import com.IB.SL.util.AABB;
-import com.IB.SL.util.PropertyEngine;
 import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.PhysicsBody;
 import com.IB.SL.util.shape.Rectangle;
 
-public class Entity extends DefaultHandler implements Serializable {
-
+public abstract class Entity extends DefaultHandler implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);
 

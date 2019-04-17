@@ -7,10 +7,10 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Mob;
 import com.IB.SL.graphics.AnimatedSprite;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.Node;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Vector2i;
@@ -135,8 +135,6 @@ public class Alice extends Mob{
 
 		sprite = animSprite.getSprite();
 		screen.renderMobSprite((int) (x() + xOffset), (int) (y() + yOffset), this);
-		
-
 	}
 
 }

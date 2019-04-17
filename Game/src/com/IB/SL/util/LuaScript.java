@@ -8,7 +8,6 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 import com.IB.SL.Boot;
-import com.IB.SL.level.worlds.XML_Level;
 
 public class LuaScript implements Runnable {
 

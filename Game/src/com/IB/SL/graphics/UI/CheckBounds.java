@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.UI.part.TextBox;
+import com.IB.SL.graphics.UI.components.TextBox;
 import com.IB.SL.input.Mouse;
 
 public class CheckBounds extends UI implements Serializable{

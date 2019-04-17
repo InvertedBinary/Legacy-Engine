@@ -1,8 +1,11 @@
 print("Opening TestMenu UI")
 GAME:DiscordMenuPresence("Test Main Menu")
 
+--menu:PlayMusic("Hope", "Hope.mid")
+
 function onUnload()
 	print("Closing TestMenu UI")
+	menu:PlayPrevious()
 end
 
 function basicContinueGame()
@@ -22,5 +25,6 @@ function luaTestHover()
 end
 
 function luaSliderTest(newPos)
-	print("NEW FPOSITION: "..newPos)
+	--print("NEW FPOSITION: "..newPos)
+	menu:SetVolume(newPos / 108);
 end

@@ -37,7 +37,6 @@ import com.IB.SL.level.worlds.TiledLevel;
 import com.IB.SL.level.worlds.XML_Level;
 import com.IB.SL.util.Debug;
 import com.IB.SL.util.LoadProperties;
-import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 import com.IB.SL.util.math.PVector;
 import com.IB.SL.util.shape.Rectangle;
@@ -552,7 +551,7 @@ public class Player extends Mob implements Serializable
 				break;
 			case 1:
 				Boot.get().setLevel(new MainLevel(Maps.main));
-				Sound.switchMusic(Sound.Windwalker, 1f);
+				//Sound.switchMusic(Sound.Windwalker, 1f);
 				SpriteSheet.minimapDYN = new SpriteSheet(Maps.main, 1024);
 				break;
 			}

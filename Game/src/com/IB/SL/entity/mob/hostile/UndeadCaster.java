@@ -17,7 +17,6 @@ import com.IB.SL.level.RayCast;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.level.tile.Tile;
 import com.IB.SL.util.Debug;
-import com.IB.SL.util.Sound;
 import com.IB.SL.util.Vector2i;
 
 public class UndeadCaster extends Mob {
@@ -300,7 +299,7 @@ public class UndeadCaster extends Mob {
 			if (!raycast.hasCollided()) {
 				shootingtracker(x(), y() + 4, dir);
 				level.getClientPlayer().incombat = true;
-				Sound.Play(Sound.Spell2, false);
+				//Sound.Play(Sound.Spell2, false);
 				fireRate = WizardProjectile2.FIRE_RATE;
 			} else {
 				visability += 50;

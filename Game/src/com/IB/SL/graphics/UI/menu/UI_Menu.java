@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.IB.SL.Boot;
+import com.IB.SL.audio.Audio;
+import com.IB.SL.graphics.Font16x;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
-import com.IB.SL.graphics.Font16x;
-import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.UI.UI;
-import com.IB.SL.graphics.UI.part.UI_Button;
-import com.IB.SL.graphics.UI.part.UI_Clickable;
-import com.IB.SL.graphics.UI.part.UI_Root;
+import com.IB.SL.graphics.UI.components.basic.UI_Clickable;
+import com.IB.SL.graphics.UI.components.basic.UI_Root;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 
@@ -65,7 +65,14 @@ public class UI_Menu extends DefaultHandler {
 		}
 	}
 	
-	private UI_Clickable focused = null;
+	private void ResetClickables() {
+		if (focused != null)
+		focused.UnsetHover();
+		focused = null;
+		pressed = false;
+	}
+	
+	private static UI_Clickable focused = null; // If not static, hover() lua still called, real fix later
 	private boolean pressed = false;
 	
 	private void distribute_input() {
@@ -77,7 +84,7 @@ public class UI_Menu extends DefaultHandler {
 				}
 			}
 		}
-		
+
 		if (focused != null) {
 			if (!focused.InBounds()) {
 				focused.UnsetHover();
@@ -89,7 +96,10 @@ public class UI_Menu extends DefaultHandler {
 					if (Mouse.dragX() != 0 || Mouse.dragY() != 0)
 						focused.Dragged();
 					
-					pressed = true;
+					if (!pressed) {
+						focused.OnDownClick();
+						pressed = true;
+					}
 				}
 				
 				if (pressed && Mouse.getButton() == -1) {
@@ -162,23 +172,53 @@ public class UI_Menu extends DefaultHandler {
 	private void unloadMenu(UI_Menu menu) {
 		if (menu != null) {
 			if (menu.enabled) {
-				for (UI_Root elements : ui.getAll()) {
-					elements.unload();
-				}
-				current.onUnload();
+				if (ui != null)
+					if (ui.getAll() != null) {
+						for (UI_Root element : ui.getAll()) {
+							if (element != null) {
+								element.unload();
+							}
+						}
+					}
+				
+				menu.ResetClickables();
+				
+				menu.onUnload();
 				menu.enabled = false;
-				current = null;
+				if (current == menu)
+					current = null;
 			}
 		}
 	}
 	
 	public void continueGame() {
-		Boot.get().getMenu().unload(Boot.get().getMenu().current);
+		Boot.get().getMenu().unload(UI_Menu.current);
 		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
 		Boot.get().getPlayer().removed = false;
 		Boot.get().getLevel().add(Boot.get().getPlayer());
 		//Boot.get().getLevel().loadLua();
 		}
+	}
+	
+	public void SetVolume(float level) {
+		System.out.println("Setting TO: " + level);
+		Audio.SetVolume(level);
+		
+		//PlayPrevious();
+	}
+	
+	public void PlayMusic(String name, String file) {
+		Audio.PlayMusic(name, file, true);
+	}
+	
+	public void PlayPrevious() {
+		if (Audio.previous_music == null)
+			Audio.StopMusic();
+		else
+			Audio.PlayMusic(
+				Audio.previous_music.name, 
+				Audio.previous_music.path
+			);
 	}
 	
 	public void addUI(UI_Root component) {

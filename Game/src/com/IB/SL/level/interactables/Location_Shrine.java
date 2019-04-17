@@ -7,9 +7,9 @@ import com.IB.SL.VARS;
 import com.IB.SL.entity.Entity;
 import com.IB.SL.entity.mob.Player;
 import com.IB.SL.entity.mob.PlayerMP;
+import com.IB.SL.graphics.Font8x;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Sprite;
-import com.IB.SL.graphics.Font8x;
 import com.IB.SL.level.TileCoord;
 import com.IB.SL.util.Debug;
 

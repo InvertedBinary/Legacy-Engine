@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import com.IB.SL.Boot;
 import com.IB.SL.graphics.AnimatedSprite;
 import com.IB.SL.graphics.Screen;
-import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.input.Keyboard;
 

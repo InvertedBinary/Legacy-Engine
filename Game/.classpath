@@ -118,5 +118,10 @@
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4-jdk14.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/discord-rpc.jar"/>
+	<classpathentry kind="lib" path="lib/CodecJOgg.jar"/>
+	<classpathentry kind="lib" path="lib/SoundSystem.jar"/>
+	<classpathentry kind="lib" path="lib/SoundSystemJPCT.jar"/>
+	<classpathentry kind="lib" path="lib/CodecJOrbis.jar"/>
+	<classpathentry kind="lib" path="lib/LibraryJavaSound.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

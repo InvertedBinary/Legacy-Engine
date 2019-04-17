@@ -2,8 +2,6 @@ package com.IB.SL.AlphaLWJGL.util;
 
 import static org.lwjgl.opengl.GL20.*;
 
-import java.io.File;
-import java.io.InputStream;
 import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
@@ -16,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.IB.SL.Boot;
 
+@SuppressWarnings("unused")
 public class Shader
 {
 	private String vertexPath, fragPath = "";

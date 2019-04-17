@@ -1,8 +1,8 @@
 package com.IB.SL.util;
 
 import com.IB.SL.Boot;
-import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.Font8x;
+import com.IB.SL.graphics.Screen;
 
 public class Debug {
 
