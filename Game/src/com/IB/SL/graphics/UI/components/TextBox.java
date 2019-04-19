@@ -16,7 +16,7 @@ import com.IB.SL.graphics.UI.menu.UI_Menu;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 
-public class TextBox extends UI_Root implements KeyListener{
+public class TextBox extends UI_Root implements KeyListener {
 	
 private Font8x font;
 private Font16x font16;

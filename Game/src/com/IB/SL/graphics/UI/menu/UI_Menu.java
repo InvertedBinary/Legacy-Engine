@@ -1,5 +1,7 @@
 package com.IB.SL.graphics.UI.menu;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import org.xml.sax.helpers.DefaultHandler;
@@ -13,11 +15,12 @@ import com.IB.SL.graphics.Sprite;
 import com.IB.SL.graphics.SpriteSheet;
 import com.IB.SL.graphics.UI.UI;
 import com.IB.SL.graphics.UI.components.basic.UI_Clickable;
+import com.IB.SL.graphics.UI.components.basic.UI_Keylistener;
 import com.IB.SL.graphics.UI.components.basic.UI_Root;
 import com.IB.SL.input.Keyboard;
 import com.IB.SL.input.Mouse;
 
-public class UI_Menu extends DefaultHandler {
+public class UI_Menu extends DefaultHandler implements KeyListener {
 	
 	public Sprite bg;
 	public SpriteSheet s_bg;
@@ -63,6 +66,7 @@ public class UI_Menu extends DefaultHandler {
 				distribute_input();
 			}
 		}
+		
 	}
 	
 	private void ResetClickables() {
@@ -158,6 +162,8 @@ public class UI_Menu extends DefaultHandler {
 				current.onLoad();
 			}
 		}
+		
+		Boot.get().addKeyListener(menu);
 	}
 	
 	public void unloadCurrent() {
@@ -172,6 +178,8 @@ public class UI_Menu extends DefaultHandler {
 	private void unloadMenu(UI_Menu menu) {
 		if (menu != null) {
 			if (menu.enabled) {
+				Boot.get().removeKeyListener(menu);
+				
 				if (ui != null)
 					if (ui.getAll() != null) {
 						for (UI_Root element : ui.getAll()) {
@@ -248,4 +256,23 @@ public class UI_Menu extends DefaultHandler {
 	public Sprite getBG() {
 		return bg;
 	}
+
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		for (UI_Keylistener element : ui.getFields()) {
+			element.KeyPressed(e);
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		//System.out.println("Key Pressed: " + e.getKeyChar());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		//System.out.println("Key Released: " + e.getKeyChar());
+	}
+	
 }

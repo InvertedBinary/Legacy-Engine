@@ -68,7 +68,7 @@ public class UI_Toggle extends UI_Root implements UI_Clickable {
 
 	@Override
 	public void OnDownClick() {
-		
+		Toggle();
 	}
 
 	@Override

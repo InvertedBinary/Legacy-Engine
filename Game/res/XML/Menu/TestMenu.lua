@@ -28,3 +28,4 @@ function luaSliderTest(newPos)
 	--print("NEW FPOSITION: "..newPos)
 	menu:SetVolume(newPos / 108);
 end
+

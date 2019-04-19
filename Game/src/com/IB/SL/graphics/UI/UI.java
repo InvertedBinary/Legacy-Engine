@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.IB.SL.graphics.Screen;
 import com.IB.SL.graphics.UI.components.UI_Sprite;
 import com.IB.SL.graphics.UI.components.basic.UI_Clickable;
+import com.IB.SL.graphics.UI.components.basic.UI_Keylistener;
 import com.IB.SL.graphics.UI.components.basic.UI_Root;
 
 public class UI extends UI_Root{
@@ -12,7 +13,8 @@ public class UI extends UI_Root{
 	private ArrayList<UI_Root> ui_Global = new ArrayList<>();
 	private ArrayList<UI_Sprite> ui_Statics = new ArrayList<>();
 	private ArrayList<UI_Clickable> ui_Clickables = new ArrayList<>();
-	
+	private ArrayList<UI_Keylistener> ui_KeyInputs = new ArrayList<>();
+
 	public UI() {
 	}
 
@@ -38,9 +40,16 @@ public class UI extends UI_Root{
 	public void addUI(UI_Root ui) {
 		if(ui instanceof UI_Sprite) {
 			this.ui_Statics.add((UI_Sprite) ui);
-		} else if (ui instanceof UI_Clickable) {
+		} 
+		
+		if (ui instanceof UI_Clickable) {
 			this.ui_Clickables.add((UI_Clickable) ui);
 		}
+		
+		if (ui instanceof UI_Keylistener) {
+			this.ui_KeyInputs.add((UI_Keylistener) ui);
+		}
+		
 		this.ui_Global.add(ui);
 	}
 	
@@ -48,6 +57,9 @@ public class UI extends UI_Root{
 		this.ui_Global.remove(this);
 	}
 	
+	public ArrayList<UI_Keylistener> getFields() {
+		return ui_KeyInputs;
+	}
 	
 	public ArrayList<UI_Clickable> getClickables() {
 		return ui_Clickables;

@@ -24,6 +24,8 @@ import com.IB.SL.graphics.UI.components.UI_Button;
 import com.IB.SL.graphics.UI.components.UI_Label;
 import com.IB.SL.graphics.UI.components.UI_Slider;
 import com.IB.SL.graphics.UI.components.UI_Sprite;
+import com.IB.SL.graphics.UI.components.UI_TextField;
+import com.IB.SL.graphics.UI.components.UI_Toggle;
 import com.IB.SL.graphics.UI.components.listeners.UI_ButtonListener;
 import com.IB.SL.graphics.UI.components.listeners.UI_SliderListener;
 import com.IB.SL.graphics.UI.components.listeners.UI_UnloadListener;
@@ -329,9 +331,21 @@ public class TagMenu extends UI_Menu
 				        PosCall.call(LuaValue.valueOf(uiSlider.pos));
 					}
 				});
-				
 				addUI(uiSlider);
 				break;
+			
+			case "components.textfield":
+				System.out.println("TextFields are not fully implemented.");
+				UI_TextField field = new UI_TextField(0, 0, 24, true, false, false);
+				addUI(field);
+				
+				break;
+			case "components.toggle":
+				System.out.println("Toggles are not fully implemented.");
+				UI_Toggle toggle = new UI_Toggle(0, 0, false, null);
+				addUI(toggle);
+				break;
+				
 			default:
 				System.out.println(" - !! Unknown Menu Component !!: " + reading_tag);
 				break;

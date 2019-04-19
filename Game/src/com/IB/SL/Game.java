@@ -200,15 +200,6 @@ public class Game extends Canvas implements Runnable
 			addMouseMotionListener(mouse);
 			addMouseWheelListener(mouse);
 
-			getMenu().addMenus();
-			//getMenu().load(getMenu().MainMenu, true);
-
-			System.out.println("-=-=-=-Begin Loading xMenu-=-=-=-");
-			TagMenu xMenu = new TagMenu("/XML/Menu/TestMenu", false);
-			System.out.println("-=-=-=-Finished Loading xMenu-=-=-=-");
-			
-			getMenu().load(xMenu, true);
-			
 			frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width), Boot.prefsInt("Frame", "MinHeight", Boot.height)));
 			
 		this.frame.getRootPane().addComponentListener(new ComponentListener()
@@ -529,6 +520,7 @@ public class Game extends Canvas implements Runnable
 		this.FrameAdjusted = false;
 	}
 
+	boolean FirstMenuLoad = false;
 	public void update()
 		{
 			conTime++;
@@ -686,6 +678,15 @@ public class Game extends Canvas implements Runnable
 			Boot.centerMouse();
 			}
 			game.start();
+			
+			getMenu().addMenus();
+			//getMenu().load(getMenu().MainMenu, true);
+			
+			System.out.println("-=-=-=-Begin Loading xMenu-=-=-=-");
+			TagMenu xMenu = new TagMenu("/XML/Menu/TestMenu", false);
+			System.out.println("-=-=-=-Finished Loading xMenu-=-=-=-");
+			
+			getMenu().load(xMenu, true);
 		}
 	
 	public boolean ChangingFullscreenState = false;

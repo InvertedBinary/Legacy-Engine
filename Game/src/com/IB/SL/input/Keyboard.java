@@ -153,8 +153,9 @@ public class Keyboard implements KeyListener {
 		ctrl = keys[KeyEvent.VK_CONTROL];
 		arrow_Left = keys[KeyEvent.VK_LEFT];
 		arrow_Right = keys[KeyEvent.VK_RIGHT];
-	
-	
+		
+		
+		
 		for (int i = 0; i < ticks.length; i++) {
 			ticks[i] = false;
 		}
@@ -176,7 +177,7 @@ public class Keyboard implements KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
-
+		
 		if (toggles[e.getKeyCode()] == true) {
 			toggle_helper[e.getKeyCode()]++;
 		}
