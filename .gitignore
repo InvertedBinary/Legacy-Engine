@@ -5,6 +5,14 @@
 
 # Package Files #
 *.jar
+!CodecJOrbis.jar
+!discord-rpc
+!ini4j-0.5.4.jar
+!ini4j-0.5.4-jdk14.jar
+!LibraryJavaSound.jar
+!SoundSystem.jar
+!SoundSystemJPCT.jar
+!CodecJOgg.jar
 !easyogg.jar
 !jogg-0.0.7.jar
 !joml-jdk8-1.9.9.jar
