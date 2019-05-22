@@ -1,10 +1,10 @@
-package com.IB.LE2.media.graphics.UI.menu;
+package com.IB.LE2.input.UI.menu;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Commands;
+import com.IB.LE2.input.UI.components.TextBox;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.UI.components.TextBox;
 import com.IB.LE2.world.entity.projectile.Selector;
 
 public class ConsoleMenu extends UI_Menu {

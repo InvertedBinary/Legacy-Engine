@@ -1,11 +1,11 @@
-package com.IB.LE2.media.graphics.UI;
+package com.IB.LE2.input.UI;
 
 import java.io.Serializable;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.components.TextBox;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.UI.components.TextBox;
 
 public class CheckBounds extends UI implements Serializable{
 	private static final long serialVersionUID = 1L;

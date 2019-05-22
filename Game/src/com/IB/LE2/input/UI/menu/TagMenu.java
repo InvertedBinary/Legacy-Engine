@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics.UI.menu;
+package com.IB.LE2.input.UI.menu;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,19 +17,19 @@ import org.xml.sax.SAXException;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.components.UI_Button;
+import com.IB.LE2.input.UI.components.UI_Label;
+import com.IB.LE2.input.UI.components.UI_Slider;
+import com.IB.LE2.input.UI.components.UI_Sprite;
+import com.IB.LE2.input.UI.components.UI_TextField;
+import com.IB.LE2.input.UI.components.UI_Toggle;
+import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
+import com.IB.LE2.input.UI.components.listeners.UI_SliderListener;
+import com.IB.LE2.input.UI.components.listeners.UI_UnloadListener;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
-import com.IB.LE2.media.graphics.UI.components.UI_Button;
-import com.IB.LE2.media.graphics.UI.components.UI_Label;
-import com.IB.LE2.media.graphics.UI.components.UI_Slider;
-import com.IB.LE2.media.graphics.UI.components.UI_Sprite;
-import com.IB.LE2.media.graphics.UI.components.UI_TextField;
-import com.IB.LE2.media.graphics.UI.components.UI_Toggle;
-import com.IB.LE2.media.graphics.UI.components.listeners.UI_ButtonListener;
-import com.IB.LE2.media.graphics.UI.components.listeners.UI_SliderListener;
-import com.IB.LE2.media.graphics.UI.components.listeners.UI_UnloadListener;
 import com.IB.LE2.world.level.scripting.LuaScript;
 
 public class TagMenu extends UI_Menu

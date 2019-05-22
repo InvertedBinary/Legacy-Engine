@@ -1,8 +1,8 @@
-package com.IB.LE2.media.graphics.UI.components;
+package com.IB.LE2.input.UI.components;
 
+import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Root;
 
 public class UI_Sprite extends UI_Root
 {

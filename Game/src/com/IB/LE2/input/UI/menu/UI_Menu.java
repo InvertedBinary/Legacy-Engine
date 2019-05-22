@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics.UI.menu;
+package com.IB.LE2.input.UI.menu;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,16 +9,16 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.UI;
+import com.IB.LE2.input.UI.components.basic.UI_Clickable;
+import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
+import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
-import com.IB.LE2.media.graphics.UI.UI;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Clickable;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Keylistener;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Root;
 
 public class UI_Menu extends DefaultHandler implements KeyListener {
 	

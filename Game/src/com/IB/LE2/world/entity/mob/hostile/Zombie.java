@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.input.UI.GUI;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
-import com.IB.LE2.media.graphics.UI.GUI;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Mob;
 import com.IB.LE2.world.entity.mob.Player;

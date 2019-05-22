@@ -23,13 +23,13 @@ import javax.swing.JFrame;
 
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.GUI;
+import com.IB.LE2.input.UI.menu.TagMenu;
+import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.UI.GUI;
-import com.IB.LE2.media.graphics.UI.menu.TagMenu;
-import com.IB.LE2.media.graphics.UI.menu.UI_Menu;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
 import com.IB.LE2.util.IO.LoadProperties;

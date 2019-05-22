@@ -1,12 +1,12 @@
-package com.IB.LE2.media.graphics.UI;
+package com.IB.LE2.input.UI;
 
 import java.util.ArrayList;
 
+import com.IB.LE2.input.UI.components.UI_Sprite;
+import com.IB.LE2.input.UI.components.basic.UI_Clickable;
+import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
+import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.UI.components.UI_Sprite;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Clickable;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Keylistener;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Root;
 
 public class UI extends UI_Root{
 	//TODO: ADD FLAG FOR ELEMENT TRANSPARENCY

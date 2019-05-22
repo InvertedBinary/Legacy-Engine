@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics.UI.components;
+package com.IB.LE2.input.UI.components;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.CheckBounds;
+import com.IB.LE2.input.UI.components.basic.UI_Root;
+import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.UI.CheckBounds;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Root;
-import com.IB.LE2.media.graphics.UI.menu.UI_Menu;
 
 public class TextBox extends UI_Root implements KeyListener {
 	

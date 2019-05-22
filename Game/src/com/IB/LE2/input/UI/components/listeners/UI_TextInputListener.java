@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics.UI.components.listeners;
+package com.IB.LE2.input.UI.components.listeners;
 
 public interface UI_TextInputListener {
 

@@ -1,16 +1,16 @@
-package com.IB.LE2.media.graphics.UI;
+package com.IB.LE2.input.UI;
 
 import java.util.ArrayList;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.input.UI.components.TextBox;
+import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
-import com.IB.LE2.media.graphics.UI.components.TextBox;
-import com.IB.LE2.media.graphics.UI.menu.UI_Menu;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Mob;
 import com.IB.LE2.world.entity.mob.Player;

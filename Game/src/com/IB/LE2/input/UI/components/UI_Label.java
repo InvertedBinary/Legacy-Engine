@@ -1,12 +1,12 @@
-package com.IB.LE2.media.graphics.UI.components;
+package com.IB.LE2.input.UI.components;
 
 import java.awt.Desktop;
 import java.net.URL;
 
 import com.IB.LE2.Game;
+import com.IB.LE2.input.UI.components.basic.UI_Clickable;
+import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Clickable;
-import com.IB.LE2.media.graphics.UI.components.basic.UI_Root;
 
 public class UI_Label extends UI_Root implements UI_Clickable {
 	public int x, y;

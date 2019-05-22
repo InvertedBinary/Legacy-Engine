@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics.UI.components.basic;
+package com.IB.LE2.input.UI.components.basic;
 
 import java.awt.event.KeyEvent;
 

@@ -11,8 +11,8 @@ import java.util.Date;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.media.audio.Audio;
-import com.IB.LE2.media.graphics.UI.menu.TagMenu;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.IO.SaveGame;
 import com.IB.LE2.world.entity.mob.Player;
