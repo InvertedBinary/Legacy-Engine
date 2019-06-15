@@ -2,8 +2,6 @@ package com.IB.LE2.input.UI;
 
 import java.util.ArrayList;
 
-import com.IB.LE2.Boot;
-import com.IB.LE2.input.UI.components.TextBox;
 import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Font16x;
@@ -49,17 +47,12 @@ public class GUI extends CheckBounds {
 	}
 
 	public void update() {
-		if (name == null) {
-			name = new TextBox(90, 38, 204, 20, Boot.get().key, 12, false);
-		}
-
 		// expBar.update();
-		for (int i = 0; i < menu.menus.size(); i++) {
-			menu.menus.get(i).updateUnloaded();
+		for (int i = 0; i < UI_Menu.menus.size(); i++) {
+			UI_Menu.menus.get(i).updateUnloaded();
 		}
 		
 		menu.UpdateMacros();
-		
 		menu.update();
 	}
 

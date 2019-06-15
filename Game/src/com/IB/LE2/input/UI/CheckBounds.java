@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Mouse;
-import com.IB.LE2.input.UI.components.TextBox;
 import com.IB.LE2.input.UI.components.basic.UI_Container;
 import com.IB.LE2.media.graphics.Screen;
 
@@ -17,7 +16,6 @@ public class CheckBounds extends UI_Container implements Serializable{
 	public String save2 = "(Open)";
 	public String save3 = "(Open)";
 	public String save4 = "(Open)";
-	transient public TextBox name;
 
 	public boolean checkBounds(int x, int y, int width, int height, boolean toScale, boolean temp) {
 		if (toScale) {

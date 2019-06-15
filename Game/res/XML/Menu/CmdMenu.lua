@@ -1,11 +1,11 @@
-print("Opening TestMenu UI")
-GAME:DiscordMenuPresence("Test Main Menu")
-
---menu:PlayMusic("Hope", "Hope.mid")
+print("Opening Console UI")
+GAME:DiscordMenuPresence("Console Menu")
+menu:SuspendWorldInput()
 
 function onUnload()
-	print("Closing TestMenu UI")
+	print("Closing Console UI")
 	menu:PlayPrevious()
+	menu:ResumeWorldInput()
 end
 
 function basicContinueGame()

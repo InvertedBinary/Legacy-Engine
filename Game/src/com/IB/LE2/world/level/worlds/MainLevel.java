@@ -125,7 +125,7 @@ public class MainLevel extends Level{
 
 		}*/
 		
-		Game.currentLevelId = Maps.mainId;
+		//Game.currentLevelId = Maps.mainId;
 
 		add(new Guard(615, 230, new TileCoord(601, 230), new TileCoord(636, 230)));
 		add(new Guard(652, 230, new TileCoord(649, 230), new TileCoord(685, 230)));

@@ -75,6 +75,10 @@ public class UI_Menu extends DefaultHandler implements KeyListener {
 				}
 				distribute_input();
 			}
+		} else {
+			if (Mouse.getMouseB() != Mouse.MOUSE_RELEASED)
+				if (Boot.get().getLevel().players.size() > 0)
+					Boot.get().getLevel().getClientPlayer().MouseClicked(Mouse.getButton());
 		}
 	}
 	
@@ -123,7 +127,8 @@ public class UI_Menu extends DefaultHandler implements KeyListener {
 			}
 		} else {
 			if (Mouse.getButton() != -1) {
-				//Process world input
+				if (Boot.get().getLevel().players.size() > 0)
+					Boot.get().getLevel().getClientPlayer().MouseClicked(Mouse.getButton());
 			}
 		}
 	}
@@ -270,6 +275,14 @@ public class UI_Menu extends DefaultHandler implements KeyListener {
 		GetElementById(id).SetText(text);
 	}
 	
+	public void SuspendWorldInput() {
+		Boot.get().getPlayer().input.suspendInput();
+	}
+	
+	public void ResumeWorldInput() {
+		Boot.get().getPlayer().input.resumeInput();
+	}
+	
 	public Keyboard getKey() {
 		return Boot.get().key;
 	}
@@ -303,9 +316,10 @@ public class UI_Menu extends DefaultHandler implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (ui != null)
-		for (UI_Keylistener element : ui.getFields()) {
-			element.KeyPressed(e);
-		}
+			for (UI_Keylistener element : ui.getFields()) {
+				element.KeyPressed(e);
+			}
+		
 		//System.out.println("Key Pressed: " + e.getKeyChar());
 	}
 

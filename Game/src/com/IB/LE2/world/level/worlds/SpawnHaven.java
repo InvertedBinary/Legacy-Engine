@@ -69,7 +69,7 @@ public class SpawnHaven extends Level implements Serializable{
 			System.out.println("Failed To Load Torches");
 		}
 		
-		Game.currentLevelId = Maps.spawnHavenId;
+		//Game.currentLevelId = Maps.spawnHavenId;
 
 		//add(new Coin(20, 15, 50000, 1, Coin.Type.RANDOM));
 		

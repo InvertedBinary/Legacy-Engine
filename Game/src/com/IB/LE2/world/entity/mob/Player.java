@@ -1,13 +1,13 @@
 package com.IB.LE2.world.entity.mob;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -16,6 +16,7 @@ import com.IB.LE2.Game;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -36,20 +37,14 @@ import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
-public class Player extends Mob implements Serializable
-{
-
-	/**
-	 * 
-	 */
+public class Player extends Mob implements Serializable {
 	private transient static final long serialVersionUID = -8911018741301426797L;
+	
 	public transient Keyboard input;
 	public transient Tile tile;
 	public boolean buildMode = false;
 
 	// private transient transient Inventory inventory;
-	// public transient vel level;
-	transient int walkingPacketTime = 0;
 	public transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
 	public transient AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
 	public transient AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
@@ -66,8 +61,6 @@ public class Player extends Mob implements Serializable
 
 	public transient AnimatedSprite animSprite = down;
 
-	public transient static java.util.Random random1 = new Random();
-	public transient static int random = random1.nextInt(8 + 4);
 	public transient int fireRate = 1;
 
 	private transient double time = 0;
@@ -136,73 +129,35 @@ public class Player extends Mob implements Serializable
 			System.out.println("ADDING NEW PLAYER: " + this.x() + "," + this.y());
 		}
 
-	public void added()
-		{
-			if (Boot.isConnected) {
-				if (this.isClientPlayer()) {
-					Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
-				}
+	public void added() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+				Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
 			}
 		}
+	}
 
-	public boolean remove()
-		{
-			if (Boot.isConnected) {
-				if (this.isClientPlayer()) {
-					Boot.c.sendMessage("REM|id=" + UUID);
-				}
+	public boolean remove() {
+		if (Boot.isConnected) {
+			if (this.isClientPlayer()) {
+				Boot.c.sendMessage("REM|id=" + UUID);
 			}
-			return super.remove();
 		}
+		return super.remove();
+	}
 
-	@Deprecated
-	public void invokeSave(Player p)
-		{
-			/*
-			 * this.currentLevelId = Game.currentLevelId; for (int i = 0; i <
-			 * level.entities.size(); i++) { System.out.println("[===] " +
-			 * level.entities.get(i).getClass()); }
-			 * System.out.println("====>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>===     |      " +
-			 * level.entities + " ||| + " + level.entities.size()); Entity[] es =
-			 * level.entities.toArray(new Entity[level.entities.size()]);
-			 * level.saveMobs(es); for(int i = 0; i < es.length; i++) {
-			 * System.out.println("  |==|  " + es[i]); } es = null; SaveGame.save(p);
-			 */
+	public void MouseClicked(int btn) {
+		switch (btn) {
+		case Mouse.LEFT_CLICK:
+			updateShooting();			
+			break;
+		case Mouse.RIGHT_CLICK:
+			break;
+		case Mouse.MIDDLE_CLICK:
+			break;
 		}
-
-	@Deprecated
-	public void invokeLoad(Player p)
-		{
-			/*
-			 * try { loadProp.loadPrefs(Boot.get());; Player temp = SaveGame.load();
-			 * 
-			 * System.out.println("-----------------------STEP1---------------------------")
-			 * ; p.riding = false; p.speed = 1;
-			 * 
-			 * p.currentLevelId = Game.currentLevelId;
-			 * 
-			 * p.Lvl = temp.Lvl; p.kills = temp.kills; p.money = temp.money;
-			 * setPosition(temp.x(), temp.y(), temp.currentLevelId, false);
-			 * 
-			 * p.mobhealth = temp.mobhealth; p.mana = temp.mana; p.stamina = temp.stamina;
-			 * 
-			 * System.out.println("-----------------------STEP2---------------------------")
-			 * ; //this.inventory.loadItems(this);
-			 * System.out.println("-----------------------STEP3---------------------------")
-			 * ; //this.equipment.loadItems(this);
-			 * System.out.println("-----------------------STEP4----------------------------"
-			 * ); //this.quests.loadQuests(this);
-			 * System.out.println("-----------------------STEP5----------------------------"
-			 * ); temp = null;
-			 * 
-			 * } catch (Exception e) {
-			 * 
-			 * }
-			 */
-		}
-
-	boolean addedAbility = false;
-
+	}
+	
 	PVector pv = null;
 	public void update()
 		{
@@ -262,14 +217,6 @@ public class Player extends Mob implements Serializable
 			if (!moving) {
 				cam_xOff = 0;
 				cam_yOff = 0;
-			}
-
-			if (swimming) {
-				// speed = 0.5;
-			}
-
-			if (swimming && sprinting) {
-				// speed = 1;
 			}
 
 			double xa = 0;
@@ -389,14 +336,6 @@ public class Player extends Mob implements Serializable
 				move(xa, ya);
 			}
 
-			if (Boot.isConnected) {
-				if (isClientPlayer()) {
-					updateShooting();
-				}
-			} else {
-				updateShooting();
-			}
-
 			this.vel().x(0);
 			this.pv.x(0);
 
@@ -409,10 +348,9 @@ public class Player extends Mob implements Serializable
 			}
 		}
 
-	public boolean isClientPlayer()
-		{
-			return this.equals(Boot.get().getPlayer());
-		}
+	public boolean isClientPlayer() {
+		return this.equals(Boot.get().getPlayer());
+	}
 
 	private Selector selection_tool;
 	public void updateShooting()

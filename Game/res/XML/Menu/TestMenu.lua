@@ -2,10 +2,12 @@ print("Opening TestMenu UI")
 GAME:DiscordMenuPresence("Test Main Menu")
 
 --menu:PlayMusic("Hope", "Hope.mid")
+menu:SuspendWorldInput()
 
 function onUnload()
 	print("Closing TestMenu UI")
 	menu:PlayPrevious()
+	menu:ResumeWorldInput()
 end
 
 function basicContinueGame()

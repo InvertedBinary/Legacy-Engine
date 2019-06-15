@@ -4,6 +4,6 @@ import java.awt.event.KeyEvent;
 
 public interface UI_Keylistener {
 	
-	public void KeyPressed(KeyEvent e);
+	public boolean KeyPressed(KeyEvent e);
 	
 }

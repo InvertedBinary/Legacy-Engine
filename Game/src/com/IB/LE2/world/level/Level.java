@@ -127,7 +127,7 @@ public class Level extends EntityContainer implements Serializable {
 	@Deprecated
 	public void saveMobs(Entity[] es) {
 		//System.out.println("SAVING TO: " + SaveGame.mobsFileName + Game.currentLevelId);
-		SaveGame.save(es, SaveGame.mobsFileName + Game.currentLevelId);
+		SaveGame.save(es, SaveGame.mobsFileName/* + Game.currentLevelId*/);
 	}
 	
 	@Deprecated

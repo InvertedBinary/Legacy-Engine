@@ -69,7 +69,6 @@ public class Game extends Canvas implements Runnable
 	private boolean running = false;
 	public static transient Font16x font16bit;
 	public static transient Font8x font8bit;
-	public static int currentLevelId;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 
@@ -245,7 +244,8 @@ public class Game extends Canvas implements Runnable
 					 (((int)Boot.get().getPlayer().y()) >> 5) + ")";
 			 rich.largeImageKey = "ogimage";
 			 rich.largeImageText = "Meridian";
-			
+			 rich.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM=";
+			 
 			 DiscordRPC.discordUpdatePresence(rich);
 	}
 	
@@ -418,7 +418,7 @@ public class Game extends Canvas implements Runnable
 			//this.PlayerName = name;
 			getPlayer().name = name;
 			// getPlayer().reset(getPlayer());
-			getPlayer().invokeLoad(getPlayer());
+			//getPlayer().invokeLoad(getPlayer());
 			System.out.println("Switched To: " + getPlayer().name);
 
 			if (disabledSave) {
@@ -446,7 +446,7 @@ public class Game extends Canvas implements Runnable
 			if (autoSave || autoOverride) {
 				if (getLevel().players.size() > 0) {
 					if (getLevel().getClientPlayer() != null) {
-						getLevel().getClientPlayer().invokeSave(getLevel().getClientPlayer());
+						//getLevel().getClientPlayer().invokeSave(getLevel().getClientPlayer());
 					}
 				}
 			}

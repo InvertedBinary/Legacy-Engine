@@ -105,8 +105,8 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 	}
 
 	@Override
-	public void KeyPressed(KeyEvent e) {
-		if (!focused) return;
+	public boolean KeyPressed(KeyEvent e) {
+		if (!focused) return false;
 		
 		char keychar = e.getKeyChar();
 		int keycode = e.getKeyCode();
@@ -151,6 +151,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		listener.KeyEntered(keychar, false);
 		
 		System.out.println("TEXT: " + text + "|");
+		return true;
 	}
 	
 	public boolean PassesFilter(char c) {
@@ -394,7 +395,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 			else
 				SetDisplayText("");
 		
-		if (focused) {
+		if (focused && !hovering) {
 			if (Mouse.getButton() != -1)
 				focused = false;
 			
