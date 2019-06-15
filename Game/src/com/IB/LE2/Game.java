@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.input.UI.menu.TagMenu;
-import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
@@ -610,6 +610,7 @@ public class Game extends Canvas implements Runnable
 					g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
 							Mouse.getX() - 103, Mouse.getY() + 70);
 					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
+					g.drawString("Press 'M' To Reload Current Menu", 10, 66);
 					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
 					//g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
 					//g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);

@@ -16,7 +16,6 @@ import com.IB.LE2.Game;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
-import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -419,12 +418,10 @@ public class Player extends Mob implements Serializable
 	public void updateShooting()
 		{
 			if (Mouse.getButton() == 2) {
-				if (UI_Menu.ConsoleMenu.enabled) {
-					selection_tool = new Selector((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
-							(Mouse.getY() / Boot.scale + Screen.yOffset) + 0);
-					level.add(selection_tool);
-					selection_tool.update();
-				}
+				selection_tool = new Selector((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
+						(Mouse.getY() / Boot.scale + Screen.yOffset) + 0);
+				level.add(selection_tool);
+				selection_tool.update();
 			}
 
 			if (Mouse.getButton() == 1) {

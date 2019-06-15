@@ -24,7 +24,7 @@ import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public class Commands {
 
-	public void updateCommandMode(String cmd, Player player) {
+	public static void Execute(String cmd, Player player) {
 		ArrayList<String> cmds = new ArrayList<>();
 		String Command = "", Modifier = "", Modifier2 = "";
 		int args = 0;

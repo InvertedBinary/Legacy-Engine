@@ -10,7 +10,6 @@ import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Label extends UI_Root implements UI_Clickable {
 	public int x, y;
-	public String text;
 	
 	public String hyperlink =  "";
 	

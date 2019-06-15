@@ -839,21 +839,40 @@ public void render32Mob(double x2, double y2, Mob mob) {
 	}
 
 	public void drawFillRect(int xp, int yp, int width, int height, int color, boolean fixed) {
-		if(fixed) {
+		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
-        for (int y = 0; y < height; y++) {
-            int ya = y + yp;
-            for (int x = 0; x < width; x++) {
-               int xa = x + xp;
-               if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
-                  continue;
+		for (int y = 0; y < height; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < width; x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height) continue;
 				int col = color;
-                  pixels[xa + ya * this.width] = col;
-               }
-            }
-         }
+				pixels[xa + ya * this.width] = col;
+			}
+		}
+	}
+	
+	public void drawFillRect(int xp, int yp, int width, int height, int color, int border_color, boolean fixed) {
+		if (fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for (int y = 0; y < height; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < width; x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height) continue;
+				int col = color;
+				
+				if (xa == 0 || ya == 0 || x == width - 1 || y == height - 1)
+					col = border_color;
+				
+				pixels[xa + ya * this.width] = col;
+			}
+		}
+	}
 	
 	public void drawVectors(List<Vector2i> list, int color, boolean fixed){
 		   for(Vector2i vec : list){

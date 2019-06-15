@@ -7,11 +7,12 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.input.Commands;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.CheckBounds;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
-import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
@@ -229,7 +230,7 @@ private class MyDispatcher implements KeyEventDispatcher {
 	
 	public void runCmd(String text) {
 		if (useCmds) {
-			UI_Menu.ConsoleMenu.cmds.updateCommandMode(finalText, Boot.get().getPlayer());
+			Commands.Execute(finalText, Boot.get().getPlayer());
 			reset(true);
 		}
 		focused = true;

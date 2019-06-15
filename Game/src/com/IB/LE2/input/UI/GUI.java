@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.UI.components.TextBox;
-import com.IB.LE2.input.UI.menu.UI_Menu;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
@@ -57,6 +57,8 @@ public class GUI extends CheckBounds {
 		for (int i = 0; i < menu.menus.size(); i++) {
 			menu.menus.get(i).updateUnloaded();
 		}
+		
+		menu.UpdateMacros();
 		
 		menu.update();
 	}

@@ -3,6 +3,7 @@ package com.IB.LE2.input.UI.menu;
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Commands;
 import com.IB.LE2.input.UI.components.TextBox;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.world.entity.projectile.Selector;
@@ -43,14 +44,14 @@ public class ConsoleMenu extends UI_Menu {
 	}
 	
 	public void updateUnloaded() {
-		if (enabled == false) {
+		/*if (enabled == false) {
 			if (getKey() != null) {
 				if (getKey().console) {
 					load(this, false);
 					getKey().console = false;
 				}
 			}
-		}
+		}*/
 	}
 	
 	public void update() {

@@ -21,6 +21,5 @@
 		
 		<image x="230" y="82" w="30" h="10" r="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">abilitybox</image>
 		<slider x="150" y="60" w="108" xo="75" railColor="0xFFFF00" slideCol="0xFF0000" onPosUpdated="luaSliderTest">Slider 1</slider>
-		<textfield>Enter Command..</textfield>
 	</components>
 </uiset>

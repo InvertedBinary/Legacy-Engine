@@ -5,9 +5,10 @@ import java.io.Serializable;
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.components.TextBox;
+import com.IB.LE2.input.UI.components.basic.UI_Container;
 import com.IB.LE2.media.graphics.Screen;
 
-public class CheckBounds extends UI implements Serializable{
+public class CheckBounds extends UI_Container implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public String desc = "";

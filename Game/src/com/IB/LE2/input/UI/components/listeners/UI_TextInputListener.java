@@ -4,6 +4,6 @@ public interface UI_TextInputListener {
 
 	//public void FocusChanged();
 	public void SubmitInput(String input);
-	public void KeyEntered(char c);
+	public void KeyEntered(char c, boolean filtered);
 	
 }

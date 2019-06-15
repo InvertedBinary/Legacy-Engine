@@ -23,8 +23,10 @@ import com.IB.LE2.input.UI.components.UI_Slider;
 import com.IB.LE2.input.UI.components.UI_Sprite;
 import com.IB.LE2.input.UI.components.UI_TextField;
 import com.IB.LE2.input.UI.components.UI_Toggle;
+import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
 import com.IB.LE2.input.UI.components.listeners.UI_SliderListener;
+import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
 import com.IB.LE2.input.UI.components.listeners.UI_UnloadListener;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
@@ -53,7 +55,6 @@ public class TagMenu extends UI_Menu
 		this.PATH = "/XML/Menu/" + tag_name;
 		
 		this.external_tag = false;
-		init();
 	}
 
 	public TagMenu(String path, boolean external)
@@ -62,7 +63,6 @@ public class TagMenu extends UI_Menu
 		this.TAG = path.substring(path.lastIndexOf('/') + 1, path.length());
 
 		this.external_tag = external;
-		init();
 	}
 
 	public void update() {
@@ -73,24 +73,28 @@ public class TagMenu extends UI_Menu
 		}
 	}
 	
+	public String GetTagName() {
+		return TAG;
+	}
+	
 	public void updateUnloaded() {
-		if (enabled == false) {
-			if (getKey() != null) {
-				if (getKey().Pause) {
-					load(this, false);
-					getKey().Pause = false;
-				}
+		if (getKey() != null) {
+			if (getKey().Pause) {
+				load(new TagMenu("TestMenu"), true);
+				getKey().Pause = false;
 			}
 		}
 	}
 	
 	public void render(Screen screen) {
-		screen.renderAlphaSprite(bg, x, y);
+		if (bg != null)
+			screen.renderAlphaSprite(bg, x, y);
+		
 		this.ui.render(screen);
 	}
 
 	public void onLoad() {
-		initLua();
+		init();
 	}
 	
 	public void onUnload() {
@@ -205,7 +209,12 @@ public class TagMenu extends UI_Menu
 				        UnloadCall.call();
 					}
 				};
+				
+				
+				initLua();
+
 				break;
+				
 			case "components.button":
 				/*for (int i = 0 ; i < current_attribs.getLength(); i++) {
 					System.out.println(current_attribs.getQName(i) + " :: " + current_attribs.getValue(i));
@@ -252,12 +261,14 @@ public class TagMenu extends UI_Menu
 				btn.addListener(new UI_ButtonListener() {
 					@Override
 					public void ButtonClick() {
+						if (ls == null) return;
 				        LuaValue ClickCall = ls.globals.get(onClickFunc);
 				        ClickCall.call();
 					}
 
 					@Override
 					public void ButtonHover() {
+						if (ls == null) return;
 				        LuaValue HoverCall = ls.globals.get(onHoverFunc);
 				        HoverCall.call();
 				    }
@@ -335,8 +346,34 @@ public class TagMenu extends UI_Menu
 				break;
 			
 			case "components.textfield":
-				System.out.println("TextFields are not fully implemented.");
-				UI_TextField field = new UI_TextField(0, 0, 24, true, false, false);
+				int	fieldx  = (int)parseNum(pullAttrib("x",  "0"));
+				int fieldy  = (int)parseNum(pullAttrib("y",  "0"));
+				int	maxchars  = (int)parseNum(pullAttrib("max",  "24"));
+				boolean scrollable = parseBool(pullAttrib("scrollable", "true"));
+				boolean numeric = parseBool(pullAttrib("numeric_only", "false"));
+				boolean sensitive = parseBool(pullAttrib("sensitive_input", "false"));
+				
+				
+				UI_TextField field = new UI_TextField(fieldx, fieldy, maxchars, scrollable, numeric, sensitive);
+				field.SetID(pullAttrib("id", field.GetID()));
+				field.prompt_text = val;
+				
+				String onSubmit = pullAttrib("onSubmit", "");
+				String onKeyed = pullAttrib("onKeyed", "");
+				field.addListener(new UI_TextInputListener() {
+					@Override
+					public void SubmitInput(String input) {
+				        LuaValue SubmitCall = ls.globals.get(onSubmit);
+				        SubmitCall.call(LuaValue.valueOf(input));						
+					}
+
+					@Override
+					public void KeyEntered(char c, boolean filtered) {
+				        LuaValue KeyCall = ls.globals.get(onKeyed);
+				        KeyCall.call(LuaValue.valueOf(c));						
+					}
+				});
+				
 				addUI(field);
 				
 				break;
