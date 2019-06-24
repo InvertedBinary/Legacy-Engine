@@ -6,8 +6,6 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import com.IB.LE2.world.level.worlds.Maps;
-
 public class SpriteSheet {
 	
 	/**
@@ -43,7 +41,6 @@ public class SpriteSheet {
 	
 	
 	public static SpriteSheet Teleporter = new SpriteSheet("/Textures/sheets/03_WorldGen/Structure/Teleporter.png", 32, 512);
-	public static SpriteSheet maps_Spawn = new SpriteSheet(Maps.main, 1024, 1024);
 
 	public static SpriteSheet inventoryItems = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Inventory/inventoryItems.png", 136, 104);
 	public static SpriteSheet inventoryEquip = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Inventory/inventoryEquip.png", 136, 104);
@@ -105,7 +102,7 @@ public class SpriteSheet {
 	public static SpriteSheet minimap_hidden = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/MapClose.png", 45, 10);
 
 	public static SpriteSheet player = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/PlayerSprite.png", 512, 512);
-
+	
 	public static SpriteSheet mobHealth = new SpriteSheet("/Textures/sheets/01_GUI/HUD/MobHealth.png", 128, 704);
 	
 	public static SpriteSheet healthbar = new SpriteSheet("/Textures/sheets/01_GUI/HUD/HealthEx2.png", 72, 1952);

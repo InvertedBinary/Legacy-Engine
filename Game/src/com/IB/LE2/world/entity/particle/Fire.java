@@ -13,7 +13,7 @@ public class Fire extends Particle {
 		this.xx = x;
 		this.yy = y;
 		sprite = Sprite.rotate(Sprite.fireParticle, dir);
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 	}
 	

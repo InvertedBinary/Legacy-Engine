@@ -8,6 +8,9 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.Game;
+import com.IB.LE2.input.UI.UI_Manager;
+import com.IB.LE2.world.entity.mob.TagMob;
 
 public class LuaScript implements Runnable {
 
@@ -25,6 +28,20 @@ public class LuaScript implements Runnable {
 		}
 		this.globals = JsePlatform.standardGlobals();
 		chunk = globals.loadfile(path);
+	}
+	
+	//public static String TAGMOB = "com.IB.LE2.world.entity.mob.TagMob";
+	public void AddGeneralGlobals() {
+		addGlobal("level", Boot.getLevel());
+		addGlobal("g", Boot.get());
+		addGlobal("GAME", Game.class);
+		addGlobal("menu", UI_Manager.Current());
+
+		addGlobal(" ", this.getClass());
+//		addGlobal("level", Boot.get().getLevel());
+//		addGlobal("g", Boot.get());
+		//addGlobal("key", Boot.get().getInput());
+		//addGlobal("key", Boot.get()); <= Crashes lua when used
 	}
 	
 	public void addGlobal(String name, Object obj) {

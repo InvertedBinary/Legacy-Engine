@@ -15,7 +15,7 @@ public class DefaultParticle extends Particle {
 		this.xx = x;
 		this.yy = y;
 		sprite = new Sprite(1, hex);
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();
@@ -29,7 +29,7 @@ public class DefaultParticle extends Particle {
 		this.xx = x;
 		this.yy = y;
 		sprite = new Sprite(size, hex);
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();
@@ -43,7 +43,7 @@ public class DefaultParticle extends Particle {
 		this.xx = x;
 		this.yy = y;
 		sprite = spr;
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();
 		this.ya = random.nextGaussian();

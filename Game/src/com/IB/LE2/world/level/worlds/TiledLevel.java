@@ -26,8 +26,8 @@ import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
 import com.IB.LE2.world.level.scripting.triggers.TriggerVolume;
 import com.IB.LE2.world.level.tile.Tile;
-import com.IB.LE2.world.level.tile.SL2.XML_Tile;
 import com.IB.LE2.world.level.tile.Tile.stepSound;
+import com.IB.LE2.world.level.tile.SL2.XML_Tile;
 
 public class TiledLevel extends Level {
 	private static final long serialVersionUID = 1L;
@@ -277,9 +277,6 @@ public class TiledLevel extends Level {
 			}
     }
 	
-	/*public int[] t_layer1 = new int[width * height];
-	public int[] t_layer2 = new int[width * height];*/
-
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		switch (qName) {
@@ -291,8 +288,6 @@ public class TiledLevel extends Level {
 			}
 			
 			tilels.add(explodeTileString(this.tile_strings.get(this.current_layer)));
-
-			this.torchTiles = new int[width * height];
 		}
 
         case "properties": {
@@ -322,7 +317,7 @@ public class TiledLevel extends Level {
 			//Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
 			
 			Tile t = new Tile();
-			t.readXML("/XML/Tiles/TileDefinitions.xml");
+			t.readXML("/Tags/Tiles/TileDefinitions.xml");
 			for (int i = 0; i < (width * height); i++) {
 				Tile[] merges = new Tile[tilels.size()];
 				for (int j = 0; j < tilels.size(); j++) {

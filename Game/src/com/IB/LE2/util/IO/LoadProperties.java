@@ -6,6 +6,7 @@ import java.io.Serializable;
 import com.IB.LE2.Game;
 import com.IB.LE2.world.level.TileCoord;
 
+@Deprecated
 public class LoadProperties implements Serializable {
 	public transient static String root = "/SquareLegacy";
 	public transient static String SystemUsername = System.getProperty("user.name");

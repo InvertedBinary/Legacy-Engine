@@ -109,7 +109,7 @@ public class XML_Projectile extends Projectile {
 		
 		//this.master_sprite = sprite;
 		
-		r = new java.awt.Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+		//r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
 		nx += speed * Math.cos(angle);
 		ny += speed * Math.sin(angle);
 		

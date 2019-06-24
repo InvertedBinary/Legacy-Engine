@@ -81,7 +81,7 @@ public abstract class Projectile extends Entity {
 		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
-			if (e != null && e.getSprite() != null && !e.invulnerable) {
+			if (e != null && e.getSprite() != null /*&& !e.invulnerable*/) {
 			if (mdpx   > (e.x() + e.xOffset)  && mdpx < (e.x() + e.xOffset)  + e.getSprite().getWidth()) {
 				if (mdpy > (e.y() + e.yOffset)  && mdpy < (e.y() + e.yOffset)  + e.getSprite().getHeight() + 8) {
 					int SP_X = (int) (mdpx - (e.x()) - e.xOffset);
@@ -112,7 +112,7 @@ public abstract class Projectile extends Entity {
 	public boolean Collision(Projectile p, List<Entity> entities) {
 		Entity ee = Collide(p, entities);
 		if (ee != null) {
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().getPlayer().name, p.ExpV);
+			//level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().getPlayer().name, p.ExpV);
 			doEffect(ee);
 			p.remove();
 			return true;
@@ -126,7 +126,7 @@ public abstract class Projectile extends Entity {
 		if (ee != null) {
 			if (ee != p.prevHit) {				
 			p.prevHit = ee;
-			level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Boot.get().getPlayer().name, p.ExpV);
+			//level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Mob) ee, ee.Exp, p.damage, Boot.get().getPlayer().name, p.ExpV);
 			doEffect(ee);
 			return true;
 			}
@@ -172,7 +172,7 @@ public abstract class Projectile extends Entity {
 	
 	protected void entityCollision(List<Entity> entities, Projectile proj, Mob mob) {
 		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i).invulnerable || entities.get(i) == mob || entities.get(i).hostility == mob.hostility) {	
+			if (/*entities.get(i).invulnerable ||*/ entities.get(i) == mob /*|| entities.get(i).hostility == mob.hostility*/) {	
 			} else {
 			if (x < entities.get(i).x() + 5
 	            && x > entities.get(i).x() - 5
@@ -180,7 +180,7 @@ public abstract class Projectile extends Entity {
 	            && y >  entities.get(i).y() - 5
 	            ) {
 				remove();
-    				level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).UUID, 0);				
+    				//level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).UUID, 0);				
 				//level.add(new BleedSpawner((int) (x + nx), (int) (y + ny), 10, 8, level));
 				if (proj.collisionSound != null) {
 					Audio.Play(proj.collisionSound, proj);
@@ -188,11 +188,11 @@ public abstract class Projectile extends Entity {
 				if (proj.breakParticle == 1) {
 					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 				}
-				if (entities.get(i).mobhealth <= 0){
+				/*if (entities.get(i).mobhealth <= 0){
 					entities.get(i).remove();
 					//Boot.get().getLevel().add(new BleedSpawner((int) (x + nx), (int)(y + ny), 15, 8, level)); 
 
-					}
+					}*/
 				}
 			}
 		}
@@ -207,10 +207,10 @@ public abstract class Projectile extends Entity {
 					&& y <  players.get(i).y() + 5
 					&& y >  players.get(i).y() - 5
 					) {
-				if (!players.get(i).invulnerable) {
+				if (true) {//!players.get(i).invulnerable) {
 				remove();
 				if (!Boot.get().devModeOn) {
-					level.damagePlayer((int)proj.x(), (int)proj.y(), players.get(i), 0, proj.damage, "projectile", 0);
+					//level.damagePlayer((int)proj.x(), (int)proj.y(), players.get(i), 0, proj.damage, "projectile", 0);
 					proj.addEffect(players.get(i));
 				}
 				players.get(i).incombat = true;
@@ -221,13 +221,13 @@ public abstract class Projectile extends Entity {
 				if (proj.breakParticle == 1) {
 					//level.add(new RockShatterSpawner((int) (x + nx), (int) (y + ny), 20, 4, level));
 				}
-				if (players.get(i).mobhealth <= 0){
+				/*if (players.get(i).mobhealth <= 0){
 					//players.get(i).onPlayerDeath();
 					//Game.switchState(Boot.get().gameState.DEATH);
 					//level.add(new ParticleSpawner((int) (x + nx), (int) (y + ny), 30000, 200, level));
 					System.out.println("Player " + players.get(i) + " Died");
 					//Game.Dead = true;	
-					}
+					}*/
 				}
 			}
 		}

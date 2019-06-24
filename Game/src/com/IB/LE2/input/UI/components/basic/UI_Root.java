@@ -9,7 +9,11 @@ public abstract class UI_Root {
 	public String id = "-1";
 	public String text = "";
 	
-	public boolean enabled = true;
+	protected boolean focused = false;
+	protected boolean enabled = true;
+	
+	//TODO: implement visibility toggle render(..) [if] return;
+	protected boolean visible = true;
 	
 	public abstract void update();
 	public abstract void render(Screen screen);
@@ -24,6 +28,10 @@ public abstract class UI_Root {
 		this.enabled = false;
 	}
 	
+	public boolean IsEnabled() {
+		return this.enabled;
+	}
+	
 	public void SetID(String ID) {
 		this.id = ID;
 	}
@@ -32,12 +40,28 @@ public abstract class UI_Root {
 		return id;
 	}
 	
+	public void SetText(String text) {
+		this.text = text;
+	}
+
 	public String GetText() {
 		return text;
 	}
 	
-	public void SetText(String text) {
-		this.text = text;
+	public void SetFocused(boolean b) {
+		this.focused = b;
+	}
+	
+	public boolean IsFocused() {
+		return this.focused;
+	}
+	
+	public void SetVisible(boolean b) {
+		this.visible = b;
+	}
+	
+	public boolean IsVisible() {
+		return this.visible;
 	}
 	
 	public boolean checkBounds(int x, int y, int width, int height) {

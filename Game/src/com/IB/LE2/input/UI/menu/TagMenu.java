@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -17,13 +18,13 @@ import org.xml.sax.SAXException;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.components.UI_Button;
 import com.IB.LE2.input.UI.components.UI_Label;
 import com.IB.LE2.input.UI.components.UI_Slider;
 import com.IB.LE2.input.UI.components.UI_Sprite;
 import com.IB.LE2.input.UI.components.UI_TextField;
 import com.IB.LE2.input.UI.components.UI_Toggle;
-import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
 import com.IB.LE2.input.UI.components.listeners.UI_SliderListener;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
@@ -52,7 +53,7 @@ public class TagMenu extends UI_Menu
 	public TagMenu(String tag_name)
 	{
 		this.TAG = tag_name;
-		this.PATH = "/XML/Menu/" + tag_name;
+		this.PATH = "/Tags/Menu/" + tag_name;
 		
 		this.external_tag = false;
 	}
@@ -67,8 +68,8 @@ public class TagMenu extends UI_Menu
 
 	public void update() {
 		if (Boot.get().key.map && Mouse.getButton() == 2) {
-			this.unloadCurrent();
-			this.load(new TagMenu(PATH, external_tag), true);
+			UI_Manager.UnloadCurrent();
+			UI_Manager.Load(new TagMenu(PATH, external_tag));
 			Mouse.setMouseB(-1);
 		}
 	}
@@ -77,13 +78,7 @@ public class TagMenu extends UI_Menu
 		return TAG;
 	}
 	
-	public void updateUnloaded() {
-		if (getKey() != null) {
-			if (getKey().Pause) {
-				load(new TagMenu("TestMenu"), true);
-				getKey().Pause = false;
-			}
-		}
+	public void UpdateUnloaded() {
 	}
 	
 	public void render(Screen screen) {
@@ -93,11 +88,11 @@ public class TagMenu extends UI_Menu
 		this.ui.render(screen);
 	}
 
-	public void onLoad() {
+	public void OnLoad() {
 		init();
 	}
 	
-	public void onUnload() {
+	public void OnUnload() {
 		if (this.UnloadListener != null)
 			this.UnloadListener.onUnload();
 		
@@ -251,7 +246,7 @@ public class TagMenu extends UI_Menu
 				} else if (!trueAnim) {
 					btn = new UI_Button(x, y, spr, transAnim);
 				} else {
-					SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/XML/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
+					SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/Tags/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
 					AnimatedSprite animSpr = new AnimatedSprite(animSheet, 1, 1, 1);
 					btn = new UI_Button(x, y, animSpr);
 					//AnimatedSprite aspr = new AnimatedSprite();
@@ -263,14 +258,22 @@ public class TagMenu extends UI_Menu
 					public void ButtonClick() {
 						if (ls == null) return;
 				        LuaValue ClickCall = ls.globals.get(onClickFunc);
-				        ClickCall.call();
+				        try {
+				        	ClickCall.call();
+				        } catch (LuaError e) {
+				        	e.printStackTrace();
+				        }
 					}
 
 					@Override
 					public void ButtonHover() {
 						if (ls == null) return;
 				        LuaValue HoverCall = ls.globals.get(onHoverFunc);
-				        HoverCall.call();
+				        try {
+				        	HoverCall.call();
+				        } catch (LuaError e) {
+				        	e.printStackTrace();
+				        }
 				    }
 				});
 				
@@ -416,13 +419,7 @@ public class TagMenu extends UI_Menu
 		try {
 		String luaString = this.PATH + ".lua";
 		ls = new LuaScript(luaString);
-		ls.addGlobal("level", this);
-		ls.addGlobal("g", Boot.get());
-		ls.addGlobal("GAME", Game.class);
-		//ls.addGlobal("mainmenu", MainMenu);
-		ls.addGlobal("menu", this);
-		//ls.addGlobal("key", Boot.get().getInput());
-		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
+		ls.AddGeneralGlobals();
 		
 		luaThread = new Thread(ls, "Menu LUA: " + luaString);
 		luaThread.start();

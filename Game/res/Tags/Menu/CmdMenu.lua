@@ -2,6 +2,8 @@ print("Opening Console UI")
 GAME:DiscordMenuPresence("Console Menu")
 menu:SuspendWorldInput()
 
+menu:SetFocused("Cmd")
+
 function onUnload()
 	print("Closing Console UI")
 	menu:PlayPrevious()

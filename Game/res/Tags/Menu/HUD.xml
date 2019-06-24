@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<uiset>
+	<global>
+		<title>HUD</title>
+		<background>Title</background>
+		<audioloop></audioloop>
+		<onUnload>onUnload</onUnload>
+		<macro>0x1B</macro>
+	</global>
+	<components>
+		<image x="230" y="82" w="30" h="10" r="30" transAnim="false" anim="false" onClick="luaTestClick" onHover="luaTestHover">abilitybox</image>
+	</components>
+</uiset>

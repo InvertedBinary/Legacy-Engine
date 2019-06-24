@@ -11,6 +11,7 @@ import java.util.Date;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.util.VARS;
@@ -130,12 +131,12 @@ public class Commands {
 						break;
 
 					case "weather":
-						if (Modifier.equalsIgnoreCase("rain")) {
-							Boot.get().getLevel().isRaining = !Boot.get().getLevel().isRaining;
-						} else
-							if (Modifier.equalsIgnoreCase("clear")) {
-								Boot.get().getLevel().isRaining = false;
-							}
+//						if (Modifier.equalsIgnoreCase("rain")) {
+//							Boot.get().getLevel().isRaining = !Boot.get().getLevel().isRaining;
+//						} else
+//							if (Modifier.equalsIgnoreCase("clear")) {
+//								Boot.get().getLevel().isRaining = false;
+//							}
 						break;
 
 					case "tcl":
@@ -203,7 +204,7 @@ public class Commands {
 
 					case "menu":
 					case "ui":
-						Boot.get().getMenu().load(new TagMenu(Modifier), true);
+						UI_Manager.Load(new TagMenu(Modifier));
 						break;
 
 					case "avg": {
@@ -239,27 +240,13 @@ public class Commands {
 						break;
 					case "money":
 						try {
-							player.money += Double.parseDouble(Modifier);
+							//player.money += Double.parseDouble(Modifier);
 							System.out.println(Modifier + " Gold Added");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						break;
 					case "time":
-						try {
-							int time = Integer.parseInt(Modifier);
-							Level.brightness = time;
-							if (time > 0) {
-								Level.daytime = 2600;
-							}
-							if (time <= 0) {
-								Level.nighttime = 2500;
-							}
-							System.out.println("Set Time To: " + time);
-							time = 0;
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
 						break;
 					case "cl":
 						//Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);

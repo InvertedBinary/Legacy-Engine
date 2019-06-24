@@ -13,6 +13,7 @@ import com.IB.LE2.Boot;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.PlayerMP;
 
+@Deprecated
 public class SaveGame {
 	public static final String fileName = "/SaveData.sl";
 	public static final String itemFileName = "/ItemData.sl";
@@ -130,7 +131,8 @@ public static PlayerMP load(String name) {
 		}
 		return null;
 	}*/
-	
+
+@Deprecated
 public static Entity[] loadEntities() {
 		
 		if(checkSaveExists(mobsFileName)) {
@@ -154,6 +156,7 @@ public static Entity[] loadEntities() {
 		return null;
 	}
 	
+@Deprecated
 public static Entity[] loadEntities(int levelID) {
 	System.out.println(">>>>>>>>>>>>>>>>>> || Loading.......: " + SaveGame.mobsFileName + levelID);
 	if(checkSaveExists(SaveGame.mobsFileName + levelID)) {

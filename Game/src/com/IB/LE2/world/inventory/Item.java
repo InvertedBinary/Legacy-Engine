@@ -13,7 +13,8 @@ import org.w3c.dom.NodeList;
 import com.IB.LE2.world.entity.Entity;
 
 public class Item extends Entity {
-	
+	private static final long serialVersionUID = -7808848233998306038L;
+
 	public final String XML_String;
 	public final String ROOT_ELEMENT = "item";
 	
@@ -45,26 +46,10 @@ public class Item extends Entity {
 	
 	public void unequip(Entity e) {
 		this.ACTIVE_SLOT = -1;
-		e.STAT_ITEM_VIT -= this.STAT_VIT;
-		e.STAT_ITEM_END -= this.STAT_END;
-		e.STAT_ITEM_STR -= this.STAT_STR;
-		e.STAT_ITEM_AGI -= this.STAT_AGI;
-		e.STAT_ITEM_RES -= this.STAT_RES;
-		e.STAT_ITEM_FAI -= this.STAT_FAI;
-		e.STAT_ITEM_INT -= this.STAT_INT;
-		e.STAT_ITEM_WIS -= this.STAT_WIS;
 	}
 	
 	public void equip(Entity e) {
 		this.ACTIVE_SLOT = this.ASSIGNED_SLOT;
-		e.STAT_ITEM_VIT += this.STAT_VIT;
-		e.STAT_ITEM_END += this.STAT_END;
-		e.STAT_ITEM_STR += this.STAT_STR;
-		e.STAT_ITEM_AGI += this.STAT_AGI;
-		e.STAT_ITEM_RES += this.STAT_RES;
-		e.STAT_ITEM_FAI += this.STAT_FAI;
-		e.STAT_ITEM_INT += this.STAT_INT;
-		e.STAT_ITEM_WIS += this.STAT_WIS;
 	}
 	
 	public void readXML(String path) {
@@ -108,7 +93,7 @@ public class Item extends Entity {
 		try {
 		//this.id = Integer.parseInt(getTag(e, "id"));
 		this.name = getTag(e, "name");
-		this.rarity = Integer.parseInt(getTag(e, "rarity"));
+		//this.rarity = Integer.parseInt(getTag(e, "rarity"));
 		this.required_level = Integer.parseInt(getTag(e, "level_req"));
 		this.ASSIGNED_SLOT = Byte.parseByte(getTag(e, "equip_slot"));
 		} catch (Exception err) {

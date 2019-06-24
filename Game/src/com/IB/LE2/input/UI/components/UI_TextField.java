@@ -23,14 +23,14 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 	private final int padding = 4;
 	private final int font_size = 16;
 	
-	private boolean focused;
-	
 	private Font16x font = Game.font16bit;
 
 	private String display_text = "";
 	public String prompt_text = "Text Field...";
 	
+	@SuppressWarnings("unused")
 	private int start_selection_pos = 0;
+	
 	private int start_display_index = 0;
 	private int cursor_pos = 0;
 	
@@ -62,7 +62,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		this.numeric = numeric;
 		this.sensitive_input = protected_field;
 		
-		this.width = padding*2 + maxchars * font_size;
+		this.width = padding*2 + (maxchars) * font_size;
 		this.height = padding*2 + font_size;
 		
 		CoverSprite = new Sprite(width, height, 0xEE000000);
@@ -301,7 +301,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		else
 			display_text = text;
 		
-		this.background_width = (!this.ShrinkToSize) ? (maxchars * (font_size + char_spacing)) + 1 :
+		this.background_width = (!this.ShrinkToSize) ? ((maxchars+1) * (font_size + char_spacing)) + 1 :
 			  					(display_text.length() * (font_size + char_spacing)) + 1;
 		if (this.background_width == 1) this.background_width = (prompt_text.length() * (font_size + char_spacing)) + 1;
 		
@@ -398,9 +398,9 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		if (focused && !hovering) {
 			if (Mouse.getButton() != -1)
 				focused = false;
-			
-			BlinkCursor();
 		}
+		
+		BlinkCursor();
 	}
 	
 	@Override
@@ -422,11 +422,10 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 			screen.drawFillRect(x, y, background_width + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
 		}
 		
-
 		//screen.drawRect(x, y, background_width + 1, height + 1, border_color, false);
 		//screen.drawFillRect(x + 1, y + 1, background_width, height, background_color, false);
-		font.render(x - font_size + padding/2, y + font_size / 4, char_spacing, 0xff000000, formatted_display, screen, false, false);
-		font.render(x - font_size + padding/2 + 1, y + font_size / 4, char_spacing, 0xffFFFFFF, formatted_display, screen, false, false);
+		font.render(x - font_size + padding/2 + 2, y + font_size / 4, char_spacing, 0xff000000, formatted_display, screen, false, false);
+		font.render(x - font_size + padding/2 + 3, y + font_size / 4, char_spacing, 0xffFFFFFF, formatted_display, screen, false, false);
 	
 		if (!focused && !hovering)
 			screen.renderAlphaSprite(x + 1, y + 1, this.CoverSprite);

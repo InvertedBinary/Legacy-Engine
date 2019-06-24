@@ -35,8 +35,6 @@ public abstract  class Mob extends Entity implements Serializable {
 	
 	//TODO: Create a list of 'stats' that can just be created and updated with
 	// tags and lua instead of hard-coded variables
-	public long money;
-	public int kills = 0;
 	
 	public enum DIRECTION {
 		UP, DOWN, LEFT, RIGHT
@@ -99,7 +97,7 @@ public abstract  class Mob extends Entity implements Serializable {
 	
 	public void yAxisCollisionResponse(double ya) {
 		if (this.vel().y() > 0) {
-			doFallDamage();
+			DoFallDamage();
 			this.vel().y(0);
 			this.canJump = true;
 		}
@@ -109,16 +107,15 @@ public abstract  class Mob extends Entity implements Serializable {
 		}
 	}
 	
-	public void doFallDamage() {
+	public void DoFallDamage() {
 		if (this.vel().y() > 10) {
-			this.damageMob(this.vel().y() / 8);
-			System.out.println(this.mobhealth);
+			this.TakeDamage(this.vel().y() / 8);
 		}
 	}
 	
 	
-	public void damageMob(double pts) {
-		this.mobhealth -= pts;
+	public void TakeDamage(double pts) {
+		//this.mobhealth -= pts;
 	}
 
 	public void pull(Entity e, double rate) {

@@ -1,7 +1,6 @@
 package com.IB.LE2.world.entity.mob;
 
 import java.awt.Image;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
@@ -16,7 +15,6 @@ import com.IB.LE2.Game;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
-import com.IB.LE2.input.UI.components.basic.UI_Menu;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -83,44 +81,25 @@ public class Player extends Mob implements Serializable {
 
 	// TODO: Generate UUID and send instead of USErname
 
-	@Deprecated
-	public Player(Keyboard input)
-		{
-			this.name = "P1";
-			this.input = input;
-			sprite = Sprite.playerback;
-		}
-
 	public Player(double x, double y, Keyboard input, String username)
-		{
-			this.setX(x);
-			this.setY(y);
-			this.name = username;
-			this.input = input;
-			init();
-		}
+	{
+		this.setX(x);
+		this.setY(y);
+		this.name = username;
+		this.input = input;
+		init();
+	}
 
 	public void init()
 		{
 			this.speed = 2;
-			this.Lvl = 1;
 			this.xBound = 8;
 			this.yBound = 8;
 			this.xOffset = -16;
 			this.yOffset = -16;
-			this.money = 30;
-			this.hostility = "PLAYER";
-
-			this.maxhealth = 20;
-			this.maxmana = 20;
-			this.maxstamina = 20;
 
 			gui = new GUI();
 			loadProp = new LoadProperties();
-
-			this.mobhealth = maxhealth;
-			this.mana = maxmana;
-			this.stamina = maxstamina;
 
 			body.bounds = new Rectangle((float) x(), (float) y(), 32, 64);
 			body.set(VARS.PHYS_NOGRAV, true);
@@ -159,8 +138,7 @@ public class Player extends Mob implements Serializable {
 	}
 	
 	PVector pv = null;
-	public void update()
-		{
+	public void update() {
 			/*
 			 * try {
 			 * 
@@ -187,21 +165,7 @@ public class Player extends Mob implements Serializable {
 
 			}
 
-			if (Boot.get().devModeOn) {
-				this.mana = maxmana;
-				this.mobhealth = maxhealth;
-				this.stamina = maxstamina;
-			}
-			int levelcounter = Lvl;
-			int expCounter = 4;
-
-			for (; levelcounter != 0; levelcounter--) {
-				expCounter += (((levelcounter + 1) * (levelcounter + 1) * (levelcounter + 1)) / 2);
-			}
-			int expNeeded = expCounter;
-
 			time++;
-
 			animSprite.update();
 
 			if (!walking) {
@@ -237,7 +201,7 @@ public class Player extends Mob implements Serializable {
 					speed = 2;
 				}
 
-				if (!input.Sprint || stamina <= 0) {
+				if (!input.Sprint) {
 					sprinting = false;
 				}
 
@@ -363,7 +327,7 @@ public class Player extends Mob implements Serializable {
 			}
 
 			if (Mouse.getButton() == 1) {
-				XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/XML/Projectiles/Arrow.xml",
+				XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/Tags/Projectiles/Arrow.xml",
 						this);
 				// XML_Projectile Test_Arrow2 = new XML_Projectile(x(), y(), Projectile.angle()
 				// + (Math.PI / 2), "/XML/Projectiles/Arrow.xml", this);
@@ -419,10 +383,9 @@ public class Player extends Mob implements Serializable {
 			Game.DiscordPlayerPosPresence();
 		}
 
-	public String getUsername()
-		{
-			return this.name;
-		}
+	public String getUsername() {
+		return this.getName();
+	}
 
 	private transient Sprite arrow = Sprite.QuestArrow;
 
@@ -519,62 +482,6 @@ public class Player extends Mob implements Serializable {
 					Game.font16bit.render((int) Boot.width - text.length() * 16 + 1, 3, -3, 0xffFFFFFF, text, screen,
 							false, false);
 				}
-
-			if (!gui.displayM && !gui.displayS) {
-				gui.yOffH = 156;
-			} else
-				if (!gui.displayS && gui.displayM) {
-					gui.yOffH = 143;
-				} else
-					if (gui.displayS && !gui.displayM) {
-						gui.yOffH = 143;
-					} else
-						if (gui.displayS && gui.displayM) {
-							gui.yOffH = 130;
-						}
-
-			if (!gui.displayS) {
-				gui.yOffM = 156;
-			} else {
-				gui.yOffM = 143;
-			}
-
-			if (stamina < maxstamina) {
-				gui.displayTimeS = 0;
-				gui.displayS = true;
-			} else
-				if (gui.displayTimeS < 151) {
-					gui.displayS = false;
-					gui.displayTimeS++;
-				}
-			if (gui.displayS) {
-				screen.renderSprite(223, gui.yOffS, gui.renderBar(60, gui.staminabar, maxstamina, stamina), false); // 156
-			}
-
-			if (incombat || mana < maxmana) {
-				gui.displayTimeM = 0;
-			} else
-				if (gui.displayTimeM < 151) {
-					gui.displayTimeM++;
-					gui.displayM = false;
-				}
-			if (gui.displayTimeM <= 150) {
-				gui.displayM = true;
-				screen.renderSprite(223, gui.yOffM, gui.renderBar(60, gui.manabar, maxmana, mana), false); // 143
-			}
-
-			if (incombat || mobhealth < maxhealth) {
-				gui.displayTime = 0;
-			} else
-				if (gui.displayTime < 151) {
-					gui.displayTime++;
-					gui.displayH = false;
-				}
-			if (gui.displayTime <= 150) {
-				gui.displayH = true;
-				screen.renderSprite(223, gui.yOffH, gui.renderBar(60, gui.healthbar, maxhealth, mobhealth), false); // 130
-			}
-			// screen.renderSprite(0, 143, gui.expBar.getSprite(), false);
 
 			if (Game.devModeOn) {
 				// screen.drawRect((int) x() - 8, (int) y() - 15, 64, 64, 0x0093FF, true);

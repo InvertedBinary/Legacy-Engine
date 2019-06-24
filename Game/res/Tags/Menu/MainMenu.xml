@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<uiset>
+	<global>
+		<title>Title Screen</title>
+		<background></background>
+		<audioloop></audioloop>
+		<onUnload>onUnload</onUnload>
+		<macro>0x1B</macro>
+	</global>
+	<components>
+		<button x="337" y="5" transAnim="false" anim="false" image="Grass" onClick="basicContinueGame" onHover="luaTestHover">Btn 4</button>
+	</components>
+</uiset>

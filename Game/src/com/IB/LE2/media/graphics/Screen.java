@@ -633,7 +633,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
 	            int d = (int) Math.sqrt((y - radius) * (y - radius) + (x - radius) * (x - radius));
 	            if (d < radius) {
 	               col = pixels[xa + ya * this.width];
-	               col = TileLighting.changeBrightness(col, Level.brightness, true);
+	               //col = TileLighting.changeBrightness(col, Level.brightness, true);
 	               pixels[xa + ya * this.width] = col;
 	            }
 	         }
@@ -654,7 +654,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
               int d = (int) Math.sqrt((y - radius) * (y - radius) + (x - radius) * (x - radius));
               if (d < radius) {
                  col = pixels[xa + ya * this.width];
-                 col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - d, g - d, b - d);                
+                 //col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - d, g - d, b - d);                
                  pixels[xa + ya * this.width] = col;
               }
            }
@@ -679,7 +679,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
               int d = (int) Math.sqrt((y - radius) * (y - radius) + (x - radius) * (x - radius));
               if (d == radius) {
                  col = pixels[xa + ya * this.width];
-                 col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - d, g - d, b - d);                
+                // col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - d, g - d, b - d);                
                  pixels[xa + ya * this.width] = col;
               }
            }
@@ -728,7 +728,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
            double testDist = Math.sqrt(((double)(xa + radius)) * (double)(xa + radius) + (double)(ya + radius) * (double)(ya + radius));
 
            col = pixels[xa + ya * this.width];
-           col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - (d - (radius/3 + 20)), g - (d - (radius/3 + 20)), b - (d - (radius/3 + 20)));
+          // col = TileLighting.changeBrightnessNegative(col, Level.brightness, r - (d - (radius/3 + 20)), g - (d - (radius/3 + 20)), b - (d - (radius/3 + 20)));
            pixels[xa + ya * this.width] = col;
 
         }
@@ -866,7 +866,7 @@ public void render32Mob(double x2, double y2, Mob mob) {
 				if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height) continue;
 				int col = color;
 				
-				if (xa == 0 || ya == 0 || x == width - 1 || y == height - 1)
+				if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
 					col = border_color;
 				
 				pixels[xa + ya * this.width] = col;
@@ -908,7 +908,7 @@ public void setOffset(int xOffset, int yOffset) {
 		            if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
 		               continue;
 		               col = pixels[xa + ya * this.width];
-		               col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b); 
+		               //col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b); 
 		               pixels[xa + ya * this.width] = col;
 		         }
 		      }
@@ -925,20 +925,21 @@ public void setOffset(int xOffset, int yOffset) {
 				            if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
 				               continue;
 				               col = pixels[xa + ya * this.width];
-				               col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b); 
+				               //col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b); 
 				               pixels[xa + ya * this.width] = col;
 				         }
 				      }
 		      
 	}
 
+	@Deprecated //TODO: rewrite getEntities in level
 	public void drawLine(Player player, List<Entity> entities) {
 		int xp = (int) player.x();
 		int yp = (int) player.y();
 		xp -= xOffset;
 		yp -= yOffset;
 		int col = 0;
-		entities = Boot.get().getLevel().getEntities(player, 20);
+		//entities = Boot.get().getLevel().getEntities(player, 20);
 		for (int i = 0; i < entities.size(); i++) {
 			for (int y = (int) player.y(); y < entities.get(i).y(); y++) {
 				int ya = y + yp;

@@ -1,6 +1,5 @@
 package com.IB.LE2.world.entity.particle;
 
-import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -19,7 +18,7 @@ public class DamageIndicator extends Particle{
 		this.yy = y;
 		this.sprite = Sprite.bleed;
 		this.text = text;
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.color = color;
 		this.life = life + (random.nextInt(15) - 4);
 	}

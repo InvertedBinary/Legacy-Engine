@@ -40,7 +40,7 @@ public class Audio {
 		LoadCodecs();
 		CreateSystem();
 		
-		LoadSources("/XML/Audio/PersistentSources.xml");
+		LoadSources("/Tags/Audio/PersistentSources.xml");
 	}
 	
 	public static void SwapSources(String path) {

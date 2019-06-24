@@ -24,8 +24,9 @@ import javax.swing.JFrame;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
-import com.IB.LE2.input.UI.components.basic.UI_Menu;
+import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
+import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
@@ -178,10 +179,10 @@ public class Game extends Canvas implements Runnable
 			windowHandler = new WindowHandler(this);
 			key = new Keyboard();
 			tile = new Tile();
-			tile.readXML("/XML/Tiles/TileDefinitions.xml");
+			tile.readXML("/Tags/Tiles/TileDefinitions.xml");
 
 			// setLevel(new XML_Level(Maps.ForestLevel));
-			TiledLevel TL = new TiledLevel("/XML/Levels/b10");
+			TiledLevel TL = new TiledLevel("/Tags/Levels/b10");
 			setLevel(TL);
 			
 			if (TL.spawnpoint != null) {
@@ -260,7 +261,7 @@ public class Game extends Canvas implements Runnable
 	}
 
 	public UI_Menu getMenu() {
-		return this.gui.menu;
+		return UI_Manager.Current();
 	}
 
 	public void setLevel(Level level) {
@@ -657,39 +658,33 @@ public class Game extends Canvas implements Runnable
 	public void Launch(Game game)
 		{
 			if (!Boot.launch_args.containsKey("-mode_dedi")) {
-			Boot.setWindowIcon("/icon.png");
-			game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
-			if (Boot.launch_args.containsKey("-resizeable")) {
-				game.frame.setResizable(true);
+				Boot.setWindowIcon("/icon.png");
+				game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
+				if (Boot.launch_args.containsKey("-resizeable")) {
+					game.frame.setResizable(true);
+				}
+				game.frame.setTitle(Boot.title);
+				game.frame.add(game);
+				// game.frame.remove(game);
+				// game.frame.setOpacity(0.01F);
+				game.frame.pack();
+				game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				game.frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				
+				int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
+				if (windowMode == 1)
+					game.setBorderlessFullscreen(true);
+				else if (windowMode == 2)
+					setTrueFullscreen();
+				
+				Boot.setMouseIcon("/Textures/cursor.png");
+				Boot.centerMouse();
 			}
-			game.frame.setTitle(Boot.title);
-			game.frame.add(game);
-			// game.frame.remove(game);
-			// game.frame.setOpacity(0.01F);
-			game.frame.pack();
-			game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-			
-			int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
-			if (windowMode == 1)
-				game.setBorderlessFullscreen(true);
-			else if (windowMode == 2)
-				setTrueFullscreen();
-			
-			Boot.setMouseIcon("/Textures/cursor.png");
-			Boot.centerMouse();
-			}
+
 			game.start();
 			
-			getMenu().addMenus();
-			//getMenu().load(getMenu().MainMenu, true);
-			
-			System.out.println("-=-=-=-Begin Loading xMenu-=-=-=-");
-			TagMenu xMenu = new TagMenu("/XML/Menu/TestMenu", false);
-			System.out.println("-=-=-=-Finished Loading xMenu-=-=-=-");
-			
-			getMenu().load(xMenu, true);
+			UI_Manager.Load(new TagMenu("/Tags/Menu/" + Boot.prefsStr("UI", "StartupMenu", "Main"), false));
 		}
 	
 	public boolean ChangingFullscreenState = false;

@@ -13,7 +13,7 @@ public class WalkingParticle extends Particle {
 		this.xx = x;
 		this.yy = y;
 		this.sprite = sprite;
-		this.invulnerable = true;
+		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 	}
 	

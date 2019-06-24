@@ -59,7 +59,7 @@ public class DebugProjectile extends Projectile {
 		if (ee != null) {
 			Boot.log("===============================================", false);
 			Boot.log("ID: " + ee.UUID, true);
-			Boot.log("HOSTILITY: " + ee.hostility, true);
+			//Boot.log("HOSTILITY: " + ee.hostility, true);
 			Boot.log("X: " + ee.x() / 16, true);
 			Boot.log("Y: " + ee.y() / 16, true);
 			Boot.log("===============================================", false);

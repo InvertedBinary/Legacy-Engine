@@ -1,6 +1,7 @@
 package com.IB.LE2.world.entity;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.xml.sax.helpers.DefaultHandler;
@@ -27,32 +28,7 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	
 	public transient AABB aabb;
 	
-	
-	public int STAT_VIT;
-	public int STAT_END;
-	public int STAT_STR;
-	public int STAT_AGI;
-	public int STAT_RES;
-	public int STAT_FAI;
-	public int STAT_INT;
-	public int STAT_WIS;
-	
-	public int STAT_ITEM_VIT;
-	public int STAT_ITEM_END;
-	public int STAT_ITEM_STR;
-	public int STAT_ITEM_AGI;
-	public int STAT_ITEM_RES;
-	public int STAT_ITEM_FAI;
-	public int STAT_ITEM_INT;
-	public int STAT_ITEM_WIS;
-
 	transient public final Random random = new Random();
-	public double mobhealth;
-	public double mana;
-	public double stamina;
-	public double maxhealth;
-	public double maxmana;
-	public double maxstamina;
 	transient public boolean hurt = false;
 	transient public boolean walking = false;
 
@@ -67,19 +43,15 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	public transient EntityContainer parent_container;
 	
 	public transient boolean ySort = true;
-	public long Exp;
-	public int Lvl = 1;
-	public transient double speed;
-	public transient boolean invulnerable;
-	transient public java.awt.Rectangle r;
-	public transient String name;
-	public int rarity = -1;
 	transient public boolean incombat;
 
 	public String UUID = "-1";
 	public int ENTITY_ID = -1;
+	
+	public transient double speed;
+	public transient String name;
 
-	public transient String hostility;
+	public HashMap<String, String> Properties = new HashMap<>();
 	
 	public Entity() {
 		
@@ -90,7 +62,7 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 		this.setY(y);
 		this.sprite = sprite;
 		this.UUID = UUID;
-		r = new java.awt.Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+		//r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
 	}
 	
 	public void setUUID(String val) {
@@ -133,18 +105,6 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	public boolean remove() {
 		removed = true;
 		return removed;
-	}
-	
-	public double health() {
-		return mobhealth;
-	}
-	
-	public long Exp() {
-		return Exp;
-	}
-	
-	public int Lvl() {
-		return Lvl;
 	}
 	
 	public double x() {

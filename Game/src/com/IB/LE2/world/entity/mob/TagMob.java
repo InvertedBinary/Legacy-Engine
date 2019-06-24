@@ -86,8 +86,15 @@ public class TagMob extends Mob
 		this.y(yi);
 	}
 
-	public void init()
-	{
+	public void init() {
+		if (PATH.equals("")) {
+			PATH = "/Tags/Entities/" + TAG;
+		}
+		
+		if (!PATH.endsWith(".xml")) {
+			PATH += ".xml";
+		}
+		
 		try {
 			if (!external_tag) {
 				tag_stream = TagMob.class.getResourceAsStream(PATH);
@@ -119,8 +126,7 @@ public class TagMob extends Mob
 		this.sprite = Sprite.Anvil;
 	}
 
-	public void readTags()
-	{
+	public void readTags() {
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
 
@@ -211,23 +217,23 @@ public class TagMob extends Mob
 			this.ENTITY_ID = (int) parseNum(val);
 			break;
 		case "props.hp":
-			this.mobhealth = parseNum(val);
+			//this.mobhealth = parseNum(val);
 			break;
 		case "props.speed":
 			this.speed = parseNum(val);
 			break;
 		case "props.rarity":
-			this.rarity = (int) parseNum(val);
+			//this.rarity = (int) parseNum(val);
 			break;
 		case "props.hostility":
-			this.hostility = val;
+			//this.hostility = val;
 			break;
 		// TODO: Add XP ranges
 		case "props.xp_min":
-			this.Exp = (long) parseNum(val);
+			//this.Exp = (long) parseNum(val);
 			break;
 		case "props.xp_max":
-			this.Exp = (long) parseNum(val);
+			//this.Exp = (long) parseNum(val);
 			break;
 		case "props.dsp_index":
 			this.despawn_index = (int) parseNum(val);
