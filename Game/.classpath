@@ -4,11 +4,9 @@
 	<classpathentry excluding="luaj-3.0.1/" kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="res"/>
-	<classpathentry kind="lib" path="lib/easyogg.jar" sourcepath="lib/easyogg.jar"/>
 	<classpathentry kind="lib" path="lib/jogg-0.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/jorbis-0.0.15.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LWJGL3"/>
-	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-assimp-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-assimp-natives-windows.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-assimp.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-bgfx-natives-windows.jar"/>
@@ -22,7 +20,6 @@
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-lmdb-natives-windows.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-lmdb.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-nanovg-natives-windows.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-nanovg-sources.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-nanovg.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-natives-windows.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-nfd-natives-windows.jar"/>
@@ -59,10 +56,6 @@
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl-yoga.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl3/lwjgl.jar"/>
 	<classpathentry kind="lib" path="lib/netty-all-4.1.21.Final.jar" sourcepath="lib/netty-all-4.1.21.Final.jar"/>
-	<classpathentry kind="lib" path="lib/luaj-3.0.1"/>
-	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jme-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-jse-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/luaj-3.0.1/lib/luaj-sources-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/joml-jdk8-1.9.9.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4-jdk14.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
@@ -72,5 +65,8 @@
 	<classpathentry kind="lib" path="lib/SoundSystemJPCT.jar"/>
 	<classpathentry kind="lib" path="lib/CodecJOrbis.jar"/>
 	<classpathentry kind="lib" path="lib/LibraryJavaSound.jar"/>
+	<classpathentry kind="lib" path="lib/luaj-jme-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/luaj-jse-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/luaj-sources-3.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

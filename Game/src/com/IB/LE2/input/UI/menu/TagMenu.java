@@ -16,7 +16,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.Game;
 import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.components.UI_Button;
