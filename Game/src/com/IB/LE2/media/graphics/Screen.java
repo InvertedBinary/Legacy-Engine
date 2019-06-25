@@ -12,7 +12,6 @@ import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Mob;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.projectile.Projectile;
-import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
 
@@ -994,7 +993,7 @@ public void setOffset(int xOffset, int yOffset) {
 				renderY = Boot.get().getLevel().height - minimapSize;
 			}
 
-			map = new Sprite(minimapSize, renderX, renderY, SpriteSheet.minimapDYN, 7);
+			map = new Sprite(minimapSize, renderX, renderY, null, 7);
 
 			for (int y = 0; y < map.SIZE; y++) {
 				double ya = y + yp;

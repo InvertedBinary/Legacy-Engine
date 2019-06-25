@@ -14,10 +14,9 @@ import org.w3c.dom.NodeList;
 
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.world.level.tile.SL2.Air;
-import com.IB.LE2.world.level.tile.SL2.VoidTile;
-import com.IB.LE2.world.level.tile.SL2.XML_Tile;
-import com.IB.LE2.world.level.tile.tiles.TorchTile;
+import com.IB.LE2.world.level.tile.tiles.Air;
+import com.IB.LE2.world.level.tile.tiles.VoidTile;
+import com.IB.LE2.world.level.tile.tiles.XML_Tile;
 
 public class Tile {
 	
@@ -31,10 +30,6 @@ public class Tile {
 	
 	public static Tile VoidTile = new VoidTile(Sprite.VoidTile);
 	public static Tile Air = new Air(Sprite.VoidTile);
-	
-	public static Tile TorchTile = new TorchTile(Sprite.Torch);
-	
-
 	
 	public Tile(Sprite sprite) { this.sprite = sprite; }
 	public Tile() { }

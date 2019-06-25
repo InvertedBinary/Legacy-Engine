@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Sheets>
 	<sheet src="/Textures/sheets/03_WorldGen/blocks32.png" w="1024" h="1024">Terrain</sheet>
+	<sheet></sheet>
 </Sheets>
 
 

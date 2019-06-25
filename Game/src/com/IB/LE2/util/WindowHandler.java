@@ -17,6 +17,9 @@ public class WindowHandler implements WindowListener, FocusListener{
 		this.game.addFocusListener(this);
 	}
 
+	
+	//TODO: Ping current menu upon state changes
+	
 	@Override
 	public void windowActivated(WindowEvent event) {
 	}

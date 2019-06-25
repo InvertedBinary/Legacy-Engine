@@ -1,31 +1,24 @@
 package com.IB.LE2.media.graphics;
 
 public class Camera {
-	public int x = 0;
-	public int y = 0;
-	public int xOffset = 0, yOffset = 0;
-	public int width = 0;
-	public int height = 0;
+	private static int x = 0;
+	private static int y = 0;
+	private static int xOffset = 0, yOffset = 0;
+	private static int width = 0;
+	private static int height = 0;
 	
-	String curFocus = "Init";
-	int curPriority = -1;
-	
-	public Camera(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
+	private static String curFocus = "Init";
+	private static int curPriority = -1;
 	
 	public void move(int x, int y, String focus) {
 		if (curFocus.equals(focus)) {
-		move(x, y);
+			move(x, y);
 		}
 	}
 	
 	public void move(int x, int y) {
-		this.x = x;
-		this.y = y;
+		Camera.x = x;
+		Camera.y = y;
 	}
 	
 	public boolean requestFocus(int x, int y, String focus, int priority) {
@@ -38,8 +31,8 @@ public class Camera {
 	
 	public boolean requestFocus(String focus, int priority) {
 		if (curPriority < priority) {
-			this.curFocus = focus;
-			this.curPriority = priority;
+			Camera.curFocus = focus;
+			Camera.curPriority = priority;
 			System.out.println("New priority accepted! New focus: " + focus);
 			return true;
 		}
@@ -47,11 +40,9 @@ public class Camera {
 	}
 	
 	public void setOffset(int xOffset, int yOffset) {
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
+		Camera.xOffset = xOffset;
+		Camera.yOffset = yOffset;
 	}
-	
-	
 	
 	public void loseFocus(String focus, int priority) {
 		if (focus.equals(curFocus)) {

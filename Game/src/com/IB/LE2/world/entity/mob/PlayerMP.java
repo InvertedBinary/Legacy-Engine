@@ -3,6 +3,7 @@ package com.IB.LE2.world.entity.mob;
 import java.net.InetAddress;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.Game;
 import com.IB.LE2.input.Keyboard;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
@@ -22,25 +23,14 @@ public class PlayerMP extends Player {
 	
 	public int attempt;
 	
-	public PlayerMP(int x, int y, Keyboard input, String username, String UUID) {
+	public PlayerMP(double x, double y, Keyboard input, String username, String UUID) {
 		super(x, y, input, username);
-		this.ipAddress = ipAddress;
-		this.port = port;
 		this.setUUID(UUID);
+		this.name = username;
 	}
 
-	@Deprecated
-	public PlayerMP(int x, int y, String username, String UUID, InetAddress ipAddress, int port) {
-		super(x, y, null, username);
-		this.ipAddress = ipAddress;
-		this.port = port;
-		this.setUUID(UUID);
-	}
-	
 	public PlayerMP(double x, double y, String username, String id) {
-		super(x, y, null, username);
-		this.setUUID(id);
-		this.name = username;
+		this(x, y, null, username, id);
 	}
 	
 	@Override
@@ -52,7 +42,7 @@ public class PlayerMP extends Player {
 	public void render(Screen screen) {
 		super.render(screen);
 		if (Boot.isConnected)
-			Boot.get().font8bit.render((int)x() - ((name.length() / 2) * 6) + 22, (int)y() - 5, -2, 0xffFFFFFF, name, screen, true, false);
+			Game.font8bit.render((int)x() - ((name.length() / 2) * 6) + 22, (int)y() - 5, -2, 0xffFFFFFF, name, screen, true, false);
 	}
 	
 }

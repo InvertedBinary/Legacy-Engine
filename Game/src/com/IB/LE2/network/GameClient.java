@@ -20,7 +20,7 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-public class Client implements Runnable
+public class GameClient implements Runnable
 {
 
 	private final String host;
@@ -32,7 +32,7 @@ public class Client implements Runnable
 	public String id = "-1";
 
 	
-	public Client(String host, int port)
+	public GameClient(String host, int port)
 		{
 			this.host = host;
 			this.port = port;

@@ -25,7 +25,7 @@ public class Font16x {
 	
 	public void render(int x, int y, String text, Screen screen, boolean fixed, boolean background) {
 			render(x, y, 0, 0, text, screen, fixed, background);
-		}
+	}
 	
 	public void render(int x, int y, int color, String text, Screen screen, int useless, boolean fixed, boolean background) {
 			render(x, y, 0, color, text, screen, fixed, background);

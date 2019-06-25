@@ -27,7 +27,7 @@ import com.IB.LE2.world.level.scripting.LuaScript;
 import com.IB.LE2.world.level.scripting.triggers.TriggerVolume;
 import com.IB.LE2.world.level.tile.Tile;
 import com.IB.LE2.world.level.tile.Tile.stepSound;
-import com.IB.LE2.world.level.tile.SL2.XML_Tile;
+import com.IB.LE2.world.level.tile.tiles.XML_Tile;
 
 public class TiledLevel extends Level {
 	private static final long serialVersionUID = 1L;

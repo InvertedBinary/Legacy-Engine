@@ -22,7 +22,6 @@ import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
-import com.IB.LE2.util.IO.LoadProperties;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.projectile.Projectile;
@@ -65,13 +64,11 @@ public class Player extends Mob implements Serializable {
 	public transient boolean sprinting = false;
 	public transient boolean swimming = false;
 	public transient GUI gui;
-	public transient LoadProperties loadProp;
 	private int tileX;
 	private int tileY;
 	public boolean noclip = false;
 	transient private List<Node> path = null;
 	transient double Pathtime = 0;
-	private transient boolean loadedProp = false;
 	transient RayCast raycastDIR;
 	private transient int dirInt = 0;
 	public int currentLevelId = 0;
@@ -99,7 +96,6 @@ public class Player extends Mob implements Serializable {
 			this.yOffset = -16;
 
 			gui = new GUI();
-			loadProp = new LoadProperties();
 
 			body.bounds = new Rectangle((float) x(), (float) y(), 32, 64);
 			body.set(VARS.PHYS_NOGRAV, true);
@@ -111,7 +107,7 @@ public class Player extends Mob implements Serializable {
 	public void added() {
 		if (Boot.isConnected) {
 			if (this.isClientPlayer()) {
-				Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+				Boot.Client.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
 			}
 		}
 	}
@@ -119,7 +115,7 @@ public class Player extends Mob implements Serializable {
 	public boolean remove() {
 		if (Boot.isConnected) {
 			if (this.isClientPlayer()) {
-				Boot.c.sendMessage("REM|id=" + UUID);
+				Boot.Client.sendMessage("REM|id=" + UUID);
 			}
 		}
 		return super.remove();
@@ -263,8 +259,8 @@ public class Player extends Mob implements Serializable {
 
 				if (Boot.isConnected) {
 					if ((vel().x() != pv.x()) || (vel().y() != pv.y())) {
-						Boot.c.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
-						Boot.c.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
+						Boot.Client.sendMessage("VEL|id=" + this.UUID + "@x=" + this.vel().x() + ",y=" + this.vel().y());
+						Boot.Client.sendMessage("POS|id=" + this.UUID + "@x=" + this.pos().x() + ",y=" + this.pos().y());
 						pv.set(vel());
 					}
 				}
@@ -387,7 +383,7 @@ public class Player extends Mob implements Serializable {
 		return this.getName();
 	}
 
-	private transient Sprite arrow = Sprite.QuestArrow;
+	private transient Sprite arrow = Sprite.Grass;
 
 	public void render(Screen screen)
 		{
@@ -454,7 +450,7 @@ public class Player extends Mob implements Serializable {
 			}
 
 			if (Level.minimap_collapsed) {
-				screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
+				//screen.renderSheet(254, 0, SpriteSheet.minimap_hidden, false);
 			}
 
 			if (buildMode) {

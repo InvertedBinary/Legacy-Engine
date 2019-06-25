@@ -49,7 +49,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<String>
 			
 			if(msg.startsWith("REG|")) { //REG|id=0
 				Boot.get().getPlayer().UUID = msg.substring(msg.indexOf("id=") + 3);
-				Boot.c.id = Boot.get().getPlayer().UUID;
+				Boot.Client.id = Boot.get().getPlayer().UUID;
 				Boot.log("Connection verified, you are ID: " + Boot.get().getPlayer().UUID, true);
 			}
 			

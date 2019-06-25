@@ -10,7 +10,6 @@ import org.luaj.vm2.lib.jse.JsePlatform;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.UI_Manager;
-import com.IB.LE2.world.entity.mob.TagMob;
 
 public class LuaScript implements Runnable {
 

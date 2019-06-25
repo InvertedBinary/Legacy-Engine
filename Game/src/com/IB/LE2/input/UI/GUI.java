@@ -7,7 +7,6 @@ import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.world.entity.mob.Player;
 
 public class GUI extends CheckBounds {
@@ -20,18 +19,13 @@ public class GUI extends CheckBounds {
 	transient public int displayTimeM = 0;
 	transient public int displayTimeS = 0;
 
-	private transient Sprite MobHealthSprite = Sprite.MobHealthBar20;
-
-	private transient Sprite HealthSprite = Sprite.HealthBar20;
-	private transient Sprite ManaSprite = Sprite.manabar20;
-	private transient Sprite StaminaSprite = Sprite.manabar20;
-
 	Player tempLoadInfo = null;
 
-	transient public AnimatedSprite healthbar = new AnimatedSprite(SpriteSheet.anim_hb, 72, 32, 61);
+	/*transient public AnimatedSprite healthbar = new AnimatedSprite(SpriteSheet.anim_hb, 72, 32, 61);
 	transient public AnimatedSprite manabar = new AnimatedSprite(SpriteSheet.anim_mb, 72, 32, 61);
 	transient public AnimatedSprite staminabar = new AnimatedSprite(SpriteSheet.anim_sb, 72, 32, 61);
-	transient public AnimatedSprite expbar = new AnimatedSprite(SpriteSheet.anim_eb, 156, 32, 151);
+	transient public AnimatedSprite expbar = new AnimatedSprite(SpriteSheet.anim_eb, 156, 32, 151);*/
+	// TODO: Custom progress bars in menus through tags
 
 	public GUI() {
 		font = new Font16x();

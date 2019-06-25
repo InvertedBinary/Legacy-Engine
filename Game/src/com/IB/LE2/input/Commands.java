@@ -15,11 +15,10 @@ import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.util.VARS;
-import com.IB.LE2.util.IO.SaveGame;
+import com.IB.LE2.util.FileIO.Disk;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
-import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
@@ -158,40 +157,29 @@ public class Commands {
 					case "tfullscr":
 						Boot.get().setTrueFullscreen();
 						break;
-
 					case "dir":
-						File f = new File(SaveGame.createSaveFolder());
-						if (Modifier.equals("")) {
-							f = new File(SaveGame.createSaveFolder());
-						} else
-							if (Modifier.equals("$logs")) {
-								f = new File(SaveGame.createSaveFolder() + "/logs/");
-							}
+						File f = Disk.AppDataDirectory;
+						if (!Modifier.equals(""))
+							f = new File(Disk.AppDataDirectory.getAbsolutePath() + "/" + Modifier + "/");
 						Desktop.getDesktop().open(f);
 						break;
-
 					case "dbg":
 						Boot.drawDebug = !Boot.drawDebug;
 						break;
-
 					case "kill":
 						if (Selector.selected != null) Selector.selected.remove();
-
 						Selector.selected = null;
 						break;
-
 					case "grab":
 						if (Selector.selected != null) {
 							VARS.do_possession = !VARS.do_possession;
 						}
 						break;
-
 					case "push":
 						if (Selector.selected != null) {
 							Selector.selected.vel().set(Double.parseDouble(Modifier), Double.parseDouble(Modifier2));
 						}
 						break;
-
 					case "snd":
 					case "aud":
 						Audio.Play(Modifier);
@@ -211,7 +199,7 @@ public class Commands {
 						Game.showAVG = !Game.showAVG;
 						String fileName;
 						if (Modifier.equals("$log-start")) {
-							boolean path = new File(SaveGame.createSaveFolder() + "/logs/").mkdir();
+							boolean path = new File(Disk.AppDataDirectory + "/logs/").mkdir();
 							Game.recAVG_FPS = true;
 						}
 
@@ -224,7 +212,7 @@ public class Commands {
 							Game.recAVG_FPS = false;
 							Date date = new Date();
 							try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-									new FileOutputStream(SaveGame.createSaveFolder() + "/logs/" + fileName + ".txt"),
+									new FileOutputStream(Disk.AppDataDirectory + "/logs/" + fileName + ".txt"),
 									"utf-8"))) {
 								writer.write("AVERAGE FPS: " + Game.fpsAVG + ", SAMPLE SIZE: " + Game.fpsIndex);
 								writer.write(
@@ -253,26 +241,25 @@ public class Commands {
 						break;
 					case "spawn":
 						Boot.get().getLevel()
-							.add(new TagMob("/XML/Entities/" + Modifier + ".xml", Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
+							.add(new TagMob("/Tags/Entities/" + Modifier + ".xml", Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
 							Boot.get().getPlayer().y() / TileCoord.TILE_SIZE ));
 						break;
 					case "ld":
 						if (Modifier.equals(""))
 							Modifier = ((TiledLevel) Boot.getLevel()).path;
 						else
-							Modifier = "/XML/Levels/" + Modifier;
+							Modifier = "/Tags/Levels/" + Modifier;
 
 						player.setPositionTiled(-1, -1, Modifier, true);
 						break;
 					case "con":
 						if (Modifier2.equals("")) {
-							Boot.host = "localhost";
+							Boot.OpenConnection("localhost");
 							Boot.get().getPlayer().name = Modifier;
 						} else {
 							Boot.get().getPlayer().name = Modifier2;
-							Boot.host = Modifier;
+							Boot.OpenConnection(Modifier);
 						}
-						Boot.tryConnect(false);
 
 						boolean attempting = true;
 						Boot.get().conTime = 0;

@@ -124,6 +124,8 @@ public class TagMenu extends UI_Menu
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		initLua();
 	}
 	
 	public void readTags()
@@ -203,10 +205,6 @@ public class TagMenu extends UI_Menu
 				        UnloadCall.call();
 					}
 				};
-				
-				
-				initLua();
-
 				break;
 				
 			case "components.button":
@@ -391,7 +389,7 @@ public class TagMenu extends UI_Menu
 			}
 			
 			reading_tag = reading_tag.replaceAll(current_tag, "");
-		}
+		}		
 	}
 	
 	public void killLua() {

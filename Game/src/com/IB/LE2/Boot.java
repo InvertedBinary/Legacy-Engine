@@ -11,11 +11,8 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,7 +23,7 @@ import org.ini4j.IniPreferences;
 
 import com.IB.LE2._GL.AlphaLWJGL.OGL_TEST;
 import com.IB.LE2._GL.GL_Real.GL_Main;
-import com.IB.LE2.network.Client;
+import com.IB.LE2.network.GameClient;
 import com.IB.LE2.network.server.GameServer;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.level.Level;
@@ -37,16 +34,20 @@ public class Boot
 	public static int height = 360; // 168 //335
 	public static int scale = 2;
 	
-	public static String title = "Legacy Engine [Build 1 : 10/31/17]";
-	
-	private static Game g;
+	public static String Title;
+	public static String AppName = "Untitled LE2 Project";
+	public static String BuildDate = "10/31/17";
+	public static int BuildNumber = 1;
+
+	private static Game Game;
 	private static OGL_TEST GameAlphaOGL;
 	private static GL_Main GameOGL;
-	private static GameServer s;
-	public static Client c;
+	
+	private static GameServer Server;
+	public static GameClient Client;
 	
 	private static int port = 7381;
-	public static String host = "localhost";
+	private static String host = "localhost";
 	
 	public static HashMap<String, Boolean> launch_args;
 	public static Preferences iniPrefs;
@@ -54,8 +55,7 @@ public class Boot
 	public static boolean isConnected = false;
 	public static boolean drawDebug = false;
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		launch_args = new HashMap<String, Boolean>();
 
 		System.out.println("----------- R U N - T I M E   A R G S  ------------");
@@ -65,20 +65,16 @@ public class Boot
 		}
 		System.out.println("---------------------------------------------------");
 
-		if (!launch_args.containsKey("-mode_dedi")) {
-			c = new Client(host, 7381);
-
-			if (launch_args.containsKey("-doconnect")) {
-				tryConnect(true);
-			}
+		if (launch_args.containsKey("-DedicatedServer")) {
+			OpenServer();
 		} else {
-			tryServer();
+			Client = new GameClient(host, 7381);
 		}
 
-		tryLaunchGame();
+		LaunchGame();
 	}
 
-	public static void tryLaunchGame()
+	public static void LaunchGame()
 	{
 		try {
 			Ini ini = new Ini(new File("le2.ini"));
@@ -105,20 +101,26 @@ public class Boot
 			height = prefsInt("Graphics", "PixelsHeight", height);
 			scale = prefsInt("Graphics", "DrawScale", scale);
 			
+			AppName = prefsStr("App", "ApplicationName", AppName);
+			BuildNumber = prefsInt("App", "BuildNumber", BuildNumber);
+			BuildDate = prefsStr("App", "BuildDate", BuildDate);
+			
+			Title = AppName + " [Build " + BuildNumber + " : " + BuildDate + "]";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		switch (iniPrefs.node("Graphics").getInt("EngineMode", 0)) {
 		case 0:
-			g = new Game();
-			g.Launch(g);
+			Game = new Game();
+			Game.Launch(Game);
 			break;
 		case 1:
-			GameAlphaOGL = new OGL_TEST(title);
+			GameAlphaOGL = new OGL_TEST(Title);
 			break;
 		case 2:
-			GameOGL = new GL_Main(title);
+			GameOGL = new GL_Main(Title);
 			break;
 		}
 	}
@@ -139,58 +141,40 @@ public class Boot
 		return iniPrefs.node(node).getDouble(key, dfVal);
 	}
 
-	public static void tryServer()
-	{
-		s = new GameServer(Boot.port);
+	private static void OpenServer() {
+		Server = new GameServer(Boot.port);
+		
 		try {
-			s.run();
+			Server.run();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void tryConnect(boolean useHostFile)
+	public static void OpenConnection(String host)
 	{
-		if (useHostFile) {
-			try {
-				String path = "./server.txt";
-				FileInputStream fis = new FileInputStream(path);
-				BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-				host = in.readLine();
-				in.close();
-				System.out.println("Host file found! Will attempt a connection to: " + host);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-				host = "localhost";
-				System.out.println("Host file is corrupt, using localhost!");
-			}
-		}
 		try {
-			c = new Client(host, 7381);
-			c.startClient();
+			Client = new GameClient(host, 7381);
+			Client.startClient();
 		} catch (Exception e) {
-			log("Unsuccessful Connection Attempt.. is the server running?", true);
+			log("Unsuccessful Connection Attempt.. is the host server (@" + host + " running?", true);
 		}
 	}
 
-	public static Game get()
-	{
-		return g;
+	public static Game get() {
+		return Game;
 	}
 
-	public static Level getLevel()
-	{
+	public static Level getLevel() {
 		return get().getLevel();
 	}
 
-	public static Player getPlayer()
-	{
+	public static Player getPlayer() {
 		return get().getPlayer();
 	}
 
-	public static void setWindowIcon(String path)
-	{
-		g.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
+	public static void setWindowIcon(String path) {
+		Game.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
 	}
 
 	public static Cursor setMouseIcon(String path)
@@ -201,14 +185,14 @@ public class Boot
 
 		Point hotspot = new Point(0, 0);
 		Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");
-		g.frame.setCursor(cursor);
+		Game.frame.setCursor(cursor);
 		return cursor;
 	}
 
 	public static void centerMouse()
 	{
-		int centreFrameX = g.frame.getX() + (g.frame.getWidth() / 2);
-		int centreFrameY = g.frame.getY() + (g.frame.getHeight() / 2);
+		int centreFrameX = Game.frame.getX() + (Game.frame.getWidth() / 2);
+		int centreFrameY = Game.frame.getY() + (Game.frame.getHeight() / 2);
 		moveMouse(new Point(centreFrameX, centreFrameY));
 	}
 

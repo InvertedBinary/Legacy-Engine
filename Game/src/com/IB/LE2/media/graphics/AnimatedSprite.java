@@ -1,9 +1,10 @@
 package com.IB.LE2.media.graphics;
 
-public class AnimatedSprite extends Sprite{
+public class AnimatedSprite extends Sprite {
+
+	private Sprite sprite;
 
 	private int frame = 0;
-	private Sprite sprite;
 	private int rate = 12;
 	private int time = 0;
 	private int length = -1;

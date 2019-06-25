@@ -35,7 +35,7 @@ public class DebugProjectile extends Projectile {
 		range = random.nextInt(80) + 260;
 		drop = (dropChance.nextInt((6 - 1) + 1) + 1);
 		speed = 3;
-		sprite = /*Sprite.rotate(*/Sprite.WizardProjectile/*, angle)*/;	
+		sprite = /*Sprite.rotate(*/Sprite.Grass/*, angle)*/;	
 		manaCost = 0;
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);

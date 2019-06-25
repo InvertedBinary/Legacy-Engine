@@ -31,10 +31,9 @@ import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
-import com.IB.LE2.util.IO.LoadProperties;
-import com.IB.LE2.util.IO.SaveGame;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.level.Level;
@@ -65,7 +64,7 @@ public class Game extends Canvas implements Runnable
 	public static int mouseMotionTime = 0;
 	// private boolean invokedLoad = false;
 
-	public boolean autoSave = true;
+	public boolean AutoSave = true;
 
 	private boolean running = false;
 	public static transient Font16x font16bit;
@@ -76,7 +75,6 @@ public class Game extends Canvas implements Runnable
 	public boolean FrameAdjusted = false;
 	public static boolean devModeOn = false;
 	private boolean devModeReleased = true;
-	public LoadProperties loadProp;
 	public static boolean devModeInfoOn = false;
 	public TileCoord playerSpawn;
 	public TileCoord playerRespawn = new TileCoord(52, 72);
@@ -98,36 +96,6 @@ public class Game extends Canvas implements Runnable
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	public int conTime = 0;
-
-	private void folderCreation()
-		{
-			File SavesFolder = new File(LoadProperties.basePath + "/Saves");
-
-			if (SavesFolder.exists()) {
-				System.out.println("File: " + SavesFolder + " exists, not creating a new directory");
-			}
-			if (!SavesFolder.exists()) {
-				System.out.println("Creating Directory: " + SavesFolder);
-
-				boolean result = SavesFolder.mkdir();
-				if (result) {
-					System.out.println(SavesFolder + " Created Successfully");
-				}
-
-			}
-
-			if (screenshots.exists()) {
-				System.out.println("File: " + screenshots + " exists, not creating a new directory");
-			}
-			if (!screenshots.exists()) {
-				System.out.println("Creating Directory: " + screenshots.getAbsolutePath());
-
-				boolean result = screenshots.mkdir();
-				if (result) {
-					System.out.println(screenshots.getAbsolutePath() + " Created Successfully");
-				}
-			}
-		}
 
 	/*
 	 * private static final char PKG_SEPARATOR = '.'; private static final char
@@ -160,14 +128,9 @@ public class Game extends Canvas implements Runnable
 
 	public Game()
 		{
-			loadProp = new LoadProperties();
-			loadProp.createDataFolder();
-			screenshots = new File(LoadProperties.basePath + "/screenshots");
-			// Sound.loadOggs();
-			folderCreation();
-
 			StartDiscord();
 			Audio.Initialize();
+			SpriteSheet.LoadTags("/Tags/Textures/SheetBatch.xml");
 			
 			//Audio.PlayMusic("Hope", "Hope.mid");
 
@@ -372,7 +335,7 @@ public class Game extends Canvas implements Runnable
 					timer += 1000;
 					//System.out.println(updates + " ups, " + frames + " fps");
 
-					frame.setTitle(Boot.title + " | " + updates + " ups, " + frames + " fps");
+					frame.setTitle(Boot.Title + " | " + updates + " ups, " + frames + " fps");
 
 					if (this.recAVG_FPS) {
 						fpsTotal += frames;
@@ -392,78 +355,12 @@ public class Game extends Canvas implements Runnable
 	public static int fpsTotal = 0;
 	public static int fpsAVG = 0;
 
-	public ArrayList<String> getCharDirs()
-		{
-			ArrayList<String> result = new ArrayList<String>();
-			File file = new File(SaveGame.createDataFolder() + "\\Saves\\");
-			String[] names = file.list();
-
-			for (String name : names) {
-				// System.out.println(SaveGame.createDataFolder() + "\\Saves\\" + name);
-				if (new File(SaveGame.createDataFolder() + "\\Saves\\" + name).isDirectory()) {
-					// System.out.println(name);
-					result.add(name);
-				}
-			}
-			return result;
+	public void autoSave() {
+		saveTime++;
+		if ((saveTime % 400) == 0) {
+			// System.out.println("SAVING THE GAME");
 		}
-
-	public void switchCharacter(String name)
-		{
-			boolean disabledSave = false;
-			if (autoSave) {
-				System.out.println("Switching Char -- Disabled AutoSave");
-				autoSave = false;
-				disabledSave = true;
-			}
-			//this.PlayerName = name;
-			getPlayer().name = name;
-			// getPlayer().reset(getPlayer());
-			//getPlayer().invokeLoad(getPlayer());
-			System.out.println("Switched To: " + getPlayer().name);
-
-			if (disabledSave) {
-				System.out.println("Finished Switching Char -- Enabled AutoSave");
-				autoSave = true;
-				disabledSave = false;
-			}
-			try {
-				loadProp.loadPrefs(this);
-			} catch (Exception e) {
-				autoSave = true;
-			}
-
-		}
-
-	public void updatePause()
-		{
-			// System.out.println("[Game: ~773] GAMESTATE: PAUSE");
-		}
-
-	public void save(boolean autoOverride)
-		{
-			// if (gameState != gameState.MENU) {
-			loadProp.savePrefs(this);
-			if (autoSave || autoOverride) {
-				if (getLevel().players.size() > 0) {
-					if (getLevel().getClientPlayer() != null) {
-						//getLevel().getClientPlayer().invokeSave(getLevel().getClientPlayer());
-					}
-				}
-			}
-			// }
-		}
-
-	public void autoSave()
-		{
-			saveTime++;
-			if ((saveTime % 400) == 0) {
-				save(false);
-				// loadProp.saveEquips((PlayerMP) this.getPlayer());
-				// save(this.player.inventory.items);
-				// System.out.println("SAVING THE GAME");
-			}
-		}
+	}
 
 	public void updateMode()
 		{
@@ -663,7 +560,7 @@ public class Game extends Canvas implements Runnable
 				if (Boot.launch_args.containsKey("-resizeable")) {
 					game.frame.setResizable(true);
 				}
-				game.frame.setTitle(Boot.title);
+				game.frame.setTitle(Boot.Title);
 				game.frame.add(game);
 				// game.frame.remove(game);
 				// game.frame.setOpacity(0.01F);
@@ -707,53 +604,44 @@ public class Game extends Canvas implements Runnable
 		ChangingFullscreenState = false;
 	}
 	
-	public void setTrueFullscreen()
-	{
+	public void setTrueFullscreen() {
 		frame.setBounds(getGraphicsConfiguration().getBounds());
 		getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
 	}
 
-	public Screen getScreen()
-	{
+	public Screen getScreen() {
 		return screen;
 	}
 
-	public Player getPlayer()
-	{
+	public Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Player player)
-	{
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
-	public Level getLevel()
-	{
+	public Level getLevel() {
 		return levels.peek();
 	}
 
-	public GUI getGui()
-	{
+	public GUI getGui() {
 		return gui;
 	}
 
-	public Keyboard getInput()
-	{
+	public Keyboard getInput() {
 		return this.key;
 	}
 
-	public void setGui(GUI gui)
-	{
+	public void setGui(GUI gui) {
 		this.gui = gui;
 	}
 
-	public void quit()
-	{
+	public void quit() {
 		DiscordRPC.discordShutdown();
 		System.out.println("Saving & Closing Application");
-		save(false);
-		Boot.c.stopClient();
+		// save(false);
+		Boot.Client.stopClient();
 		System.exit(0);
 	}
 }
