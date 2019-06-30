@@ -34,8 +34,8 @@ end
 
 function onSubmit(text)
 	print("Text Submitted.. "..text)
-	menu:RunCommand(text)
 	menu:SetElementText("Cmd", "")
+	menu:RunCommand(text)
 end
 
 function onKeyed(character)

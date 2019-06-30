@@ -1,4 +1,4 @@
-package com.IB.LE2.input;
+package com.IB.LE2.input.hardware;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

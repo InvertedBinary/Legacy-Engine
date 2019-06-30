@@ -3,8 +3,8 @@ package com.IB.LE2.input.UI;
 import java.io.Serializable;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.components.basic.UI_Container;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.Screen;
 
 public class CheckBounds extends UI_Container implements Serializable{

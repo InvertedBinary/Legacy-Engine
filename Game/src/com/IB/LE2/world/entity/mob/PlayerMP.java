@@ -4,7 +4,7 @@ import java.net.InetAddress;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.input.Keyboard;
+import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.SpriteSheet;

@@ -25,7 +25,6 @@ import com.IB.LE2.world.level.worlds.TiledLevel;
 public class Commands {
 
 	public static void Execute(String cmd, Player player) {
-		ArrayList<String> cmds = new ArrayList<>();
 		String Command = "", Modifier = "", Modifier2 = "";
 		int args = 0;
 
@@ -61,231 +60,196 @@ public class Commands {
 				Modifier2 = "";
 			}
 		}
-		
-		cmds.add("help");
-		cmds.add("tp");
-		cmds.add("tpp");
-		cmds.add("speed");
-		cmds.add("exp");
-		cmds.add("time");
-		cmds.add("money");
-		cmds.add("avg");
-		cmds.add("dir");
-		cmds.add("dbg");
-		cmds.add("tcl");
-		cmds.add("weather");
-		cmds.add("nospawns");
-		cmds.add("spawn");
-		cmds.add("ld");
-		cmds.add("con");
-		cmds.add("svr");
-		cmds.add("sus");
-		cmds.add("kill");
-		cmds.add("grab");
-		cmds.add("push");
-		cmds.add("restart");
-		cmds.add("fullscr");
-		cmds.add("tfullscr");
-		cmds.add("ui");
-		cmds.add("menu");
-		cmds.add("aud");
-		cmds.add("snd");
-		cmds.add("killmusic");
-		cmds.add("killmus");
-		
-		
+
 		if (Command != null && Command.length() > 0) {
-			if (cmds.contains(Command.toLowerCase())) {
-				try {
-					switch (Command.toLowerCase()) {
-					case "nospawns":
-						if (Boot.launch_args.containsKey("-nospawns")) {
-							boolean g = Boot.launch_args.get("-nospawns");
-							Boot.launch_args.put("-nospawns", !Boot.launch_args.get("-nospawns"));
-						} else {
-							Boot.launch_args.put("-nospawns", false);
-						}
-						break;
-					case "tp":
-						if (Modifier.equals("$")) {
-							Modifier = "" + (int) Boot.get().getPlayer().x() / TileCoord.TILE_SIZE;
-						}
-						if (Modifier2.equals("$")) {
-							Modifier2 = "" + (int) Boot.get().getPlayer().y() / TileCoord.TILE_SIZE;
-						}
-						Boot.get().getPlayer()
-								.setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
-
-						break;
-					case "speed": {
-						try {
-							double WalkingSpeedInt = Double.parseDouble(Modifier);
-							System.out.println("Set Speed Equal To " + WalkingSpeedInt);
-							player.speed = WalkingSpeedInt;
-
-						} catch (NumberFormatException e) {
-						}
-
+			try {
+				switch (Command.toLowerCase()) {
+				case "nospawns":
+					if (Boot.launch_args.containsKey("-nospawns")) {
+						boolean g = Boot.launch_args.get("-nospawns");
+						Boot.launch_args.put("-nospawns", !Boot.launch_args.get("-nospawns"));
+					} else {
+						Boot.launch_args.put("-nospawns", false);
 					}
-						break;
+					break;
+				case "tp":
+					if (Modifier.equals("$")) {
+						Modifier = "" + (int) Boot.get().getPlayer().x() / TileCoord.TILE_SIZE;
+					}
+					if (Modifier2.equals("$")) {
+						Modifier2 = "" + (int) Boot.get().getPlayer().y() / TileCoord.TILE_SIZE;
+					}
+					Boot.get().getPlayer()
+							.setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
-					case "weather":
+					break;
+				case "speed": {
+					try {
+						double WalkingSpeedInt = Double.parseDouble(Modifier);
+						System.out.println("Set Speed Equal To " + WalkingSpeedInt);
+						player.speed = WalkingSpeedInt;
+
+					} catch (NumberFormatException e) {
+					}
+
+				}
+					break;
+
+				case "weather":
 //						if (Modifier.equalsIgnoreCase("rain")) {
 //							Boot.get().getLevel().isRaining = !Boot.get().getLevel().isRaining;
 //						} else
 //							if (Modifier.equalsIgnoreCase("clear")) {
 //								Boot.get().getLevel().isRaining = false;
 //							}
-						break;
+					break;
 
-					case "tcl":
-						player.noclip = !player.noclip;
-						break;
+				case "tcl":
+					player.noclip = !player.noclip;
+					break;
 
-					case "sus":
-						VARS.suspend_world = !VARS.suspend_world;
-						break;
+				case "sus":
+					VARS.suspend_world = !VARS.suspend_world;
+					break;
 
-					case "restart":
-						Boot.restart();
-						break;
-				
-					case "fullscr":
-						Boot.get().setBorderlessFullscreen(!Boot.get().frame.isUndecorated());
-						break;
+				case "restart":
+					Boot.restart();
+					break;
 
-					case "tfullscr":
-						Boot.get().setTrueFullscreen();
-						break;
-					case "dir":
-						File f = Disk.AppDataDirectory;
-						if (!Modifier.equals(""))
-							f = new File(Disk.AppDataDirectory.getAbsolutePath() + "/" + Modifier + "/");
-						Desktop.getDesktop().open(f);
-						break;
-					case "dbg":
-						Boot.drawDebug = !Boot.drawDebug;
-						break;
-					case "kill":
-						if (Selector.selected != null) Selector.selected.remove();
-						Selector.selected = null;
-						break;
-					case "grab":
-						if (Selector.selected != null) {
-							VARS.do_possession = !VARS.do_possession;
-						}
-						break;
-					case "push":
-						if (Selector.selected != null) {
-							Selector.selected.vel().set(Double.parseDouble(Modifier), Double.parseDouble(Modifier2));
-						}
-						break;
-					case "snd":
-					case "aud":
-						Audio.Play(Modifier);
-						break;
+				case "fullscr":
+					Boot.get().setBorderlessFullscreen(!Boot.get().frame.isUndecorated());
+					break;
 
-					case "killmus":
-					case "killmusic":
-						Audio.StopMusic();
-						break;
-
-					case "menu":
-					case "ui":
-						UI_Manager.Load(new TagMenu(Modifier));
-						break;
-
-					case "avg": {
-						Game.showAVG = !Game.showAVG;
-						String fileName;
-						if (Modifier.equals("$log-start")) {
-							boolean path = new File(Disk.AppDataDirectory + "/logs/").mkdir();
-							Game.recAVG_FPS = true;
-						}
-
-						if (Modifier.equals("$log-stop")) {
-							if (Modifier2.equals("")) {
-								fileName = "FPS_LOG_" + System.currentTimeMillis();
-							} else {
-								fileName = Modifier2;
-							}
-							Game.recAVG_FPS = false;
-							Date date = new Date();
-							try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-									new FileOutputStream(Disk.AppDataDirectory + "/logs/" + fileName + ".txt"),
-									"utf-8"))) {
-								writer.write("AVERAGE FPS: " + Game.fpsAVG + ", SAMPLE SIZE: " + Game.fpsIndex);
-								writer.write(
-										System.getProperty("line.separator") + System.getProperty("line.separator"));
-								writer.write("TEST CONDUCTED ON: " + date);
-								writer.close();
-							}
-							Game.fpsIndex = 0;
-							Game.fpsTotal = 0;
-							Game.fpsAVG = 0;
-						}
+				case "tfullscr":
+					Boot.get().setTrueFullscreen();
+					break;
+				case "dir":
+					File f = Disk.AppDataDirectory;
+					if (!Modifier.equals(""))
+						f = new File(Disk.AppDataDirectory.getAbsolutePath() + "/" + Modifier + "/");
+					Desktop.getDesktop().open(f);
+					break;
+				case "dbg":
+					Boot.drawDebug = !Boot.drawDebug;
+					break;
+				case "kill":
+					if (Selector.selected != null)
+						Selector.selected.remove();
+					Selector.selected = null;
+					break;
+				case "grab":
+					if (Selector.selected != null) {
+						VARS.do_possession = !VARS.do_possession;
 					}
-						break;
-					case "money":
-						try {
-							//player.money += Double.parseDouble(Modifier);
-							System.out.println(Modifier + " Gold Added");
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						break;
-					case "time":
-						break;
-					case "cl":
-						//Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
-						break;
-					case "spawn":
-						Boot.get().getLevel()
-							.add(new TagMob("/Tags/Entities/" + Modifier + ".xml", Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
-							Boot.get().getPlayer().y() / TileCoord.TILE_SIZE ));
-						break;
-					case "ld":
-						if (Modifier.equals(""))
-							Modifier = ((TiledLevel) Boot.getLevel()).path;
-						else
-							Modifier = "/Tags/Levels/" + Modifier;
+					break;
+				case "push":
+					if (Selector.selected != null) {
+						Selector.selected.vel().set(Double.parseDouble(Modifier), Double.parseDouble(Modifier2));
+					}
+					break;
+				case "snd":
+				case "aud":
+					Audio.Play(Modifier);
+					break;
 
-						player.setPositionTiled(-1, -1, Modifier, true);
-						break;
-					case "con":
+				case "killmus":
+				case "killmusic":
+					Audio.StopMusic();
+					break;
+
+				case "menu":
+				case "ui":
+					UI_Manager.Load(new TagMenu(Modifier));
+					break;
+
+				case "avg": {
+					Game.showAVG = !Game.showAVG;
+					String fileName;
+					if (Modifier.equals("$log-start")) {
+						boolean path = new File(Disk.AppDataDirectory + "/logs/").mkdir();
+						Game.recAVG_FPS = true;
+					}
+
+					if (Modifier.equals("$log-stop")) {
 						if (Modifier2.equals("")) {
-							Boot.OpenConnection("localhost");
-							Boot.get().getPlayer().name = Modifier;
+							fileName = "FPS_LOG_" + System.currentTimeMillis();
 						} else {
-							Boot.get().getPlayer().name = Modifier2;
-							Boot.OpenConnection(Modifier);
+							fileName = Modifier2;
 						}
-
-						boolean attempting = true;
-						Boot.get().conTime = 0;
-						while (attempting) {
-							attempting = !Boot.isConnected;
-							if ((Boot.get().conTime >= 120) || Boot.isConnected) {
-								attempting = false;
-							}
-							System.out.println("in connection loop!");
+						Game.recAVG_FPS = false;
+						Date date = new Date();
+						try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+								new FileOutputStream(Disk.AppDataDirectory + "/logs/" + fileName + ".txt"), "utf-8"))) {
+							writer.write("AVERAGE FPS: " + Game.fpsAVG + ", SAMPLE SIZE: " + Game.fpsIndex);
+							writer.write(System.getProperty("line.separator") + System.getProperty("line.separator"));
+							writer.write("TEST CONDUCTED ON: " + date);
+							writer.close();
 						}
-
-						// Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
-						break;
-					case "svr":
-						break;
-					case "":
-						System.out.println("... Finished CMD Lap");
-						break;
+						Game.fpsIndex = 0;
+						Game.fpsTotal = 0;
+						Game.fpsAVG = 0;
 					}
-					Command = "";
-
-				} catch (Exception e) {
-					System.err.println("Improper CMD, try again!");
-					e.printStackTrace();
 				}
-			} else {
+					break;
+				case "money":
+					try {
+						// player.money += Double.parseDouble(Modifier);
+						System.out.println(Modifier + " Gold Added");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				case "time":
+					break;
+				case "cl":
+					// Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
+					break;
+				case "spawn":
+					Boot.get().getLevel()
+							.add(new TagMob("/Tags/Entities/" + Modifier + ".xml",
+									Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
+									Boot.get().getPlayer().y() / TileCoord.TILE_SIZE));
+					break;
+				case "ld":
+					if (Modifier.equals(""))
+						Modifier = ((TiledLevel) Boot.getLevel()).path;
+					else
+						Modifier = "/Tags/Levels/" + Modifier;
+
+					player.setPositionTiled(-1, -1, Modifier, true);
+					break;
+				case "con":
+					if (Modifier2.equals("")) {
+						Boot.OpenConnection("localhost");
+						Boot.get().getPlayer().name = Modifier;
+					} else {
+						Boot.get().getPlayer().name = Modifier2;
+						Boot.OpenConnection(Modifier);
+					}
+
+					boolean attempting = true;
+					Boot.get().conTime = 0;
+					while (attempting) {
+						attempting = !Boot.isConnected;
+						if ((Boot.get().conTime >= 120) || Boot.isConnected) {
+							attempting = false;
+						}
+						System.out.println("in connection loop!");
+					}
+
+					// Boot.c.sendMessage(Level.entityStringBuilder(Boot.get().getPlayer()));
+					break;
+				case "svr":
+					break;
+				case "":
+					System.out.println("... Finished CMD Lap");
+					break;
+				}
+				Command = "";
+
+			} catch (Exception e) {
+				System.err.println("Improper CMD, try again!");
+				e.printStackTrace();
 			}
 		}
 

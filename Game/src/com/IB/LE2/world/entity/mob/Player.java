@@ -12,9 +12,9 @@ import javax.imageio.ImageIO;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.input.Keyboard;
-import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.GUI;
+import com.IB.LE2.input.hardware.Keyboard;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;

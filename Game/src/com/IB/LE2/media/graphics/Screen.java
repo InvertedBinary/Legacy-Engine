@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.lighting.TileLighting;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;

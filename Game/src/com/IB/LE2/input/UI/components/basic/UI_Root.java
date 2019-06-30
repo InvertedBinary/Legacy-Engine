@@ -1,7 +1,7 @@
 package com.IB.LE2.input.UI.components.basic;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.Screen;
 
 public abstract class UI_Root {

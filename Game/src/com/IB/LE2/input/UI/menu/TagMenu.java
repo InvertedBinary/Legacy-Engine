@@ -16,9 +16,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.input.Mouse;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.components.UI_Button;
+import com.IB.LE2.input.UI.components.UI_Canvas;
 import com.IB.LE2.input.UI.components.UI_Label;
 import com.IB.LE2.input.UI.components.UI_Slider;
 import com.IB.LE2.input.UI.components.UI_Sprite;
@@ -28,6 +28,7 @@ import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
 import com.IB.LE2.input.UI.components.listeners.UI_SliderListener;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
 import com.IB.LE2.input.UI.components.listeners.UI_UnloadListener;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -383,6 +384,20 @@ public class TagMenu extends UI_Menu
 				addUI(toggle);
 				break;
 				
+			case "components.canvas":
+				int	canvasx = (int)parseNum(pullAttrib("x",  "0"));
+				int canvasy = (int)parseNum(pullAttrib("y",  "0"));
+				int canvasw = (int)parseNum(pullAttrib("width",  "0"));
+				int canvash = (int)parseNum(pullAttrib("height",  "0"));
+				int drawcol = Long.decode(pullAttrib("drawcol", "0")).intValue();
+				int bgcol = Long.decode(pullAttrib("bgcol", "0")).intValue();
+
+				UI_Canvas canvas = new UI_Canvas(canvasx, canvasy, canvasw, canvash);
+				canvas.SetColor(drawcol);
+				canvas.SetBackground(bgcol);
+				addUI(canvas);
+				break;
+
 			default:
 				System.out.println(" - !! Unknown Menu Component !!: " + reading_tag);
 				break;

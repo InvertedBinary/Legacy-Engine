@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.input.Mouse;
+import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.VARS;
