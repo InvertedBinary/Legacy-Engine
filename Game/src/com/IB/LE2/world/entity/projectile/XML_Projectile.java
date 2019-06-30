@@ -43,7 +43,7 @@ public class XML_Projectile extends Projectile {
 	
 	public void init(double x, double y, double angle)
 		{
-			this.sprite = Sprite.Grass;
+			this.sprite = Sprite.get("Grass");
 			this.xOrigin = x;
 			this.yOrigin = y;
 			this.x = x;

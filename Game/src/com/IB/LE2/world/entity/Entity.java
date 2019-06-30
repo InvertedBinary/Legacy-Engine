@@ -99,7 +99,7 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 
 	}
 	public void render (Screen screen) {
-		if (sprite != null) screen.renderSprite((int)x(), (int)y(), Sprite.VoidTile, true);
+		if (sprite != null) screen.renderSprite((int)x(), (int)y(), Sprite.get("VoidTile"), true);
 	}
 	
 	public boolean remove() {

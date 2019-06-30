@@ -123,7 +123,7 @@ public class TagMob extends Mob
 
 		if (!processAllTags()) Boot.log("One or more tags failed to process!", "TagEntity", true);
 
-		this.sprite = Sprite.Anvil;
+		this.sprite = Sprite.get("Anvil");
 	}
 
 	public void readTags() {

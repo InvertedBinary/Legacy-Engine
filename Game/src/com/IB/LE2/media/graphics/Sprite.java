@@ -16,33 +16,39 @@ public class Sprite {
 	
 	public static HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 	
-	public Sprite get(String s) {
-		Sprite result = this.VoidTile;
+	public static Sprite get(String s) {
+		Sprite result = Sprite.nullSpr;
 		if (sprites.containsKey(s)) {
 			result = sprites.get(s);
 		}
 		return result;
 	}
 	
-	public void put(String name, Sprite spr) {
+	public static void put(String name, Sprite spr) {
 		sprites.put(name, spr);
 	}
 	
-	public void load_all(String dir) {
-		
-	}
-	
-	public void load(String path) {
-		
+	public static void LoadTags(String path) {
+		//GUIS
+		put("Title", new Sprite(300, 168, 0, 0, SpriteSheet.get("TitleMenu")));
+		put("BGFade", new Sprite(300, 168, 0, 0, SpriteSheet.bgFade));
+		put("AbilityBox", new Sprite(18, 0, 0, SpriteSheet.abilitybox));
+		put("CabinetTop", new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.blocks));
+		put("CabinetBottom", new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.blocks));
+		put("Dirt", new Sprite(TileCoord.TILE_SIZE, 15, 1, SpriteSheet.blocks));
+		put("Swamp", new Sprite(TileCoord.TILE_SIZE, 8, 1, SpriteSheet.blocks));
+		put("PathDirt", new Sprite(TileCoord.TILE_SIZE, 15, 0, SpriteSheet.blocks));
+		put("PathCornerTL", new Sprite(TileCoord.TILE_SIZE, 17, 18, SpriteSheet.blocks));
+		put("RedBed", new Sprite(TileCoord.TILE_SIZE, 16, 17, SpriteSheet.blocks));
+		put("Grass", new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.blocks));
+		put("Water", new Sprite(TileCoord.TILE_SIZE, 13, 1, SpriteSheet.blocks));
+		put("VoidTile", get("Water"));
+		put("Anvil", new Sprite(TileCoord.TILE_SIZE, 20, 16, SpriteSheet.blocks));
 	}
 	
 	// Defaults
 	public static Sprite nullSpr = new Sprite(TileCoord.TILE_SIZE, 0xffFF00FF);
 	
-	//GUIS
-	public static Sprite Title = new Sprite(300, 168, 0, 0, SpriteSheet.title);
-	public static Sprite bgFade = new Sprite(300, 168, 0, 0, SpriteSheet.bgFade);
-	public static Sprite abilitybox = new Sprite(18, 0, 0, SpriteSheet.abilitybox);
 
 	//Particles:
 	public static Sprite particle_def = new Sprite(2, 0x7F0000);
@@ -51,17 +57,6 @@ public class Sprite {
 	public static Sprite bleed = new Sprite(1, 0x7F0000);
 	public static Sprite Rock = new Sprite(3, 0x808080);
 
-	public static Sprite CabinetTop = new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.blocks);
-	public static Sprite CabinetBottom = new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.blocks);
-	public static Sprite Dirt = new Sprite(TileCoord.TILE_SIZE, 15, 1, SpriteSheet.blocks);
-	public static Sprite Swamp = new Sprite(TileCoord.TILE_SIZE, 8, 1, SpriteSheet.blocks);
-	public static Sprite PathDirt = new Sprite(TileCoord.TILE_SIZE, 15, 0, SpriteSheet.blocks);
-	public static Sprite PathCornerTL = new Sprite(TileCoord.TILE_SIZE, 17, 18, SpriteSheet.blocks);
-	public static Sprite RedBed = new Sprite(TileCoord.TILE_SIZE, 16, 17, SpriteSheet.blocks);
-	public static Sprite Grass = new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.blocks);
-	public static Sprite Water = new Sprite(TileCoord.TILE_SIZE, 13, 1, SpriteSheet.blocks);
-	public static Sprite VoidTile = Water;
-	public static Sprite Anvil = new Sprite(TileCoord.TILE_SIZE, 20, 16, SpriteSheet.blocks);
 	public static Sprite Barrier = new Sprite(1, 1, 0xffFF00FF);
 
 	protected Sprite(SpriteSheet sheet, int width, int height) {

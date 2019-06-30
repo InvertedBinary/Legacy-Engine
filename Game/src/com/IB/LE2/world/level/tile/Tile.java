@@ -28,8 +28,8 @@ public class Tile {
 	public Sprite sprite;
 	public static HashMap<Integer, Tile> TileIndex = new HashMap<Integer, Tile>();
 	
-	public static Tile VoidTile = new VoidTile(Sprite.VoidTile);
-	public static Tile Air = new Air(Sprite.VoidTile);
+	public static Tile VoidTile = new VoidTile(Sprite.get("VoidTile"));
+	public static Tile Air = new Air(Sprite.get("VoidTile"));
 	
 	public Tile(Sprite sprite) { this.sprite = sprite; }
 	public Tile() { }
@@ -71,8 +71,7 @@ public class Tile {
 						boolean solidTwo = (Boolean.parseBoolean(e.getAttribute("projSolid")));
 						boolean jumpThrough = (Boolean.parseBoolean(e.getAttribute("jumpThrough")));
 						boolean isExit = (Boolean.parseBoolean(e.getAttribute("isExitTile")));
-						Field field = Sprite.class.getField(e.getAttribute("sprite"));
-						Sprite sp = (Sprite) field.get(field.getType());
+						Sprite sp = Sprite.get(e.getAttribute("sprite"));
 						String name = (e.getTextContent());
 
 						/*System.out.println("HEX: " + (hex)

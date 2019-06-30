@@ -31,6 +31,7 @@ import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
@@ -131,7 +132,7 @@ public class Game extends Canvas implements Runnable
 			StartDiscord();
 			Audio.Initialize();
 			SpriteSheet.LoadTags("/Tags/Textures/SheetBatch.xml");
-			
+			Sprite.LoadTags("/Tags/Textures/SpriteBatch.xml");
 			//Audio.PlayMusic("Hope", "Hope.mid");
 
 			setGui(new GUI());

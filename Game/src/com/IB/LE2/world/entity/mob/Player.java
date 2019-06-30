@@ -383,7 +383,7 @@ public class Player extends Mob implements Serializable {
 		return this.getName();
 	}
 
-	private transient Sprite arrow = Sprite.Grass;
+	private transient Sprite arrow = Sprite.get("Grass");
 
 	public void render(Screen screen)
 		{

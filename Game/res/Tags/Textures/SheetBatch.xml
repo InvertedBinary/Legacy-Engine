@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Sheets>
-	<sheet src="/Textures/sheets/03_WorldGen/blocks32.png" w="1024" h="1024">Terrain</sheet>
-	<sheet></sheet>
+	<sheet src="/Textures/World/blocks32.png" w="300" h="300">TitleMenu</sheet>
+	<sheet src="/Textures/World/blocks32.png" w="300" h="168">BGFade</sheet>
+	
+	<sheet src="/Textures/World/blocks32.png" w="1024" h="1024">Terrain</sheet>
+	
+	<sheet src="/Textures/World/blocks32.png" w="20" h="20">AbilityBox</sheet>
+	
+	<sheet src="/Textures/Entities/Player/PlayerSprite.png" w="512" h="512">
+		<sub x="0" y="0" w="1" h="7" size="64">player_down</sub>
+		<sub x="1" y="0" w="1" h="7" size="64">player_up</sub>
+		<sub x="3" y="0" w="1" h="7" size="64">player_left</sub>
+		<sub x="2" y="0" w="1" h="7" size="64">player_right</sub>
+	</sheet>	
 </Sheets>
 
 

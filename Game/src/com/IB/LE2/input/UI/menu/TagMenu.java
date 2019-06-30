@@ -187,8 +187,7 @@ public class TagMenu extends UI_Menu
 					this.bg = new Sprite(Boot.width, Boot.height, hex);
 				} catch (NumberFormatException e) {
 					try {
-						Field field = Sprite.class.getField(val);
-						this.bg = (Sprite) field.get(field.getType());
+						this.bg = Sprite.get(val);
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -223,7 +222,7 @@ public class TagMenu extends UI_Menu
 				String onHoverFunc = pullAttrib("onHover", "");
 				
 				UI_Button btn = null;
-				Sprite spr = Sprite.Grass;
+				Sprite spr = Sprite.get("Grass");
 
 				try {					
 					int hex = Long.decode(imagpth).intValue();
@@ -231,8 +230,7 @@ public class TagMenu extends UI_Menu
 				} catch (NumberFormatException e) {
 					if (!imagpth.endsWith(".png")) {
 						try {
-							Field field = Sprite.class.getField(imagpth);
-							spr = (Sprite) field.get(field.getType());
+							spr = Sprite.get(imagpth);
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						}
@@ -304,15 +302,14 @@ public class TagMenu extends UI_Menu
 				double imagr = Math.toRadians(parseNum(pullAttrib("r", "0")));
 				String imagimagpth = val;
 				
-				Sprite imagspr = Sprite.Grass;
+				Sprite imagspr = Sprite.get("Grass");
 
 				try {					
 					int hex = Long.decode(imagimagpth).intValue();
 					imagspr = Sprite.rotate(new Sprite(imagw, imagh, hex), imagr);
 				} catch (NumberFormatException e) {
 					try {
-						Field field = Sprite.class.getField(imagimagpth);
-						imagspr = Sprite.rotate((Sprite) field.get(field.getType()), imagr);
+						imagspr = Sprite.rotate(Sprite.get(imagimagpth), imagr);
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}

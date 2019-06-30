@@ -29,7 +29,15 @@ public class SpriteSheet {
 	}
 	
 	public static void LoadTags(String path) {
-		//System.out.println("Loading.. " + path);
+		System.out.println("Loading Sprite Sheets.. " + path);
+		
+		put("TitleMenu", title);
+		put("BGFade", bgFade);
+		put("Terrain", blocks);
+		put("AbilityBox", abilitybox);
+		put("player", player);
+		
+		
 	}
 	
 	public static SpriteSheet title = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/Menu.png", 300);
@@ -38,7 +46,6 @@ public class SpriteSheet {
 	public static SpriteSheet blocks = new SpriteSheet("/Textures/sheets/03_WorldGen/blocks32.png", 1024);
 	public static SpriteSheet abilitybox = new SpriteSheet("/Textures/sheets/01_GUI/abilitybox.png", 20, 20);
 
-	
 	public static SpriteSheet player = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/PlayerSprite.png", 512, 512);
 	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 7, 64);
 	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 7, 64);
