@@ -41,14 +41,13 @@ public class TagMob extends Mob
 
 	public EntityContainer inventory;
 
-	/*private transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
-	private transient AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
-	private transient AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 64, 64, 7);
-	private transient AnimatedSprite jump = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
+	public transient AnimatedSprite
+		idle = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
+		down = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
+		left = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
+		right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
 
-	private transient AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
-
-	private transient AnimatedSprite anim = idle;*/
+	public transient AnimatedSprite anim = idle;
 	
 	public TagMob(String tag_name)
 	{
@@ -324,13 +323,6 @@ public class TagMob extends Mob
 		return Boolean.parseBoolean(val);
 	}
 
-	public void render(Screen screen) {
-		if (removed)
-			return;
-
-		screen.drawEntity((int) x() + render_xOffset, (int) y() + render_yOffset, this);
-	}
-
 	public void update()
 	{
 		if (VARS.do_possession && Selector.selected.equals((this))) {
@@ -365,11 +357,22 @@ public class TagMob extends Mob
 
 		move(xa, ya);
 
+		anim.update();
+
+		if (walking) {
+			anim.setFrameRate(6 - (int) this.speed / 2);
+		} else {
+			anim = idle;
+			anim.setFrameRate(8);
+		}
+		
 		if (this.vx() > 0) {
 			vel().x(vel().x() - speed);
+			anim = this.right;
 		} else
 			if (this.vx() < 0) {
 				vel().x(vel().x() + speed);
+				anim = this.left;
 			}
 
 		if (xa != 0) {
@@ -377,7 +380,15 @@ public class TagMob extends Mob
 		} else {
 			walking = false;
 		}
+	}
+	
+	public void render(Screen screen) {
+		if (removed)
+			return;
+		
+		this.sprite = anim.getSprite();
 
+		screen.drawEntity((int) x() + render_xOffset, (int) y() + render_yOffset, this);
 	}
 
 	public void renderGUI(Screen screen)

@@ -1,7 +1,7 @@
 package com.IB.LE2.media.graphics;
 
-import java.awt.Color;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -24,6 +24,7 @@ public class Sprite {
 	public SpriteSheet sheet;
 	
 	public static HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+	public static ArrayList<AnimatedSprite> animated_sprites = new ArrayList<>();
 	public static final Sprite NULL_SPRITE = new Sprite(TileCoord.TILE_SIZE, 0xffFFFFFF);
 
 	public static Sprite get(String s) {
@@ -34,6 +35,15 @@ public class Sprite {
 			System.out.println("Failed to get sprite " + s + " is it loaded..?");
 		}
 		return result;
+	}
+	
+	public static AnimatedSprite getNewAnim(String s) {
+		AnimatedSprite template = (AnimatedSprite) get(s);
+		AnimatedSprite newSpr;
+		
+		newSpr = new AnimatedSprite(template.sheet, template.getWidth(), template.getHeight(), template.getLength());
+		
+		return newSpr;
 	}
 	
 	public static void put(String name, Sprite spr) {

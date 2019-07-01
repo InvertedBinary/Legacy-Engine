@@ -2,4 +2,5 @@
 	<source name="Click" file="Click.ogg" vol="1.0" />
 	<!--source name="Hope" file="Hope.ogg" vol="1.0" /-->
 	<source name="Hope" file="Hope.mid" vol="1.0" />
+	<source name="Explosion4" file="Explosion4.ogg" vol="0.5" />
 </audiosources>

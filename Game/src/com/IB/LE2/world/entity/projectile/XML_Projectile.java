@@ -29,27 +29,26 @@ public class XML_Projectile extends Projectile {
 		this.origin = origin;
 		readXML(XML);
 	}
-	
+
 	public XML_Projectile(double x, double y, double angle, String XML) {
 		this.init(x, y, angle);
 		readXML(XML);
 	}
-	
+
 	public XML_Projectile(double x, double y, double angle, String XML, Entity origin) {
 		this.init(x, y, angle);
 		this.origin = origin;
 		readXML(XML);
 	}
-	
-	public void init(double x, double y, double angle)
-		{
-			this.sprite = Sprite.get("Grass");
-			this.xOrigin = x;
-			this.yOrigin = y;
-			this.x = x;
-			this.y = y;
-			this.angle = angle;
-		}
+
+	public void init(double x, double y, double angle) {
+		this.sprite = Sprite.get("Grass");
+		this.xOrigin = x;
+		this.yOrigin = y;
+		this.x = x;
+		this.y = y;
+		this.angle = angle;
+	}
 	
 	public void readXML(String path) {
 		this.XML_String = path;

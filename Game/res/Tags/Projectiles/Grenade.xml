@@ -1,4 +1,4 @@
-﻿<entity>
+<entity>
      <props>
           <name>Zombie</name>
           <id>0</id>
@@ -14,8 +14,8 @@
      </props>
      <sprite>
           <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
-          <xOffset>1.00</xOffset>
-          <yOffset>1.00</yOffset>
+          <xOffset>-16.00</xOffset>
+          <yOffset>-16.00</yOffset>
           <width>64</width>
           <height>64</height>
           <static_spr>Zombie</static_spr>
@@ -27,10 +27,10 @@
           <jump>zombie01_jump</jump>
      </anims>
      <collision>
-          <xOffset>23</xOffset>
-          <yOffset>11</yOffset>
-          <width>19</width>
-          <height>51</height>
+          <xOffset>0</xOffset>
+          <yOffset>32</yOffset>
+          <width>32</width>
+          <height>32</height>
      </collision>
      <scripts>
           <behavior>simple_mob_behavior.lua</behavior>

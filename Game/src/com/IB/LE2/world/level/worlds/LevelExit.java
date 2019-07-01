@@ -2,6 +2,7 @@ package com.IB.LE2.world.level.worlds;
 
 import org.w3c.dom.Element;
 
+@Deprecated
 public class LevelExit {
 	
 	public String path;

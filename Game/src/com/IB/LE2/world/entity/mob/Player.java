@@ -15,6 +15,7 @@ import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.GUI;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
+import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -40,9 +41,11 @@ public class Player extends Mob implements Serializable {
 	public transient Keyboard input;
 	public transient Tile tile;
 
-	public transient AnimatedSprite idle = (AnimatedSprite) Sprite.get("PlayerIdle"),
-			down = (AnimatedSprite) Sprite.get("PlayerDown"), left = (AnimatedSprite) Sprite.get("PlayerLeft"),
-			right = (AnimatedSprite) Sprite.get("PlayerRight");
+	public transient AnimatedSprite
+			idle = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
+			down = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
+			left = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
+			right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
 
 	public transient AnimatedSprite animSprite = down;
 
@@ -289,6 +292,8 @@ public class Player extends Mob implements Serializable {
 		if (Mouse.getButton() == 1) {
 			XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/Tags/Projectiles/Arrow.xml", this);
 			level.add(Test_Arrow);
+			Audio.Play("Explosion4");
+			Mouse.setMouseB(-1);
 		}
 	}
 
