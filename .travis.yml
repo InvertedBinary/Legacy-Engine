@@ -1,0 +1,16 @@
+anguage: java
+jdk:
+  - oraclejdk8
+
+script: ant create_run_jar
+
+deploy:
+  provider: releases
+  api_key: "5e473b70532c838e7ee6c30610d62bb1c6f23acd"
+  file: "/home/travis/build/coinreturn1/LE2/LE2.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+
+addons:
+artifacts: true
