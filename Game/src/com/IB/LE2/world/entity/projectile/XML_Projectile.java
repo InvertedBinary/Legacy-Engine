@@ -124,7 +124,7 @@ public class XML_Projectile extends Projectile {
 	}
 	
 	public void render(Screen screen) {
-		screen.renderProjectile((int)x + xOffset,(int)y + yOffset, this);
+		screen.drawEntity((int)x + xOffset,(int)y + yOffset, this);
 		if (Boot.get().devModeOn) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
 	}
 }

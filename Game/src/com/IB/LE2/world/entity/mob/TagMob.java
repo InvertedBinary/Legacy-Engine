@@ -324,11 +324,11 @@ public class TagMob extends Mob
 		return Boolean.parseBoolean(val);
 	}
 
-	public void render(Screen screen)
-	{
-		if (removed) return;
+	public void render(Screen screen) {
+		if (removed)
+			return;
 
-		screen.renderMobSpriteUniversal((int) x() + render_xOffset, (int) y() + render_yOffset, sprite);
+		screen.drawEntity((int) x() + render_xOffset, (int) y() + render_yOffset, this);
 	}
 
 	public void update()

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
@@ -160,26 +161,6 @@ public class Level extends EntityContainer implements Serializable {
 		return solidtwo;
 	}
 	
-	public static boolean minimap_enabled = false;
-	public static boolean minimap_collapsed = false;
-	private void renderMiniMap(Screen screen) {
-		if (minimap_enabled == true) {
-			int size = 75;
-			int x = Boot.width - size - 5;
-			int y = 5;
-			
-			if (Boot.get().getPlayer().input.map) {
-				size = 200;
-				 x = 50;
-				 y = 0;
-			}
-				
-			if (!minimap_collapsed) {
-			screen.renderMiniMap(x, y, size);
-			}
-		}
-	}
-	
 	int bgcolor = 0xffBED0CA;
 	/*
 	 * SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/parallax/bg.png",
@@ -200,14 +181,14 @@ public class Level extends EntityContainer implements Serializable {
 
 		try {
 
-			// screen.renderSheet(0, 0, pl_bg, false);
+			//screen.renderSheet(0, 0, SpriteSheet.get("level_background"), false);
 			// screen.renderParallax(bgcolor, pl_first, pl_second, pl_third, 37);
 
 			// screen.renderSheet(0, 37, pl_first, false);
 			// screen.renderSheet(0, 36, pl_second, false);
 			// screen.renderSheet(0, 63, pl_third, false);
 		} catch (Exception e) {
-
+			
 		}
 
 		for (int y = y0; y < y1; y++) {
@@ -238,7 +219,7 @@ public class Level extends EntityContainer implements Serializable {
 			players.get(i).renderGUI(screen);
 		}
 
-		renderMiniMap(screen);
+		//renderMiniMap(screen);
 		drawExtendedLevel(screen);
 
 		remove();

@@ -12,6 +12,9 @@
 		<sub x="3" y="0" w="1" h="7" size="64">player_left</sub>
 		<sub x="2" y="0" w="1" h="7" size="64">player_right</sub>
 	</sheet>
+	
+	<sheet src="/Textures/World/bg.png" w="640" h="360">level_background</sheet>
+
 </Sheets>
 
 

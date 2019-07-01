@@ -40,7 +40,7 @@ public class WalkingParticle extends Particle {
 		
 
 		public void render(Screen screen) {
-			screen.renderParticle((int)x() - 8, (int)y() - 14, sprite, true);
+			//screen.renderParticle((int)x() - 8, (int)y() - 14, sprite, true);
 		}
 
 }

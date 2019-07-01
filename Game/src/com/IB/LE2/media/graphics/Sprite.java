@@ -125,7 +125,7 @@ public class Sprite {
 	}
 	
 	public Sprite(int width, int height, int x, int y, SpriteSheet sheet) {
-		SIZE = (width == height) ? (width) : 0;
+		SIZE = (width == height) ? width : -1;
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
@@ -135,18 +135,6 @@ public class Sprite {
 		load();
 	}
 	
-	
-	
-	public Sprite(int size, int x, int y, SpriteSheet sheet, int random) {
-		SIZE = size;
-		this.width = size;
-		this.height = size;
-		pixels = new int[SIZE * SIZE];
-		this.x = x;
-		this.y = y;
-		this.sheet = sheet;
-		load();
-	}
 	
 	
 	 /*  public static Sprite rotate(Sprite sprite) {
@@ -195,14 +183,6 @@ public class Sprite {
 		for (int i = 0; i < pixels.length; i++) {
 			this.pixels[i] = pixels[i];
 		}
-	}
-
-	public Sprite(int width, int height, Color opaque2) {
-		   this.SIZE = width * height;
-		   this.width = width;
-		   this.height = height;
-		   pixels = new int[width * height];
-		   setColor(opaque2);
 	}
 
 	public static Sprite resize(Sprite sprite, double mag) {
@@ -330,12 +310,6 @@ public class Sprite {
 	private void setColor(int color) {
 		for (int i = 0; i < height * width; i++) {
 			pixels[i] = color;
-		}
-	}
-	
-	private void setColor(Color opaque2) {
-		for (int i = 0; i < height * width; i++) {
-			pixels[i] = opaque2.getRGB();
 		}
 	}
 	

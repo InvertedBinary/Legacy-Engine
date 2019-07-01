@@ -55,13 +55,6 @@ public class GUI extends CheckBounds {
 		}
 	}
 
-	public void renderBuild(Screen screen, Player player) {
-		
-	}
-	
-
-	// 263, 42, 55[mana]
-
 	public Sprite renderBar(int size, AnimatedSprite sprite, double max, double current) {
 		double currentHealth = current;
 		double maxHealth = max;
