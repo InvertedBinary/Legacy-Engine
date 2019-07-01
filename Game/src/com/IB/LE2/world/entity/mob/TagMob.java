@@ -41,14 +41,14 @@ public class TagMob extends Mob
 
 	public EntityContainer inventory;
 
-	private transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
+	/*private transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 64, 64, 7);
 	private transient AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 64, 64, 7);
 	private transient AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 64, 64, 7);
 	private transient AnimatedSprite jump = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
 
 	private transient AnimatedSprite idle = new AnimatedSprite(SpriteSheet.player_up, 64, 64, 7);
 
-	private transient AnimatedSprite anim = idle;
+	private transient AnimatedSprite anim = idle;*/
 	
 	public TagMob(String tag_name)
 	{

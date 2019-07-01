@@ -31,19 +31,19 @@ public class Sprite {
 	public static void LoadTags(String path) {
 		//GUIS
 		put("Title", new Sprite(300, 168, 0, 0, SpriteSheet.get("TitleMenu")));
-		put("BGFade", new Sprite(300, 168, 0, 0, SpriteSheet.bgFade));
-		put("AbilityBox", new Sprite(18, 0, 0, SpriteSheet.abilitybox));
-		put("CabinetTop", new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.blocks));
-		put("CabinetBottom", new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.blocks));
-		put("Dirt", new Sprite(TileCoord.TILE_SIZE, 15, 1, SpriteSheet.blocks));
-		put("Swamp", new Sprite(TileCoord.TILE_SIZE, 8, 1, SpriteSheet.blocks));
-		put("PathDirt", new Sprite(TileCoord.TILE_SIZE, 15, 0, SpriteSheet.blocks));
-		put("PathCornerTL", new Sprite(TileCoord.TILE_SIZE, 17, 18, SpriteSheet.blocks));
-		put("RedBed", new Sprite(TileCoord.TILE_SIZE, 16, 17, SpriteSheet.blocks));
-		put("Grass", new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.blocks));
-		put("Water", new Sprite(TileCoord.TILE_SIZE, 13, 1, SpriteSheet.blocks));
+		put("BGFade", new Sprite(300, 168, 0, 0, SpriteSheet.get("BGFade")));
+		put("AbilityBox", new Sprite(18, 0, 0, SpriteSheet.get("AbilityBox")));
+		put("CabinetTop", new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.get("Terrain")));
+		put("CabinetBottom", new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.get("Terrain")));
+		put("Dirt", new Sprite(TileCoord.TILE_SIZE, 15, 1, SpriteSheet.get("Terrain")));
+		put("Swamp", new Sprite(TileCoord.TILE_SIZE, 8, 1, SpriteSheet.get("Terrain")));
+		put("PathDirt", new Sprite(TileCoord.TILE_SIZE, 15, 0, SpriteSheet.get("Terrain")));
+		put("PathCornerTL", new Sprite(TileCoord.TILE_SIZE, 17, 18, SpriteSheet.get("Terrain")));
+		put("RedBed", new Sprite(TileCoord.TILE_SIZE, 16, 17, SpriteSheet.get("Terrain")));
+		put("Grass", new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.get("Terrain")));
+		put("Water", new Sprite(TileCoord.TILE_SIZE, 13, 1, SpriteSheet.get("Terrain")));
 		put("VoidTile", get("Water"));
-		put("Anvil", new Sprite(TileCoord.TILE_SIZE, 20, 16, SpriteSheet.blocks));
+		put("Anvil", new Sprite(TileCoord.TILE_SIZE, 20, 16, SpriteSheet.get("Terrain")));
 	}
 	
 	// Defaults

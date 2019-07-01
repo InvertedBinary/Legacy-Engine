@@ -2,9 +2,20 @@ package com.IB.LE2.media.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.IB.LE2.world.level.tile.Tile.stepSound;
+import com.IB.LE2.world.level.tile.tiles.XML_Tile;
 
 public class SpriteSheet {
 
@@ -30,30 +41,64 @@ public class SpriteSheet {
 	
 	public static void LoadTags(String path) {
 		System.out.println("Loading Sprite Sheets.. " + path);
-		
-		put("TitleMenu", title);
-		put("BGFade", bgFade);
-		put("Terrain", blocks);
-		put("AbilityBox", abilitybox);
-		put("player", player);
-		
-		
+		try {
+			InputStream fXmlFile = SpriteSheet.class.getResourceAsStream(path);
+			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+			doc.getDocumentElement().normalize();
+			BuildSheet(doc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public static SpriteSheet title = new SpriteSheet("/Textures/sheets/01_GUI/Menu/menu_Main/Menu.png", 300);
-	public static SpriteSheet bgFade = new SpriteSheet("/Textures/sheets/01_GUI/Menu/Universal/fade.png", 300, 168);
-
-	public static SpriteSheet blocks = new SpriteSheet("/Textures/sheets/03_WorldGen/blocks32.png", 1024);
-	public static SpriteSheet abilitybox = new SpriteSheet("/Textures/sheets/01_GUI/abilitybox.png", 20, 20);
-
-	public static SpriteSheet player = new SpriteSheet("/Textures/sheets/00_MobSheets/Players/PlayerSprite.png", 512, 512);
-	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 7, 64);
-	public static SpriteSheet player_up = new SpriteSheet(player, 1, 0, 1, 7, 64);
-	public static SpriteSheet player_left = new SpriteSheet(player, 3, 0, 1, 7, 64);
-	public static SpriteSheet player_right = new SpriteSheet(player, 2, 0, 1, 7, 64);
+	private static void BuildSheet(Document doc) {
+		NodeList nList = doc.getElementsByTagName("Sheets");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				NodeList sheets = ((Element) nNode).getElementsByTagName("sheet");
+				for (int i = 0; i < (sheets.getLength()); i++) {
+					try {
+						Element e = (Element) sheets.item(i);
+						String path = e.getAttribute("src");
+						int width = Integer.parseInt(e.getAttribute("w"));
+						int height = Integer.parseInt(e.getAttribute("h"));
+						SpriteSheet s = new SpriteSheet(path, width, height);
+						
+						if (e.hasChildNodes()) {
+							for (int j = 0; j < e.getChildNodes().getLength(); j++) {
+								Node child = e.getChildNodes().item(j);
+								if (child.getNodeType() == Node.ELEMENT_NODE) {
+									Element c = (Element) child;
+									System.out.println(" - Building subsheet.." + child.getTextContent());
+									
+									int sx = Integer.parseInt(c.getAttribute("x"));
+									int sy = Integer.parseInt(c.getAttribute("y"));
+									int sw = Integer.parseInt(c.getAttribute("w"));
+									int sh = Integer.parseInt(c.getAttribute("h"));
+									int size = Integer.parseInt(c.getAttribute("size"));
+									
+									String name = c.getTextContent();
+									SpriteSheet subsheet = new SpriteSheet(s, sx, sy, sw, sh, size);
+									put(name, subsheet);
+								} else {
+									String name = e.getTextContent();
+									put(name, s);
+								}
+							}
+							
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 	
 	private Sprite[] sprites;
-	
 	
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
 		int xx = x * spriteSize;

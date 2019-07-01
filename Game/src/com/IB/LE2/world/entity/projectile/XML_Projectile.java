@@ -68,7 +68,6 @@ public class XML_Projectile extends Projectile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void initProjectile(Document doc) {
