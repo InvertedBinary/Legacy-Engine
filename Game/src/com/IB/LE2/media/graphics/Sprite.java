@@ -1,7 +1,16 @@
 package com.IB.LE2.media.graphics;
 
 import java.awt.Color;
+import java.io.InputStream;
 import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.IB.LE2.world.level.TileCoord;
 
@@ -29,25 +38,62 @@ public class Sprite {
 	}
 	
 	public static void LoadTags(String path) {
-		//GUIS
-		put("Title", new Sprite(300, 168, 0, 0, SpriteSheet.get("TitleMenu")));
-		put("BGFade", new Sprite(300, 168, 0, 0, SpriteSheet.get("BGFade")));
-		put("AbilityBox", new Sprite(18, 0, 0, SpriteSheet.get("AbilityBox")));
-		put("CabinetTop", new Sprite(TileCoord.TILE_SIZE, 3, 18, SpriteSheet.get("Terrain")));
-		put("CabinetBottom", new Sprite(TileCoord.TILE_SIZE, 3, 19, SpriteSheet.get("Terrain")));
-		put("Dirt", new Sprite(TileCoord.TILE_SIZE, 15, 1, SpriteSheet.get("Terrain")));
-		put("Swamp", new Sprite(TileCoord.TILE_SIZE, 8, 1, SpriteSheet.get("Terrain")));
-		put("PathDirt", new Sprite(TileCoord.TILE_SIZE, 15, 0, SpriteSheet.get("Terrain")));
-		put("PathCornerTL", new Sprite(TileCoord.TILE_SIZE, 17, 18, SpriteSheet.get("Terrain")));
-		put("RedBed", new Sprite(TileCoord.TILE_SIZE, 16, 17, SpriteSheet.get("Terrain")));
-		put("Grass", new Sprite(TileCoord.TILE_SIZE, 0, 0, SpriteSheet.get("Terrain")));
-		put("Water", new Sprite(TileCoord.TILE_SIZE, 13, 1, SpriteSheet.get("Terrain")));
-		put("VoidTile", get("Water"));
-		put("Anvil", new Sprite(TileCoord.TILE_SIZE, 20, 16, SpriteSheet.get("Terrain")));
+		try {
+			InputStream fXmlFile = SpriteSheet.class.getResourceAsStream(path);
+			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+			doc.getDocumentElement().normalize();
+			BuildSprite(doc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
+	private static void BuildSprite(Document doc) {
+		NodeList nList = doc.getElementsByTagName("Sprites");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				for (int i = 0; i < (nNode.getChildNodes().getLength()); i++) {
+					try {
+						Node node = nNode.getChildNodes().item(i);
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element e = (Element) node;
+							SpriteSheet sheet = SpriteSheet.get(e.getAttribute("sheet"));
+							int x = Integer.parseInt(e.getAttribute("x"));
+							int y = Integer.parseInt(e.getAttribute("y"));
+							String name = e.getTextContent();
+							Sprite s = nullSpr;
+							
+							String noden = e.getNodeName();
+							
+							System.out.println("NODEN: " + noden);
+							
+							if (noden.equalsIgnoreCase("anim")) {
+								
+							} else if (noden.equalsIgnoreCase("square")){
+								int size = Integer.parseInt(e.getAttribute("s"));
+								s = new Sprite(size, x, y, sheet);
+							} else {
+								int width = Integer.parseInt(e.getAttribute("w"));
+								int height = Integer.parseInt(e.getAttribute("h"));
+								s = new Sprite(width, height, x, y, sheet);
+							}
+							
+							put(name, s);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+	
 	// Defaults
-	public static Sprite nullSpr = new Sprite(TileCoord.TILE_SIZE, 0xffFF00FF);
+	public static Sprite nullSpr = new Sprite(TileCoord.TILE_SIZE, 0xffFFFFFF);
 	
 
 	//Particles:
@@ -79,7 +125,7 @@ public class Sprite {
 	}
 	
 	public Sprite(int width, int height, int x, int y, SpriteSheet sheet) {
-		SIZE = (width == height) ? (width * height) : 0;
+		SIZE = (width == height) ? (width) : 0;
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
