@@ -24,11 +24,14 @@ public class Sprite {
 	public SpriteSheet sheet;
 	
 	public static HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
-	
+	public static final Sprite NULL_SPRITE = new Sprite(TileCoord.TILE_SIZE, 0xffFFFFFF);
+
 	public static Sprite get(String s) {
-		Sprite result = Sprite.nullSpr;
+		Sprite result = Sprite.NULL_SPRITE;
 		if (sprites.containsKey(s)) {
 			result = sprites.get(s);
+		} else {
+			System.out.println("Failed to get sprite " + s + " is it loaded..?");
 		}
 		return result;
 	}
@@ -60,22 +63,33 @@ public class Sprite {
 						Node node = nNode.getChildNodes().item(i);
 						if (node.getNodeType() == Node.ELEMENT_NODE) {
 							Element e = (Element) node;
-							SpriteSheet sheet = SpriteSheet.get(e.getAttribute("sheet"));
-							int x = Integer.parseInt(e.getAttribute("x"));
-							int y = Integer.parseInt(e.getAttribute("y"));
 							String name = e.getTextContent();
-							Sprite s = nullSpr;
+							Sprite s = NULL_SPRITE;
 							
 							String noden = e.getNodeName();
-							
-							System.out.println("NODEN: " + noden);
-							
 							if (noden.equalsIgnoreCase("anim")) {
-								
+								SpriteSheet sheet = SpriteSheet.get(e.getAttribute("sheet"));
+								int width = Integer.parseInt(e.getAttribute("w"));
+								int height = Integer.parseInt(e.getAttribute("h"));
+								int length = Integer.parseInt(e.getAttribute("len"));
+								int rate = Integer.parseInt(e.getAttribute("rate"));
+								s = new AnimatedSprite(sheet, width, height, length);
+								((AnimatedSprite)s).setFrameRate(rate);
+							} else if (noden.equalsIgnoreCase("color")) {
+								int width = Integer.parseInt(e.getAttribute("w"));
+								int height = Integer.parseInt(e.getAttribute("h"));
+								int color = Long.decode(e.getAttribute("color")).intValue();
+								s = new Sprite(width, height, color);
 							} else if (noden.equalsIgnoreCase("square")){
+								SpriteSheet sheet = SpriteSheet.get(e.getAttribute("sheet"));
+								int x = Integer.parseInt(e.getAttribute("x"));
+								int y = Integer.parseInt(e.getAttribute("y"));
 								int size = Integer.parseInt(e.getAttribute("s"));
 								s = new Sprite(size, x, y, sheet);
 							} else {
+								SpriteSheet sheet = SpriteSheet.get(e.getAttribute("sheet"));
+								int x = Integer.parseInt(e.getAttribute("x"));
+								int y = Integer.parseInt(e.getAttribute("y"));
 								int width = Integer.parseInt(e.getAttribute("w"));
 								int height = Integer.parseInt(e.getAttribute("h"));
 								s = new Sprite(width, height, x, y, sheet);
@@ -90,20 +104,6 @@ public class Sprite {
 			}
 		}
 	}
-
-	
-	// Defaults
-	public static Sprite nullSpr = new Sprite(TileCoord.TILE_SIZE, 0xffFFFFFF);
-	
-
-	//Particles:
-	public static Sprite particle_def = new Sprite(2, 0x7F0000);
-	public static Sprite wallparticle = new Sprite(1, 0x0000BF);
-	public static Sprite VoidParticle = new Sprite(3, 0x050525);
-	public static Sprite bleed = new Sprite(1, 0x7F0000);
-	public static Sprite Rock = new Sprite(3, 0x808080);
-
-	public static Sprite Barrier = new Sprite(1, 1, 0xffFF00FF);
 
 	protected Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1;

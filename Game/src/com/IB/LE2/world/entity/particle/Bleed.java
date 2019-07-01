@@ -14,7 +14,7 @@ public class Bleed extends Particle {
 		this.setY(y);
 		this.xx = x;
 		this.yy = y;
-		sprite = Sprite.bleed;
+		sprite = Sprite.get("BleedParticle");
 		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();

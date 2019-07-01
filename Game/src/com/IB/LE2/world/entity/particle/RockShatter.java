@@ -12,7 +12,7 @@ public class RockShatter extends Particle {
 		this.setY(y);
 		this.xx = x;
 		this.yy = y;
-		sprite = Sprite.Rock;
+		sprite = Sprite.get("RockParticle");
 		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();

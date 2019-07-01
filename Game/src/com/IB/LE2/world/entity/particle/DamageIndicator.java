@@ -16,7 +16,7 @@ public class DamageIndicator extends Particle{
 		this.setY(y);
 		this.xx = x;
 		this.yy = y;
-		this.sprite = Sprite.bleed;
+		this.sprite = Sprite.get("BleedParticle");
 		this.text = text;
 		//this.invulnerable = true;
 		this.color = color;

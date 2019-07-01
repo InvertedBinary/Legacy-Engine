@@ -42,10 +42,6 @@ public class Player extends Mob implements Serializable {
 	public boolean buildMode = false;
 
 	// private transient transient Inventory inventory;
-	public transient AnimatedSprite down = new AnimatedSprite(SpriteSheet.get("player_down"), 64, 64, 7);
-	public transient AnimatedSprite idle = new AnimatedSprite(SpriteSheet.get("player_up"), 64, 64, 7);
-	public transient AnimatedSprite left = new AnimatedSprite(SpriteSheet.get("player_left"), 64, 64, 7);
-	public transient AnimatedSprite right = new AnimatedSprite(SpriteSheet.get("player_right"), 64, 64, 7);
 
 	// private transient AnimatedSprite player_upstill = new
 	// AnimatedSprite(SpriteSheet.player_upstill, 16, 16, 1);
@@ -55,6 +51,12 @@ public class Player extends Mob implements Serializable {
 	// AnimatedSprite(SpriteSheet.player_leftstill, 16, 16, 1);
 	// private transient AnimatedSprite player_rightstill = new
 	// AnimatedSprite(SpriteSheet.player_rightstill, 16, 16, 1);
+
+	public transient AnimatedSprite 
+		idle = (AnimatedSprite) Sprite.get("PlayerIdle"), 
+		down = (AnimatedSprite) Sprite.get("PlayerDown"),
+		left = (AnimatedSprite) Sprite.get("PlayerLeft"),
+		right = (AnimatedSprite) Sprite.get("PlayerRight");
 
 	public transient AnimatedSprite animSprite = down;
 

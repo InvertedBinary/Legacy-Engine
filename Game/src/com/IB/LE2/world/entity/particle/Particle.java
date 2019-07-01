@@ -17,7 +17,7 @@ public class Particle extends Entity{
 		this.setY(y);
 		this.xx = x;
 		this.yy = y;
-		sprite = Sprite.particle_def;
+		sprite = Sprite.get("DefaultParticle");
 		//this.invulnerable = true;
 		this.life = life + (random.nextInt(15) - 4);
 		this.xa = random.nextGaussian();
