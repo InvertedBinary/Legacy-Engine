@@ -17,10 +17,12 @@ import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.util.Debug;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.TagMob;
 
 public class TagProjectile extends Projectile {
+	private static final long serialVersionUID = -8287209713181341484L;
 
 	public int FireRate = 0;
 
@@ -56,20 +58,36 @@ public class TagProjectile extends Projectile {
 		this.sprite = Sprite.get("Grass");
 		this.xOrigin = x;
 		this.yOrigin = y;
-		this.x = x;
-		this.y = y;
+		x(x);
+		y(y);
 		this.angle = angle;
 	}
 
 	public void update() {
 		time++;
 		
+		if (CollidesLevel(this)) {
+			remove();
+		}
+		
 		this.moveSimple();
 	}
 	
 	public void render(Screen screen) {
-		screen.drawEntity((int)x + xOffset,(int)y + yOffset, this);
-		if (Game.devModeOn) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		screen.drawEntity((int)x() + render_xOffset,(int)y() + render_yOffset, this);
+		if (Game.devModeOn) screen.drawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
+	}
+	
+	public void renderGUI(Screen screen) {
+		if (Boot.drawDebug) {
+			if (BottomBound != null) {
+				BottomBound.drawLine(screen, true);
+
+				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
+						sprite.getHeight(), 0xffFADE0F, true);
+				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
+			}
+		}
 	}
 	
 	private void LoadTags(String path) {
@@ -110,7 +128,10 @@ public class TagProjectile extends Projectile {
 		if (!processAllTags())
 			Boot.log("One or more tags failed to process!", "TagProjectile", true);
 
-		this.sprite = Sprite.get("Anvil");
+		this.range = 200;
+		
+		nx += speed * Math.cos(angle);
+		ny += speed * Math.sin(angle);
 	}
 
 	public void ReadTags() {
@@ -197,7 +218,31 @@ public class TagProjectile extends Projectile {
 		case "props.name":
 			this.name = val;
 			break;
-		case "scripts.combat":
+		case "props.speed":
+			this.speed = parseNum(val);
+			break;
+		case "props.hp":
+			this.damage = parseNum(val);
+			break;
+		
+		// Sprite
+		case "sprite.xOffset":
+			this.render_xOffset = (int) parseNum(val);
+			break;
+		case "sprite.yOffset":
+			this.render_yOffset = (int) parseNum(val);
+			break;
+		case "sprite.width":
+			//
+			break;
+		case "sprite.height":
+			//
+			break;
+		case "sprite.static_spr":
+			this.sprite = Sprite.get(val);
+			this.master_sprite = sprite;
+			break;
+		case "sprite.dspl_spr":
 			break;
 		default:
 			result = false;
@@ -206,6 +251,36 @@ public class TagProjectile extends Projectile {
 
 		return result;
 	}
+	
+	/*public void setProperties(Element eElement) {
+		try {
+		this.id = Integer.parseInt(eElement.getAttribute("id"));
+		
+		this.name = (eElement.getElementsByTagName("name").item(0).getTextContent());
+		this.damage = Double.parseDouble(eElement.getElementsByTagName("damage").item(0).getTextContent());
+		this.speed = Double.parseDouble(eElement.getElementsByTagName("speed").item(0).getTextContent());
+
+		this.range = ThreadLocalRandom.current().nextInt(Integer.parseInt(((Element)eElement.getElementsByTagName("range").item(0)).getAttribute("min")), Integer.parseInt(((Element)eElement.getElementsByTagName("range").item(0)).getAttribute("max")) + 1);
+		
+		this.MovementStyle = ((Element)eElement.getElementsByTagName("movement").item(0)).getAttribute("shape");
+		this.initial_rotation = Boolean.parseBoolean(((Element)eElement.getElementsByTagName("movement").item(0)).getAttribute("rot"));
+		this.RoF = Integer.parseInt(((Element)eElement.getElementsByTagName("movement").item(0)).getAttribute("rof"));
+
+		this.xOffset = Integer.parseInt(((Element)eElement.getElementsByTagName("sprite").item(0)).getAttribute("xOffset"));
+		this.yOffset = Integer.parseInt(((Element)eElement.getElementsByTagName("sprite").item(0)).getAttribute("yOffset"));
+		//Field field = Sprite.class.getField((((Element)eElement.getElementsByTagName("sprite").item(0)).getAttribute("Arrow")));
+		//this.sprite = (Sprite) field.get(field.getType());
+		
+		//this.master_sprite = sprite;
+		
+		//r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+		nx += speed * Math.cos(angle);
+		ny += speed * Math.sin(angle);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
 
 	public double parseNum(String val) {
 		return Double.parseDouble(val);

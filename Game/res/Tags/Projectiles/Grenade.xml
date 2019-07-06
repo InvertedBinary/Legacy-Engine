@@ -1,9 +1,9 @@
 <entity>
      <props>
-          <name>Zombie</name>
+          <name>Grenade</name>
           <id>0</id>
           <hp>5.00</hp>
-          <speed>2</speed>
+          <speed>5</speed>
           <rarity>0</rarity>
           <hostility>Aggressive</hostility>
           <xp_min>3.00</xp_min>
@@ -14,12 +14,12 @@
      </props>
      <sprite>
           <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
-          <xOffset>-16.00</xOffset>
-          <yOffset>-16.00</yOffset>
-          <width>64</width>
-          <height>64</height>
-          <static_spr>Zombie</static_spr>
-          <dspl_spr>Zombie02</dspl_spr>
+          <xOffset>0</xOffset>
+          <yOffset>0</yOffset>
+          <width>16</width>
+          <height>16</height>
+          <static_spr>WizardBolt</static_spr>
+          <dspl_spr>WizardBolt</dspl_spr>
      </sprite>
      <anims>
           <right>zombie01_right</right>

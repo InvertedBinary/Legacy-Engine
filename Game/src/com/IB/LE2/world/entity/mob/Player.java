@@ -1,14 +1,7 @@
 package com.IB.LE2.world.entity.mob;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
@@ -19,15 +12,13 @@ import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.Rectangle;
-import com.IB.LE2.world.entity.projectile.Projectile;
 import com.IB.LE2.world.entity.projectile.Selector;
-import com.IB.LE2.world.entity.projectile.XML_Projectile;
+import com.IB.LE2.world.entity.projectile.TagProjectile;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.Node;
 import com.IB.LE2.world.level.RayCast;
@@ -290,9 +281,10 @@ public class Player extends Mob implements Serializable {
 		}
 
 		if (Mouse.getButton() == 1) {
-			XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/Tags/Projectiles/Arrow.xml", this);
-			level.add(Test_Arrow);
 			Audio.Play("Explosion4");
+			//XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/Tags/Projectiles/Arrow.xml", this);
+			TagProjectile Grenade = new TagProjectile(x() + 32, y() + 32, "/Tags/Projectiles/Grenade.xml", this);
+			level.add(Grenade);
 			Mouse.setMouseB(-1);
 		}
 	}
@@ -340,8 +332,8 @@ public class Player extends Mob implements Serializable {
 
 	public void renderGUI(Screen screen) {
 		if (Boot.drawDebug) {
-			if (this.feetLine != null) {
-				this.feetLine.drawLine(screen, true);
+			if (BottomBound != null) {
+				BottomBound.drawLine(screen, true);
 			}
 
 			Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),

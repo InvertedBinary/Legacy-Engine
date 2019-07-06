@@ -37,6 +37,7 @@ import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
+import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
@@ -157,6 +158,7 @@ public class Game extends Canvas implements Runnable
 
 			// TileCoord playerSpawn = new TileCoord(296, 381);
 			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
+			getLevel().add(new TagMob("TestZombie"));
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();

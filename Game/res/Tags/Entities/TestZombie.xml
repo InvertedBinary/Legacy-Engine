@@ -1,42 +1,37 @@
-﻿<entity>
-     <props>
-          <name>Zombie</name>
-          <id>0</id>
-          <hp>5.00</hp>
-          <speed>2</speed>
-          <rarity>0</rarity>
-          <hostility>Aggressive</hostility>
-          <xp_min>3.00</xp_min>
-          <xp_max>5.00</xp_max>
-          <dsp_index>1</dsp_index>
-          <essential>false</essential>
-          <det_radius>1</det_radius>
-     </props>
-     <sprite>
-          <sheet>C:\Users\Nate\Documents\Visual Studio 2013\Projects\LE2TD\LE2TD\bin\Debug\PlayerSprite Test.png</sheet>
-          <xOffset>1.00</xOffset>
-          <yOffset>1.00</yOffset>
-          <width>64</width>
-          <height>64</height>
-          <static_spr>Zombie</static_spr>
-          <dspl_spr>Zombie02</dspl_spr>
-     </sprite>
-     <anims>
-          <right>zombie01_right</right>
-          <left>zombie01_left</left>
-          <jump>zombie01_jump</jump>
-     </anims>
-     <collision>
-          <xOffset>23</xOffset>
-          <yOffset>11</yOffset>
-          <width>19</width>
-          <height>51</height>
-     </collision>
-     <scripts>
-          <behavior>simple_mob_behavior.lua</behavior>
-          <trigger>simple_mob_trigger_volume.lua</trigger>
-          <equipped>unused.lua</equipped>
-          <combat>zombie_combat.lua</combat>
-     </scripts>
-     <event_scripts />
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entity>
+  <props>
+    <name>Zombie</name>
+    <health>5</health>
+    <speed>2</speed>
+    <mass>95</mass>
+    <script>TestZombie.lua</script>
+  </props>
+  <sprite>
+    <xOffset>1.00</xOffset>
+    <yOffset>1.00</yOffset>
+    <static>Zombie</static>
+    <display>Zombie02</display>
+  </sprite>
+  <anim> <!-- Animations when entity moves left, up (jumping?), down, right or is idle -->
+     <down>PlayerDown</down>
+     <up>PlayerDown</up>
+     <right>PlayerRight</right>
+     <left>PlayerLeft</left>
+     <idle>PlayerIdle</idle>
+  </anim>
+  <hitbox>
+    <begin-x>23</begin-x>
+    <begin-y>11</begin-y>
+    <width>19</width>
+    <height>51</height>
+  </hitbox>
+  <vars>
+    <dsp_index>1</dsp_index>
+    <essential>false</essential>
+    <det_radius>5</det_radius>
+	<xp_min>0</xp_min>
+	<xp_max>0</xp_max>
+	<allegiance>zombies</allegiance>
+  </vars>
 </entity>

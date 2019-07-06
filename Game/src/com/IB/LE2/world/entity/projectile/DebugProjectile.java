@@ -47,7 +47,7 @@ public class DebugProjectile extends Projectile {
 	
 	public void update() {
 		List<Entity> entities = level.entities;
-			level.add(new WallParticleSpawner((int) (x + nx), (int) (y + ny - 4), 4, 4, level));
+			level.add(new WallParticleSpawner((int) (x() + nx), (int) (y() + ny - 4), 4, 4, level));
 			
 			DebugCollision(this, entities);
 			
@@ -70,20 +70,20 @@ public class DebugProjectile extends Projectile {
 	}
 	
 	protected void move() {
-		x += nx;
-		y += ny;
+		x(x() + nx);
+		y(y() + ny);
 		if (distance() > range) remove();
 	}
 
 	public double distance() {
 		double dist = 0;
-		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin -y) * (yOrigin - y)));
+		dist = Math.sqrt(Math.abs((xOrigin - x()) * (xOrigin - x()) + (yOrigin -y()) * (yOrigin - y())));
 		return dist;
 	}
 
 	public void render(Screen screen) {
-		screen.drawEntity((int)x - 8,(int)y - 14, this);
-		if (Boot.get().devModeOn) screen.drawRect((int)x - 3, (int)y - 9, 5, 5, 0x0093FF, true);
+		screen.drawEntity((int)x() - 8,(int)y() - 14, this);
+		if (Boot.get().devModeOn) screen.drawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

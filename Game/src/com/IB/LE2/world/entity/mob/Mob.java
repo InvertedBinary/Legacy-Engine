@@ -179,7 +179,6 @@ public abstract  class Mob extends Entity implements Serializable {
 		
 	public abstract void update();
 	
-	public LineSegment feetLine;
 	public boolean sliding = false;
 	
 	protected boolean collision(double xa, double ya) {
@@ -188,7 +187,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		double xt = ((x() + xa));
 		double yt = ((y() + ya));
 		
-		feetLine = new LineSegment(
+		BottomBound = new LineSegment(
 			new Vertex((float) xt + 22f, (float) yt + 60f), 
 			new Vertex((float)xt + 40f, (float)yt + 60f)
 		);
@@ -207,9 +206,9 @@ public abstract  class Mob extends Entity implements Serializable {
 			
 			boolean collides = false;
 			if (i == 48)
-				collides = feetLine.CollidesWithLine(ls, true);
+				collides = BottomBound.CollidesWithLine(ls, true);
 			else 
-				collides = feetLine.CollidesWithLine(ls, false);
+				collides = BottomBound.CollidesWithLine(ls, false);
 			
 			
 			if (collides) {
@@ -264,7 +263,7 @@ public abstract  class Mob extends Entity implements Serializable {
 			double yt = ((y() + ya));
 			//AABB aabb = new AABB(this.getBounds());
 			//aabb.moveTo(xt, yt);
-			feetLine = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 60f)); //=>38, 60
+			BottomBound = new LineSegment(new Vertex((float) xt + 24f, (float) yt + 60f), new Vertex((float)xt + 38f, (float)yt + 60f)); //=>38, 60
 			//TODO: Add collision for parallel lines 
 			if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
 				return false;
@@ -273,7 +272,7 @@ public abstract  class Mob extends Entity implements Serializable {
 			for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
 				LineSegment ls = ((TiledLevel) Boot.getLevel()).solid_geometry.get(i);
 
-				if (ls.CollidesWithLine(feetLine)) {
+				if (ls.CollidesWithLine(BottomBound)) {
 					//System.out.println(i + ":: " + ls.origin.x);
 					if (Math.abs(ls.slope) <= 3) {
 						if (xa != 0 && ya == 0) {
@@ -283,7 +282,7 @@ public abstract  class Mob extends Entity implements Serializable {
 							sliding = false;
 							}
 						}
-					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY && (feetLine.midpoint().x > ls.left_pt.x && feetLine.midpoint().x < ls.right_pt.x)) {
+					} else if (Math.abs(ls.slope) > 3 && Math.abs(ls.slope) < Double.POSITIVE_INFINITY && (BottomBound.midpoint().x > ls.left_pt.x && BottomBound.midpoint().x < ls.right_pt.x)) {
 						if (canJump == true) {
 						this.sliding = true;
 							move(ls.slope / 4, 0);

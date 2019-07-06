@@ -15,6 +15,8 @@
 	<square x="13" y="1" s="32" sheet="Terrain">Water</square>
 	<square x="13" y="1" s="32" sheet="Terrain">VoidTile</square>
 	<square x="20" y="16" s="32" sheet="Terrain">Anvil</square>
+	
+	<square x="0" y="0" s="16" sheet="Projectiles">WizardBolt</square>
 
 	<color w="1" h="1" color="0xffFF00FF" >Barrier</color>
 	<color w="2" h="2" color="0xff7F0000" >DefaultParticle</color>

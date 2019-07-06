@@ -6,6 +6,8 @@
 	<sheet src="/Textures/GUI/fade.png" w="300" h="168">BGFade</sheet>
 	<sheet src="/Textures/GUI/AbilityBox.png" w="20" h="20">AbilityBox</sheet>	
 	
+	<sheet src="/Textures/Entities/Attacks/Projectiles.png" w="256" h="256">Projectiles</sheet>
+	
 	<sheet src="/Textures/Entities/Player/PlayerSprite.png" w="512" h="512">
 		<sub x="0" y="0" w="1" h="7" size="64">player_down</sub>
 		<sub x="1" y="0" w="1" h="7" size="64">player_up</sub>

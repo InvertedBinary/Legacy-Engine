@@ -9,15 +9,17 @@ import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
+import com.IB.LE2.util.shape.LineSegment;
+import com.IB.LE2.util.shape.Vertex;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Mob;
 import com.IB.LE2.world.entity.mob.PlayerMP;
+import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public abstract class Projectile extends Entity {
 
 	protected double xOrigin, yOrigin;
 	public double angle;
-	public double x, y;
 	public double nx;
 	public double ny;
 	protected float zz, za;
@@ -53,8 +55,8 @@ public abstract class Projectile extends Entity {
 		xOrigin = x;
 		yOrigin = y;
 		angle = dir;
-		this.x = x;
-		this.y = y;
+		x(x);
+		y(y);
 	}
 	
 	public Sprite getSprite() {
@@ -75,9 +77,29 @@ public abstract class Projectile extends Entity {
 		}
 	}
 	
+	public boolean CollidesLevel(Projectile p) {
+		if (((TiledLevel) Boot.getLevel()).solid_geometry == null) {
+			return false;
+		}
+		
+		int c = this.getSpriteSize() / 2;
+		LineSegment bound = new LineSegment(
+				new Vertex((float)x() + c - 2, (float)y() + c - 2), 
+				new Vertex((float)x() + c + 2, (float)y() + c + 2)
+		);
+
+		for (int i = 0; i < ((TiledLevel) Boot.getLevel()).solid_geometry.size(); i++) {
+			if(bound.CollidesWithLine(((TiledLevel) Boot.getLevel()).solid_geometry.get(i), false)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Entity Collide(Projectile p, List<Entity> entities) {
-		double mdpx = p.x;
-		double mdpy = p.y;
+		double mdpx = p.x();
+		double mdpy = p.y();
 		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
@@ -174,10 +196,10 @@ public abstract class Projectile extends Entity {
 		for (int i = 0; i < entities.size(); i++) {
 			if (/*entities.get(i).invulnerable ||*/ entities.get(i) == mob /*|| entities.get(i).hostility == mob.hostility*/) {	
 			} else {
-			if (x < entities.get(i).x() + 5
-	            && x > entities.get(i).x() - 5
-	            && y < entities.get(i).y() + 5
-	            && y >  entities.get(i).y() - 5
+			if (x() < entities.get(i).x() + 5
+	            && x() > entities.get(i).x() - 5
+	            && y() < entities.get(i).y() + 5
+	            && y() >  entities.get(i).y() - 5
 	            ) {
 				remove();
     				//level.damage((int) (x + nx), (int)((y + ny)), (Mob) entities.get(i), entities.get(i).Exp, this.damage, "" + entities.get(0).UUID, 0);				
@@ -202,10 +224,10 @@ public abstract class Projectile extends Entity {
 	protected void PlayerCollision(List<PlayerMP> players, Projectile proj) {
 		
 		for (int i = 0; i < players.size(); i++) {
-			if (x < players.get(i).x() + 5
-					&& x > players.get(i).x() - 5
-					&& y <  players.get(i).y() + 5
-					&& y >  players.get(i).y() - 5
+			if (x() < players.get(i).x() + 5
+					&& x() > players.get(i).x() - 5
+					&& y() <  players.get(i).y() + 5
+					&& y() >  players.get(i).y() - 5
 					) {
 				if (true) {//!players.get(i).invulnerable) {
 				remove();
@@ -235,8 +257,8 @@ public abstract class Projectile extends Entity {
 	
 	public double angle() {
 			//TODO: Convert projectile x,y to PVector!
-		double dx = Mouse.getX() - ((x - Boot.get().xScroll) * 2);
-		double dy = Mouse.getY() - ((y - Boot.get().yScroll) * 2);
+		double dx = Mouse.getX() - ((x() - Boot.get().xScroll) * 2);
+		double dy = Mouse.getY() - ((y() - Boot.get().yScroll) * 2);
 		///double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 		///double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 		double dir = Math.atan2(dy + 32, dx + 16);
@@ -245,7 +267,7 @@ public abstract class Projectile extends Entity {
 	
 	public double distance() {
 		double dist = 0;
-		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin -y) * (yOrigin - y)));
+		dist = Math.sqrt(Math.abs((xOrigin - x()) * (xOrigin - x()) + (yOrigin -y()) * (yOrigin - y())));
 		return dist;
 	}
 	
@@ -254,8 +276,8 @@ public abstract class Projectile extends Entity {
 	
 	protected void moveSimple()
 		{
-			this.x += this.nx;
-			this.y += this.ny;
+			this.x(x() + nx);
+			this.y(y() + ny);
 			if (distance() > range) {
 				remove();
 			}
@@ -263,8 +285,8 @@ public abstract class Projectile extends Entity {
 
 	protected void moveDropArc()
 		{
-			x += nx;
-			y += ny -= 1000;
+			this.x(x() + nx);
+			this.y(y() + ny - 1000);
 			if (distance() > range) {
 				// level.add(new RockSpawner((int) (x + nx), (int) (y + ny), 80, 1, level));
 				remove();
@@ -281,11 +303,11 @@ public abstract class Projectile extends Entity {
 		}
 		
 		if (master_sprite == null) master_sprite = sprite;
-		double deltaX = this.x - (this.x + this.nx);
-		double deltaY = (this.y - (this.y + this.ny)) - (zz + za) / 900;
+		double deltaX = this.x() - (this.x() + this.nx);
+		double deltaY = (this.y() - (this.y() + this.ny)) - (zz + za) / 900;
 		this.angle = Math.atan2(deltaY, deltaX);
-		this.x += this.nx;
-		this.y += this.ny += (zz + za);
+		this.x(x() + nx);
+		this.y(y() + ny + (zz + za));
 		this.sprite = Sprite.rotate(this.master_sprite, this.angle);	
 		if (distance() > range) remove();
 		//if (this.yOrigin < this.y) remove();

@@ -10,6 +10,7 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.AABB;
 import com.IB.LE2.util.math.PVector;
+import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.PhysicsBody;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.mob.Player;
@@ -23,11 +24,14 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	public transient PhysicsBody body = new PhysicsBody(this, bounds);
 
 	public transient Sprite sprite;
+	public transient Sprite display;
+	
 	public transient boolean removed = false;
 	public transient Level level;
 	
 	public transient AABB aabb;
-	
+	protected transient LineSegment BottomBound;
+
 	transient public final Random random = new Random();
 	transient public boolean hurt = false;
 	transient public boolean walking = false;
@@ -48,10 +52,12 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	public String UUID = "-1";
 	public int ENTITY_ID = -1;
 	
-	public transient double speed;
 	public transient String name;
+	public transient double health;
+	public transient double speed;
+	public transient double mass;
 
-	public HashMap<String, String> Properties = new HashMap<>();
+	private HashMap<String, String> vars = new HashMap<>();
 	
 	public Entity() {
 		
@@ -63,6 +69,30 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 		this.sprite = sprite;
 		this.UUID = UUID;
 		//r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
+	}
+	
+	public void set(String key, String val) {
+		vars.put(key, val);
+	}
+	
+	public String svar(String key) {
+		return vars.get(key);
+	}
+	
+	public double nvar(String key) {
+		try {
+			return Double.parseDouble(svar(key));			
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+	
+	public boolean bvar(String key) {
+		try {
+			return Boolean.parseBoolean(svar(key));
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	public void setUUID(String val) {
