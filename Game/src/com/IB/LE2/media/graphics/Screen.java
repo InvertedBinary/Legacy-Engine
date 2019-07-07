@@ -97,15 +97,11 @@ public class Screen {
 		return rgb;
 	}
 
-	public void renderAlphaSprite(int xp, int yp, Sprite sprite) {
-		renderAlphaSprite(sprite, xp, yp);
+	public void DrawAlphaSprite(Sprite sprite, int xp, int yp) {
+		DrawAlphaSprite(sprite, xp, yp, false);
 	}
 
-	public void renderAlphaSprite(Sprite sprite, int xp, int yp) {
-		renderAlphaSprite(xp, yp, sprite, false);
-	}
-
-	public void renderAlphaSprite(int xp, int yp, Sprite sprite, boolean fixed) {
+	public void DrawAlphaSprite(Sprite sprite, int xp, int yp, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -130,7 +126,7 @@ public class Screen {
 		}
 	}
 
-	public void renderText(int xp, int yp, Sprite sprite, int color, boolean fixed) {
+	public void DrawText(int xp, int yp, Sprite sprite, int color, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -149,7 +145,7 @@ public class Screen {
 		}
 	}
 
-	public void renderTile(int xp, int yp, Sprite sprite) {
+	public void DrawTile(int xp, int yp, Sprite sprite) {
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < sprite.SIZE; y++) {
@@ -167,7 +163,7 @@ public class Screen {
 		}
 	}
 
-	public void drawEntity(int xp, int yp, Entity e) {
+	public void DrawEntity(Entity e, int xp, int yp) {
 		Sprite sprite = e.getSprite();
 		
 		int tilesx = xp;
@@ -184,6 +180,10 @@ public class Screen {
 					xa = 0;
 				int col = sprite.pixels[x + y * sprite.getWidth()];
 				if (col != ALPHA_COL) {
+					if (e.hurt) {
+						col = 0xffFF0000;
+						e.hurt = false;
+					}
 					col = colSwitch(col, tilesx, tilesy);
 
 					pixels[(int) (xa + ya * width)] = col;
@@ -192,30 +192,7 @@ public class Screen {
 		}
 	}
 
-	public void renderMobSpriteSwimming(int xp, int yp, Sprite sprite) {
-		int tilesx = xp;
-		int tilesy = yp;
-		xp -= xOffset;
-		yp -= yOffset;
-		for (int y = 0; y < sprite.getHeight() / 1.4; y++) {
-			int ya = y + yp;
-			for (int x = 0; x < sprite.getWidth(); x++) {
-				int xa = x + xp;
-				if (xa < -sprite.getWidth() || xa >= width || ya < 0 || ya >= height / 1.4)
-					break;
-				if (xa < 0)
-					xa = 0;
-				int col = sprite.pixels[x + y * sprite.getWidth()];
-				if (col != ALPHA_COL) {
-					col = colSwitch(col, tilesx, tilesy);
-
-					pixels[(int) (xa + ya * width)] = col;
-				}
-			}
-		}
-	}
-
-	public void drawCir(int xp, int yp, int radius, int color, boolean fixed) {
+	public void DrawCircle(int xp, int yp, int radius, int color, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -241,7 +218,7 @@ public class Screen {
 		}
 	}
 
-	public void drawRect(int xp, int yp, int width, int height, int color, boolean fixed) {
+	public void DrawRect(int xp, int yp, int width, int height, int color, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -270,7 +247,7 @@ public class Screen {
 		}
 	}
 
-	public void drawFillRect(int xp, int yp, int width, int height, int color, boolean fixed) {
+	public void DrawFillRect(int xp, int yp, int width, int height, int color, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -287,7 +264,7 @@ public class Screen {
 		}
 	}
 
-	public void drawFillRect(int xp, int yp, int width, int height, int color, int border_color, boolean fixed) {
+	public void DrawFillRect(int xp, int yp, int width, int height, int color, int border_color, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -308,7 +285,7 @@ public class Screen {
 		}
 	}
 
-	public void drawVectors(List<Vector2i> list, int color, boolean fixed) {
+	public void DrawVectors(List<Vector2i> list, int color, boolean fixed) {
 		for (Vector2i vec : list) {
 			int xPixel = vec.getX();
 			int yPixel = vec.getY();

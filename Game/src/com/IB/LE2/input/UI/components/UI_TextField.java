@@ -415,11 +415,11 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 			//System.out.println("FORMDSP: " + formatted_display);
 			
 			if (this.ShrinkToSize) //TODO: Clean this mess up..
-				screen.drawFillRect(x, y, (background_width + font_size) + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
+				screen.DrawFillRect(x, y, (background_width + font_size) + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
 			else
-				screen.drawFillRect(x, y, background_width + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
+				screen.DrawFillRect(x, y, background_width + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
 		} else {
-			screen.drawFillRect(x, y, background_width + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
+			screen.DrawFillRect(x, y, background_width + 2 * border_size, height + 2 * border_size, background_color, border_color, false);
 		}
 		
 		//screen.drawRect(x, y, background_width + 1, height + 1, border_color, false);
@@ -428,7 +428,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		font.render(x - font_size + padding/2 + 3, y + font_size / 4, char_spacing, 0xffFFFFFF, formatted_display, screen, false, false);
 	
 		if (!focused && !hovering)
-			screen.renderAlphaSprite(x + 1, y + 1, this.CoverSprite);
+			screen.DrawAlphaSprite(this.CoverSprite, x + 1, y + 1);
 	}
 
 }

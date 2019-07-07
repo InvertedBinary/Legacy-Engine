@@ -11,15 +11,15 @@ public class Debug {
 	}
 	
 	public static void drawRect(Screen screen, int x, int y, int width, int height, boolean fixed){
-	      screen.drawRect(x, y, width, height, 0xFF0000, fixed);
+	      screen.DrawRect(x, y, width, height, 0xFF0000, fixed);
 	   }
 	   
 	   public static void drawRect(Screen screen, int x, int y, int width, int height, int color, boolean fixed){
-	      screen.drawRect(x, y, width, height, color, fixed);
+	      screen.DrawRect(x, y, width, height, color, fixed);
 	   }
 	
 	   public static void drawLine(Screen screen, int x0, int y0, int x1, int y1, int colour, boolean fixed){
-		   screen.drawVectors(Boot.get().getLevel().BresenhamLine(x0, y0, x1, y1), colour, fixed);
+		   screen.DrawVectors(Boot.get().getLevel().BresenhamLine(x0, y0, x1, y1), colour, fixed);
 		}
 	   
 	   public static void drawTriangle(Screen screen, Font8x font8x8, double x, double y, double x2, double y2) {

@@ -120,14 +120,9 @@ public class Player extends Mob implements Serializable {
 		Pathtime++;
 		tileX = (int) x() >> VARS.TILE_BIT_SHIFT;
 		tileY = (int) y() >> VARS.TILE_BIT_SHIFT;
-		try {
-			if (level.getTile(tileX, tileY).exit()) {
-				level.checkExits(this, level, (int) x(), (int) y());
-			}
-		} catch (Exception e) {
-
-		}
-
+		
+		((TiledLevel) level).TestEventVolumes(this);
+		
 		time++;
 		animSprite.update();
 
@@ -301,7 +296,7 @@ public class Player extends Mob implements Serializable {
 		}
 		this.currentLevelId = -1;
 
-		((TiledLevel) Boot.get().getLevel()).killLua();
+		TiledLevel previous = (TiledLevel)Boot.get().getLevel();
 
 		TiledLevel newLevel = new TiledLevel(XML);
 		Boot.get().setLevel(newLevel);
@@ -315,6 +310,8 @@ public class Player extends Mob implements Serializable {
 		this.removed = false;
 		this.setX((x));
 		this.setY((y));
+		
+		//previous.killLua();
 
 		Game.DiscordPlayerPosPresence();
 	}
@@ -322,11 +319,11 @@ public class Player extends Mob implements Serializable {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 
-		this.render_xOffset = 0;
-		this.render_yOffset = 0;
+		this.DrawXOffset = 0;
+		this.DrawYOffset = 0;
 		this.yOffset = 0;
 		this.xOffset = 16;
-		screen.drawEntity((int) (x() + render_xOffset + cam_xOff), (int) (y() + render_yOffset + cam_yOff), this);
+		screen.DrawEntity(this, (int) (x() + DrawXOffset + cam_xOff), (int) (y() + DrawYOffset + cam_yOff));
 
 	}
 
@@ -336,9 +333,9 @@ public class Player extends Mob implements Serializable {
 				BottomBound.drawLine(screen, true);
 			}
 
-			Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
+			Debug.drawRect(screen, (int) x() + DrawXOffset, (int) y() + DrawYOffset, sprite.getWidth(),
 					sprite.getHeight(), 0xffFADE0F, true);
-			Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
+			Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
 		}
 
 		String text = (int) Boot.get().getPlayer().x() / TileCoord.TILE_SIZE + ","

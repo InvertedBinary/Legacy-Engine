@@ -112,20 +112,9 @@ public class Level extends EntityContainer implements Serializable {
 		Collections.sort(entitiesList, ySort);
 
 		if (!VARS.suspend_world) {
-			if (false) {
-				for (int i = 0; i < entities.size(); i++) {
-					//if (this.getPlayersBool(entities.get(i), 350)) { // TODO: Make a list of entities for entities that
-																		// need to update even when the player is not
-																		// within 350px
-					//	entities.get(i).update();
-					//}
-				}
-			} else {
-				for (int i = 0; i < entities.size(); i++) {
-					entities.get(i).update();
-				}
+			for (int i = 0; i < entities.size(); i++) {
+				entities.get(i).update();
 			}
-
 			for (int i = 0; i < Projectiles.size(); i++) {
 				Projectiles.get(i).update();
 			}
@@ -306,7 +295,7 @@ public class Level extends EntityContainer implements Serializable {
 		x >>= 4;
 		y >>= 4;
 		
-		screen.drawCir(x, y, rad, color, true);
+		screen.DrawCircle(x, y, rad, color, true);
 
 	}
 	
@@ -450,8 +439,6 @@ public class Level extends EntityContainer implements Serializable {
 		return t;
 	}
 	
-	public void checkExits(Player player, Level level, int x, int y) { }
-
 	// Create one damage method, check if the entity shooting
 	// is the entity hit detected and don't damage it
 

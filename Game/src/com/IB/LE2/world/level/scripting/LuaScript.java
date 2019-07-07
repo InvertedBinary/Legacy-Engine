@@ -3,6 +3,7 @@ package com.IB.LE2.world.level.scripting;
 import java.net.URL;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaInteger;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -13,11 +14,14 @@ import com.IB.LE2.input.UI.UI_Manager;
 
 public class LuaScript implements Runnable {
 
-	public final String path;
-	public final Globals globals;
-	public final URL script;
-	LuaValue chunk;
-
+	private final String path;
+	private final Globals globals;
+	private final URL script;
+	private final LuaValue chunk;
+	
+	private boolean should_close = false;
+	
+	private Thread thread;
 	
 	public LuaScript(String path) {
 		this.path = path;
@@ -43,6 +47,32 @@ public class LuaScript implements Runnable {
 		//addGlobal("key", Boot.get()); <= Crashes lua when used
 	}
 	
+	public boolean call(String function) {
+		if (should_close)
+			return false;
+		
+        LuaValue func = globals.get(function);
+        if (!func.isnil()) {
+        	func.call();
+        	return true;
+        }
+        
+        return false;
+	}
+	
+	public boolean call(String function, LuaValue arg) {
+		if (should_close)
+			return false;
+		
+        LuaValue func = globals.get(function);
+        if (!func.isnil()) {
+        	func.call(arg);
+        	return true;
+        }
+        
+        return false;
+	}
+	
 	public void addGlobal(String name, Object obj) {
 		globals.set(name, CoerceJavaToLua.coerce(obj));
 	}
@@ -51,5 +81,22 @@ public class LuaScript implements Runnable {
 		if (script != null) {
 			chunk.call();
 		}
+	}
+	
+	private void TerminateGracefully() {
+		this.should_close = true;
+	}
+
+	public void Terminate() {
+		try {
+			if (thread != null)
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void SetThread(Thread t) {
+		this.thread = t;
 	}
 }

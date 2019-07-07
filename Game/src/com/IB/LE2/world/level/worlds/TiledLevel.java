@@ -24,7 +24,7 @@ import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
-import com.IB.LE2.world.level.scripting.triggers.TriggerVolume;
+import com.IB.LE2.world.level.scripting.triggers.EventVolume;
 import com.IB.LE2.world.level.tile.Tile;
 import com.IB.LE2.world.level.tile.Tile.stepSound;
 import com.IB.LE2.world.level.tile.tiles.XML_Tile;
@@ -46,8 +46,7 @@ public class TiledLevel extends Level {
 	ArrayList<String> tile_strings;
 
 	public HashMap<String, String> props = new HashMap<String, String>();
-	public ArrayList<LevelExit> exits;
-	public ArrayList<TriggerVolume> triggers;
+	public ArrayList<EventVolume> event_volumes;
 	public TileCoord spawnpoint;
 	public ArrayList<int[]> tilels;
 	public ArrayList<LineSegment> solid_geometry;
@@ -56,7 +55,7 @@ public class TiledLevel extends Level {
 		super(path);
 		String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
 		
-		Boot.get().lvl_name = lvn;
+		Game.lvl_name = lvn;
 
 		this.tiled_xml = path + "/" + lvn + ".tmx";
 		System.out.println("TILED: " + tiled_xml);
@@ -72,11 +71,8 @@ public class TiledLevel extends Level {
 	
 	public void killLua() {
 		this.loadedLua = false;
-		try {
-			luaThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
+		ls.Terminate();
 	}
 	
 	public boolean runningLua() {
@@ -100,6 +96,7 @@ public class TiledLevel extends Level {
 		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
 		
 		luaThread = new Thread(ls, "LUA For " + luaString);
+		ls.SetThread(luaThread);
 		luaThread.start();
 		loadedLua = true;
 		} catch (Exception e) {
@@ -189,23 +186,10 @@ public class TiledLevel extends Level {
             	 if (current_object_type == null)
             		 break;
             	 
-            	 if (this.current_object_type.equalsIgnoreCase("Exit_Zone")) {
-            		 this.props.put("x", attributes.getValue("x"));
-            		 this.props.put("y", attributes.getValue("y"));
-            		 this.props.put("width", attributes.getValue("width"));
-            		 this.props.put("height", attributes.getValue("height"));
-            	 } else if (this.current_object_type.equalsIgnoreCase("SpawnPoint")) {
-            		 this.props.put("x", attributes.getValue("x"));
-            		 this.props.put("y", attributes.getValue("y"));
-            	 } else if (this.current_object_type.equalsIgnoreCase("c_mask")) {
-            		 this.props.put("x", attributes.getValue("x"));
-            		 this.props.put("y", attributes.getValue("y"));
-            	 } else if (this.current_object_type.equalsIgnoreCase("Trigger")) {
-            		 this.props.put("x", attributes.getValue("x"));
-            		 this.props.put("y", attributes.getValue("y"));
-            		 this.props.put("width", attributes.getValue("width"));
-            		 this.props.put("height", attributes.getValue("height"));
-            	 }
+        		 for (int i = 0; i < attributes.getLength(); i++) {
+        			 this.props.put(attributes.getQName(i), attributes.getValue(i));
+        		 }
+            		 
             	 break;
              }
              
@@ -292,13 +276,8 @@ public class TiledLevel extends Level {
 
         case "properties": {
         	if (this.current_object_type != null) {
-	        	if (this.current_object_type.equals("Exit_Zone")) {
-	        		LevelExit e = new LevelExit(asInt(props.get("x")), asInt(props.get("y")), asInt(props.get("width")), asInt(props.get("height")), props.get("To"), asInt(props.get("To_X")), asInt(props.get("To_Y")));
-	        		addExit(e);
-	        	}
-        	
 	        	if (this.current_object_type.equals("Trigger")) {
-	        		TriggerVolume t = new TriggerVolume(props);
+	        		EventVolume t = new EventVolume(props);
 	        		addTrigger(t);
 	        	}
         	}
@@ -367,20 +346,10 @@ public class TiledLevel extends Level {
 		}
 	}		
 	
-	public void addTrigger(TriggerVolume t) {
-		if (this.triggers == null) {
-			this.triggers = new ArrayList<TriggerVolume>();
-		}
+	public void addTrigger(EventVolume t) {
+		event_volumes = (event_volumes == null) ? new ArrayList<EventVolume>() : event_volumes;
 		
-		triggers.add(t);
-	}
-	
-	public void addExit(LevelExit e) {
-		if (this.exits == null) {
-			this.exits = new ArrayList<LevelExit>();
-		}
-		
-		exits.add(e);
+		event_volumes.add(t);
 	}
 	
 	public static int asInt(String s) {
@@ -406,31 +375,40 @@ public class TiledLevel extends Level {
 		return xml_tiles;
 	}		
 			
-	public void drawExtendedLevel(Screen screen)
-		{	
-			if (Boot.drawDebug) {
-				if (this.solid_geometry != null) {
-					for (int i = 0; i < this.solid_geometry.size(); i++) {
-						LineSegment ln = solid_geometry.get(i);
-						Game.font8bit.render((int)ln.midpoint().x, (int)ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
-						ln.drawLine(screen, true);
-						
-						ln.Perpendicular().drawLine(screen, true);
-					}
+	public void drawExtendedLevel(Screen screen) {
+		if (Boot.drawDebug) {
+			if (this.solid_geometry != null) {
+				for (int i = 0; i < this.solid_geometry.size(); i++) {
+					LineSegment ln = solid_geometry.get(i);
+					Game.font8bit.render((int) ln.midpoint().x, (int) ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
+					ln.drawLine(screen, true);
+
+					ln.Perpendicular().drawLine(screen, true);
 				}
 			}
-		}	
 			
-	public void checkExits(Player player, Level level, int x, int y) {
-		// refresh();
-		System.out.println("NUM EXITS: " + exits.size());
-		for (int i = 0; i < exits.size(); i++) {
-			LevelExit exit = exits.get(i);
-			if (x >= exit.x && x <= (exit.x + exit.w)) {
-				if (y >= exit.y && y <= (exit.y + exit.h)) {
-					player.setPositionTiled(exit.send_x, exit.send_y, exit.path, true);
-				}
+			
+			for (EventVolume ev : event_volumes) {
+				if (ev != null)
+				ev.render(screen);
 			}
 		}
+	}
+
+	public void TestEventVolumes(Player p) {
+		if (event_volumes != null)
+		for (EventVolume ev : event_volumes) {
+			if (ev != null)
+			ev.Test(p, ls);
+		}
+	}
+			
+	public void UpdateUnloaded() {
+		if (loadedLua)
+		killLua();
+	}
+	
+	public void MovePlayerTo(double x, double y, String path, boolean tile_mult) {
+		Boot.get().getPlayer().setPositionTiled(x, y, path, true);
 	}
 }

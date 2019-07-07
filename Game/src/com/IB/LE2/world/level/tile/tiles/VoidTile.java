@@ -12,7 +12,7 @@ public class VoidTile extends Tile {
 	}
 
 	public void render(int x, int y, Screen screen) {
-		screen.renderTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, sprite);
+		screen.DrawTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, sprite);
 	}
 
 	public boolean solid() {

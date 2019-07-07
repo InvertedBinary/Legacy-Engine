@@ -112,7 +112,7 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 			}
 			
 			if (transAnim && !this.hovering || this.isanim) {
-				screen.renderAlphaSprite(x, y, sprite);
+				screen.DrawAlphaSprite(sprite, x, y);
 			} else {
 				screen.renderSprite(x, y, sprite, false);
 			}

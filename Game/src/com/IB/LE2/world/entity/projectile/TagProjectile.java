@@ -74,8 +74,8 @@ public class TagProjectile extends Projectile {
 	}
 	
 	public void render(Screen screen) {
-		screen.drawEntity((int)x() + render_xOffset,(int)y() + render_yOffset, this);
-		if (Game.devModeOn) screen.drawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
+		screen.DrawEntity(this, (int)x() + DrawXOffset,(int)y() + DrawYOffset);
+		if (Game.devModeOn) screen.DrawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
 	}
 	
 	public void renderGUI(Screen screen) {
@@ -83,9 +83,9 @@ public class TagProjectile extends Projectile {
 			if (BottomBound != null) {
 				BottomBound.drawLine(screen, true);
 
-				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
+				Debug.drawRect(screen, (int) x() + DrawXOffset, (int) y() + DrawYOffset, sprite.getWidth(),
 						sprite.getHeight(), 0xffFADE0F, true);
-				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
+				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
 			}
 		}
 	}
@@ -227,10 +227,10 @@ public class TagProjectile extends Projectile {
 		
 		// Sprite
 		case "sprite.xOffset":
-			this.render_xOffset = (int) parseNum(val);
+			this.DrawXOffset = (int) parseNum(val);
 			break;
 		case "sprite.yOffset":
-			this.render_yOffset = (int) parseNum(val);
+			this.DrawYOffset = (int) parseNum(val);
 			break;
 		case "sprite.width":
 			//

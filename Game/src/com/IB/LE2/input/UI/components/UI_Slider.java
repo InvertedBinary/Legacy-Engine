@@ -74,8 +74,8 @@ public class UI_Slider extends UI_Root implements UI_Clickable {
 	}
 	
 	public void render(Screen screen) {
-		screen.drawFillRect(x, y, width, 1, this.railCol, false);
-		screen.drawFillRect(x + pos - 1, y - 4, 2, 8, this.slideCol, false);
+		screen.DrawFillRect(x, y, width, 1, this.railCol, false);
+		screen.DrawFillRect(x + pos - 1, y - 4, 2, 8, this.slideCol, false);
 	}
 
 	public void addListener(UI_SliderListener listener) {

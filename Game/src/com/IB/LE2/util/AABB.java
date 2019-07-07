@@ -31,7 +31,7 @@ public class AABB
 	}
 
 	public void drawAABB(Screen screen) {
-			screen.drawRect((int)x, (int)y, (int)w, (int)h, 0xffFF00FF, true);
+			screen.DrawRect((int)x, (int)y, (int)w, (int)h, 0xffFF00FF, true);
 	}
 	
 	public void move(double x, double y) {

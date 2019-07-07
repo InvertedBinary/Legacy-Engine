@@ -38,8 +38,8 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 
 	protected transient int xBound = 0;
 	protected transient int yBound = 0;
-	public transient int xOffset = -16, yOffset = -24, entWidth = 32, entHeight = 64;
-	public transient int render_xOffset = -16, render_yOffset = -24;
+	public transient int xOffset = -16, yOffset = -24, EntWidth = 32, EntHeight = 64;
+	public transient int DrawXOffset = -16, DrawYOffset = -24;
 	public transient double detection_radius = 0;
 	public transient int despawn_index = -1; //-1 => never despawn
 	public transient boolean essential = false;
@@ -50,14 +50,13 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	transient public boolean incombat;
 
 	public String UUID = "-1";
-	public int ENTITY_ID = -1;
 	
 	public transient String name;
 	public transient double health;
 	public transient double speed;
 	public transient double mass;
 
-	private HashMap<String, String> vars = new HashMap<>();
+	protected HashMap<String, String> vars = new HashMap<>();
 	
 	public Entity() {
 		

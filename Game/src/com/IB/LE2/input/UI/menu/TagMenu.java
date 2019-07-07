@@ -83,7 +83,7 @@ public class TagMenu extends UI_Menu
 	
 	public void render(Screen screen) {
 		if (bg != null)
-			screen.renderAlphaSprite(bg, x, y);
+			screen.DrawAlphaSprite(bg, x, y);
 		
 		this.ui.render(screen);
 	}
@@ -201,8 +201,7 @@ public class TagMenu extends UI_Menu
 				this.UnloadListener = new UI_UnloadListener() {
 					@Override
 					public void onUnload() {
-				        LuaValue UnloadCall = ls.globals.get(onUnloadFunc);
-				        UnloadCall.call();
+						ls.call(onUnloadFunc);
 					}
 				};
 				break;
@@ -253,9 +252,8 @@ public class TagMenu extends UI_Menu
 					@Override
 					public void ButtonClick() {
 						if (ls == null) return;
-				        LuaValue ClickCall = ls.globals.get(onClickFunc);
 				        try {
-				        	ClickCall.call();
+				        	ls.call(onClickFunc);
 				        } catch (LuaError e) {
 				        	e.printStackTrace();
 				        }
@@ -264,9 +262,8 @@ public class TagMenu extends UI_Menu
 					@Override
 					public void ButtonHover() {
 						if (ls == null) return;
-				        LuaValue HoverCall = ls.globals.get(onHoverFunc);
 				        try {
-				        	HoverCall.call();
+				        	ls.call(onHoverFunc);
 				        } catch (LuaError e) {
 				        	e.printStackTrace();
 				        }
@@ -336,8 +333,7 @@ public class TagMenu extends UI_Menu
 				uiSlider.addListener(new UI_SliderListener() {
 					@Override
 					public void PositionChanged() {
-				        LuaValue PosCall = ls.globals.get(onPosUpdated);
-				        PosCall.call(LuaValue.valueOf(uiSlider.pos));
+				        ls.call(onPosUpdated, LuaValue.valueOf(uiSlider.pos));
 					}
 				});
 				addUI(uiSlider);
@@ -361,14 +357,12 @@ public class TagMenu extends UI_Menu
 				field.addListener(new UI_TextInputListener() {
 					@Override
 					public void SubmitInput(String input) {
-				        LuaValue SubmitCall = ls.globals.get(onSubmit);
-				        SubmitCall.call(LuaValue.valueOf(input));						
+				        ls.call(onSubmit, LuaValue.valueOf(input));
 					}
 
 					@Override
 					public void KeyEntered(char c, boolean filtered) {
-				        LuaValue KeyCall = ls.globals.get(onKeyed);
-				        KeyCall.call(LuaValue.valueOf(c));						
+				        ls.call(onKeyed, LuaValue.valueOf(c));
 					}
 				});
 				

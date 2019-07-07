@@ -33,5 +33,6 @@
 	<xp_min>0</xp_min>
 	<xp_max>0</xp_max>
 	<allegiance>zombies</allegiance>
+	<custom>Custom_value</custom>
   </vars>
 </entity>

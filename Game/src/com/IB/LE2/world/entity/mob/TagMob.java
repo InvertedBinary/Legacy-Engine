@@ -13,6 +13,7 @@ import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.world.entity.EntityContainer;
 import com.IB.LE2.world.entity.projectile.Selector;
+import com.IB.LE2.world.level.TileCoord;
 
 public class TagMob extends Mob
 {
@@ -37,8 +38,8 @@ public class TagMob extends Mob
 	public TagMob(String tag_name, double xi, double yi) {
 		InitTags(tag_name);
 		
-		this.x(xi);
-		this.y(yi);
+		this.x(xi * TileCoord.TILE_SIZE);
+		this.y(yi * TileCoord.TILE_SIZE);
 	}
 	
 	public void InitTags(String tag_name) {
@@ -46,11 +47,13 @@ public class TagMob extends Mob
 		this.tags = new TagReader(tag_name, new TagReadListener() {
 			@Override
 			public void TagsRead() {
-				processAllTags();
+				if (!processAllTags())
+					Boot.log("Unable to recognize one or more tags- ensure you are writing tags for this version of Legacy Engine!", "TagMob", true);
 			}
 			
 			@Override
 			public void TagsError() {
+				Boot.log("Error reading tags! -- Aborting", "TagMob", true);
 				e.remove();
 			}
 		});
@@ -58,8 +61,7 @@ public class TagMob extends Mob
 		tags.start();
 	}
 
-	public boolean processAllTags()
-	{
+	public boolean processAllTags() {
 		boolean result = true;
 		for (String i : tags.TagSet()) {
 			if (!processTag(i)) result = false;
@@ -68,8 +70,7 @@ public class TagMob extends Mob
 		return result;
 	}
 
-	public boolean processTag(String tag)
-	{
+	public boolean processTag(String tag) {
 		boolean result = true;
 		if (!tags.has(tag)) return (result = false);
 
@@ -108,10 +109,10 @@ public class TagMob extends Mob
 			break;
 			//
 		case "sprite.xOffset":
-			this.render_xOffset = (int) parseNum(val);
+			this.DrawXOffset = (int) parseNum(val);
 			break;
 		case "sprite.yOffset":
-			this.render_yOffset = (int) parseNum(val);
+			this.DrawYOffset = (int) parseNum(val);
 			break;
 		case "sprite.static":
 			this.sprite = Sprite.get(val);
@@ -143,15 +144,16 @@ public class TagMob extends Mob
 			this.yOffset = (int) parseNum(val);
 			break;
 		case "hitbox.width":
-			this.entWidth = (int) parseNum(val);
+			this.EntWidth = (int) parseNum(val);
 			break;
 		case "hitbox.height":
-			this.entHeight = (int) parseNum(val);
+			this.EntHeight = (int) parseNum(val);
 			break;
+			//
 		default:
 			if (tag.startsWith("vars.")) {
-				String var_name = tag.substring(4);
-				//TODO: Use custom tags
+				String var_name = tag.substring(5);
+				set(var_name, val);
 			} else {
 				result = false;
 			}
@@ -161,38 +163,33 @@ public class TagMob extends Mob
 		return result;
 	}
 
-	public void processEvent(int event_id)
-	{
-		//TODO: lua do
+	public void processEvent(int event_id) {
+		// TODO: lua do
 		return;
 	}
 
-	public double parseNum(String val)
-	{
+	public double parseNum(String val) {
 		return Double.parseDouble(val);
 	}
 
-	public Boolean parseBool(String val)
-	{
+	public Boolean parseBool(String val) {
 		return Boolean.parseBoolean(val);
 	}
 
-	public void update()
-	{
+	public void update() {
 		if (VARS.do_possession && Selector.selected.equals((this))) {
 		} else {
 			move();
 		}
 	}
 
-	public void move()
-	{
+	public void move() {
 		double xa = 0, ya = 0;
 		List<PlayerMP> players = level.getPlayers();
 
 		if (players.size() > 0) {
 			PlayerMP p = players.get(0);
-			int track_offset = (p.sprite.getWidth()) + render_xOffset + p.render_xOffset;
+			int track_offset = (p.sprite.getWidth()) + DrawXOffset + p.DrawXOffset;
 			if ((int) x() <= (int) p.x() + track_offset && (int) x() >= (int) p.x() - track_offset) {
 				// this.vel().x(0);
 			} else {
@@ -242,18 +239,17 @@ public class TagMob extends Mob
 		
 		this.sprite = anim.getSprite();
 
-		screen.drawEntity((int) x() + render_xOffset, (int) y() + render_yOffset, this);
+		screen.DrawEntity(this, (int) x() + DrawXOffset, (int) y() + DrawYOffset);
 	}
 
-	public void renderGUI(Screen screen)
-	{
+	public void renderGUI(Screen screen) {
 		if (Boot.drawDebug) {
 			if (BottomBound != null) {
 				BottomBound.drawLine(screen, true);
 
-				Debug.drawRect(screen, (int) x() + render_xOffset, (int) y() + render_yOffset, sprite.getWidth(),
+				Debug.drawRect(screen, (int) x() + DrawXOffset, (int) y() + DrawYOffset, sprite.getWidth(),
 						sprite.getHeight(), 0xffFADE0F, true);
-				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, entWidth, entHeight, 0xff00FFFF, true);
+				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
 			}
 		}
 	}

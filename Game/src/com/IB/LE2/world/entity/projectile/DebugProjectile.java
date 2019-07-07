@@ -82,8 +82,8 @@ public class DebugProjectile extends Projectile {
 	}
 
 	public void render(Screen screen) {
-		screen.drawEntity((int)x() - 8,(int)y() - 14, this);
-		if (Boot.get().devModeOn) screen.drawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
+		screen.DrawEntity(this, (int)x() - 8,(int)y() - 14);
+		if (Boot.get().devModeOn) screen.DrawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
 
 	}
 }

@@ -28,7 +28,6 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.BufferUtils;
 
-@SuppressWarnings("unused")
 public class TextureHandler
 {
 	   public static int loadTexture(BufferedImage image, int GL_TEX){

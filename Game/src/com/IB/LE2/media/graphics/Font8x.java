@@ -42,9 +42,9 @@ public class Font8x {
 		if (background) {
 			if (text.length() > 0) {
 			if (fixBg) {
-				screen.drawFillRect(x + 8, y, (text.length() * 8), 8, 0xff302B23, fixed);				
+				screen.DrawFillRect(x + 8, y, (text.length() * 8), 8, 0xff302B23, fixed);				
 			} else {
-				screen.drawFillRect(x + (8 + spacing) + 1, y, (text.length() * (8 + spacing)) + 1, 8, 0xff302B23, fixed);
+				screen.DrawFillRect(x + (8 + spacing) + 1, y, (text.length() * (8 + spacing)) + 1, 8, 0xff302B23, fixed);
 				}
 			}
 		}
@@ -67,7 +67,7 @@ public class Font8x {
 			int index = characterIndex.indexOf(currentChar);
 			//System.out.print(index + " ");
 			if (index == -1) continue;
-			screen.renderText(x + xOffset, y + line * 10 + yOffset, characters[index], color, fixed);
+			screen.DrawText(x + xOffset, y + line * 10 + yOffset, characters[index], color, fixed);
 		sprite = characters[index];
 		}
 		return sprite;
@@ -93,9 +93,9 @@ public class Font8x {
 			//System.out.print(index + " ");
 			if (index == -1) continue;
 			if (background) {
-				screen.drawFillRect(xOffset + x, y + line * 10, (characters[index].getWidth()) + 1, 8, 0xff302B23, fixed);
+				screen.DrawFillRect(xOffset + x, y + line * 10, (characters[index].getWidth()) + 1, 8, 0xff302B23, fixed);
 			}
-			screen.renderText(x + xOffset, y + line * 10 + yOffset, characters[index], color, fixed);
+			screen.DrawText(x + xOffset, y + line * 10 + yOffset, characters[index], color, fixed);
 		sprite = characters[index];
 		}
 		return sprite;

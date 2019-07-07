@@ -38,7 +38,7 @@ public class Font16x {
 	
 	public void render(int x, int y, int spacing, int color, String text, Screen screen, boolean fixed, boolean background) {
 		if (background) {
-		screen.drawFillRect(x, y, text.length() * 16, 16, 0xff302B23, fixed);
+		screen.DrawFillRect(x, y, text.length() * 16, 16, 0xff302B23, fixed);
 	}
 
 		this.spacing = spacing;
@@ -59,13 +59,13 @@ public class Font16x {
 			int index = characterIndex.indexOf(currentChar);
 			//System.out.print(index + " ");
 			if (index == -1) continue;
-			screen.renderText(x + xOffset, y + line * 20 + yOffset, characters[index], color, fixed);
+			screen.DrawText(x + xOffset, y + line * 20 + yOffset, characters[index], color, fixed);
 		}
 	}
 	
 	public void render(int x, int y, int spacing, int color, String text, Screen screen, boolean fixed, boolean background, int size) {
 		if (background) {
-		screen.drawFillRect(x, y, text.length() * 16, 16, 0xff302B23, fixed);
+		screen.DrawFillRect(x, y, text.length() * 16, 16, 0xff302B23, fixed);
 	}
 
 		this.spacing = spacing;

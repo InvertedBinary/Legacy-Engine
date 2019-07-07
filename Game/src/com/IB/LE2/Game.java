@@ -158,7 +158,6 @@ public class Game extends Canvas implements Runnable
 
 			// TileCoord playerSpawn = new TileCoord(296, 381);
 			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
-			getLevel().add(new TagMob("TestZombie"));
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();
@@ -439,6 +438,11 @@ public class Game extends Canvas implements Runnable
 			this.AdjustImageToFrame();
 			
 			getLevel().update();
+			
+			for (Level lvl : levels) {
+				if (lvl != getLevel())
+					((TiledLevel)lvl).UpdateUnloaded();
+			}
 		}
 
 	public void render()

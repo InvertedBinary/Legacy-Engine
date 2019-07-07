@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-@SuppressWarnings("unused")
 public class ResourceManager
 {
 	public final static int FLOAT_SIZE = 4;
