@@ -148,9 +148,9 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 		}
 
 		if (listener != null)
-		listener.KeyEntered(keychar, false);
+			listener.KeyEntered(keychar, false);
 		
-		System.out.println("TEXT: " + text + "|");
+		//System.out.println("TEXT: " + text + "|");
 		return true;
 	}
 	

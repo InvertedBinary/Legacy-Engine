@@ -53,7 +53,6 @@ public class Player extends Mob implements Serializable {
 	transient double Pathtime = 0;
 	transient RayCast raycastDIR;
 	private transient int dirInt = 0;
-	public int currentLevelId = 0;
 
 	public int cam_xOff = 0;
 	public int cam_yOff = 0;
@@ -290,21 +289,18 @@ public class Player extends Mob implements Serializable {
 	}
 
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
-		if (tileMult) {
-			x *= TileCoord.TILE_SIZE;
-			y *= TileCoord.TILE_SIZE;
-		}
-		this.currentLevelId = -1;
-
-		TiledLevel previous = (TiledLevel)Boot.get().getLevel();
-
 		TiledLevel newLevel = new TiledLevel(XML);
 		Boot.get().setLevel(newLevel);
 		Boot.get().getLevel().add(this);
-
+		
 		if (x == -1 && y == -1) {
-			x = newLevel.spawnpoint.x() / 32;
-			y = newLevel.spawnpoint.y() / 32;
+			x = newLevel.Spawnpoint.x() / 32;
+			y = newLevel.Spawnpoint.y() / 32;
+		}
+
+		if (tileMult) {
+			x *= TileCoord.TILE_SIZE;
+			y *= TileCoord.TILE_SIZE;
 		}
 
 		this.removed = false;

@@ -60,13 +60,26 @@ public class LuaScript implements Runnable {
         return false;
 	}
 	
-	public boolean call(String function, LuaValue arg) {
+	public boolean call(String function, Object... arg) {
 		if (should_close)
 			return false;
 		
         LuaValue func = globals.get(function);
         if (!func.isnil()) {
-        	func.call(arg);
+        	
+        	if (arg.length == 1)
+        		func.call(CoerceJavaToLua.coerce(arg[0]));
+        	
+        	if (arg.length == 2)
+            	func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]));
+
+        	if (arg.length >= 3) 
+            	func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]), CoerceJavaToLua.coerce(arg[2]));
+
+        	if (arg.length > 3) {
+        		Boot.log("Three is the maximum argument count of LuaJ functions. Additional arguments are ignored!", "LuaScript.java", true);
+        	}
+        	
         	return true;
         }
         

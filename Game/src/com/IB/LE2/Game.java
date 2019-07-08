@@ -150,8 +150,8 @@ public class Game extends Canvas implements Runnable
 			TiledLevel TL = new TiledLevel("/Tags/Levels/b10");
 			setLevel(TL);
 			
-			if (TL.spawnpoint != null) {
-				playerSpawn = TL.spawnpoint;
+			if (TL.Spawnpoint != null) {
+				playerSpawn = TL.Spawnpoint;
 			} else {
 				playerSpawn = new TileCoord(0, 0);
 			}

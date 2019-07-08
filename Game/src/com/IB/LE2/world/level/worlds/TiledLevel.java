@@ -47,7 +47,7 @@ public class TiledLevel extends Level {
 
 	public HashMap<String, String> props = new HashMap<String, String>();
 	public ArrayList<EventVolume> event_volumes;
-	public TileCoord spawnpoint;
+	public TileCoord Spawnpoint;
 	public ArrayList<int[]> tilels;
 	public ArrayList<LineSegment> solid_geometry;
 
@@ -287,7 +287,7 @@ public class TiledLevel extends Level {
         case "object": {
 				if (this.current_object_type != null) {
 					if (this.current_object_type.equals("SpawnPoint")) {
-						spawnpoint = new TileCoord(asInt(props.get("x")) / 32, asInt(props.get("y")) / 32);
+						Spawnpoint = new TileCoord(asInt(props.get("x")) / 32, asInt(props.get("y")) / 32);
 					}
 				}
 			}

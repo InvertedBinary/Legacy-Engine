@@ -53,7 +53,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
 	        String UUID = uuid.toString();
 			users.put(ctx.channel().remoteAddress().toString(), UUID); // TODO ADD AUTOMATED USER ID
 			
-			ctx.channel().writeAndFlush("LEV|PATH=" + ((TiledLevel)Boot.getLevel()).path + "@x=" + ((TiledLevel)Boot.getLevel()).spawnpoint.x() + ",y=" + ((TiledLevel)Boot.getLevel()).spawnpoint.y() + "\n");
+			ctx.channel().writeAndFlush("LEV|PATH=" + ((TiledLevel)Boot.getLevel()).path + "@x=" + ((TiledLevel)Boot.getLevel()).Spawnpoint.x() + ",y=" + ((TiledLevel)Boot.getLevel()).Spawnpoint.y() + "\n");
 			
 			for (Entity e : Boot.getLevel().players) {
 				if (!e.removed) {

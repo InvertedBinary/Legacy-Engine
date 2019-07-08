@@ -105,8 +105,8 @@ public class EventVolume {
 		s.DrawRect((int)x, (int)y, (int)width, (int)height, 0xffFF0000, true);
 		s.DrawAlphaSprite(display_bound, (int)x, (int)y, true);
 		
-		if (this.name != null && !this.name.equals("")) {
+		if (!this.name.equals("")) 
 			Game.font8bit.render((int)x, (int)y + 5, -2, 0xffFF3f3f, "EV: " + name, s, true, false);
-		}
+		
 	}
 }

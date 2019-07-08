@@ -333,7 +333,7 @@ public class TagMenu extends UI_Menu
 				uiSlider.addListener(new UI_SliderListener() {
 					@Override
 					public void PositionChanged() {
-				        ls.call(onPosUpdated, LuaValue.valueOf(uiSlider.pos));
+				        ls.call(onPosUpdated, uiSlider.pos);
 					}
 				});
 				addUI(uiSlider);
@@ -357,12 +357,12 @@ public class TagMenu extends UI_Menu
 				field.addListener(new UI_TextInputListener() {
 					@Override
 					public void SubmitInput(String input) {
-				        ls.call(onSubmit, LuaValue.valueOf(input));
+				        ls.call(onSubmit, input);
 					}
 
 					@Override
 					public void KeyEntered(char c, boolean filtered) {
-				        ls.call(onKeyed, LuaValue.valueOf(c));
+				        ls.call(onKeyed, c, filtered);
 					}
 				});
 				

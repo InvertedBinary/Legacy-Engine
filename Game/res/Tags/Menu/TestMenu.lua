@@ -38,8 +38,10 @@ function onSubmit(text)
 	menu:SetElementText("Cmd", "")
 end
 
-function onKeyed(character)
-	print("Key Typed.. "..character)
+function onKeyed(character, filtered)
+	if (filtered) then
+		print("Key Typed.. "..character)
+	end
 end
 
 
