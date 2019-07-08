@@ -14,9 +14,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.IB.LE2.world.level.tile.Tile.stepSound;
-import com.IB.LE2.world.level.tile.tiles.XML_Tile;
-
 public class SpriteSheet {
 
 	private String path;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
@@ -139,17 +138,6 @@ public class Level extends EntityContainer implements Serializable {
 		return Projectiles;
 	}
 
-	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset) {
-		boolean solidtwo = false;
-		for (int c = 0; c < 4; c++) {
-			int xt = (x - c % 2 * size - xOffset) >> VARS.TILE_BIT_SHIFT;
-			int yt = (y - c / 2 * size - yOffset) >> VARS.TILE_BIT_SHIFT;
-			if (getTile(xt, yt).solidtwo())
-				solidtwo = true;
-		}
-		return solidtwo;
-	}
-	
 	int bgcolor = 0xffBED0CA;
 	/*
 	 * SpriteSheet pl_bg = new SpriteSheet("/XML/Levels/a10/assets/parallax/bg.png",
@@ -337,7 +325,7 @@ public class Level extends EntityContainer implements Serializable {
 		   return result;
 		}
 	
-	public RayCast RayCast(Vector2i pos, double angle, float rayLength){
+	/*public RayCast RayCast(Vector2i pos, double angle, float rayLength){
 		   RayCast result = new RayCast();
 		   result.setCollided(false);
 		   if(rayLength <= 0) {
@@ -397,7 +385,7 @@ public class Level extends EntityContainer implements Serializable {
 				if (at.solid())
 					continue;
 				Vector2i a = new Vector2i(x + xi, y + yi);
-				double gCost = current.gCost + (getDistance(current.tile, a)/* == 1 ? 1 : 1*/);
+				double gCost = current.gCost + (getDistance(current.tile, a)/* == 1 ? 1 : 1*//*);
 				double hCost = getDistance(a, goal);
 				Node node = new Node(a, current, gCost, hCost);
 				if (vecInList(closedList, a) && gCost >= node.gCost)
@@ -409,7 +397,7 @@ public class Level extends EntityContainer implements Serializable {
 		}
 		closedList.clear();
 		return null;
-	}
+	}*/
 
 	private boolean vecInList(List<Node> list, Vector2i vector) {
 		for (Node n : list) {
@@ -431,10 +419,10 @@ public class Level extends EntityContainer implements Serializable {
 	}*/
 	
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.VoidTile;
+		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.Air;
 		
 		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
-		t = (t == null) ? Tile.VoidTile : t;
+		t = (t == null) ? Tile.Air : t;
 		
 		return t;
 	}

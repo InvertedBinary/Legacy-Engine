@@ -14,7 +14,6 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
-import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.projectile.Selector;
@@ -114,7 +113,7 @@ public class Player extends Mob implements Serializable {
 
 	PVector pv = null;
 	public void update() {
-		raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int) 3);
+		//raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int) 3);
 
 		Pathtime++;
 		tileX = (int) x() >> VARS.TILE_BIT_SHIFT;

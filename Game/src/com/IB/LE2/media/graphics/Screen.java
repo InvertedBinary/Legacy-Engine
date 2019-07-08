@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;

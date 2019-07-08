@@ -17,6 +17,7 @@ import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
@@ -26,7 +27,6 @@ import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
 import com.IB.LE2.world.level.scripting.triggers.EventVolume;
 import com.IB.LE2.world.level.tile.Tile;
-import com.IB.LE2.world.level.tile.Tile.stepSound;
 import com.IB.LE2.world.level.tile.tiles.XML_Tile;
 
 public class TiledLevel extends Level {
@@ -147,15 +147,8 @@ public class TiledLevel extends Level {
  					current_layer = -1;
  				}
  				
- 				
-            	 
-            	/* if (ln.equals("Tiles")) {
-            		 this.current_layer = 0;
-            	 } else if (ln.equals("Overlays")) {
-            		 this.current_layer = 1;
-            	 }*/
-          	 		this.current_layer++;
-          	 		//System.out.println(ln + " : " + current_layer);
+          	 	this.current_layer++;
+          	 	
             	 break;
              }
              
@@ -163,7 +156,7 @@ public class TiledLevel extends Level {
             	 if (attributes.getValue("encoding").equals("csv")) {
             		 readingLayer = true;
             	 } else {
-            		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "Tiled_Level.java", true);
+            		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "TiledLevel.java", true);
             		 Boot.get().quit();
             	 }
             	 break;
@@ -295,34 +288,31 @@ public class TiledLevel extends Level {
         case "map": {
 			//Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
 			
-			Tile t = new Tile();
-			t.readXML("/Tags/Tiles/TileDefinitions.xml");
+			Tile.TileIndex.put(0, Tile.Air);
+			
 			for (int i = 0; i < (width * height); i++) {
 				Tile[] merges = new Tile[tilels.size()];
 				for (int j = 0; j < tilels.size(); j++) {
 					if (tilels.get(j)[i] == 0) {
 						merges[j] = null;
 					} else {
-						merges[j] = Tile.TileIndex.get(tilels.get(j)[i]);
+						int tile_id = tilels.get(j)[i];
+						merges[j] = Tile.TileIndex.get(tile_id);
+						if (merges[j] == null) {
+							merges[j] = new XML_Tile(tile_id, Tile.GenSpriteFromId(SpriteSheet.get("Terrain"), tile_id));
+							Tile.TileIndex.put(tile_id, merges[j]);
+						}
 					}
 				}
 				
 				Sprite sp = null;
-				boolean solid = false;
-				boolean solid2 = false;
-				boolean jumpThrough = false;
-				boolean exit = false;
 				for (int j = 0; j < merges.length; j++ ) {
 					if (merges[j] != null) {
 						if (sp == null && !merges[j].equals(Tile.TileIndex.get(0))) {
 							sp = merges[j].sprite;
 						}
-					if (merges[j].solid()) solid = true;
-					if (merges[j].solidtwo()) solid2 = true;
-					if (merges[j].jumpThrough()) jumpThrough = true;
-					if (merges[j].exit()) exit = true;
-					
-					if (j > 0 && sp != null) {
+
+						if (j > 0 && sp != null) {
 						sp = new Sprite(sp, merges[j].sprite);
 						}
 					}
@@ -332,8 +322,7 @@ public class TiledLevel extends Level {
 					this.tilels.get(0)[i] = 0;
 				} else {
 				int id = (1024 + i); //SET 1024 TO MAX NATURAL TILE ID
-				XML_Tile ct = new XML_Tile("Compound_Tile", sp, stepSound.Hard, 
-						id, solid, solid2, jumpThrough, exit);
+				XML_Tile ct = new XML_Tile(id, sp);
 				
 				Tile.TileIndex.put(id, ct);
 				this.tilels.get(0)[i] = (id);

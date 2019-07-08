@@ -10,13 +10,10 @@ import java.util.Set;
 import com.IB.LE2.Boot;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.util.VARS;
-import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.entity.particle.DefaultParticle;
 import com.IB.LE2.world.level.Node;
-import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public abstract  class Mob extends Entity implements Serializable {
@@ -118,7 +115,7 @@ public abstract  class Mob extends Entity implements Serializable {
 		//this.mobhealth -= pts;
 	}
 
-	public void pull(Entity e, double rate) {
+	/*public void pull(Entity e, double rate) {
 		double xpa = 0, ypa = 0;
 		double px = (int) e.x();
 		double py = (int) e.y();
@@ -167,7 +164,7 @@ public abstract  class Mob extends Entity implements Serializable {
 			walking = false;
 
 		}
-	}
+	}*/
 	
 	
 	

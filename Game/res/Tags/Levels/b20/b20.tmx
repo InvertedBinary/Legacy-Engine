@@ -134,7 +134,8 @@
   </object>
   <object id="22" name="Load b10" type="Trigger" x="1056" y="800" width="64" height="160">
    <properties>
-    <property name="Lua Function" value="LoadB"/>
+    <property name="function" value="LoadB"/>
+    <property name="timer" value="-1"/>
    </properties>
   </object>
  </objectgroup>

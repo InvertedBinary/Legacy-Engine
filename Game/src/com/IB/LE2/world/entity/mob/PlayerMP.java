@@ -7,7 +7,6 @@ import com.IB.LE2.Game;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.SpriteSheet;
 
 public class PlayerMP extends Player {
 

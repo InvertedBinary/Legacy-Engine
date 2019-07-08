@@ -4,18 +4,6 @@
 	<rect x="0" y="0" w="300" h="168" sheet="BGFade">BGFade</rect>
 	<rect x="0" y="0" w="18" h="18" sheet="AbilityBox">AbilityBox</rect>
 	
-	<square x="3" y="18" s="32" sheet="Terrain">CabinetTop</square>
-	<square x="3" y="19" s="32" sheet="Terrain">CabinetBottom</square>
-	<square x="15" y="1" s="32" sheet="Terrain">Dirt</square>
-	<square x="8" y="1" s="32" sheet="Terrain">Swamp</square>
-	<square x="15" y="0" s="32" sheet="Terrain">PathDirt</square>
-	<square x="17" y="18" s="32" sheet="Terrain">PathCornerTL</square>
-	<square x="16" y="17" s="32" sheet="Terrain">RedBed</square>
-	<square x="0" y="0" s="32" sheet="Terrain">Grass</square>
-	<square x="13" y="1" s="32" sheet="Terrain">Water</square>
-	<square x="13" y="1" s="32" sheet="Terrain">VoidTile</square>
-	<square x="20" y="16" s="32" sheet="Terrain">Anvil</square>
-	
 	<square x="0" y="0" s="16" sheet="Projectiles">WizardBolt</square>
 
 	<color w="1" h="1" color="0xffFF00FF" >Barrier</color>

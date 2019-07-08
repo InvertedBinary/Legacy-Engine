@@ -3,7 +3,6 @@ package com.IB.LE2.world.level.scripting;
 import java.net.URL;
 
 import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaInteger;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;

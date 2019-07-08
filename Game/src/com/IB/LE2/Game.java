@@ -37,7 +37,6 @@ import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
-import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
@@ -143,8 +142,6 @@ public class Game extends Canvas implements Runnable
 			frame = new JFrame();
 			windowHandler = new WindowHandler(this);
 			key = new Keyboard();
-			tile = new Tile();
-			tile.readXML("/Tags/Tiles/TileDefinitions.xml");
 
 			// setLevel(new XML_Level(Maps.ForestLevel));
 			TiledLevel TL = new TiledLevel("/Tags/Levels/b10");

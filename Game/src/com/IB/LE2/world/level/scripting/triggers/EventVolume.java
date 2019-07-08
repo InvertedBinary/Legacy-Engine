@@ -1,11 +1,7 @@
 package com.IB.LE2.world.level.scripting.triggers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.luaj.vm2.LuaValue;
-
-import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -20,28 +16,25 @@ public class EventVolume {
 	
 	private boolean was_tripped = false;
 	
-	private int delay = 0;
-	private int trip_timer = -1; // -1 = Trip once, 0 = continually
+	private final int trip_timer; // -1 = Trip once, 0 = continually
 	private int timer = 0;
+	private int delay = 0;
 	
 	private String function = "";
-	
 	private Sprite display_bound;
 	
-	ArrayList<Object> lua_args = new ArrayList<Object>();
-	
 	public EventVolume(HashMap<String, String> props) {
-			 this(props.get("name"), props.get("Lua Function"),
+			 this(props.get("name"), props.get("function"), Integer.parseInt(props.get("timer")),
 			 Double.parseDouble(props.get("x")), Double.parseDouble(props.get("y")),
 			 Double.parseDouble(props.get("width")), Double.parseDouble(props.get("height"))
 		);
 	}
 	
-	public EventVolume(String function, double x, double y, double width, double height) {
-		this("", function, x, y, width, height);
+	public EventVolume(String function, int timer, double x, double y, double width, double height) {
+		this("", function, timer, x, y, width, height);
 	}
 	
-	public EventVolume(String name, String function, double x, double y, double width, double height) {
+	public EventVolume(String name, String function, int timer, double x, double y, double width, double height) {
 		this.name = name;
 		
 		this.x = x;
@@ -50,6 +43,9 @@ public class EventVolume {
 		this.height = height;
 		
 		this.function = function;
+		
+		this.trip_timer = timer;
+		this.timer = trip_timer;
 		
 		display_bound = new Sprite((int)width, (int)height, 0x3fFF0000);
 	}
@@ -60,10 +56,9 @@ public class EventVolume {
 			delay--;
 		}
 		
-		if (trip_timer == -1)
-			if (!was_tripped)			
-			Consequence(ls);
-		else if (trip_timer == 0)
+		if (trip_timer == -1) {
+			if (!was_tripped) Consequence(ls);
+		} else if (trip_timer == 0)
 			Consequence(ls);
 		else if (trip_timer > 0) {
 			timer++;
@@ -79,11 +74,6 @@ public class EventVolume {
 	
 	public void SetDelay(int x) {
 		this.delay = x;
-	}
-	
-	public void SetTimer(int x) {
-		this.timer = x;
-		this.trip_timer = x;
 	}
 	
 	private void Consequence(LuaScript ls) {

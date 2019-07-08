@@ -7,7 +7,6 @@ import com.IB.LE2.Boot;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.entity.emitter.WallParticleSpawner;
 import com.IB.LE2.world.entity.mob.Mob;
 
 public class DebugProjectile extends Projectile {
@@ -47,7 +46,7 @@ public class DebugProjectile extends Projectile {
 	
 	public void update() {
 		List<Entity> entities = level.entities;
-			level.add(new WallParticleSpawner((int) (x() + nx), (int) (y() + ny - 4), 4, 4, level));
+			//	level.add(new WallParticleSpawner((int) (x() + nx), (int) (y() + ny - 4), 4, 4, level));
 			
 			DebugCollision(this, entities);
 			

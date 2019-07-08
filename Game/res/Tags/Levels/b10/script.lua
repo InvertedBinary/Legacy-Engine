@@ -1,10 +1,10 @@
 print("Loading Lua for level b10")
 
-local z = luajava.newInstance("com.IB.LE2.world.entity.mob.TagMob", "TestZombie", 3, 40);
 --level:add(z);
 
-function TestSpawnTrigger() 
+function TestSpawnTrigger()
 	print("Spawn?");
+	local z = luajava.newInstance("com.IB.LE2.world.entity.mob.TagMob", "TestZombie", 3, 40);
 	level:add(z);
 end
 
