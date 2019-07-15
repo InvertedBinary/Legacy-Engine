@@ -9,7 +9,7 @@ import com.IB.LE2.media.graphics.Sprite;
 
 public class UI_Canvas extends UI_Root implements UI_Clickable {
 
-	private int x, y, width, height;
+	private int width, height;
 	private int draw_color = 0;
 	private int background_color = 0xffFF00FF;
 	private Sprite canvas;

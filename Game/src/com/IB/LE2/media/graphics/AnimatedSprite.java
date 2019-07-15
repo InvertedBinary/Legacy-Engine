@@ -16,6 +16,7 @@ public class AnimatedSprite extends Sprite {
 		sprite = sheet.getSprites()[0];
 		if (length > sheet.getSprites().length) System.err.println("ERR! Length > Sheet");
 	}
+	
 	public void update() {
 		time++;
 		if (time % rate == 0) {
@@ -27,7 +28,6 @@ public class AnimatedSprite extends Sprite {
 	}
 	public Sprite getSprite() {
 		return sprite;
-		
 	}
 
 	public void setFrameRate(int frames) {

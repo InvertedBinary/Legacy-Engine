@@ -8,12 +8,14 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
+import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.world.entity.EntityContainer;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.TileCoord;
+import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public class TagMob extends Mob
 {
@@ -44,7 +46,7 @@ public class TagMob extends Mob
 	
 	public void InitTags(String tag_name) {
 		TagMob e = this;
-		this.tags = new TagReader(tag_name, new TagReadListener() {
+		this.tags = new TagReader(tag_name, "entity", new TagReadListener() {
 			@Override
 			public void TagsRead() {
 				if (!processAllTags())
@@ -63,20 +65,19 @@ public class TagMob extends Mob
 
 	public boolean processAllTags() {
 		boolean result = true;
-		for (String i : tags.TagSet()) {
+		for (Tag i : tags.getTags()) {
 			if (!processTag(i)) result = false;
 		}
 
 		return result;
 	}
 
-	public boolean processTag(String tag) {
+	public boolean processTag(Tag tag) {
 		boolean result = true;
-		if (!tags.has(tag)) return (result = false);
 
-		String val = tags.get(tag);
+		String val = tag.value;
 
-		switch (tag) {
+		switch (tag.uri) {
 		case "props.name":
 			this.name = val;
 			break;
@@ -151,8 +152,8 @@ public class TagMob extends Mob
 			break;
 			//
 		default:
-			if (tag.startsWith("vars.")) {
-				String var_name = tag.substring(5);
+			if (tag.uri.startsWith("vars.")) {
+				String var_name = tag.uri.substring(5);
 				set(var_name, val);
 			} else {
 				result = false;
@@ -179,6 +180,7 @@ public class TagMob extends Mob
 	public void update() {
 		if (VARS.do_possession && Selector.selected.equals((this))) {
 		} else {
+			((TiledLevel) level).TestEventVolumes(this);
 			move();
 		}
 	}

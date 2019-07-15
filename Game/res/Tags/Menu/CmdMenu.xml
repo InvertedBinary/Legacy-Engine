@@ -8,7 +8,8 @@
 		<macro>0x1B</macro>
 	</global>
 	<components>
-		<button x="337" y="5" transAnim="false" anim="false" image="Grass" onClick="basicContinueGame" onHover="luaTestHover">Btn 4</button>
+		<button x="38" y="5" align="right" transAnim="false" anim="false" image="ExitIcon" onClick="basicContinueGame" onHover="luaTestHover">Btn 4</button>
 		<textfield id="Cmd" x="5" y="5" max="24" scrollable="false" numeric_only="false" sensitive_input="false" onSubmit="onSubmit" onKeyed="onKeyed">Enter Command..</textfield>
+		<label id="hist" x="5" y="38" color="0xFFFFFF" hvcolor="0x660099">Log:</label>
 	</components>
 </uiset>

@@ -9,11 +9,18 @@ public abstract class UI_Root {
 	public String id = "-1";
 	public String text = "";
 	
+	public int x;
+	public int y;
+	public int z;
+	
 	protected boolean focused = false;
 	protected boolean enabled = true;
 	
 	//TODO: implement visibility toggle render(..) [if] return;
 	protected boolean visible = true;
+	
+	protected boolean right_aligned;
+	protected boolean bottom_aligned;
 	
 	public abstract void update();
 	public abstract void render(Screen screen);
@@ -30,6 +37,17 @@ public abstract class UI_Root {
 	
 	public boolean IsEnabled() {
 		return this.enabled;
+	}
+	
+	public void SetAlignment(String align) {
+		if (align.contains("right")) {
+			this.right_aligned = true;
+		}
+		
+		if (align.contains("bottom")) {
+			this.bottom_aligned = true;
+			
+		}
 	}
 	
 	public void SetID(String ID) {
@@ -62,6 +80,16 @@ public abstract class UI_Root {
 	
 	public boolean IsVisible() {
 		return this.visible;
+	}
+	
+	public int RenderX(int original) {
+		if (right_aligned) return Boot.width - original;
+		return original;
+	}
+	
+	public int RenderY(int original) {
+		if (bottom_aligned) return Boot.height - original;
+		return original;
 	}
 	
 	public boolean checkBounds(int x, int y, int width, int height) {

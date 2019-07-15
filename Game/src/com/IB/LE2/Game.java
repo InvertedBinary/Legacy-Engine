@@ -299,7 +299,6 @@ public class Game extends Canvas implements Runnable
 
 					//speedModif++;
 					//if (speedModif % 1 == 0) {
-					if (UI_Menu.suspend != UI_Menu.SUS_UPD && UI_Menu.suspend != UI_Menu.SUS_ALL)
 					update();
 					//speedModif = 0;
 					//}
@@ -472,9 +471,7 @@ public class Game extends Canvas implements Runnable
 				}
 				Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
 	
-			if (UI_Menu.suspend != UI_Menu.SUS_ALL) {
 				getLevel().render((int) (xScroll), (int) (yScroll), screen);
-			}
 			
 			gui.render(screen);
 
@@ -585,7 +582,7 @@ public class Game extends Canvas implements Runnable
 
 			game.start();
 			
-			UI_Manager.Load(new TagMenu("/Tags/Menu/" + Boot.prefsStr("UI", "StartupMenu", "Main"), false));
+			UI_Manager.Load(new TagMenu("/Tags/Menu/" + Boot.prefsStr("UI", "StartupMenu", "Main")));
 		}
 	
 	public boolean ChangingFullscreenState = false;

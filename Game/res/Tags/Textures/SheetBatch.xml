@@ -4,7 +4,12 @@
 
 	<sheet src="/Textures/GUI/Menu.png" w="300" h="300">TitleMenu</sheet>
 	<sheet src="/Textures/GUI/fade.png" w="300" h="168">BGFade</sheet>
-	<sheet src="/Textures/GUI/AbilityBox.png" w="20" h="20">AbilityBox</sheet>	
+	<sheet src="/Textures/GUI/AbilityBox.png" w="20" h="20">AbilityBox</sheet>
+	<sheet src="/Textures/GUI/ExitIcon.png" w="32" h="32">ExitIcon</sheet>
+	
+	<sheet src="/Textures/GUI/HealthEx2.png" w="72" h="1952">
+		<sub x="0" y="0" w="1" h="61" frame-width="72" frame-height="32">HealthBar</sub>
+	</sheet>
 	
 	<sheet src="/Textures/Entities/Attacks/Projectiles.png" w="256" h="256">Projectiles</sheet>
 	

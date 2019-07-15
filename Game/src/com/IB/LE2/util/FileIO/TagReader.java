@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -21,25 +21,38 @@ public class TagReader extends DefaultHandler {
 
 	protected String PATH = "";
 	protected String TAG = "";
+	protected String ROOT_ELEMENT;
 	protected boolean external_tag = false;
 	protected InputStream tag_stream = null;
 
-	private HashMap<String, String> tags = new HashMap<>();
+	private ArrayList<Tag> tags = new ArrayList<>();
 
 	private String reading_tag;
 	private String current_tag;
+	private Attributes current_attribs;
 	
 	public TagReadListener callbacks;
 	
-	public TagReader(String tag_name, TagReadListener callbacks) {
+	
+	public TagReader(String tag_name, String root_element, TagReadListener callbacks) {
 		if (tag_name.startsWith("/") || tag_name.startsWith(".")) {
 			//this.PATH = tag_name;
-			external_tag = true;
+			//external_tag = true;
+			PATH = tag_name;
 		} else {
 			this.TAG = tag_name;
 		}
 		
 		this.callbacks = callbacks;
+		this.ROOT_ELEMENT = root_element;
+	}
+	
+	public String getPath() {
+		return PATH;
+	}
+	
+	public ArrayList<Tag> getTags() {
+		return this.tags;
 	}
 	
 	public void start() {
@@ -47,9 +60,11 @@ public class TagReader extends DefaultHandler {
 			PATH = "/Tags/Entities/" + TAG;
 		}
 		
-		if (!PATH.endsWith(".xml")) {
+		if (!PATH.endsWith(".xml") && !PATH.endsWith(".tmx")) {
 			PATH += ".xml";
 		}
+		
+		System.out.println("PATH: "  + PATH);
 		
 		try {
 			if (!external_tag) {
@@ -81,7 +96,7 @@ public class TagReader extends DefaultHandler {
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser sp;
 
-		System.out.println("Loading A Tag Entity..");
+		System.out.println("Reading tags...");
 		try {
 			sp = parserFactory.newSAXParser();
 			sp.parse(tag_stream, this);
@@ -90,26 +105,19 @@ public class TagReader extends DefaultHandler {
 		}
 	}
 	
-	public Set<String> TagSet() {
-		return tags.keySet();
-	}
-	
-	public boolean has(String tag) {
-		return tags.containsKey(tag);
-	}
-	
-	public String get(String tag) {
-		return tags.get(tag);
+	public void addTag(Tag t) {
+		this.tags.add(t);
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
 	{
 		if (reading_tag == null) reading_tag = "";
-
 		if (current_tag == null) current_tag = "";
-
-		if (!qName.equals("entity") && qName != null) {
+		
+		current_attribs = attributes;
+		
+		if (!qName.equals(ROOT_ELEMENT) && qName != null) {
 			reading_tag += (qName + ".");
 			current_tag = qName;
 		}
@@ -125,8 +133,15 @@ public class TagReader extends DefaultHandler {
 			if (reading_tag.endsWith(".")) {
 				reading_tag = reading_tag.substring(0, reading_tag.length() - 1);
 			}
-
-			setTag(reading_tag, val);
+			
+			HashMap<String, String> attrs = new HashMap<>();
+			
+			for (int i = 0; i < current_attribs.getLength(); i++) {
+				attrs.put(current_attribs.getQName(i), current_attribs.getValue(i));
+			}
+			
+			addTag(new Tag(current_tag, reading_tag, val, attrs));
+			
 			reading_tag = reading_tag.replaceAll(current_tag, "");
 		}
 	}
@@ -137,16 +152,4 @@ public class TagReader extends DefaultHandler {
 		reading_tag = reading_tag.replace(qName + ".", "");
 	}
 
-	public void setTag(String tag, String value)
-	{
-		this.tags.put(tag, value);
-	}
-
-	public void printTags()
-	{
-		for (String i : tags.keySet()) {
-			System.out.println("TAG::VAL=> " + i + " :: " + tags.get(i));
-		}
-	}
-	
 }

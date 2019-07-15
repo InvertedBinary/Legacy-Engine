@@ -27,19 +27,15 @@ function luaTestHover()
 	--print("Button Hovered Over!")
 end
 
-function luaSliderTest(newPos)
-	--print("NEW FPOSITION: "..newPos)
-	menu:SetVolume(newPos / 108);
-end
-
 function onSubmit(text)
 	print("Text Submitted.. "..text)
 	menu:SetElementText("Cmd", "")
+	menu:SetElementText("hist", menu:GetElementText("hist").."\n"..text)
 	menu:RunCommand(text)
 end
 
 function onKeyed(character, filtered)
 	if (filtered) then
-		print("Key Typed.. "..character)
+		--print("Key Typed.. "..character)
 	end
 end

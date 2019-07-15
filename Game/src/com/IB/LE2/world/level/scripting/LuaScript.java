@@ -20,8 +20,6 @@ public class LuaScript implements Runnable {
 	
 	private boolean should_close = false;
 	
-	private Thread thread;
-	
 	public LuaScript(String path) {
 		this.path = path;
 		this.script = LuaScript.class.getResource(path);
@@ -46,25 +44,15 @@ public class LuaScript implements Runnable {
 		//addGlobal("key", Boot.get()); <= Crashes lua when used
 	}
 	
-	public boolean call(String function) {
-		if (should_close)
-			return false;
-		
-        LuaValue func = globals.get(function);
-        if (!func.isnil()) {
-        	func.call();
-        	return true;
-        }
-        
-        return false;
-	}
-	
 	public boolean call(String function, Object... arg) {
 		if (should_close)
 			return false;
 		
         LuaValue func = globals.get(function);
         if (!func.isnil()) {
+        	
+        	if (arg.length == 0)
+        		func.call();
         	
         	if (arg.length == 1)
         		func.call(CoerceJavaToLua.coerce(arg[0]));
@@ -86,7 +74,8 @@ public class LuaScript implements Runnable {
 	}
 	
 	public void addGlobal(String name, Object obj) {
-		globals.set(name, CoerceJavaToLua.coerce(obj));
+		if (obj != null)
+			globals.set(name, CoerceJavaToLua.coerce(obj));
 	}
 	
 	public void run() {
@@ -95,20 +84,4 @@ public class LuaScript implements Runnable {
 		}
 	}
 	
-	private void TerminateGracefully() {
-		this.should_close = true;
-	}
-
-	public void Terminate() {
-		try {
-			if (thread != null)
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void SetThread(Thread t) {
-		this.thread = t;
-	}
 }

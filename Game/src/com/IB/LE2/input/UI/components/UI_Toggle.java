@@ -12,7 +12,6 @@ public class UI_Toggle extends UI_Root implements UI_Clickable {
 	
 	private AnimatedSprite sprite;
 	private boolean checked = false;
-	private int x, y;
 	
 	public UI_Toggle(int x, int y, boolean checked, AnimatedSprite sprite) {
 		this.x = x;

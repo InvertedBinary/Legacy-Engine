@@ -75,10 +75,18 @@ public class SpriteSheet {
 									int sy = Integer.parseInt(c.getAttribute("y"));
 									int sw = Integer.parseInt(c.getAttribute("w"));
 									int sh = Integer.parseInt(c.getAttribute("h"));
-									int size = Integer.parseInt(c.getAttribute("size"));
+									
+									int frameW, frameH;
+									if (c.hasAttribute("size")) {
+										int size = Integer.parseInt(c.getAttribute("size"));
+										frameW = size; frameH = size;
+									} else {
+										frameW = Integer.parseInt(c.getAttribute("frame-width"));
+										frameH = Integer.parseInt(c.getAttribute("frame-height"));
+									}
 									
 									String name = c.getTextContent();
-									SpriteSheet subsheet = new SpriteSheet(s, sx, sy, sw, sh, size);
+									SpriteSheet subsheet = new SpriteSheet(s, sx, sy, sw, sh, frameW, frameH);
 									put(name, subsheet);
 								} else {
 									String name = e.getTextContent();

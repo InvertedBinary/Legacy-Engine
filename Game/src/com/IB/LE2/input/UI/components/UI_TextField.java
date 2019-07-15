@@ -16,7 +16,7 @@ import com.IB.LE2.media.graphics.Sprite;
 public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistener {
 	
 	UI_TextInputListener listener;
-	private int x, y, maxchars;
+	private int maxchars;
 	private int width, height;
 	private boolean scrollable, numeric, sensitive_input;
 	
@@ -166,6 +166,19 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 				|| (valid_punctuation.contains("" + c)));
 	}
 	
+	public boolean PassesFilter(String s) {
+		if (s.trim().length() == 0)
+			return false;
+		
+		for (int i = 0; i < s.length(); i++) {
+			if (!PassesFilter(s.charAt(i)))
+				return false;
+		}
+		
+		return true;
+		
+	}
+	
 	@Deprecated
 	public void DropLastWord() {
 		if (text.contains(" ")) {
@@ -313,8 +326,9 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 	}
 	
 	public void SubmitText() {
-		if (listener != null)
-		this.listener.SubmitInput(text);
+		if (PassesFilter(text))
+			if (listener != null)
+				listener.SubmitInput(text);
 	}
 	
 	public void ShiftCursor(int step) {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import com.IB.LE2.Boot;
@@ -26,6 +27,8 @@ public class Level extends EntityContainer implements Serializable {
 	public int width, height;
 	public int[] tiles;
 	transient public Tile tile;
+	
+	public HashMap<Integer, Tile> tile_map = new HashMap<>();
 
 	transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
@@ -86,16 +89,6 @@ public class Level extends EntityContainer implements Serializable {
 		return result;
 	}
 	
-	public String returnTile(List<Entity> entities) {
-		Tile tile;
-		tile = getTile((int) entities.get(0).x() >> VARS.TILE_BIT_SHIFT,
-				(int) entities.get(0).y() >> VARS.TILE_BIT_SHIFT);
-		String tileString = tile.toString();
-		tileString = tileString.replace("com.IB.SL.level.tile.", "");
-		tileString = tileString.substring(0, tileString.indexOf("@"));
-		return tileString;
-	}
-	 
 	 transient private Vector2i start;
 	 transient private Vector2i goal;
 	
@@ -421,7 +414,7 @@ public class Level extends EntityContainer implements Serializable {
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.Air;
 		
-		Tile t = Tile.TileIndex.get((tiles[x + y * width]));
+		Tile t = tile_map.get(tiles[x + y * width]);
 		t = (t == null) ? Tile.Air : t;
 		
 		return t;

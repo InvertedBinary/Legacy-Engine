@@ -3,6 +3,7 @@ package com.IB.LE2.world.entity;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -17,7 +18,7 @@ import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.projectile.Projectile;
 import com.IB.LE2.world.level.Level;
 
-public abstract class Entity extends DefaultHandler implements Serializable {
+public abstract class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public transient Rectangle bounds = new Rectangle(0, 0, 32, 32);
@@ -70,7 +71,28 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 		//r = new Rectangle((int)x, (int)y, sprite.getWidth(), sprite.getHeight());
 	}
 	
+	public Set<String> getVars() {
+		return vars.keySet();
+	}
+	
+	public void set(String key, double num) {
+		set(key, "" + num);
+	}
+	
+	public void set(String key, boolean val) {
+		set(key, "" + val);
+	}
+	
 	public void set(String key, String val) {
+		if (key.equals("name"))
+			name = key;
+		else if (key.equals("health"))
+			health = Double.parseDouble(val);
+		else if (key.equals("speed"))
+			speed = Double.parseDouble(val);
+		else if (key.equals("mass"))
+			mass = Double.parseDouble(val);
+		
 		vars.put(key, val);
 	}
 	
@@ -80,7 +102,7 @@ public abstract class Entity extends DefaultHandler implements Serializable {
 	
 	public double nvar(String key) {
 		try {
-			return Double.parseDouble(svar(key));			
+			return Double.parseDouble(svar(key));
 		} catch (NumberFormatException e) {
 			return 0;
 		}

@@ -82,27 +82,13 @@ public class Commands {
 							.setPosition(new TileCoord(Integer.parseInt(Modifier), Integer.parseInt(Modifier2)));
 
 					break;
-				case "speed": {
+				case "modav":
 					try {
-						double WalkingSpeedInt = Double.parseDouble(Modifier);
-						System.out.println("Set Speed Equal To " + WalkingSpeedInt);
-						player.speed = WalkingSpeedInt;
-
-					} catch (NumberFormatException e) {
-					}
-
-				}
+						System.out.println("SETTING PLAYER VAR: " + Modifier + " TO: " + Modifier2);
+						player.set(Modifier, Modifier2);
+					} catch (NumberFormatException e) { }
 					break;
-
-				case "weather":
-//						if (Modifier.equalsIgnoreCase("rain")) {
-//							Boot.get().getLevel().isRaining = !Boot.get().getLevel().isRaining;
-//						} else
-//							if (Modifier.equalsIgnoreCase("clear")) {
-//								Boot.get().getLevel().isRaining = false;
-//							}
-					break;
-
+					
 				case "tcl":
 					player.noclip = !player.noclip;
 					break;
@@ -158,6 +144,7 @@ public class Commands {
 
 				case "menu":
 				case "ui":
+					UI_Manager.Current().ResumeWorldInput();
 					UI_Manager.Load(new TagMenu(Modifier));
 					break;
 

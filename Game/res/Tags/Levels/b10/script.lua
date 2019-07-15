@@ -1,14 +1,13 @@
 print("Loading Lua for level b10")
 
---level:add(z);
 
-function TestSpawnTrigger()
-	print("Spawn?");
+function TestSpawnTrigger(entity)
+	print("Triggered By: "..entity.name);
 	local z = luajava.newInstance("com.IB.LE2.world.entity.mob.TagMob", "TestZombie", 3, 40);
 	level:add(z);
 end
 
-function TestLoadTrigger() 
+function TestLoadTrigger(entity) 
 	print("Loading..?");
 	level:MovePlayerTo(0, 0, "/Tags/Levels/b20", true);
 end

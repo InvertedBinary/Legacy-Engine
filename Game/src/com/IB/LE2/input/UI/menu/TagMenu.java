@@ -1,9 +1,9 @@
 package com.IB.LE2.input.UI.menu;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -31,49 +31,46 @@ import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.util.FileIO.Tag;
+import com.IB.LE2.util.FileIO.TagReadListener;
+import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.world.level.scripting.LuaScript;
 
 public class TagMenu extends UI_Menu
 {
-	protected String PATH = "";
-	protected String TAG = "";
-	protected String ROOT_ELEMENT = "uiset";
-	
-	private InputStream tag_stream = null;
-	protected boolean external_tag = false;
-	private Attributes current_attribs;
-
-	private String reading_tag;
-	private String current_tag;
-	
+	public TagReader tags;
+	public LuaScript script;
+	public boolean loadedLua = false;
 	public UI_UnloadListener UnloadListener;
 	
-	public TagMenu(String tag_name)
-	{
-		this.TAG = tag_name;
-		this.PATH = "/Tags/Menu/" + tag_name;
+	private String path;
+	
+	public TagMenu(String tag_name) {
+		if (!tag_name.contains("/"))
+			tag_name = "/Tags/Menu/" + tag_name;
 		
-		this.external_tag = false;
-	}
+		this.path = tag_name;
+		
+		tags = new TagReader(path, "uiset", new TagReadListener() {
+			@Override
+			public void TagsRead() {
+				if (!processAllTags())
+					Boot.log("Unable to recognize one or more tags- ensure you are writing tags for this version of Legacy Engine!", "TagMob", true);
+			}
 
-	public TagMenu(String path, boolean external)
-	{
-		this.PATH = path;
-		this.TAG = path.substring(path.lastIndexOf('/') + 1, path.length());
-
-		this.external_tag = external;
-	}
-
-	public void update() {
-		if (Boot.get().key.map && Mouse.getButton() == 2) {
-			UI_Manager.UnloadCurrent();
-			UI_Manager.Load(new TagMenu(PATH, external_tag));
-			Mouse.setMouseB(-1);
-		}
+			@Override
+			public void TagsError() {
+				Boot.log("An error occurred attempting to read the tags", "TagMenu.java", true);
+			}
+		});
 	}
 	
-	public String GetTagName() {
-		return TAG;
+	public void update() {
+		if (Boot.get().key.map && Mouse.getButton() == 1) {
+			UI_Manager.UnloadCurrent();
+			UI_Manager.Load(new TagMenu(tags.getPath()));
+			Mouse.setMouseB(-1);
+		}
 	}
 	
 	public void UpdateUnloaded() {
@@ -101,308 +98,267 @@ public class TagMenu extends UI_Menu
 	{
 		super.init(0, 0);
 		
-		try {
-			if (!external_tag) {
-				tag_stream = TagMenu.class.getResourceAsStream(PATH + ".xml");
-			} else {
-				tag_stream = new FileInputStream(new File(PATH + ".xml"));
-			}
-
-			if (tag_stream == null) {
-				return;
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		readTags();
-
-		try {
-			tag_stream.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		if (ui.getAll().size() == 0)
+			tags.start();
+		
 		initLua();
 	}
 	
-	public void readTags()
-	{
-		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-		SAXParser sp;
-
-		System.out.println("Loading A Tag Menu..");
-		try {
-			sp = parserFactory.newSAXParser();
-			sp.parse(tag_stream, this);
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
+	public boolean processAllTags() {
+		boolean result = true;
+		for (Tag i : tags.getTags()) {
+			if (!processTag(i)) result = false;
 		}
-	}
-	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
-	{
-		if (reading_tag == null) reading_tag = "";
 
-		if (current_tag == null) current_tag = "";
+		return result;
+	}
+
+	public boolean processTag(Tag t) {
+		boolean result = true;
+		String val = t.value;
 		
-		if (current_attribs == null) current_attribs = attributes;
-
-		if (!qName.equals(ROOT_ELEMENT) && qName != null) {
-			reading_tag += (qName + ".");
-			current_tag = qName;
-		}
-	}
-
-	public String pullAttrib(String key, String defaultVal) {
-		if (current_attribs.getIndex(key) != -1)
-			return current_attribs.getValue(key);
-		
-		return defaultVal;
-	}
-	
-	@Override
-	public void characters(char ch[], int start, int length) throws SAXException
-	{
-		if (reading_tag.equals("") || current_tag.equals("")) return;
-
-		String val = (new String(ch, start, length));
-		if (!(val.trim()).equals("")) {
-			if (reading_tag.endsWith(".")) {
-				reading_tag = reading_tag.substring(0, reading_tag.length() - 1);
+		switch (t.uri) {
+		case "global.title":
+			break;
+		case "global.background":
+			System.out.println("BG: " + val);
+			try {					
+				int hex = Long.decode(val).intValue();
+				this.bg = new Sprite(Boot.width, Boot.height, hex);
+			} catch (NumberFormatException e) {
+				try {
+					this.bg = Sprite.get(val);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
 			}
-
-			//System.out.println("TAG::VAL=> " + reading_tag + " :: " + val);
+			break;			
+		case "global.audioloop":
+			break;
+		case "global.onUnload":
+			String onUnloadFunc = val;
 			
-			switch (reading_tag) {
-			case "global.title":
-				break;
-			case "global.background":
-				System.out.println("BG: " + val);
-				try {					
-					int hex = Long.decode(val).intValue();
-					this.bg = new Sprite(Boot.width, Boot.height, hex);
-				} catch (NumberFormatException e) {
+			this.UnloadListener = new UI_UnloadListener() {
+				@Override
+				public void onUnload() {
+					script.call(onUnloadFunc);
+				}
+			};
+			break;
+			
+		case "components.button":
+			int x = (int)parseNum(t.get("x", "0"));
+			int y = (int)parseNum(t.get("y", "0"));
+			int w = (int)parseNum(t.get("w", "0"));
+			int h = (int)parseNum(t.get("h", "0"));
+			boolean transAnim = parseBool(t.get("transAnim", "false"));
+			boolean trueAnim = parseBool(t.get("anim", "false"));
+			String imagpth = t.get("image", "");
+			String onClickFunc = t.get("onClick", "");
+			String onHoverFunc = t.get("onHover", "");
+			
+			UI_Button btn = null;
+			Sprite spr = Sprite.get("Grass");
+
+			try {					
+				int hex = Long.decode(imagpth).intValue();
+				spr = new Sprite(w, h, hex);
+			} catch (NumberFormatException e) {
+				if (!imagpth.endsWith(".png")) {
 					try {
-						this.bg = Sprite.get(val);
+						spr = Sprite.get(imagpth);
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
 				}
-				break;			
-			case "global.audioloop":
-				break;
-			case "global.onUnload":
-				String onUnloadFunc = val;
-				
-				this.UnloadListener = new UI_UnloadListener() {
-					@Override
-					public void onUnload() {
-						ls.call(onUnloadFunc);
-					}
-				};
-				break;
-				
-			case "components.button":
-				/*for (int i = 0 ; i < current_attribs.getLength(); i++) {
-					System.out.println(current_attribs.getQName(i) + " :: " + current_attribs.getValue(i));
-				}*/
-				int x = (int)parseNum(pullAttrib("x", "0"));
-				int y = (int)parseNum(pullAttrib("y", "0"));
-				int w = (int)parseNum(pullAttrib("w", "0"));
-				int h = (int)parseNum(pullAttrib("h", "0"));
-				boolean transAnim = parseBool(pullAttrib("transAnim", "false"));
-				boolean trueAnim = parseBool(pullAttrib("anim", "false"));
-				String imagpth = pullAttrib("image", "");
-				String onClickFunc = pullAttrib("onClick", "");
-				String onHoverFunc = pullAttrib("onHover", "");
-				
-				UI_Button btn = null;
-				Sprite spr = Sprite.get("Grass");
-
-				try {					
-					int hex = Long.decode(imagpth).intValue();
-					spr = new Sprite(w, h, hex);
-				} catch (NumberFormatException e) {
-					if (!imagpth.endsWith(".png")) {
-						try {
-							spr = Sprite.get(imagpth);
-						} catch (Exception e2) {
-							e2.printStackTrace();
-						}
-					}
+			}
+			
+			if (imagpth.equals("")) {
+				btn = new UI_Button(x, y, w, h);
+			} else if (!trueAnim) {
+				btn = new UI_Button(x, y, spr, transAnim);
+			} else {
+				SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/Tags/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
+				AnimatedSprite animSpr = new AnimatedSprite(animSheet, 1, 1, 1);
+				btn = new UI_Button(x, y, animSpr);
+				//AnimatedSprite aspr = new AnimatedSprite();
+				//addUI(new UI_Button(x, y, animSpr));
+			}
+			
+			btn.addListener(new UI_ButtonListener() {
+				@Override
+				public void ButtonClick() {
+					if (script == null) return;
+			        try {
+			        	script.call(onClickFunc);
+			        } catch (LuaError e) {
+			        	e.printStackTrace();
+			        }
 				}
-				
-				if (imagpth.equals("")) {
-					btn = new UI_Button(x, y, w, h);
-				} else if (!trueAnim) {
-					btn = new UI_Button(x, y, spr, transAnim);
-				} else {
-					SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/Tags/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
-					AnimatedSprite animSpr = new AnimatedSprite(animSheet, 1, 1, 1);
-					btn = new UI_Button(x, y, animSpr);
-					//AnimatedSprite aspr = new AnimatedSprite();
-					//addUI(new UI_Button(x, y, animSpr));
-				}
-				
-				btn.addListener(new UI_ButtonListener() {
-					@Override
-					public void ButtonClick() {
-						if (ls == null) return;
-				        try {
-				        	ls.call(onClickFunc);
-				        } catch (LuaError e) {
-				        	e.printStackTrace();
-				        }
-					}
 
-					@Override
-					public void ButtonHover() {
-						if (ls == null) return;
-				        try {
-				        	ls.call(onHoverFunc);
-				        } catch (LuaError e) {
-				        	e.printStackTrace();
-				        }
-				    }
-				});
-				
-				addUI(btn);
-				
-				break;
-			case "components.label":
-				int lblx = (int)parseNum(pullAttrib("x", "0"));
-				int lbly = (int)parseNum(pullAttrib("y", "0"));
-				int lblhex = Long.decode(pullAttrib("color", "0")).intValue();
-				int lblhvhex = Long.decode(pullAttrib("hvcolor", "" + lblhex)).intValue();
-				String hyperlink = pullAttrib("hyperlink", "");
+				@Override
+				public void ButtonHover() {
+					if (script == null) return;
+			        try {
+			        	script.call(onHoverFunc);
+			        } catch (LuaError e) {
+			        	e.printStackTrace();
+			        }
+			    }
+			});
+			
+			btn.SetAlignment(t.get("align", ""));
+			btn.SetID(t.get("id", btn.GetID()));
+			
+			addUI(btn);
+			
+			break;
+		case "components.label":
+			int lblx = (int)parseNum(t.get("x", "0"));
+			int lbly = (int)parseNum(t.get("y", "0"));
+			int lblhex = Long.decode(t.get("color", "0")).intValue();
+			int lblhvhex = Long.decode(t.get("hvcolor", "" + lblhex)).intValue();
+			String hyperlink = t.get("hyperlink", "");
 
-				UI_Label uilbl = new UI_Label(lblx, lbly, val);
-				uilbl.setDefaultColor(lblhex);
-				uilbl.fallback_color = uilbl.color;
-				uilbl.hyperlink = hyperlink;
-				uilbl.hover_color = lblhvhex;
-				uilbl.spacing = -2;
-				uilbl.font_size = 8;
-				
-				addUI(uilbl);
-				
-				break;
-			case "components.image":
-				int imagx = (int)parseNum(pullAttrib("x", "0"));
-				int imagy = (int)parseNum(pullAttrib("y", "0"));
-				int imagw = (int)parseNum(pullAttrib("w", "0"));
-				int imagh = (int)parseNum(pullAttrib("h", "0"));
-				double imagr = Math.toRadians(parseNum(pullAttrib("r", "0")));
-				String imagimagpth = val;
-				
-				Sprite imagspr = Sprite.get("Grass");
-
+			UI_Label uilbl = new UI_Label(lblx, lbly, val);
+			uilbl.setDefaultColor(lblhex);
+			uilbl.fallback_color = uilbl.color;
+			uilbl.hyperlink = hyperlink;
+			uilbl.hover_color = lblhvhex;
+			uilbl.spacing = -2;
+			uilbl.font_size = 8;
+			
+			uilbl.SetAlignment(t.get("align", ""));
+			uilbl.SetID(t.get("id", uilbl.GetID()));
+			addUI(uilbl);
+			
+			break;
+		case "components.image":
+			int imagx = (int)parseNum(t.get("x", "0"));
+			int imagy = (int)parseNum(t.get("y", "0"));
+			int imagw = (int)parseNum(t.get("w", "0"));
+			int imagh = (int)parseNum(t.get("h", "0"));
+			boolean anim = parseBool(t.get("anim", "false"));
+			double imagr = parseNum(t.get("r", "-1"));
+			String imagimagpth = val;
+			
+			Sprite imagspr = Sprite.get("Grass");
+			UI_Sprite uis;
+			
+			if (!anim) {
 				try {					
 					int hex = Long.decode(imagimagpth).intValue();
-					imagspr = Sprite.rotate(new Sprite(imagw, imagh, hex), imagr);
+					imagspr = new Sprite(imagw, imagh, hex);
 				} catch (NumberFormatException e) {
 					try {
-						imagspr = Sprite.rotate(Sprite.get(imagimagpth), imagr);
+						if (!anim)
+							imagspr = Sprite.get(imagimagpth);
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
 				}
 				
-				UI_Sprite uis = new UI_Sprite(imagx, imagy, imagspr);
-				addUI(uis);
+				if (imagr != -1)
+					imagspr = Sprite.rotate(imagspr, Math.toRadians(imagr));
 				
-				break;
-			case "components.slider":
-				UI_Slider uiSlider;
+				uis = new UI_Sprite(imagx, imagy, imagspr);
 
-				int	sliderx  = (int)parseNum(pullAttrib("x",  "0"));
-				int slidery  = (int)parseNum(pullAttrib("y",  "0"));
-				int sliderw  = (int)parseNum(pullAttrib("w",  "0"));
-				int sliderxo = (int)parseNum(pullAttrib("xo", "" + sliderw/2));
-				String onPosUpdated = pullAttrib("onPosUpdated", "");
-
-				uiSlider = new UI_Slider(sliderx, slidery, sliderw, sliderxo);
-				uiSlider.railCol = Long.decode(pullAttrib("railColor", "" + uiSlider.railCol)).intValue();
-				uiSlider.slideCol = Long.decode(pullAttrib("slideCol", "" + uiSlider.slideCol)).intValue();
-
-
-				uiSlider.addListener(new UI_SliderListener() {
-					@Override
-					public void PositionChanged() {
-				        ls.call(onPosUpdated, uiSlider.pos);
-					}
-				});
-				addUI(uiSlider);
-				break;
-			
-			case "components.textfield":
-				int	fieldx  = (int)parseNum(pullAttrib("x",  "0"));
-				int fieldy  = (int)parseNum(pullAttrib("y",  "0"));
-				int	maxchars  = (int)parseNum(pullAttrib("max",  "24"));
-				boolean scrollable = parseBool(pullAttrib("scrollable", "true"));
-				boolean numeric = parseBool(pullAttrib("numeric_only", "false"));
-				boolean sensitive = parseBool(pullAttrib("sensitive_input", "false"));
-				
-				
-				UI_TextField field = new UI_TextField(fieldx, fieldy, maxchars, scrollable, numeric, sensitive);
-				field.SetID(pullAttrib("id", field.GetID()));
-				field.prompt_text = val;
-				
-				String onSubmit = pullAttrib("onSubmit", "");
-				String onKeyed = pullAttrib("onKeyed", "");
-				field.addListener(new UI_TextInputListener() {
-					@Override
-					public void SubmitInput(String input) {
-				        ls.call(onSubmit, input);
-					}
-
-					@Override
-					public void KeyEntered(char c, boolean filtered) {
-				        ls.call(onKeyed, c, filtered);
-					}
-				});
-				
-				addUI(field);
-				
-				break;
-			case "components.toggle":
-				System.out.println("Toggles are not fully implemented.");
-				UI_Toggle toggle = new UI_Toggle(0, 0, false, null);
-				addUI(toggle);
-				break;
-				
-			case "components.canvas":
-				int	canvasx = (int)parseNum(pullAttrib("x",  "0"));
-				int canvasy = (int)parseNum(pullAttrib("y",  "0"));
-				int canvasw = (int)parseNum(pullAttrib("width",  "0"));
-				int canvash = (int)parseNum(pullAttrib("height",  "0"));
-				int drawcol = Long.decode(pullAttrib("drawcol", "0")).intValue();
-				int bgcol = Long.decode(pullAttrib("bgcol", "0")).intValue();
-
-				UI_Canvas canvas = new UI_Canvas(canvasx, canvasy, canvasw, canvash);
-				canvas.SetColor(drawcol);
-				canvas.SetBackground(bgcol);
-				addUI(canvas);
-				break;
-
-			default:
-				System.out.println(" - !! Unknown Menu Component !!: " + reading_tag);
-				break;
+			} else {
+				AnimatedSprite sp = Sprite.getNewAnim(imagimagpth);
+				uis = new UI_Sprite(imagx, imagy, sp);
 			}
 			
-			reading_tag = reading_tag.replaceAll(current_tag, "");
-		}		
+			uis.SetAlignment(t.get("align", ""));
+			uis.SetID(t.get("id", uis.GetID()));
+
+			addUI(uis);
+			
+			break;
+		case "components.slider":
+			UI_Slider uiSlider;
+
+			int	sliderx  = (int)parseNum(t.get("x",  "0"));
+			int slidery  = (int)parseNum(t.get("y",  "0"));
+			int sliderw  = (int)parseNum(t.get("w",  "0"));
+			int sliderxo = (int)parseNum(t.get("xo", "" + sliderw/2));
+			String onPosUpdated = t.get("onPosUpdated", "");
+
+			uiSlider = new UI_Slider(sliderx, slidery, sliderw, sliderxo);
+			uiSlider.railCol = Long.decode(t.get("railColor", "" + uiSlider.railCol)).intValue();
+			uiSlider.slideCol = Long.decode(t.get("slideCol", "" + uiSlider.slideCol)).intValue();
+
+
+			uiSlider.addListener(new UI_SliderListener() {
+				@Override
+				public void PositionChanged() {
+			        script.call(onPosUpdated, uiSlider.pos);
+				}
+			});
+			addUI(uiSlider);
+			break;
+		
+		case "components.textfield":
+			int	fieldx  = (int)parseNum(t.get("x",  "0"));
+			int fieldy  = (int)parseNum(t.get("y",  "0"));
+			int	maxchars  = (int)parseNum(t.get("max",  "24"));
+			boolean scrollable = parseBool(t.get("scrollable", "true"));
+			boolean numeric = parseBool(t.get("numeric_only", "false"));
+			boolean sensitive = parseBool(t.get("sensitive_input", "false"));
+			
+			
+			UI_TextField field = new UI_TextField(fieldx, fieldy, maxchars, scrollable, numeric, sensitive);
+			field.SetID(t.get("id", field.GetID()));
+			field.prompt_text = val;
+			
+			String onSubmit = t.get("onSubmit", "");
+			String onKeyed = t.get("onKeyed", "");
+			field.addListener(new UI_TextInputListener() {
+				@Override
+				public void SubmitInput(String input) {
+			        script.call(onSubmit, input);
+				}
+
+				@Override
+				public void KeyEntered(char c, boolean filtered) {
+			        script.call(onKeyed, c, filtered);
+				}
+			});
+			
+			addUI(field);
+			
+			break;
+		case "components.toggle":
+			System.out.println("Toggles are not fully implemented.");
+			UI_Toggle toggle = new UI_Toggle(0, 0, false, null);
+			addUI(toggle);
+			break;
+			
+		case "components.canvas":
+			int	canvasx = (int)parseNum(t.get("x",  "0"));
+			int canvasy = (int)parseNum(t.get("y",  "0"));
+			int canvasw = (int)parseNum(t.get("width",  "0"));
+			int canvash = (int)parseNum(t.get("height",  "0"));
+			int drawcol = Long.decode(t.get("drawcol", "0")).intValue();
+			int bgcol = Long.decode(t.get("bgcol", "0")).intValue();
+
+			UI_Canvas canvas = new UI_Canvas(canvasx, canvasy, canvasw, canvash);
+			canvas.SetColor(drawcol);
+			canvas.SetBackground(bgcol);
+			addUI(canvas);
+			break;
+
+		default:
+			System.out.println(" - !! Unknown Menu Component !!: " + t.uri);
+			result = false;
+			break;
+		}
+		return result;
 	}
 	
+			
 	public void killLua() {
+		script = null;
 		this.loadedLua = false;
-		try {
-			luaThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public boolean runningLua() {
@@ -413,37 +369,31 @@ public class TagMenu extends UI_Menu
 		loadLua();
 	}
 	
-	public Thread luaThread;
-	LuaScript ls;
-	boolean loadedLua = false;
 	public void loadLua() {
 		try {
-		String luaString = this.PATH + ".lua";
-		ls = new LuaScript(luaString);
-		ls.AddGeneralGlobals();
+		String luaString = path + ".lua";
+		script = new LuaScript(luaString);
+		script.AddGeneralGlobals();
 		
-		luaThread = new Thread(ls, "Menu LUA: " + luaString);
-		luaThread.start();
+		script.run();
 		loadedLua = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException
-	{
-		reading_tag = reading_tag.replace(qName + ".", "");
-	}
-
-	public double parseNum(String val)
-	{
+	public double parseNum(String val) {
 		return Double.parseDouble(val);
 	}
 
-	public Boolean parseBool(String val)
-	{
+	public Boolean parseBool(String val) {
 		return Boolean.parseBoolean(val);
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		script.call("KeyInput", e.getKeyCode());
+		//System.out.println("Key Released: " + e.getKeyCode());
 	}
 	
 }

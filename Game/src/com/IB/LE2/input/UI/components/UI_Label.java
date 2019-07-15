@@ -2,6 +2,8 @@ package com.IB.LE2.input.UI.components;
 
 import java.awt.Desktop;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
@@ -9,7 +11,6 @@ import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Label extends UI_Root implements UI_Clickable {
-	public int x, y;
 	
 	public String hyperlink =  "";
 	
@@ -20,10 +21,21 @@ public class UI_Label extends UI_Root implements UI_Clickable {
 	public int hover_color = 0x0000FF;
 	public int fallback_color = 0;
 	
+	private int lines = 1;
+	
 	public UI_Label(int x, int y, String text) {
 		this.x = x;
 		this.y = y;
-		this.text = text;
+		SetText(text);
+	}
+	
+	public void SetText(String text) {
+		super.SetText(text);
+		
+		Matcher m = Pattern.compile("\r\n|\r|\n").matcher(text);
+		while (m.find()) {
+		    lines++;
+		}
 	}
 
 	public void update() {
@@ -36,7 +48,7 @@ public class UI_Label extends UI_Root implements UI_Clickable {
 	
 	@Override
 	public boolean InBounds() {
-		return checkBounds(x, y, font_size + (font_size + spacing) * text.length(), font_size);
+		return !this.hyperlink.equals("") && checkBounds(RenderX(x), RenderY(y), font_size + (font_size + spacing) * text.length(), font_size * lines);
 	}
 
 	@Override
@@ -64,9 +76,8 @@ public class UI_Label extends UI_Root implements UI_Clickable {
 	public void Dragged() { }
 	
 	public void render(Screen screen) {
-		Game.font8bit.render(x - 1, y, spacing, 0x282828, text, screen, false, false);
-		Game.font8bit.render(x, y, spacing, color, text, screen, false, false);
-
+		Game.font8bit.render(RenderX(x) - 1, RenderY(y), spacing, 0x282828, text, screen, false, false);
+		Game.font8bit.render(RenderX(x), RenderY(y), spacing, color, text, screen, false, false);
 	}
 
 	@Override

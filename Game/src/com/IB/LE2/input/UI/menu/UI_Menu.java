@@ -20,7 +20,7 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
 
-public abstract class UI_Menu extends DefaultHandler implements KeyListener {
+public abstract class UI_Menu implements KeyListener {
 	
 	public Sprite bg;
 	public SpriteSheet s_bg;
@@ -32,15 +32,12 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 	public boolean enabled = false;
 	public static int index = 0;
 	
-	public static byte suspend = 0;
-	public final static byte SUS_ALL = 2;
-	public final static byte SUS_UPD = 1;
-	public final static byte SUS_NON = 0;
-	
 	public void init(int x, int y) {
 		this.x = x;
 		this.y = y;
-		ui = new UI_Container();
+		
+		if (ui == null)
+			ui = new UI_Container();
 	}
 	
 	public void UpdateUnloaded() { }
@@ -48,12 +45,14 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 	public void render(Screen screen) {	}
 	
 	public void continueGame() {
-		UI_Manager.UnloadCurrent();
+		//UI_Manager.UnloadCurrent();
 		if (!Boot.get().getLevel().players.contains(Boot.get().getPlayer())) {
 			Boot.get().getPlayer().removed = false;
 			Boot.get().getLevel().add(Boot.get().getPlayer());
 			//Boot.get().getLevel().loadLua();
 		}
+		
+		Boot.getPlayer().ShowHUD();
 	}
 	
 	public void SetVolume(float level) {
@@ -77,6 +76,13 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 			);
 	}
 	
+	public int progressBar(int total_frames, double max_val, double current_val) {
+		double percent = current_val / max_val;
+		int frame = (int)(percent * total_frames);
+		
+		return (total_frames - 1) - frame;
+	}
+	
 	public void RunCommand(String text) {
 		Commands.Execute(text, Boot.get().getPlayer());
 	}
@@ -94,7 +100,7 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 	}
 	
 	public UI_Root GetElementById(String id) {
-		for (UI_Root e : UI_Manager.Current().ui.getAll()) {
+		for (UI_Root e : ui.getAll()) {
 			if (e.GetID().equals(id))
 				return e;
 		}
@@ -107,11 +113,14 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 	}
 	
 	public String GetElementText(String id) {
-		return GetElementById(id).GetText();
+		if (ElementExists(id))
+			return GetElementById(id).GetText();
+		else return "";
 	}
 	
 	public void SetElementText(String id, String text) {
-		GetElementById(id).SetText(text);
+		if (ElementExists(id))
+			GetElementById(id).SetText(text);
 	}
 	
 	public void SuspendWorldInput() {
@@ -134,19 +143,10 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 		
 	}
 	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
 	public Sprite getBG() {
 		return bg;
 	}
 
-	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
@@ -158,9 +158,6 @@ public abstract class UI_Menu extends DefaultHandler implements KeyListener {
 			for (UI_Keylistener element : ui.getFields()) {
 				element.KeyPressed(e);
 			}
-		
-		
-		//System.out.println("Key Pressed: " + e.getKeyChar());
 	}
 
 	@Override

@@ -19,9 +19,13 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
+import com.IB.LE2.util.FileIO.TagReadListener;
+import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
+import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
+import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
@@ -50,6 +54,9 @@ public class TiledLevel extends Level {
 	public TileCoord Spawnpoint;
 	public ArrayList<int[]> tilels;
 	public ArrayList<LineSegment> solid_geometry;
+	
+	public LuaScript script;
+	public boolean LuaLoaded = false;
 
 	public TiledLevel(String path) {
 		super(path);
@@ -63,42 +70,50 @@ public class TiledLevel extends Level {
 
 		//add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
 		//add(new TagEntity("/XML/Entities/TestZombie.xml", false));
+		
+		tr = new TagReader(tiled_xml, "level", new TagReadListener() {
+			@Override
+			public void TagsRead() {
+				//PrintTRTags();
+			}
+
+			@Override
+			public void TagsError() {
+				
+			}
+		});
+		
+		//tr.start();
 
 		initLua();
 	}
 	
+	TagReader tr;
 	
-	
-	public void killLua() {
-		this.loadedLua = false;
-		
-		ls.Terminate();
+	public void StopLua() {
+		script = null;
+		this.LuaLoaded = false;
 	}
 	
 	public boolean runningLua() {
-		return this.loadedLua;
+		return this.LuaLoaded;
 	}
 	
 	public void initLua() {
 		loadLua();
 	}
 	
-	public Thread luaThread;
-	LuaScript ls;
-	boolean loadedLua = false;
 	public void loadLua() {
 		try {
-		String luaString = path + "/script.lua";
-		ls = new LuaScript(luaString);
-		ls.addGlobal("level", this);
-		//ls.addGlobal("pc", getClientPlayer());
-		//ls.addGlobal("key", Boot.get().getInput());
-		//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
-		
-		luaThread = new Thread(ls, "LUA For " + luaString);
-		ls.SetThread(luaThread);
-		luaThread.start();
-		loadedLua = true;
+			String luaString = path + "/script.lua";
+			script = new LuaScript(luaString);
+			//script.AddGeneralGlobals();
+			script.addGlobal("level", this);
+			//ls.addGlobal("pc", getClientPlayer());
+			//ls.addGlobal("key", Boot.get().getInput());
+			//ls.addGlobal("key", Boot.get()); <= Crashes lua when used
+			script.run();
+			LuaLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -288,7 +303,7 @@ public class TiledLevel extends Level {
         case "map": {
 			//Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
 			
-			Tile.TileIndex.put(0, Tile.Air);
+        	tile_map.put(0, Tile.Air);
 			
 			for (int i = 0; i < (width * height); i++) {
 				Tile[] merges = new Tile[tilels.size()];
@@ -297,10 +312,10 @@ public class TiledLevel extends Level {
 						merges[j] = null;
 					} else {
 						int tile_id = tilels.get(j)[i];
-						merges[j] = Tile.TileIndex.get(tile_id);
+						merges[j] = tile_map.get(tile_id);
 						if (merges[j] == null) {
 							merges[j] = new XML_Tile(tile_id, Tile.GenSpriteFromId(SpriteSheet.get("Terrain"), tile_id));
-							Tile.TileIndex.put(tile_id, merges[j]);
+							tile_map.put(tile_id, merges[j]);
 						}
 					}
 				}
@@ -308,7 +323,7 @@ public class TiledLevel extends Level {
 				Sprite sp = null;
 				for (int j = 0; j < merges.length; j++ ) {
 					if (merges[j] != null) {
-						if (sp == null && !merges[j].equals(Tile.TileIndex.get(0))) {
+						if (sp == null && !merges[j].equals(tile_map.get(0))) {
 							sp = merges[j].sprite;
 						}
 
@@ -324,7 +339,7 @@ public class TiledLevel extends Level {
 				int id = (1024 + i); //SET 1024 TO MAX NATURAL TILE ID
 				XML_Tile ct = new XML_Tile(id, sp);
 				
-				Tile.TileIndex.put(id, ct);
+				tile_map.put(id, ct);
 				this.tilels.get(0)[i] = (id);
 				}
 			}
@@ -384,17 +399,22 @@ public class TiledLevel extends Level {
 		}
 	}
 
-	public void TestEventVolumes(Player p) {
+	public void TestEventVolumes(Entity e) {
 		if (event_volumes != null)
 		for (EventVolume ev : event_volumes) {
 			if (ev != null)
-			ev.Test(p, ls);
+				if (ev.player_only) {
+					if (e instanceof Player)
+					ev.Test(e, script);
+				} else {
+					ev.Test(e, script);
+				}
 		}
 	}
 			
 	public void UpdateUnloaded() {
-		if (loadedLua)
-		killLua();
+		if (LuaLoaded)
+			StopLua();
 	}
 	
 	public void MovePlayerTo(double x, double y, String path, boolean tile_mult) {

@@ -3,6 +3,10 @@
 	<rect x="0" y="0" w="300" h="168" sheet="TitleMenu">Title</rect>
 	<rect x="0" y="0" w="300" h="168" sheet="BGFade">BGFade</rect>
 	<rect x="0" y="0" w="18" h="18" sheet="AbilityBox">AbilityBox</rect>
+	<rect x="0" y="0" w="32" h="32" sheet="ExitIcon">ExitIcon</rect>
+	
+	<!--rect x="0" y="0" w="72" h="32" sheet="HealthBar">HealthBar</rect-->
+	<anim w="72" h="32" len="7" rate="12" sheet="HealthBar">HealthBar</anim>
 	
 	<square x="0" y="0" s="16" sheet="Projectiles">WizardBolt</square>
 

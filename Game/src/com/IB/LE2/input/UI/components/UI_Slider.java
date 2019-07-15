@@ -10,7 +10,7 @@ import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Slider extends UI_Root implements UI_Clickable {
 	
-	public int x, y, width, pos;
+	public int width, pos;
 	
 	public int startPos = pos;
 	

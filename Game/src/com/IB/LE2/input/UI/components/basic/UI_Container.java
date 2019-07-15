@@ -50,6 +50,13 @@ public class UI_Container extends UI_Root{
 		this.ui_Global.add(ui);
 	}
 	
+	public void ClearAllElements() {
+		ui_Global.clear();
+		ui_Statics.clear();
+		ui_Clickables.clear();
+		ui_KeyInputs.clear();
+	}
+	
 	public void destroy() {
 		this.ui_Global.remove(this);
 	}

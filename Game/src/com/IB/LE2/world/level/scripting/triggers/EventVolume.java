@@ -23,48 +23,52 @@ public class EventVolume {
 	private String function = "";
 	private Sprite display_bound;
 	
+	public boolean player_only = true;
+	
 	public EventVolume(HashMap<String, String> props) {
-			 this(props.get("name"), props.get("function"), Integer.parseInt(props.get("timer")),
+			 this(props.get("name"), props.get("function"), 
+			 Integer.parseInt(props.get("timer")), Boolean.parseBoolean(props.get("player-only")), 
 			 Double.parseDouble(props.get("x")), Double.parseDouble(props.get("y")),
 			 Double.parseDouble(props.get("width")), Double.parseDouble(props.get("height"))
 		);
 	}
 	
-	public EventVolume(String function, int timer, double x, double y, double width, double height) {
-		this("", function, timer, x, y, width, height);
+	public EventVolume(String function, int timer, boolean player_only, double x, double y, double width, double height) {
+		this("", function, timer, player_only, x, y, width, height);
 	}
 	
-	public EventVolume(String name, String function, int timer, double x, double y, double width, double height) {
+	public EventVolume(String name, String function, int timer, boolean player_only, double x, double y, double width, double height) {
 		this.name = name;
+		this.function = function;
 		
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		
-		this.function = function;
-		
 		this.trip_timer = timer;
 		this.timer = trip_timer;
+		
+		this.player_only = player_only;
 		
 		display_bound = new Sprite((int)width, (int)height, 0x3fFF0000);
 	}
 	
 	// Call repeatedly while entity is within range
-	public void Trip(LuaScript ls) {
+	public void Trip(LuaScript ls, Entity e) {
 		if (delay > 0) {
 			delay--;
 		}
 		
 		if (trip_timer == -1) {
-			if (!was_tripped) Consequence(ls);
+			if (!was_tripped) Consequence(ls, e);
 		} else if (trip_timer == 0)
-			Consequence(ls);
+			Consequence(ls, e);
 		else if (trip_timer > 0) {
 			timer++;
 			
 			if (timer > trip_timer) {
-				Consequence(ls);
+				Consequence(ls, e);
 				timer = 0;
 			}
 		}
@@ -76,14 +80,14 @@ public class EventVolume {
 		this.delay = x;
 	}
 	
-	private void Consequence(LuaScript ls) {
-		ls.call(function);
+	private void Consequence(LuaScript ls, Entity e) {
+		ls.call(function, e);
 	}
 	
 	public boolean Test(Entity e, LuaScript ls) {
-		if (e.x() + e.getSprite().getWidth() > x && e.x() < x + width) {
-			if ((e.y() + e.getSprite().getHeight()) > y && e.y() < y + height) {
-				Trip(ls);
+		if (e.x() + e.xOffset + e.EntWidth > x && e.x() + e.xOffset < x + width) {
+			if ((e.y() + e.yOffset + e.EntHeight) > y && e.y() + e.yOffset < y + height) {
+				Trip(ls, e);
 				return true;
 			}
 		}

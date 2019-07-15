@@ -10,8 +10,8 @@
   <sprite>
     <xOffset>1.00</xOffset>
     <yOffset>1.00</yOffset>
-    <static>Zombie</static>
-    <display>Zombie02</display>
+    <static>RockParticle</static>
+    <display>RockParticle</display>
   </sprite>
   <anim> <!-- Animations when entity moves left, up (jumping?), down, right or is idle -->
      <down>PlayerDown</down>

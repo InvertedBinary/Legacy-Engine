@@ -13,10 +13,6 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 	public Sprite sprite;
 	public AnimatedSprite animSprite;
 	
-	public int x;
-	public int y;
-	public int z;
-	
 	public int width;
 	public int height;
 
@@ -70,7 +66,7 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 
 	@Override
 	public boolean InBounds() {
-		return checkBounds(x, y, width, height);
+		return checkBounds(RenderX(x), RenderY(y), width, height);
 	}
 	
 	@Override
@@ -112,19 +108,11 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 			}
 			
 			if (transAnim && !this.hovering || this.isanim) {
-				screen.DrawAlphaSprite(sprite, x, y);
+				screen.DrawAlphaSprite(sprite, RenderX(x), RenderY(y));
 			} else {
-				screen.renderSprite(x, y, sprite, false);
+				screen.renderSprite(RenderX(x), RenderY(y), sprite, false);
 			}
 		}
-	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
 	}
 	
 	public Sprite getSprite() {

@@ -104,13 +104,15 @@ public class UI_Manager {
 	}
 	
 	public static void UnloadCurrent() {
-		if (Current() != null) {
-			if (Current().enabled) {
-				Boot.get().removeKeyListener(Current());
+		UI_Menu c = Current();
+		SetCurrent(null);
+		if (c != null) {
+			if (c.enabled) {
+				Boot.get().removeKeyListener(c);
 				
-				if (Current().ui != null)
-					if (Current().ui.getAll() != null) {
-						for (UI_Root element : Current().ui.getAll()) {
+				if (c.ui != null)
+					if (c.ui.getAll() != null) {
+						for (UI_Root element : c.ui.getAll()) {
 							if (element != null) {
 								element.unload();
 							}
@@ -119,10 +121,9 @@ public class UI_Manager {
 				
 				ResetClickables();
 				
-				Current().OnUnload();
-				Current().enabled = false;
+				c.OnUnload();
+				c.enabled = false;
 				
-				SetCurrent(null);
 			}
 		}
 	}

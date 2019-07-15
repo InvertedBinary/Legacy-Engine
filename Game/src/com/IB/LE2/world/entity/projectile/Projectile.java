@@ -256,12 +256,12 @@ public abstract class Projectile extends Entity {
 	}
 	
 	public double angle() {
-			//TODO: Convert projectile x,y to PVector!
+		//TODO: Convert projectile x,y to PVector!
 		double dx = Mouse.getX() - ((x() - Boot.get().xScroll) * 2);
 		double dy = Mouse.getY() - ((y() - Boot.get().yScroll) * 2);
 		///double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 		///double dy = Mouse.getY() - Game.getWindowHeight() / 2;
-		double dir = Math.atan2(dy + 32, dx + 16);
+		double dir = Math.atan2(dy + 0, dx + 0);
 		return dir;
 	}
 	
