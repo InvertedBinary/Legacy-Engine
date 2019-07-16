@@ -17,6 +17,7 @@ import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.projectile.Projectile;
 import com.IB.LE2.world.level.Level;
+import com.IB.LE2.world.level.TileCoord;
 
 public abstract class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -103,8 +104,8 @@ public abstract class Entity implements Serializable {
 	public double nvar(String key) {
 		try {
 			return Double.parseDouble(svar(key));
-		} catch (NumberFormatException e) {
-			return 0;
+		} catch (Exception e) {
+			return -1;
 		}
 	}
 	
@@ -114,6 +115,11 @@ public abstract class Entity implements Serializable {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public double modvar(String key, double num) {
+		set(key, nvar(key) + num);
+		return nvar(key);
 	}
 	
 	public void setUUID(String val) {
@@ -172,6 +178,14 @@ public abstract class Entity implements Serializable {
 	
 	public void y(double val) {
 		setY(val);
+	}
+	
+	public int TileX() {
+		return (int)x() / TileCoord.TILE_SIZE;
+	}
+	
+	public int TileY() {
+		return (int)y() / TileCoord.TILE_SIZE;
 	}
 	
 	public void setX(double val) {

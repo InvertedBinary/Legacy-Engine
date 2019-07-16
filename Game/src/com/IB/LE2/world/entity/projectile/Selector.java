@@ -13,7 +13,7 @@ public class Selector extends Projectile {
 	public static Entity selected;
 
 	public Selector(double x, double y) {
-		super(x, y, 0);
+		super(x, y);
 	}
 
 	public void update() {

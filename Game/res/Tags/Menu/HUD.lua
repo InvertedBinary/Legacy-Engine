@@ -21,6 +21,10 @@ function VarChanged(variable, from, val)
 	end
 end
 
+function Moving()
+	menu:SetElementText("coords", (p:TileX())..","..(p:TileY()));
+end
+
 --Update all the variables when the menu is opened
 local itr = p:getVars():iterator();
 while(itr:hasNext()) do

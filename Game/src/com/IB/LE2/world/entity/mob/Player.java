@@ -10,6 +10,7 @@ import com.IB.LE2.input.UI.components.UI_Sprite;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
+import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -200,10 +201,12 @@ public class Player extends Mob implements Serializable {
 
 			if (xa != 0 || (ya != 0 && ya != Gravity.y())) {
 				Game.DiscordPlayerPosPresence();
+				HUD.script.call("Moving");
 			}
 
 			if (xa != 0) {
 				walking = true;
+				//Audio.MoveListener(x(), y(), 1);
 			} else {
 				walking = false;
 			}
@@ -304,12 +307,6 @@ public class Player extends Mob implements Serializable {
 					sprite.getHeight(), 0xffFADE0F, true);
 			Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
 		}
-
-		String text = (int) Boot.get().getPlayer().x() / TileCoord.TILE_SIZE + ","
-				+ (int) Boot.get().getPlayer().y() / TileCoord.TILE_SIZE;
-		Game.font16bit.render((int) Boot.width - text.length() * 16 - 3, 3, -3, text, screen, false, false);
-		Game.font16bit.render((int) Boot.width - text.length() * 16 + 1 - 3, 3, -3, 0xffFFFFFF, text, screen, false,
-				false);
 
 		if (Game.devModeOn) {
 			body.draw(screen);

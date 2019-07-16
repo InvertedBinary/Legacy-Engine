@@ -66,10 +66,9 @@ public class TagMenu extends UI_Menu
 	}
 	
 	public void update() {
-		if (Boot.get().key.map && Mouse.getButton() == 1) {
+		if (Boot.get().key.r && Boot.get().key.ctrl) {
 			UI_Manager.UnloadCurrent();
 			UI_Manager.Load(new TagMenu(tags.getPath()));
-			Mouse.setMouseB(-1);
 		}
 	}
 	

@@ -1,75 +1,55 @@
 package com.IB.LE2.world.entity.projectile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
+import com.IB.LE2.util.FileIO.TagReadListener;
+import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.entity.mob.TagMob;
 
 public class TagProjectile extends Projectile {
-	private static final long serialVersionUID = -8287209713181341484L;
+	private static final long serialVersionUID = 1L;
 
-	public int FireRate = 0;
+	private TagReader tags;
 
-	protected String PATH = "";
-	protected String TAG = "";
-	private InputStream tag_stream = null;
-	protected boolean external_tag = false;
-
-	private String reading_tag;
-	private String current_tag;
-	
-	public HashMap<String, String> tags = new HashMap<>();
-
-
-	public TagProjectile(double x, double y, String XML, Entity origin) {
-		this.init(x, y, 0);
-		this.angle = angle();
+	public TagProjectile(double x, double y, String path, Entity origin) {
+		super(x, y);
+		this.init(x, y, angle, path);
 		this.origin = origin;
-		LoadTags(XML);
 	}
 
-	public TagProjectile(double x, double y, double angle, String XML) {
-		this.init(x, y, angle);
-		LoadTags(XML);
-	}
-
-	public TagProjectile(double x, double y, double angle, String XML, Entity origin) {
-		this.init(x, y, angle);
+	public TagProjectile(double x, double y, double angle, String path, Entity origin) {
+		super(x, y);
+		this.init(x, y, angle, path);
 		this.origin = origin;
-		LoadTags(XML);
 	}
 
-	public void init(double x, double y, double angle) {
+	public void init(double x, double y, double angle, String path) {
 		this.sprite = Sprite.get("Grass");
-		this.xOrigin = x;
-		this.yOrigin = y;
-		x(x);
-		y(y);
+		
 		this.angle = angle;
+		nx += speed * Math.cos(angle);
+		ny += speed * Math.sin(angle);
 
 		Audio.Play("Explosion4");
+		
+		tags = new TagReader(path, "entity", new TagReadListener() {
+			@Override
+			public void TagsRead() {
+				
+			}
+
+			@Override
+			public void TagsError() {
+				Boot.log("An error occurred reading tags for a projectile", "TagProjectile", true);
+			}
+		});
 	}
 
 	public void update() {
-		time++;
-
 		if (CollidesLevel(this)) {
 			remove();
 		}
@@ -94,14 +74,6 @@ public class TagProjectile extends Projectile {
 		}
 	}
 	
-	private void LoadTags(String path) {
-
-		this.range = 200;
-		
-		nx += speed * Math.cos(angle);
-		ny += speed * Math.sin(angle);
-	}
-
 	public double parseNum(String val) {
 		return Double.parseDouble(val);
 	}

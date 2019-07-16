@@ -2,19 +2,24 @@ print("Opening Console UI")
 GAME:DiscordMenuPresence("Console Menu")
 menu:SuspendWorldInput()
 
+menu:RunCommand("sus")
+
 menu:SetFocused("Cmd")
 
 function onUnload()
 	print("Closing Console UI")
 	menu:PlayPrevious()
+	menu:RunCommand("sus")
 	menu:ResumeWorldInput()
 end
 
 function basicContinueGame()
+	onUnload()
 	menu:continueGame()
 end
 
 function advancedContinueGame()
+	onUnload()
 	menu:continueGame()
 end
 

@@ -139,9 +139,8 @@ public class Audio {
 		if (ac.path.endsWith(".mid"))
 			Audio.cur_music_source = name;
 
-		system.newSource(false, name, ac.path, loop, 0, 0, 0, aModel, rFactor);
+		system.newSource(false, name, ac.path, loop, (float)x, (float)y, (float)z, aModel, rFactor);
 		system.setVolume(name, ac.volume);
-		system.setPosition(name, (float)x, (float)y, (float)z);
 		
 		system.play(name);
 	}
@@ -176,6 +175,10 @@ public class Audio {
 	
 	public static void PlayMusic(String name, String source) {
 		PlayMusic(name, source, false);
+	}
+	
+	public static void MoveListener(double x, double y, double z) {
+		system.moveListener((float)x, (float)y, (float)z);
 	}
 	
 	public static void StopMusic() {
