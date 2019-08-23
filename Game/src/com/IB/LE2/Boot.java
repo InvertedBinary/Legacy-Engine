@@ -174,14 +174,14 @@ public class Boot
 	}
 
 	public static void setWindowIcon(String path) {
-		Game.frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path)));
+		Game.frame.setIconImage(Toolkit.getDefaultToolkit().getImage((path)));
 	}
 
 	public static Cursor setMouseIcon(String path)
 	{
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = null;
-		image = Toolkit.getDefaultToolkit().getImage(Game.class.getResource(path));
+		image = Toolkit.getDefaultToolkit().getImage((path));
 
 		Point hotspot = new Point(0, 0);
 		Cursor cursor = toolkit.createCustomCursor(image, hotspot, "Stone");

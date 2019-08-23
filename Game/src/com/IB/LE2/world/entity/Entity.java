@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
-import org.xml.sax.helpers.DefaultHandler;
-
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.AABB;
@@ -27,6 +25,7 @@ public abstract class Entity implements Serializable {
 
 	public transient Sprite sprite;
 	public transient Sprite display;
+	public transient Sprite master;
 	
 	public transient boolean removed = false;
 	public transient Level level;
@@ -35,7 +34,7 @@ public abstract class Entity implements Serializable {
 	protected transient LineSegment BottomBound;
 
 	transient public final Random random = new Random();
-	transient public boolean hurt = false;
+	transient public short hurt = 0;
 	transient public boolean walking = false;
 
 	protected transient int xBound = 0;
@@ -227,6 +226,7 @@ public abstract class Entity implements Serializable {
 	public boolean isRemoved() {
 		return removed;
 	}
+	
 	public void init(Level level) {
 		this.level = level;
 	}

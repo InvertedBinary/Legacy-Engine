@@ -14,6 +14,7 @@ import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.util.VARS;
+import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Disk;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
@@ -94,9 +95,14 @@ public class Commands {
 					break;
 
 				case "sus":
-					VARS.suspend_world = !VARS.suspend_world;
+					if (Modifier.equalsIgnoreCase("true"))
+						VARS.suspend_world = true;
+					else if (Modifier.equalsIgnoreCase("false"))
+						VARS.suspend_world = false;
+					else
+						VARS.suspend_world = !VARS.suspend_world;
+					
 					break;
-
 				case "restart":
 					Boot.restart();
 					break;
@@ -147,7 +153,11 @@ public class Commands {
 					UI_Manager.Current().ResumeWorldInput();
 					UI_Manager.Load(new TagMenu(Modifier));
 					break;
-
+				case "ldap":
+				case "loadap":
+				case "loadpack":
+					Assets.LoadPack(Modifier);
+					break;
 				case "avg": {
 					Game.showAVG = !Game.showAVG;
 					String fileName;

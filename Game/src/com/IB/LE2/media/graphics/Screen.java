@@ -179,9 +179,8 @@ public class Screen {
 					xa = 0;
 				int col = sprite.pixels[x + y * sprite.getWidth()];
 				if (col != ALPHA_COL) {
-					if (e.hurt) {
+					if (e.hurt > 0) {
 						col = 0xffFF0000;
-						e.hurt = false;
 					}
 					col = colSwitch(col, tilesx, tilesy);
 

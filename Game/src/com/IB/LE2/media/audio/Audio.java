@@ -1,6 +1,8 @@
 package com.IB.LE2.media.audio;
 
-import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,9 +29,6 @@ public class Audio {
 	private static SoundSystem system;
 	private static String prev_tag_path = "";
 	
-	private static int aModel = SoundSystemConfig.ATTENUATION_ROLLOFF;
-	private static float rFactor = SoundSystemConfig.getDefaultRolloff();
-	
 	private static HashMap<String, AudioClip> files = new HashMap<>();
 
 	public static AudioClip previous_music = null;
@@ -39,22 +38,19 @@ public class Audio {
 		ConfigureLibrary();
 		LoadCodecs();
 		CreateSystem();
-		
-		LoadSources("/Tags/Audio/PersistentSources.xml");
 	}
 	
 	public static void SwapSources(String path) {
-		UnloadSources(prev_tag_path);
-		LoadSources(path);
+		UnloadSounds(prev_tag_path);
+		LoadSounds(path);
 	}
 
-	private static void LoadSources(String path) {
-		InputStream fXmlFile = Audio.class.getResourceAsStream(path);
+	public static ArrayList<AudioClip> ReadSounds(String path) {
+		ArrayList<AudioClip> result = new ArrayList<>();
 		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
-		
 		try {
 			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(path + "PersistentSources.xml");
 			doc.getDocumentElement().normalize();
 			
 			NodeList nList = doc.getElementsByTagName("source");
@@ -63,11 +59,11 @@ public class Audio {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					String name = eElement.getAttribute("name");
-					String file = eElement.getAttribute("file");
+					String file = path + "assets/" + eElement.getAttribute("file");
+					file = file.replace('\\', '/');
 					float volume = Float.parseFloat(eElement.getAttribute("vol"));
 					
-					files.put(name, new AudioClip(name, file, volume));
-					system.loadSound(file);
+					result.add(new AudioClip(name, file, volume));
 				}
 			}
 		} catch (Exception e) {
@@ -76,38 +72,33 @@ public class Audio {
 		
 		
 		prev_tag_path = path;
+		return result;
 	}
 	
-	private static void UnloadSources(String path) {
-		InputStream fXmlFile = Audio.class.getResourceAsStream(path);
-		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
-		
+	public static void UnloadSounds(String path) {
+		ArrayList<AudioClip> l = ReadSounds(path);
+		for (AudioClip clip : l)
+			system.unloadSound(clip.name);
+	}
+	
+	public static void LoadSounds(String path) {
+		ArrayList<AudioClip> l = ReadSounds(path);
 		try {
-			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
-			
-			NodeList nList = doc.getElementsByTagName("source");
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node nNode = nList.item(i);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element) nNode;
-					String name = eElement.getAttribute("name");
-					String file = eElement.getAttribute("file");
-
-					system.unloadSound(file);
-					files.remove(name);
-				}
+			for (AudioClip clip : l) {
+				files.put(clip.name, clip);
+				system.loadSound(new URL("file:///" + clip.path), clip.name);
 			}
-		} catch (Exception e) {
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
 	private static void ConfigureLibrary() {
 		try {
+            //SoundSystemConfig.addLibrary(LibraryLWJGLOpenAL.class);
+			//SoundSystemConfig.addLibrary(LibraryJOALOpenAL.class);
 			SoundSystemConfig.addLibrary(LibraryJavaSound.class);
+			SoundSystemConfig.setSoundFilesPackage("");
 		} catch (SoundSystemException e) {
 			Boot.log("An exception was thrown choosing a sound library!", "Audio.java", true);
 		}
@@ -124,14 +115,13 @@ public class Audio {
 	}
 	
 	private static void CreateSystem() {
-		try {
-			system = new SoundSystem(LibraryJavaSound.class);
-		} catch (SoundSystemException e) {
-			e.printStackTrace();
-		}
+		system = new SoundSystem();
 	}
 	
 	public static void Play(String name, double x, double y, double z, boolean loop) {
+		int aModel = SoundSystemConfig.ATTENUATION_ROLLOFF;
+		float rFactor = SoundSystemConfig.getDefaultRolloff();
+		
 		AudioClip ac = files.get(name);
 		if (ac == null)
 			return;
@@ -139,10 +129,21 @@ public class Audio {
 		if (ac.path.endsWith(".mid"))
 			Audio.cur_music_source = name;
 
-		system.newSource(false, name, ac.path, loop, (float)x, (float)y, (float)z, aModel, rFactor);
+		/*try {
+			//system.newSource(false, name, new URL("file:///" + ac.path), name + ".ogg", loop, (float)x, (float)y, (float)z, aModel, rFactor);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}*/
 		system.setVolume(name, ac.volume);
+		//system.play(name);
 		
-		system.play(name);
+        //system.quickPlay(true, ac.path, false, (int)x, (int)y, (int)z, aModel, rFactor);
+		try {
+			system.quickPlay(true, new URL("file:///" + ac.path), name + ".ogg", false, (float)x, (float)y, (float)z, aModel, rFactor);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void Play(String name, double x, double y, double z) {

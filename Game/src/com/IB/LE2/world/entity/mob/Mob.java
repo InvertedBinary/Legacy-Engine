@@ -4,7 +4,6 @@ package com.IB.LE2.world.entity.mob;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Set;
 
 import com.IB.LE2.Boot;
@@ -13,7 +12,6 @@ import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.level.Node;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public abstract  class Mob extends Entity implements Serializable {
@@ -21,8 +19,6 @@ public abstract  class Mob extends Entity implements Serializable {
 	
 	transient protected boolean moving = false;
 	transient private boolean solid;
-	transient private List<Node> pathPull = null;
-	transient double PathtimePull = 0;
 
 	//TODO: Time since player was last near this entity
 	// Stop updating them over such an interval to save on performance

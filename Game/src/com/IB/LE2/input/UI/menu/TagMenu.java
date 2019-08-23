@@ -1,17 +1,8 @@
 package com.IB.LE2.input.UI.menu;
 
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.luaj.vm2.LuaError;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.UI.UI_Manager;
@@ -26,11 +17,11 @@ import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
 import com.IB.LE2.input.UI.components.listeners.UI_SliderListener;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
 import com.IB.LE2.input.UI.components.listeners.UI_UnloadListener;
-import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
@@ -45,12 +36,9 @@ public class TagMenu extends UI_Menu
 	
 	private String path;
 	
-	public TagMenu(String tag_name) {
-		if (!tag_name.contains("/"))
-			tag_name = "/Tags/Menu/" + tag_name;
-		
-		this.path = tag_name;
-		
+	public TagMenu(String name) {
+		this.path = Assets.get(name);
+
 		tags = new TagReader(path, "uiset", new TagReadListener() {
 			@Override
 			public void TagsRead() {
@@ -79,6 +67,7 @@ public class TagMenu extends UI_Menu
 		if (bg != null)
 			screen.DrawAlphaSprite(bg, x, y);
 		
+		if (ui != null)
 		this.ui.render(screen);
 	}
 
@@ -177,7 +166,7 @@ public class TagMenu extends UI_Menu
 			} else if (!trueAnim) {
 				btn = new UI_Button(x, y, spr, transAnim);
 			} else {
-				SpriteSheet animSheet = new SpriteSheet(new SpriteSheet("/Tags/Menu/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
+				SpriteSheet animSheet = new SpriteSheet(new SpriteSheet(path.substring(0, path.lastIndexOf('\\')) + "/global_assets/" + imagpth, w, h * 2), 0, 0, 1, 2, w, h);
 				AnimatedSprite animSpr = new AnimatedSprite(animSheet, 1, 1, 1);
 				btn = new UI_Button(x, y, animSpr);
 				//AnimatedSprite aspr = new AnimatedSprite();

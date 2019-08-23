@@ -5,11 +5,11 @@ import java.awt.event.KeyEvent;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
+import com.IB.LE2.input.UI.components.basic.UI_Font;
 import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.graphics.Font16x;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 
@@ -23,7 +23,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 	private final int padding = 4;
 	private final int font_size = 16;
 	
-	private Font16x font = Game.font16bit;
+	private UI_Font font = Game.font16bit;
 
 	private String display_text = "";
 	public String prompt_text = "Text Field...";

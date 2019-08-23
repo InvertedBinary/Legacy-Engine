@@ -3,8 +3,6 @@ package com.IB.LE2.input.UI.menu;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import org.xml.sax.helpers.DefaultHandler;
-
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.Commands;
 import com.IB.LE2.input.UI.UI_Manager;
@@ -14,8 +12,6 @@ import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.media.audio.Audio;
-import com.IB.LE2.media.graphics.Font16x;
-import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
@@ -25,8 +21,6 @@ public abstract class UI_Menu implements KeyListener {
 	public Sprite bg;
 	public SpriteSheet s_bg;
 	public UI_Container ui;
-	public Font8x font8x8 = new Font8x();
-	public Font16x font = new Font16x();
 	public int x;
 	public int y;
 	public boolean enabled = false;

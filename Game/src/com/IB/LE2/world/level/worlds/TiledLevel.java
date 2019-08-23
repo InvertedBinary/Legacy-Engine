@@ -19,13 +19,14 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
+import com.IB.LE2.util.FileIO.Assets;
+import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
-import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
@@ -58,15 +59,14 @@ public class TiledLevel extends Level {
 	public LuaScript script;
 	public boolean LuaLoaded = false;
 
-	public TiledLevel(String path) {
-		super(path);
-		String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
+	public TiledLevel(String name) {
+		path = Assets.get(name);
+		String lvn = path.substring(path.lastIndexOf('\\') + 1, path.length());
 		
 		Game.lvl_name = lvn;
 
 		this.tiled_xml = path + "/" + lvn + ".tmx";
-		System.out.println("TILED: " + tiled_xml);
-		this.path = path;
+		System.out.println("TILED: " + path);
 
 		//add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
 		//add(new TagEntity("/XML/Entities/TestZombie.xml", false));
@@ -83,12 +83,18 @@ public class TiledLevel extends Level {
 			}
 		});
 		
-		//tr.start();
-
+		tr.start();
+		loadLevel(path);
 		initLua();
 	}
 	
 	TagReader tr;
+	
+	public void PrintTRTags() {
+		for (Tag x : tr.getTags()) {
+			System.out.println(x.uri);
+		}
+	}
 	
 	public void StopLua() {
 		script = null;
@@ -126,11 +132,12 @@ public class TiledLevel extends Level {
 		
 		System.out.println("Loading A Tiled Level..");
 		try {
-			String lvn = path.substring(path.lastIndexOf('/') + 1, path.length());
+			System.out.println(path);
+			String lvn = path.substring(path.lastIndexOf('\\') + 1, path.length());
 			sp = parserFactory.newSAXParser();
 			//sp.parse("E:\\Dev\\Square Legacy 2\\Square-Legacy-2\\Game\\res\\XML\\Levels\\b10\\b10.tmx", this);
 			System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
-			sp.parse(TiledLevel.class.getResourceAsStream(path + "/" + lvn + ".tmx"), this);
+			sp.parse((path + "/" + lvn + ".tmx"), this);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -384,18 +391,18 @@ public class TiledLevel extends Level {
 			if (this.solid_geometry != null) {
 				for (int i = 0; i < this.solid_geometry.size(); i++) {
 					LineSegment ln = solid_geometry.get(i);
-					Game.font8bit.render((int) ln.midpoint().x, (int) ln.midpoint().y, 0xffFFFFFF, "LN: " + i, screen, 0, true, false);
+					Game.font8bit.render((int) ln.midpoint().x, (int) ln.midpoint().y, -3, 0xffFFFFFF, "LN: " + i, screen, true, false);
 					ln.drawLine(screen, true);
 
 					ln.Perpendicular().drawLine(screen, true);
 				}
 			}
 			
-			
-			for (EventVolume ev : event_volumes) {
-				if (ev != null)
-				ev.render(screen);
-			}
+			if (event_volumes != null)
+				for (EventVolume ev : event_volumes) {
+					if (ev != null)
+					ev.render(screen);
+				}
 		}
 	}
 

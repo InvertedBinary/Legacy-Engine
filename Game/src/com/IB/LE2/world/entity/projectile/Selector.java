@@ -17,7 +17,7 @@ public class Selector extends Projectile {
 	}
 
 	public void update() {
-		Entity to_select = Collide(this, level.entitiesList);
+		Entity to_select = CollidesEntity(this, level.all);
 		if (to_select != null) {
 			selected = to_select;
 		}

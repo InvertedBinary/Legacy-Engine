@@ -1,6 +1,5 @@
 package com.IB.LE2.media.graphics;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -52,10 +51,9 @@ public class Sprite {
 	
 	public static void LoadTags(String path) {
 		try {
-			InputStream fXmlFile = SpriteSheet.class.getResourceAsStream(path);
 			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(path);
 			doc.getDocumentElement().normalize();
 			BuildSprite(doc);
 		} catch (Exception e) {

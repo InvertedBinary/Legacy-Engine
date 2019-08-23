@@ -4,13 +4,10 @@ import java.io.Serializable;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.input.UI.GUI;
 import com.IB.LE2.input.UI.UI_Manager;
-import com.IB.LE2.input.UI.components.UI_Sprite;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.AnimatedSprite;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
@@ -31,10 +28,10 @@ public class Player extends Mob implements Serializable {
 	public transient Tile tile;
 
 	public transient AnimatedSprite
-			idle  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
-			down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
-			left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
-			right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
+		idle  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
+		down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
+		left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
+		right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
 
 	public transient AnimatedSprite animSprite = down;
 
@@ -82,14 +79,6 @@ public class Player extends Mob implements Serializable {
 		
 	}
 	
-	public void UpdateVars() {
-		System.out.println("VARS: " + vars.keySet().size());
-		for (String i : vars.keySet()) {
-			System.out.println(" + " + i + " :: " + vars.get(i));
-			//HUD.script.call("VarChanged", i, vars.get(i), vars.get(i));
-		}
-	}
-
 	public boolean remove() {
 		return super.remove();
 	}
@@ -111,7 +100,6 @@ public class Player extends Mob implements Serializable {
 		case Mouse.MIDDLE_CLICK:
 			break;
 		}
-		
 	}
 
 	PVector pv = null;
@@ -231,6 +219,9 @@ public class Player extends Mob implements Serializable {
 			Selector.selected.pos().set((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
 					(Mouse.getY() / Boot.scale + Screen.yOffset) - Selector.selected.sprite.getHeight());
 		}
+		
+		if (hurt > 0)
+			hurt--;
 	}
 
 	public boolean isClientPlayer() {
@@ -248,7 +239,7 @@ public class Player extends Mob implements Serializable {
 
 		if (Mouse.getButton() == 1) {
 			//XML_Projectile Test_Arrow = new XML_Projectile((x()) + 32, y() + 32, "/Tags/Projectiles/Arrow.xml", this);
-			TagProjectile Grenade = new TagProjectile(x() + 32, y() + 32, "/Tags/Projectiles/Grenade.xml", this);
+			TagProjectile Grenade = new TagProjectile(x() + 32, y() + 32, "Grenade", this);
 			level.add(Grenade);
 			Mouse.setMouseB(-1);
 		}

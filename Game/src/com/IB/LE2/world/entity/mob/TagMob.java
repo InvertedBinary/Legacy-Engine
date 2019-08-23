@@ -8,6 +8,7 @@ import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
+import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
@@ -46,7 +47,7 @@ public class TagMob extends Mob
 	
 	public void InitTags(String tag_name) {
 		TagMob e = this;
-		this.tags = new TagReader(tag_name, "entity", new TagReadListener() {
+		this.tags = new TagReader(Assets.get(tag_name), "entity", new TagReadListener() {
 			@Override
 			public void TagsRead() {
 				if (!processAllTags())
@@ -74,21 +75,21 @@ public class TagMob extends Mob
 
 	public boolean processTag(Tag tag) {
 		boolean result = true;
-
+		
 		String val = tag.value;
-
+		
 		switch (tag.uri) {
 		case "props.name":
 			this.name = val;
 			break;
 		case "props.health":
-			this.health = parseNum(val);
+			this.set("health", val);
 			break;
 		case "props.speed":
-			this.speed = parseNum(val);
+			this.set("speed", val);
 			break;
 		case "props.mass":
-			this.mass = (int) parseNum(val);
+			this.set("mass", val);
 			break;
 		case "props.script":
 			break;
@@ -117,6 +118,8 @@ public class TagMob extends Mob
 			break;
 		case "sprite.static":
 			this.sprite = Sprite.get(val);
+			this.master = sprite;
+			this.display = sprite;
 			break;
 		case "sprite.display":
 			this.display = Sprite.get(val);
@@ -233,6 +236,10 @@ public class TagMob extends Mob
 		} else {
 			walking = false;
 		}
+		
+
+		if (hurt > 0)
+			hurt--;
 	}
 	
 	public void render(Screen screen) {

@@ -1,6 +1,6 @@
 package com.IB.LE2.world.level.scripting;
 
-import java.net.URL;
+import java.io.File;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -15,15 +15,15 @@ public class LuaScript implements Runnable {
 
 	private final String path;
 	private final Globals globals;
-	private final URL script;
+	private final File script;
 	private final LuaValue chunk;
 	
 	private boolean should_close = false;
 	
 	public LuaScript(String path) {
 		this.path = path;
-		this.script = LuaScript.class.getResource(path);
-		if (script == null) {
+		this.script = new File(path);
+		if (!script.exists()) {
 			Boot.log("Missing script at: " + path, "LuaScript.java", true);
 		}
 		this.globals = JsePlatform.standardGlobals();

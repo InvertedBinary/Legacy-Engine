@@ -15,26 +15,23 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import com.IB.LE2.input.UI.GUI;
 import com.IB.LE2.input.UI.UI_Manager;
+import com.IB.LE2.input.UI.components.basic.UI_Font;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.media.audio.Audio;
-import com.IB.LE2.media.graphics.Font16x;
-import com.IB.LE2.media.graphics.Font8x;
 import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
+import com.IB.LE2.util.FileIO.Assets;
+import com.IB.LE2.util.FileIO.Disk;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.level.Level;
@@ -53,7 +50,6 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 
 	public static Tile tile;
-	public GUI gui;
 	private Thread thread;
 	public JFrame frame;
 	public Keyboard key;
@@ -68,8 +64,8 @@ public class Game extends Canvas implements Runnable
 	public boolean AutoSave = true;
 
 	private boolean running = false;
-	public static transient Font16x font16bit;
-	public static transient Font8x font8bit;
+	public static transient UI_Font font16bit;
+	public static transient UI_Font font8bit;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 
@@ -98,44 +94,11 @@ public class Game extends Canvas implements Runnable
 
 	public int conTime = 0;
 
-	/*
-	 * private static final char PKG_SEPARATOR = '.'; private static final char
-	 * DIR_SEPARATOR = '/'; private static final String CLASS_FILE_SUFFIX =
-	 * ".class"; private static final String BAD_PACKAGE_ERROR =
-	 * "Unable to get resources from path '%s'. Are you sure the package '%s' exists?"
-	 * ;
-	 * 
-	 * public static List<Class<?>> find(String scannedPackage) { String scannedPath
-	 * = scannedPackage.replace(PKG_SEPARATOR, DIR_SEPARATOR); URL scannedUrl =
-	 * Thread.currentThread().getContextClassLoader().getResource(scannedPath); if
-	 * (scannedUrl == null) { throw new
-	 * IllegalArgumentException(String.format(BAD_PACKAGE_ERROR, scannedPath,
-	 * scannedPackage)); } File scannedDir = new File(scannedUrl.getFile());
-	 * List<Class<?>> classes = new ArrayList<Class<?>>(); for (File file :
-	 * scannedDir.listFiles()) { classes.addAll(find(file, scannedPackage)); }
-	 * return classes; }
-	 * 
-	 * private static List<Class<?>> find(File file, String scannedPackage) {
-	 * List<Class<?>> classes = new ArrayList<Class<?>>(); String resource =
-	 * scannedPackage + PKG_SEPARATOR + file.getName(); if (file.isDirectory()) {
-	 * for (File child : file.listFiles()) { classes.addAll(find(child, resource));
-	 * } } else if (resource.endsWith(CLASS_FILE_SUFFIX)) { int endIndex =
-	 * resource.length() - CLASS_FILE_SUFFIX.length(); String className =
-	 * resource.substring(0, endIndex); try { classes.add(Class.forName(className));
-	 * } catch (ClassNotFoundException ignore) { } } return classes; }
-	 */
-
-	ArrayList<String> materials = new ArrayList<String>();
-
-	public Game()
-		{
+	public Game() {
 			StartDiscord();
 			Audio.Initialize();
-			SpriteSheet.LoadTags("/Tags/Textures/SheetBatch.xml");
-			Sprite.LoadTags("/Tags/Textures/SpriteBatch.xml");
+			Assets.LoadPack("BASE");
 			//Audio.PlayMusic("Hope", "Hope.mid");
-
-			setGui(new GUI());
 			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
 			setPreferredSize(size);
 			screen = new Screen(Boot.width, Boot.height);
@@ -143,8 +106,7 @@ public class Game extends Canvas implements Runnable
 			windowHandler = new WindowHandler(this);
 			key = new Keyboard();
 
-			// setLevel(new XML_Level(Maps.ForestLevel));
-			TiledLevel TL = new TiledLevel("/Tags/Levels/b10");
+			TiledLevel TL = new TiledLevel("b10");
 			setLevel(TL);
 			
 			if (TL.Spawnpoint != null) {
@@ -158,8 +120,11 @@ public class Game extends Canvas implements Runnable
 			// level.add(getPlayer());
 			addKeyListener(key);
 			Mouse mouse = new Mouse();
-			font16bit = new Font16x();
-			font8bit = new Font8x();
+			font16bit = UI_Font.getFont("SL");
+			font8bit = UI_Font.getFont("SL8x8");
+			
+			font8bit.equals(font8bit);
+			
 			addMouseListener(mouse);
 			addMouseMotionListener(mouse);
 			addMouseWheelListener(mouse);
@@ -230,8 +195,7 @@ public class Game extends Canvas implements Runnable
 		this.levels.push(level);
 	}
 
-	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException
-	{
+	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException {
 		System.out.println("Saved Screenshot as: " + fileName + "_" + System.currentTimeMillis() + ".png");
 		Robot robot = new Robot();
 		Rectangle capRectange = currentFrame.getBounds();
@@ -246,25 +210,21 @@ public class Game extends Canvas implements Runnable
 
 	}
 
-	public static int getWindowWidth()
-	{
+	public static int getWindowWidth() {
 		return Boot.width * Boot.scale;
 	}
 
-	public static int getWindowHeight()
-	{
+	public static int getWindowHeight() {
 		return Boot.height * Boot.scale;
 	}
 
-	public synchronized void start()
-	{
+	public synchronized void start() {
 		running = true;
 		thread = new Thread(this, "Game");
 		thread.start();
 	}
 
-	public synchronized void stop()
-	{
+	public synchronized void stop() {
 		running = false;
 		try {
 			thread.join();
@@ -273,16 +233,8 @@ public class Game extends Canvas implements Runnable
 		}
 		quit();
 	}
-
-	/*
-	 * inet = InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 });
-	 * System.out.println("Sending Ping Request to " + inet);
-	 * System.out.println(inet.isReachable(5000) ? "Host is reachable" :
-	 * "Host is NOT reachable");
-	 */
 	
-	public void run()
-		{
+	public void run() {
 			long lastTime = System.nanoTime();
 			long timer = System.currentTimeMillis();
 			final double ns = 1000000000.0 / 60.0;
@@ -304,7 +256,7 @@ public class Game extends Canvas implements Runnable
 					//}
 
 					key.update();
-					gui.update();
+					UI_Manager.update();
 					Mouse.update();
 					updateMode();
 
@@ -419,8 +371,7 @@ public class Game extends Canvas implements Runnable
 	}
 
 	boolean FirstMenuLoad = false;
-	public void update()
-		{
+	public void update() {
 			conTime++;
 			
 			if(conTime > 120) {
@@ -441,9 +392,7 @@ public class Game extends Canvas implements Runnable
 			}
 		}
 
-	public void render()
-		{
-
+	public void render() {
 			BufferStrategy bs = getBufferStrategy();
 			if (bs == null) {
 				createBufferStrategy(3);
@@ -473,7 +422,7 @@ public class Game extends Canvas implements Runnable
 	
 				getLevel().render((int) (xScroll), (int) (yScroll), screen);
 			
-			gui.render(screen);
+			UI_Manager.render(screen);
 
 			if (showAVG) {
 				if (fpsAVG < 200) {
@@ -553,10 +502,9 @@ public class Game extends Canvas implements Runnable
 			// System.out.println(width);
 		}
 
-	public void Launch(Game game)
-		{
+	public void Launch(Game game) {
 			if (!Boot.launch_args.containsKey("-mode_dedi")) {
-				Boot.setWindowIcon("/icon.png");
+				Boot.setWindowIcon(Disk.AppDataDirectory + "/bin/icon.png");
 				game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
 				if (Boot.launch_args.containsKey("-resizeable")) {
 					game.frame.setResizable(true);
@@ -576,13 +524,13 @@ public class Game extends Canvas implements Runnable
 				else if (windowMode == 2)
 					setTrueFullscreen();
 				
-				Boot.setMouseIcon("/Textures/cursor.png");
+				Boot.setMouseIcon(Disk.AppDataDirectory + "/bin/cursor.png");
 				Boot.centerMouse();
 			}
 
 			game.start();
 			
-			UI_Manager.Load(new TagMenu("/Tags/Menu/" + Boot.prefsStr("UI", "StartupMenu", "Main")));
+			UI_Manager.Load(new TagMenu(Boot.prefsStr("UI", "StartupMenu", "Main")));
 		}
 	
 	public boolean ChangingFullscreenState = false;
@@ -626,16 +574,8 @@ public class Game extends Canvas implements Runnable
 		return levels.peek();
 	}
 
-	public GUI getGui() {
-		return gui;
-	}
-
 	public Keyboard getInput() {
 		return this.key;
-	}
-
-	public void setGui(GUI gui) {
-		this.gui = gui;
 	}
 
 	public void quit() {

@@ -13,10 +13,8 @@ import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.EntityContainer;
-import com.IB.LE2.world.entity.emitter.Emitter;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
-import com.IB.LE2.world.entity.particle.Particle;
 import com.IB.LE2.world.entity.projectile.Projectile;
 import com.IB.LE2.world.level.tile.Tile;
 
@@ -39,10 +37,6 @@ public class Level extends EntityContainer implements Serializable {
 		}
 	};
 
-	public Level(String path) {
-		loadLevel(path);
-	}
-	
 	public void loadLua() {}
 	
 	protected void loadLevel(String path) { }
@@ -101,15 +95,17 @@ public class Level extends EntityContainer implements Serializable {
 		  };
 		  
 	public void update() {
-		Collections.sort(entitiesList, ySort);
+		Collections.sort(all, ySort);
 
 		if (!VARS.suspend_world) {
 			for (int i = 0; i < entities.size(); i++) {
 				entities.get(i).update();
 			}
-			for (int i = 0; i < Projectiles.size(); i++) {
-				Projectiles.get(i).update();
+			
+			for (int i = 0; i < projectiles.size(); i++) {
+				projectiles.get(i).update();
 			}
+			
 			for (int i = 0; i < particles.size(); i++) {
 				particles.get(i).update();
 			}
@@ -117,10 +113,10 @@ public class Level extends EntityContainer implements Serializable {
 			for (int i = 0; i < emitters.size(); i++) {
 				emitters.get(i).update();
 			}
-		}
 
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).update();
+			for (int i = 0; i < players.size(); i++) {
+				players.get(i).update();
+			}
 		}
 
 		// Water.update();
@@ -128,7 +124,7 @@ public class Level extends EntityContainer implements Serializable {
 	}
 	
 	public List<Projectile> getProjectiles() {
-		return Projectiles;
+		return projectiles;
 	}
 
 	int bgcolor = 0xffBED0CA;
@@ -173,16 +169,16 @@ public class Level extends EntityContainer implements Serializable {
 			if (!entities.get(i).ySort) entities.get(i).render(screen);
 		}
 
-		for (int i = 0; i < entitiesList.size(); i++) {
+		for (int i = 0; i < all.size(); i++) {
 			// if (this.getPlayersBool(entitiesList.get(i), 350)) { //TODO: Make a list of
 			// entities for entities that need to update even when the player is not within
 			// 350px
-			if (entitiesList.get(i).ySort) entitiesList.get(i).render(screen);
+			if (all.get(i).ySort) all.get(i).render(screen);
 			// }
 		}
 
-		for (int i = 0; i < entitiesList.size(); i++) {
-			entitiesList.get(i).renderGUI(screen);
+		for (int i = 0; i < all.size(); i++) {
+			all.get(i).renderGUI(screen);
 		}
 
 		for (int i = 0; i < players.size(); i++) {
@@ -197,49 +193,6 @@ public class Level extends EntityContainer implements Serializable {
 	
 	public void drawExtendedLevel(Screen screen) {}
 	
-	private void remove() {
-		for(int i = 0; i < entitiesList.size(); i++){
-	         if(entitiesList.get(i).isRemoved()) entitiesList.remove(i);
-	     }
-		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i).isRemoved())
-				entities.remove(i);
-		}
-		for (int i = 0; i < Projectiles.size(); i++) {
-			if (Projectiles.get(i).isRemoved())
-				Projectiles.remove(i);
-		}
-		for (int i = 0; i < particles.size(); i++) {
-			if (particles.get(i).isRemoved())
-				particles.remove(i);
-		}
-		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isRemoved())
-				players.remove(i);
-		}
-		for (int i = 0; i < emitters.size(); i++) {
-			if (emitters.get(i).isRemoved())
-			emitters.remove(i);
-		}
-	}
-
-	public void add(Entity e) {
-		e.init(this);
-		entitiesList.add(e);
-		if (e instanceof Particle) {
-			particles.add((Particle) e);
-		} else if (e instanceof Projectile) {
-			Projectiles.add((Projectile) e);
-		} else if (e instanceof Player) {
-			players.add((PlayerMP) e);
-			e.added();
-		} else if (e instanceof Emitter) {
-			emitters.add((Emitter) e);
-		} else {
-			entities.add(e);
-		}
-	}
-
 	public List<PlayerMP> getPlayers() {
 		return players;
 	}
@@ -420,9 +373,16 @@ public class Level extends EntityContainer implements Serializable {
 		return t;
 	}
 	
-	// Create one damage method, check if the entity shooting
-	// is the entity hit detected and don't damage it
-
+	public static void DamageEntity(Entity e, double damage) {
+		if (e.nvar("health") != -1) {
+			e.modvar("health", -damage);
+			e.hurt = 5;
+			if (e.nvar("health") <= 0) {
+				e.remove();
+			}
+		}
+	}
+	
 	public List<Entity> getEntities() {
 		return entities;
 	}

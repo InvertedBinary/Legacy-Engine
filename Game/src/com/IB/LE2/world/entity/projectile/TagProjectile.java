@@ -2,44 +2,47 @@ package com.IB.LE2.world.entity.projectile;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
+import com.IB.LE2.util.FileIO.Assets;
+import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.world.entity.Entity;
+import com.IB.LE2.world.level.scripting.LuaScript;
 
 public class TagProjectile extends Projectile {
 	private static final long serialVersionUID = 1L;
 
+	private final String path;
+	
+	private String LuaPath;
+
+	private LuaScript script;
 	private TagReader tags;
 
-	public TagProjectile(double x, double y, String path, Entity origin) {
+	public TagProjectile(double x, double y, String name, Entity origin) {
 		super(x, y);
-		this.init(x, y, angle, path);
+		this.angle = CalcAngle();
+		this.path = Assets.get(name);
 		this.origin = origin;
+		this.init(x, y, angle, path);
 	}
 
 	public TagProjectile(double x, double y, double angle, String path, Entity origin) {
 		super(x, y);
-		this.init(x, y, angle, path);
+		this.path = path;
 		this.origin = origin;
+		this.init(x, y, angle, path);
 	}
 
 	public void init(double x, double y, double angle, String path) {
-		this.sprite = Sprite.get("Grass");
-		
-		this.angle = angle;
-		nx += speed * Math.cos(angle);
-		ny += speed * Math.sin(angle);
-
-		Audio.Play("Explosion4");
-		
 		tags = new TagReader(path, "entity", new TagReadListener() {
 			@Override
 			public void TagsRead() {
-				
+				if (!processAllTags())
+					Boot.log("One or more tags failed to be processed.", "TagProjectile", true);
 			}
 
 			@Override
@@ -47,11 +50,117 @@ public class TagProjectile extends Projectile {
 				Boot.log("An error occurred reading tags for a projectile", "TagProjectile", true);
 			}
 		});
+		
+		tags.start();
+		
+		this.angle = angle;
+		nx += speed * Math.cos(angle);
+		ny += speed * Math.sin(angle);
+		
+		LoadLua();
+	}
+	
+	public void LoadLua() {
+		try {
+			if (!LuaPath.endsWith(".lua"))
+				LuaPath += ".lua";
+			
+			script = new LuaScript(LuaPath);
+			script.AddGeneralGlobals();
+			
+			script.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean processAllTags() {
+		boolean result = true;
+		for (Tag i : tags.getTags()) {
+			if (!processTag(i)) result = false;
+		}
+
+		return result;
+	}
+
+	public boolean processTag(Tag tag) {
+		boolean result = true;
+		String val = tag.value;
+		
+		switch (tag.uri) {
+		case "props.name":
+			this.name = val;
+			break;
+		case "props.health":
+			this.health = parseNum(val);
+			break;
+		case "props.speed":
+			this.speed = parseNum(val);
+			break;
+		case "props.mass":
+			this.mass = (int) parseNum(val);
+			break;
+		case "props.script":
+			this.LuaPath = this.path.substring(0, path.lastIndexOf('\\') + 1) + val;
+			break;
+			//
+		/*case "vars.range":
+			break;
+		case "vars.firerate":
+			break;
+		case "vars.damage":
+			break;
+		case "vars.do-rotation":
+			break;*/
+			//
+		case "sprite.xOffset":
+			this.DrawXOffset = (int) parseNum(val);
+			break;
+		case "sprite.yOffset":
+			this.DrawYOffset = (int) parseNum(val);
+			break;
+		case "sprite.static":
+			this.sprite = Sprite.get(val);
+			this.master = sprite;
+			this.display = sprite;
+			break;
+		case "sprite.display":
+			this.display = Sprite.get(val);
+			break;
+		case "hitbox.begin-x":
+			this.xOffset = (int) parseNum(val);
+			break;
+		case "hitbox.begin-y":
+			this.yOffset = (int) parseNum(val);
+			break;
+		case "hitbox.width":
+			this.EntWidth = (int) parseNum(val);
+			break;
+		case "hitbox.height":
+			this.EntHeight = (int) parseNum(val);
+			break;
+			//
+		default:
+			if (tag.uri.startsWith("vars.")) {
+				String var_name = tag.uri.substring(5);
+				set(var_name, val);
+			} else {
+				result = false;
+			}
+			break;
+		}
+		
+		return result;
 	}
 
 	public void update() {
 		if (CollidesLevel(this)) {
-			remove();
+			script.call("LevelCollided", this);
+		}
+		
+		Entity e = CollidesEntity(this, Boot.getLevel().all);
+		if (e != null) {
+			script.call("EntityCollided", e, this);
 		}
 		
 		this.moveSimple();

@@ -34,15 +34,15 @@ public class TagReader extends DefaultHandler {
 	public TagReadListener callbacks;
 	
 	
-	public TagReader(String tag_name, String root_element, TagReadListener callbacks) {
-		if (tag_name.startsWith("/") || tag_name.startsWith(".")) {
-			//this.PATH = tag_name;
-			//external_tag = true;
-			PATH = tag_name;
-		} else {
-			this.TAG = tag_name;
-		}
+	public TagReader(String path, String root_element, TagReadListener callbacks) {
+		this.PATH = path;
 		
+		if (TAG.contains("."))
+			this.TAG = path.substring(path.lastIndexOf('\\') + 1, path.lastIndexOf("."));
+		else 
+			this.TAG = path.substring(path.lastIndexOf('\\') + 1, path.length());
+		
+		this.external_tag = true;
 		this.callbacks = callbacks;
 		this.ROOT_ELEMENT = root_element;
 	}
@@ -57,7 +57,7 @@ public class TagReader extends DefaultHandler {
 	
 	public void start() {
 		if (PATH.equals("")) {
-			PATH = "/Tags/Entities/" + TAG;
+			PATH = TAG;
 		}
 		
 		if (!PATH.endsWith(".xml") && !PATH.endsWith(".tmx")) {

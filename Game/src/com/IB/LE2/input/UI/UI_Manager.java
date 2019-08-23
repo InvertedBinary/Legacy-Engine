@@ -27,6 +27,8 @@ public class UI_Manager {
 	}
 	
 	public static void update() {
+		UpdateMacros();
+		
 		if (Current() != null) {
 			if (Current().enabled) {
 				Current().update();
@@ -44,7 +46,8 @@ public class UI_Manager {
 		if (Current() != null) {
 			if (Current().enabled) {
 				Current().render(screen);
-				Current().ui.render(screen);
+				if (Current().ui != null)
+					Current().ui.render(screen);
 			}
 		}
 		

@@ -1,8 +1,7 @@
 package com.IB.LE2.media.graphics;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.File;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -22,6 +21,7 @@ public class SpriteSheet {
 	private int width, height;
 	public int[] pixels;
 	
+	private static String tagpath;
 	public static HashMap<String, SpriteSheet> sheets = new HashMap<>();
 	
 	public static SpriteSheet get(String s) {
@@ -38,11 +38,11 @@ public class SpriteSheet {
 	
 	public static void LoadTags(String path) {
 		System.out.println("Loading Sprite Sheets.. " + path);
+		tagpath = path;
 		try {
-			InputStream fXmlFile = SpriteSheet.class.getResourceAsStream(path);
 			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(path);
 			doc.getDocumentElement().normalize();
 			BuildSheet(doc);
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class SpriteSheet {
 				for (int i = 0; i < (sheets.getLength()); i++) {
 					try {
 						Element e = (Element) sheets.item(i);
-						String path = e.getAttribute("src");
+						String path = tagpath.substring(0, tagpath.lastIndexOf('/')) + "/assets" + e.getAttribute("src");
 						int width = Integer.parseInt(e.getAttribute("w"));
 						int height = Integer.parseInt(e.getAttribute("h"));
 						SpriteSheet s = new SpriteSheet(path, width, height);
@@ -104,7 +104,6 @@ public class SpriteSheet {
 	}
 	
 	private Sprite[] sprites;
-	
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
 		int xx = x * spriteSize;
 		int yy = y * spriteSize;
@@ -224,18 +223,25 @@ public class SpriteSheet {
 	}
 	
 	private void load() {
+		System.out.print("Attempting To Fetch SpriteSheet At: " + path + "... ");
 		try {
-			System.out.print("Attempting To Fetch SpriteSheet At: " + path + "...");
-			BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path));
-			System.out.println(" Succeeded!");
-			width = image.getWidth();
-			height = image.getHeight();
-			pixels = new int[width * height];
-			image.getRGB(0, 0, width, height, pixels, 0, width);
-		} catch (IOException e) {
-			e.printStackTrace();
+			File s = new File(path);
+			if (s.exists()) {
+				load(ImageIO.read(new File(path)));
+			} else {
+				load(ImageIO.read(SpriteSheet.class.getResource(path)));
+			}
+			System.out.println("Succeeded!");
 		} catch (Exception e) {
-			System.err.println(" Failed!");
+			System.err.println("Failed!");
 		}
 	}
+	
+	private void load(BufferedImage image) {
+		width = image.getWidth();
+		height = image.getHeight();
+		pixels = new int[width * height];
+		image.getRGB(0, 0, width, height, pixels, 0, width);
+	}
+	
 }

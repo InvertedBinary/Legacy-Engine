@@ -1,19 +1,15 @@
 package com.IB.LE2.world.entity.projectile;
 
 import java.util.List;
-import java.util.Random;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.audio.Audio;
+import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.entity.mob.Mob;
-import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public abstract class Projectile extends Entity {
@@ -24,7 +20,6 @@ public abstract class Projectile extends Entity {
 	public double angle;
 	
 	public Entity origin;
-	boolean initial_rotation = false;
 	
 	public Projectile (double x, double y) {
 		this.xOrigin = x;
@@ -72,39 +67,37 @@ public abstract class Projectile extends Entity {
 		return false;
 	}
 	
-	public Entity Collide(Projectile p, List<Entity> entities) {
-		double mdpx = p.x();
-		double mdpy = p.y();
-
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			if (e != null && e.getSprite() != null /* && !e.invulnerable */) {
-				if (mdpx > (e.x() + e.xOffset) && mdpx < (e.x() + e.xOffset) + e.getSprite().getWidth()) {
-					if (mdpy > (e.y() + e.yOffset) && mdpy < (e.y() + e.yOffset) + e.getSprite().getHeight() + 8) {
-						int SP_X = (int) (mdpx - (e.x()) - e.xOffset);
-						int SP_Y = (int) (mdpy - (e.y()) - (e.yOffset + 8));
-
-						if (e.getSprite().pixels[(SP_X) + (SP_Y) * e.getSprite().getWidth()] != 0xffFF3AFB) {
+	public Entity CollidesEntity(Projectile p, List<Entity> entities) {
+		int pw = p.getSprite().getWidth();
+		int ph = p.getSprite().getHeight();
+		int px = (int)p.x() + pw / 2;
+		int py = (int)p.y() + ph / 2;
+		
+		
+		for (Entity e : entities) {
+			if (e != null && e.getSprite() != null)
+			if (!(e instanceof Projectile) && !e.equals(p.origin)) {
+				int entityX = (int)e.x();
+				int entityY = (int)e.y();
+				
+				Sprite s = e.getSprite();
+				
+				if (px > (entityX + e.DrawXOffset) && px < (entityX + e.DrawXOffset + s.getWidth())) {
+					if (py > (entityY + e.DrawYOffset) && py < (entityY + e.DrawYOffset + s.getHeight())) {
+						int pixel_x = (int)(px - entityX - e.DrawXOffset);
+						int pixel_y = (int)(py - entityY - e.DrawYOffset);
+						
+						if (s.pixels[(pixel_x) + (pixel_y) * s.getWidth()] != Screen.ALPHA_COL)
 							return e;
-						}
+						
 					}
 				}
 			}
 		}
+
 		return null;
 	}
 	
-	public boolean Collision(Projectile p, List<Entity> entities) {
-		Entity ee = Collide(p, entities);
-		if (ee != null) {
-			//level.damage((int) (p.x + p.nx), (int) ((p.y + p.ny)), (Entity) ee, ee.Exp, p.damage, Boot.get().getPlayer().name, p.ExpV);
-			ApplyStatusEffect(ee);
-			p.remove();
-			return true;
-		}
-		return false;
-	}
-
 	public double CalcAngle() {
 		//TODO: Convert projectile x,y to PVector!
 		double dx = Mouse.getX() - ((x() - Boot.get().xScroll) * 2);
