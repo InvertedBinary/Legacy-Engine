@@ -1,17 +1,9 @@
 package com.IB.LE2.world.level.worlds;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
@@ -37,27 +29,18 @@ import com.IB.LE2.world.level.tile.tiles.XML_Tile;
 public class TiledLevel extends Level {
 	private static final long serialVersionUID = 1L;
 
+	private TagReader reader;
+	private LuaScript script;
+	
 	public String path = "";
+	public String tiled_xml = "";
 	
-	String tiled_xml = "";
-	String tiled_version = "";
-	
-	boolean readingLayer = false;
-	boolean readingObjects = false;
-	Integer current_layer = -1;
-	String current_object_layer = "";
-	String current_object_type = "";
-
-	ArrayList<String> tile_strings;
-
-	public HashMap<String, String> props = new HashMap<String, String>();
-	public ArrayList<EventVolume> event_volumes;
 	public TileCoord Spawnpoint;
-	public ArrayList<int[]> tilels;
+	public ArrayList<EventVolume> event_volumes;
 	public ArrayList<LineSegment> solid_geometry;
 	
-	public LuaScript script;
 	public boolean LuaLoaded = false;
+	
 
 	public TiledLevel(String name) {
 		path = Assets.get(name);
@@ -70,30 +53,8 @@ public class TiledLevel extends Level {
 
 		//add(new Emitter(128, 32 * 32, new PVector(0, 5), new Sprite(4, 0xFFFF00), 50, 50, 1, this));
 		//add(new TagEntity("/XML/Entities/TestZombie.xml", false));
-		
-		tr = new TagReader(tiled_xml, "level", new TagReadListener() {
-			@Override
-			public void TagsRead() {
-				//PrintTRTags();
-			}
-
-			@Override
-			public void TagsError() {
-				
-			}
-		});
-		
-		tr.start();
 		loadLevel(path);
 		initLua();
-	}
-	
-	TagReader tr;
-	
-	public void PrintTRTags() {
-		for (Tag x : tr.getTags()) {
-			System.out.println(x.uri);
-		}
 	}
 	
 	public void StopLua() {
@@ -127,235 +88,150 @@ public class TiledLevel extends Level {
 	
 	
 	protected void loadLevel(String path) {
-		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-		SAXParser sp;
-		
 		System.out.println("Loading A Tiled Level..");
-		try {
-			System.out.println(path);
-			String lvn = path.substring(path.lastIndexOf('\\') + 1, path.length());
-			sp = parserFactory.newSAXParser();
-			//sp.parse("E:\\Dev\\Square Legacy 2\\Square-Legacy-2\\Game\\res\\XML\\Levels\\b10\\b10.tmx", this);
-			System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
-			sp.parse((path + "/" + lvn + ".tmx"), this);
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		//add(new Emitter(64, 1216, new PVector(1, -5), new Sprite(1 + Boot.randInt(0, 0), 0xffFFFF00), 20, 300, 1, this));
-	}
+		System.out.println(path);
+		String lvn = path.substring(path.lastIndexOf('\\') + 1, path.length());
+		System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
+		
+		reader = new TagReader(tiled_xml, "level", new TagReadListener() {
+			@Override
+			public void TagsRead() {
+				ProcessTags();
+			}
 
-	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        switch (qName) {
-             case "map": {
-              this.tiled_version = attributes.getValue("tiledversion");
-              Boot.log(this.tiled_version.equals(VARS.VAL_TILED_VER) ? "Using a Valid Version of Tiled!" : "This Version of Tiled may not be Supported!", "Tiled_Level.java", false);
-              	
-           	  this.width = Integer.parseInt(attributes.getValue("width"));
-           	  this.height = Integer.parseInt(attributes.getValue("height"));
-           	  
-           	  break;
-             }
-             
-             case "layer": {
-            	 String ln = attributes.getValue("name");
- 				if (tile_strings == null) {
-					tile_strings = new ArrayList<>();
-				}
- 				
- 				if (current_layer == null) {
- 					current_layer = -1;
- 				}
- 				
-          	 	this.current_layer++;
-          	 	
-            	 break;
-             }
-             
-             case "data": {
-            	 if (attributes.getValue("encoding").equals("csv")) {
-            		 readingLayer = true;
-            	 } else {
-            		 Boot.log("This level's tiles are encoded in an unsupported method. (Must use CSV!)..", "TiledLevel.java", true);
-            		 Boot.get().quit();
-            	 }
-            	 break;
-             }
-             
-             case "objectgroup": {
-            	 this.current_object_layer = attributes.getValue("name");
-            	 if (current_object_layer.equals("Collision_mask")) {
-            		 String color = attributes.getValue("color");
-            		 if (color == null) {
-            			 color = "#ff00ff";
-            		 }
-            		 this.props.put("color", color);
-            	 }
-            	 break;
-             }
-             
-             case "object": {
-            	 this.current_object_type = attributes.getValue("type");
-            	 if (current_object_type == null)
-            		 break;
-            	 
-        		 for (int i = 0; i < attributes.getLength(); i++) {
-        			 this.props.put(attributes.getQName(i), attributes.getValue(i));
-        		 }
-            		 
-            	 break;
-             }
-             
-             case "polyline": {
-            	 if (this.current_object_type == null)
-            		 break;
-            	 
-            	 if (this.current_object_type.equalsIgnoreCase("c_mask")) {
-            		 if (this.solid_geometry == null) {
-            			 this.solid_geometry = new ArrayList<>();
-            		 }
-            		 
-					ArrayList<Vertex> pts = new ArrayList<>();
-
-					String coords = attributes.getValue("points");
-					String c_array[] = coords.split("\\s+");
-					for (String s : c_array) {
-						String c_xy[] = s.split(",");
-						float x = Float.parseFloat(c_xy[0]) + Float.parseFloat(this.props.get("x"));
-						float y = Float.parseFloat(c_xy[1]) + Float.parseFloat(this.props.get("y"));
-						pts.add(new Vertex(x, y));
-					}
-					
-					Vertex v1 = null;
-					Vertex v2 = null;
-					for (int i = 0; i < pts.size(); i++) {
-						Vertex v = pts.get(i);
-
-						if (i % 2 == 0) {
-							v2 = v;
-						} else {
-							v1 = v;
-						}
-						
-						
-						if (v1 != null && v2 != null) {
-							LineSegment ls = new LineSegment(v1, v2);
-							if (this.props.containsKey("color")) {
-							String color = this.props.get("color").substring(1);
-								ls.color = Long.decode("0x" + color).intValue();
-							} else {
-								ls.color = 0xffFF00FF;
-							}
-							this.solid_geometry.add(ls);
-						}
-					}
-					
-            	 //System.out.println("Adding some new geometry.. " + solid_geometry);
-            	 }
-            	 break;
-             }
-             
-             case "property": {
-            	 this.props.put(attributes.getValue("name"), attributes.getValue("value"));
-            	 break;
-             }
-        }
+			@Override
+			public void TagsError() {
+				
+			}
+		});
+		
+		reader.start();
 	}
 	
-	@Override
-    public void characters(char ch[], int start, int length) throws SAXException {
-			if (readingLayer) {
-				//System.out.println("CURRENTLAYER: " + current_layer);
-				if (tile_strings.size() == current_layer) {
-				tile_strings.add(((new String(ch, start, length))));
-				} else {
-				tile_strings.set(current_layer, tile_strings.get(current_layer) + new String(ch, start, length));
-				}
+	private void ProcessTags() {
+		//reader.PrintTags();
+		
+		for(Tag tag : reader.getTags()) {
+			String name = tag.name;
+			String uri = tag.uri;
+			String value = tag.value;
+
+			switch (uri) {
+			case "map":
+				if (!tag.testEquality("tiledversion", VARS.VAL_TILED_VER)) 
+					System.err.println("[WARN] Map was saved in an untested version of tiled!");
+				if (!tag.testEquality("orientation", "orthogonal")
+					|| !tag.testEquality("renderorder", "right-down") || !tag.testEquality("infinite", "0"))
+					System.err.println("[WARN] Using unsupported map set-up!");
+				if (tag.get("tilewidth", 32) + tag.get("tileheight", 32) != 64)
+					System.err.println("[WARN] Non-standard tile dimensions!");
+				
+				this.width = tag.get("width", width);
+				this.height = tag.get("height", height);
+				this.tiles = new int[width * height];
+				this.solid_geometry = new ArrayList<>();
+				this.event_volumes = new ArrayList<>();
+				break;
+			case "map.tileset":
+				break;
+			case "map.layer":
+				addTileLayer(tag);
+				break;
+			case "map.objectgroup":
+				addObjectGroup(tag);
+				break;
 			}
-    }
+		}
+	}
 	
-	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException {
-		switch (qName) {
-        case "data": {
-			this.readingLayer = false;
+	public void addObjectGroup(Tag group) {
+		String group_id = group.get("id", "-1");
+		String group_name = group.get("name", "UnnamedObjectGroup");
+		String group_color = group.get("color", "#ffffff");
+		
+		ArrayList<Tag> children = group.getChildren();
+		for (Tag child : children) {
+			String id = child.get("id", "-1");
+			String name = child.get("name", "UnnamedObject");
+			String type = child.get("type", "UnnamedObjectGroup");
+			double x = child.get("x", 0.0);
+			double y = child.get("y", 0.0);
+			double w = child.get("width", -1.0);
+			double h = child.get("height", -1.0);
 			
-			if (tilels == null) {
-				tilels = new ArrayList<>();
-			}
-			
-			tilels.add(explodeTileString(this.tile_strings.get(this.current_layer)));
-		}
+			switch(type.toLowerCase()) {
+			case "trigger":
+				HashMap<String, String> properties = new HashMap<>();
+				properties.put("name", name);
+				properties.put("x", "" + x);
+				properties.put("y", "" + y);
+				properties.put("width", "" + w);
+				properties.put("height", "" + h);
 
-        case "properties": {
-        	if (this.current_object_type != null) {
-	        	if (this.current_object_type.equals("Trigger")) {
-	        		EventVolume t = new EventVolume(props);
-	        		addTrigger(t);
-	        	}
-        	}
-        	this.props = new HashMap<String, String>();
-        }
-
-        case "object": {
-				if (this.current_object_type != null) {
-					if (this.current_object_type.equals("SpawnPoint")) {
-						Spawnpoint = new TileCoord(asInt(props.get("x")) / 32, asInt(props.get("y")) / 32);
-					}
+				for (Tag property : child.getChild(0).getChildren()) {
+					String pname = property.get("name", "UnnamedProperty");
+					String pvalue = property.get("value", "");
+					properties.put(pname, pvalue);
 				}
-			}
-
-        case "map": {
-			//Boot.log("Tile layer " + this.current_layer + " fully loaded..", "Tiled_Level.java", false);
-			
-        	tile_map.put(0, Tile.Air);
-			
-			for (int i = 0; i < (width * height); i++) {
-				Tile[] merges = new Tile[tilels.size()];
-				for (int j = 0; j < tilels.size(); j++) {
-					if (tilels.get(j)[i] == 0) {
-						merges[j] = null;
-					} else {
-						int tile_id = tilels.get(j)[i];
-						merges[j] = tile_map.get(tile_id);
-						if (merges[j] == null) {
-							merges[j] = new XML_Tile(tile_id, Tile.GenSpriteFromId(SpriteSheet.get("Terrain"), tile_id));
-							tile_map.put(tile_id, merges[j]);
-						}
-					}
-				}
+				addTrigger(new EventVolume(properties));
+				break;
+			case "c_mask":
+				String polyline_points = child.getChild(0).get("points", "");
 				
-				Sprite sp = null;
-				for (int j = 0; j < merges.length; j++ ) {
-					if (merges[j] != null) {
-						if (sp == null && !merges[j].equals(tile_map.get(0))) {
-							sp = merges[j].sprite;
-						}
-
-						if (j > 0 && sp != null) {
-						sp = new Sprite(sp, merges[j].sprite);
-						}
-					}
-				}
-				
-				if (sp == null) {
-					this.tilels.get(0)[i] = 0;
-				} else {
-				int id = (1024 + i); //SET 1024 TO MAX NATURAL TILE ID
-				XML_Tile ct = new XML_Tile(id, sp);
-				
-				tile_map.put(id, ct);
-				this.tilels.get(0)[i] = (id);
-				}
-			}
-			
-			this.tiles = tilels.get(0);
-			//this.overlayTiles = this.tilels.get(1);
+				Vertex previous = null;
+                for (String s : polyline_points.split("\\s+")) {
+                	String[] p = s.split(",");
+                    Vertex v = new Vertex(
+                    	Float.parseFloat(p[0]) + x, 
+                    	Float.parseFloat(p[1]) + y
+                    );
+                    
+                    if (previous != null) {
+                    	LineSegment ls = new LineSegment(previous, v);
+                    	ls.color = Long.decode("0x" + group_color.substring(1)).intValue();
+                    	solid_geometry.add(ls);
+                    }
+                    
+                    previous = v;
+                }
+                
+				break;
+			case "spawnpoint":
+                Spawnpoint = new TileCoord((int)x / 32, (int)y / 32);
+				break;
 			}
 		}
-	}		
+	}
+
+	public void addTileLayer(Tag layer) {
+		String id = layer.get("id", "-1");
+		String name = layer.get("name", "UnnamedLayer");
+		Tag data = layer.getChild(0);
+		
+        tile_map.put(0, Tile.Air);
+
+		int[] tiles = explodeTileString(data.value);
+		for (int i = 0; i < tiles.length; i++) {
+			int tile_id = tiles[i];
+			if (tile_id == 0) continue;
+			
+	        XML_Tile t = new XML_Tile(tile_id, Tile.GenSpriteFromId(SpriteSheet.get("Terrain"), tile_id));
+	        tile_map.put(tile_id, t);
+			
+	        // Merge existing tile with tile on this layer
+	        if (this.tiles[i] != 0 && this.tiles[i] != tile_id) {
+	        	Sprite existing = tile_map.get(this.tiles[i]).sprite;
+	        	Sprite composite = new Sprite(existing, tile_map.get(tile_id).sprite);
+	        	
+	        	tile_id = 1024 + i;
+	        	XML_Tile new_tile = new XML_Tile(tile_id, composite);
+	        	tile_map.put(tile_id, new_tile);
+	        }
+	        
+			this.tiles[i] = tile_id;
+		}
+	}
 	
 	public void addTrigger(EventVolume t) {
 		event_volumes = (event_volumes == null) ? new ArrayList<EventVolume>() : event_volumes;
@@ -363,10 +239,6 @@ public class TiledLevel extends Level {
 		event_volumes.add(t);
 	}
 	
-	public static int asInt(String s) {
-		return (int)Double.parseDouble(s);
-	}
-
 	public int[] explodeTileString(String tiles) {
      	int[] xml_tiles = new int[width * height];
      	

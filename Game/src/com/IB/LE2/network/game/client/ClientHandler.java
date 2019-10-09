@@ -1,4 +1,4 @@
-package com.IB.LE2.network;
+package com.IB.LE2.network.game.client;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.world.entity.mob.Player;

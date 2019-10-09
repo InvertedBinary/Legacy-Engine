@@ -79,85 +79,84 @@ public class TagMob extends Mob
 		String val = tag.value;
 		
 		switch (tag.uri) {
-		case "props.name":
+		case "entity.props.name":
 			this.name = val;
 			break;
-		case "props.health":
+		case "entity.props.health":
 			this.set("health", val);
 			break;
-		case "props.speed":
+		case "entity.props.speed":
 			this.set("speed", val);
 			break;
-		case "props.mass":
+		case "entity.props.mass":
 			this.set("mass", val);
 			break;
-		case "props.script":
+		case "entity.props.script":
 			break;
 			//
-		case "vars.dsp_index":
+		case "entity.vars.dsp_index":
 			this.despawn_index = (int) parseNum(val);
 			break;
-		case "vars.essential":
+		case "entity.vars.essential":
 			this.essential = parseBool(val);
 			break;
-		case "vars.det_radius":
+		case "entity.vars.det_radius":
 			this.detection_radius = parseNum(val);
 			break;
-		case "vars.xp_min":
+		case "entity.vars.xp_min":
 			break;
-		case "vars.xp_max":
+		case "entity.vars.xp_max":
 			break;
-		case "vars.allegiance":
+		case "entity.vars.allegiance":
 			break;
 			//
-		case "sprite.xOffset":
+		case "entity.sprite.xOffset":
 			this.DrawXOffset = (int) parseNum(val);
 			break;
-		case "sprite.yOffset":
+		case "entity.sprite.yOffset":
 			this.DrawYOffset = (int) parseNum(val);
 			break;
-		case "sprite.static":
+		case "entity.sprite.static":
 			this.sprite = Sprite.get(val);
 			this.master = sprite;
 			this.display = sprite;
 			break;
-		case "sprite.display":
+		case "entity.sprite.display":
 			this.display = Sprite.get(val);
 			break;
 			
-		case "anims.down":
+		case "entity.anims.down":
 			this.down = Sprite.getNewAnim(val);
 			break;
-		case "anims.up":
+		case "entity.anims.up":
 			this.up = Sprite.getNewAnim(val);
 			break;
-		case "anims.left":
+		case "entity.anims.left":
 			this.left = Sprite.getNewAnim(val);
 			break;
-		case "anims.right":
+		case "entity.anims.right":
 			this.right = Sprite.getNewAnim(val);
 			break;
-		case "anims.idle":
+		case "entity.anims.idle":
 			this.idle = Sprite.getNewAnim(val);
 			break;
 			//
-		case "hitbox.begin-x":
+		case "entity.hitbox.begin-x":
 			this.xOffset = (int) parseNum(val);
 			break;
-		case "hitbox.begin-y":
+		case "entity.hitbox.begin-y":
 			this.yOffset = (int) parseNum(val);
 			break;
-		case "hitbox.width":
+		case "entity.hitbox.width":
 			this.EntWidth = (int) parseNum(val);
 			break;
-		case "hitbox.height":
+		case "entity.hitbox.height":
 			this.EntHeight = (int) parseNum(val);
 			break;
 			//
 		default:
-			if (tag.uri.startsWith("vars.")) {
-				String var_name = tag.uri.substring(5);
-				set(var_name, val);
+			if (tag.uri.startsWith("entity.vars.")) {
+				set(tag.name, val);
 			} else {
 				result = false;
 			}
@@ -237,7 +236,6 @@ public class TagMob extends Mob
 			walking = false;
 		}
 		
-
 		if (hurt > 0)
 			hurt--;
 	}

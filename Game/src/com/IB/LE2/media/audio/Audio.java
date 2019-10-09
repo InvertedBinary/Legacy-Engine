@@ -1,5 +1,6 @@
 package com.IB.LE2.media.audio;
 
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,6 +67,8 @@ public class Audio {
 					result.add(new AudioClip(name, file, volume));
 				}
 			}
+		} catch (FileNotFoundException e) {
+			System.out.println("The system could not find Audio Sources for this asset pack.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

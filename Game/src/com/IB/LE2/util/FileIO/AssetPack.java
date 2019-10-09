@@ -14,7 +14,7 @@ import java.util.prefs.Preferences;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 
-import com.IB.LE2.input.UI.components.basic.UI_Font;
+import com.IB.LE2.input.UI.components.UI_Font;
 import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.media.graphics.SpriteSheet;

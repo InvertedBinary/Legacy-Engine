@@ -3,8 +3,6 @@ package com.IB.LE2.world.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.xml.sax.helpers.DefaultHandler;
-
 import com.IB.LE2.Boot;
 import com.IB.LE2.world.entity.emitter.Emitter;
 import com.IB.LE2.world.entity.mob.Player;
@@ -12,7 +10,7 @@ import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.entity.particle.Particle;
 import com.IB.LE2.world.entity.projectile.Projectile;
 
-public class EntityContainer extends DefaultHandler {
+public class EntityContainer {
 	public List<Entity> entities = new ArrayList<>();
 	public List<Projectile> projectiles = new ArrayList<>();
 	public List<Particle> particles = new ArrayList<>();

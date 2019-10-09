@@ -95,7 +95,8 @@ public class TagMenu extends UI_Menu
 	public boolean processAllTags() {
 		boolean result = true;
 		for (Tag i : tags.getTags()) {
-			if (!processTag(i)) result = false;
+			if (i.holdsData())
+				if (!processTag(i)) result = false;
 		}
 
 		return result;
@@ -106,10 +107,11 @@ public class TagMenu extends UI_Menu
 		String val = t.value;
 		
 		switch (t.uri) {
-		case "global.title":
+		case "uiset.global.title":
 			break;
-		case "global.background":
+		case "uiset.global.background":
 			System.out.println("BG: " + val);
+			if (val == null) break;
 			try {					
 				int hex = Long.decode(val).intValue();
 				this.bg = new Sprite(Boot.width, Boot.height, hex);
@@ -121,9 +123,9 @@ public class TagMenu extends UI_Menu
 				}
 			}
 			break;			
-		case "global.audioloop":
+		case "uiset.global.audioloop":
 			break;
-		case "global.onUnload":
+		case "uiset.global.onUnload":
 			String onUnloadFunc = val;
 			
 			this.UnloadListener = new UI_UnloadListener() {
@@ -134,7 +136,7 @@ public class TagMenu extends UI_Menu
 			};
 			break;
 			
-		case "components.button":
+		case "uiset.components.button":
 			int x = (int)parseNum(t.get("x", "0"));
 			int y = (int)parseNum(t.get("y", "0"));
 			int w = (int)parseNum(t.get("w", "0"));
@@ -201,7 +203,7 @@ public class TagMenu extends UI_Menu
 			addUI(btn);
 			
 			break;
-		case "components.label":
+		case "uiset.components.label":
 			int lblx = (int)parseNum(t.get("x", "0"));
 			int lbly = (int)parseNum(t.get("y", "0"));
 			int lblhex = Long.decode(t.get("color", "0")).intValue();
@@ -221,7 +223,7 @@ public class TagMenu extends UI_Menu
 			addUI(uilbl);
 			
 			break;
-		case "components.image":
+		case "uiset.components.image":
 			int imagx = (int)parseNum(t.get("x", "0"));
 			int imagy = (int)parseNum(t.get("y", "0"));
 			int imagw = (int)parseNum(t.get("w", "0"));
@@ -262,7 +264,7 @@ public class TagMenu extends UI_Menu
 			addUI(uis);
 			
 			break;
-		case "components.slider":
+		case "uiset.components.slider":
 			UI_Slider uiSlider;
 
 			int	sliderx  = (int)parseNum(t.get("x",  "0"));
@@ -285,7 +287,7 @@ public class TagMenu extends UI_Menu
 			addUI(uiSlider);
 			break;
 		
-		case "components.textfield":
+		case "uiset.components.textfield":
 			int	fieldx  = (int)parseNum(t.get("x",  "0"));
 			int fieldy  = (int)parseNum(t.get("y",  "0"));
 			int	maxchars  = (int)parseNum(t.get("max",  "24"));
@@ -315,13 +317,13 @@ public class TagMenu extends UI_Menu
 			addUI(field);
 			
 			break;
-		case "components.toggle":
+		case "uiset.components.toggle":
 			System.out.println("Toggles are not fully implemented.");
 			UI_Toggle toggle = new UI_Toggle(0, 0, false, null);
 			addUI(toggle);
 			break;
 			
-		case "components.canvas":
+		case "uiset.components.canvas":
 			int	canvasx = (int)parseNum(t.get("x",  "0"));
 			int canvasy = (int)parseNum(t.get("y",  "0"));
 			int canvasw = (int)parseNum(t.get("width",  "0"));

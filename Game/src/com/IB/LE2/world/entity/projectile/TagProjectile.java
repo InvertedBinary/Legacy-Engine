@@ -15,8 +15,7 @@ import com.IB.LE2.world.level.scripting.LuaScript;
 public class TagProjectile extends Projectile {
 	private static final long serialVersionUID = 1L;
 
-	private final String path;
-	
+	private String path;
 	private String LuaPath;
 
 	private LuaScript script;
@@ -77,6 +76,7 @@ public class TagProjectile extends Projectile {
 	public boolean processAllTags() {
 		boolean result = true;
 		for (Tag i : tags.getTags()) {
+			if (i.holdsData())
 			if (!processTag(i)) result = false;
 		}
 
@@ -88,62 +88,61 @@ public class TagProjectile extends Projectile {
 		String val = tag.value;
 		
 		switch (tag.uri) {
-		case "props.name":
+		case "entity.props.name":
 			this.name = val;
 			break;
-		case "props.health":
+		case "entity.props.health":
 			this.health = parseNum(val);
 			break;
-		case "props.speed":
+		case "entity.props.speed":
 			this.speed = parseNum(val);
 			break;
-		case "props.mass":
+		case "entity.props.mass":
 			this.mass = (int) parseNum(val);
 			break;
-		case "props.script":
+		case "entity.props.script":
 			this.LuaPath = this.path.substring(0, path.lastIndexOf('\\') + 1) + val;
 			break;
 			//
-		/*case "vars.range":
+		/*case "entity.vars.range":
 			break;
-		case "vars.firerate":
+		case "entity.vars.firerate":
 			break;
-		case "vars.damage":
+		case "entity.vars.damage":
 			break;
-		case "vars.do-rotation":
+		case "entity.vars.do-rotation":
 			break;*/
 			//
-		case "sprite.xOffset":
+		case "entity.sprite.xOffset":
 			this.DrawXOffset = (int) parseNum(val);
 			break;
-		case "sprite.yOffset":
+		case "entity.sprite.yOffset":
 			this.DrawYOffset = (int) parseNum(val);
 			break;
-		case "sprite.static":
+		case "entity.sprite.static":
 			this.sprite = Sprite.get(val);
 			this.master = sprite;
 			this.display = sprite;
 			break;
-		case "sprite.display":
+		case "entity.sprite.display":
 			this.display = Sprite.get(val);
 			break;
-		case "hitbox.begin-x":
+		case "entity.hitbox.begin-x":
 			this.xOffset = (int) parseNum(val);
 			break;
-		case "hitbox.begin-y":
+		case "entity.hitbox.begin-y":
 			this.yOffset = (int) parseNum(val);
 			break;
-		case "hitbox.width":
+		case "entity.hitbox.width":
 			this.EntWidth = (int) parseNum(val);
 			break;
-		case "hitbox.height":
+		case "entity.hitbox.height":
 			this.EntHeight = (int) parseNum(val);
 			break;
 			//
 		default:
-			if (tag.uri.startsWith("vars.")) {
-				String var_name = tag.uri.substring(5);
-				set(var_name, val);
+			if (tag.uri.startsWith("entity.vars.")) {
+				set(tag.name, val);
 			} else {
 				result = false;
 			}

@@ -1,4 +1,4 @@
-package com.IB.LE2.network;
+package com.IB.LE2.network.game.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,16 +8,8 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-@Deprecated
-public class ClientInitializer extends ChannelInitializer<SocketChannel>
+public class ServerInitializer extends ChannelInitializer<SocketChannel>
 {
-
-	private final ClientHandler ch;
-	
-	public ClientInitializer(ClientHandler ch)
-		{
-			this.ch = ch;
-		}
 
 	@Override
 	protected void initChannel(SocketChannel sc) throws Exception
@@ -28,7 +20,7 @@ public class ClientInitializer extends ChannelInitializer<SocketChannel>
 			pipeline.addLast("decoder", new StringDecoder());
 			pipeline.addLast("encoder", new StringEncoder());
 			
-			pipeline.addLast("handler", new ClientHandler());
+			pipeline.addLast("handler", new ServerHandler());
 		}
 
 }

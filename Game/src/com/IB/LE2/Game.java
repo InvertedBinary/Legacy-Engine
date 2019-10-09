@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.IB.LE2.input.UI.UI_Manager;
-import com.IB.LE2.input.UI.components.basic.UI_Font;
+import com.IB.LE2.input.UI.components.UI_Font;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.input.hardware.Keyboard;
@@ -97,7 +97,7 @@ public class Game extends Canvas implements Runnable
 	public Game() {
 			StartDiscord();
 			Audio.Initialize();
-			Assets.LoadPack("BASE");
+			Assets.ExecuteLoadOrder();
 			//Audio.PlayMusic("Hope", "Hope.mid");
 			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
 			setPreferredSize(size);

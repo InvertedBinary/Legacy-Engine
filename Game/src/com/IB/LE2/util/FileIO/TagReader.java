@@ -5,32 +5,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import com.IB.LE2.world.entity.mob.TagMob;
-
-public class TagReader extends DefaultHandler {
+public class TagReader {
 
 	protected String PATH = "";
 	protected String TAG = "";
 	protected String ROOT_ELEMENT;
-	protected boolean external_tag = false;
 	protected InputStream tag_stream = null;
 
 	private ArrayList<Tag> tags = new ArrayList<>();
+	public Tag HEAD;
 
-	private String reading_tag;
-	private String current_tag;
-	private Attributes current_attribs;
-	
 	public TagReadListener callbacks;
 	
 	
@@ -42,7 +34,6 @@ public class TagReader extends DefaultHandler {
 		else 
 			this.TAG = path.substring(path.lastIndexOf('\\') + 1, path.length());
 		
-		this.external_tag = true;
 		this.callbacks = callbacks;
 		this.ROOT_ELEMENT = root_element;
 	}
@@ -67,22 +58,17 @@ public class TagReader extends DefaultHandler {
 		System.out.println("PATH: "  + PATH);
 		
 		try {
-			if (!external_tag) {
-				tag_stream = TagMob.class.getResourceAsStream(PATH);
-			} else {
-				tag_stream = new FileInputStream(new File(PATH));
-			}
+			tag_stream = new FileInputStream(new File(PATH));
 
 			if (tag_stream == null) {
 				callbacks.TagsError();
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		readTags();
-
+		
 		try {
 			tag_stream.close();
 		} catch (IOException e) {
@@ -93,63 +79,83 @@ public class TagReader extends DefaultHandler {
 	}
 	
 	private void readTags() {
-		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-		SAXParser sp;
-
-		System.out.println("Reading tags...");
 		try {
-			sp = parserFactory.newSAXParser();
-			sp.parse(tag_stream, this);
-		} catch (ParserConfigurationException | SAXException | IOException e) {
+			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+			Document doc = dBuilder.parse(tag_stream);
+			doc.getDocumentElement().normalize();
+			System.out.println("BUILDING TAGS...");
+			BuildTags(null, doc.getChildNodes());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void addTag(Tag t) {
-		this.tags.add(t);
-	}
-
-	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
-	{
-		if (reading_tag == null) reading_tag = "";
-		if (current_tag == null) current_tag = "";
-		
-		current_attribs = attributes;
-		
-		if (!qName.equals(ROOT_ELEMENT) && qName != null) {
-			reading_tag += (qName + ".");
-			current_tag = qName;
-		}
-	}
-
-	@Override
-	public void characters(char ch[], int start, int length) throws SAXException
-	{
-		if (reading_tag.equals("") || current_tag.equals("")) return;
-
-		String val = (new String(ch, start, length));
-		if (!(val.trim()).equals("")) {
-			if (reading_tag.endsWith(".")) {
-				reading_tag = reading_tag.substring(0, reading_tag.length() - 1);
+	private void BuildTags(Tag parent, NodeList nodes) {
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node n = nodes.item(i);
+			if (n.getNodeType() == Node.TEXT_NODE) {
+				if (n.getNodeValue() != null)
+					parent.value = n.getNodeValue().trim();
+				continue;
 			}
 			
-			HashMap<String, String> attrs = new HashMap<>();
+			if (n.getNodeType() != Node.ELEMENT_NODE) continue;
+
+			String tagname = n.getNodeName();
 			
-			for (int i = 0; i < current_attribs.getLength(); i++) {
-				attrs.put(current_attribs.getQName(i), current_attribs.getValue(i));
+			Node hnode = n.getParentNode();
+			String uri = tagname;
+			while (hnode.getParentNode() != null) {
+				uri = hnode.getNodeName() + "." + uri;
+				hnode = hnode.getParentNode();
 			}
 			
-			addTag(new Tag(current_tag, reading_tag, val, attrs));
+			Tag t = new Tag(tagname, uri, "");
+			if (HEAD == null)
+				HEAD = t;
+			else {
+				parent.addChild(t);
+				t.parent = parent;				
+			}
 			
-			reading_tag = reading_tag.replaceAll(current_tag, "");
+			
+			t.setAttributes(n.getAttributes());
+			
+			tags.add(t);
+			BuildTags(t, n.getChildNodes());
 		}
 	}
-
-	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException
-	{
-		reading_tag = reading_tag.replace(qName + ".", "");
+	
+	public void PrintTags() {
+		System.out.println("-=-=-=-=-=-==-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=");
+		PrintTags(HEAD);
+		System.out.println("-=-=-=-=-=-==-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=");
 	}
-
+	
+	public void PrintTags(Tag start) {
+		System.out.print("<" + start.name);
+		if (start.getAttributes().size() != 0) {
+			for (String s : start.getAttributes().keySet()) {
+				System.out.print(" " + s + "=\"" + start.getAttributes().get(s) + "\"");
+			}
+		}
+		
+		if (!start.value.equals("")) {			
+			System.out.println(">\n" + start.value);				
+		} else {
+			if (!start.hasChild()) {
+				System.out.print("/>\n");
+				return;
+			}
+			System.out.print(">\n");
+		}
+		
+		if (start.hasChild()) {
+			for (Tag t : start.getChildren()) {
+				PrintTags(t);
+			}
+		}
+		System.out.println("</" + start.name + ">");
+	}
 }

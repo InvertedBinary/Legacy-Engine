@@ -69,5 +69,6 @@
 	<classpathentry kind="lib" path="lib/luaj-jse-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/luaj-sources-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/LibraryLWJGLOpenAL.jar"/>
+	<classpathentry kind="lib" path="lib/NetCommons.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

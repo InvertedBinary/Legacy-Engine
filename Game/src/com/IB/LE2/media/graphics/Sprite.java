@@ -268,7 +268,7 @@ public class Sprite {
 		Sprite[] sprites = new Sprite[amount];
 		int current = 0;
 		int[] pixels = new int[sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT];
-		for (int yp = 0; yp < sheet.getHeight() / sheet.SPRITE_HEIGHT; yp++) {		
+		for (int yp = 0; yp < sheet.getHeight() / sheet.SPRITE_HEIGHT; yp++) {
 			for (int xp = 0; xp < sheet.getWidth() / sheet.SPRITE_WIDTH; xp++) {
 				
 				for (int y = 0; y < sheet.SPRITE_HEIGHT; y++) {
@@ -276,11 +276,6 @@ public class Sprite {
 						int xo = x + xp * sheet.SPRITE_WIDTH;
 						int yo = y + yp * sheet.SPRITE_HEIGHT;
 						pixels[x + y * sheet.SPRITE_WIDTH] = sheet.getPixels()[xo + yo * sheet.getWidth()];
-
-						/*System.out.println("SPRITE_WIDTH: " + sheet.SPRITE_WIDTH + " SPRITE_HEIGHT: " + sheet.SPRITE_HEIGHT);
-						System.out.println("getWidth: " + sheet.getWidth() + " getHeight: " + sheet.getHeight());
-						System.out.println("getPixels: " + sheet.getPixels());*/
-						
 					} 
 				}
 				
@@ -288,6 +283,22 @@ public class Sprite {
 			}
 		}
 		return sprites;
+	}
+	
+	public static Sprite Slim(Sprite sprite) {
+		int[] p = sprite.pixels;
+		int lx = -1;
+		int rx = -1;
+		for (int y = 0; y < sprite.getHeight(); y++) {
+			for (int x = 0; x < sprite.getWidth(); x++) {
+				int pixel = p[x + y * sprite.getWidth()];
+				if (pixel == Screen.ALPHA_COL) continue;
+					else if (x > lx) lx = x;
+				
+			}
+		}
+		
+		return new Sprite(p, sprite.width, sprite.height);
 	}
 	
 	public Sprite(Sprite s, Sprite s2) {

@@ -21,6 +21,7 @@ import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.worlds.TiledLevel;
+import com.moremeridian.nc.net.wire.NetContext;
 
 public class Commands {
 
@@ -87,9 +88,10 @@ public class Commands {
 					try {
 						System.out.println("SETTING PLAYER VAR: " + Modifier + " TO: " + Modifier2);
 						player.set(Modifier, Modifier2);
-					} catch (NumberFormatException e) { }
+					} catch (NumberFormatException e) {
+					}
 					break;
-					
+
 				case "tcl":
 					player.noclip = !player.noclip;
 					break;
@@ -101,7 +103,7 @@ public class Commands {
 						VARS.suspend_world = false;
 					else
 						VARS.suspend_world = !VARS.suspend_world;
-					
+
 					break;
 				case "restart":
 					Boot.restart();
@@ -146,6 +148,10 @@ public class Commands {
 				case "killmus":
 				case "killmusic":
 					Audio.StopMusic();
+					break;
+
+				case "login":
+					Boot.MeridianClient.Upload(NetContext.BIT_LOGIN, Modifier + " " + Modifier2);
 					break;
 
 				case "menu":

@@ -23,10 +23,12 @@ import org.ini4j.IniPreferences;
 
 import com.IB.LE2._GL.AlphaLWJGL.OGL_TEST;
 import com.IB.LE2._GL.GL_Real.GL_Main;
-import com.IB.LE2.network.GameClient;
-import com.IB.LE2.network.server.GameServer;
+import com.IB.LE2.network.game.client.GameClient;
+import com.IB.LE2.network.game.server.GameServer;
+import com.IB.LE2.network.meridian.MeridianClient;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.level.Level;
+import com.moremeridian.nc.net.client.Client;
 
 public class Boot
 {
@@ -45,6 +47,8 @@ public class Boot
 	
 	private static GameServer Server;
 	public static GameClient Client;
+	
+	public static Client MeridianClient;
 	
 	private static int port = 7381;
 	private static String host = "localhost";
@@ -69,6 +73,13 @@ public class Boot
 			OpenServer();
 		} else {
 			Client = new GameClient(host, 7381);
+		}
+		
+		MeridianClient = new Client("127.0.0.1", MeridianClient.class);
+		try {
+			MeridianClient.StartClient();
+		} catch (Exception e) {
+			System.out.println("Unable to connect to a Meridian Server.");
 		}
 
 		LaunchGame();

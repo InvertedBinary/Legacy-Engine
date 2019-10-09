@@ -1,4 +1,4 @@
-package com.IB.LE2.network;
+package com.IB.LE2.network.game.client;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

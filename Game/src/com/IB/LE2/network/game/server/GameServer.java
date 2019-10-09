@@ -1,4 +1,4 @@
-package com.IB.LE2.network.server;
+package com.IB.LE2.network.game.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;

@@ -29,6 +29,13 @@ public class UI_Manager {
 	public static void update() {
 		UpdateMacros();
 		
+		/* TODO: Debug this
+		 * Exception in thread "Game" java.lang.NullPointerException
+		 * 	at com.IB.LE2.input.UI.UI_Manager.update(UI_Manager.java:35)
+		 *  at com.IB.LE2.Game.run(Game.java:259)
+		 *  at java.lang.Thread.run(Thread.java:748)
+		 */
+
 		if (Current() != null) {
 			if (Current().enabled) {
 				Current().update();

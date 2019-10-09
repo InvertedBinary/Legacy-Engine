@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
-import com.IB.LE2.input.UI.components.basic.UI_Font;
 import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
