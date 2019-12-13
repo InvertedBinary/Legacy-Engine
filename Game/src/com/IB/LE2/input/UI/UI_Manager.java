@@ -35,6 +35,7 @@ public class UI_Manager {
 		 *  at com.IB.LE2.Game.run(Game.java:259)
 		 *  at java.lang.Thread.run(Thread.java:748)
 		 */
+		
 
 		if (Current() != null) {
 			if (Current().enabled) {

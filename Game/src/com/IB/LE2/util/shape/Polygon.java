@@ -10,7 +10,8 @@ import com.IB.LE2.util.VARS;
 
 public class Polygon extends PropertyEngine {
 
-	float xo, yo;
+	protected float xo, yo;
+	private boolean convex;
 	
 	public ArrayList<LineSegment> sides = new ArrayList<>();
 	public ArrayList<Vertex> vertices = new ArrayList<>();
@@ -77,6 +78,14 @@ public class Polygon extends PropertyEngine {
 			}
 			//System.out.println("NUM SIDES: " + sides.size() + " NUM VERTICES: " + vertices.size());
 		}
+	}
+	
+	private void setConvex() {
+		//All interior angles < 180?
+	}
+	
+	public boolean isConvex() {
+		return convex;
 	}
 	
 	public void CC_VERTS() {

@@ -2,6 +2,7 @@ package com.IB.LE2.media.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -12,6 +13,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.IB.LE2.Boot;
 
 public class SpriteSheet {
 
@@ -45,6 +48,8 @@ public class SpriteSheet {
 			Document doc = dBuilder.parse(path);
 			doc.getDocumentElement().normalize();
 			BuildSheet(doc);
+		} catch (FileNotFoundException e) {
+			Boot.log("Sheet definitions not found for this asset pack.", "SpriteSheet", true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

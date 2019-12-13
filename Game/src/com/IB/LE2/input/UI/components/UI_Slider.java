@@ -12,7 +12,7 @@ public class UI_Slider extends UI_Root implements UI_Clickable {
 	
 	public int width, pos;
 	
-	public int startPos = pos;
+	public int startPos;
 	
 	public int railCol = 0xFFFFFF;
 	public int slideCol = 0x000000;

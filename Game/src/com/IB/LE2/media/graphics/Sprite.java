@@ -1,5 +1,6 @@
 package com.IB.LE2.media.graphics;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.IB.LE2.Boot;
 import com.IB.LE2.world.level.TileCoord;
 
 
@@ -56,6 +58,8 @@ public class Sprite {
 			Document doc = dBuilder.parse(path);
 			doc.getDocumentElement().normalize();
 			BuildSprite(doc);
+		} catch (FileNotFoundException e) {
+			Boot.log("Sprite definitions not found for this asset pack.", "Sprite", true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

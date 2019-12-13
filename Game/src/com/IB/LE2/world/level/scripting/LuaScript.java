@@ -10,6 +10,7 @@ import org.luaj.vm2.lib.jse.JsePlatform;
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.input.UI.UI_Manager;
+import com.IB.LE2.world.level.scripting.triggers.EventDispatcher;
 
 public class LuaScript implements Runnable {
 
@@ -71,6 +72,10 @@ public class LuaScript implements Runnable {
         }
         
         return false;
+	}
+	
+	public void bindEvent(String event_name, String function) {
+		EventDispatcher.RegisterHook(this, event_name, function);
 	}
 	
 	public void addGlobal(String name, Object obj) {

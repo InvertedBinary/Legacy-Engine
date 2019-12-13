@@ -45,8 +45,7 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 
 @SuppressWarnings("static-access")
 
-public class Game extends Canvas implements Runnable
-{
+public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	public static Tile tile;
@@ -78,7 +77,6 @@ public class Game extends Canvas implements Runnable
 	File screenshots = null;
 	public Stack<Level> levels = new Stack<Level>();
 
-
 	int saveTime = 0;
 	/**
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol: (in-game); 4
@@ -95,96 +93,91 @@ public class Game extends Canvas implements Runnable
 	public int conTime = 0;
 
 	public Game() {
-			StartDiscord();
-			Audio.Initialize();
-			Assets.ExecuteLoadOrder();
-			//Audio.PlayMusic("Hope", "Hope.mid");
-			Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
-			setPreferredSize(size);
-			screen = new Screen(Boot.width, Boot.height);
-			frame = new JFrame();
-			windowHandler = new WindowHandler(this);
-			key = new Keyboard();
+		StartDiscord();
+		Audio.Initialize();
+		Assets.ExecuteLoadOrder();
+		// Audio.PlayMusic("Hope", "Hope.mid");
+		Dimension size = new Dimension(Boot.width * Boot.scale, Boot.height * Boot.scale);
+		setPreferredSize(size);
+		screen = new Screen(Boot.width, Boot.height);
+		frame = new JFrame();
+		windowHandler = new WindowHandler(this);
+		key = new Keyboard();
 
-			TiledLevel TL = new TiledLevel("b10");
-			setLevel(TL);
-			
-			if (TL.Spawnpoint != null) {
-				playerSpawn = TL.Spawnpoint;
-			} else {
-				playerSpawn = new TileCoord(0, 0);
-			}
+		TiledLevel TL = new TiledLevel("b10");
+		setLevel(TL);
 
-			// TileCoord playerSpawn = new TileCoord(296, 381);
-			setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
-			// level.add(getPlayer());
-			addKeyListener(key);
-			Mouse mouse = new Mouse();
-			font16bit = UI_Font.getFont("SL");
-			font8bit = UI_Font.getFont("SL8x8");
-			
-			font8bit.equals(font8bit);
-			
-			addMouseListener(mouse);
-			addMouseMotionListener(mouse);
-			addMouseWheelListener(mouse);
+		if (TL.Spawnpoint != null) {
+			playerSpawn = TL.Spawnpoint;
+		} else {
+			playerSpawn = new TileCoord(0, 0);
+		}
 
-			frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width), Boot.prefsInt("Frame", "MinHeight", Boot.height)));
-			
-		this.frame.getRootPane().addComponentListener(new ComponentListener()
-		{
+		// TileCoord playerSpawn = new TileCoord(296, 381);
+		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
+		// level.add(getPlayer());
+		addKeyListener(key);
+		Mouse mouse = new Mouse();
+		font16bit = UI_Font.getFont("SL");
+		font8bit = UI_Font.getFont("SL8x8");
+
+		font8bit.equals(font8bit);
+
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+		addMouseWheelListener(mouse);
+
+		frame.setMinimumSize(new Dimension(Boot.prefsInt("Frame", "MinWidth", Boot.width),
+				Boot.prefsInt("Frame", "MinHeight", Boot.height)));
+
+		this.frame.getRootPane().addComponentListener(new ComponentListener() {
 			@Override
-			public void componentResized(ComponentEvent e)
-			{
-				//System.out.println("Resized?");
+			public void componentResized(ComponentEvent e) {
+				// System.out.println("Resized?");
 				FrameAdjusted = true;
 			}
 
 			@Override
-			public void componentMoved(ComponentEvent e)
-			{
+			public void componentMoved(ComponentEvent e) {
 			}
 
 			@Override
-			public void componentShown(ComponentEvent e)
-			{
+			public void componentShown(ComponentEvent e) {
 			}
 
 			@Override
-			public void componentHidden(ComponentEvent e)
-			{
+			public void componentHidden(ComponentEvent e) {
 			}
 		});
 	}
-	
+
 	public void StartDiscord() {
-		 DiscordEventHandlers handler = new DiscordEventHandlers();
-		 DiscordRPC.discordInitialize("402613263986327552", handler, true);
+		DiscordEventHandlers handler = new DiscordEventHandlers();
+		DiscordRPC.discordInitialize("402613263986327552", handler, true);
 	}
 
 	public static String lvl_name = "test;";
 
 	public static void DiscordPlayerPosPresence() {
-			 DiscordRichPresence rich = new DiscordRichPresence();
-			 rich.details = "On Level: " + (lvl_name);
-			 rich.state = "Located at: (" + 
-					 (((int)Boot.get().getPlayer().x()) >> 5) + " , " +
-					 (((int)Boot.get().getPlayer().y()) >> 5) + ")";
-			 rich.largeImageKey = "ogimage";
-			 rich.largeImageText = "Meridian";
-			 rich.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM=";
-			 
-			 DiscordRPC.discordUpdatePresence(rich);
+		DiscordRichPresence rich = new DiscordRichPresence();
+		rich.details = "On Level: " + (lvl_name);
+		rich.state = "Located at: (" + (((int) Boot.get().getPlayer().x()) >> 5) + " , "
+				+ (((int) Boot.get().getPlayer().y()) >> 5) + ")";
+		rich.largeImageKey = "ogimage";
+		rich.largeImageText = "Meridian";
+		rich.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM=";
+
+		DiscordRPC.discordUpdatePresence(rich);
 	}
-	
+
 	public static void DiscordMenuPresence(String menuName) {
-		 DiscordRichPresence rich = new DiscordRichPresence();
-		 rich.details = "At A Menu:";
-		 rich.state = menuName;
-		 rich.largeImageKey = "ogimage";
-		 rich.largeImageText = "Meridian";
-		
-		 DiscordRPC.discordUpdatePresence(rich);
+		DiscordRichPresence rich = new DiscordRichPresence();
+		rich.details = "At A Menu:";
+		rich.state = menuName;
+		rich.largeImageKey = "ogimage";
+		rich.largeImageText = "Meridian";
+
+		DiscordRPC.discordUpdatePresence(rich);
 	}
 
 	public UI_Menu getMenu() {
@@ -233,73 +226,73 @@ public class Game extends Canvas implements Runnable
 		}
 		quit();
 	}
-	
+
 	public void run() {
-			long lastTime = System.nanoTime();
-			long timer = System.currentTimeMillis();
-			final double ns = 1000000000.0 / 60.0;
-			double delta = 0;
-			frames = 0;
-			int updates = 0;
-			requestFocus();
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double ns = 1000000000.0 / 60.0;
+		double delta = 0;
+		frames = 0;
+		int updates = 0;
+		requestFocus();
 
-			while (running) {
-				long now = System.nanoTime();
-				delta += (now - lastTime) / ns;
-				lastTime = now;
-				while (delta >= 1) {
+		while (running) {
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			while (delta >= 1) {
 
-					//speedModif++;
-					//if (speedModif % 1 == 0) {
-					update();
-					//speedModif = 0;
-					//}
+				// speedModif++;
+				// if (speedModif % 1 == 0) {
+				update();
+				// speedModif = 0;
+				// }
 
-					key.update();
-					UI_Manager.update();
-					Mouse.update();
-					updateMode();
+				key.update();
+				UI_Manager.update();
+				Mouse.update();
+				updateMode();
 
-					if (Boot.prefsBool("Graphics", "LockFPS", false)) {
-						if (!Boot.launch_args.containsKey("-mode_dedi")) {
-							if (frame.isVisible())
-								render();
-						}
-					frames++;
-					}
-					
-					updates++;
-					delta--;
-					
-				}
-				
-				if (!Boot.prefsBool("Graphics", "LockFPS", false)) {
+				if (Boot.prefsBool("Graphics", "LockFPS", false)) {
 					if (!Boot.launch_args.containsKey("-mode_dedi")) {
 						if (frame.isVisible())
 							render();
 					}
-				frames++;
+					frames++;
 				}
 
-				if (System.currentTimeMillis() - timer >= 1000) {
-					timer += 1000;
-					//System.out.println(updates + " ups, " + frames + " fps");
+				updates++;
+				delta--;
 
-					frame.setTitle(Boot.Title + " | " + updates + " ups, " + frames + " fps");
-
-					if (this.recAVG_FPS) {
-						fpsTotal += frames;
-						System.out.println("FPS: " + frames + " fpsIndex: " + ++fpsIndex + " AVG: " + fpsAVG);
-						fpsAVG = fpsTotal / fpsIndex;
-					}
-
-					updates = 0;
-					frames = 0;
-				}
 			}
-			 DiscordRPC.discordShutdown();
-			stop();
+
+			if (!Boot.prefsBool("Graphics", "LockFPS", false)) {
+				if (!Boot.launch_args.containsKey("-mode_dedi")) {
+					if (frame.isVisible())
+						render();
+				}
+				frames++;
+			}
+
+			if (System.currentTimeMillis() - timer >= 1000) {
+				timer += 1000;
+				// System.out.println(updates + " ups, " + frames + " fps");
+
+				frame.setTitle(Boot.Title + " | " + updates + " ups, " + frames + " fps");
+
+				if (this.recAVG_FPS) {
+					fpsTotal += frames;
+					System.out.println("FPS: " + frames + " fpsIndex: " + ++fpsIndex + " AVG: " + fpsAVG);
+					fpsAVG = fpsTotal / fpsIndex;
+				}
+
+				updates = 0;
+				frames = 0;
+			}
 		}
+		DiscordRPC.discordShutdown();
+		stop();
+	}
 
 	public static int fpsIndex = 0;
 	public static int fpsTotal = 0;
@@ -312,228 +305,232 @@ public class Game extends Canvas implements Runnable
 		}
 	}
 
-	public void updateMode()
-		{
-			// adminCmds();
+	public void updateMode() {
+		// adminCmds();
 
-			autoSave();
-			if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
-				devModeOn = true;
-				devModeReleased = false;
-			}
+		autoSave();
+		if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
+			devModeOn = true;
+			devModeReleased = false;
+		}
 
-			if (!key.DevMode) devModeReleased = true;
+		if (!key.DevMode)
+			devModeReleased = true;
 
-			if (key.DevMode && devModeOn && devModeReleased) {
-				devModeOn = false;
-				devModeReleased = false;
-			}
+		if (key.DevMode && devModeOn && devModeReleased) {
+			devModeOn = false;
+			devModeReleased = false;
+		}
 
-			if (key.toggleDevModeInfo && !devModeInfoOn && releasedDevInfo && devModeOn) {
-				devModeInfoOn = true;
-				releasedDevInfo = false;
-			}
+		if (key.toggleDevModeInfo && !devModeInfoOn && releasedDevInfo && devModeOn) {
+			devModeInfoOn = true;
+			releasedDevInfo = false;
+		}
 
-			if (!key.toggleDevModeInfo) releasedDevInfo = true;
+		if (!key.toggleDevModeInfo)
+			releasedDevInfo = true;
 
-			if (key.toggleDevModeInfo && devModeInfoOn && releasedDevInfo) {
-				devModeInfoOn = false;
-				releasedDevInfo = false;
-			}
+		if (key.toggleDevModeInfo && devModeInfoOn && releasedDevInfo) {
+			devModeInfoOn = false;
+			releasedDevInfo = false;
+		}
 
-			if (key.capture) {
-				if (screenshots.exists()) {
-					try {
-						captureScreen(frame, screenshots + "/Square_Legacy");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+		if (key.capture) {
+			if (screenshots.exists()) {
+				try {
+					captureScreen(frame, screenshots + "/Square_Legacy");
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
-	
+	}
+
 	public void AdjustImageToFrame() {
 		if (this.FrameAdjusted && Mouse.getButton() == -1)
-		screen.clear();
-		
-		Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale; 
+			screen.clear();
+
+		Boot.width = (frame.getWidth() - frame.getInsets().left - frame.getInsets().right) / Boot.scale;
 		Boot.height = (frame.getHeight() - frame.getInsets().top - frame.getInsets().bottom) / Boot.scale;
-		
+
 		screen.clear();
 		screen.width = Boot.width;
 		screen.height = Boot.height;
 		screen.pixels = new int[Boot.width * Boot.height];
-		
+
 		image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-		
+
 		this.FrameAdjusted = false;
 	}
 
 	boolean FirstMenuLoad = false;
+
 	public void update() {
-			conTime++;
-			
-			if(conTime > 120) {
-				conTime = 0;
-			}
-			 
-			if (mouseMotionTime > 0) {
-				this.mouseMotionTime--;
-			}
-			
-			this.AdjustImageToFrame();
-			
-			getLevel().update();
-			
-			for (Level lvl : levels) {
-				if (lvl != getLevel())
-					((TiledLevel)lvl).UpdateUnloaded();
-			}
+		conTime++;
+		
+		if (conTime > 120) {
+			conTime = 0;
 		}
+
+		if (mouseMotionTime > 0) {
+			this.mouseMotionTime--;
+		}
+		
+		this.AdjustImageToFrame();
+
+		getLevel().update();
+
+		for (Level lvl : levels) {
+			if (lvl != getLevel())
+				((TiledLevel) lvl).UpdateUnloaded();
+		}
+	}
 
 	public void render() {
-			BufferStrategy bs = getBufferStrategy();
-			if (bs == null) {
-				createBufferStrategy(3);
-				image.setAccelerationPriority(1);
-				return;
-			}
-			
-			screen.clear();
-
-			double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2
-					: getPlayer().x() - screen.width / 2;
-			double ySp = getPlayer().y() - screen.height / 2;
-			
-
-			double rScroll = xSp + (screen.width);
-			double bScroll = ySp + (screen.height);
-
-			double maxw = getLevel().width << VARS.TILE_BIT_SHIFT;
-			double maxh = getLevel().height << VARS.TILE_BIT_SHIFT;
-
-				if (xSp < 0) {
-					xScroll = 0;
-				} else {
-					Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
-				}
-				Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
-	
-				getLevel().render((int) (xScroll), (int) (yScroll), screen);
-			
-			UI_Manager.render(screen);
-
-			if (showAVG) {
-				if (fpsAVG < 200) {
-					font8bit.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
-				} else {
-					font8bit.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
-				}
-			}
-
-			// System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
-			for (int i = 0; i < pixels.length; i++) {
-				pixels[i] = screen.pixels[i];
-			}
-
-			Graphics g = bs.getDrawGraphics();
-			Color Opaque = new Color(5, 0, 0, 120);
-
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-
-			g.setColor(Opaque);
-
-			if (devModeOn == true || Mouse.getButton() == 2) {
-				try {
-					g.setColor(Opaque);
-					// g.fillRect(10, 80, 100, 1);
-					g.fill3DRect(0, 0, 545, 95, false);
-					g.fill3DRect(Mouse.getX() - 110, Mouse.getY() + 50, 250, 30, false);
-					g.setColor(Color.lightGray);
-					g.fillRect(Mouse.getX() - 4, Mouse.getY() - 4, 38, 38);
-					g.setFont(new Font("Verdana", 0, 16));
-					g.setColor(Color.WHITE);
-					g.drawString("Application: " + frame.getTitle(), 10, 22);
-					g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
-							Mouse.getX() - 103, Mouse.getY() + 70);
-					g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
-					g.drawString("Press 'M' To Reload Current Menu", 10, 66);
-					// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
-					//g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " + getLevel().returnOverlayTile(), 10, 60);
-					//g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " + (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
-					// screen.drawLine(getPlayer(), level.entities);
-					g.setColor(Color.gray);
-					// g.fill3DRect(1020, 618, 300, 300, true);
-					g.setColor(Color.WHITE);
-
-					g.setFont(new Font("Verdana", 0, 18));
-
-					/*
-					 * if (gameState == 5) { g.fill3DRect(1362, 4, 55, 30, false);
-					 * g.setColor(Color.WHITE); g.setFont(new Font("Verdana",0, 18));
-					 * g.drawString("Map", 1372, 25); }
-					 */
-
-					if (devModeOn == true && devModeInfoOn) {
-						g.setFont(new Font("Verdana", 0, 16));
-						g.drawString("Developer Mode: Mouse Grid, Coordinate, Player [UUID], Scrolls", 10, 80);
-						g.setFont(new Font("Verdana", 0, 16));
-						g.fill3DRect(1362, 4, 55, 30, false);
-						g.setColor(Color.WHITE);
-						g.setFont(new Font("Verdana", 0, 18));
-						g.drawString("Map", 1372, 25);
-						// g.drawString("Button: " + Mouse.getButton(), 415, 80);
-					}
-
-				} catch (Exception e) {
-
-				}
-			}
-
-			// fontLayer.render(g);
-			g.dispose();
-			bs.show();
-
-			// frame.remove(this);
-			// width = frame.getWidth() / scale;
-			// height = frame.getHeight() / scale;
-			// frame.add(this);
-			// System.out.println(width);
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			image.setAccelerationPriority(1);
+			return;
 		}
+
+		screen.clear();
+
+		double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2
+				: getPlayer().x() - screen.width / 2;
+		double ySp = getPlayer().y() - screen.height / 2;
+
+		double rScroll = xSp + (screen.width);
+		double bScroll = ySp + (screen.height);
+
+		double maxw = getLevel().width << VARS.TILE_BIT_SHIFT;
+		double maxh = getLevel().height << VARS.TILE_BIT_SHIFT;
+
+		if (xSp < 0) {
+			xScroll = 0;
+		} else {
+			Boot.get().xScroll = ((rScroll + 1) >= maxw) ? (maxw - (rScroll - xSp)) : xSp;
+		}
+		Boot.get().yScroll = ((bScroll + 1) >= maxh) ? (maxh - (bScroll - ySp)) : ySp;
+
+		getLevel().render((int) (xScroll), (int) (yScroll), screen);
+
+		UI_Manager.render(screen);
+
+		if (showAVG) {
+			if (fpsAVG < 200) {
+				font8bit.render(-5, Boot.height - 17, -3, 0xDB0000, "Average FPS: " + fpsAVG, screen, false, true);
+			} else {
+				font8bit.render(-5, Boot.height - 17, -3, 0x00ff00, "Average FPS: " + fpsAVG, screen, false, true);
+			}
+		}
+
+		// System.arraycopy(screen.pixels, 0, pixels, 0, screen.pixels.length);
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = screen.pixels[i];
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		Color Opaque = new Color(5, 0, 0, 120);
+
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
+		g.setColor(Opaque);
+
+		if (devModeOn == true || Mouse.getButton() == 2) {
+			try {
+				g.setColor(Opaque);
+				// g.fillRect(10, 80, 100, 1);
+				g.fill3DRect(0, 0, 545, 95, false);
+				g.fill3DRect(Mouse.getX() - 110, Mouse.getY() + 50, 250, 30, false);
+				g.setColor(Color.lightGray);
+				g.fillRect(Mouse.getX() - 4, Mouse.getY() - 4, 38, 38);
+				g.setFont(new Font("Verdana", 0, 16));
+				g.setColor(Color.WHITE);
+				g.drawString("Application: " + frame.getTitle(), 10, 22);
+				g.drawString("Mouse X: " + (int) Mouse.getX() / Boot.scale + ", Mouse Y: " + Mouse.getY() / Boot.scale,
+						Mouse.getX() - 103, Mouse.getY() + 70);
+				g.drawString("Player[UUID]: " + getLevel().getPlayers(), 10, 44);
+				g.drawString("Press 'M' To Reload Current Menu", 10, 66);
+				// g.drawString("xScroll: " + xScroll + " yScroll: " + yScroll, 10, 60);
+				// g.drawString("Tile: " + getLevel().returnTile() + " || Overlay: " +
+				// getLevel().returnOverlayTile(), 10, 60);
+				// g.drawString("X: " + (int) getPlayer().x() / TileCoord.TILE_SIZE + ", Y: " +
+				// (int) getPlayer().y() / TileCoord.TILE_SIZE, 10, 20);
+				// screen.drawLine(getPlayer(), level.entities);
+				g.setColor(Color.gray);
+				// g.fill3DRect(1020, 618, 300, 300, true);
+				g.setColor(Color.WHITE);
+
+				g.setFont(new Font("Verdana", 0, 18));
+
+				/*
+				 * if (gameState == 5) { g.fill3DRect(1362, 4, 55, 30, false);
+				 * g.setColor(Color.WHITE); g.setFont(new Font("Verdana",0, 18));
+				 * g.drawString("Map", 1372, 25); }
+				 */
+
+				if (devModeOn == true && devModeInfoOn) {
+					g.setFont(new Font("Verdana", 0, 16));
+					g.drawString("Developer Mode: Mouse Grid, Coordinate, Player [UUID], Scrolls", 10, 80);
+					g.setFont(new Font("Verdana", 0, 16));
+					g.fill3DRect(1362, 4, 55, 30, false);
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("Verdana", 0, 18));
+					g.drawString("Map", 1372, 25);
+					// g.drawString("Button: " + Mouse.getButton(), 415, 80);
+				}
+
+			} catch (Exception e) {
+
+			}
+		}
+
+		// fontLayer.render(g);
+		g.dispose();
+		bs.show();
+
+		// frame.remove(this);
+		// width = frame.getWidth() / scale;
+		// height = frame.getHeight() / scale;
+		// frame.add(this);
+		// System.out.println(width);
+	}
 
 	public void Launch(Game game) {
-			if (!Boot.launch_args.containsKey("-mode_dedi")) {
-				Boot.setWindowIcon(Disk.AppDataDirectory + "/bin/icon.png");
-				game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
-				if (Boot.launch_args.containsKey("-resizeable")) {
-					game.frame.setResizable(true);
-				}
-				game.frame.setTitle(Boot.Title);
-				game.frame.add(game);
-				// game.frame.remove(game);
-				// game.frame.setOpacity(0.01F);
-				game.frame.pack();
-				game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				game.frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				
-				int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
-				if (windowMode == 1)
-					game.setBorderlessFullscreen(true);
-				else if (windowMode == 2)
-					setTrueFullscreen();
-				
-				Boot.setMouseIcon(Disk.AppDataDirectory + "/bin/cursor.png");
-				Boot.centerMouse();
+		if (!Boot.launch_args.containsKey("-mode_dedi")) {
+			Boot.setWindowIcon(Disk.AppDataDirectory + "/bin/icon.png");
+			game.frame.setResizable(Boot.prefsBool("Frame", "Resizeable", false));
+			if (Boot.launch_args.containsKey("-resizeable")) {
+				game.frame.setResizable(true);
 			}
+			game.frame.setTitle(Boot.Title);
+			game.frame.add(game);
+			// game.frame.remove(game);
+			// game.frame.setOpacity(0.01F);
+			game.frame.pack();
+			game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			game.frame.setLocationRelativeTo(null);
+			frame.setVisible(true);
 
-			game.start();
-			
-			UI_Manager.Load(new TagMenu(Boot.prefsStr("UI", "StartupMenu", "Main")));
+			int windowMode = Boot.prefsInt("Frame", "FullscreenMode", 0);
+			if (windowMode == 1)
+				game.setBorderlessFullscreen(true);
+			else if (windowMode == 2)
+				setTrueFullscreen();
+
+			Boot.setMouseIcon(Disk.AppDataDirectory + "/bin/cursor.png");
+			Boot.centerMouse();
 		}
-	
+
+		game.start();
+
+		UI_Manager.Load(new TagMenu(Boot.prefsStr("UI", "StartupMenu", "Main")));
+	}
+
 	public boolean ChangingFullscreenState = false;
+
 	public void setBorderlessFullscreen(boolean state) {
 		ChangingFullscreenState = true;
 		if (state) {
@@ -544,15 +541,16 @@ public class Game extends Canvas implements Runnable
 			frame.dispose();
 			frame.setUndecorated(false);
 			frame.setExtendedState(JFrame.NORMAL);
-			frame.setSize(new Dimension(Boot.prefsInt("Graphics", "PixelsWidth", Boot.width) * Boot.scale, Boot.prefsInt("Graphics", "PixelsHeight", Boot.height) * Boot.scale));
+			frame.setSize(new Dimension(Boot.prefsInt("Graphics", "PixelsWidth", Boot.width) * Boot.scale,
+					Boot.prefsInt("Graphics", "PixelsHeight", Boot.height) * Boot.scale));
 			frame.setLocationRelativeTo(null);
 		}
 		if (!frame.isVisible())
 			frame.setVisible(true);
-		
+
 		ChangingFullscreenState = false;
 	}
-	
+
 	public void setTrueFullscreen() {
 		frame.setBounds(getGraphicsConfiguration().getBounds());
 		getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);

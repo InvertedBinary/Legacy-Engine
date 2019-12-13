@@ -308,37 +308,6 @@ public class Screen {
 		return col;
 	}
 
-	public void fade(int r, int g, int b) {
-		int col = 0;
-		for (int y = 0; y < height * 2; y++) {
-			int ya = y;
-			for (int x = 0; x < width * 2; x++) {
-				int xa = x;
-				if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
-					continue;
-				col = pixels[xa + ya * this.width];
-				// col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b);
-				pixels[xa + ya * this.width] = col;
-			}
-		}
-	}
-
-	public void fade(int r, int g, int b, int timer) {
-		int col = 0;
-		for (int y = 0; y < height * 2; y++) {
-			int ya = y;
-			for (int x = 0; x < width * 2; x++) {
-				int xa = x;
-				if (xa < 0 || xa >= this.width || ya < 0 || ya >= this.height)
-					continue;
-				col = pixels[xa + ya * this.width];
-				// col = TileLighting.changeBrightnessNegative(col, Level.brightness, r, g, b);
-				pixels[xa + ya * this.width] = col;
-			}
-		}
-
-	}
-
 	@Deprecated // TODO: rewrite getEntities in level
 	public void drawLine(Player player, List<Entity> entities) {
 		int xp = (int) player.x();

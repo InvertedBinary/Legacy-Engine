@@ -209,30 +209,6 @@ public class Level extends EntityContainer implements Serializable {
 		return Boot.get().getPlayer();
 	}
 	
-	//TODO: Rewrite with new getEntitiesListFixed(x, y, rad);
-	//TODO: actually scrap getEntitiesListFixed into FilterList(List, rad);
-	public List<Entity> AOEFull(Screen screen, int x, int y, int rad, boolean render, int color) {
-		List<Entity> result = null;
-		if (render) {
-			drawAOE(screen, x, y, rad, color);
-		}
-
-		x >>= 4;
-		y >>= 4;
-
-		//result = getEntitiesListFixed(x, y, rad);
-		return result;
-	}
-	
-	
-	public void drawAOE(Screen screen, int x, int y, int rad, int color) {
-		x >>= 4;
-		y >>= 4;
-		
-		screen.DrawCircle(x, y, rad, color, true);
-
-	}
-	
 	public List<Vector2i> BresenhamLine(int x1, int y1, int x2, int y2){
 		   List<Vector2i> result = new ArrayList<Vector2i>();
 		   int dy = y2 - y1;
@@ -274,14 +250,17 @@ public class Level extends EntityContainer implements Serializable {
 	/*public RayCast RayCast(Vector2i pos, double angle, float rayLength){
 		   RayCast result = new RayCast();
 		   result.setCollided(false);
+		   
 		   if(rayLength <= 0) {
 		      result.setCollided(this.getTile(pos.getX()>>4, pos.getY()>>4).solid());
 		      result.setPosition(pos);
 		      return result;
 		   }
+		   
 		   double adjacent = pos.getX()+rayLength*Math.cos(angle);
 		   double opposite = pos.getY()+rayLength*Math.sin(angle);
 		   List<Vector2i> rayLine = BresenhamLine(pos.getX(), pos.getY(), (int)adjacent, (int)opposite);
+		   
 		   if(!rayLine.isEmpty()){
 		      for(int rayVectorIndex = 0; rayVectorIndex < rayLine.size(); rayVectorIndex++){
 		         Vector2i rayVector = rayLine.get(rayVectorIndex);
@@ -293,10 +272,11 @@ public class Level extends EntityContainer implements Serializable {
 		         }
 		      }
 		   }
+		   
 		   return result;
-		}
+		}*/
 	
-	public List<Node> findPath(Vector2i start, Vector2i goal) {
+	/*public List<Node> findPath(Vector2i start, Vector2i goal) {
 		this.start = start;
 		this.goal = goal;
 		List<Node> openList = new ArrayList<Node>();
