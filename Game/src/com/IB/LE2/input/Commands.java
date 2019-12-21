@@ -243,6 +243,10 @@ public class Commands {
 					break;
 				case "svr":
 					break;
+				case "wget":
+					System.out.println("Downloading new Tags..");
+					
+					break;
 				case "":
 					System.out.println("... Finished CMD Lap");
 					break;

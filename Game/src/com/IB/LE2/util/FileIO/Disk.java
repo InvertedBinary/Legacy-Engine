@@ -7,9 +7,9 @@ import com.IB.LE2.Boot;
 public class Disk {
 	
 	private static final String AppDataRoot = "/" + Boot.prefsStr("Disk", "AppDataDirectoryRoot", "LE2Mod");
-	public static final File AppDataDirectory = AppDataDirectory();
-	
 	public static final String[] subdirs = { "/bin", "/mods" };
+
+	public static final File AppDataDirectory = AppDataDirectory();
 	
 	private static File AppDataDirectory() {
 		String home = System.getProperty("user.home");
@@ -30,23 +30,22 @@ public class Disk {
 			dir.mkdir();
 			System.out.println("Creating parent directory");
 		}
-
+		
+		InitializeDirectoryStructure(dir.getAbsolutePath());
+		
 		return dir;
 	}
 	
-	public static void InitializeDirectoryStructure() {
-		File dir = AppDataDirectory;
-		
-		for(int i = 0; i < subdirs.length; i++) {
-			File sdir = new File(dir.getPath() + subdirs[i]);
-			if (!sdir.exists()) {
-				sdir.mkdirs();
-				System.out.println("... Subdirectory \"" + subdirs[i] + "\" created.");
+	private static void InitializeDirectoryStructure(String appdatadir) {
+		for (String p : subdirs) {
+			File dir = new File(appdatadir + p + "/");
+			if (!dir.exists()) {
+				dir.mkdirs();
+				System.out.println("... Subdirectory \"" + p + "\" created.");
 			}
 		}
-		
 	}
-
+	
 	public static void DeleteDir(File index) {
 		String[] entries = index.list();
 		for (String s : entries) {

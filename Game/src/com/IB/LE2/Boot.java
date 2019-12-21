@@ -114,7 +114,7 @@ public class Boot {
 			BuildDate = prefsStr("App", "BuildDate", BuildDate);
 
 			Title = AppName + " [Build " + BuildNumber + " : " + BuildDate + "]";
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -185,6 +185,9 @@ public class Boot {
 	}
 
 	public static Cursor setMouseIcon(String path) {
+		File f = new File(path);
+		if (!f.exists()) return null;
+		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = null;
 		image = Toolkit.getDefaultToolkit().getImage((path));

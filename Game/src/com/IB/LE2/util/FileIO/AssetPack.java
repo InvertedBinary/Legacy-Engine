@@ -28,8 +28,6 @@ public class AssetPack {
 	String version;
 	
 	public AssetPack(String name) {
-		Disk.InitializeDirectoryStructure();
-		
 		this.path = (Disk.AppDataDirectory + "/mods/" + name);
 
 		try {

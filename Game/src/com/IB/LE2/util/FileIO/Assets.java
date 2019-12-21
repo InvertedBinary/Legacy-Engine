@@ -21,15 +21,14 @@ public class Assets {
 	
 	public static void ExecuteLoadOrder() {
 		try {
-			Ini ini = new Ini(new File(Disk.AppDataDirectory + "/mods/mods.ini"));
+			File iniF = new File(Disk.AppDataDirectory + "/mods/mods.ini");
+			if (!iniF.exists()) ThrowTagsError();
+			
+			Ini ini = new Ini(iniF);
 			Preferences order = new IniPreferences(ini).node("LoadOrder");
 			String mods = order.get("mods", "");
 			if (mods.isEmpty()) {
-				JOptionPane.showMessageDialog(null,
-					    "Game files are missing or corrupt.\nReinstall and try again.",
-					    "Dirty Disk Error",
-					    JOptionPane.ERROR_MESSAGE);
-				System.exit(1);
+				ThrowTagsError();
 			}
 			
 			List<String> items = Arrays.asList(mods.split("\\s*,\\s*"));
@@ -40,6 +39,14 @@ public class Assets {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void ThrowTagsError() {
+		JOptionPane.showMessageDialog(null,
+			    "Necessary game files are missing or corrupted.\nReinstall and try again.",
+			    "Dirty Disk Error",
+			    JOptionPane.ERROR_MESSAGE);
+		System.exit(1);
 	}
 	
 	public static void LoadPack(String name) {
