@@ -25,7 +25,7 @@ public class UI_Font {
 			 "abcdefghijklm" + // 3
   			 "nopqrstuvwxyz" + // 4
   			 "0123456789.,'" + // 5
-  			 "'“”;:!@$%()-+" ; // 6
+  			 "'\";:!@$%()-+" ; // 6
 	
 	private transient int spacing;
 	private transient int size;
