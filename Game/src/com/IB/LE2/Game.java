@@ -121,8 +121,6 @@ public class Game extends Canvas implements Runnable {
 		font16bit = UI_Font.getFont("SL");
 		font8bit = UI_Font.getFont("SL8x8");
 
-		font8bit.equals(font8bit);
-
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 		addMouseWheelListener(mouse);

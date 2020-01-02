@@ -68,7 +68,7 @@ public class AssetPack {
 	        			} else if (parent.endsWith("Menu")) {
 	        				filePath = filePath.substring(0, filePath.lastIndexOf('.'));
 	        			} else if (parent.endsWith("Font")) {
-	        				UI_Font.LoadFont(filePath);
+	        				UI_Font.GenFont(filePath);
 	        			}
 	        			
 	        			results.put(fileName, filePath);
