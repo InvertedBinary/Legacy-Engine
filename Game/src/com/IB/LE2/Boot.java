@@ -26,6 +26,7 @@ import com.IB.LE2._GL.AlphaLWJGL.OGL_TEST;
 import com.IB.LE2._GL.GL_Real.GL_Main;
 import com.IB.LE2.network.game.client.GameClient;
 import com.IB.LE2.network.game.server.GameServer;
+import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.level.Level;
 import com.moremeridian.nc.net.client.Client;
@@ -85,6 +86,9 @@ public class Boot {
 
 	public static void LaunchGame() {
 		try {
+			File f = new File("le2.ini");
+			if (!f.exists()) Assets.ThrowTagsError("\n**Missing LE2.ini");
+			
 			Ini ini = new Ini(new File("le2.ini"));
 			iniPrefs = new IniPreferences(ini);
 

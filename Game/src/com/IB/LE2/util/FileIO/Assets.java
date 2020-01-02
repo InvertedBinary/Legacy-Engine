@@ -42,9 +42,15 @@ public class Assets {
 	}
 	
 	public static void ThrowTagsError() {
+		ThrowTagsError("");
+	}
+	
+	public static void ThrowTagsError(String missing) {
+		String title = "Dirty Disk Error";
+		String message = "Necessary game files are missing or corrupted.\nReinstall and try again.\n" + missing;
 		JOptionPane.showMessageDialog(null,
-			    "Necessary game files are missing or corrupted.\nReinstall and try again.",
-			    "Dirty Disk Error",
+			    message,
+			    title,
 			    JOptionPane.ERROR_MESSAGE);
 		System.exit(1);
 	}
