@@ -20,7 +20,7 @@
 		<jar destfile="${dir.jarfile}/LE2.jar" filesetmanifest="mergewithoutmain">
 		<fileset dir="${outputDir}" includes="**/*.class" />
 		<manifest>
-                <!--attribute name="Main-Class" value="com.IB.SL.Boot"/-->
+                <attribute name="Main-Class" value="com.IB.LE2.Boot"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
 			<fileset dir="${dir.workspace}/lib"/>
