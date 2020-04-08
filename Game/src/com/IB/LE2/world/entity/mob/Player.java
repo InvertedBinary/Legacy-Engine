@@ -246,10 +246,10 @@ public class Player extends Mob implements Serializable {
 	}
 
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
-		TiledLevel newLevel = (TiledLevel)Boot.get().getCreateLevel(XML);
-		Level current = Boot.get().getLevel();
-		Boot.get().setLevel(newLevel);
-		Boot.get().getLevel().add(this);
+		TiledLevel newLevel = (TiledLevel)Game.getCreateLevel(XML);
+		Level current = Game.getLevel();
+		Game.setLevel(newLevel);
+		Game.getLevel().add(this);
 		current.remove(this);
 		
 		

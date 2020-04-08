@@ -400,6 +400,6 @@ public class TiledLevel extends Level {
 	}
 
 	public void MovePlayerTo(double x, double y, String path, boolean tile_mult) {
-		Boot.get().getPlayer().setPositionTiled(x, y, path, true);
+		Boot.get().getPlayer().setPositionTiled(x, y, path, tile_mult);
 	}
 }

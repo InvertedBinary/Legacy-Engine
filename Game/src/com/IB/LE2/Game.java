@@ -595,7 +595,7 @@ public class Game extends Canvas implements Runnable {
 		this.player = player;
 	}
 
-	public Level getLevel() {
+	public static Level getLevel() {
 		return levels.get(0);
 	}
 
