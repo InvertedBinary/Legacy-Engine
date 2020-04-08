@@ -1,11 +1,15 @@
 package com.IB.LE2.input;
 
 import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.Date;
 
 import com.IB.LE2.Boot;
@@ -20,7 +24,6 @@ import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.TileCoord;
-import com.IB.LE2.world.level.worlds.TiledLevel;
 import com.moremeridian.nc.net.wire.NetContext;
 
 public class Commands {
@@ -208,17 +211,15 @@ public class Commands {
 					break;
 				case "spawn":
 					Boot.get().getLevel()
-							.add(new TagMob("/Tags/Entities/" + Modifier + ".xml",
+							.add(new TagMob(Modifier,
 									Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
 									Boot.get().getPlayer().y() / TileCoord.TILE_SIZE));
 					break;
 				case "ld":
 					if (Modifier.equals(""))
-						Modifier = ((TiledLevel) Boot.getLevel()).path;
-					else
-						Modifier = "/Tags/Levels/" + Modifier;
+						return;
 
-					player.setPositionTiled(-1, -1, Modifier, true);
+					Boot.get().getPlayer().setPositionTiled(-1, -1, Modifier, true);
 					break;
 				case "con":
 					if (Modifier2.equals("")) {
@@ -244,8 +245,12 @@ public class Commands {
 				case "svr":
 					break;
 				case "wget":
-					System.out.println("Downloading new Tags..");
-					
+		            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+		            String txt = (String) c.getData(DataFlavor.stringFlavor);
+		            System.out.println("Downloading new Tags from.." + txt);
+		            URL url = new URL(txt);
+		            Disk.unpackArchive(url, new File(Disk.AppDataDirectory.getAbsolutePath() + "/mods/"));
+		            System.out.println("Finished.");
 					break;
 				case "":
 					System.out.println("... Finished CMD Lap");

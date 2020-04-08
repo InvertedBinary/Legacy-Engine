@@ -22,8 +22,8 @@ public class TagMob extends Mob
 {
 	private static final long serialVersionUID = 1L;
 
-	private TagReader tags;
-	public EntityContainer inventory;
+	private transient TagReader tags;
+	public transient EntityContainer inventory;
 
 	public transient AnimatedSprite
 		idle = Sprite.getNewAnim("PlayerIdle"),

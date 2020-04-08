@@ -21,7 +21,7 @@ public class UI_Font {
 			"abcdefghijklm" + // 3
 			"nopqrstuvwxyz" + // 4
 			"0123456789.,'" + // 5
-			"'\";:!@$%()-+"; // 6
+			"'\";:!@$%()-+";  // 6
 	private transient String charmap = STANDARD_CHARMAP;
 
 	private transient String name;
@@ -119,10 +119,12 @@ public class UI_Font {
 	public void render(int x, int y, int color, String text, Screen screen, boolean fixed) {
 		render(x, y, 0, color, text, screen, fixed, false);
 	}
+	
+	public Sprite getChar(char c) {
+		return chars[charmap.indexOf(c)];
+	}
 
-	public Sprite render(int x, int y, int spacing, int color, String text, Screen screen, boolean fixed, boolean background) {
-		Sprite sprite = null;
-
+	public void render(int x, int y, int spacing, int color, String text, Screen screen, boolean fixed, boolean background) {
 		if (background)
 			if (text.length() > 0) screen.DrawFillRect(x + size, y, (text.length() * size), size, 0xff302B23, fixed);
 
@@ -143,10 +145,9 @@ public class UI_Font {
 			}
 			int index = charmap.indexOf(currentChar);
 			if (index == -1) continue;
+			
 			screen.DrawText(x + xOffset, y + line * (2 + size) + yOffset, chars[index], color, fixed);
-			sprite = chars[index];
 		}
-		return sprite;
 	}
 
 }

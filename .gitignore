@@ -70,3 +70,7 @@ RemoteSystemsTempFiles/
 Game/gliConfig_FullDebug\.ini
 
 *.lnk
+
+SLPorter/
+
+*.log

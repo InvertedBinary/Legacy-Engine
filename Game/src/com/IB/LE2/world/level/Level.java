@@ -26,14 +26,15 @@ public class Level extends EntityContainer implements Serializable {
 	public int[] tiles;
 	transient public Tile tile;
 	
-	public HashMap<Integer, Tile> tile_map = new HashMap<>();
+	public String name;
+	
+	public transient HashMap<Integer, Tile> tile_map = new HashMap<>();
 
 	transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
 			if (n1.fCost < n0.fCost) return +1;
 			if (n1.fCost > n0.fCost) return -1;
 			return 0;
-
 		}
 	};
 
@@ -345,7 +346,7 @@ public class Level extends EntityContainer implements Serializable {
 	}*/
 	
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.Air;
+		if (x < 0 || y < 0 || x >= width || y >= height) return getTile(0, 0);
 		
 		Tile t = tile_map.get(tiles[x + y * width]);
 		t = (t == null) ? Tile.Air : t;
@@ -366,5 +367,6 @@ public class Level extends EntityContainer implements Serializable {
 	public List<Entity> getEntities() {
 		return entities;
 	}
+
 
 }

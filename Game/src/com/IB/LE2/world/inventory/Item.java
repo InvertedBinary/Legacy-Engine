@@ -1,27 +1,20 @@
 package com.IB.LE2.world.inventory;
 
-import java.io.InputStream;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
+import com.IB.LE2.Boot;
+import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.util.FileIO.Assets;
+import com.IB.LE2.util.FileIO.Tag;
+import com.IB.LE2.util.FileIO.TagReadListener;
+import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.world.entity.Entity;
+import com.IB.LE2.world.level.TileCoord;
 
 public class Item extends Entity {
 	private static final long serialVersionUID = -7808848233998306038L;
 
-	public final String XML_String;
-	public final String ROOT_ELEMENT = "item";
-	
-	public int required_level = 0;
-	
 	// - = - = - = - = - = - = - =
 	public final byte SLOT_WEAPON = 7;
+	//
 	public final byte SLOT_HEAD = 0;
 	public final byte SLOT_CHEST = 1;
 	public final byte SLOT_ARMS = 2;
@@ -30,99 +23,113 @@ public class Item extends Entity {
 	public final byte SLOT_MSC1 = 5;
 	public final byte SLOT_MSC2 = 6;
 	// - = - = - = - = - = - = - =
-	public byte ASSIGNED_SLOT = -1;
-	public byte ACTIVE_SLOT = -1;
-	// - = - = - = - = - = - = - =
+	
+	private TagReader tags;
+	
+	public Item(String tag_name) {
+		InitTags(tag_name);
+	}
 
-
-	public Item(String XML) {
-		this.XML_String = XML;
-		init();
+	public Item(String tag_name, double xi, double yi) {
+		InitTags(tag_name);
+		
+		this.x(xi * TileCoord.TILE_SIZE);
+		this.y(yi * TileCoord.TILE_SIZE);
 	}
 	
-	public void init() {
-		readXML(XML_String);
-	}
-	
-	public void unequip(Entity e) {
-		this.ACTIVE_SLOT = -1;
-	}
-	
-	public void equip(Entity e) {
-		this.ACTIVE_SLOT = this.ASSIGNED_SLOT;
-	}
-	
-	public void readXML(String path) {
-		try {
-		InputStream fXmlFile = getClass().getResourceAsStream(path);
-		DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
-		Document doc = dBuilder.parse(fXmlFile);
-		
-		doc.getDocumentElement().normalize();
-		
-		System.out.println("ROOT: " + doc.getDocumentElement().getNodeName());
-		
-		initItem(doc);
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public void initItem(Document doc) {
-		NodeList nList = doc.getElementsByTagName(this.ROOT_ELEMENT);
-		System.out.println("----------------------------");
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				try {
-					setProperties(eElement);
-					
-					} catch (Exception e) {
-						e.printStackTrace();
-				}
+	public void InitTags(String tag_name) {
+		Item e = this;
+		this.tags = new TagReader(Assets.get(tag_name), "entity", new TagReadListener() {
+			@Override
+			public void TagsRead() {
+				if (!processAllTags())
+					Boot.log("Unable to recognize one or more tags- ensure you are writing tags for this version of Legacy Engine!", "Item", true);
 			}
-		}
-	}
-	
-	public void setProperties(Element e) {
-		try {
-		//this.id = Integer.parseInt(getTag(e, "id"));
-		this.name = getTag(e, "name");
-		//this.rarity = Integer.parseInt(getTag(e, "rarity"));
-		this.required_level = Integer.parseInt(getTag(e, "level_req"));
-		this.ASSIGNED_SLOT = Byte.parseByte(getTag(e, "equip_slot"));
-		} catch (Exception err) {
-			err.printStackTrace();
-		}
-	}
-	
-	
-	
-	public Element getETag(Element e, String tagname) {
-		return (Element) (e.getElementsByTagName(tagname).item(0));		
-	}
-	
-	public String getTag(Element e, String tagname) {
-		return (e.getElementsByTagName(tagname).item(0).getTextContent());		
-	}
-	
-	public void initSprite(Element eElement) {
-				try {
-				this.xOffset = Integer.parseInt(eElement.getAttribute("xOffset"));
-				this.yOffset = Integer.parseInt(eElement.getAttribute("yOffset"));
-				int size = Integer.parseInt(eElement.getAttribute("size"));
-
-				Element sprite = getETag(eElement, "sprite");
-				Element icon = getETag(eElement, "icon");
-
-//				this.sprite = buildAnimSprite(size, sp);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			
+			@Override
+			public void TagsError() {
+				Boot.log("Error reading tags! -- Aborting", "Item", true);
+				e.remove();
 			}
+		});
+		
+		tags.start();
+	}
+
+	public boolean processAllTags() {
+		boolean result = true;
+		for (Tag i : tags.getTags()) {
+			if (!processTag(i)) result = false;
 		}
+
+		return result;
+	}
+
+	public boolean processTag(Tag tag) {
+		boolean result = true;
+		
+		String val = tag.value;
+		
+		switch (tag.uri) {
+		case "entity.props.name":
+			this.name = val;
+			break;
+		case "entity.props.health":
+			this.set("health", val);
+			break;
+		case "entity.props.speed":
+			this.set("speed", val);
+			break;
+		case "entity.props.mass":
+			this.set("mass", val);
+			break;
+			//
+		case "entity.sprite.xOffset":
+			this.DrawXOffset = (int) parseNum(val);
+			break;
+		case "entity.sprite.yOffset":
+			this.DrawYOffset = (int) parseNum(val);
+			break;
+		case "entity.sprite.static":
+			this.sprite = Sprite.get(val);
+			this.master = sprite;
+			this.display = sprite;
+			break;
+		case "entity.sprite.display":
+			this.display = Sprite.get(val);
+			break;
+			//
+		case "entity.hitbox.begin-x":
+			this.xOffset = (int) parseNum(val);
+			break;
+		case "entity.hitbox.begin-y":
+			this.yOffset = (int) parseNum(val);
+			break;
+		case "entity.hitbox.width":
+			this.EntWidth = (int) parseNum(val);
+			break;
+		case "entity.hitbox.height":
+			this.EntHeight = (int) parseNum(val);
+			break;
+			//
+		default:
+			if (tag.uri.startsWith("entity.vars.")) {
+				set(tag.name, val);
+			} else {
+				result = false;
+			}
+			break;
+		}
+
+		return result;
+	}
+	
+	public double parseNum(String val) {
+		return Double.parseDouble(val);
+	}
+
+	public Boolean parseBool(String val) {
+		return Boolean.parseBoolean(val);
+	}
+
+}

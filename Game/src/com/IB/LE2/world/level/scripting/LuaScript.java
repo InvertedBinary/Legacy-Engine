@@ -83,6 +83,10 @@ public class LuaScript implements Runnable {
 			globals.set(name, CoerceJavaToLua.coerce(obj));
 	}
 	
+	public void setShouldClose() {
+		this.should_close = true;
+	}
+	
 	public void run() {
 		if (script != null) {
 			chunk.call();

@@ -71,41 +71,16 @@ public abstract  class Mob extends Entity implements Serializable {
 			if (Math.abs(ya) > 1) {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + abs(ya));
-					this.canJump = false;
-				} else {
-					this.yAxisCollisionResponse(ya);
 				}
 				ya -= abs(ya);
 			} else {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + ya);
-					this.canJump = false;
-				} else {
-					this.yAxisCollisionResponse(ya);
 				}
 				ya = 0;
 			}
 		}
 	}
-	
-	public void yAxisCollisionResponse(double ya) {
-		if (this.vel().y() > 0) {
-			DoFallDamage();
-			this.vel().y(0);
-			this.canJump = true;
-		}
-		if (ya < 0) {
-			this.vel().y(VARS.Ag);
-			this.canJump = false;
-		}
-	}
-	
-	public void DoFallDamage() {
-		if (this.vel().y() > 10) {
-			this.TakeDamage(this.vel().y() / 8);
-		}
-	}
-	
 	
 	public void TakeDamage(double pts) {
 		//this.mobhealth -= pts;
@@ -205,7 +180,6 @@ public abstract  class Mob extends Entity implements Serializable {
 			
 			
 			if (collides) {
-				//is the player walking with the slope or down it?
 				int slopePolarity = PolarityOf(ls.slope);
 				int xaPolarity = PolarityOf(xa);
 				

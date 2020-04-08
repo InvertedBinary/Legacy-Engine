@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
@@ -75,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 	public TileCoord playerSpawn;
 	public TileCoord playerRespawn = new TileCoord(52, 72);
 	File screenshots = null;
-	public Stack<Level> levels = new Stack<Level>();
+	public static ArrayList<Level> levels = new ArrayList<Level>();
 
 	int saveTime = 0;
 	/**
@@ -104,7 +105,7 @@ public class Game extends Canvas implements Runnable {
 		windowHandler = new WindowHandler(this);
 		key = new Keyboard();
 
-		TiledLevel TL = new TiledLevel("b10");
+		TiledLevel TL = new TiledLevel(Boot.prefsStr("App", "BootLevel", "b10"));
 		setLevel(TL);
 
 		if (TL.Spawnpoint != null) {
@@ -182,10 +183,37 @@ public class Game extends Canvas implements Runnable {
 		return UI_Manager.Current();
 	}
 
-	public void setLevel(Level level) {
-		this.levels.push(level);
+	public static void setLevel(Level level) {
+		if (levels.size() > 0) {
+			((TiledLevel)levels.get(0)).StopLua();
+			levels.add(levels.get(0));
+			levels.set(0, level);
+		} else
+			levels.add(level);
 	}
-
+	
+	public static Level getCreateLevel(String lvln) {
+		for (Level lvl : levels) {
+			if (lvl.name.equals(lvln)) {
+				System.out.println("Map exists, returning loaded version!");
+				((TiledLevel)lvl).reload();
+				return lvl;
+			}
+		}
+		
+		System.out.println("Map unloaded, reading..");
+		return new TiledLevel(lvln);
+	}
+	
+	public static boolean levelExists(String lvln) {
+		for (Level lvl : levels) {
+			if (lvl.name.equals(lvln))
+				return true;
+		}
+		
+		return false;
+	}
+	
 	public void captureScreen(JFrame currentFrame, String fileName) throws AWTException {
 		System.out.println("Saved Screenshot as: " + fileName + "_" + System.currentTimeMillis() + ".png");
 		Robot robot = new Robot();
@@ -377,10 +405,11 @@ public class Game extends Canvas implements Runnable {
 		
 		this.AdjustImageToFrame();
 
-		getLevel().update();
+		Level current = getLevel();
+		current.update();
 
 		for (Level lvl : levels) {
-			if (lvl != getLevel())
+			if (lvl != current)
 				((TiledLevel) lvl).UpdateUnloaded();
 		}
 	}
@@ -395,9 +424,9 @@ public class Game extends Canvas implements Runnable {
 
 		screen.clear();
 
-		double xSp = key.pan ? getPlayer().x() + (screen.xo * 2) - screen.width / 2
-				: getPlayer().x() - screen.width / 2;
-		double ySp = getPlayer().y() - screen.height / 2;
+		double xSp = key.pan ? (getPlayer().getMidpointX()) + (screen.xo * 2) - screen.width / 2
+				: getPlayer().getMidpointX() - screen.width / 2;
+		double ySp = (getPlayer().getMidpointY()) - screen.height / 2;
 
 		double rScroll = xSp + (screen.width);
 		double bScroll = ySp + (screen.height);
@@ -567,7 +596,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public Level getLevel() {
-		return levels.peek();
+		return levels.get(0);
 	}
 
 	public Keyboard getInput() {

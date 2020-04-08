@@ -26,6 +26,15 @@ public class EntityContainer {
 		return false;
 	}
 	
+	public void remove(Entity e) {
+		all.remove(e);
+		entities.remove(e);
+		projectiles.remove(e);
+		particles.remove(e);
+		players.remove(e);
+		emitters.remove(e);
+	}
+	
 	protected void remove() {
 		for(int i = 0; i < all.size(); i++)
 	         if(all.get(i).isRemoved()) all.remove(i);

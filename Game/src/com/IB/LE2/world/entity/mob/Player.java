@@ -17,6 +17,7 @@ import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.entity.projectile.TagProjectile;
+import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
 import com.IB.LE2.world.level.worlds.TiledLevel;
@@ -29,17 +30,18 @@ public class Player extends Mob implements Serializable {
 
 	public transient AnimatedSprite
 		idle  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
+		up  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
 		down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
 		left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
 		right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
 
 	public transient AnimatedSprite animSprite = down;
 
-	public boolean noclip = false;
-	private TagMenu HUD;
+	public transient boolean noclip = false;
+	private transient TagMenu HUD;
 
-	public int cam_xOff = 0;
-	public int cam_yOff = 0;
+	public transient int cam_xOff = 0;
+	public transient int cam_yOff = 0;
 
 	// TODO: Generate UUID and send instead of Username
 
@@ -102,7 +104,7 @@ public class Player extends Mob implements Serializable {
 		}
 	}
 
-	PVector pv = null;
+	private transient PVector pv = null;
 	public void update() {
 		//HUD.script.call("SetHealthbar", GUI.progressBar(61, 100, this.health));
 		//raycastDIR = level.RayCast(new Vector2i(x(), y()), dirInt, (int) 3);
@@ -138,14 +140,13 @@ public class Player extends Mob implements Serializable {
 				speed = 2;
 			}
 
-			// if (inventoryOn == false) {
 			if (this == level.getClientPlayer()) {
 				if (input.up) {
-					// animSprite = up;
-					yv -= speed;
+					animSprite = up;
+					this.vel().y(-speed);
 				} else if (input.down) {
-					// animSprite = down;
-					yv += speed;
+					animSprite = down;
+					this.vel().y(+speed);
 				}
 				if (input.left) {
 					animSprite = left;
@@ -153,10 +154,6 @@ public class Player extends Mob implements Serializable {
 				} else if (input.right) {
 					animSprite = right;
 					this.vel().x(speed);
-				}
-
-				if ((this.input.jump || this.input.up) && this.canJump && !this.sliding) {
-					this.vel().y(-6.5);
 				}
 
 				if (Mouse.getButton() == 1 && walking) {
@@ -179,20 +176,12 @@ public class Player extends Mob implements Serializable {
 		}
 
 		if (this.isClientPlayer()) {
-			PVector Gravity = new PVector();
-			Gravity.y(VARS.Ag);
-
-			this.vel().add(Gravity);
-
 			ya = vel().y();
 			xa = vel().x();
 
-			if (xa != 0 || (ya != 0 && ya != Gravity.y())) {
+			if (xa != 0 || ya != 0) {
 				Game.DiscordPlayerPosPresence();
 				HUD.script.call("Moving");
-			}
-
-			if (xa != 0) {
 				walking = true;
 				//Audio.MoveListener(x(), y(), 1);
 			} else {
@@ -203,7 +192,7 @@ public class Player extends Mob implements Serializable {
 				move(xa, ya);
 			} else {
 				setX(x() + xa * speed);
-				setY(y() + yv * speed);
+				setY(y() + ya * speed);
 			}
 
 		} else {
@@ -214,6 +203,8 @@ public class Player extends Mob implements Serializable {
 
 		this.vel().x(0);
 		this.pv.x(0);
+		this.vel().y(0);
+		this.pv.y(0);
 
 		if (VARS.do_possession && Selector.selected != null) {
 			Selector.selected.pos().set((Mouse.getX() / Boot.scale + Screen.xOffset) + 0,
@@ -255,9 +246,12 @@ public class Player extends Mob implements Serializable {
 	}
 
 	public void setPositionTiled(double x, double y, String XML, boolean tileMult) {
-		TiledLevel newLevel = new TiledLevel(XML);
+		TiledLevel newLevel = (TiledLevel)Boot.get().getCreateLevel(XML);
+		Level current = Boot.get().getLevel();
 		Boot.get().setLevel(newLevel);
 		Boot.get().getLevel().add(this);
+		current.remove(this);
+		
 		
 		if (x == -1 && y == -1) {
 			x = newLevel.Spawnpoint.x() / 32;
@@ -302,5 +296,17 @@ public class Player extends Mob implements Serializable {
 		if (Game.devModeOn) {
 			body.draw(screen);
 		}
+	}
+
+	public double getMidpointX() {
+		double result = x();
+		if (sprite != null) result += (sprite.getWidth() / 2);
+		return result;
+	}
+	
+	public double getMidpointY() {
+		double result = y();
+		if (sprite != null) result += (sprite.getHeight() / 2);
+		return result;
 	}
 }

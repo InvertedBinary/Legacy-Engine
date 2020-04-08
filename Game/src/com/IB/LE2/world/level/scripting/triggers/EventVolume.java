@@ -81,6 +81,10 @@ public class EventVolume {
 	}
 	
 	private void Consequence(LuaScript ls, Entity e) {
+		if (ls == null) {
+			System.out.println("Attempted signalling trigger consequence but script was corrupt!");
+			return;
+		}
 		ls.call(function, e);
 	}
 	

@@ -29,7 +29,7 @@ public class Particle2D extends Entity {
 		this.amount = amount;
 	}
 
-	PVector Gravity = new PVector(0, VARS.Ag);
+	private transient PVector Gravity = new PVector(0, VARS.Ag);
 
 	public void update() {
 		time++;
