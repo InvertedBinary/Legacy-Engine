@@ -28,13 +28,15 @@ import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.scripting.LuaScript;
 import com.IB.LE2.world.level.scripting.triggers.EventVolume;
 import com.IB.LE2.world.level.tile.Tile;
-import com.IB.LE2.world.level.tile.tiles.XML_Tile;
+import com.IB.LE2.world.level.tile.tiles.TSXData;
+import com.IB.LE2.world.level.tile.tiles.TagTile;
 
 public class TiledLevel extends Level {
 	private static final long serialVersionUID = 1L;
 
 	private TagReader reader;
 	private LuaScript script;
+	private TSXData tsx;
 
 	public String path = "";
 	public String tiled_xml = "";
@@ -108,6 +110,8 @@ public class TiledLevel extends Level {
 		String lvn = path.substring(path.lastIndexOf('\\') + 1, path.length());
 		System.out.println("PATH: " + path + " :: " + path + "/" + lvn + ".tmx");
 
+		tsx = new TSXData(this);
+		
 		reader = new TagReader(tiled_xml, "level", new TagReadListener() {
 			@Override
 			public void TagsRead() {
@@ -142,8 +146,6 @@ public class TiledLevel extends Level {
 	}
 
 	private void ProcessTags(boolean reloading) {
-		// reader.PrintTags();
-
 		for (Tag tag : reader.getTags()) {
 			String name = tag.name;
 			String uri = tag.uri;
@@ -166,6 +168,8 @@ public class TiledLevel extends Level {
 				this.event_volumes = new ArrayList<>();
 				break;
 			case "map.tileset":
+				//
+				tsx.read(path + "/" + tag.get("source", ""), tag.get("firstgid", 1));
 				break;
 			case "map.layer":
 				if (!reloading) addTileLayer(tag);
@@ -314,27 +318,30 @@ public class TiledLevel extends Level {
 			tiles = explodeTileString(data.value);
 			break;
 		}
+		
 		for (int i = 0; i < tiles.length; i++) {
+			if (tiles[i] != 0 && this.tiles[i] != tiles[i])
+				this.tiles[i] = tiles[i];
+		}
+		/*for (int i = 0; i < tiles.length; i++) {
 			int tile_id = tiles[i];
 			if (tile_id == 0) continue;
 
 			Tile t = tile_map.get(tile_id);
-			if (t == null) {
-				t = new XML_Tile(tile_id, Tile.GenSpriteFromId(SpriteSheet.get("Terrain"), tile_id));
-				tile_map.put(tile_id, t);
-			}
 			// Merge existing tile with tile on this layer
 			if (numLayersProcessed > 0) {
 				if (this.tiles[i] != 0 && this.tiles[i] != tile_id) {
 					Sprite composite = new Sprite(tile_map.get(this.tiles[i]).sprite, t.sprite);
 
-					tile_id = 1024 + i;
-					XML_Tile new_tile = new XML_Tile(tile_id, composite);
+					tile_id = tsx.getNumTiles() + i;
+					TagTile new_tile = new TagTile(tile_id, composite);
 					tile_map.put(tile_id, new_tile);
 				}
+			} else {
+				// Case first layer -> Process Animations
 			}
 			this.tiles[i] = tile_id;
-		}
+		}*/
 		numLayersProcessed++;
 	}
 

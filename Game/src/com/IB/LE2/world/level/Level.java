@@ -120,7 +120,9 @@ public class Level extends EntityContainer implements Serializable {
 			}
 		}
 
-		// Water.update();
+		for (int id : tile_map.keySet()) {
+			tile_map.get(id).update();
+		}
 
 	}
 	

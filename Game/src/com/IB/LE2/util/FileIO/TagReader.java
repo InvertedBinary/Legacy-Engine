@@ -51,7 +51,7 @@ public class TagReader {
 			PATH = TAG;
 		}
 		
-		if (!PATH.endsWith(".xml") && !PATH.endsWith(".tmx")) {
+		if (!PATH.endsWith(".xml") && !PATH.endsWith(".tmx") && !PATH.endsWith(".tsx")) {
 			PATH += ".xml";
 		}
 		

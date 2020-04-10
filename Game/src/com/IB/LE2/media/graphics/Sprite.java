@@ -208,7 +208,7 @@ public class Sprite {
 	public static Sprite rotate(Sprite sprite, double angle) {
 		return new Sprite(rotate(sprite.pixels, sprite.width, sprite.height, angle), sprite.width, sprite.height);
 	}
-
+	
 	private static int[] rotate(int[] pixels, int width, int height, double angle) {
 		int[] result = new int[width * height];
 
@@ -229,7 +229,7 @@ public class Sprite {
 
 				int col = 0;
 				if (xx < 0 || xx >= width || yy < 0 || yy >= height)
-					col = Screen.ALPHA_COL /* 0xff00CFCB */;
+					col = Screen.ALPHA_COL;
 				else
 					col = pixels[xx + yy * width];
 				result[x + y * width] = col;
@@ -349,5 +349,38 @@ public class Sprite {
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public static Sprite flipX(Sprite sprite) {
+		int[] pixels = new int[sprite.pixels.length];
+		for (int y = 0; y < sprite.height; y++) {
+			for (int x = 0; x < sprite.width; x++) {
+				pixels[(sprite.width - 1 - x) + y * sprite.width] = sprite.pixels[x + y * sprite.width];
+			}
+		}
+		
+		return new Sprite(pixels, sprite.width, sprite.height);
+	}
+	
+	public static Sprite flipY(Sprite sprite) {
+		int[] pixels = new int[sprite.pixels.length];
+		for (int y = 0; y < sprite.height; y++) {
+			for (int x = 0; x < sprite.width; x++) {
+				pixels[x + (sprite.height - 1 - y) * sprite.width] = sprite.pixels[x + y * sprite.width];
+			}
+		}
+		
+		return new Sprite(pixels, sprite.width, sprite.height);
+	}
+	
+	public static Sprite flipXY(Sprite sprite) {
+		int[] pixels = new int[sprite.pixels.length];
+		for (int y = 0; y < sprite.height; y++) {
+			for (int x = 0; x < sprite.width; x++) {
+				pixels[(sprite.width - 1 - x) + (sprite.height - 1 - y) * sprite.width] = sprite.pixels[x + y * sprite.width];
+			}
+		}
+		
+		return new Sprite(pixels, sprite.width, sprite.height);
 	}
 }
