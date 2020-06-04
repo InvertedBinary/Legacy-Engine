@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.util.AABB;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.LineSegment;

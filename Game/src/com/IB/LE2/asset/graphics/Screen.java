@@ -1,12 +1,14 @@
-package com.IB.LE2.media.graphics;
+package com.IB.LE2.asset.graphics;
 
 import java.util.List;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.asset.graphics.lighting.TileLighting;
 import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
+import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 
 public class Screen {
@@ -156,6 +158,7 @@ public class Screen {
 				if (xa < 0)
 					xa = 0;
 				int color = sprite.pixels[x + y * sprite.SIZE];
+				color = colSwitch(color, x, y);
 				if (color != ALPHA_COL)
 					pixels[xa + ya * width] = color;
 			}
@@ -305,9 +308,11 @@ public class Screen {
 	}
 
 	public int colSwitch(int col, int tilesx, int tilesy) {
+		if (!Boot.getLevel().DoDayCycle || !Boot.EnableLighting) return col;
+		col = TileLighting.changeBrightness(col, Boot.getLevel().BaseBrightness + Level.getBrightness(), false);
 		return col;
 	}
-
+	
 	@Deprecated // TODO: rewrite getEntities in level
 	public void drawLine(Player player, List<Entity> entities) {
 		int xp = (int) player.x();

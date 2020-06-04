@@ -7,7 +7,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
@@ -18,6 +18,7 @@ public abstract  class Mob extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	transient protected boolean moving = false;
+	transient protected boolean noclip = false;
 	transient private boolean solid;
 
 	//TODO: Time since player was last near this entity
@@ -42,11 +43,11 @@ public abstract  class Mob extends Entity implements Serializable {
 	public DIRECTION dir;
 	public boolean canJump = false;
 	
-	public void move(double xa, double ya) {
+	public boolean move(double xa, double ya) {
 		if (xa != 0 && ya != 0) {
-			move(xa, 0);
-			move(0, ya);
-			return;
+			boolean a = move(xa, 0);
+			boolean b = move(0, ya);
+			return a || b;
 		}
 		
 		if (xa > 0) dir = DIRECTION.RIGHT;
@@ -54,15 +55,19 @@ public abstract  class Mob extends Entity implements Serializable {
 		if (ya > 0) dir = DIRECTION.DOWN;
 		if (ya < 0) dir = DIRECTION.UP;
 
+		boolean result = false;
+		
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
 				if (!collision(abs(xa), ya)) {
 					this.setX(this.x() + abs(xa));
+					result = true;
 				}
 				xa -= abs(xa);
 			} else {
 				if (!collision(abs(xa), ya)) {
 					this.setX(this.x() + xa);
+					result = true;
 				}
 				xa = 0;
 			}
@@ -71,15 +76,18 @@ public abstract  class Mob extends Entity implements Serializable {
 			if (Math.abs(ya) > 1) {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + abs(ya));
+					result = true;
 				}
 				ya -= abs(ya);
 			} else {
 				if (!collision(xa, abs(ya))) {
 					this.setY(this.y() + ya);
+					result = true;
 				}
 				ya = 0;
 			}
 		}
+		return result;
 	}
 	
 	public void TakeDamage(double pts) {
@@ -150,6 +158,8 @@ public abstract  class Mob extends Entity implements Serializable {
 	public boolean sliding = false;
 	
 	protected boolean collision(double xa, double ya) {
+		if (this.noclip) return false;
+		
 		solid = false;
 
 		double xt = ((x() + xa));

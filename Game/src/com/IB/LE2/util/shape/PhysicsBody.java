@@ -2,7 +2,7 @@ package com.IB.LE2.util.shape;
 
 import java.util.ArrayList;
 
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.PropertyEngine;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.math.PVector;

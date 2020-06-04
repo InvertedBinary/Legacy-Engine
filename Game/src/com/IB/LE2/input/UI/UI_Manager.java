@@ -2,12 +2,12 @@ package com.IB.LE2.input.UI;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.world.entity.projectile.Selector;
 
 public class UI_Manager {

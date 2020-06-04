@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics;
+package com.IB.LE2.asset.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

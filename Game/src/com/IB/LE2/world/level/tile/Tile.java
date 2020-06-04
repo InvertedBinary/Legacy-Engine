@@ -1,8 +1,8 @@
 package com.IB.LE2.world.level.tile;
 
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
+import com.IB.LE2.asset.graphics.SpriteSheet;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.tiles.Air;
 

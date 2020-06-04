@@ -1,7 +1,7 @@
 package com.IB.LE2.world.level.tile.tiles;
 
-import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.asset.graphics.Sprite;
+import com.IB.LE2.asset.graphics.SpriteSheet;
 import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
@@ -14,6 +14,7 @@ public class TSXData {
 	private TiledLevel level;
 	
 	private int num_tiles = 0;
+	private int merge_tiles = 0;
 	
 	public TSXData(TiledLevel level) {
 		this.level = level;
@@ -67,19 +68,25 @@ public class TSXData {
 		return num_tiles;
 	}
 	
+	public int getTotNumTiles() {
+		return num_tiles + merge_tiles;
+	}
+	
 	private void addTile(SpriteSheet sheet, int localid, int vanityid) {
-		System.out.println("LOCALID: " + localid + " :: " + vanityid);
 		Sprite spr = Tile.GenSpriteFromId(sheet, localid);
 		TagTile t = new TagTile(vanityid, spr);
 		level.tile_map.put(vanityid, t);
 	}
 	
-	private void addTile(Tag t, int id, int vanityid) {
+	public TagTile mergeTiles(Tile base, Tile other) {
+		if (base.sprite == null || other.sprite == null)
+			return (TagTile) base;
 		
-	}
-	
-	private void mergeTiles(TagTile base, TagTile other) {
-		
+		Sprite composite = new Sprite(base.sprite, other.sprite);
+		TagTile t = new TagTile(getTotNumTiles() + 1, composite);
+		level.tile_map.put(t.id, t);
+		merge_tiles++;
+		return t;
 	}
 
 }

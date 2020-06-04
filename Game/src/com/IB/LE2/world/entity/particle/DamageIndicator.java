@@ -1,8 +1,8 @@
 package com.IB.LE2.world.entity.particle;
 
 import com.IB.LE2.Game;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 
 public class DamageIndicator extends Particle {
 

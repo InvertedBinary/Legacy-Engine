@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
@@ -22,14 +22,21 @@ import com.IB.LE2.world.level.tile.Tile;
 public class Level extends EntityContainer implements Serializable {
 	private static final long serialVersionUID = -2980023760275759466L;
 
-	public int width, height;
-	public int[] tiles;
-	transient public Tile tile;
+	transient public int width, height;
+	transient public int[] tiles;
 	
-	public String name;
+	transient public Tile tile;
+	transient public String name;
 	
 	public transient HashMap<Integer, Tile> tile_map = new HashMap<>();
 
+	transient public boolean DoDayCycle = true;
+	transient public int BaseBrightness = 0;
+	transient public final static int DayTime = 36000;
+	transient public final static int NightTime = 24000;
+	transient public static int WorldTime = 0;
+	transient public static int time_per_tick = 1;
+	
 	transient private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
 			if (n1.fCost < n0.fCost) return +1;
@@ -123,7 +130,32 @@ public class Level extends EntityContainer implements Serializable {
 		for (int id : tile_map.keySet()) {
 			tile_map.get(id).update();
 		}
-
+		
+		DaylightCycle();
+	}
+	
+	public static void DaylightCycle() {
+		if (WorldTime > (DayTime + NightTime))
+			WorldTime = 0;
+		WorldTime += time_per_tick;
+	}
+	
+	public static int getBrightness() {
+		double TotalDay = DayTime + NightTime;
+		double PeakNight = DayTime + NightTime/3;
+		double PeakNight2 = DayTime + NightTime/3 + NightTime/3;
+		double maxdark = -255;
+		if (WorldTime < DayTime)
+			return 0;
+		else if (WorldTime < PeakNight) {
+			double perc = (WorldTime - DayTime) / (PeakNight - DayTime) * maxdark;
+			return (int) perc;
+		} else if (WorldTime < PeakNight2) {
+			return (int) maxdark;
+		} else {
+			double perc = maxdark - ((WorldTime - PeakNight2) / (TotalDay - PeakNight2) * maxdark);
+			return (int) perc;
+		}
 	}
 	
 	public List<Projectile> getProjectiles() {
@@ -369,6 +401,4 @@ public class Level extends EntityContainer implements Serializable {
 	public List<Entity> getEntities() {
 		return entities;
 	}
-
-
 }

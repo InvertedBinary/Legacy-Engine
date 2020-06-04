@@ -1,12 +1,12 @@
 package com.IB.LE2.input.UI.components;
 
+import com.IB.LE2.asset.audio.Audio;
+import com.IB.LE2.asset.graphics.AnimatedSprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
-import com.IB.LE2.media.audio.Audio;
-import com.IB.LE2.media.graphics.AnimatedSprite;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
 
 public class UI_Button extends UI_Root implements UI_Clickable {
 	

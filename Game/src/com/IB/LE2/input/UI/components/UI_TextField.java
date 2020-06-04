@@ -4,13 +4,13 @@ import java.awt.event.KeyEvent;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
 import com.IB.LE2.input.UI.components.basic.UI_Keylistener;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.components.listeners.UI_TextInputListener;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
 
 public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistener {
 	

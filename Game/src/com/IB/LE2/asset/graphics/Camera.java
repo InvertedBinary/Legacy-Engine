@@ -1,4 +1,4 @@
-package com.IB.LE2.media.graphics;
+package com.IB.LE2.asset.graphics;
 
 public class Camera {
 	private static int x = 0;

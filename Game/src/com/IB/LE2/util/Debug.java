@@ -1,8 +1,8 @@
 package com.IB.LE2.util;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.components.UI_Font;
-import com.IB.LE2.media.graphics.Screen;
 
 public class Debug {
 

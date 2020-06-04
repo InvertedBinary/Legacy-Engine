@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
-import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Label extends UI_Root implements UI_Clickable {
 	

@@ -1,10 +1,10 @@
 package com.IB.LE2.input.UI.components;
 
+import com.IB.LE2.asset.graphics.AnimatedSprite;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.components.basic.UI_Clickable;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
 import com.IB.LE2.input.UI.components.listeners.UI_ToggleListener;
-import com.IB.LE2.media.graphics.AnimatedSprite;
-import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Toggle extends UI_Root implements UI_Clickable {
 

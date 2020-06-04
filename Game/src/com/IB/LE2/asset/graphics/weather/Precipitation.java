@@ -1,8 +1,8 @@
-package com.IB.LE2.media.graphics.Weather;
+package com.IB.LE2.asset.graphics.weather;
 
 import java.util.ArrayList;
 
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 
 public class Precipitation {
 	

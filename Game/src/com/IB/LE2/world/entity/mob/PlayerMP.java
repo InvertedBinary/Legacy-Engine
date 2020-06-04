@@ -4,9 +4,10 @@ import java.net.InetAddress;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.graphics.AnimatedSprite;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.hardware.Keyboard;
-import com.IB.LE2.media.graphics.AnimatedSprite;
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.world.level.TileCoord;
 
 public class PlayerMP extends Player {
 
@@ -21,6 +22,10 @@ public class PlayerMP extends Player {
 	private transient AnimatedSprite animSprite = down; //TODO: Is safe to delete but doing so speeds up animation rate -- figure this out later
 	
 	public int attempt;
+	
+	public PlayerMP(TileCoord loc, Keyboard input, String username, String UUID) {
+		this(loc.x(), loc.y(), input, username, UUID);
+	}
 	
 	public PlayerMP(double x, double y, Keyboard input, String username, String UUID) {
 		super(x, y, input, username);

@@ -1,10 +1,10 @@
-package com.IB.LE2.media.graphics.Weather;
+package com.IB.LE2.asset.graphics.weather;
 
 import java.util.Random;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 
 public class RainPart {
 

@@ -1,7 +1,7 @@
 package com.IB.LE2.world.entity.particle;
 
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.world.entity.Entity;
 
 public class Particle extends Entity {

@@ -2,8 +2,8 @@ package com.IB.LE2.world.entity.projectile;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;

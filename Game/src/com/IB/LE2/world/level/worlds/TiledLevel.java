@@ -11,9 +11,7 @@ import java.util.zip.Inflater;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;
@@ -212,6 +210,18 @@ public class TiledLevel extends Level {
 				}
 				addTrigger(new EventVolume(properties));
 				break;
+			case "skybox":
+				for (Tag property : child.getChild(0).getChildren()) {
+					switch (property.get("name", "NULL")) {
+					case "BaseBrightness":
+						this.BaseBrightness = property.get("value", 0);
+						break;
+					case "DoDayCycle":
+						this.DoDayCycle = property.get("value", false);
+						break;
+					}
+				}
+				break;
 			case "c_mask":
 			case "collidable":
 			case "wall":
@@ -313,35 +323,34 @@ public class TiledLevel extends Level {
 			}
 			break;
 		default:
-			Boot.log("Level Encoded in Unknown Format. Assuming CSV-- Expect to crash!", "TiledLevel", true);
+			Boot.log("Level Encoded in Unsupported Format. Assuming CSV-- Expect to crash!", "TiledLevel", true);
 		case "CSV":
 			tiles = explodeTileString(data.value);
 			break;
 		}
 		
-		for (int i = 0; i < tiles.length; i++) {
-			if (tiles[i] != 0 && this.tiles[i] != tiles[i])
-				this.tiles[i] = tiles[i];
-		}
 		/*for (int i = 0; i < tiles.length; i++) {
-			int tile_id = tiles[i];
-			if (tile_id == 0) continue;
-
-			Tile t = tile_map.get(tile_id);
-			// Merge existing tile with tile on this layer
-			if (numLayersProcessed > 0) {
-				if (this.tiles[i] != 0 && this.tiles[i] != tile_id) {
-					Sprite composite = new Sprite(tile_map.get(this.tiles[i]).sprite, t.sprite);
-
-					tile_id = tsx.getNumTiles() + i;
-					TagTile new_tile = new TagTile(tile_id, composite);
-					tile_map.put(tile_id, new_tile);
-				}
-			} else {
-				// Case first layer -> Process Animations
+			if (tiles[i] != 0 && this.tiles[i] != tiles[i]) {
+				this.tiles[i] = tiles[i];
 			}
-			this.tiles[i] = tile_id;
 		}*/
+		
+		for (int i = 0; i < tiles.length; i++) {
+			int existingId = this.tiles[i];
+			int tile_id = tiles[i];
+			if (tile_id != 0 && this.tiles[i] != tiles[i]) {
+				if (numLayersProcessed > 0) {
+					if (existingId != 0) {
+						Tile existingT = tile_map.get(existingId);
+						Tile tile = tile_map.get(tile_id);
+
+						TagTile merged = tsx.mergeTiles(existingT, tile);
+						tile_id = merged.id;
+					}
+				}
+				this.tiles[i] = tile_id;
+			}
+		}
 		numLayersProcessed++;
 	}
 

@@ -21,14 +21,14 @@ import java.util.Stack;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.IB.LE2.asset.audio.Audio;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.components.UI_Font;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.audio.Audio;
-import com.IB.LE2.media.graphics.Screen;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.WindowHandler;
 import com.IB.LE2.util.FileIO.Assets;
@@ -73,8 +73,6 @@ public class Game extends Canvas implements Runnable {
 	public static boolean devModeOn = false;
 	private boolean devModeReleased = true;
 	public static boolean devModeInfoOn = false;
-	public TileCoord playerSpawn;
-	public TileCoord playerRespawn = new TileCoord(52, 72);
 	File screenshots = null;
 	public static ArrayList<Level> levels = new ArrayList<Level>();
 
@@ -108,15 +106,7 @@ public class Game extends Canvas implements Runnable {
 		TiledLevel TL = new TiledLevel(Boot.prefsStr("App", "BootLevel", "b10"));
 		setLevel(TL);
 
-		if (TL.Spawnpoint != null) {
-			playerSpawn = TL.Spawnpoint;
-		} else {
-			playerSpawn = new TileCoord(0, 0);
-		}
-
-		// TileCoord playerSpawn = new TileCoord(296, 381);
-		setPlayer(new PlayerMP(playerSpawn.x(), playerSpawn.y(), key, "New Player", "-1"));
-		// level.add(getPlayer());
+		setPlayer(new PlayerMP(TL.Spawnpoint, key, "New Player", "-1"));
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
 		font16bit = UI_Font.getFont("SL");

@@ -1,8 +1,8 @@
 package com.IB.LE2.world.entity.emitter;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.world.entity.Entity;

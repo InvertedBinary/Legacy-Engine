@@ -1,7 +1,7 @@
 package com.IB.LE2.world.inventory;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Sprite;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;

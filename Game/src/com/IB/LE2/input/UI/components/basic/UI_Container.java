@@ -2,8 +2,8 @@ package com.IB.LE2.input.UI.components.basic;
 
 import java.util.ArrayList;
 
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.components.UI_Sprite;
-import com.IB.LE2.media.graphics.Screen;
 
 public class UI_Container extends UI_Root{
 	//TODO: ADD FLAG FOR ELEMENT TRANSPARENCY

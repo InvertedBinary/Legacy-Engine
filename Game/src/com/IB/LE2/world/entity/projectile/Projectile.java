@@ -3,9 +3,9 @@ package com.IB.LE2.world.entity.projectile;
 import java.util.List;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;

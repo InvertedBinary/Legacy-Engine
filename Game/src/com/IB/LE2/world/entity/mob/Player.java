@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.graphics.AnimatedSprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
-import com.IB.LE2.media.graphics.AnimatedSprite;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.math.PVector;
@@ -37,7 +37,6 @@ public class Player extends Mob implements Serializable {
 
 	public transient AnimatedSprite animSprite = down;
 
-	public transient boolean noclip = false;
 	private transient TagMenu HUD;
 
 	public transient int cam_xOff = 0;
@@ -112,14 +111,7 @@ public class Player extends Mob implements Serializable {
 		((TiledLevel) level).TestEventVolumes(this);
 		
 		animSprite.update();
-
-		if (!walking) {
-			animSprite = idle;
-			this.animSprite.setFrameRate(8);
-		} else {
-			this.animSprite.setFrameRate(6 - (int) this.speed / 2);
-		}
-
+		
 		if (!moving) {
 			cam_xOff = 0;
 			cam_yOff = 0;
@@ -165,13 +157,10 @@ public class Player extends Mob implements Serializable {
 				}
 			}
 		} else {
-			walking = false;
 			if (vel().x() > 0) {
 				animSprite = right;
-				walking = true;
 			} else if (vel().x() < 0) {
 				animSprite = left;
-				walking = true;
 			}
 		}
 
@@ -182,17 +171,16 @@ public class Player extends Mob implements Serializable {
 			if (xa != 0 || ya != 0) {
 				Game.DiscordPlayerPosPresence();
 				HUD.script.call("Moving");
-				walking = true;
 				//Audio.MoveListener(x(), y(), 1);
-			} else {
-				walking = false;
 			}
 
-			if (!noclip) {
-				move(xa, ya);
+			if (!move(xa, ya)) {
+				animSprite = idle;
+				this.animSprite.setFrameRate(8);
+				this.walking = false;
 			} else {
-				setX(x() + xa * speed);
-				setY(y() + ya * speed);
+				this.animSprite.setFrameRate(6 - (int) this.speed / 2);
+				this.walking = true;
 			}
 
 		} else {
@@ -213,6 +201,8 @@ public class Player extends Mob implements Serializable {
 		
 		if (hurt > 0)
 			hurt--;
+
+		HUD.script.call("Clock", Level.WorldTime);
 	}
 
 	public boolean isClientPlayer() {
@@ -267,8 +257,6 @@ public class Player extends Mob implements Serializable {
 		this.setX((x));
 		this.setY((y));
 		
-		//previous.killLua();
-
 		Game.DiscordPlayerPosPresence();
 	}
 
@@ -308,5 +296,9 @@ public class Player extends Mob implements Serializable {
 		double result = y();
 		if (sprite != null) result += (sprite.getHeight() / 2);
 		return result;
+	}
+	
+	public void toggleNoclip() {
+		noclip =! noclip;
 	}
 }

@@ -1,9 +1,9 @@
 package com.IB.LE2.input.UI.components;
 
+import com.IB.LE2.asset.graphics.AnimatedSprite;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.UI.components.basic.UI_Root;
-import com.IB.LE2.media.graphics.AnimatedSprite;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
 
 public class UI_Sprite extends UI_Root {
 

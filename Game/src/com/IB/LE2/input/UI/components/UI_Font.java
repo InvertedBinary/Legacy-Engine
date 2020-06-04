@@ -3,9 +3,9 @@ package com.IB.LE2.input.UI.components;
 import java.util.HashMap;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
-import com.IB.LE2.media.graphics.Sprite;
-import com.IB.LE2.media.graphics.SpriteSheet;
+import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
+import com.IB.LE2.asset.graphics.SpriteSheet;
 import com.IB.LE2.util.FileIO.Tag;
 import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;

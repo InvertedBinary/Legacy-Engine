@@ -9,20 +9,22 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Date;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
+import com.IB.LE2.asset.audio.Audio;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
-import com.IB.LE2.media.audio.Audio;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Disk;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
+import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.moremeridian.nc.net.wire.NetContext;
 
@@ -96,7 +98,15 @@ public class Commands {
 					break;
 
 				case "tcl":
-					player.noclip = !player.noclip;
+					player.toggleNoclip();
+					break;
+					
+				case "tle":
+					Boot.EnableLighting =! Boot.EnableLighting;
+					break;
+					
+				case "tpt":
+					Level.time_per_tick = Integer.parseInt(Modifier);
 					break;
 
 				case "sus":
@@ -111,7 +121,7 @@ public class Commands {
 				case "restart":
 					Boot.restart();
 					break;
-
+					
 				case "fullscr":
 					Boot.get().setBorderlessFullscreen(!Boot.get().frame.isUndecorated());
 					break;

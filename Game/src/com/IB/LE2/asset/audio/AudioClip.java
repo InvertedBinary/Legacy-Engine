@@ -1,4 +1,4 @@
-package com.IB.LE2.media.audio;
+package com.IB.LE2.asset.audio;
 
 public class AudioClip {
 	

@@ -1,6 +1,6 @@
 package com.IB.LE2.util;
 
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.Vertex;
 

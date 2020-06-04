@@ -1,7 +1,7 @@
 package com.IB.LE2.util.math;
 
 import com.IB.LE2.Boot;
-import com.IB.LE2.media.graphics.Screen;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.Debug;
 
 public class PVector
