@@ -1,8 +1,10 @@
-package com.IB.LE2.media.graphics.lighting;
+package com.IB.LE2.asset.graphics.lighting;
 
 public class TileLighting {
 	   
 	   public static int changeBrightness(int col, int amount, boolean neg) {
+		   if (amount == 0) return col;
+		   
 		      int r = (col & 0xff0000) >> 16;
 		      int g = (col & 0xff00) >> 8;
 		      int b = (col & 0xff);
