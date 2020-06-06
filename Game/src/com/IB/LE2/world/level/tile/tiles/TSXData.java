@@ -119,9 +119,9 @@ public class TSXData {
 		Sprite composite = new Sprite(base.sprite, other.sprite);
 		TagTile t = new TagTile(getTotNumTiles() + 1, composite);
 		
-		int newIllumination = Math.max(base.illumination(), other.illumination());
-		float newLightRadius = Math.max(base.illumination_radius(), other.illumination_radius());
-		float newLightDrop = Math.min(base.illumination_dropoff(), other.illumination_dropoff());
+		int newIllumination = (int) max(base.illumination(), other.illumination());
+		float newLightRadius = max(base.illumination_radius(), other.illumination_radius());
+		float newLightDrop = min(base.illumination_dropoff(), other.illumination_dropoff());
 
 		t.setIllumination(newIllumination);
 		t.setIlluminationRadius(newLightRadius);
@@ -131,5 +131,14 @@ public class TSXData {
 		merge_tiles++;
 		return t;
 	}
-
+	
+	public float max(float a, float b) {
+		if (a == -1 || b == -1) return -1;
+		return Math.max(a, b);
+	}
+	
+	public float min(float a, float b) {
+		if (a == -1 || b == -1) return -1;
+		return Math.min(a, b);
+	}
 }

@@ -28,6 +28,7 @@ import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
+import com.IB.LE2.world.level.tile.tiles.TagTile;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 import com.moremeridian.nc.net.wire.NetContext;
 
@@ -47,7 +48,7 @@ public class Commands {
 	
 	public static String SelectTile(int x, int y) {
 		victimTile = Boot.getLevel().getTile(x, y);
-		return victimTile.toString();
+		return ((TagTile)victimTile).toString(x, y);
 	}
 	
 	public static void SelectEntity() {

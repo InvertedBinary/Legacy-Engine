@@ -369,16 +369,25 @@ public class TiledLevel extends Level {
 				if (t.illumination() <= 0) 
 					continue;
 				
+				
 					float radius = t.illumination_radius();
+					System.out.println("RADIUS: " + radius);
+					if (!this.DoDayCycle) {
+						radius = -1;
+					}
+					
 					float attenuation = t.illumination_dropoff();
 
 					TileCoord[] tiles = getTileNeighbors(x, y, (int)radius);
 					for (int i = 0; i < tiles.length; i++) {
 						double distance = calcDist(tiles[i].tx(), tiles[i].ty(), x, y);
-						if (distance > radius) continue;
+						if (distance > radius && radius != -1) continue;
 						
 						int location = tiles[i].tx() + tiles[i].ty() * width;
-						illuminate(location, t.illumination() / (distance * attenuation));
+						double drop = distance * attenuation;
+						if (attenuation == -1)
+							drop = 1;
+						illuminate(location, t.illumination() / (drop));
 					}
 			}
 		}
@@ -390,14 +399,22 @@ public class TiledLevel extends Level {
 	
 	public TileCoord[] getTileNeighbors(int xp, int yp, int radius) {
 		int sidelen = 2 * radius + 1;
-		TileCoord[] results = new TileCoord[sidelen * sidelen];
+		int wid = sidelen;
+		int hei = sidelen;
 		
 		int index = 0;
 		int yz = yp - radius;
 		int xz = xp - radius;
+		if (radius == -1) {
+			yz = 0;
+			xz = 0;
+			wid = this.width;
+			hei = this.height;
+		}
+		TileCoord[] results = new TileCoord[wid * hei];
 		
-		for (int y = yz; y < yz + sidelen; y++) {
-			for (int x = xz; x < xz + sidelen; x++) {
+		for (int y = yz; y < yz + wid; y++) {
+			for (int x = xz; x < xz + hei; x++) {
 				results[index] = new TileCoord(x, y);
 				index++;
 			}
@@ -406,7 +423,7 @@ public class TiledLevel extends Level {
 	}
 
 	public void illuminate(int tileLocation, double value) {
-		if (tileLocation < 0 || tileLocation > lightmap.length) return;
+		if (tileLocation < 0 || tileLocation > lightmap.length - 1) return;
 		
 		if (lightmap[tileLocation] < value) 
 			lightmap[tileLocation] = (int) Math.ceil(value);

@@ -1,5 +1,6 @@
 package com.IB.LE2.world.level.tile.tiles;
 
+import com.IB.LE2.Boot;
 import com.IB.LE2.asset.graphics.AnimatedSprite;
 import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.asset.graphics.Sprite;
@@ -25,6 +26,7 @@ public class TagTile extends Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
+		
 		screen.DrawTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, sprite);
 	}
 	
@@ -38,11 +40,15 @@ public class TagTile extends Tile {
 		return id;
 	}
 	
-	public String toString() {
+	public String toString(int x, int y) {
 		String str =
 				"TILE:\n" +
 				"-------\n" +
-				"LIGHT: " + this.illumination() + "\n" +
+				"ID: " + id + "\n" +
+				"COORD: " + x + ", " + y + "\n" +
+				"ANIMATED: " + animated + "\n" +
+				"SRC-LIGHT: " + this.illumination() + "\n" +
+				"REAL-LIGHT: " + Boot.getLevel().lightmap[x + y * Boot.getLevel().width] + "\n" + 
 				"DROP_OFF: " + this.illumination_dropoff() + "\n" +
 				"RADIUS: " + this.illumination_radius() + "\n" +
 				"-------";

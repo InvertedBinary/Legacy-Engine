@@ -141,7 +141,8 @@ public class Level extends EntityContainer implements Serializable {
 		WorldTime += time_per_tick;
 	}
 	
-	public static int getBrightness() {
+	
+	public static int getGlobalBrightness() {
 		double TotalDay = DayTime + NightTime;
 		double PeakNight = DayTime + NightTime/3;
 		double PeakNight2 = DayTime + NightTime/3 + NightTime/3;
@@ -157,6 +158,16 @@ public class Level extends EntityContainer implements Serializable {
 			double perc = maxdark - ((WorldTime - PeakNight2) / (TotalDay - PeakNight2) * maxdark);
 			return (int) perc;
 		}
+	}
+	
+	
+	public int getLevelBrightness() {
+		int result = this.BaseBrightness;
+		if (this.DoDayCycle) {
+			result += getGlobalBrightness();			
+		}
+		
+		return result;
 	}
 	
 	public List<Projectile> getProjectiles() {
