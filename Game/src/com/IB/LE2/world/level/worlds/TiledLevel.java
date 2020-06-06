@@ -123,6 +123,8 @@ public class TiledLevel extends Level {
 		});
 
 		reader.start();
+		
+		buildLightmap();
 	}
 
 	public void reload() {
@@ -300,6 +302,8 @@ public class TiledLevel extends Level {
 		switch (tileEncoding) {
 		case "base64":
 			tiles = new int[width * height];
+			lightmap = new int[width * height];
+			
 			byte[] b64bytes = Base64.getDecoder().decode(data.value);
 		    byte[] bytes;
 		    
@@ -338,11 +342,12 @@ public class TiledLevel extends Level {
 		for (int i = 0; i < tiles.length; i++) {
 			int existingId = this.tiles[i];
 			int tile_id = tiles[i];
+			Tile existingT = tile_map.get(existingId);
+			Tile tile = tile_map.get(tile_id);
+
 			if (tile_id != 0 && this.tiles[i] != tiles[i]) {
 				if (numLayersProcessed > 0) {
 					if (existingId != 0) {
-						Tile existingT = tile_map.get(existingId);
-						Tile tile = tile_map.get(tile_id);
 
 						TagTile merged = tsx.mergeTiles(existingT, tile);
 						tile_id = merged.id;
@@ -353,7 +358,60 @@ public class TiledLevel extends Level {
 		}
 		numLayersProcessed++;
 	}
+	
+	public void buildLightmap() {
+		System.out.println("Generating Lightmap..");
+		lightmap = new int[width * height];
 
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Tile t = tile_map.get(tiles[x + y * width]);
+				if (t.illumination() <= 0) 
+					continue;
+				
+					float radius = t.illumination_radius();
+					float attenuation = t.illumination_dropoff();
+
+					TileCoord[] tiles = getTileNeighbors(x, y, (int)radius);
+					for (int i = 0; i < tiles.length; i++) {
+						double distance = calcDist(tiles[i].tx(), tiles[i].ty(), x, y);
+						if (distance > radius) continue;
+						
+						int location = tiles[i].tx() + tiles[i].ty() * width;
+						illuminate(location, t.illumination() / (distance * attenuation));
+					}
+			}
+		}
+	}
+	
+	public double calcDist(double xo, double yo, double xx, double yy) {    
+		return Math.sqrt((yy - yo) * (yy - yo) + (xx - xo) * (xx - xo));
+	}
+	
+	public TileCoord[] getTileNeighbors(int xp, int yp, int radius) {
+		int sidelen = 2 * radius + 1;
+		TileCoord[] results = new TileCoord[sidelen * sidelen];
+		
+		int index = 0;
+		int yz = yp - radius;
+		int xz = xp - radius;
+		
+		for (int y = yz; y < yz + sidelen; y++) {
+			for (int x = xz; x < xz + sidelen; x++) {
+				results[index] = new TileCoord(x, y);
+				index++;
+			}
+		}
+		return results;
+	}
+
+	public void illuminate(int tileLocation, double value) {
+		if (tileLocation < 0 || tileLocation > lightmap.length) return;
+		
+		if (lightmap[tileLocation] < value) 
+			lightmap[tileLocation] = (int) Math.ceil(value);
+	}
+	
 	public void addTrigger(EventVolume t) {
 		event_volumes = (event_volumes == null) ? new ArrayList<EventVolume>() : event_volumes;
 

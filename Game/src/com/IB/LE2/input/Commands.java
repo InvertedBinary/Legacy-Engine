@@ -9,27 +9,51 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Date;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.asset.audio.Audio;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.menu.TagMenu;
 import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Disk;
+import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
+import com.IB.LE2.world.level.tile.Tile;
+import com.IB.LE2.world.level.worlds.TiledLevel;
 import com.moremeridian.nc.net.wire.NetContext;
 
 public class Commands {
 
+	public static Entity victimEntity;
+	public static Tile victimTile;
+	
+	public static void SelectVictims(int x, int y) {
+		if (x == -1 || y == -1) {
+			x = Screen.xo;
+			y = Screen.yo;
+		}
+		
+		SelectTile(x, y);
+	}
+	
+	public static String SelectTile(int x, int y) {
+		victimTile = Boot.getLevel().getTile(x, y);
+		return victimTile.toString();
+	}
+	
+	public static void SelectEntity() {
+		
+	}
+	
 	public static void Execute(String cmd, Player player) {
 		String Command = "", Modifier = "", Modifier2 = "";
 		int args = 0;
@@ -122,6 +146,10 @@ public class Commands {
 					Boot.restart();
 					break;
 					
+				case "prtile":
+					System.out.println(victimTile.toString());
+					break;
+					
 				case "fullscr":
 					Boot.get().setBorderlessFullscreen(!Boot.get().frame.isUndecorated());
 					break;
@@ -166,7 +194,19 @@ public class Commands {
 				case "login":
 					Boot.MeridianClient.Upload(NetContext.BIT_LOGIN, Modifier + " " + Modifier2);
 					break;
-
+					
+				case "night":
+					Level.WorldTime = Level.DayTime;
+					break;
+				case "midnight":
+					Level.WorldTime = Level.DayTime + Level.NightTime / 2;
+					break;
+					
+				case "regenLights":
+				case "relight":
+					((TiledLevel)Boot.getLevel()).buildLightmap();
+					break;
+					
 				case "menu":
 				case "ui":
 					UI_Manager.Current().ResumeWorldInput();

@@ -169,8 +169,8 @@ public class Game extends Canvas implements Runnable {
 		DiscordRPC.discordUpdatePresence(rich);
 	}
 
-	public UI_Menu getMenu() {
-		return UI_Manager.Current();
+	public TagMenu getMenu() {
+		return (TagMenu) UI_Manager.Current();
 	}
 
 	public static void setLevel(Level level) {

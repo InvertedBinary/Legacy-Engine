@@ -38,11 +38,15 @@ public class TagTile extends Tile {
 		return id;
 	}
 	
-	public boolean liquid() {
-		return false;
+	public String toString() {
+		String str =
+				"TILE:\n" +
+				"-------\n" +
+				"LIGHT: " + this.illumination() + "\n" +
+				"DROP_OFF: " + this.illumination_dropoff() + "\n" +
+				"RADIUS: " + this.illumination_radius() + "\n" +
+				"-------";
+		return str;
 	}
 	
-	public boolean illuminator() {
-		return false;
-	}
 }

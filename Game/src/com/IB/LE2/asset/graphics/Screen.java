@@ -5,6 +5,7 @@ import java.util.List;
 import com.IB.LE2.Boot;
 import com.IB.LE2.asset.graphics.lighting.TileLighting;
 import com.IB.LE2.input.hardware.Mouse;
+import com.IB.LE2.util.VARS;
 import com.IB.LE2.util.Vector2i;
 import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
@@ -147,6 +148,9 @@ public class Screen {
 	}
 
 	public void DrawTile(int xp, int yp, Sprite sprite) {
+		int tilesx = xp >> VARS.TILE_BIT_SHIFT;
+		int tilesy = yp >> VARS.TILE_BIT_SHIFT;
+		
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < sprite.SIZE; y++) {
@@ -158,7 +162,7 @@ public class Screen {
 				if (xa < 0)
 					xa = 0;
 				int color = sprite.pixels[x + y * sprite.SIZE];
-				color = colSwitch(color, x, y);
+				color = colSwitch(color, tilesx, tilesy);
 				if (color != ALPHA_COL)
 					pixels[xa + ya * width] = color;
 			}
@@ -168,8 +172,9 @@ public class Screen {
 	public void DrawEntity(Entity e, int xp, int yp) {
 		Sprite sprite = e.getSprite();
 		
-		int tilesx = xp;
-		int tilesy = yp;
+		int tilesx = (xp + sprite.getWidth() / 2) >> VARS.TILE_BIT_SHIFT;
+		int tilesy = (yp + sprite.getHeight() / 2) >> VARS.TILE_BIT_SHIFT;
+		
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < sprite.getHeight(); y++) {
@@ -309,7 +314,7 @@ public class Screen {
 
 	public int colSwitch(int col, int tilesx, int tilesy) {
 		if (!Boot.getLevel().DoDayCycle || !Boot.EnableLighting) return col;
-		col = TileLighting.changeBrightness(col, Boot.getLevel().BaseBrightness + Level.getBrightness(), false);
+		col = TileLighting.changeBrightness(col, Boot.getLevel().BaseBrightness + Level.getBrightness() + Boot.getLevel().lightmap[tilesx + tilesy * Boot.getLevel().width], false);
 		return col;
 	}
 	

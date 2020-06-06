@@ -45,33 +45,31 @@ public class LuaScript implements Runnable {
 		//addGlobal("key", Boot.get()); <= Crashes lua when used
 	}
 	
-	public boolean call(String function, Object... arg) {
+	public LuaValue call(String function, Object... arg) {
 		if (should_close)
-			return false;
+			return null;
 		
         LuaValue func = globals.get(function);
         if (!func.isnil()) {
+        	if (arg.length > 3)
+        		Boot.log("Three is the maximum argument count of LuaJ functions. Additional arguments are ignored!", "LuaScript.java", true);
         	
         	if (arg.length == 0)
-        		func.call();
+        		return func.call();
         	
         	if (arg.length == 1)
-        		func.call(CoerceJavaToLua.coerce(arg[0]));
+        		return func.call(CoerceJavaToLua.coerce(arg[0]));
         	
         	if (arg.length == 2)
-            	func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]));
+        		return func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]));
 
         	if (arg.length >= 3) 
-            	func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]), CoerceJavaToLua.coerce(arg[2]));
+        		return func.call(CoerceJavaToLua.coerce(arg[0]), CoerceJavaToLua.coerce(arg[1]), CoerceJavaToLua.coerce(arg[2]));
 
-        	if (arg.length > 3) {
-        		Boot.log("Three is the maximum argument count of LuaJ functions. Additional arguments are ignored!", "LuaScript.java", true);
-        	}
         	
-        	return true;
         }
         
-        return false;
+        return null;
 	}
 	
 	public void bindEvent(String event_name, String function) {

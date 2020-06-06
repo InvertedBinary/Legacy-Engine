@@ -1,5 +1,8 @@
 package com.IB.LE2.world.level.tile.tiles;
 
+import java.util.ArrayList;
+
+import com.IB.LE2.Boot;
 import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.asset.graphics.SpriteSheet;
 import com.IB.LE2.util.FileIO.Tag;
@@ -55,6 +58,33 @@ public class TSXData {
 				tilesheet = new SpriteSheet(imagepath, tag.get("width", 0), tag.get("height", 0));
 				break;
 			case "tileset.tile":
+				int id = tag.getAttribute("id", -1);
+				Tile t = addTile(tilesheet, id, id + startingID);
+				Tag props_parent = tag.getChild(0);
+				if (!props_parent.name.contentEquals("properties")) {
+					break;
+				}
+				ArrayList<Tag> props = tag.getChild(0).getChildren();
+				for (int i = 0; i < props.size(); i++) {
+					Tag PropTag = props.get(i);
+					String prop_name = PropTag.getAttribute("name", "null");
+					switch(prop_name) {
+						case "illuminator":
+							t.setIllumination(PropTag.getAttribute("value", t.illumination()));
+						break;
+						case "light_radius":
+							t.setIlluminationRadius(PropTag.getAttribute("value", t.illumination_radius()));
+						break;
+						case "light_attenuation":
+							System.out.println("SETTING ATTENUATION: ");
+							t.setIlluminationDropoff(PropTag.getAttribute("value", t.illumination_dropoff()));
+							System.out.println(t.illumination_dropoff());
+						break;
+						default: 
+							Boot.log("UNRECOGNIZED TILE PROPERTY -- " + prop_name, "TSXData", true);
+						break;
+					}
+				}
 				break;
 			}
 		}
@@ -72,10 +102,14 @@ public class TSXData {
 		return num_tiles + merge_tiles;
 	}
 	
-	private void addTile(SpriteSheet sheet, int localid, int vanityid) {
+	private Tile addTile(SpriteSheet sheet, int localid, int vanityid) {
+		if (level.tile_map.containsKey(vanityid)) return level.tile_map.get(vanityid);
+		
 		Sprite spr = Tile.GenSpriteFromId(sheet, localid);
 		TagTile t = new TagTile(vanityid, spr);
 		level.tile_map.put(vanityid, t);
+		
+		return t;
 	}
 	
 	public TagTile mergeTiles(Tile base, Tile other) {
@@ -84,6 +118,15 @@ public class TSXData {
 		
 		Sprite composite = new Sprite(base.sprite, other.sprite);
 		TagTile t = new TagTile(getTotNumTiles() + 1, composite);
+		
+		int newIllumination = Math.max(base.illumination(), other.illumination());
+		float newLightRadius = Math.max(base.illumination_radius(), other.illumination_radius());
+		float newLightDrop = Math.min(base.illumination_dropoff(), other.illumination_dropoff());
+
+		t.setIllumination(newIllumination);
+		t.setIlluminationRadius(newLightRadius);
+		t.setIlluminationDropoff(newLightDrop);
+		
 		level.tile_map.put(t.id, t);
 		merge_tiles++;
 		return t;

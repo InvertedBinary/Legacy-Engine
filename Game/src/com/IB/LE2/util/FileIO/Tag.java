@@ -48,6 +48,14 @@ public class Tag {
 		return default_value;
 	}
 	
+	public int getAttribute(String attribute, int default_value) {
+		return Integer.parseInt(getAttribute(attribute, "" + default_value));
+	}
+	
+	public float getAttribute(String attribute, float default_value) {
+		return Float.parseFloat(getAttribute(attribute, "" + default_value));
+	}
+	
 	public String get(String attribute, String default_value) {
 		return getAttribute(attribute, default_value);
 	}
@@ -104,5 +112,4 @@ public class Tag {
 	public boolean hasChild() {
 		return (children.size() != 0);
 	}
-	
 }

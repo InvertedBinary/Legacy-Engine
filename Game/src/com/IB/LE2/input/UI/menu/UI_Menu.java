@@ -81,6 +81,13 @@ public abstract class UI_Menu implements KeyListener {
 		Commands.Execute(text, Boot.get().getPlayer());
 	}
 	
+	public String SelectVictimTile() {
+		return Commands.SelectTile(Screen.xo, Screen.yo);
+	}
+	public void SelectVictims() {
+		Commands.SelectVictims(-1, -1);
+	}
+	
 	public void addUI(UI_Root component) {
 		this.ui.addUI(component);
 	}

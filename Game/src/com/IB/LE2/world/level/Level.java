@@ -24,6 +24,7 @@ public class Level extends EntityContainer implements Serializable {
 
 	transient public int width, height;
 	transient public int[] tiles;
+	transient public int[] lightmap;
 	
 	transient public Tile tile;
 	transient public String name;

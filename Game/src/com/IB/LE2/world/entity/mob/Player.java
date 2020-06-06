@@ -2,6 +2,9 @@ package com.IB.LE2.world.entity.mob;
 
 import java.io.Serializable;
 
+import org.luaj.vm2.LuaBoolean;
+import org.luaj.vm2.LuaValue;
+
 import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.asset.graphics.AnimatedSprite;
@@ -92,6 +95,11 @@ public class Player extends Mob implements Serializable {
 	}
 
 	public void MouseClicked(int btn) {
+		LuaValue res = Boot.get().getMenu().script.call("onClick", btn);
+		if (res != null) {
+			return;
+		}
+
 		switch (btn) {
 		case Mouse.LEFT_CLICK:
 			updateShooting();
@@ -101,6 +109,7 @@ public class Player extends Mob implements Serializable {
 		case Mouse.MIDDLE_CLICK:
 			break;
 		}
+		
 	}
 
 	private transient PVector pv = null;
