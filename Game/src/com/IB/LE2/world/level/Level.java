@@ -33,8 +33,8 @@ public class Level extends EntityContainer implements Serializable {
 
 	transient public boolean DoDayCycle = true;
 	transient public int BaseBrightness = 0;
-	transient public final static int DayTime = 36000;
-	transient public final static int NightTime = 24000;
+	transient public final static int DayTime = 24000;
+	transient public final static int NightTime = 36000;
 	transient public static int WorldTime = 0;
 	transient public static int time_per_tick = 1;
 	
