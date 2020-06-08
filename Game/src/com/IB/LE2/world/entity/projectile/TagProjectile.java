@@ -4,6 +4,7 @@ import com.IB.LE2.Boot;
 import com.IB.LE2.Game;
 import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.asset.graphics.Sprite;
+import com.IB.LE2.asset.graphics.lighting.DynamicLight;
 import com.IB.LE2.util.Debug;
 import com.IB.LE2.util.FileIO.Assets;
 import com.IB.LE2.util.FileIO.Tag;
@@ -20,6 +21,8 @@ public class TagProjectile extends Projectile {
 
 	private LuaScript script;
 	private TagReader tags;
+	
+	private DynamicLight light;
 
 	public TagProjectile(double x, double y, String name, Entity origin) {
 		super(x, y);
@@ -37,6 +40,8 @@ public class TagProjectile extends Projectile {
 	}
 
 	public void init(double x, double y, double angle, String path) {
+		light = new DynamicLight(40, -1, 0.1);
+		
 		tags = new TagReader(path, "entity", new TagReadListener() {
 			@Override
 			public void TagsRead() {
@@ -153,6 +158,8 @@ public class TagProjectile extends Projectile {
 	}
 
 	public void update() {
+		light.update(x(), y());
+		
 		if (CollidesLevel(this)) {
 			script.call("LevelCollided", this);
 		}

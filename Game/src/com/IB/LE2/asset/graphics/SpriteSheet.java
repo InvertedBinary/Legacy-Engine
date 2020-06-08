@@ -108,7 +108,7 @@ public class SpriteSheet {
 		}
 	}
 	
-	private Sprite[] sprites;
+	public Sprite[] sprites;
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
 		int xx = x * spriteSize;
 		int yy = y * spriteSize;
@@ -209,6 +209,27 @@ public class SpriteSheet {
 		SPRITE_HEIGHT = height;
 		pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
 		load();
+	}
+	
+	public SpriteSheet(int width, int height) {
+		this.path = "NULL";
+		SIZE = -1;
+		SPRITE_WIDTH = width;
+		SPRITE_HEIGHT = height;
+		this.height = height;
+		this.width = width;
+		pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
+	}
+	
+	public void impose(int xa, int ya, Sprite s) {
+		int sx = 0, sy = 0;
+		for (int y = ya; y < this.height; y++) {
+			for (int x = xa; x < this.width; x++) {
+				pixels[x + y * width] = s.pixels[sx + sy * s.getWidth()];
+				sx++;
+			}
+			sy++;
+		}
 	}
 	
 	public Sprite[] getSprites() {

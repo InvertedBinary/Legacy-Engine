@@ -13,6 +13,7 @@ public class TagTile extends Tile {
 	
 	private AnimatedSprite asprite;
 	private boolean animated = false;
+	private int framerate = 3;
 
 	public TagTile(int id, Sprite sprite) {
 		this.id = id;
@@ -25,8 +26,19 @@ public class TagTile extends Tile {
 		this.animated = true;
 	}
 	
+	public void setAnim(AnimatedSprite s) {
+		this.asprite = s;
+		this.animated = true;
+		s.setFrameRate(framerate);
+	}
+	
+	public void setFrameRate(int value) {
+		this.framerate = value;
+		if (animated)
+			asprite.setFrameRate(framerate);
+	}
+	
 	public void render(int x, int y, Screen screen) {
-		
 		screen.DrawTile(x << VARS.TILE_BIT_SHIFT, y << VARS.TILE_BIT_SHIFT, sprite);
 	}
 	
@@ -48,7 +60,7 @@ public class TagTile extends Tile {
 				"COORD: " + x + ", " + y + "\n" +
 				"ANIMATED: " + animated + "\n" +
 				"SRC-LIGHT: " + this.illumination() + "\n" +
-				"REAL-LIGHT: " + Boot.getLevel().lightmap[x + y * Boot.getLevel().width] + "\n" + 
+				"REAL-LIGHT: " + Boot.getLevel().LightValues(x, y) + "\n" + 
 				"DROP_OFF: " + this.illumination_dropoff() + "\n" +
 				"RADIUS: " + this.illumination_radius() + "\n" +
 				"-------";

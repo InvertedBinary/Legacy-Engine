@@ -25,6 +25,7 @@ public class Level extends EntityContainer implements Serializable {
 	transient public int width, height;
 	transient public int[] tiles;
 	transient public int[] lightmap;
+	transient public int[] dynamic_lightmap;
 	
 	transient public Tile tile;
 	transient public String name;
@@ -107,6 +108,12 @@ public class Level extends EntityContainer implements Serializable {
 		Collections.sort(all, ySort);
 
 		if (!VARS.suspend_world) {
+			for (int i = 0; i < dynamic_lightmap.length; i++) {
+				if (dynamic_lightmap[i] > 0) {
+					dynamic_lightmap[i]--;					
+				}
+			}
+			
 			for (int i = 0; i < entities.size(); i++) {
 				entities.get(i).update();
 			}
@@ -126,8 +133,9 @@ public class Level extends EntityContainer implements Serializable {
 			for (int i = 0; i < players.size(); i++) {
 				players.get(i).update();
 			}
+			
 		}
-
+		
 		for (int id : tile_map.keySet()) {
 			tile_map.get(id).update();
 		}
@@ -412,5 +420,10 @@ public class Level extends EntityContainer implements Serializable {
 	
 	public List<Entity> getEntities() {
 		return entities;
+	}
+
+	public int LightValues(int tilesx, int tilesy) {
+		int idx = tilesx + tilesy * width;
+		return getLevelBrightness() + lightmap[idx] + dynamic_lightmap[idx];
 	}
 }

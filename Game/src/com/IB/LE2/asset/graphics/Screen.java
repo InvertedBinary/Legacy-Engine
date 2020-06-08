@@ -313,8 +313,9 @@ public class Screen {
 	}
 
 	public int colSwitch(int col, int tilesx, int tilesy) {
+		if (tilesx < 0 || tilesy < 0 || tilesx > Boot.getLevel().width || tilesy > Boot.getLevel().height) return col;
 		if ((!Boot.getLevel().DoDayCycle && Boot.getLevel().BaseBrightness == 0) || !Boot.EnableLighting) return col;
-		col = TileLighting.changeBrightness(col,  + Boot.getLevel().getLevelBrightness() + Boot.getLevel().lightmap[tilesx + tilesy * Boot.getLevel().width]);
+		col = TileLighting.changeBrightness(col, Boot.getLevel().LightValues(tilesx, tilesy));
 		return col;
 	}
 	

@@ -303,6 +303,7 @@ public class TiledLevel extends Level {
 		case "base64":
 			tiles = new int[width * height];
 			lightmap = new int[width * height];
+			dynamic_lightmap = new int[width * height];
 			
 			byte[] b64bytes = Base64.getDecoder().decode(data.value);
 		    byte[] bytes;
@@ -362,7 +363,8 @@ public class TiledLevel extends Level {
 	public void buildLightmap() {
 		System.out.println("Generating Lightmap..");
 		lightmap = new int[width * height];
-
+		dynamic_lightmap = new int[width * height];
+		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				Tile t = tile_map.get(tiles[x + y * width]);
@@ -381,6 +383,7 @@ public class TiledLevel extends Level {
 					TileCoord[] tiles = getTileNeighbors(x, y, (int)radius);
 					for (int i = 0; i < tiles.length; i++) {
 						double distance = calcDist(tiles[i].tx(), tiles[i].ty(), x, y);
+						if (distance == 0) distance = 1;
 						if (distance > radius && radius != -1) continue;
 						
 						int location = tiles[i].tx() + tiles[i].ty() * width;
@@ -393,7 +396,7 @@ public class TiledLevel extends Level {
 		}
 	}
 	
-	public double calcDist(double xo, double yo, double xx, double yy) {    
+	public static double calcDist(double xo, double yo, double xx, double yy) {    
 		return Math.sqrt((yy - yo) * (yy - yo) + (xx - xo) * (xx - xo));
 	}
 	
