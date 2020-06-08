@@ -2,7 +2,6 @@ package com.IB.LE2.world.entity.mob;
 
 import java.io.Serializable;
 
-import org.luaj.vm2.LuaBoolean;
 import org.luaj.vm2.LuaValue;
 
 import com.IB.LE2.Boot;
