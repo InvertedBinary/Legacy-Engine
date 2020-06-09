@@ -291,6 +291,8 @@ public class TiledLevel extends Level {
 	public void addTileLayer(Tag layer) {
 		String id = layer.get("id", "-1");
 		String name = layer.get("name", "UnnamedLayer");
+		
+		boolean overlay = name.toLowerCase().startsWith("overlay");
 
 		Tag data = layer.getChild(0);
 		String tileEncoding = data.get("encoding", "CSV");
@@ -302,6 +304,7 @@ public class TiledLevel extends Level {
 		switch (tileEncoding) {
 		case "base64":
 			tiles = new int[width * height];
+			overlays = new int[width * height];
 			lightmap = new int[width * height];
 			dynamic_lightmap = new int[width * height];
 			
@@ -342,19 +345,21 @@ public class TiledLevel extends Level {
 		
 		for (int i = 0; i < tiles.length; i++) {
 			int existingId = this.tiles[i];
+			if (overlay) existingId = overlays[i];
 			int tile_id = tiles[i];
 			Tile existingT = tile_map.get(existingId);
 			Tile tile = tile_map.get(tile_id);
 
-			if (tile_id != 0 && this.tiles[i] != tiles[i]) {
+			if (tile_id != 0 && existingId != tiles[i]) {
 				if (numLayersProcessed > 0) {
 					if (existingId != 0) {
-
 						TagTile merged = tsx.mergeTiles(existingT, tile);
 						tile_id = merged.id;
 					}
 				}
-				this.tiles[i] = tile_id;
+				if (overlay) 
+					this.overlays[i] = tile_id;
+				else this.tiles[i] = tile_id;
 			}
 		}
 		numLayersProcessed++;

@@ -31,7 +31,11 @@ public class Player extends Mob implements Serializable {
 	public transient Tile tile;
 
 	public transient AnimatedSprite
-		idle  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdle"),
+		idle_left  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleLeft"),
+		idle_right = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleRight"),
+		idle_up = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleUp"),
+		idle_down = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleDown"),
+		
 		up  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
 		down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
 		left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
@@ -40,6 +44,12 @@ public class Player extends Mob implements Serializable {
 	public transient AnimatedSprite animSprite = down;
 
 	private transient TagMenu HUD;
+	
+	private int facing = 0;
+		// 0 = right
+		// 1 = up
+		// 2 = left
+		// 3 = down
 
 	public transient int cam_xOff = 0;
 	public transient int cam_yOff = 0;
@@ -142,16 +152,20 @@ public class Player extends Mob implements Serializable {
 
 			if (this == level.getClientPlayer()) {
 				if (input.up) {
+					this.facing = 1;
 					animSprite = up;
 					this.vel().y(-speed);
 				} else if (input.down) {
+					this.facing = 3;
 					animSprite = down;
 					this.vel().y(+speed);
 				}
 				if (input.left) {
+					this.facing = 2;
 					animSprite = left;
 					this.vel().x(-speed);
 				} else if (input.right) {
+					this.facing = 0;
 					animSprite = right;
 					this.vel().x(speed);
 				}
@@ -183,7 +197,7 @@ public class Player extends Mob implements Serializable {
 			}
 
 			if (!move(xa, ya)) {
-				animSprite = idle;
+				animSprite = getDirectionalIdleAnim();
 				this.animSprite.setFrameRate(8);
 				this.walking = false;
 			} else {
@@ -211,6 +225,19 @@ public class Player extends Mob implements Serializable {
 			hurt--;
 
 		HUD.script.call("Clock", Level.WorldTime);
+	}
+	
+	public AnimatedSprite getDirectionalIdleAnim() {
+		switch (this.facing) {
+		case 1:
+			return this.idle_up;
+		case 2:
+			return this.idle_left;
+		case 3:
+			return this.idle_down;
+		default:
+			return this.idle_right;
+		}
 	}
 
 	public boolean isClientPlayer() {

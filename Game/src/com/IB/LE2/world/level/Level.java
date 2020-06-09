@@ -24,6 +24,7 @@ public class Level extends EntityContainer implements Serializable {
 
 	transient public int width, height;
 	transient public int[] tiles;
+	transient public int[] overlays;
 	transient public int[] lightmap;
 	transient public int[] dynamic_lightmap;
 	
@@ -231,6 +232,14 @@ public class Level extends EntityContainer implements Serializable {
 			if (all.get(i).ySort) all.get(i).render(screen);
 			// }
 		}
+		
+		for (int y = y0; y < y1; y++) {
+			for (int x = x0; x < x1; x++) {
+				Tile tile = getTile(x, y, overlays);
+				tile.render(x, y, screen);
+			}
+		}
+		drawExtendedLevel(screen);
 
 		for (int i = 0; i < all.size(); i++) {
 			all.get(i).renderGUI(screen);
@@ -241,7 +250,6 @@ public class Level extends EntityContainer implements Serializable {
 		}
 
 		//renderMiniMap(screen);
-		drawExtendedLevel(screen);
 
 		remove();
 	}
@@ -399,7 +407,12 @@ public class Level extends EntityContainer implements Serializable {
 		tiles_anim.add(t);
 	}*/
 	
+	
 	public Tile getTile(int x, int y) {
+		return getTile(x, y, tiles);
+	}
+
+	public Tile getTile(int x, int y, int[] tiles) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return getTile(0, 0);
 		
 		Tile t = tile_map.get(tiles[x + y * width]);

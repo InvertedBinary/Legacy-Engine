@@ -256,6 +256,7 @@ public class Commands {
 					}
 					break;
 				case "time":
+					Boot.get().getLevel().WorldTime = Integer.parseInt(Modifier);
 					break;
 				case "cl":
 					// Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);

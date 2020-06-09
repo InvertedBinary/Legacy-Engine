@@ -162,9 +162,11 @@ public class Screen {
 				if (xa < 0)
 					xa = 0;
 				int color = sprite.pixels[x + y * sprite.SIZE];
-				color = colSwitch(color, tilesx, tilesy);
-				if (color != ALPHA_COL)
+					
+				if (color != ALPHA_COL) {
+					color = colSwitch(color, tilesx, tilesy);
 					pixels[xa + ya * width] = color;
+				}
 			}
 		}
 	}
