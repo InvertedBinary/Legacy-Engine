@@ -1,15 +1,17 @@
 package com.IB.LE2.world.inventory;
 
+import java.awt.List;
+
 import com.IB.LE2.Boot;
-import com.IB.LE2.asset.graphics.Sprite;
-import com.IB.LE2.util.FileIO.Assets;
+import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.util.FileIO.Tag;
-import com.IB.LE2.util.FileIO.TagReadListener;
 import com.IB.LE2.util.FileIO.TagReader;
 import com.IB.LE2.world.entity.Entity;
-import com.IB.LE2.world.level.TileCoord;
+import com.IB.LE2.world.entity.mob.Player;
+import com.IB.LE2.world.entity.mob.TagMob;
+import com.IB.LE2.world.level.scripting.LuaScript;
 
-public class Item extends Entity {
+public class Item extends TagMob {
 	private static final long serialVersionUID = -7808848233998306038L;
 
 	// - = - = - = - = - = - = - =
@@ -27,44 +29,51 @@ public class Item extends Entity {
 	private TagReader tags;
 	
 	public Item(String tag_name) {
-		InitTags(tag_name);
+		super(tag_name);
+		LoadLua();
 	}
 
 	public Item(String tag_name, double xi, double yi) {
-		InitTags(tag_name);
-		
-		this.x(xi * TileCoord.TILE_SIZE);
-		this.y(yi * TileCoord.TILE_SIZE);
+		super(tag_name, xi, yi);
+		LoadLua();
 	}
 	
-	public void InitTags(String tag_name) {
-		Item e = this;
-		this.tags = new TagReader(Assets.get(tag_name), "entity", new TagReadListener() {
-			@Override
-			public void TagsRead() {
-				if (!processAllTags())
-					Boot.log("Unable to recognize one or more tags- ensure you are writing tags for this version of Legacy Engine!", "Item", true);
-			}
-			
-			@Override
-			public void TagsError() {
-				Boot.log("Error reading tags! -- Aborting", "Item", true);
-				e.remove();
-			}
-		});
-		
-		tags.start();
+	public void render(Screen screen) {
+		screen.DrawEntity(this, (int) (x() + DrawXOffset), (int) (y() + DrawYOffset));
 	}
-
-	public boolean processAllTags() {
-		boolean result = true;
-		for (Tag i : tags.getTags()) {
-			if (!processTag(i)) result = false;
+	
+	public void collidedWithPlayer(Player p) {
+		if (p != null) {
+			script.call("PlayerCollided", p, this);
 		}
-
-		return result;
 	}
-
+	
+	public void collidedWith(Entity e) {
+		if (e instanceof Player) {
+			collidedWithPlayer((Player)e);
+			return;
+		}
+	}
+	
+	public void update() {
+		Player p = CollidesPlayerSimple(this, Boot.getLevel().getPlayers());
+		collidedWithPlayer(p);
+	}
+	
+	public void LoadLua() {
+		try {
+			if (!LuaPath.endsWith(".lua"))
+				LuaPath += ".lua";
+			
+			script = new LuaScript(LuaPath);
+			script.AddGeneralGlobals();
+			
+			script.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean processTag(Tag tag) {
 		boolean result = true;
 		
@@ -74,56 +83,12 @@ public class Item extends Entity {
 		case "entity.props.name":
 			this.name = val;
 			break;
-		case "entity.props.health":
-			this.set("health", val);
-			break;
-		case "entity.props.speed":
-			this.set("speed", val);
-			break;
-		case "entity.props.mass":
-			this.set("mass", val);
-			break;
-			//
-		case "entity.sprite.xOffset":
-			this.DrawXOffset = (int) parseNum(val);
-			break;
-		case "entity.sprite.yOffset":
-			this.DrawYOffset = (int) parseNum(val);
-			break;
-		case "entity.sprite.static":
-			this.sprite = Sprite.get(val);
-			this.master = sprite;
-			this.display = sprite;
-			break;
-		case "entity.sprite.display":
-			this.display = Sprite.get(val);
-			break;
-			//
-		case "entity.hitbox.begin-x":
-			this.xOffset = (int) parseNum(val);
-			break;
-		case "entity.hitbox.begin-y":
-			this.yOffset = (int) parseNum(val);
-			break;
-		case "entity.hitbox.width":
-			this.EntWidth = (int) parseNum(val);
-			break;
-		case "entity.hitbox.height":
-			this.EntHeight = (int) parseNum(val);
-			break;
-			//
 		default:
-			if (tag.uri.startsWith("entity.vars.")) {
-				set(tag.name, val);
-			} else {
-				result = false;
-			}
-			break;
+			super.processTag(tag);
 		}
 
 		return result;
-	}
-	
+	}	
 	public double parseNum(String val) {
 		return Double.parseDouble(val);
 	}

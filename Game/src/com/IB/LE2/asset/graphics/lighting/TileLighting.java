@@ -26,6 +26,33 @@ public class TileLighting {
 		      return r << 16 | g << 8 | b;
 	   }
 	   
+	   public static int changeBrightness(int col, int r, int g, int b) {
+		      int cr = (col & 0xff0000) >> 16;
+		      int cg = (col & 0xff00) >> 8;
+		      int cb = (col & 0xff);
+		      
+		      r = Math.max(r, -180);
+		      g = Math.max(g, -180);
+		      b = Math.max(b, -180);
+		      r = Math.min(r, 0);
+		      g = Math.min(g, 0);
+		      b = Math.min(b, 0);
+		      
+		      cr += r;
+		      cg += g;
+		      cb += b;
+		      
+		      
+		      if (cr < 0) cr = 0;
+		      if (cg < 0) cg = 0;
+		      if (cb < 0) cb = 0;
+		      if (cr > 255) cr = 255;
+		      if (cg > 255) cg = 255;
+		      if (cb > 255) cb = 255;
+		      
+		      return cr << 16 | cg << 8 | cb;
+	   }
+	   
 	   public static int changeBrightnessNegative(int col, int amount) {
 		   if (amount == 0) return col;
 		   

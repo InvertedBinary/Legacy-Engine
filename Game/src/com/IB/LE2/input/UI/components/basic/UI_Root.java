@@ -2,6 +2,7 @@ package com.IB.LE2.input.UI.components.basic;
 
 import com.IB.LE2.Boot;
 import com.IB.LE2.asset.graphics.Screen;
+import com.IB.LE2.asset.graphics.Sprite;
 import com.IB.LE2.input.hardware.Mouse;
 
 public abstract class UI_Root {
@@ -15,6 +16,8 @@ public abstract class UI_Root {
 	
 	protected boolean focused = false;
 	protected boolean enabled = true;
+	
+	protected Sprite sprite;
 	
 	//TODO: implement visibility toggle render(..) [if] return;
 	protected boolean visible = true;
@@ -60,6 +63,10 @@ public abstract class UI_Root {
 	
 	public void SetText(String text) {
 		this.text = text;
+	}
+	
+	public void SetImage(Sprite sprite) {
+		this.sprite = sprite;
 	}
 
 	public String GetText() {

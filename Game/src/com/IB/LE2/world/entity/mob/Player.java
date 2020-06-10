@@ -19,6 +19,8 @@ import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.entity.projectile.TagProjectile;
+import com.IB.LE2.world.inventory.Inventory;
+import com.IB.LE2.world.inventory.Item;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
@@ -36,7 +38,7 @@ public class Player extends Mob implements Serializable {
 		idle_up = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleUp"),
 		idle_down = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleDown"),
 		
-		up  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
+		up  = (AnimatedSprite) Sprite.getNewAnim("PlayerUp"),
 		down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
 		left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
 		right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
@@ -44,6 +46,8 @@ public class Player extends Mob implements Serializable {
 	public transient AnimatedSprite animSprite = down;
 
 	private transient TagMenu HUD;
+	
+	private Inventory inventory;
 	
 	private int facing = 0;
 		// 0 = right
@@ -69,19 +73,23 @@ public class Player extends Mob implements Serializable {
 		this.speed = 2;
 		this.xBound = 8;
 		this.yBound = 8;
-		this.xOffset = -16;
-		this.yOffset = -16;
 		this.health = 50;
+		
+		EntWidth = 19;
+		EntHeight = 51;
+		xOffset = 22;
+		yOffset = 11;
 		
 		super.set("name", "" + name);
 		super.set("health", "" + health);
 		super.set("speed", "" + speed);
 		super.set("mass", "" + mass);
-
+		
 		body.bounds = new Rectangle((float) x(), (float) y(), 32, 64);
 		body.set(VARS.PHYS_NOGRAV, true);
 		body.bounds.set(VARS.REND_LOCALLY, true);
 		
+		this.inventory = new Inventory(this, "Inventory", 10);
 		this.HUD = new TagMenu("HUD");
 
 		System.out.println("ADDING NEW PLAYER: " + this.x() + "," + this.y());
@@ -89,7 +97,14 @@ public class Player extends Mob implements Serializable {
 	
 	public void ShowHUD() {
 		UI_Manager.Load(HUD);
-		
+	}
+	
+	public void ShowInventory() {
+		inventory.show();
+	}
+	
+	public void AddItem(Item item) {
+		inventory.addItem(item);
 	}
 	
 	public boolean remove() {
@@ -298,10 +313,10 @@ public class Player extends Mob implements Serializable {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		
+		
 		this.DrawXOffset = 0;
 		this.DrawYOffset = 0;
-		this.yOffset = 0;
-		this.xOffset = 16;
+
 		screen.DrawEntity(this, (int) (x() + DrawXOffset + cam_xOff), (int) (y() + DrawYOffset + cam_yOff));
 	}
 
@@ -321,18 +336,7 @@ public class Player extends Mob implements Serializable {
 		}
 	}
 
-	public double getMidpointX() {
-		double result = x();
-		if (sprite != null) result += (sprite.getWidth() / 2);
-		return result;
-	}
-	
-	public double getMidpointY() {
-		double result = y();
-		if (sprite != null) result += (sprite.getHeight() / 2);
-		return result;
-	}
-	
+
 	public void toggleNoclip() {
 		noclip =! noclip;
 	}

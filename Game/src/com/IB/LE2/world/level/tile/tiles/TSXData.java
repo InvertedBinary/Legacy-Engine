@@ -80,6 +80,11 @@ public class TSXData {
 								break;
 							case "frame_rate":
 								((TagTile) t).setFrameRate(PropTag.getAttribute("value", 3));
+								break;
+							case "color":
+								((TagTile) t).color = PropTag.getAttribute("color", 1);
+								System.out.println("COLOR: " + ((TagTile)t).color);
+								break;
 							default:
 								Boot.log("UNRECOGNIZED TILE PROPERTY -- " + prop_name, "TSXData", true);
 								break;

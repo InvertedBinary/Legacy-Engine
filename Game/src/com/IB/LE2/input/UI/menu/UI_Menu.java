@@ -124,6 +124,11 @@ public abstract class UI_Menu implements KeyListener {
 			GetElementById(id).SetText(text);
 	}
 	
+	public void SetElementImage(String id, Sprite sprite) {
+		if (ElementExists(id))
+			GetElementById(id).SetImage(sprite);
+	}
+	
 	public void SuspendWorldInput() {
 		Boot.get().getPlayer().input.suspendInput();
 	}

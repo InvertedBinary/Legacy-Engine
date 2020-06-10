@@ -25,6 +25,8 @@ public class Level extends EntityContainer implements Serializable {
 	transient public int width, height;
 	transient public int[] tiles;
 	transient public int[] overlays;
+	
+	transient public int[][] lightcolors;
 	transient public int[] lightmap;
 	transient public int[] dynamic_lightmap;
 	
@@ -99,9 +101,9 @@ public class Level extends EntityContainer implements Serializable {
 	
 	 transient private Comparator<Entity> ySort = new Comparator<Entity>() {
 		    public int compare(Entity e1, Entity e2) {
-		      if (e1.y() > e2.y()) return 1; // Shift Up
-		      if (e1.y() < e2.y()) return -1; // Shift Down
-		      return 0;
+		    	if ((e1.y() + e1.EntHeight + e1.yOffset) > (e2.y() + e2.EntHeight + e2.yOffset)) return 1; // Shift Up
+		    	if ((e1.y() + e1.EntHeight + e1.yOffset) < (e2.y() + e2.EntHeight + e2.yOffset)) return -1; // Shift Down
+		    	return 0;
 		    }
 		  };
 		  

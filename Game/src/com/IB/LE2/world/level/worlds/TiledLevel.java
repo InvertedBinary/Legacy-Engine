@@ -163,7 +163,13 @@ public class TiledLevel extends Level {
 
 				this.width = tag.get("width", width);
 				this.height = tag.get("height", height);
-				if (!reloading) this.tiles = new int[width * height];
+				if (!reloading) {
+					tiles = new int[width * height];
+					overlays = new int[width * height];
+					lightmap = new int[width * height];
+					dynamic_lightmap = new int[width * height];
+					lightcolors = new int[width * height][3];
+				}
 				this.solid_geometry = new ArrayList<>();
 				this.event_volumes = new ArrayList<>();
 				break;
@@ -304,9 +310,6 @@ public class TiledLevel extends Level {
 		switch (tileEncoding) {
 		case "base64":
 			tiles = new int[width * height];
-			overlays = new int[width * height];
-			lightmap = new int[width * height];
-			dynamic_lightmap = new int[width * height];
 			
 			byte[] b64bytes = Base64.getDecoder().decode(data.value);
 		    byte[] bytes;
@@ -378,7 +381,6 @@ public class TiledLevel extends Level {
 				
 				
 					float radius = t.illumination_radius();
-					System.out.println("RADIUS: " + radius);
 					if (!this.DoDayCycle) {
 						radius = -1;
 					}

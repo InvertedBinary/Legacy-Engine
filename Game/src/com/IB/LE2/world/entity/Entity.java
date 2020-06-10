@@ -2,6 +2,7 @@ package com.IB.LE2.world.entity;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import com.IB.LE2.util.shape.LineSegment;
 import com.IB.LE2.util.shape.PhysicsBody;
 import com.IB.LE2.util.shape.Rectangle;
 import com.IB.LE2.world.entity.mob.Player;
+import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.entity.projectile.Projectile;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
@@ -56,7 +58,7 @@ public abstract class Entity implements Serializable {
 	public transient double health;
 	public transient double speed;
 	public transient double mass;
-
+	
 	protected HashMap<String, String> vars = new HashMap<>();
 	
 	public Entity() {
@@ -328,6 +330,63 @@ public abstract class Entity implements Serializable {
 			}
 		}
 	}	*/
+
+	public double getMidpointX() {
+		double result = x();
+		if (sprite != null)
+			result += (sprite.getWidth() / 2);
+		return result;
+	}
+
+	public double getMidpointY() {
+		double result = y();
+		if (sprite != null)
+			result += (sprite.getHeight() / 2);
+		return result;
+	}
+	
+	public Player CollidesPlayerSimple(Entity o, List<PlayerMP> list) {
+		int ex = (int) o.x();
+		int ey = (int) o.y();
+		int ex2 = ex + o.EntWidth + o.xOffset;
+		int ey2 = ey + o.EntHeight + o.yOffset;
+
+		for (Player e : list) {
+			if (e != null) {
+				double px = e.getMidpointX();
+				double py = e.getMidpointY();
+				
+				if (px > ex && px < ex2) {
+					if (py > ey && py < ey2) {
+						return e;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Entity CollidesEntitySimple(Entity o, List<Entity> entities) {
+		int px = (int) o.getMidpointX();
+		int py = (int) o.getMidpointY();
+		
+
+		for (Entity e : entities) {
+			if (e != null) {
+				int ex = (int) e.x();
+				int ey = (int) e.y();
+				int ex2 = ex + e.EntWidth + e.xOffset;
+				int ey2 = ey + e.EntHeight + e.yOffset;
+
+				if (px > ex && px < ex2) {
+					if (py > ey && py < ey2) {
+						return e;
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
 	public void death() {
 		

@@ -8,7 +8,6 @@ import com.IB.LE2.input.UI.components.basic.UI_Root;
 public class UI_Sprite extends UI_Root {
 
 	public AnimatedSprite anim;
-	public Sprite sprite;
 
 	public UI_Sprite(int x, int y, Sprite sprite) {
 		this.sprite = sprite;

@@ -25,6 +25,7 @@ import com.IB.LE2.world.entity.Entity;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.TagMob;
 import com.IB.LE2.world.entity.projectile.Selector;
+import com.IB.LE2.world.inventory.Item;
 import com.IB.LE2.world.level.Level;
 import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
@@ -262,12 +263,18 @@ public class Commands {
 					// Boot.get().getPlayer().setPosition(0, 0, Integer.parseInt(Modifier), true);
 					break;
 				case "spawn":
-					Boot.get().getLevel()
+					Boot.getLevel()
 							.add(new TagMob(Modifier,
 									Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
 									Boot.get().getPlayer().y() / TileCoord.TILE_SIZE));
 					break;
-				case "ld":
+				case "item":
+					Boot.getLevel()
+					.add(new Item(Modifier,
+							Boot.get().getPlayer().x() / TileCoord.TILE_SIZE,
+							Boot.get().getPlayer().y() / TileCoord.TILE_SIZE));
+					break;
+					case "ld":
 					if (Modifier.equals(""))
 						return;
 

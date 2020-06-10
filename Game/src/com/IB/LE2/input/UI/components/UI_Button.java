@@ -10,7 +10,6 @@ import com.IB.LE2.input.UI.components.listeners.UI_ButtonListener;
 
 public class UI_Button extends UI_Root implements UI_Clickable {
 	
-	public Sprite sprite;
 	public AnimatedSprite animSprite;
 	
 	public int width;

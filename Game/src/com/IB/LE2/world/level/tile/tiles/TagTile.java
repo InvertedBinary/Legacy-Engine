@@ -14,6 +14,7 @@ public class TagTile extends Tile {
 	private AnimatedSprite asprite;
 	private boolean animated = false;
 	private int framerate = 3;
+	public int color;
 
 	public TagTile(int id, Sprite sprite) {
 		this.id = id;

@@ -16,23 +16,33 @@ import com.IB.LE2.util.math.PVector;
 import com.IB.LE2.world.entity.EntityContainer;
 import com.IB.LE2.world.entity.projectile.Selector;
 import com.IB.LE2.world.level.TileCoord;
+import com.IB.LE2.world.level.scripting.LuaScript;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
 public class TagMob extends Mob
 {
 	private static final long serialVersionUID = 1L;
 
-	private transient TagReader tags;
+	protected String LuaPath;
+	protected String path;
+	protected LuaScript script;
+	protected transient TagReader tags;
 	public transient EntityContainer inventory;
 
-	public transient AnimatedSprite
-		idle = Sprite.getNewAnim("PlayerIdle"),
-		up = Sprite.getNewAnim("PlayerDown"),
-		down = Sprite.getNewAnim("PlayerDown"),
-		left = Sprite.getNewAnim("PlayerLeft"),
-		right = Sprite.getNewAnim("PlayerRight");
 	
-	public transient AnimatedSprite anim = idle;
+	private int facing = 0;
+	public transient AnimatedSprite
+		idle_left  = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleLeft"),
+		idle_right = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleRight"),
+		idle_up = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleUp"),
+		idle_down = (AnimatedSprite) Sprite.getNewAnim("PlayerIdleDown"),
+		
+		up  = (AnimatedSprite) Sprite.getNewAnim("PlayerUp"),
+		down  = (AnimatedSprite) Sprite.getNewAnim("PlayerDown"),
+		left  = (AnimatedSprite) Sprite.getNewAnim("PlayerLeft"),
+		right = (AnimatedSprite) Sprite.getNewAnim("PlayerRight");
+	
+	public transient AnimatedSprite anim = idle_right;
 	
 	public TagMob(String tag_name) {
 		InitTags(tag_name);
@@ -46,6 +56,8 @@ public class TagMob extends Mob
 	}
 	
 	public void InitTags(String tag_name) {
+		this.path = Assets.get(tag_name);
+		
 		TagMob e = this;
 		this.tags = new TagReader(Assets.get(tag_name), "entity", new TagReadListener() {
 			@Override
@@ -92,6 +104,7 @@ public class TagMob extends Mob
 			this.set("mass", val);
 			break;
 		case "entity.props.script":
+			this.LuaPath = this.path.substring(0, path.lastIndexOf('\\') + 1) + val;
 			break;
 			//
 		case "entity.vars.dsp_index":
@@ -138,9 +151,18 @@ public class TagMob extends Mob
 			this.right = Sprite.getNewAnim(val);
 			break;
 		case "entity.anims.idle":
-			this.idle = Sprite.getNewAnim(val);
+		case "entity.anims.idle_right":
+			this.idle_right = Sprite.getNewAnim(val);
 			break;
-			//
+		case "entity.anims.idle_left":
+			this.idle_left = Sprite.getNewAnim(val);
+			break;
+		case "entity.anims.idle_up":
+			this.idle_up = Sprite.getNewAnim(val);
+			break;
+		case "entity.anims.idle_down":
+			this.idle_down = Sprite.getNewAnim(val);
+			break;
 		case "entity.hitbox.begin-x":
 			this.xOffset = (int) parseNum(val);
 			break;
@@ -193,51 +215,79 @@ public class TagMob extends Mob
 
 		if (players.size() > 0) {
 			PlayerMP p = players.get(0);
-			int track_offset = (p.sprite.getWidth()) + DrawXOffset + p.DrawXOffset;
-			if ((int) x() <= (int) p.x() + track_offset && (int) x() >= (int) p.x() - track_offset) {
-				// this.vel().x(0);
-			} else {
-				if ((int) x() < (int) p.x() + track_offset) this.vel().x(vel().x() + speed);
-				if ((int) x() > (int) p.x() - track_offset) this.vel().x(vel().x() - speed);
-			}
+			
+				int track_xoffset = (p.sprite.getWidth()) + DrawXOffset + p.DrawXOffset;
+				int track_yoffset = (p.sprite.getHeight()) + DrawYOffset + p.DrawYOffset;
+				if ((int) x() <= (int) p.x() + track_xoffset && (int) x() >= (int) p.x() - track_xoffset) {
+					// this.vel().x(0);
+				} else {
+					if ((int) x() < (int) p.x() + track_xoffset)
+						this.vel().x(vel().x() + speed);
+					if ((int) x() > (int) p.x() - track_xoffset)
+						this.vel().x(vel().x() - speed);
+				}
+
+				if ((int) y() <= (int) p.y() + track_yoffset && (int) y() >= (int) p.y() - track_yoffset) {
+					// this.vel().x(0);
+				} else {
+					if ((int) y() < (int) p.y() + track_yoffset)
+						this.vel().y(vel().y() + speed);
+					if ((int) y() > (int) p.y() - track_yoffset)
+						this.vel().y(vel().y() - speed);
+				}
 		}
-
-		PVector Gravity = new PVector();
-		Gravity.y(VARS.Ag);
-
-		this.vel().add(Gravity);
-
+		
 		ya = vel().y();
 		xa = vel().x();
 
-		move(xa, ya);
+		if (!move(xa, ya)) {
+			anim = getDirectionalIdleAnim();
+			anim.setFrameRate(8);			
+			walking = false;
+		} else {
+			anim.setFrameRate(6 - (int) this.speed / 2);
+			walking = true;
+		}
+		
+			if (this.vy() > 0) {
+				vel().y(vel().y() - speed);
+				if (vy() > 1)
+				anim = this.up;
+				this.facing = 1;
+			} else if (this.vy() < 0) {
+				if (vy() < -1)
+				anim = this.down;
+				vel().y(vel().y() + speed);
+				this.facing = 3;
+			}
+
+			if (this.vx() > 0) {
+				vel().x(vel().x() - speed);
+				anim = this.right;
+				this.facing = 0;
+			} else if (this.vx() < 0) {
+				vel().x(vel().x() + speed);
+				anim = this.left;
+				this.facing = 2;
+			}
 
 		anim.update();
 
-		if (walking) {
-			anim.setFrameRate(6 - (int) this.speed / 2);
-		} else {
-			anim = idle;
-			anim.setFrameRate(8);
-		}
-		
-		if (this.vx() > 0) {
-			vel().x(vel().x() - speed);
-			anim = this.right;
-		} else
-			if (this.vx() < 0) {
-				vel().x(vel().x() + speed);
-				anim = this.left;
-			}
-
-		if (xa != 0) {
-			walking = true;
-		} else {
-			walking = false;
-		}
-		
 		if (hurt > 0)
 			hurt--;
+	}
+	
+	public AnimatedSprite getDirectionalIdleAnim() {
+		switch (this.facing) {
+		case 1:
+			return this.idle_up;
+		case 2:
+			return this.idle_left;
+		case 3:
+			return this.idle_down;
+		default:
+			return this.idle_right;
+		}
 	}
 	
 	public void render(Screen screen) {
@@ -251,13 +301,11 @@ public class TagMob extends Mob
 
 	public void renderGUI(Screen screen) {
 		if (Boot.drawDebug) {
-			if (BottomBound != null) {
+			if (BottomBound != null) 
 				BottomBound.drawLine(screen, true);
 
-				Debug.drawRect(screen, (int) x() + DrawXOffset, (int) y() + DrawYOffset, sprite.getWidth(),
-						sprite.getHeight(), 0xffFADE0F, true);
+				Debug.drawRect(screen, (int) x() + DrawXOffset, (int) y() + DrawYOffset, sprite.getWidth(), sprite.getHeight(), 0xffFADE0F, true);
 				Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
-			}
 		}
 	}
 
