@@ -16,7 +16,6 @@ import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Stack;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -26,7 +25,6 @@ import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.input.UI.UI_Manager;
 import com.IB.LE2.input.UI.components.UI_Font;
 import com.IB.LE2.input.UI.menu.TagMenu;
-import com.IB.LE2.input.UI.menu.UI_Menu;
 import com.IB.LE2.input.hardware.Keyboard;
 import com.IB.LE2.input.hardware.Mouse;
 import com.IB.LE2.util.VARS;
@@ -36,7 +34,6 @@ import com.IB.LE2.util.FileIO.Disk;
 import com.IB.LE2.world.entity.mob.Player;
 import com.IB.LE2.world.entity.mob.PlayerMP;
 import com.IB.LE2.world.level.Level;
-import com.IB.LE2.world.level.TileCoord;
 import com.IB.LE2.world.level.tile.Tile;
 import com.IB.LE2.world.level.worlds.TiledLevel;
 
@@ -66,14 +63,11 @@ public class Game extends Canvas implements Runnable {
 	private boolean running = false;
 	public static transient UI_Font font16bit;
 	public static transient UI_Font font8bit;
+	public static transient TagMenu MainMenu;
 	public static boolean showAVG;
 	public static boolean recAVG_FPS = false;
 
 	public boolean FrameAdjusted = false;
-	public static boolean devModeOn = false;
-	private boolean devModeReleased = true;
-	public static boolean devModeInfoOn = false;
-	File screenshots = null;
 	public static ArrayList<Level> levels = new ArrayList<Level>();
 
 	int saveTime = 0;
@@ -81,8 +75,6 @@ public class Game extends Canvas implements Runnable {
 	 * 0 = stop; 1 = menu; 2 = [m]Protocol: (in-game); 3 = [a]Protocol: (in-game); 4
 	 * = pause; 5 = modded/tampered; 6 = dead; 7 = Splash;
 	 */
-	private boolean releasedDevInfo = true;
-
 	private Screen screen;
 	public WindowHandler windowHandler;
 	public BufferedImage image = new BufferedImage(Boot.width, Boot.height, BufferedImage.TYPE_INT_RGB);
@@ -322,44 +314,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void updateMode() {
-		// adminCmds();
-
 		autoSave();
-		if (key.DevMode && !devModeOn && devModeReleased && Mouse.getButton() == 2) {
-			devModeOn = true;
-			devModeReleased = false;
-		}
-
-		if (!key.DevMode)
-			devModeReleased = true;
-
-		if (key.DevMode && devModeOn && devModeReleased) {
-			devModeOn = false;
-			devModeReleased = false;
-		}
-
-		if (key.toggleDevModeInfo && !devModeInfoOn && releasedDevInfo && devModeOn) {
-			devModeInfoOn = true;
-			releasedDevInfo = false;
-		}
-
-		if (!key.toggleDevModeInfo)
-			releasedDevInfo = true;
-
-		if (key.toggleDevModeInfo && devModeInfoOn && releasedDevInfo) {
-			devModeInfoOn = false;
-			releasedDevInfo = false;
-		}
-
-		if (key.capture) {
-			if (screenshots.exists()) {
-				try {
-					captureScreen(frame, screenshots + "/Square_Legacy");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	public void AdjustImageToFrame() {
@@ -414,7 +369,7 @@ public class Game extends Canvas implements Runnable {
 
 		screen.clear();
 
-		double xSp = key.pan ? (getPlayer().getMidpointX()) + (screen.xo * 2) - screen.width / 2
+		double xSp = key.getKeyState("pan") ? (getPlayer().getMidpointX()) + (screen.xo * 2) - screen.width / 2
 				: getPlayer().getMidpointX() - screen.width / 2;
 		double ySp = (getPlayer().getMidpointY()) - screen.height / 2;
 
@@ -455,7 +410,7 @@ public class Game extends Canvas implements Runnable {
 
 		g.setColor(Opaque);
 
-		if (devModeOn == true || Mouse.getButton() == 2) {
+		if (Mouse.getButton() == 2) {
 			try {
 				g.setColor(Opaque);
 				// g.fillRect(10, 80, 100, 1);
@@ -487,18 +442,6 @@ public class Game extends Canvas implements Runnable {
 				 * g.setColor(Color.WHITE); g.setFont(new Font("Verdana",0, 18));
 				 * g.drawString("Map", 1372, 25); }
 				 */
-
-				if (devModeOn == true && devModeInfoOn) {
-					g.setFont(new Font("Verdana", 0, 16));
-					g.drawString("Developer Mode: Mouse Grid, Coordinate, Player [UUID], Scrolls", 10, 80);
-					g.setFont(new Font("Verdana", 0, 16));
-					g.fill3DRect(1362, 4, 55, 30, false);
-					g.setColor(Color.WHITE);
-					g.setFont(new Font("Verdana", 0, 18));
-					g.drawString("Map", 1372, 25);
-					// g.drawString("Button: " + Mouse.getButton(), 415, 80);
-				}
-
 			} catch (Exception e) {
 
 			}
@@ -543,7 +486,8 @@ public class Game extends Canvas implements Runnable {
 
 		game.start();
 
-		UI_Manager.Load(new TagMenu(Boot.prefsStr("UI", "StartupMenu", "Main")));
+		MainMenu = new TagMenu(Boot.prefsStr("UI", "StartupMenu", "Main"));
+		UI_Manager.Load(MainMenu);
 	}
 
 	public boolean ChangingFullscreenState = false;

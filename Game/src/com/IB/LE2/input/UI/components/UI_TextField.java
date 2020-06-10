@@ -117,7 +117,7 @@ public class UI_TextField extends UI_Root implements UI_Clickable, UI_Keylistene
 				
 			case KeyEvent.VK_DELETE:
 			case KeyEvent.VK_BACK_SPACE:
-				if (!Boot.get().getInput().ctrl)
+				if (!Boot.get().getInput().getKeyState("ctrl"))
 					this.DeleteChar(this.cursor_pos);
 				else
 					this.DeleteBulk(this.cursor_pos);

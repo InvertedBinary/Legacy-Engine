@@ -174,7 +174,7 @@ public class TagProjectile extends Projectile {
 	
 	public void render(Screen screen) {
 		screen.DrawEntity(this, (int)x() + DrawXOffset,(int)y() + DrawYOffset);
-		if (Game.devModeOn) screen.DrawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
+		if (Boot.drawDebug) screen.DrawRect((int)x() - 3, (int)y() - 9, 5, 5, 0x0093FF, true);
 	}
 	
 	public void renderGUI(Screen screen) {

@@ -159,27 +159,27 @@ public class Player extends Mob implements Serializable {
 		}
 
 		if (input != null) {
-			if (input.Sprint && walking) { // 300
+			if (input.getKeyState("sprint") && walking) { // 300
 				speed = 4;
 			} else {
 				speed = 2;
 			}
 
 			if (this == level.getClientPlayer()) {
-				if (input.up) {
+				if (input.getKeyState("up")) {
 					this.facing = 1;
 					animSprite = up;
 					this.vel().y(-speed);
-				} else if (input.down) {
+				} else if (input.getKeyState("down")) {
 					this.facing = 3;
 					animSprite = down;
 					this.vel().y(+speed);
 				}
-				if (input.left) {
+				if (input.getKeyState("left")) {
 					this.facing = 2;
 					animSprite = left;
 					this.vel().x(-speed);
-				} else if (input.right) {
+				} else if (input.getKeyState("right")) {
 					this.facing = 0;
 					animSprite = right;
 					this.vel().x(speed);
@@ -211,13 +211,15 @@ public class Player extends Mob implements Serializable {
 				//Audio.MoveListener(x(), y(), 1);
 			}
 
-			if (!move(xa, ya)) {
-				animSprite = getDirectionalIdleAnim();
-				this.animSprite.setFrameRate(8);
-				this.walking = false;
-			} else {
-				this.animSprite.setFrameRate(6 - (int) this.speed / 2);
-				this.walking = true;
+			if (this.HUD.enabled) {
+				if (!move(xa, ya)) {
+					animSprite = getDirectionalIdleAnim();
+					this.animSprite.setFrameRate(8);
+					this.walking = false;
+				} else {
+					this.animSprite.setFrameRate(6 - (int) this.speed / 2);
+					this.walking = true;
+				}
 			}
 
 		} else {
@@ -331,9 +333,7 @@ public class Player extends Mob implements Serializable {
 			Debug.drawRect(screen, (int) x() + xOffset, (int) y() + yOffset, EntWidth, EntHeight, 0xff00FFFF, true);
 		}
 
-		if (Game.devModeOn) {
-			body.draw(screen);
-		}
+			//body.draw(screen);
 	}
 
 

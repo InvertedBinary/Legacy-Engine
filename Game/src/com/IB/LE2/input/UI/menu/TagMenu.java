@@ -54,7 +54,7 @@ public class TagMenu extends UI_Menu
 	}
 	
 	public void update() {
-		if (Boot.get().key.r && Boot.get().key.ctrl) {
+		if (Boot.get().key.getKeyState("r") && Boot.get().key.getKeyState("ctrl")) {
 			UI_Manager.UnloadCurrent();
 			UI_Manager.Load(new TagMenu(tags.getPath()));
 		}
@@ -230,6 +230,7 @@ public class TagMenu extends UI_Menu
 			int imagh = (int)parseNum(t.get("h", "0"));
 			boolean anim = parseBool(t.get("anim", "false"));
 			double imagr = parseNum(t.get("r", "-1"));
+			boolean visible = parseBool(t.get("visible", "true"));
 			String imagimagpth = val;
 			
 			Sprite imagspr = Sprite.get("Grass");
@@ -260,7 +261,8 @@ public class TagMenu extends UI_Menu
 			
 			uis.SetAlignment(t.get("align", ""));
 			uis.SetID(t.get("id", uis.GetID()));
-
+			uis.SetVisible(visible);
+			
 			addUI(uis);
 			
 			break;

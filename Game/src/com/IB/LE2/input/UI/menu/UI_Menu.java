@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.IB.LE2.Boot;
+import com.IB.LE2.Game;
 import com.IB.LE2.asset.audio.Audio;
 import com.IB.LE2.asset.graphics.Screen;
 import com.IB.LE2.asset.graphics.Sprite;
@@ -75,6 +76,15 @@ public abstract class UI_Menu implements KeyListener {
 		int frame = (int)(percent * total_frames);
 		
 		return (total_frames - 1) - frame;
+	}
+	
+	public void ShowMainMenu() {
+		UI_Manager.Load(Game.MainMenu);
+	}
+	
+	public void ShowConsole() {
+		if (UI_Manager.ConsoleMenu == null) UI_Manager.ConsoleMenu = new TagMenu("CmdMenu");
+		UI_Manager.Load(UI_Manager.ConsoleMenu);
 	}
 	
 	public void RunCommand(String text) {

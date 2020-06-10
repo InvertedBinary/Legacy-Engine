@@ -41,6 +41,7 @@ public class UI_Sprite extends UI_Root {
 	}
 
 	public void render(Screen screen) {
+		if (visible)
 		screen.renderSprite(RenderX(x), RenderY(y), getSprite(), false);
 	}
 

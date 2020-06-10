@@ -13,6 +13,7 @@ import com.IB.LE2.world.entity.projectile.Selector;
 public class UI_Manager {
 	
 	private static UI_Menu current = null;
+	public static TagMenu ConsoleMenu;
 	
 	public static UI_Menu Current() {
 		return current;
@@ -45,8 +46,8 @@ public class UI_Manager {
 			}
 		} else {
 			if (Mouse.getMouseB() != Mouse.MOUSE_RELEASED)
-				if (Boot.get().getLevel().players.size() > 0)
-					Boot.get().getLevel().getClientPlayer().MouseClicked(Mouse.getButton());
+				if (Boot.getLevel().players.size() > 0)
+					Boot.getLevel().getClientPlayer().MouseClicked(Mouse.getButton());
 		}
 	}
 	
@@ -63,8 +64,10 @@ public class UI_Manager {
 			Game.font8bit.render(12, Boot.height - 16, 1, 0xFFFFFF, Selector.selected.toString(), screen, false, false);
 	}
 	
+	
+	@Deprecated
 	public static void UpdateMacros() {
-		if (Boot.get().key != null) {
+		/*if (Boot.get().key != null) {
 			if (Boot.get().key.Pause) {
 				UI_Manager.Load(new TagMenu("TestMenu"));
 				Boot.get().key.Pause = false;
@@ -74,7 +77,7 @@ public class UI_Manager {
 				UI_Manager.Load(new TagMenu("CmdMenu"));
 				Boot.get().key.console = false;
 			}
-		}
+		}*/
 	}
 	
 	public void navUp() {
