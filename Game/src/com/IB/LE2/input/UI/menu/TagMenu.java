@@ -143,6 +143,7 @@ public class TagMenu extends UI_Menu
 			int h = (int)parseNum(t.get("h", "0"));
 			boolean transAnim = parseBool(t.get("transAnim", "false"));
 			boolean trueAnim = parseBool(t.get("anim", "false"));
+			String audio = t.get("sound", "Click");
 			String imagpth = t.get("image", "");
 			String onClickFunc = t.get("onClick", "");
 			String onHoverFunc = t.get("onHover", "");
@@ -199,6 +200,7 @@ public class TagMenu extends UI_Menu
 			
 			btn.SetAlignment(t.get("align", ""));
 			btn.SetID(t.get("id", btn.GetID()));
+			btn.AudioFeedback = audio;
 			
 			addUI(btn);
 			

@@ -21,6 +21,8 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 	public boolean isanim = false;
 	public boolean transAnim = false;
 	
+	public String AudioFeedback = "Click";
+	
 	private UI_ButtonListener listener;
 
 	public UI_Button(int x, int y, Sprite sprite) {
@@ -128,7 +130,7 @@ public class UI_Button extends UI_Root implements UI_Clickable {
 
 	@Override
 	public void OnDownClick() {
-		Audio.Play("Click"); // Probably should let Lua handle this audio feedback eventually
+		Audio.Play(AudioFeedback); // Probably should let Lua handle this audio feedback eventually
 	}
 
 }
